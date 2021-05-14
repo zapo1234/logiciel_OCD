@@ -1,0 +1,141 @@
+<?php
+include('connecte_db.php');
+include('inc_session.php');
+
+?>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+  <?php include('inc_entete.php');?>
+  <title>Optimisation de comptabilité à distance</title>
+  <meta name="description" content="Dynamiser le suivi et la gestion de votre espace hotelier" />
+  <style type="text/css">
+ // Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+
+
+
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+#first{width:100%;height:70px;background-color:white;box-shadow:3px 3px 3px grey;padding-top:20px;padding-left:2%;}
+.it{padding-left:5%;} a{color:black;font-family:arial;font-size:11px;text-decoration:none;text-transform:uppercase;}
+.home{background-color:#F0F8FF;padding:1%;font-family:arial;font-size:12px;border-radius:15px;}
+#second{width:100%;} .box,.box1,.box3{float:left;margin-left:4%;}
+.second1{background-color:white;width:90%;height:90px;margin-left:5%;margin-top:10px;padding-top:20px;box-shadow:3px 3px 3px grey;}
+.box{font-family:aria;font-style:italic;font-size:20px;} 
+#button1{margin-left:12%;width:150px;height:25px;background-color:#4682B4;color:white;padding:2%;border-radius:15px;font-family:arial;
+font-size:12px;border:2px solid #4682B4;cursor:pointer;}.box1{width:30%;} .box3{margin-left:12%;font-family:arial;margin-top:-12px;}
+.bos1,.bos2{float:left;} .bos1{width:35%;} .bos2{width:60%;}
+#three{width:100%;} .three1{width:90%;height:60px;background-color:#F0F8FF;margin-left:5%;}
+.boss1,.boss2{float:left;margin-left:2%;padding-top:7px;} .boss1{width:35%;font-family:arial;} .boss2{width:55%;font-family:arial;font-size:11px;text-transform:uppercase;} .clis{padding-left:3%;} .reser{padding-left:6%;cursor:pointer;}
+.dim{padding-left:8%;cursor:pointer;} #four{width:100%;} .four1{width:90%;height:500px;background-color:white;margin-left:5%;margin-top:5px;box-shadow:3px 3px 3px grey;} .x{font-size:12px;width:100px;}
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+#first{width:100%;height:70px;background-color:white;box-shadow:3px 3px 3px grey;padding-top:20px;padding-left:2%;}
+.it{padding-left:5%;} a{color:black;font-family:arial;font-size:11px;text-decoration:none;text-transform:uppercase;}
+.home{background-color:#F0F8FF;padding:1%;font-family:arial;font-size:12px;border-radius:15px;}
+#second{width:100%;} .box,.box1,.box3{float:left;margin-left:4%;}
+.second1{background-color:white;width:90%;height:90px;margin-left:5%;margin-top:10px;padding-top:20px;box-shadow:3px 3px 3px grey;}
+.box{font-family:aria;font-style:italic;font-size:20px;} 
+#button1{margin-left:12%;width:150px;height:25px;background-color:#4682B4;color:white;padding:2%;border-radius:15px;font-family:arial;
+font-size:12px;border:2px solid #4682B4;cursor:pointer;}.box1{width:30%;} .box3{margin-left:12%;font-family:arial;margin-top:-12px;}
+.bos1,.bos2{float:left;} .bos1{width:35%;} .bos2{width:60%;}
+#three{width:100%;} .three1{width:90%;height:60px;background-color:#F0F8FF;margin-left:5%;}
+.boss1,.boss2{float:left;margin-left:2%;padding-top:7px;} .boss1{width:35%;font-family:arial;} .boss2{width:55%;font-family:arial;font-size:11px;text-transform:uppercase;} .clis{padding-left:3%;} .reser{padding-left:6%;cursor:pointer;}
+.dim{padding-left:8%;cursor:pointer;} #four{width:100%;} .four1{width:90%;height:500px;background-color:white;margin-left:5%;margin-top:5px;box-shadow:3px 3px 3px grey;} .x{font-size:12px;width:100px;}
+}
+
+@media (min-width: 1200px) { 
+#first{width:100%;height:70px;background-color:white;box-shadow:3px 3px 3px grey;padding-top:20px;padding-left:2%;position:fixed;}
+.it{padding-left:5%;} a{color:black;font-family:arial;font-size:11px;text-decoration:none;text-transform:uppercase;}
+.home{background-color:#F0F8FF;padding:1%;font-family:arial;font-size:12px;border-radius:15px;}
+#second{width:100%;} .box,.box1,.box3{float:left;margin-left:4%;}
+.second1{background-color:white;width:90%;height:90px;margin-left:5%;margin-top:10px;padding-top:20px;box-shadow:3px 3px 3px grey;margin-top:75px;}
+.box{font-family:aria;font-style:italic;font-size:20px;} 
+#button1{margin-left:12%;width:150px;height:25px;background-color:#4682B4;color:white;padding:2%;border-radius:15px;font-family:arial;
+font-size:12px;border:2px solid #4682B4;cursor:pointer;}.box1{width:30%;} .box3{margin-left:12%;font-family:arial;margin-top:-12px;}
+.bos1,.bos2{float:left;} .bos1{width:35%;} .bos2{width:60%;}
+#three{width:100%;} .three1{width:90%;height:60px;background-color:#F0F8FF;margin-left:5%;}
+.boss1,.boss2{float:left;margin-left:2%;padding-top:7px;} .boss1{width:35%;font-family:arial;} .boss2{width:55%;font-family:arial;font-size:11px;text-transform:uppercase;} .clis{padding-left:3%;} .reser{padding-left:6%;cursor:pointer;}
+.dim{padding-left:8%;cursor:pointer;} #four{width:100%;} .four1{width:90%;height:500px;background-color:white;margin-left:5%;margin-top:5px;box-shadow:3px 3px 3px grey;} .x{font-size:12px;width:100px;}
+#footer{width:100%;margin-top:5px;} .ocd{width:90%;height:25px;background-color:white;margin-left:5%;font-family:arial;text-align:center;}
+}
+
+   
+	
+  </style>
+  </head>
+<body style="background-color:#eee">
+
+<div class="container" id="first"> 
+ <div class="bos1"><span class="is"><img src="image/logo.jpg" alt="logo" withd="50" height="30"/> <span class="home"><?php 
+ 
+   try{
+	   
+      // on ecrire la reuete sql pour recuperer le nom
+	  $req=$bdd->prepare('SELECT Denomination,numero FROM inscription_client WHERE email_ocd= :email_ocd');
+     $req->execute(array(':email_ocd'=>$_SESSION['pose']));
+     $donnees= $req->fetch();
+	echo'<span class="erf">Entreprise : '.$donnees['Denomination'].' TEL :'.$donnees['numero'].'</span>';
+	$req->closeCursor();
+   } 
+  catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
+}  
+?>
+ </span></div><div class="bos2"> <span><i class="material-icons" style="position:absolute;top:21px;padding-left:1%;">&#xe5cf;</i></span><span class="it"><a href="gestion_home_tab.php" title="suivi de gestion client et location chambre">Tableau bord entrées/réservations</a></span>
+<span><i class="material-icons" style="position:absolute;top:21px;padding-left:1%;">&#xe5cf;</i></span><span class="it"> <a href="gestion_home_ocd.php" title="suivi intéreactif des achats/crédit">Tableau bord dépenses</a></span>
+<span><i class="material-icons" style="position:absolute;top:21px;padding-left:1%;">&#xe5cf;</i></span><span class="it"><a href="gestion_depeses_ocd.php">Tableau bord Trésorie comptable</a></span></div>
+</div><!--contenair--#id first-->
+	
+<div class="container" id="second"> 
+<div class="second1">
+<div class="box">Dynamiser et innover  vos enregsitrements <br/>entrées/reservations/gestion des espaces Hoteliers </div>
+<div class="box1"><a href="acceuil_gestion_hotel.php">Acceuil</a> <span <button id="button1" title="actualiser le jour suivant">Reinitialiser vos Montants</button></div>
+<div class="box3"> Vos Montants <span class="des"><i class="material-icons" style="color:#4682B4;font-size:22px;cursor:pointer;" title="recette/entrées/reservations/dépense">&#xe8de;</i></span></div>
+</div>
+</div><!--contenair--#id second-->
+<div id="montant"></div>	
+<div class="container" id="three"> 
+<div class="three1">
+<div class="boss1"><i class="material-icons">&#xe873;</i> <a href="gestion_description_home.php"> Lister vos appartements</a> 
+<span class="clis"><i class="material-icons" style="font-size:18px">&#xe3c9;</i> Enregistrer vos locations </span></div>
+
+<div class="boss2"><button class="x" id="sejour">Séjour</button> <button class="x" id="pass">Pass</button> <span class="reser">
+<i class="material-icons">&#xe914;</i> Réservation</span> <span class="dim">vérifier des disponibilités <i class="material-icons">&#xe876;</i></span></div>
+
+</div><!--three1-->
+
+</div><!--contenair--#id second-->
+
+
+<div class="container" id="four"> 
+<div class="four1">
+<div id="corps1"></div>
+<div id="corps2"></div>
+</div>
+
+</div><!--contenair--#id second-->
+<div id="footer">
+<div class="ocd">Optimisation de comptabilité à distance : Dynamiser et innover efficacement le suivi et la gestion de vos biens Hoteliers</div>
+</div>
+
+<?php include('inc_foot_scriptjs.php');?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	
+});
+
+</script>
+</body>
+</html>
+    
