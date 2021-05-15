@@ -19,20 +19,7 @@ if(!isset($_GET['home']) AND !empty($_GET['home'])) {
 	// on recupére les equipement checkbox
 	$data = $donnees['equipement'];
 	$data1  = $donnees['equipements'];
-	// on les transforme en un tableau
-	$datas = explode(',', $data);
-	$datas1 = explode(',', $data1);
-	
-	 $a ='toilletes';
-	 
-	 if(strpos($data1,$a) !== false){
-		echo'zapo'; 
-	 }
-	 
-	 else{
-		 
-	 }
-	 echo$data1;
+
 	 
 	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre');
     $res->execute(array(':id_chambre'=>$home));
@@ -104,7 +91,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  #button_delete{width:50px;height:40px;background:#4e73df;color:white;border-radius:50%;margin-left:10%;margin-top:20px;border:2px solid #4e73df;}
  .enr{color:white;padding:2%;font family:arial;background:red;width:150px;height:25px;}
  #data_delete{position:absolute;top:200px;left:15%;} #forms {color:black;}
- .d{border:1px solid #eee;} .homes{z-index:4;position:absolute;top:20px;left:15%;display:none;width:70%;height:900px;background:white;border:2px solid #eee;} . der{padding-left:2%;}
+ .d{border:1px solid #eee;} .homes{overflow-y:scroll;z-index:4;position:absolute;top:20px;left:15%;display:none;width:70%;height:900px;background:white;border:2px solid #eee;} . der{padding-left:2%;}
  .imgs{border-radius:20%;font-weight:bold;width:110px;color:white;text-align:center;padding:1%;background:#FF7133;border:2px solid #FF7133;color:block;margin-top:6px;margin-left:25%;}
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
 </style>
@@ -113,102 +100,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">O C D <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Tableau de bord</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Gestion innovante
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="inventaire_gestion_home.php"
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Inventaire des locaux </span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>gestion clients</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                    aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Factures</span>
-                </a>
-                
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Dépense</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Trésorie</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Equipes messanger</span></a>
-            </li>
+           <?php include('inc_menu_principale.php');?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -433,7 +325,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
                     <div class="center">
                     <!--formulaire affiche-->
   <form method="post" id="forms"  enctype="multipart/form-data">
-  <h1>Formualire pour modifier les données d'un local,une chambre ou un appartement de votre espace Hotelier</h1>
+  <h1> <i class='fas fa-house-user' style='font-size:20px'></i> Formualire pour modifier les données d'un local,une chambre ou un appartement de votre espace Hotelier</h1>
    
    <div class="form-row">
     <div class="form-group col-md-6">
@@ -478,34 +370,34 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
         <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
 
       <div class="custom-checkbox">
-      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation
-     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision"> <i style='font-size:13px' class='fa'>&#xf108;</i> télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> salle de bains
-     <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Déjeuner"> <i style="font-size:14px" class="fas">&#xf0f4;</i> Déjeuner
+      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation" <?php $a = "climatisation"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation
+     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision" <?php $a = "télévision"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf108;</i> télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> salle de bains
+     <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Déjeuner" <?php $a = "Déjeuner"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style="font-size:14px" class="fas">&#xf0f4;</i> Déjeuner
 	 </div>
 	 
 	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements secondaires du local</h2>
-    <input type="checkbox" name="choix[]"  value="toilletes"> toilletes
-    <input type="checkbox" name="choix[]"  value="armoie ou penderie"> armoie ou penderie  
-   <input type="checkbox" name="choix2[]" value="chaines satellite"> chaines satellite
-   <input type="checkbox" name="choix2[]"  value="prise près de lit"> prise près de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
-   <input type="checkbox" name="choix[]"  value="portant"> portant<br/>
-    <input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche
-   <input type="checkbox" name="choix[]"  value="télephone"> télephone
-   <input type="checkbox" name="choix[]"  value="microonde"> microonde
-   <input type="checkbox" name="choix[]"  value="microonde"> fer à repasser
-   <input type="checkbox" name="choix[]"  value="réfrigérateur"> réfrigerateur
-    <input type="checkbox" name="choix[]"  value="machine à laver"> machine à laver<br/>
-     <input type="checkbox" name="choix[]"  value="papier toillete"> papier toillete
-    <input type="checkbox" name="choix[]"  value="séche cheveux"> séche cheveux
-   <input type="checkbox" name="choix[]"  value="petit café">  petit café
-   <input type="checkbox" name="choix[]" value="déjeuner"> déjeuner
+    <input type="checkbox" name="choix[]"  value="toilletes" <?php $a = "toilletes"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> toilletes
+    <input type="checkbox" name="choix[]"  value="armoie ou penderie" <?php $a = "armoie"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> armoie ou penderie  
+   <input type="checkbox" name="choix2[]" value="chaines satellite" <?php $a = "chaines satellite"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> chaines satellite
+   <input type="checkbox" name="choix2[]"  value="prise près du lit" <?php $a = "prise près du lit"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> prise près de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
+   <input type="checkbox" name="choix[]"  value="portant" <?php $a = "portant"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> portant<br/>
+    <input type="checkbox" name="choix[]"  value="baignoire ou douche" <?php $a = "baignoire ou douche"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Baignoire ou douche
+   <input type="checkbox" name="choix[]"  value="télephone" <?php $a = "télephone"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> télephone
+   <input type="checkbox" name="choix[]"  value="microonde" <?php $a = "microonde"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> microonde
+   <input type="checkbox" name="choix[]"  value="fer à repasser" <?php $a = "fer à repasser"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> fer à repasser
+   <input type="checkbox" name="choix[]"  value="réfrigérateur" <?php $a = "réfrigerateur"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> réfrigerateur
+    <input type="checkbox" name="choix[]"  value="machine à laver" <?php $a = "machine à laver"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> machine à laver<br/>
+     <input type="checkbox" name="choix[]"  value="papier toillete" <?php $a = "papier toillette"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> papier toillete
+    <input type="checkbox" name="choix[]"  value="séche cheveux" <?php $a = "séche cheveux"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> séche cheveux
+   <input type="checkbox" name="choix[]"  value="petit café" <?php $a = "petit café"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>>  petit café
+   <input type="checkbox" name="choix[]" value="déjeuner" <?php $a = "déjeuner"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> déjeuner
 	</div>
       
     </div>
    <h2>Informations facultatives</h2>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">informations complementaire</label>
-    <textarea class="form-control" name="infos" id="infos" rows="3"><?php echo$donnees['infos'];?>v</textarea>
+    <textarea class="form-control" name="infos" id="infos" rows="3"><?php echo$donnees['infos'];?></textarea>
   </div>
   
   <div class="d"><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)
@@ -632,6 +524,12 @@ echo $_SESSION['token'];?>">
 	}
  });
  
+ $('.mr').click(function(){
+	 
+	 alert('zapo');
+	 
+ }
+ 
  // compter le nombre de class
   var thecount = $('.text_img').length;
   
@@ -647,6 +545,10 @@ echo $_SESSION['token'];?>">
 	$('#file4').hide(); 
 	  
   }
+  
+  else if(thecount == 1){
+	$('#file1').hide();	 
+}
 
  
  // delete home--
@@ -661,11 +563,14 @@ echo $_SESSION['token'];?>">
 	data:{ids:ids, action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#delete_img').html(data);
-     $('der').click();
-	 
-	}
+     }
 		
 	});
+	
+	 setInterval(function(){
+		 $('#delete_img').html('');
+		 location.reload(true);
+	 },3000);
 
  });
  
@@ -701,7 +606,7 @@ var infos = $('#infos').val();
       $('#nums').css('border-color','red');
 	}
 	
-	else if (infos.length >200){
+	else if (infos.length >300){
       $('#error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> nombre de caractères pour les informations ne peuvent pas dépasser 200');
       $('#infos').css('border-color','red');
 	}
@@ -722,12 +627,7 @@ var infos = $('#infos').val();
 	}
    });
    
-   setInterval(function(){
-		 $('#html').html('');
-		 location.reload(true);
-	 },3000);
-	 
-   }
+   
 
 }); 
 

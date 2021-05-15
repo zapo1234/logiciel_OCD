@@ -39,12 +39,17 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 
        $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }
+	 
+	 else{
+		 
+		 
+	 }
 
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
 	// type de logement
 	$type =$_POST['type'];
-	$types =$_POST['typs'];
+	$typs =$_POST['typs'];
 	if(isset($types)){
 	$type=$types;
 	}
@@ -80,7 +85,7 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 	}
 	
 	else{
-		$type ="";
+		$type =$typs;
 	}
 	$second_type =html_entity_decode($_POST['typs']);
 	
