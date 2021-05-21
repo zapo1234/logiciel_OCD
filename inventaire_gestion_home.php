@@ -62,7 +62,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
 
 .x{color:#4e73df;font-weight:bold;} .ts{padding-left:4%;} .center{width:90%;margin-left:5%;background-color:white;}
-.table{width:80%;margin-left:5%;margin-top:14px;} td,th{text-align:center;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;}
+.table{width:80%;margin-left:5%;margin-top:14px;border:1px solid #eee;} td,th{text-align:center;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;}
 th{text-align:center;background:#4c76b2;color:white;font-size:13px;}
 .div{color:green;} #block_delete{position: absolute;top:200px;left:40%;width:370px;;height:160px;background-color:white;z-index:4;}
  h3{color:black;padding-top:5%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;text-align:center;}
@@ -70,7 +70,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;}
  #button_delete{width:50px;height:40px;background:#4e73df;color:white;border-radius:50%;margin-left:10%;margin-top:20px;border:2px solid #4e73df;}
  .enr{color:white;padding:2%;font family:arial;background:red;width:150px;height:25px;}
  #data_delete{position:absolute;top:200px;left:15%;} #forms {color:black;}
- .color{background:#ACD6EA;font-weight:bold;}
+ .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 </style>
 
 </head>
@@ -110,9 +110,10 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;}
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
                            <option selected>lister</option>
-                           <option selected>0</option>
-						   <option selected>5</option>
-						   <option selected>10</option>
+                           <option selected>5</option>
+						   <option selected>15</option>
+						   <option selected>25</option>
+						   <option selected>35</option>
                          </select>
                           </div>  
                         </div>
@@ -502,7 +503,7 @@ var nums =$('#nums').val();
 var infos = $('#infos').val();
 
 
- if(ids.length> 50) {
+ if(ids.length> 60) {
 	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>nombre max de caractère est de 50 nom du client');
 	}
 	
