@@ -1,3 +1,9 @@
+<?php
+include('connecte_db.php');
+include('inc_session.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +33,7 @@
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;font-weight:bold;margin-left:8%;}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:300px;border:2px solid #eee;height:210px;padding:4%;}
-.center{background-color:white;width:80%;height:750px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
@@ -37,6 +43,15 @@ h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
 background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
 .form1,.form2{display:none;}
+
+.content1{display:none;color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+.h3{padding-bottom:5px;font-size:20px;font-weight:bold;color:#4e73df;text-transform:uppercase;border-bottom:2px solid #ACD6EA;}
+.de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
+.content_home{width:80%;margin-top:7px;display:none;background:#ACD6EA;height:900px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
+.dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
+.df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
+.intervalle{font-size:13px;padding-left:3%;}
 </style>
 
 </head>
@@ -84,9 +99,12 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                           <option selected>Type de chambre</option>
-                           
-                         </select>
+                         <option selected>Type de logement</option>
+						  <option value="1">chambre single</option><option value="2">chambre double</option>
+                           <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
+                          <option value="7">studio double</option>
+                          </select>
+						  
                           </div>  
                         </div>
                     </form>
@@ -301,15 +319,15 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="text" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" name="email" id="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" class="form-control" id="inputPassword4" placeholder="">
+      <input type="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
     </div>
     
     <h2>Information hébergement</h2>
@@ -328,32 +346,39 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 	
      <div class="form1 col-md-6">
 	  <label for="inputPassword4">Date d'entrée(check_in) </label>
-      <input type="date" name="days" class="form-control" id="inputPassword4" placeholder="">
+      <input type="date" name="days" id="days" class="form-control" id="inputPassword4" placeholder="">
      </div>
 	
 	 <div class="form1 col-md-6">
       <label for="inputPassword4">Date du départ(check_out) </label>
-      <input type="date" name="das" class="form-control" id="inputPassword4" placeholder="">
+      <input type="date" name="das" id="das" class="form-control" id="inputPassword4" placeholder="">
     </div>
 	
 	<div class="form2 col-md-6">
 	  <label for="inputPassword4">Heure d'entrée(check_in) </label>
-      <input type="time" name="tim" class="form-control" id="inputPassword4" placeholder="">
+      <input type="time" name="tim" id="tim" class="form-control" id="inputPassword4" placeholder="">
      </div>
 	
 	 <div class="form2 col-md-6">
       <label for="inputPassword4">Heure du départ(check_out) </label>
-      <input type="time" name="tis" class="form-control" id="inputPassword4" placeholder="">
+      <input type="time" name="tis" id="tis" class="form-control" id="inputPassword4" placeholder="">
     </div>
 	
   </div>
+  <span class="errors"></span>
    <button type="button" class="buttons">continuer</button>
  </div>
  
  <div class="content">
- <div><span class="client"></span><span class="nbjour"></span><span class="njoue"></div>
+ <div class="content1">
+ <div class="h3"><span id="h3"></span><span class="nbjour"></span></div>
+ <span class="client"></span>
+ </div>
+ <input type="hidden" id="nbjour" name="nbjour">
  
- </div><!--content--!>
+</div><!--content-->
+
+<div id="resultat-home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
  
  </form>
                     </div>
@@ -420,6 +445,13 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
+   var email = "default@gmail.com";
+   $('#email').val(email);
+ });
+ 
+ $('#pak').click(function(){
+	$('#examp').css('display','none');
+   $('#pak').css('display','none');
  });
  
  $(document).on('change','.to',function(){
@@ -445,6 +477,310 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		$('.form2').css('display','block');
 		 $('.form1').css('display','none'); 
 	 }
+ });
+ 
+ // click sur le bouton 
+ $('.buttons').click(function(){
+	 
+	 // on definir
+	 var dat = $('#dat').val();
+	 var name = $('#name').val();
+	 var piece = $('#piece').val();
+	 var to = $('#to').val();
+	 var days = $('#days').val();
+	 var das = $('#das').val();
+	 var tim = $('#tim').val();
+	 var tis =$('#tis').val();
+	 var email = $('#email').val();
+	 var adresse = $('#adresse').val();
+	 var numero =$('#numero').val();
+	 
+	 // regex
+	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
+    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
+    var number = /^[0-9]{8,14}$/;
+	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	 
+	 var date1 = new Date($('#days').val());
+	 var date2 =  new Date($('#das').val());
+	 
+	 // convertir les dates en Français
+	 var d = date1.getDate();
+	 var m = date1.getMonth() +1;
+	 var y = date1.getFullYear();
+	 
+	 var ds = date2.getDate();
+	 var ms = date2.getMonth() +1;
+	 var ys = date2.getFullYear();
+	 
+	 var datefrom = (d <= 30 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) +'/' + y;
+	 
+	 var datefro = (ds <= 30 ? '0' + ds : ds) + '/' + (ms <= 9 ? '0' + ms : ms) +'/' + ys;
+	 
+	 
+	 // calculer le nom de jour du séjour 
+	  var tmp = new Date(date2-date1);
+	  var s = tmp/1000/60/60/24;
+	 
+	 
+	 var date3 = parseInt($('#tim').val(),10);
+	 var date4 = parseInt($('#tis').val(),10);
+	 
+	 // caclcule d'heure horaire
+	 var tmps = date4-date3;
+	 var r = tmps;
+	 
+	 if(name.length==""){
+		$('#name').css('border-color','red');
+		
+	}
+	 
+	 else if (name.length > 60){
+      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur le nom du client');
+    }
+	
+	 
+	 else if (!reg.test(email)){
+      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email du client');
+    }
+	
+	 else if (numero.length > 14){
+      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro de télephone ne doit pas depasser 14chiffres');
+    }
+	
+	
+	else if (piece.length > 50){
+      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>le nombre de caractères pour la pièce d\identité ne doit pas depasser 50');
+    }
+	 
+	 else if(dat ==""){
+		 $('#dat').css('border-color','red');
+	 }
+	 
+	 else if(piece.length ==""){
+		$('#piece').css('border-color','red'); 
+		$('.error').html('fournir les informations sur l\'identité du client');
+	}
+	
+	else if(adresse > 150){
+		$('#adresse').css('border-color','red'); 
+		$('.errors').html('l\'adresse du client peut pas dépasser 150 caractères');
+	}
+	 
+	 else if(to =="sans"){
+		$('#to').css('border-color','red'); 
+	}
+	
+
+	else{
+	 
+	 if(to =="séjour"){
+		 
+		 var client = $('.client').text();
+		 if(client ==""){
+		 
+		 if(days!=""){
+		 
+		 if(das!=""){
+		 
+		 if(date1 < date2) {
+		 $('#h3').append('Séjour facturé');
+		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  '+datefrom+' ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  '+datefro+' </span>');
+		 
+		 if(s==1){
+		 $('.nbjour').append(' Durée : <span class="det">'+s+'jour</span>');
+		 }
+		 if(s > 1){
+			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
+		 }
+		 $('.content1').css('display','block');
+		 $('#pak').css('display','none');
+	     $('#examp').css('display','none');
+		 $('.content_home').css('display','block');
+		 $('.text').css('display','block');
+		 $('.tex').css('display','none');
+		 $('#nbjour').val(s);
+		 }
+		 
+		 else{
+			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
+		 }
+		 
+		 }
+		 
+		 else{
+			 $('#das').css('border-color','red'); 
+		 }
+		 
+		 }
+		 
+		 else{
+			$('#days').css('border-color','red');  
+		 }
+		 
+		 }
+		 
+		 else{
+			$('#h3').text('Séjour facturé'); 
+			$('.de').text(name);
+			$('.des').text(numero);
+			
+			if(s==1){
+			$('.det').text(s+'jour');
+			
+			}
+			
+			if(s > 1){
+				$('.det').text(s+'jours');
+			}
+			$('.content1').css('display','block');
+			$('#pak').css('display','none');
+	       $('#examp').css('display','none');
+		   $('.content_home').css('display','block');
+		   $('.text').css('display','block');
+		   $('.tex').css('display','none');
+		   $('#nbjour').val(s);
+		 }
+	 }
+	 
+	 if(to =="horaire"){
+		 var client = $('.client').text();
+		 if(client==""){
+		 if(tim!=""){
+		 if(tis!=""){
+		 if(date3 < date4){
+		 $('#h3').append('Horaire facturé');
+		 $('.client').append('Réference client : <i class="far fa-user" style="color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:2%;color:green;font-size:13px;"></i> contact : <span class="des">'+numero+'</span>');
+		 if(r==1){
+		 $('.nbjour').append('Durée : <span class="det">'+r+'heure</span>');
+		 }
+		 if(r > 1){
+			$('.nbjour').append('Durée : <span class="det">'+r+'heures</span>');			  
+		 }
+		 
+		 $('.content1').css('display','block');
+		    $('#pak').css('display','none');
+	        $('#examp').css('display','none');
+			$('.content_home').css('display','block');
+		    $('.text').css('display','none');
+			$('.tex').css('display','block');
+			$('#nbjour').val(r);
+		 }
+		 
+		 else{
+			 $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>l\'heure de départ ne dois pas etre inférieur à celle de l\'entréé'); 
+	      }
+		 
+		 }
+		 
+		 else{
+			$('#tis').css('border-color','red');  
+		 }
+		 
+		 }
+		 
+		 else{
+			 $('#tim').css('border-color','red'); 
+		 }
+		 
+		 }
+         else{
+            $('#h3').text('Horaire facturé'); 
+			$('.de').text(name);
+			$('.des').text(numero);
+			
+			if(r==1){
+			$('.det').text(r+'heure');
+			
+			}
+			
+			if(r > 1){
+				$('.det').text(r+'heures');
+			}
+			
+			$('.content1').css('display','block');
+		    $('#pak').css('display','none');
+	        $('#examp').css('display','none');
+			$('.content_home').css('display','block');
+		    $('.text').css('display','none');
+			$('.tex').css('display','block');
+			$('#nbjour').val(r);
+		}
+	 }
+	 
+	 
+	 if(to =="réservation"){
+		 
+		 var client = $('.client').text();
+		 if(client ==""){
+		 
+		 if(days!=""){
+		 
+		 if(das!=""){
+		 
+		 if(date1 < date2) {
+		 $('#h3').append('Réservation');
+		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  '+datefrom+' ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  '+datefro+' </span>');
+		 
+		 if(s==1){
+		 $('.nbjour').append('Durée : <span class="det">'+s+'jour</span>');
+		 }
+		 if(s > 1){
+			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
+		 }
+		 $('.content1').css('display','block');
+		 $('#pak').css('display','none');
+	     $('#examp').css('display','none');
+		 $('.content_home').css('display','block');
+		 $('.text').css('display','block');
+		 $('.tex').css('display','none');
+		 $('#nbjour').val(s);
+		 }
+		 
+		 else{
+			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
+		 }
+		 
+		 }
+		 
+		 else{
+			 $('#das').css('border-color','red'); 
+		 }
+		 
+		 }
+		 
+		 else{
+			$('#days').css('border-color','red');  
+		 }
+		 
+		 }
+		 
+		 else{
+			$('#h3').text('Réservation'); 
+			$('.de').text(name);
+			$('.des').text(numero);
+			
+			if(s==1){
+			$('.det').text(s+'jour');
+			
+			}
+			
+			if(s > 1){
+				$('.det').text(s+'jours');
+			}
+			$('.content1').css('display','block');
+		    $('#pak').css('display','none');
+	        $('#examp').css('display','none');
+		    $('.content_home').css('display','block');
+			$('.text').css('display','block');
+		    $('.tex').css('display','none');
+		    $('#nbjour').val(s);
+		 }
+	 }
+	
+     
+	}
+	 
  });
 
 
