@@ -47,11 +47,12 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .content1{display:none;color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .h3{padding-bottom:5px;font-size:20px;font-weight:bold;color:#4e73df;text-transform:uppercase;border-bottom:2px solid #ACD6EA;}
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
-.content_home{width:80%;margin-top:7px;display:none;background:#ACD6EA;height:900px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home{width:80%;margin-top:15px;display:none;background:#BDDDF9;height:900px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home,.content2{float:left;display:none;} .content2{margin-left:3%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 .df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
-.intervalle{font-size:13px;padding-left:3%;}
+.intervalle{font-size:13px;padding-left:3%;} 
 </style>
 
 </head>
@@ -374,12 +375,20 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
  <div class="h3"><span id="h3"></span><span class="nbjour"></span></div>
  <span class="client"></span>
  </div>
+
+
  <input type="hidden" id="nbjour" name="nbjour">
  
 </div><!--content-->
 
+<div class="contents">
 <div id="resultat-home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
- 
+
+ <div class="content2">
+  <h4>Détails sur le sejour </h4>
+ </div>
+
+ </div><!--content2--> 
  </form>
                     </div>
 
@@ -513,9 +522,9 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 	 var ms = date2.getMonth() +1;
 	 var ys = date2.getFullYear();
 	 
-	 var datefrom = (d <= 30 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) +'/' + y;
+	 var datefrom = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) +'/' + y;
 	 
-	 var datefro = (ds <= 30 ? '0' + ds : ds) + '/' + (ms <= 9 ? '0' + ms : ms) +'/' + ys;
+	 var datefro = (ds <= 9 ? '0' + ds : ds) + '/' + (ms <= 9 ? '0' + ms : ms) +'/' + ys;
 	 
 	 
 	 // calculer le nom de jour du séjour 
@@ -585,7 +594,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 
 		 if(date1 < date2) {
 		 $('#h3').append('Séjour facturé');
-		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  '+datefrom+' ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  '+datefro+' </span>');
+		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
 		 
 		 if(s==1){
 		 $('.nbjour').append(' Durée : <span class="det">'+s+'jour</span>');
@@ -594,6 +603,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
 		 }
 		 $('.content1').css('display','block');
+		 $('.content2').css('display','block');
 		 $('#pak').css('display','none');
 	     $('#examp').css('display','none');
 		 $('.content_home').css('display','block');
@@ -621,9 +631,13 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 }
 		 
 		 else{
+			 
+			 if(date1 < date2){
 			$('#h3').text('Séjour facturé'); 
 			$('.de').text(name);
 			$('.des').text(numero);
+			$('.from').text(datefrom);
+			$('.todate').text(datefro);
 			
 			if(s==1){
 			$('.det').text(s+'jour');
@@ -634,6 +648,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 				$('.det').text(s+'jours');
 			}
 			$('.content1').css('display','block');
+			$('.content2').css('display','block');
 			$('#pak').css('display','none');
 	       $('#examp').css('display','none');
 		   $('.content_home').css('display','block');
@@ -641,6 +656,12 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		   $('.tex').css('display','none');
 		   $('#nbjour').val(s);
 		 }
+		 else{
+			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé');  
+		 }
+		 
+		 }
+		
 	 }
 	 
 	 if(to =="horaire"){
@@ -650,7 +671,8 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 if(tis!=""){
 		 if(date3 < date4){
 		 $('#h3').append('Horaire facturé');
-		 $('.client').append('Réference client : <i class="far fa-user" style="color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:2%;color:green;font-size:13px;"></i> contact : <span class="des">'+numero+'</span>');
+		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+tim+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+tis+'</span> </span>');
+		 
 		 if(r==1){
 		 $('.nbjour').append('Durée : <span class="det">'+r+'heure</span>');
 		 }
@@ -659,6 +681,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 }
 		 
 		 $('.content1').css('display','block');
+		 $('.content2').css('display','block');
 		    $('#pak').css('display','none');
 	        $('#examp').css('display','none');
 			$('.content_home').css('display','block');
@@ -685,9 +708,13 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 
 		 }
          else{
+			 
+			 if(date3 < date4){
             $('#h3').text('Horaire facturé'); 
 			$('.de').text(name);
 			$('.des').text(numero);
+			$('.from').text(tim);
+			$('.todate').text(tis);
 			
 			if(r==1){
 			$('.det').text(r+'heure');
@@ -699,6 +726,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 			}
 			
 			$('.content1').css('display','block');
+			$('.content2').css('display','block');
 		    $('#pak').css('display','none');
 	        $('#examp').css('display','none');
 			$('.content_home').css('display','block');
@@ -706,6 +734,11 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 			$('.tex').css('display','block');
 			$('#nbjour').val(r);
 		}
+		
+		else{
+			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
+		}
+	   }
 	 }
 	 
 	 
@@ -720,7 +753,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 
 		 if(date1 < date2) {
 		 $('#h3').append('Réservation');
-		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  '+datefrom+' ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  '+datefro+' </span>');
+		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
 		 
 		 if(s==1){
 		 $('.nbjour').append('Durée : <span class="det">'+s+'jour</span>');
@@ -729,6 +762,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
 		 }
 		 $('.content1').css('display','block');
+		 $('.content2').css('display','block');
 		 $('#pak').css('display','none');
 	     $('#examp').css('display','none');
 		 $('.content_home').css('display','block');
@@ -756,9 +790,13 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		 }
 		 
 		 else{
+			 
+			 if(date1 < date2){
 			$('#h3').text('Réservation'); 
 			$('.de').text(name);
 			$('.des').text(numero);
+			$('.from').text(datefrom);
+			$('.todate').text(datefro);
 			
 			if(s==1){
 			$('.det').text(s+'jour');
@@ -769,6 +807,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 				$('.det').text(s+'jours');
 			}
 			$('.content1').css('display','block');
+			$('.content2').css('display','block');
 		    $('#pak').css('display','none');
 	        $('#examp').css('display','none');
 		    $('.content_home').css('display','block');
@@ -776,6 +815,12 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 		    $('.tex').css('display','none');
 		    $('#nbjour').val(s);
 		 }
+		 
+		 else{
+			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
+		 }
+		 
+		}
 	 }
 	
      
