@@ -143,11 +143,10 @@ include('inc_session.php');
 			 
 			echo'<div class="hom"><h5>'.$values['type'].'</h5>
 			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pay.'x'.$_POST['nbjour'].' xof</span> 
-			<input type="hidden" name="chambr[]" value="'.$value['chambre'].'">
-			<input type="hidden" name"="typ[]" value="'.$value['type'].'">
-			<input type="hidden" name="paynuite[]" value="'.$pay'">
-			<span class="remove"><a href ="#" data-id3="'.$_POST['id'].'" class="remove"><i class="fas fa-file-times" style="background-color:#F7890E;font-size:12px;"></i></a></span>
-			
+			<input type="hidden" name="chambr[]" value="'.$values['chambre'].'">
+			<input type="hidden" name"="typ[]" value="'.$values['type'].'">
+			<input type="hidden" name="paynuite[]" value="'.$pay.'">
+			<span class="remov"><a href ="#" data-id3="'.$_POST['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span>
 			</div>';
 			
 			
