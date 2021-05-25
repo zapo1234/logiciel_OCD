@@ -47,12 +47,16 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .content1{display:none;color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .h3{padding-bottom:5px;font-size:20px;font-weight:bold;color:#4e73df;text-transform:uppercase;border-bottom:2px solid #ACD6EA;}
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
-.content_home{width:80%;margin-top:15px;display:none;background:#BDDDF9;height:900px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
-.content_home,.content2{float:left;display:none;} .content2{margin-left:3%;}
+.content_home{width:80%;margin-top:15px;display:none;background:#BDDDF9;height:950px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home,.content2{float:left;display:none;} .content2{margin-left:0.3%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 .df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
 .intervalle{font-size:13px;padding-left:3%;} 
+h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+.hom{text-align:center;border-bottom:1px solid #eee;padding:0.3%;color:black;font-size:14px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+ h5{font-size:13px;} .dg{padding-left:3%;} .montant{text-align:center;margin-top:30px;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
+ #monts,#tva{width:90px;font-weight:400;} .tot{margin-top:10px;font-weight:bold;} #mont{font-weight:bold;padding-left:2%;}
 </style>
 
 </head>
@@ -385,7 +389,10 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 <div id="resultat-home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
 
  <div class="content2">
-  <h4>Détails sur le sejour </h4>
+  <h4> Les détails sur le séjour </h4>
+  <div class="data1"></div>
+  <div id="results"></div><!--div-affiche data home selectionné-->
+  
  </div>
 
  </div><!--content2--> 
@@ -827,6 +834,59 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 	}
 	 
  });
+ 
+ // on récupére les données pour créer un user recaptitulatif
+ 
+ $('.add_home').click(function() {
+
+	var id = $(this).data('id2'); // on recupère l'id.
+    var action ="add";
+	// recupération des variable
+	var nbjour = $('#nbjour').val();
+	var chambre = $('#chambre'+id).val();
+	var type = $('#type'+id).val();
+	var prix_nuite = $('#prix'+id).val();
+	var prix_pass = $('#pric'+id).val();
+	var paynuite = $('#cout_nuite'+id).val();
+	var paypass = $('#cout_pass'+id).val();
+	var to = $('#to').val();
+	
+	
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#results').html(data);
+	
+	 },
+	 error: function() {
+    alert('vérifier votre connexion'); }
+	 
+	});
+
+	});
+	
+	// fonction remove
+	$('document').on('click','.remove',function(){
+		var action ="remove";
+		var id = $(this).data('id3');
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{id:id,action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#results').html(data);
+	
+	 },
+	 error: function() {
+    alert('vérifier votre connexion'); }
+	 
+	});
+		
+	});
 
 
 });
