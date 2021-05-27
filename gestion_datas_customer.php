@@ -32,7 +32,11 @@ include('inc_session.php');
     <style>
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;font-weight:bold;margin-left:8%;}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{background:white;width:300px;border:2px solid #eee;height:210px;padding:4%;}
+    .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
+    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
+    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
+	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
+	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
@@ -72,13 +76,19 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
         
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
-                    <div class="bg">
+                    <div class="bs">
                         <h6 class="collapse-header">Point journalier caisse</h6>
                         <a class="collapse-item" href="login.html">Encaissé</a><br/>
                         <a class="collapse-item" href="register.html">Facture non payé</a><br/>
                         <a class="collapse-item" href="forgot-password.html">Réservation</a><br/>
                         <a class="collapse-item" href="forgot-password.html">Dépenses</a>
                         <div class="collapse-divider"></div>
+                      
+                    </div>
+					
+					
+					<div class="bg">
+                        <div id="resultats"></div>
                       
                     </div>
                 </div>
@@ -876,9 +886,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 	
 	// recupération et caclul des montants
 	
-	
-	
-	// fonction remove
+	// fonction remove pour suprimer un local de la liste
 	$(document).on('click','.remove',function(){
 		var action ="remove";
 		var id = $(this).data('id3');
@@ -908,7 +916,51 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 		
 	});
 	
-	// calculer les sommes
+	// calculer les sommes automatiquement du récapitualitif
+	
+	$(document).on('keyup','#tva',function(){
+		
+	var tva = $('#tva').val();
+	var totals =$('#total').val();
+	
+	if(tva > 0 && tva.length <3 && tva.length!=""){
+	var result = parseFloat(totals)*parseFloat(tva);
+	var resul = parseFloat(total) - parseFloat(result)/100;
+	var results = resul.toFixed(2);
+	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+	}
+
+    if(tva.length ==""){
+     var results = 0;
+	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+    }		
+  });
+  
+  $(document).on('keyup','#account',function(){
+	 var totals =  $('#total').val();	 
+	 var account = $('#account').val();
+	 if(account >0){
+		var result = parseFloat(totals) - parseFloat(account);
+        $('#rpay').val(result);
+	 }
+	  
+  });
+  
+  // afficher les données des encaissements
+  function load() {
+				var action="fetch";
+				$.ajax({
+					url: "affichage_donnees.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats').html(data);
+					}
+				});
+			}
+
+			load();
+			
 	
 	
       $(document).on('click','#add_local',function(){
