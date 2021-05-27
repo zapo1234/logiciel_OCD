@@ -24,9 +24,9 @@
             </li>
 			
 			<li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="gestion_data_home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Bord clients</span>
+                    <span>Bord local</span>
                 </a>
             </li>
 

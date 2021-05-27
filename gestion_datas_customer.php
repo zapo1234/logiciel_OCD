@@ -30,11 +30,11 @@ include('inc_session.php');
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;font-weight:bold;margin-left:8%;}
+     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
     .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
+    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
@@ -65,6 +65,9 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
+.reini{padding:2%;z-index:3;position:absolute;top:200px;left:35%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
+.action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
+	.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;border
 </style>
 
 </head>
@@ -315,7 +318,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="zapo.php">
+  <form method="post" id="form1" action="data_validate_client.php">
  <div  id="examp" style="display:none">
   <h2> Les informations du client </h2>
    
@@ -324,7 +327,21 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
       <div class="input-group">
 	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
     <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required>                                               
-</div>
+  </div>
+ </div>
+
+   <div class="form-group col-md-6">
+      <div class="input-group">
+	  <label for="inputPassword4">Civilité client *<br/></label>
+     <select id="civil" class="civil" name="civil">
+     <option value="sans">type</option><option value="couple">couple</option>
+	 <option value="monsieur">Monsieur</option>
+	 <option value="madame">Madame</option>    
+      <option value="famille">famille</option>
+	  <option value="sans">sans précision</option>
+    </select>	  
+   </div>
+
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
@@ -415,7 +432,17 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
     
 	</div>
 
-                </div>
+ <div class="reini" style="display:none">
+ <form method="post" id="form_reini" action="">
+ <h1>Réinitialiser votre caisse journalière</h1>
+ <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
+ <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+ </form>
+ 
+ </div><!--reini---->
+ <div id="result_reini"></div><!--div result_reini-->
+    
+	</div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -484,6 +511,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
  $('#pak').click(function(){
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
+   $('.reini').css('display','none');
  });
  
  $(document).on('change','.to',function(){
@@ -960,8 +988,12 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 			}
 
 			load();
-			
 	
+    // afficher la div pour réinitailiser les chiffres	
+	$(document).on('click','.butt',function(){
+    $('.reini').css('display','block');
+    $('#pak').css('display','block');
+    });
 	
       $(document).on('click','#add_local',function(){
 		 $('#form1').submit();
