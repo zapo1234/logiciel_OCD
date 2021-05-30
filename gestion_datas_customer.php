@@ -68,6 +68,22 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .reini{padding:2%;z-index:3;position:absolute;top:200px;left:35%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 	.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;border
+
+ @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+ .dep {
+  animation: spin 2s linear infinite;
+  margin-top:10px;font-size:45px;font-weight:bold;
+  }
+
+
+#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
+.enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
+
+
 </style>
 
 </head>
@@ -363,7 +379,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
+      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
     </div>
     
     <h2>Information hébergement</h2>
@@ -426,9 +442,13 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
   <div id="results"></div><!--div-affiche data home selectionné-->
   
  </div>
-
+<input type="hidden" name="token" id="token" value="<?php
+//Le champ caché a pour valeur le jeton
+echo $_SESSION['token'];?>">
  </div><!--content2--> 
  </form>
+ 
+ 
     
 	</div>
 
@@ -894,13 +914,17 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 	var paynuite = $('#cout_nuite'+id).val();
 	var paypass = $('#cout_pass'+id).val();
 	var to = $('#to').val();
+	var days = $('#days').val();
+	 var das = $('#das').val();
+	 var tim = $('#tim').val();
+	 var tis =$('#tis').val();
 	
 	
 	// on lance l'apel ajax
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
+	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#results').html(data);
 	
@@ -953,7 +977,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 	
 	if(tva > 0 && tva.length <3 && tva.length!=""){
 	var result = parseFloat(totals)*parseFloat(tva);
-	var resul = parseFloat(total) - parseFloat(result)/100;
+	var resul = parseFloat(result)/100;
 	var results = resul.toFixed(2);
 	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
 	}
@@ -971,6 +995,10 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 		var result = parseFloat(totals) - parseFloat(account);
         $('#rpay').val(result);
 	 }
+	 
+	 if(account.length ==""){
+		$('#rpay').val(0);	
+	}
 	  
   });
   
