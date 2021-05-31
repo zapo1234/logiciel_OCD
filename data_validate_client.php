@@ -278,8 +278,8 @@ include('inc_session.php');
 						  
 						  
 		
-		
-	  
+		}
+      }
 	  
 	   // insertion des données dans la table facture
 		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,tva,id_fact,type,status) 
@@ -306,7 +306,7 @@ include('inc_session.php');
 							':type'=>$mode,
 							':status'=>$status
 						  ));
-						  
+            				  
 						  
 			// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
@@ -330,10 +330,9 @@ include('inc_session.php');
             
 			echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_factures_home.php"/>';
         					 
-		}
-	 }	
+		
+	 
    }
-   
    
    
    else{
@@ -370,19 +369,24 @@ include('inc_session.php');
 			
 		}
 		
-		elseif($result4 < $_POST['dat']){
-			echo'<div class="erro">l\'une de vos chambres occupée à cette heure</div>';
-		}
-		
-		elseif($result3 > $_POST['dat']){
-			echo'<div class="erro">l\'une de vos chambres occupée à cette heure</div>';
-		}
 		
 		elseif($result1==$d1 AND $result2==$d2 AND $dos['dat']==$_POST['dat']){
 		
         echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';		
 			
 		}
+		
+		
+	    elseif($result3== $_POST['dat'] AND $result4==$_POST['dat']){
+		echo'<div class="erro">l\'une de vos chambres occupée à ces heures</div>';
+			
+		}
+		
+		elseif($result3 > $_POST['dat'] AND $result4<$_POST['dat']){
+		echo'<div class="erro">l\'une de vos chambres occupée à ces heures</div>';
+			
+		}
+	
 		
 		elseif($result2 > $d2 AND $dos['dat']==$_POST['dat']) {
 		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
@@ -418,7 +422,9 @@ include('inc_session.php');
 		
 		
 	  
-	  
+		}
+		
+	   }
 	   // insertion des données dans la table facture
 		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,tva,id_fact,type,status) 
 		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:tva,:id_fact,:type,:status)');
@@ -468,24 +474,6 @@ include('inc_session.php');
             
 			echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_factures_home.php"/>';
         					 
-		}
-	 }	
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
    }
    
  }
