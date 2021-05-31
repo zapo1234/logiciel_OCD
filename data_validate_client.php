@@ -47,6 +47,49 @@ include('inc_session.php');
 	$id_fact=$mt+0.0001;
 		
 	}
+	
+	$dates1 =$_POST['days'];
+	$dates2 =$_POST['das'];
+	
+	$dates1 = explode('-',$dates1);
+	
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dates2 = explode('-',$dates2);
+	
+	$j1 = $dates2[2];
+	$mm1 = $dates2[1];
+	$an1 = $dates2[0];
+	
+	$debut_date = mktime(0, 0, 0, $mm, $j, $an);
+     $fin_date = mktime(0, 0, 0, $mm1, $j1, $an);
+	 
+	 $tab = [];
+	  for($i = $debut_date; $i <= $fin_date; $i+=86400)
+     {
+       $dates =  date("Y-m-d.",$i);
+	   
+	   $dates = explode('.',$dates);
+	   
+	   foreach($dates as $dats){
+		   
+		 $tab[] = $dats;  
+		   
+	   }
+	 }
+	   
+	 // on recupére les données sur une chaine de caractère
+	  $datas = implode(',',$tab);
+	 // on recupére les date dans la base de donnnées.
+	 
+	  $rey=$bds->prepare('INSERT INTO home_occupation (id_chambre,date) 
+		VALUES(:id_chambre,:date)');
+	     $rey->execute(array(':id_chambre'=>2,
+		                     ':date'=>$datas
+	                        ));
+	 
 
    // on recupére les variable fixe
    
@@ -320,19 +363,7 @@ include('inc_session.php');
 			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
 
-
-             echo'<div id="pak"></div>';
-				
-				  // on redirige vers la page
-             echo'<div class="enre"><div>La facture du clientg à eté prise en compte <button class="resul">!<div></button>
-		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>';
-  
-            
-			echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_factures_home.php"/>';
-        					 
-		
-	 
-   }
+       }
    
    
    else{
@@ -465,18 +496,9 @@ include('inc_session.php');
 				unset($_SESSION['add_home']);
 
 
-             echo'<div id="pak"></div>';
-				
-				  // on redirige vers la page
-             echo'<div class="enre"><div>La facture du clientg à eté prise en compte <button class="resul">!<div></button>
-		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>';
-  
-            
-			echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_factures_home.php"/>';
-        					 
+             		 
    }
-   
- }
+  }
    catch(Exception $e)
   {
 die('Erreur : '.$e->getMessage());
