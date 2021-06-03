@@ -69,9 +69,9 @@ include('inc_session.php');
 	 $tab = [];
 	  for($i = $debut_date; $i <= $fin_date; $i+=86400)
      {
-       $dates =  date("Y-m-d.",$i);
+       $dates =  date("Y-m-d",$i);
 	   
-	   $dates = explode('.',$dates);
+	   $dates = explode(' ',$dates);
 	   
 	   foreach($dates as $dats){
 		   
@@ -79,18 +79,9 @@ include('inc_session.php');
 		   
 	   }
 	 }
-	   
-	 // on recupére les données sur une chaine de caractère
+	 
+     // on recupére les données sur une chaine de caractère
 	  $datas = implode(',',$tab);
-	 // on recupére les date dans la base de donnnées.
-	 
-	  $rey=$bds->prepare('INSERT INTO home_occupation (id_chambre,date) 
-		VALUES(:id_chambre,:date)');
-	     $rey->execute(array(':id_chambre'=>2,
-		                     ':date'=>$datas
-	                        ));
-	 
-
    // on recupére les variable fixe
    
    $dat =$_POST['dat']; // date d'enregistrement.
@@ -318,7 +309,14 @@ include('inc_session.php');
 		                    ':id_fact'=>$id_fact,
 						    ':type'=>$ty
 						  ));
-						  
+				
+
+                // on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,date) 
+		 VALUES(:id_chambre,:date)');
+	     $reys->execute(array(':id_chambre'=>$ids_chambre,
+		                     ':date'=>$datas
+	                        ));				
 						  
 		
 		}
@@ -413,7 +411,7 @@ include('inc_session.php');
 			
 		}
 		
-		elseif($result3 > $_POST['dat'] AND $result4<$_POST['dat']){
+		elseif($result3 > $_POST['dat'] AND $result4 < $_POST['dat']){
 		echo'<div class="erro">l\'une de vos chambres occupée à ces heures</div>';
 			
 		}
@@ -449,8 +447,7 @@ include('inc_session.php');
 						    ':type'=>$ty
 						  ));
 						  
-						  
-		
+						
 		
 	  
 		}
