@@ -885,6 +885,7 @@ echo $_SESSION['token'];?>">
 			$('.text').css('display','block');
 		    $('.tex').css('display','none');
 		    $('#nbjour').val(s);
+			
 		 }
 		 
 		 else{
@@ -893,7 +894,25 @@ echo $_SESSION['token'];?>">
 		 
 		}
 	 }
+	 
+	 // on renvoi une requete Ajax pour afficher les données
+	 // on lance l'apel ajax
+	 var days = $('#days').val();
+	 var das = $('#das').val();
+	 var tim = $('#tim').val();
+	 var tis =$('#tis').val();
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	data:{days:days,das:das,tim:tim,tis:tis},
+	url: 'home.php',// on traite par la fichier
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#result').html(data);
 	
+	 },
+	 error: function() {
+    alert('vérifier votre connexion'); }
+	 
+	});
      
 	}
 	 
@@ -957,8 +976,7 @@ echo $_SESSION['token'];?>">
 	  url: 'add_home.php',// on traite par la fichier
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
-		
-		$('#results').html(data);
+		$('#resultat-home').html(data);
 
       },
 	 error: function() {

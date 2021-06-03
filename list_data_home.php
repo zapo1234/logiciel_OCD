@@ -22,31 +22,43 @@ include('inc_session.php');
        
 	echo'<div class="content_home">';
 	
-	$tab = [];
+	
 	// on récupére les données
-	
-	foreach($don as $donnees){
-		
-		$datas = $donnees['id_chambre'];
-		
-		$datas = explode(' ',$datas);
-		
-		foreach($datas as $values){
-		
-        $tab[] = $values;		
-	   }
-	}
-	
-	
 	
 	
 	foreach($don as $donnees) {
 		
-	  echo'<div class="content3">
+	 $array = [];
+	foreach($donns as $datas) {
+		
+		$data = $datas['id_chambre'];
+		
+		$dat = explode(' ',$data);
+		
+		foreach($dat as $value){
+		
+        $array[] = $value;		
+	   
+	   }
+	}	   
+	 
+     if(in_array(($donnees['id_chambre']),$array)){
+
+        $name="disponible";
+	 }
+
+     else{
+
+        $name="";
+	 }		 
+
+	
+	     echo'<div class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text">Prix négocié(nuité)<input type="number"  class="prix" id="prix'.$donnees['id_chambre'].'"></span>
 			 <span class="tex">Prix négocié(horaire)<input type="number"  class="pric" id="pric'.$donnees['id_chambre'].'"></span><br/><br/>
-			 <span class="but1"><a href="#" data-id1="'.$donnees['id_chambre'].'" title="voir disponibilité">check</a></span> <span id="d'.$donnees['id_chambre'].'"></span><span class="but2"><a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a></span>
+			 <span class="d">'.$name.'</span>
+			 <span class="but1"><a href="#" data-id1="'.$donnees['id_chambre'].'" title="voir disponibilité">check</a></span><span class="but2"><a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a></span>
 			 <input type="hidden"  name="hidden_name" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'">
 			 <input type="hidden" id="cout_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'">
 		     <input type="hidden" id="cout_pass'.$donnees['id_chambre'].'" value="'.$donnees['cout_pass'].'">
@@ -56,9 +68,10 @@ include('inc_session.php');
 	
 	}
 	
+  
 	
 	echo'</div>';
 
-   
+   var_dump($array);
 
 ?>
