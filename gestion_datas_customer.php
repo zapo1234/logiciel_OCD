@@ -81,8 +81,9 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
 
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
-.enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
+.enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white;}
 
+.ds{font-size:30px;color:blue;}
 
 </style>
 
@@ -435,7 +436,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
 
 <div class="contents">
-<div id="resultat-home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
+<div id="resultat_home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
 
  <div class="content2">
   <h4> Les détails sur le séjour </h4>
@@ -895,32 +896,52 @@ echo $_SESSION['token'];?>">
 		}
 	 }
 	 
-	 // on renvoi une requete Ajax pour afficher les données
-	 // on lance l'apel ajax
-	 var days = $('#days').val();
-	 var das = $('#das').val();
-	 var tim = $('#tim').val();
-	 var tis =$('#tis').val();
-	$.ajax({
-	type: 'POST', // on envoi les donnes
-	data:{days:days,das:das,tim:tim,tis:tis},
-	url: 'home.php',// on traite par la fichier
-	success:function(data) { // on traite le fichier recherche apres le retour
-		$('#result').html(data);
-	
-	 },
-	 error: function() {
-    alert('vérifier votre connexion'); }
-	 
-	});
      
 	}
 	 
  });
  
+ 
+ $('.buttons').click(function(){
+	
+     var days = $('#days').val();
+	 var das = $('#das').val();
+	 var tim = $('#tim').val();
+	 var tis =$('#tis').val();	
+	 var to =$('#to').val();
+	
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'list_data_home.php',// on traite par la fichier
+	data:{days:days,das:das,tim:tim,tis:tis,to:to},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat_home').html(data);
+		$('.content_home').css('display','block');
+		
+		if(to=="séjour" || to=="réservation"){
+		$('.text').css('display','block');
+		$('.tex').css('display','none');
+        $('.content1').css('display','block');
+		$('.content2').css('display','block');		
+		}
+		
+		if(to=="horaire"){
+			
+			$('.content1').css('display','block');
+			$('.content2').css('display','block');
+		    $('.text').css('display','none');
+			$('.tex').css('display','block');
+			
+		}
+	
+	 },
+	 
+	}); 
+});
+ 
  // on récupére les données pour créer un user recaptitulatif
  
- $('.add_home').click(function() {
+ $(document).on('click','.add_home',function() {
 
 	var id = $(this).data('id2'); // on recupère l'id.
     var action ="add";
@@ -976,7 +997,7 @@ echo $_SESSION['token'];?>">
 	  url: 'add_home.php',// on traite par la fichier
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
-		$('#resultat-home').html(data);
+		$('#results').html(data);
 
       },
 	 error: function() {

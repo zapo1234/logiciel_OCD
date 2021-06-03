@@ -10,9 +10,9 @@ include('inc_session.php');
 	$don = $req->fetchAll();
 	
     //// emttre la requete sur le fonction
-    $rec=$bds->query('SELECT id_chambre FROM home_occupation');
-    $donns = $rec->fetchAll();
-	$rec->closeCursor();
+    //$rec=$bds->query('SELECT id_chambre,date FROM home_occupation');
+    //$donns = $rec->fetchAll();
+	//$rec->closeCursor();
 	
 	$rem='<span class="ts"></span>';
 	$rt=",";
@@ -27,13 +27,14 @@ include('inc_session.php');
 	
 	
 	foreach($don as $donnees) {
-		
+	$rec=$bds->query('SELECT id_chambre,date FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
+    $donns = $rec->fetchAll();
 	 $array = [];
 	foreach($donns as $datas) {
 		
-		$data = $datas['id_chambre'];
+		$data = $datas['date'];
 		
-		$dat = explode(' ',$data);
+		$dat = explode(',',$data);
 		
 		foreach($dat as $value){
 		
@@ -42,22 +43,27 @@ include('inc_session.php');
 	   }
 	}	   
 	 
-     if(in_array(($donnees['id_chambre']),$array)){
+     if(in_array(($_POST['days']),$array)){
 
-        $name="disponible";
+        $name="";
+	 }	
+
+     elseif(in_array(($_POST['das']),$array)){
+
+        $name="";
 	 }
 
      else{
 
-        $name="";
-	 }		 
+        $name="disponible";
+	 }	 
 
 	
 	     echo'<div class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text">Prix négocié(nuité)<input type="number"  class="prix" id="prix'.$donnees['id_chambre'].'"></span>
 			 <span class="tex">Prix négocié(horaire)<input type="number"  class="pric" id="pric'.$donnees['id_chambre'].'"></span><br/><br/>
-			 <span class="d">'.$name.'</span>
+			 <h3>'.$name.'</h3>
 			 <span class="but1"><a href="#" data-id1="'.$donnees['id_chambre'].'" title="voir disponibilité">check</a></span><span class="but2"><a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a></span>
 			 <input type="hidden"  name="hidden_name" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'">
 			 <input type="hidden" id="cout_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'">
@@ -71,7 +77,6 @@ include('inc_session.php');
   
 	
 	echo'</div>';
-
-   var_dump($array);
+    var_dump($array);
 
 ?>
