@@ -46,16 +46,30 @@ include('inc_session.php');
      if(in_array(($_POST['days']),$array)){
 
         $name="";
+		$a="null";
 	 }	
 
      elseif(in_array(($_POST['das']),$array)){
 
         $name="";
+		$a="null";
 	 }
 
      else{
-
-        $name="disponible";
+         $dates1 = explode('-',$_POST['days']);
+	
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dates2 = explode('-',$_POST['das']);
+	
+	$j1 = $dates2[2];
+	$mm1 = $dates2[1];
+	$an1 = $dates2[0];
+   
+        $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+		$a="h5";
 	 }	 
 
 	
@@ -63,7 +77,7 @@ include('inc_session.php');
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text">Prix négocié(nuité)<input type="number"  class="prix" id="prix'.$donnees['id_chambre'].'"></span>
 			 <span class="tex">Prix négocié(horaire)<input type="number"  class="pric" id="pric'.$donnees['id_chambre'].'"></span><br/><br/>
-			 <h3>'.$name.'</h3>
+			 <div class="'.$a.'">'.$name.'</div>
 			 <span class="but1"><a href="#" data-id1="'.$donnees['id_chambre'].'" title="voir disponibilité">check</a></span><span class="but2"><a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a></span>
 			 <input type="hidden"  name="hidden_name" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'">
 			 <input type="hidden" id="cout_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'">
@@ -77,6 +91,5 @@ include('inc_session.php');
   
 	
 	echo'</div>';
-    var_dump($array);
 
 ?>
