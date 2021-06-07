@@ -27,7 +27,7 @@ include('inc_session.php');
 	
 	
 	foreach($don as $donnees) {
-	$rec=$bds->query('SELECT id_chambre,date FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
+	$rec=$bds->query('SELECT id_chambre,date,dates FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
     $donns = $rec->fetchAll();
 	 $array = [];
 	foreach($donns as $datas) {
@@ -41,19 +41,36 @@ include('inc_session.php');
         $array[] = $value;		
 	   
 	   }
-	}	   
+	}
+
+     $tab = $array;
+    $nombre = count($array);	
+    $debut = current($array);
+    $sortie = end($array);
+   
+	// on recupére le premier et la dernier date
+    // si le client est facturé sur un séjour ou reservation
 	 
+	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
      if(in_array(($_POST['days']),$array)){
 
-        $name="";
-		$a="null";
-	 }	
+        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+	 }
+
+     elseif($_POST['days'] < $debut  AND $_POST['das']> $sortie){
+
+       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+
+     }		 
 
      elseif(in_array(($_POST['das']),$array)){
 
-        $name="";
-		$a="null";
+        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+		$a="h6";
 	 }
+	 
 
      else{
          $dates1 = explode('-',$_POST['days']);
@@ -71,7 +88,41 @@ include('inc_session.php');
         $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
 	 }	 
+    
+	 }
+	 
+	 // si le client est facturé sur une horaire
+	 
+	 if($_POST['to']=="horaire"){
+		 
+		 
+		 if(in_array(($_POST['tim']),$array) AND $donns['dates']==$_POST['dat']){
 
+        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+	 }	
+
+     elseif(in_array(($_POST['tis']),$array) AND $donns['dates']==$_POST['dat']){
+
+        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+		$a="h6";
+	 }	 
+
+     elseif(in_array(($_POST['tis']),$array)){
+
+        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+		$a="h6";
+	 }
+	 
+	 else{
+		 
+		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
+		$a="h5";
+		 
+		 
+	 }
+		 
+	 }
 	
 	     echo'<div class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
