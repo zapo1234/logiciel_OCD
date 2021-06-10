@@ -41,7 +41,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
-#examp{padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
+#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
@@ -50,10 +50,11 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 .content1{display:none;color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .h3{padding-bottom:5px;font-size:20px;font-weight:bold;color:#4e73df;text-transform:uppercase;border-bottom:2px solid #ACD6EA;}
-.h5{text-align:center;font-size:13px;background:green;color:white;padding:2%;border:2px solid green;width:180px;height:35px;}
+.h5{text-align:center;font-size:11px;font-weight:bold;color:green;padding:2%;width:180px;height:35px;}
+.h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
-.content_home{width:80%;margin-top:15px;display:none;background:#BDDDF9;height:950px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:260px;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home{width:80%;margin-top:15px;display:none;background:#BDDDF9;height:950px;} .content3{background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:275px;border:2px solid white;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 .content_home,.content2{float:left;display:none;} .content2{margin-left:0.3%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
@@ -67,11 +68,22 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:200px;left:35%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
+.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
-.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;border
+.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
+#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+
+.enre{font-size:16px;z-index:4;position:absolute;top:300px;left:40%;color:green;font-weight:bold;border:2px solid white;font-size:16px;width:320px;padding:3%;text-align:center;background-color:white}
+.dep {
+  animation: spin 2s linear infinite;
+  margin-top:10px;
+  }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 </style>
 
@@ -323,7 +335,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_validate_client.php">
+  <form method="post" id="form1" action="">
  <div  id="examp" style="display:none">
   <h2> Les informations du client </h2>
    
@@ -450,6 +462,7 @@ echo $_SESSION['token'];?>">
  
  </div><!--reini---->
  <div id="result_reini"></div><!--div result_reini-->
+ <div id="home_data"></div><!--div home-->
     
 	</div>
                 <!-- /.container-fluid -->
@@ -897,11 +910,22 @@ echo $_SESSION['token'];?>">
 	 var tim = $('#tim').val();
 	 var tis =$('#tis').val();	
 	 var to =$('#to').val();
+	 var dat =$('#dat').val();
+	
+	var dat = $('#dat').val();
+	 var name = $('#name').val();
+	 var piece = $('#piece').val();
+	 
+	 var dat = $('#dat').val();
+	 var name = $('#name').val();
+	 var piece = $('#piece').val();
+	 
+	 if(name.length!="" && name.length!="" && piece.length!=""){
 	
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'list_data_home.php',// on traite par la fichier
-	data:{days:days,das:das,tim:tim,tis:tis,to:to},
+	data:{days:days,das:das,tim:tim,tis:tis,to:to,dat:dat},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat_home').html(data);
 		$('.content_home').css('display','block');
@@ -925,6 +949,7 @@ echo $_SESSION['token'];?>">
 	 },
 	 
 	}); 
+	 }
 });
  
  // on récupére les données pour créer un user recaptitulatif
@@ -946,13 +971,14 @@ echo $_SESSION['token'];?>">
 	 var das = $('#das').val();
 	 var tim = $('#tim').val();
 	 var tis =$('#tis').val();
+	 var dat =$('#dat').val();
 	
 	
 	// on lance l'apel ajax
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
+	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,dat:dat,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#results').html(data);
 	
@@ -1050,10 +1076,41 @@ echo $_SESSION['token'];?>">
     $('#pak').css('display','block');
     });
 	
-      $(document).on('click','#add_local',function(){
-		 $('#form1').submit();
-		  
-	  });
+     
+	  
+	 $(document).on('click','#add_local', function() {
+	// on traite le fichier recherche apres le retour
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#home_data').html(data);
+	  $('#form1').submit();
+	  }
+	 });
+	});
+	 
+	 // envoi du formulaire
+	 
+	 $('#form_reini').on('submit', function(event) {
+	event.preventDefault();
+	
+	var action="dat";
+	var date=$('#reini').val();
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'affichage_donnees.php',// on traite par la fichier
+	data:{action:action,date:date},
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#pak').css('display','none');
+	  $('#result_reini').html(data);
+	  $('.reini').css('display','none');
+	  
+	 
+	}
+    });
+	  
+	  
+  });
 
 });
 </script>

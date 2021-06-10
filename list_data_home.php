@@ -96,19 +96,13 @@ include('inc_session.php');
 	 if($_POST['to']=="horaire"){
 		 
 		 
-		 if(in_array(($_POST['tim']),$array) AND $donns['dates']==$_POST['dat']){
+		 if(in_array(($_POST['tim']),$array) AND  in_array(($_POST['tis']),$array) AND $donns['dates']==$_POST['dat']){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
-	 }	
+	 }
 
-     elseif(in_array(($_POST['tis']),$array) AND $donns['dates']==$_POST['dat']){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
-		$a="h6";
-	 }	 
-
-     elseif(in_array(($_POST['tis']),$array)){
+     elseif(in_array(($_POST['dat']),$array)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
