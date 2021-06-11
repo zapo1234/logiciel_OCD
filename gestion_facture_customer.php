@@ -63,7 +63,10 @@ include('inc_session.php');
 
 .table,th{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
-.datas{display:none;}
+.datas{display:none;width:100px;height:70px;border:1px solid black;box-shadow:1px 2px 2px 1px 2px 2px;} .data1{color:green;font-size:22px;font-weight:bold;} .datas1{border-left:6px solid green;}
+.data3{color:#1E90FF;font-size:22px;font-weight:bold;} .datas3{border-left:6px solid #1E90FF;}
+.data2{color:#4B0082;font-weight:bold;font-size:22px;} .datas2{border-left:6px solid #4B0082;}
+.button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:16px;color:#224abe;font-weight:bold;}
 </style>
 
 </head>
