@@ -34,22 +34,36 @@ include('inc_session.php');
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
     .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
-    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} 
+    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
+	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
+	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
-h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
+#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
 
+.bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
+.tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
 
-.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
-	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
-	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
+.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
+.dep {
+  animation: spin 2s linear infinite;
+  margin-top:10px;
+  }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.table,th{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
+td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
+.datas{display:none;}
 </style>
 
 </head>
@@ -98,15 +112,14 @@ h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Entrez des Clients  <button type="button" class="btn btn-primary" id="but">
+                               Lister des factures  <button type="button" class="btn btn-primary" id="but">
                               +</button>
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Type de logement</option>
-						  <option value="1">chambre single</option><option value="2">chambre double</option>
-                           <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
-                          <option value="7">studio double</option>
+                         <option selected>Type de facture</option>
+						  <option value="1">encaissé</option><option value="2">réservation</option>
+                           <option value="4">Annuler</option>
                           </select>
 						  
                           </div>  
@@ -301,6 +314,7 @@ h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
                     <!-- 404 Error Text -->
                     <div class="center">
                     
+					<div id="content"><?php include('result_facture_home.php');?></div>
  
                    </div><!--content-->
  
@@ -404,6 +418,34 @@ h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
     $('.reini').css('display','block');
     $('#pak').css('display','block');
     });
+	
+	// envoi du formulaire
+	 
+	 $('#form_reini').on('submit', function(event) {
+	event.preventDefault();
+	
+	var action="dat";
+	var date=$('#reini').val();
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'affichage_donnees.php',// on traite par la fichier
+	data:{action:action,date:date},
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#pak').css('display','none');
+	  $('#result_reini').html(data);
+	  $('.reini').css('display','none');
+	  load();
+	  
+	 
+	}
+    });
+	
+	setInterval(function(){
+		 $('#result_reini').html('');
+	 },6000);
+	  
+	  
+  });
    
    });
    
