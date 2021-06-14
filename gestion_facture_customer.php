@@ -63,10 +63,14 @@ include('inc_session.php');
 
 .table,th{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
-.datas{display:none;width:100px;height:70px;border:1px solid black;box-shadow:1px 2px 2px 1px 2px 2px;} .data1{color:green;font-size:22px;font-weight:bold;} .datas1{border-left:6px solid green;}
+.datas{width:100px;height:70px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:green;font-size:22px;font-weight:bold;} .datas1{border-left:6px solid green;}
 .data3{color:#1E90FF;font-size:22px;font-weight:bold;} .datas3{border-left:6px solid #1E90FF;}
 .data2{color:#4B0082;font-weight:bold;font-size:22px;} .datas2{border-left:6px solid #4B0082;}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:16px;color:#224abe;font-weight:bold;}
+.der{font-size:12.5px;} .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
+.csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
+.side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
+ul a{margin-left:3%;}
 </style>
 
 </head>
@@ -317,7 +321,7 @@ td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration
                     <!-- 404 Error Text -->
                     <div class="center">
                     
-					<div id="content"><?php include('result_facture_home.php');?></div>
+					<div id="results"></div>
  
                    </div><!--content-->
  
@@ -400,7 +404,30 @@ td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration
    $('#pak').css('display','none');
    $('.reini').css('display','none');
  });
+ 
+ // action sur l'onglet gére
+ 
+ $(document).on('click','.action',function(){
+	var id = $(this).data('id2');
+  // afficher 
+  $('#content'+id).slideToggle();
+});
   
+  
+  function loads() {
+				var action="fetch";
+				$.ajax({
+					url: "result_facture_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#results').html(data);
+					}
+				});
+			}
+
+			loads();
+			
   
   function load() {
 				var action="fetch";
@@ -421,6 +448,8 @@ td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration
     $('.reini').css('display','block');
     $('#pak').css('display','block');
     });
+	
+
 	
 	// envoi du formulaire
 	 

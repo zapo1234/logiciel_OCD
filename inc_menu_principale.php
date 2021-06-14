@@ -1,3 +1,11 @@
+<?php
+include('connecte_db.php');
+include('inc_session.php');
+
+   
+
+?>
+
 <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -5,15 +13,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">O C D <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <div class="side"><i class="fas fa-camera" style="font-size:20px;"></i></div>
+            </a><br/><br/><br/><br/>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
@@ -70,7 +74,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" title="facture clients" href="#"
+                <a class="nav-link" title="facture clients" href="gestion_facture_customer.php"
                     aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Factures</span>
@@ -101,6 +105,20 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Equipes messanger</span></a>
             </li>
+			
+			<?php
+			
+			if($_SESSION['permission']=="user:boss") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Paramètre compte</span></a>
+            </li>';			
+				
+			}
+			
+			?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
