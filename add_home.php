@@ -4,84 +4,32 @@ include('inc_session.php');
 
 
 // recupére les données de la base de données
-    $id =$_POST['id'];
-    $rec=$bds->query('SELECT id_chambre,date,dates FROM home_occupation WHERE id_chambre="'.$id.'"');
-    $donns = $rec->fetchAll();
-	
+   
 	//créer un tableau vide 
-	
-	$array = [];
-	foreach($donns as $dat){
-		$dates = $dat['date'];
-		
-		$dates = explode(',',$dates);
-		
-		foreach($dates as $dats){
-			
-			$array[] = $dats;
-		}
-	}
-	
-	$tab = $array;
-    $nombre = count($array);	
-    $debut = current($array);
-    $sortie = end($array);
-    
-	if($_POST['action']=="add"){
+
+    if($_POST['action']=="add"){
 	 
-	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	 if(!empty($_POST['prix_nuite'])){
-		
-        $pay = $_POST['prix_nuite'];	
-        		
-	 }
+		$pay = $_POST['prix_nuite'];	
+      }
 	 
 	 else{
-		 
 		 $pay = $_POST['paynuite'];
 	 }
 	 
-	 }
-	 
-	 if($_POST['to']=="horaire"){
 	 
 	  if(!empty($_POST['prix_pass'])){
-		
-        $pay = $_POST['prix_pass'];		
+		 $pay = $_POST['prix_pass'];		
 	 }
 	 
 	 else{
-		 
 		 $pay= $_POST['paypass'];
 	 }
 	 
-	 }
-	 
-	 
-	
 	// créer un tableau de session 
 	if(isset($_SESSION['add_home'])){
 	
     // pour le choix du séjour ou réservation	
-	if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
-     
-	 if(in_array(($_POST['days']),$array)){
-        
-		$total =0;
-		$adjout= 0;
-	 }
-
-     elseif($_POST['days'] < $debut  AND $_POST['das']> $sortie){
-        $total =0;
-		$adjout= 0;
-     }		 
-
-     elseif(in_array(($_POST['das']),$array)){
-        $total =0;
-		$adjout= 0;
-    
-	 }
-	 else{
 		
 	$item_array_id = array_column($_SESSION['add_home'], 'id');	
 		
@@ -108,79 +56,9 @@ include('inc_session.php');
 		 
 		 
 	 }
-	 
-	 }
+	
 		
 	}
-	
-	
-	// pour les choix sur l'horaire
-	if($_POST['to']=="horaire"){
-		
-	 if(in_array(($_POST['tim']),$array) AND $donns['dates']==$_POST['dat']){
-         
-		 $total=0;
-		 $adjout=0;
-     }
-
-     elseif(in_array(($_POST['tis']),$array) AND $donns['dates']==$_POST['dat']){
-        $total=0;
-		$adjout=0;
-     }	 
-
-    elseif(in_array(($_POST['dat']),$array)){
-         $total=0;
-		 $adjout=0;
-     }
-
- 
-	 else{
-		
-	$item_array_id = array_column($_SESSION['add_home'], 'id');	
-		
-		if(!in_array($_POST['id'], $item_array_id))
-		{
-		  $count = count($_SESSION['add_home']);
-		  $item_array = array(
-         'id'          =>   $_POST['id'],
-		 'nbjour'      =>   $_POST['nbjour'],
-         'prix_nuite'  =>   $pay,
-         'prix_pass'   =>   $pay,
-		 'paynuite'    =>   $pay,
-		 'paypass'     =>   $pay,
-         'type'        =>   $_POST['type'],
-		 'chambre'     =>   $_POST['chambre']
-
-         );
-		 
-		 $_SESSION['add_home'][$count] = $item_array;
-				
-		}
-		
-		
-		
-	}
-	
-	}
-	
-	}
-	
-	else{
-		
-		if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
-     if(in_array(($_POST['days']),$array)){
-
-       
-	 }
-
-     elseif($_POST['days'] < $debut  AND $_POST['das']> $sortie){
-
-     }		 
-
-     elseif(in_array(($_POST['das']),$array)){
-
-    
-	 }
 	 
 	 else{
 	 
@@ -200,43 +78,10 @@ include('inc_session.php');
          $_SESSION['add_home'][] = $item_array;		 
 		   
 	   }
-	   
-	
-		}
-		
-	}
 	  
 	  if(!empty($_SESSION['add_home'])){
 		  
-		  if($_POST['to']=="séjour" or $_POST['to']=="réservation") {
-			  
-			$dat =$_POST['days'];
-            $dat1 = $_POST['das'];
-            $donns['dates']=0;
-            $_POST['dat']=0;			
-		  }
-		  
-		  if($_POST['to']=="horaire") {
-			 $dat =$_POST['tim'];
-            $dat1 = $_POST['tis'];
-            }
-		  
-		   if(in_array($dat,$array) AND $donns['dates']==$_POST['dat']){
-           }
-
-         elseif($dat<$debut  AND $dat1> $sortie AND $donns['dates']==$_POST['dat']){
-         }		 
-
-         elseif(in_array($dat1,$array) AND $donns['dates']==$_POST['dat']){
-         }
-		 
-		 elseif(in_array(($_POST['dat']),$array)){
-
-           }
-	 
-	    else {
-			
-			$total =0;
+		  $total =0;
 	     	$count =count($_SESSION['add_home']);
 			if($count ==1){
 			  $local ="local";
@@ -308,9 +153,7 @@ include('inc_session.php');
 			
 			
 			}
-		}
 		
-	  }
 			
 			echo'<div class="montant"><h5>récapitulatif des montants</h5>
 			<div class="rest">'.$adjout.'</div>
@@ -323,13 +166,12 @@ include('inc_session.php');
 			echo'</div>';
 			echo'<div><input type="submit" id="add_local" value="valider"></div>';
 		
-		  }
+	  }	
       
-
+    }
 
       if($_POST['action']=="remove") {
         
-	  if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	 if(!empty($_POST['prix_nuite'])){
 		
         $pay = $_POST['prix_nuite'];	
@@ -341,11 +183,8 @@ include('inc_session.php');
 		 $pay = $_POST['paynuite'];
 	 }
 	 
-	 }
 	 
-	 if($_POST['to']=="horaire"){
-	 
-	  if(!empty($_POST['prix_pass'])){
+     if(!empty($_POST['prix_pass'])){
 		
         $pay = $_POST['prix_pass'];		
 	 }
@@ -353,8 +192,6 @@ include('inc_session.php');
 	 else{
 		 
 		 $pay= $_POST['paypass'];
-	 }
-	 
 	 }
 	 
 	 
