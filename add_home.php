@@ -352,7 +352,60 @@ include('inc_session.php');
 		
 		  }	
 	 
-         
+    
+      if($_POST['action']=="removes"){
+        
+		// recupére les données 
+       $id=$_POST['id'];
+	   $id_fact =$_GET['id_fact'];
+	
+	// recupére les autres données
+	$total1 = $_POST['mon'];
+	$account1= $_POST['acomp'];
+	$reste1 = $_POST['rest'];
+    
+	//
+	
+	$req=$bds->prepare('SELECT montant,mont_restant FROM bord_informations WHERE id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+    $req->execute(array(':id'=>$id,
+	                    ':id_fact'=>$id_fact,
+	                   ':email_ocd'=>$_SESSION['email_ocd']));
+	$donns= $req->fetch();
+	
+	$montant = $donns['montant']* floatval($_POST['nbjour']);
+	
+	$monts =$total1-$montant;
+	
+
+	// modifie les données
+	// on modifie les données de la base de données guide
+         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps WHERE email_ocd= :email_ocd AND id_fact= :id');
+        $ret->execute(array(':des'=>$monts,
+		                    ':ds'=>$_POST['acomp'],
+							':rs'=>$mont,
+							':rps'=>$_POST['rep'],
+							':id'=>$id_fact,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	
+    // on surprime la data de delete dans la tableau
+    $res=$bds->prepare('DELETE  FROM bord_informations WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $res->execute(array(':id'=>$id,
+	                    ':id_fact'=>$id_fact,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+						
+	// on surprime la data de delete dans la tableau
+    $res=$bds->prepare('DELETE  FROM home_occupation WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $res->execute(array(':id'=>$id,
+	                    ':id_fact'=>$id_fact,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+											
+	
+	 // suppression du local
+	 echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:red"></i>local suprimé de la liste</button>
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+    
+    }		
 
  ?>
 

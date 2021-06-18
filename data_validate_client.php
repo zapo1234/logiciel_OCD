@@ -1,7 +1,52 @@
 <?php
-
 include('connecte_db.php');
 include('inc_session.php');
+
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="confirmation">
+    <meta name="author" content="">
+
+    <title>Confirmation</title>
+     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+      <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom fonts for this template-->
+  
+    <!-- Custom fonts for this template -->
+   
+<style>
+ 
+  
+ #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity:0.6;}
+label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
+ .dep {
+  animation: spin 2s linear infinite;
+  margin-top:10px;font-size:45px;font-weight:bold;
+  }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.nam{color:black;font-weight:bold;}
+.enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:18px;width:280px;height:100px;padding:2%;text-align:center;background-color:white;
+}
+</style>
+
+</head>
+
+<?php
+
 
 
  if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token']))
@@ -48,8 +93,10 @@ include('inc_session.php');
 		
 	}
 	
+	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
 	$dates2 =$_POST['das'];
+
 	
 	$dates1 = explode('-',$dates1);
 	
@@ -80,8 +127,24 @@ include('inc_session.php');
 	   }
 	 }
 	 
-     // on recupére les données sur une chaine de caractère
-	  $datas = implode(',',$tab);
+	 $datas = implode(',',$tab);
+	 
+	} 
+	
+	if($_POST['to']=="horaire") {
+	 
+	 $dates3 =$_POST['tim'];
+	 $dates4 =$_POST['tis'];
+	  $array = [];
+	  $dats = $dates3.'.'.$dates4;
+	  $dats = explode('.',$dats);
+	   
+	   foreach($dats as $horaire){
+		  $array[] = $horaire;  
+	}
+	  $horaires = implode(',',$array);
+	}
+	
    // on recupére les variable fixe
    
    $dat =$_POST['dat']; // date d'enregistrement.
@@ -267,7 +330,7 @@ include('inc_session.php');
 			$dats = $dos['dat'];
 			$_POST['dat'] == $dats;
 		
-		
+		   $dates="";
 	
 	    if($result1 > $d1){
 		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
@@ -286,7 +349,11 @@ include('inc_session.php');
 		
 		else{
 			
-			
+	     // on redirige vers la page
+		 echo'<div id="pak"></div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -312,10 +379,14 @@ include('inc_session.php');
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,date) 
-		 VALUES(:id_chambre,:date)');
-	     $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                     ':date'=>$datas
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+		 $dates ="";
+		 $reys->execute(array(':id_chambre'=>$ids_chambre,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':date'=>$datas,
+							  ':dates'=>$dates,
+							  ':id_fact'=>$id_fact
 	                        ));				
 						  
 		
@@ -323,8 +394,8 @@ include('inc_session.php');
       }
 	  
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,tva,id_fact,type,status) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:tva,:id_fact,:type,:status)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -342,10 +413,13 @@ include('inc_session.php');
 						    ':montant'=>$monts,
 							':avance'=>$avance,
 						    ':reste'=>$reste,
+							':montant_repas'=>$prix_repas,
 						    ':tva'=>$tva,
+							':mont_tva'=>$taxe,
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
-							':status'=>$status
+							':status'=>$status,
+							':types'=>$ty
 						  ));
             				  
 						  
@@ -392,6 +466,11 @@ include('inc_session.php');
 			
 			$d1=$dat3;
 	        $d2=$dat4;
+			
+				
+			  $dates=$_POST['dat'];	
+				
+
 		
 	  if($result1 > $d1 AND $dos['dat']==$_POST['dat']){
 		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
@@ -423,7 +502,10 @@ include('inc_session.php');
 		
 		else{
 			
-			
+		  echo'<div id="pak"></div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -447,15 +529,23 @@ include('inc_session.php');
 						    ':type'=>$ty
 						  ));
 						  
-						
+					// on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+		 $reys->execute(array(':id_chambre'=>$ids_chambre,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':date'=>$horaires,
+							  ':dates'=>$dates,
+							  ':id_fact'=>$id_fact
+	                        ));		
 		
 	  
 		}
 		
 	   }
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,tva,id_fact,type,status) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:tva,:id_fact,:type,:status)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -473,10 +563,13 @@ include('inc_session.php');
 						    ':montant'=>$monts,
 							':avance'=>$avance,
 						    ':reste'=>$reste,
+							':montant_repas'=>$prix_repas,
 						    ':tva'=>$tva,
+							':mont_tva'=>$taxe,
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
-							':status'=>$status
+							':status'=>$status,
+							':types'=>$ty
 						  ));
 						  
 						  
@@ -500,9 +593,5 @@ include('inc_session.php');
   {
 die('Erreur : '.$e->getMessage());
  }  
-
-
-
-
 
 ?>

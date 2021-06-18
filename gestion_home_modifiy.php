@@ -54,6 +54,13 @@ include('inc_session.php');
 	$da2=$donnees['check_in'];
 	$da3=$donnees['check_out'];
 	
+	$type_sejour='<select id="to" class="to" name="to" required>
+     <option value="séjour">séjour facturé</option>
+	 <option value="horaire">horaire facturé</option>
+	 <option value="réservation">réservation</option>
+	 <option value="séjour">séjour facturé</option>
+	 </select>';
+	
 	if($donnees['nombre']==1){
 		$jour ='Durée : <span class="det">'.$donnees['nombre'].'heure</span>';
 	}
@@ -70,7 +77,14 @@ include('inc_session.php');
 	$da2=$donnees['time'];
 	$da3=$donnees['time1'];
 	$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$donnees['clients'].'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$donnees['numero'].'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$donnees['time'].'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$donnees['time1'].'</span> </span>';	
-		
+	
+   $type_sejour = '<select id="to" class="to" name="to" required>
+     <option value="horaire">horaire facturé</option>
+	 <option value="séjour">séjour facturé</option>
+	 <option value="réservation">réservation</option>
+	 <option value="horaire">horaire facturé</option>
+	 </select>';
+	
 	if($donnees['nombre']==1){
 		$jour ='Durée : <span class="det">'.$donnees['nombre'].'jour</span>';
 	}
@@ -90,15 +104,22 @@ include('inc_session.php');
 		$types="réservation";
 		$da2=$donnees['check_in'];
 	    $da3=$donnees['check_out'];
-		$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$donnees['client'].'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$donnees['numero'].'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$date2.'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$date3.'</span> </span>';	
+		$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$donnees['clients'].'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$donnees['numero'].'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$date2.'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$date3.'</span> </span>';	
+		
+		$type_sejour='<select id="to" class="to" name="to" required>
+      <option value="réservation">réservation</option>
+	  <option value="horaire">horaire facturé</option>
+	  <option value="séjour">séjour facturé</option>
+	  <option value="réservation">réservation</option>
+	   </select>';
 		
 		if($donnees['nombre']==1){
-		$jour ='Durée : <span class="det">'.$donnees['nombre'].'heure</span>';
+		$jour ='Durée : <span class="det">'.$donnees['nombre'].'jour</span>';
 	}
 	
 	else{
 		
-		$jour ='Durée : <span class="det">'.$donnees['nombre'].'heures</span>';
+		$jour ='Durée : <span class="det">'.$donnees['nombre'].'jours</span>';
 	}
 	}
 	
@@ -135,15 +156,16 @@ include('inc_session.php');
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
-    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
+    .bs{background:white;width:340px;border:2px solid white;padding:4%;margin-top:0px;}
+    .titre{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
+	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
-#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
+#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color:white;z-index:2;opacity: 0.6;}
+#examp{display:block;border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
@@ -174,19 +196,28 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+#pak{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
 
-.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
+.h6{font-family:arial;font-size:14px;text-align:center;color:black;margin-top:10px;}
+.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:red;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
+
+.tab,.tabs{border:1px solid #eee;margin-top:5px;padding:2%;margin-top:5px;}
+.tabs td{padding:2%;font-size:13px;width:130px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";;margin-left:2%;color:black}
+.tabs{margin-left:4%;}
 .dep {
   animation: spin 2s linear infinite;
   margin-top:10px;
   }
-
+  
+  .side{margin-left:-10%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
+   ul a{margin-left:3%;}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+.side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
+ul a{margin-left:3%;}
 </style>
 
 </head>
@@ -199,7 +230,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                        <h6 class="collapse-header">Point journalier caisse</h6>
+                     <h6 class="collapse-header">Point journalier caisse</h6>
                         <a class="collapse-item" href="login.html">Encaissé</a><br/>
                         <a class="collapse-item" href="register.html">Facture non payé</a><br/>
                         <a class="collapse-item" href="forgot-password.html">Réservation</a><br/>
@@ -438,15 +469,14 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
                     <!-- 404 Error Text -->
                     <div class="center">
   <form method="post" id="form1" action="data_validate_client.php">
- <div  id="examp" style="display:none">
+ <div  id="examp">
   <h2> Les informations du client </h2>
    
    <div class="form-row">
     <div class="form-group col-md-6">
       <div class="input-group">
-	  date émise :<?php echo$date;?>
 	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
-    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required value="<?php echo$date;?>">                                               
+    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required value="<?php echo$donnees['date'];?>">                                               
   </div>
  </div>
 
@@ -471,7 +501,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
    <div class="form-group col-md-6">
       <label for="inputEmail4">piéce d'identité *</label>
-      <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro" value="<?php echo$donnees['piece_identite'],?>">
+      <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro" value="<?php echo$donnees['piece_identite'];?>">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
@@ -490,11 +520,8 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 	
 	<div class="form-group col-md-6">
       <label for="inputPassword4">Type de séjour</label>
-      <select id="to" class="to" name="to" required>
-     <option value="sans">type</option><option value="séjour">séjour facturé</option>
-	 <option value="horaire">horaire facturé</option>
-	 <option value="réservation">réservation</option>
-	 </select></div>
+      <?php echo$type_sejour;?>
+	  </div>
 	
 	<div class="form-group col-md-6">
       
@@ -543,6 +570,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
  <div class="content2">
   <h4> Les détails sur le séjour </h4>
+  <div id="resul"></div>
   <div id="results"></div><!--div-affiche data home selectionné-->
   
  </div>
@@ -599,7 +627,8 @@ echo $_SESSION['token'];?>">
   
 
 <!--div black-->
-<div id="pak" style="display:none"></div>
+<div id="pak"></div>
+<div id="resul"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -626,11 +655,7 @@ echo $_SESSION['token'];?>">
   <script type="text/javascript">
    $(document).ready(function(){
     
-	var dat1=<?php echo$da2;?>;
-	var dat2=<?php echo$da3;?>;
-	
-
-   $('#but').click(function(){
+ $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
    var email = "default@gmail.com";
@@ -782,7 +807,8 @@ echo $_SESSION['token'];?>">
 		 if(s > 1){
 			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
 		 }
-		 
+		 $('.content1').css('display','block');
+		 $('.content2').css('display','block');
 		 $('#pak').css('display','none');
 	     $('#examp').css('display','none');
 		 $('.content_home').css('display','block');
@@ -812,12 +838,11 @@ echo $_SESSION['token'];?>">
 		 else{
 			 
 			 if(date1 < date2){
+			$('#h3').text('Séjour facturé'); 
 			$('.de').text(name);
 			$('.des').text(numero);
 			$('.from').text(datefrom);
 			$('.todate').text(datefro);
-			$('#days').val(dat1);
-		    $('#das').val(dat2);
 			
 			if(s==1){
 			$('.det').text(s+'jour');
@@ -827,15 +852,14 @@ echo $_SESSION['token'];?>">
 			if(s > 1){
 				$('.det').text(s+'jours');
 			}
-			
+			$('.content1').css('display','block');
+			$('.content2').css('display','block');
 			$('#pak').css('display','none');
 	       $('#examp').css('display','none');
 		   $('.content_home').css('display','block');
 		   $('.text').css('display','block');
 		   $('.tex').css('display','none');
 		   $('#nbjour').val(s);
-		   $('#days').val(dat1);
-		   $('#das').val(dat2);
 		 }
 		 else{
 			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé');  
@@ -1081,7 +1105,7 @@ echo $_SESSION['token'];?>">
 	// on lance l'apel ajax
 	$.ajax({
 	type: 'POST', // on envoi les donnes
-	url: 'add_home.php',// on traite par la fichier
+	url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>",// on traite par la fichier
 	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,dat:dat,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#results').html(data);
@@ -1095,8 +1119,8 @@ echo $_SESSION['token'];?>">
 	});
 	
 	// recupération et caclul des montants
-	
-	// fonction remove pour suprimer un local de la liste
+	// calculer les sommes automatiquement du récapitualitif
+		// fonction remove pour suprimer un local de la liste
 	$(document).on('click','.remove',function(){
 		var action ="remove";
 		var id = $(this).data('id3');
@@ -1125,12 +1149,47 @@ echo $_SESSION['token'];?>">
 		
 	});
 	
+	
+	// fonction remove pour suprimer un local de la liste
+	$(document).on('click','.removes',function(){
+		var action ="removes";
+		var id = $(this).data('id4');
+		var nbjour = $('#nbjour').val();
+	    var type = $('#type'+id).val();
+	    var prix_nuite = $('#prix'+id).val();
+	    var prix_pass = $('#pric'+id).val();
+	    var paynuite = $('#cout_nuite'+id).val();
+	    var paypass = $('#cout_pass'+id).val();
+	    var to = $('#to').val();
+		var mon =$('#mon').val();
+		var acomp =$('#acomp').val();
+		var rest =$('#rest').val();
+		var rep =$('#rep').val();
+	// on lance l'apel ajax
+	  $.ajax({
+	  type: 'POST', // on envoi les donnes
+	  url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>",// on traite par la fichier
+	  data:{id:id,nbjour:nbjour,to:to,mon:mon,rest:rest,acomp:acomp,rep:rep,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retouy
+		$('#homs'+id).html('');
+		$('#resul').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:red"></i>local suprimé de la liste</button>');
+	    loads();
+
+      },
+	 error: function() {
+    alert('vérifier votre connexion'); }
+	 
+	});
+	
+		
+	});
+	
 	// calculer les sommes automatiquement du récapitualitif
 	
 	$(document).on('keyup','#tva',function(){
 		
 	var tva = $('#tva').val();
-	var totals =$('#total').val();
+	var totals =$('#mon').val();
 	
 	if(tva > 0 && tva.length <3 && tva.length!=""){
 	var result = parseFloat(totals)*parseFloat(tva);
@@ -1138,6 +1197,11 @@ echo $_SESSION['token'];?>">
 	var results = resul.toFixed(2);
 	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
 	}
+	
+	if(tva.length > 2){
+     var results = 0;
+	$('.tva').html('<span class="taxe">Tva pas réglémentée</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+    }	
 
     if(tva.length ==""){
      var results = 0;
@@ -1145,21 +1209,38 @@ echo $_SESSION['token'];?>">
     }		
   });
   
-  $(document).on('keyup','#account',function(){
-	 var totals =  $('#total').val();	 
-	 var account = $('#account').val();
+  $(document).on('keyup','#acomp',function(){
+	 var totals =  $('#mon').val();	 
+	 var account = $('#acomp').val();
 	 if(account >0){
 		var result = parseFloat(totals) - parseFloat(account);
-        $('#rpay').val(result);
+        $('#rest').val(result);
 	 }
 	 
 	 if(account.length ==""){
-		$('#rpay').val(0);	
+		$('#rest').val(0);	
 	}
 	  
   });
   
-  // afficher les données des encaissements
+  
+  // afficher les données existant dans les array de mofication
+  function loads() {
+				var action="modify";
+				var to =$('#to').val();
+				$.ajax({
+					url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>",
+					method: "POST",
+					data:{action:action,to:to},
+					success: function(data) {
+						$('#resul').html(data);
+					}
+				});
+			}
+
+			loads();
+
+// afficher les données des encaissements
   function load() {
 				var action="fetch";
 				$.ajax({
@@ -1212,6 +1293,11 @@ echo $_SESSION['token'];?>">
 		 $('#result_reini').html('');
 	 },6000);
 	  
+	  
+  });
+  
+  $('#page-top').click(function(){
+	alert(zapo);	 
 	  
   });
 
