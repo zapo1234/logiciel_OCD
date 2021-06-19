@@ -1136,7 +1136,7 @@ echo $_SESSION['token'];?>">
 	// on lance l'apel ajax
 	  $.ajax({
 	  type: 'POST', // on envoi les donnes
-	  url: 'add_home.php',// on traite par la fichier
+	   url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>",// on traite par la fichier
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#results').html(data);
