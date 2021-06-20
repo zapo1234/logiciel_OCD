@@ -94,6 +94,9 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  .d{border:1px solid #eee;} .homes{overflow-y:scroll;z-index:4;position:absolute;top:20px;left:15%;display:none;width:70%;height:900px;background:white;border:2px solid #eee;} . der{padding-left:2%;}
  .imgs{border-radius:20%;font-weight:bold;width:110px;color:white;text-align:center;padding:1%;background:#FF7133;border:2px solid #FF7133;color:block;margin-top:6px;margin-left:25%;}
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
+ 
+ .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
+ul a{margin-left:3%;}
 </style>
 
 </head>
@@ -524,11 +527,6 @@ echo $_SESSION['token'];?>">
 	}
  });
  
- $('.mr').click(function(){
-	 
-	 alert('zapo');
-	 
- }
  
  // compter le nombre de class
   var thecount = $('.text_img').length;
@@ -548,6 +546,18 @@ echo $_SESSION['token'];?>">
   
   else if(thecount == 1){
 	$('#file1').hide();	 
+}
+
+else if(thecount ==4){
+	$('#file1').hide();
+	$('#file2').hide();
+	$('#file3').hide();
+	$('#file4').hide();
+}
+
+else{
+	
+	
 }
 
  
@@ -627,13 +637,11 @@ var infos = $('#infos').val();
 	}
    });
    
-   
+   } 
 
-}); 
-
+ });
+ });
  
- 
-});
 </script>
 </body>
 

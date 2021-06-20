@@ -218,6 +218,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;}
+
 </style>
 
 </head>
@@ -468,7 +469,7 @@ ul a{margin-left:3%;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_validate_client.php">
+  <form method="post" id="form1" action="data_modify_client.php?id_fact=<?php echo$_GET['id_fact'];?>">
  <div  id="examp">
   <h2> Les informations du client </h2>
    
@@ -1174,6 +1175,7 @@ echo $_SESSION['token'];?>">
 		$('#homs'+id).html('');
 		$('#resul').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:red"></i>local suprimé de la liste</button>');
 	    loads();
+		load();
 
       },
 	 error: function() {
@@ -1206,7 +1208,13 @@ echo $_SESSION['token'];?>">
     if(tva.length ==""){
      var results = 0;
 	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
-    }		
+    }
+     
+	if(totals ==0){
+     var results = 0;
+	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+    }
+   	
   });
   
   $(document).on('keyup','#acomp',function(){
