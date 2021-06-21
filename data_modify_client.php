@@ -8,6 +8,8 @@ if(!isset($_GET['id_fact'])) {
 }
 
  $id =$_GET['id_fact'];
+ 
+ echo$id;
 
 ?>
 
@@ -79,32 +81,14 @@ ul a{margin-left:3%;}
 
  try{
 	
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE id_fact= :id AND email_ocd= :email_ocd');
-   $rej->execute(array(':id'=> $id,
-                      ':email_ocd'=>$_SESSION['email_ocd']
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']
    ));
    $donns=$rej->fetch();
 	$rej->closeCursor();
 	
+
 	
-	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE  id_fact= :id, email_ocd= :email_ocd ORDER BY id DESC');
-   $reb->execute(array(':id'=>$id,
-                       ':email_ocd'=>$_SESSION['email_ocd']));
-   $donnes=$reb->fetch();
-	$reb->closeCursor();
-	
-	if(empty($donnes)) {
-	 
-     $id_fact=0.0001;	 
-		
-	}
-	
-	else{
-	$mt = $donnes['id_fact'];
-	$mt = floatval($mt);
-	$id_fact=$mt+0.0001;
-		
-	}
 	
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
@@ -173,7 +157,7 @@ ul a{margin-left:3%;}
    $direction = $_POST['to'];
    // récupére les variable dans différentes cas possible de séjour
    
-   $prix_repas =$_POST['monts'];
+   $prix_repas =$_POST['rep'];
    
    if(empty($_POST['taxe'])){
 	   
@@ -212,8 +196,8 @@ ul a{margin-left:3%;}
 	  $dat3 = date('H:i');
        $dat4 = date('H:i');
 	   
-	 $avance=$_POST['account'];
-     $reste=$_POST['rpay']; 
+	 $avance=$_POST['acomp'];
+     $reste=$_POST['rest']; 
      $mode =1;
      $nombre_heures=0;	 
 	 $rete_payer="";
@@ -237,7 +221,7 @@ ul a{margin-left:3%;}
    
  if($_POST['to']=="réservation") {
 	   
-	 if($_POST['account']==""){
+	 if($_POST['acomp']==""){
 		 
          $avance = 0;
          $reste =0;		 
@@ -248,8 +232,8 @@ ul a{margin-left:3%;}
       $dat1= $_POST['days'];
       $dat2= $_POST['das'];
 	 
-	 $avance=$_POST['account'];
-     $reste=$_POST['rpay'];
+	 $avance=$_POST['acomp'];
+     $reste=$_POST['rest'];
      $mode =3;	 
 	 $rete_payer=$reste;
      $encaisser=$avance;
@@ -262,9 +246,18 @@ ul a{margin-left:3%;}
      $time1=date('H:i');
      $tva =$_POST['tva'];
 	 $taxe =$_POST['taxe'];
+	
+	if(!isset($_POST['total'])){
+		
+     $total=0;		
+	 }
      $total = $_POST['total'];
      $ty="réservation client";
 	 $status =$_POST['status'];
+	 
+	 if(!isset($_POST['mon'])){
+		$total1=0;
+	 }
      $total1 = $_POST['mon'];
      $monts =$total+$total1+floatval($prix_repas);	 
 	   
@@ -272,7 +265,7 @@ ul a{margin-left:3%;}
    
  if($_POST['to']=="horaire") {
 	   
-	  if($_POST['account']==""){
+	  if($_POST['acomp']==""){
 		 
          $avance = 0;
          $reste =0;		 
@@ -301,7 +294,17 @@ ul a{margin-left:3%;}
      $time1=$dat4;
      $tva =$_POST['tva'];
 	 $taxe =$_POST['taxe'];
+	 
+	 if(!isset($_POST['total'])){
+		
+     $total=0;		
+	 }
      $total = $_POST['total'];
+	 
+	 if(!isset($_POST['mon'])){
+		$total1=0;
+	 }
+	 
 	 $total1 =$_POST['mon'];
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
@@ -335,7 +338,11 @@ ul a{margin-left:3%;}
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
 		
 		// delete bord_informations id_fact
-		
+		 // on surprime la data de delete dans la tableau
+    $res=$bds->prepare('DELETE  FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
+    $res->execute(array(':id'=>$id,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	
 		
 		
 		// on insere les données dans la bds-
@@ -362,46 +369,47 @@ ul a{margin-left:3%;}
 						  ));
 				
 
-                // action Udapte home_occupation
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
-		 $dates ="";
-		 $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
-		                      ':date'=>$datas,
-							  ':dates'=>$dates,
-							  ':id_fact'=>$id
-	                        ));				
+                	// on modifie les données de la table home_occupation
+         $ret=$bds->prepare('UPDATE home_occupation id_chambre= :des, date= :ds, dates= :rs WHERE email_ocd= :email_ocd AND id_fact= :id');
+        $ret->execute(array(':des'=>$ids_chambre,
+		                    ':ds'=>$datas,
+							':rs'=>$dates,
+							':id'=>$id_fact,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));			
 		}
 	  
-	   // update sur facture 
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
-	     $rev->execute(array(':date'=>$dat,
-		                     ':civilite'=>$civilite,
-		                    ':email_ocd'=>$email,
-							':adresse'=>$adresse,
-							':check_in'=>$date1,
-							':check_out'=>$date2,
-							':time'=>$time,
-							':time1'=>$time1,
-							':nombre'=>$nombre_jours,
-							':email_client'=>$email1,
-						    ':numero'=>$_POST['numero'],
-					        ':user'=>$_SESSION['user'],
-						    ':clients'=>$name,
-						    ':piece_identite'=>$client,
-						    ':montant'=>$monts,
-							':avance'=>$avance,
-						    ':reste'=>$reste,
-							':montant_repas'=>$prix_repas,
-						    ':tva'=>$tva,
-							':mont_tva'=>$taxe,
-						    ':id_fact'=>$id,
-							':type'=>$mode,
-							':status'=>$status,
-							':types'=>$ty
-						  ));
+	   // update sur facture
+
+       	// on modifie les données de la table home_occupation
+         $ret=$bds->prepare('UPDATE facture date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
+		  nombre= :nbr, numero= :num, user= :us clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
+		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
+		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+        $ret->execute(array(':des'=>$dat,
+		                    ':ds'=>$civilite,
+							':rs'=>$adresse,
+							':cke'=>$date1,
+							':cko'=>$date2,
+							':tim1'=>$time,
+							':tim2'=>$time1,
+							':nbr'=>$nombre_jours,
+							':num'=>$_POST['numero'],
+							':us'=>$_SESSION['user'],
+							':client'=>$name,
+							':pc'=>$client,
+							':mont'=>$monts,
+							':avc'=>$avance,
+							':rest'=>$reste,
+							':mont_rep'=>$prix_repas,
+							':tv'=>$tva,
+							':mtva'=>$taxe,
+							':ty'=>$mode,
+							':stat'=>$status,
+							':ty'=>$ty,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
             				  
 						  
 			// on modifie les données de la base de données guide
@@ -432,11 +440,14 @@ ul a{margin-left:3%;}
 			echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
 		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		
 		// delete bord_informations 
-		
+		 // on surprime la data de delete dans la tableau
+    $res=$bds->prepare('DELETE  FROM bord_informations WHERE  id_fact= :id AND email_ocd= :email_ocd');
+    $res->execute(array(':id'=>$id,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
 		
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -456,52 +467,55 @@ ul a{margin-left:3%;}
 						    ':mont_restant'=>$reste,
 						    ':encaisser'=>$encaisser,
 						    ':rete_payer'=>$rete_payer,
-		                    ':id_fact'=>$id_fact,
+		                    ':id_fact'=>$id,
 						    ':type'=>$ty
 						  ));
 						  
-					// Action update sur home_occupation
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
-		 $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
-		                      ':date'=>$horaires,
-							  ':dates'=>$dates,
-							  ':id_fact'=>$id
-	                        ));		
+					
+					// on modifie les données de la table home_occupation
+         $ret=$bds->prepare('UPDATE home_occupation id_chambre= :des, date= :ds, dates= :rs WHERE email_ocd= :email_ocd AND id_fact= :id');
+        $ret->execute(array(':des'=>$ids_chambre,
+		                    ':ds'=>$horaires,
+							':rs'=>$dates,
+							':id'=>$id_fact,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+					
+						
 		
 	  }
+	   
 	   // Action update sur facture 
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
-	     $rev->execute(array(':date'=>$dat,
-		                     ':civilite'=>$civilite,
-		                    ':email_ocd'=>$email,
-							':adresse'=>$adresse,
-							':check_in'=>$date1,
-							':check_out'=>$date2,
-							':time'=>$time,
-							':time1'=>$time1,
-							':nombre'=>$nombre_jours,
-							':email_client'=>$email1,
-						    ':numero'=>$_POST['numero'],
-					        ':user'=>$_SESSION['user'],
-						    ':clients'=>$name,
-						    ':piece_identite'=>$client,
-						    ':montant'=>$monts,
-							':avance'=>$avance,
-						    ':reste'=>$reste,
-							':montant_repas'=>$prix_repas,
-						    ':tva'=>$tva,
-							':mont_tva'=>$taxe,
-						    ':id_fact'=>$id,
-							':type'=>$mode,
-							':status'=>$status,
-							':types'=>$ty
-						  ));
-						  
-						  
-			// on modifie les données de la base de données guide
+         $reg=$bds->prepare('UPDATE facture date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
+		  nombre= :nbr, numero= :num, user= :us clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
+		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
+		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+          $reg->execute(array(':des'=>$dat,
+		                    ':ds'=>$civilite,
+							':rs'=>$adresse,
+							':cke'=>$date1,
+							':cko'=>$date2,
+							':tim1'=>$time,
+							':tim2'=>$time1,
+							':nbr'=>$nombre,
+							':num'=>$_POST['numero'],
+							':us'=>$_SESSION['user'],
+							':client'=>$name,
+							':pc'=>$client,
+							':mont'=>$monts,
+							':avc'=>$avance,
+							':rest'=>$reste,
+							':mont_rep'=>$prix_repas,
+							':tv'=>$tva,
+							':mtva'=>$taxe,
+							':ty'=>$mode,
+							':stat'=>$status,
+							':ty'=>$ty,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+            				
+		 // on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
