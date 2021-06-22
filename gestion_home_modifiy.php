@@ -432,7 +432,7 @@ ul a{margin-left:3%;}
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo$donnees['user'];?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -1176,6 +1176,7 @@ echo $_SESSION['token'];?>">
 		$('#resul').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:red"></i>local suprimé de la liste</button>');
 	    loads();
 		load();
+		$('.buttons').click();
 
       },
 	 error: function() {
