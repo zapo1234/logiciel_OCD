@@ -82,14 +82,30 @@ ul a{margin-left:3%;}
  try{
 	
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']
-   ));
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
 	
-
+    $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
+   $rev->execute(array(':id'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donnes=$rev->fetchAll();
+   
+   // on regroupe tout les id_chambre dans un tableau deja facturé
+   $arrays = [];
+   foreach($donnes as $data){
+	  $datas =$data['id_chambre'].',';
+	  
+	  $dats = explode(',',$datas);
+	  
+	  foreach($dats as $value){
+		 
+         $arrays[] = $value;		 
+	  }
+  }
 	
 	
+	// definir les 2 tableau de date en fonction du type de réservation
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
 	$dates2 =$_POST['das'];
@@ -183,7 +199,7 @@ ul a{margin-left:3%;}
    
    if($_POST['to']=="séjour") {
 	   
-	   if($_POST['account']==""){
+	   if($_POST['acomp']==""){
 		 
          $avance = 0;
          $reste =0;		 
@@ -210,13 +226,19 @@ ul a{margin-left:3%;}
 	 $time= date('H:i');
      $time1= date('H:i');
 	 $tva =$_POST['tva'];
-	 $taxe =$_POST['taxe'];
-	 $total =$_POST['total'];
+	 $total =$_POST['mons'];
+	 
+	 if(!isset($_POST['mons'])){
+		
+     $total=0;		
+	 }
+	 
 	 $ty="client facturé";
 	 $status =$_POST['status'];
 	 $total1 =$_POST['mon'];
 	 
 	 $monts = $total+$total1+floatval($prix_repas);
+	 $taxe = $monts*$tva/100;
    }
    
  if($_POST['to']=="réservation") {
@@ -245,22 +267,28 @@ ul a{margin-left:3%;}
 	 $time= date('H:i');
      $time1=date('H:i');
      $tva =$_POST['tva'];
-	 $taxe =$_POST['taxe'];
 	
-	if(!isset($_POST['total'])){
-		
-     $total=0;		
+	if(!isset($_POST['mons'])){
+	 $total=0;		
 	 }
-     $total = $_POST['total'];
+	 
+	 else{
+		 
+		$total =$_POST['mons'];
+	 }
+    
      $ty="réservation client";
 	 $status =$_POST['status'];
 	 
 	 if(!isset($_POST['mon'])){
 		$total1=0;
 	 }
+	 
+	 else{
      $total1 = $_POST['mon'];
+	 }
      $monts =$total+$total1+floatval($prix_repas);	 
-	   
+	   $taxe = $monts*$tva/100;
    }
    
  if($_POST['to']=="horaire") {
@@ -293,23 +321,31 @@ ul a{margin-left:3%;}
 	 $time=$dat3;
      $time1=$dat4;
      $tva =$_POST['tva'];
-	 $taxe =$_POST['taxe'];
 	 
-	 if(!isset($_POST['total'])){
+	 if(!isset($_POST['mons'])){
 		
      $total=0;		
 	 }
-     $total = $_POST['total'];
+	 
+	 else{
+     $total = $_POST['mons'];
+	 }
 	 
 	 if(!isset($_POST['mon'])){
 		$total1=0;
+	 }
+	 
+	 else{
+		 
+		$total1 =$_POST['mon']; 
 	 }
 	 
 	 $total1 =$_POST['mon'];
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
 	  
-     $monts =$total+$total1+floatval($prix_repas);	  
+     $monts =$total+$total1+floatval($prix_repas);
+     $taxe = $monts*$tva/100;	 
 	}
 
    // récupérer les variables en boucles
@@ -335,17 +371,11 @@ ul a{margin-left:3%;}
 		 echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
 		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		
-		// delete bord_informations id_fact
-		 // on surprime la data de delete dans la tableau
-    $res=$bds->prepare('DELETE  FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
-    $res->execute(array(':id'=>$id,
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
-	
-		
-		
-		// on insere les données dans la bds-
+	// verifier sur l'id_chambre est deja dans le tableau
+	if(!in_array($ids_chambre,$arrays)){
+	// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
 	     $rey->execute(array(':email_ocd'=>$email,
@@ -368,22 +398,26 @@ ul a{margin-left:3%;}
 						    ':type'=>$ty
 						  ));
 				
-
-                	// on modifie les données de la table home_occupation
-         $ret=$bds->prepare('UPDATE home_occupation id_chambre= :des, date= :ds, dates= :rs WHERE email_ocd= :email_ocd AND id_fact= :id');
-        $ret->execute(array(':des'=>$ids_chambre,
-		                    ':ds'=>$datas,
-							':rs'=>$dates,
-							':id'=>$id_fact,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));			
+	           
+                	
+                // on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+		 $dates ="";
+		 $reys->execute(array(':id_chambre'=>$ids_chambre,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':date'=>$datas,
+							  ':dates'=>$dates,
+							  ':id_fact'=>$id
+	                        ));				
 		}
+       }
 	  
 	   // update sur facture
 
        	// on modifie les données de la table home_occupation
-         $ret=$bds->prepare('UPDATE facture date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
-		  nombre= :nbr, numero= :num, user= :us clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
+         $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
+		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
 		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$dat,
@@ -406,7 +440,7 @@ ul a{margin-left:3%;}
 							':mtva'=>$taxe,
 							':ty'=>$mode,
 							':stat'=>$status,
-							':ty'=>$ty,
+							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
@@ -444,10 +478,8 @@ ul a{margin-left:3%;}
 		// on insere les données dans la bds-
 		
 		// delete bord_informations 
-		 // on surprime la data de delete dans la tableau
-    $res=$bds->prepare('DELETE  FROM bord_informations WHERE  id_fact= :id AND email_ocd= :email_ocd');
-    $res->execute(array(':id'=>$id,
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
+        // verifier sur l'id_chambre est deja dans le tableau
+	if(!in_array($ids_chambre,$arrays)){
 		
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -472,22 +504,25 @@ ul a{margin-left:3%;}
 						  ));
 						  
 					
-					// on modifie les données de la table home_occupation
-         $ret=$bds->prepare('UPDATE home_occupation id_chambre= :des, date= :ds, dates= :rs WHERE email_ocd= :email_ocd AND id_fact= :id');
-        $ret->execute(array(':des'=>$ids_chambre,
-		                    ':ds'=>$horaires,
-							':rs'=>$dates,
-							':id'=>$id_fact,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
 					
-						
+                // on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+		 $dates ="";
+		 $reys->execute(array(':id_chambre'=>$ids_chambre,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':date'=>$datas,
+							  ':dates'=>$dates,
+							  ':id_fact'=>$id
+	                        ));		
+					
+	      }    				
 		
 	  }
 	   
 	   // Action update sur facture 
-         $reg=$bds->prepare('UPDATE facture date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
-		  nombre= :nbr, numero= :num, user= :us clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
+         $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
+		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
 		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
           $reg->execute(array(':des'=>$dat,
@@ -510,7 +545,7 @@ ul a{margin-left:3%;}
 							':mtva'=>$taxe,
 							':ty'=>$mode,
 							':stat'=>$status,
-							':ty'=>$ty,
+							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
