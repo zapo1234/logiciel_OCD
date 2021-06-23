@@ -41,7 +41,6 @@ include('inc_session.php');
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -49,7 +48,7 @@ include('inc_session.php');
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
 
 .enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
 .dep {
@@ -64,14 +63,23 @@ include('inc_session.php');
 
 .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
-.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:green;font-size:22px;font-weight:bold;} .datas1{border-left:6px solid green;}
-.data3{color:#1E90FF;font-size:22px;font-weight:bold;} .datas3{border-left:6px solid #1E90FF;}
-.data2{color:#4B0082;font-weight:bold;font-size:22px;} .datas2{border-left:6px solid #4B0082;}
+.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:18px;font-weight:bold;background:green} .datas1{}
+.data3{background:#1E90FF;font-size:22px;font-weight:bold;color:white} .datas3{}
+.data2{background:#4B0082;font-weight:bold;font-size:18px;color:white;} .datas2{}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
 .der{font-size:12.5px;} .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;}
+ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
+.annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
+.detail{width:550px;background:white;position:absolute;z-index:4;border:2px solid #eee;
+ font-size:15px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black;
+ top:150px;margin-left:20%;}
+  h4{text-align:center;margin-top:8px;font-size:18px;border-bottom:1px solid #eee;}
+  .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
+  .fact{color:#4e73df;font-weight:bold;font-size:18px;}
+  .liste td{width:150px;} .liste{border-top:1px solid #eee;} .hs{padding-left:10%;margin-top:10px;font-size:13px;}
+#form_logo{display:none;}
 </style>
 
 </head>
@@ -335,6 +343,33 @@ ul a{margin-left:3%;}
    </form>
  
   </div><!--reini---->
+  
+  <div class="annuler" style="display:none">
+   <form method="post" id="form_annul" action="">
+   <h1>Êtes vous sûr d'annuler la facture <span id="id_fact"></span><br/></h1>
+   <div class="action"><button type="button" class="annul">Annuler</button><button type="button" class="annuls">ok</button></div>
+   <input type="hidden" name="ids" id="ids">
+  <input type="hidden" name="token" id="token" value="<?php
+  //Le champ caché a pour valeur le jeton
+   echo $_SESSION['token'];?>">
+   </form>
+ 
+  </div><!--annul---->
+  
+  <div class="envoyer" style="display:none">
+   <form method="post" id="form_annul" action="">
+   <h1>Êtes vous sûr d'annuler la facture <span id="id_fact"></span><br/></h1>
+   <div class="action"><button type="button" class="envoi">Annuler</button><button type="button" class="envois" value="ok"></button></div>
+   <input type="hidden" name="ids" id="ids">
+  <input type="hidden" name="token" id="token" value="<?php
+  //Le champ caché a pour valeur le jeton
+   echo $_SESSION['token'];?>">
+   </form>
+ 
+  </div><!--annul---->
+  
+  <div id="details"></div><!--div details-->
+  <div id="data_annuler"></div><!--div annuler -->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
  
@@ -404,6 +439,8 @@ ul a{margin-left:3%;}
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+   $('.annuler').css('display','none');
+   $('.detail').css('display','none');
  });
  
  // action sur l'onglet gére
@@ -416,6 +453,52 @@ ul a{margin-left:3%;}
  $('.datas').css('height','120px');	
   }
 });
+
+
+ // 
+ 
+ // delete home--
+ $(document).on('click','.annul', function(){
+	 // recupere la variable
+	 var id = $(this).data('id5');
+	 var action = "deleted";
+    // affiche les differentes
+	$('.annuler').css('display','block');
+	$('#id_fact').text(id);
+    $('#pak').css('display','block');
+	$('#ids').val(id);
+	
+	$(document).on('click','.annuler', function(){
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'datas_annuler.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_annuler').html(data);
+     $('#annul').css('display','none');
+     $('#pak').css('display','none');
+	}
+		
+	});
+
+ });
+ });
+ 
+ $(document).on('click','.details', function(){
+	 // recupere la variable
+	 var id = $(this).data('id2');
+	 var action = "details";
+	 $.ajax({
+			      url: "result_facture_home.php",
+					method: "POST",
+					data:{id:id,action:action},
+					success: function(data) {
+						$('#details').html(data);
+						$('#pak').css('display','block');
+					}
+				});
+    
+ });
   
   
   function loads() {

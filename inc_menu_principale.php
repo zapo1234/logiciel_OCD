@@ -102,7 +102,7 @@ include('inc_session.php');
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-comment-alt"></i>
                     <span>Equipes messanger</span></a>
             </li>
 			
@@ -124,3 +124,8 @@ include('inc_session.php');
             <hr class="sidebar-divider d-none d-md-block">
 
         </ul>
+		
+		<form id="form_logo" method="post" action="upload_logo.php" enctype="multipart/form-data">
+        <input type="file" name="fichier" id="fichier" />
+        <input type="submit" id="envoyer" />
+       </form>

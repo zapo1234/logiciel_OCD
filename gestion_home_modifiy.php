@@ -217,7 +217,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 }
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;}
+ul a{margin-left:3%;} #form_logo{display:none;}
 
 </style>
 
