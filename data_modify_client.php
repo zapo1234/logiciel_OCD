@@ -85,17 +85,26 @@ ul a{margin-left:3%;}
    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
-	
-	
-	// aller chercher les auteurs en écriture sur une facture
+
+  // aller chercher les auteurs en écriture sur une facture
 	 $res=$bds->prepare('SELECT date,user FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
    
+   $dat =$donnees['date'];
+   
+   $dats = explode('-',$dat);
+    $j = $dats[2];
+	$mm = $dats[1];
+	$an = $dats[0];
+   
    // création d'un tableau pour recupérer les users
-  $user_datas =' <i class="fas fa-pen"style="color:green;font-size:16px;"></i> edité le'.$donnees['date'].' par  '.$donnees['user'].', <i class="fas fa-list-alt" style="font-size:13px;color:></i>  modifié le '.date('d-m-Y').'à'.date('H:i').' par   <span class="edit" style="color:#4e73df"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   $user_data = $donnees['user'].',<i class="fas fa-list-alt" style="font-size:13px;color:#66FF8F;"></i>  modifié le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
    // convertir en chaine de caractère le tableau
+   $user = explode(',',$user_data);
+   
+   $user_datas = implode(',',$user);
   
    $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
    $rev->execute(array(':id'=>$id,
@@ -321,8 +330,8 @@ ul a{margin-left:3%;}
 	   $dat3 = $_POST['tim'];
        $dat4 = $_POST['tis'];
 	   
-	   $avance=$_POST['account'];
-     $reste=$_POST['rpay'];
+	   $avance=$_POST['acomp'];
+     $reste=$_POST['rest'];
 	   
      $mode =2;	 
 	 $rete_payer="";

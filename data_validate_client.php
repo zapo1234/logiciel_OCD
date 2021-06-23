@@ -156,6 +156,14 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
    
+    $dat1 = explode('-',$_POST['dat']);
+	
+	$js = $dat1[2];
+	$mms = $dat1[1];
+	$ans = $dat1[0];
+	
+   
+   $user_data = '<i class="fas fa-pen"style="color:green;font-size:16px;"></i> edité le  '.$js.'/'.$mms.'/'.$ans.' par  '.$_SESSION['user'].'';
    
    $direction = $_POST['to'];
    // récupére les variable dans différentes cas possible de séjour
@@ -218,7 +226,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 $ty="client facturé";
 	 $status =$_POST['status'];
 	 
-	 $monts = $total+$taxe+ floatval($prix_repas);
+	 $monts = $total+ floatval($prix_repas);
    }
    
  if($_POST['to']=="réservation") {
@@ -252,7 +260,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
      $ty="réservation client";
 	 $status =$_POST['status'];
      
-     $monts =$total+$taxe+floatval($prix_repas);	 
+     $monts =$total+floatval($prix_repas);	 
 	   
    }
    
@@ -291,7 +299,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
 	  
-     $monts =$total+$taxe+floatval($prix_repas);	  
+     $monts =$total+floatval($prix_repas);	  
 	}
 
    // récupérer les variables en boucles
@@ -313,47 +321,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 $ids_chambre = $id_chambre[$count];
 	 $types = $type[$count];
 	 
-	 
-	 // 
-	 
-	  $reb=$bds->prepare('SELECT dat,email_ocd,id,id_chambre,id_fact,check_in,check_out,time1,time2 FROM bord_informations WHERE id_chambre= :id_chambre');
-      $reb->execute(array(':id_chambre'=>$ids_chambre));
-      $dos=$reb->fetch();
-	  $reb->closeCursor();
-		
-		
-			
-			$result1 =$dos['check_out'];
-			$result2 = $dos['check_in'];
-			$d1=$dat1;
-	        $d2=$dat2;
-			$dats = $dos['dat'];
-			$_POST['dat'] == $dats;
-		
-		   $dates="";
-	
-	    if($result1 > $d1){
-		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
-			
-		}
-		
-		elseif($result1==$d1 AND $result2==$d2){
-		
-        echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';		
-			
-		}
-		
-		elseif($result2 > $d2) {
-		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
-		}
-		
-		else{
-			
-	     // on redirige vers la page
+		// on redirige vers la page
 		 echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<r/>
+			 </div>
 		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -388,10 +361,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id_fact
 	                        ));				
-						  
-		
-		}
-      }
+			}
 	  
 	   // insertion des données dans la table facture
 		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
@@ -407,7 +377,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':nombre'=>$nombre_jours,
 							':email_client'=>$email1,
 						    ':numero'=>$_POST['numero'],
-					        ':user'=>$_SESSION['user'],
+					        ':user'=>$user_data,
 						    ':clients'=>$name,
 						    ':piece_identite'=>$client,
 						    ':montant'=>$monts,
@@ -447,65 +417,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 $montants = $montant[$count];
 	 $ids_chambre = $id_chambre[$count];
 	 $types = $type[$count];
-	 
-	 
-	 // 
-	 
-	  $reb=$bds->prepare('SELECT dat,email_ocd,id,id_chambre,id_fact,check_in,check_out,time1,time2 FROM bord_informations WHERE id_chambre= :id_chambre');
-      $reb->execute(array(':id_chambre'=>$ids_chambre));
-      $dos=$reb->fetch();
-	  $reb->closeCursor();
-		
-		
-			
-			$result1 =$dos['time2'];
-			$result2 = $dos['time1'];
-			
-			$result3 =$dos['check_out'];
-			$result4 = $dos['check_in'];
-			
-			$d1=$dat3;
-	        $d2=$dat4;
-			
-				
-			  $dates=$_POST['dat'];	
-				
-
-		
-	  if($result1 > $d1 AND $dos['dat']==$_POST['dat']){
-		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
-			
-		}
-		
-		
-		elseif($result1==$d1 AND $result2==$d2 AND $dos['dat']==$_POST['dat']){
-		
-        echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';		
-			
-		}
-		
-		
-	    elseif($result3== $_POST['dat'] AND $result4==$_POST['dat']){
-		echo'<div class="erro">l\'une de vos chambres occupée à ces heures</div>';
-			
-		}
-		
-		elseif($result3 > $_POST['dat'] AND $result4 < $_POST['dat']){
-		echo'<div class="erro">l\'une de vos chambres occupée à ces heures</div>';
-			
-		}
-	
-		
-		elseif($result2 > $d2 AND $dos['dat']==$_POST['dat']) {
-		echo'<div class="erro">l\'une de vos chambres occupée à ces dates</div>';
-		}
-		
-		else{
+	    //
 			
 		  echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
 		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_datas_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -535,12 +452,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
-							  ':dates'=>$dates,
+							  ':dates'=>$dat,
 							  ':id_fact'=>$id_fact
 	                        ));		
 		
 	  
-		}
+		
 		
 	   }
 	   // insertion des données dans la table facture
@@ -557,7 +474,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':nombre'=>$nombre_jours,
 							':email_client'=>$email1,
 						    ':numero'=>$_POST['numero'],
-					        ':user'=>$_SESSION['user'],
+					        ':user'=>$user_data,
 						    ':clients'=>$name,
 						    ':piece_identite'=>$client,
 						    ':montant'=>$monts,

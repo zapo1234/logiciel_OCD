@@ -78,7 +78,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   h4{text-align:center;margin-top:8px;font-size:18px;border-bottom:1px solid #eee;}
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
-  .liste td{width:150px;} .liste{border-top:1px solid #eee;} .hs{padding-left:10%;margin-top:10px;font-size:13px;}
+  .liste td{width:150px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
 #form_logo{display:none;}
 </style>
 

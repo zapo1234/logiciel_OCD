@@ -16,7 +16,11 @@ include('inc_session.php');
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                 </div>
-                <div class="side"><i class="fas fa-camera" style="font-size:20px;"></i></div>
+                <div class="side"><button onclick="document.getElementById('fichier').click(); return false;" id="logo-button"><i class="fas fa-camera" style="font-size:20px;"></i></button>
+				<div id="upload">
+				
+				</div><!--affichage ajax log-->
+				</div>
             </a><br/><br/><br/><br/>
 
             <!-- Nav Item - Dashboard -->
