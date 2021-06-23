@@ -66,6 +66,7 @@ td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration
 .datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:18px;font-weight:bold;background:green} .datas1{}
 .data3{background:#1E90FF;font-size:22px;font-weight:bold;color:white} .datas3{}
 .data2{background:#4B0082;font-weight:bold;font-size:18px;color:white;} .datas2{}
+.data4{background:#AB040E;font-weight:bold;font-size:18px;color:white;border:2px solid #AB040E;}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
 .der{font-size:12.5px;} .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
@@ -468,15 +469,16 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
     $('#pak').css('display','block');
 	$('#ids').val(id);
 	
-	$(document).on('click','.annuler', function(){
+	$(document).on('click','.annuls', function(){
 	$.ajax({
 	type:'POST', // on envoi les donnes
-	url:'datas_annuler.php',// on traite par la fichier
+	url:'result_facture_home.php',// on traite par la fichier
 	data:{id:id,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data_annuler').html(data);
-     $('#annul').css('display','none');
+     $('.annuler').css('display','none');
      $('#pak').css('display','none');
+	 loads();
 	}
 		
 	});

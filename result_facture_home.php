@@ -29,29 +29,41 @@ include('inc_session.php');
        
 	while($donnees = $req->fetch()) {
 		
+	$nombre =$donnees['id_fact'];
+	// recupérer le chiffre
+	$nombre =substr($nombre,2);
+	
 	if($donnees['type']==1){
 	$name =" Séjour facturé";
 	$jour = $donnees['nombre'].'jours';
 	$encaiss="";
+	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	$annul='<a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	elseif($donnees['type']==2){
 		
 	$name="Horaire facturé";
 	$jour = $donnees['nombre'].'heure';
 	$encaiss="";
+	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	$annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
 	 $name ="Réservation";
 	 $encaiss='<a href="#" class="envoi" title="Encaisser" data-id6='.$donnees['id_fact'].'"><i class="fas fa-arrow-square-right" sytle="font-size:13px;color:green"></i> Encaisser</a><br/>';
+	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	else{
 		
-		$name="Annulé";
+		$name=" séjour Annulé";
 		$jour ="";
 		$encaiss="";
+		$modif="";
+		$annul="";
 	}
 	
 	if($donnees['montant_repas']!=0){
@@ -63,6 +75,7 @@ include('inc_session.php');
 		
 		$repas ="";
 		$monts="";
+		
 	}
 	
 	$date1=$donnees['date'];
@@ -82,10 +95,7 @@ include('inc_session.php');
 	$mm2 = $date3[1];
 	$an2 = $date3[0];
 	
-	$nombre =$donnees['id_fact'];
 	
-	// recupérer le chiffre
-	$nombre =substr($nombre,2);
     
 	// récupérer le user editor
 	
@@ -107,9 +117,9 @@ include('inc_session.php');
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'</td>
 		 <td><a href="#" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
-		 <a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>
+		  '.$modif.'
 		  '.$encaiss.'
-		  <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>
+		  '.$annul.'
 		  </div></td>
 		 <td><a href="gestion_datas_facture.php?id_fact="'.$nombre.'"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 	    </tr>';
@@ -168,6 +178,51 @@ include('inc_session.php');
           </div>		  
 		  ';
    
+   }
+   
+   if($_POST['action']=="deleted"){
+	   
+	 $id=$_POST['id']; 
+     
+    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$rej->fetch();
+   $rej->closeCursor();
+
+   // aller chercher les auteurs en écriture sur une facture
+	 $res=$bds->prepare('SELECT date,user,montant,reste,avance FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':id'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$res->fetch();
+    
+	// on ajoute le user qui as annulé la facture
+	// création d'un tableau pour recupérer les users
+   $user_data = $donns['user'].',<i class="fas fa-exclamation-circle" style="font-size:13px;color:#AB040E;"></i>  annulée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   // convertir en chaine de caractère le tableau
+   $user = explode(',',$user_data);
+   
+   $user_datas = implode(',',$user);
+    // on modifer les montants
+
+    	// on modifie les données de la base de données guide
+         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE email_ocd= :email_ocd');
+        $ret->execute(array(':des'=>$donnees['montant']-$donns['montant'],
+							':rs'=>$donnees['reservation']-$donns['avance'],
+							':re'=>$donnees['reste']-$donns['reste'],
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+		$ty="4";
+		$tys="facture annulé";
+		// on modifie le type dans la table facture
+         $ret=$bds->prepare('UPDATE facture SET user= :us, type= :ty, types= :tys WHERE id_fact= :id AND email_ocd= :email_ocd');
+        $ret->execute(array(':us'=>$user_datas,
+		                    ':ty'=>$ty,
+							':tys'=>$tys,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));			 
+           echo'<div class="enre">vous avez annulé la facture</div>';
+	   
    }
 
 ?>
