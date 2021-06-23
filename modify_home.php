@@ -10,11 +10,18 @@ if(isset($_GET['id_fact'])){
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$don = $req->fetchAll();
 	$req->closeCursor();
+	
 	// recupére les données de la facture
 	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva FROM facture WHERE   id_fact= :id_fact AND email_ocd= :email_ocd ');
     $res->execute(array(':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$donns= $res->fetch();
+	$res->closeCursor();
+	
+	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
+    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    $donnes=$rej->fetch();
+   
 	//créer un tableau vide 
 
     if($_POST['action']=="modify"){
@@ -94,11 +101,11 @@ if(isset($_GET['id_fact'])){
 			$mont_tva = $donns['mont_tva'];
 			}
 			
-			$montants = $donns['montant'];
+			$montants = $donns['montant']-floatval($donns['montant_repas']);
 			
 			echo'<div class="montant"><h5>récapitulatif des montants</h5>
 			<div class="rest">'.$adjout.'</div>
-			<div>Repas(+):<br/><input type="number" id="rep" name="rep"></div>
+			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span></div>
 			<div class="tot">Montant <span class="mont">'.$montants.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
@@ -149,7 +156,8 @@ if(isset($_GET['id_fact'])){
 		 'paynuite'    =>   $pay,
 		 'paypass'     =>   $pay,
          'type'        =>   $_POST['type'],
-		 'chambre'     =>   $_POST['chambre']
+		 'chambre'     =>   $_POST['chambre'],
+		 'montant'     =>   $pay*$_POST['nbjour']
 
          );
 		 
@@ -175,7 +183,8 @@ if(isset($_GET['id_fact'])){
 		 'paynuite'    =>   $pay,
 		 'paypass'     =>   $pay,
          'type'        =>   $_POST['type'],
-		 'chambre'     =>   $_POST['chambre']
+		 'chambre'     =>   $_POST['chambre'],
+		 'montant'    => $pay*$_POST['nbjour']
 
          );
          
@@ -310,7 +319,8 @@ if(isset($_GET['id_fact'])){
 		 'paynuite'    =>   $pay,
 		 'paypass'     =>   $pay,
          'type'        =>   $_POST['type'],
-		 'chambre'     =>   $_POST['chambre']
+		 'chambre'     =>   $_POST['chambre'],
+		 'montant'    =>    $pay*$_POST['nbjour']
 
          );
 		 
@@ -335,7 +345,8 @@ if(isset($_GET['id_fact'])){
 		 'paynuite'    =>   $pay,
 		 'paypass'     =>   $pay,
          'type'        =>   $_POST['type'],
-		 'chambre'     =>   $_POST['chambre']
+		 'chambre'     =>   $_POST['chambre'],
+		 'montant'     => $pay*$_POST['nbjour']
 
          );
          
@@ -351,29 +362,32 @@ if(isset($_GET['id_fact'])){
 			$count = $count -1;
 			if($count ==1){
 			  $local ="local";
-			  echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
+			  echo'<div><div class="titre">Nouvelle selection '.$count.' '.$local.'</div></div>';
 			
 			}
 			
 			if($count >1){
 				$local ="locaux";
-				echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
+				echo'<div><div class="titre">Nouvelle selection '.$count.' '.$local.'</div></div>';
 			
 			}
 			
 			if($count ==0){
 				
-				echo'<div><div class="titre">Aucun local selectionné
+				echo'<div><div class="titre">Aucun nouvelle selectionnée
 				</div></div>';
 				
 				$total =0;
 			}
 			
+			$tab = [];
+			$array = [];
 			foreach($_SESSION['add_home'] as $keys => $values){
 		
 		    if($values['id']==$_POST['id']){
 	        // suprimer
 	          unset($_SESSION['add_home'][$keys]);
+			  $array[] = $values['montant'];
 	       }
 		   
 			if($_POST['to']=="réservation") {
@@ -420,7 +434,7 @@ if(isset($_GET['id_fact'])){
 				
 			}
 			
-		
+		    $tab[]= $values['montant'];
 			$total = $total +($pays*$_POST['nbjour']);
 			 
 			 if($values['id'] !=$_POST['id']) {
@@ -436,15 +450,19 @@ if(isset($_GET['id_fact'])){
 			
 			}
 			
-			$totals = $total -($pays*$_POST['nbjour']);
+			// on recupére la dernière valeur du tableau
+		   // on recupére le montant de sortie.
+		   
+		   $arrays = array_diff($tab,$array);
+		    $totals= array_sum($arrays);
+			
 		}
 			
 			echo'
-			<div></div>
+			<div class="montant">
 			<div class="tot">Montant <span class="mont">'.$totals.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
 			</div>';
-			echo'</div>';
 		
 		  }	
     
@@ -470,16 +488,18 @@ if(isset($_GET['id_fact'])){
 	$montan = $dnns['montant']* floatval($_POST['nbjour']);
 
 	
-	if(!empty($_POST['acomp'])){
+
 	$monts =$total1-$montan;
-	$mont = $reste1+$montan;
-	}
+	
+	if($total1 !=0 AND $_POST['acompt']!=0) {
+	$mont = $monts-$_POST['acomp'];
+    }
 	
 	else{
-		$monts =$total1-$montan;
-		$mont=0;
+		
+	$mont =0;
 	}
-
+	
 	// modifie les données
 	// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps WHERE email_ocd= :email_ocd AND id_fact= :id');
@@ -490,6 +510,14 @@ if(isset($_GET['id_fact'])){
 							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
+					 
+	 // on modifie les données de la base de données guide
+         $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
+        $rem->execute(array(':des'=>$donnes['encaisse']-$montan,
+		                    ':res'=>$donnes['reste']+$_POST['rep'],
+					        ':reser'=>$donnes['reservation']+$_POST['acomp'],
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
 	
     // on surprime la data de delete dans la tableau
     $res=$bds->prepare('DELETE  FROM bord_informations WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
@@ -497,12 +525,15 @@ if(isset($_GET['id_fact'])){
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	// on surprime la data de delete dans la tableau
-    $res=$bds->prepare('DELETE  FROM home_occupation WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
-    $res->execute(array(':id'=>$id,
+    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $rel->execute(array(':id'=>$id,
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));				
 	
-	
+    
+					 
+
+
     
     }
 }	

@@ -86,7 +86,18 @@ ul a{margin-left:3%;}
    $donns=$rej->fetch();
 	$rej->closeCursor();
 	
-    $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
+	
+	// aller chercher les auteurs en écriture sur une facture
+	 $res=$bds->prepare('SELECT date,user FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':id'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$res->fetch();
+   
+   // création d'un tableau pour recupérer les users
+  $user_datas =' <i class="fas fa-pen"style="color:green;font-size:16px;"></i> edité le'.$donnees['date'].' par  '.$donnees['user'].', <i class="fas fa-list-alt" style="font-size:13px;color:></i>  modifié le '.date('d-m-Y').'à'.date('H:i').' par   <span class="edit" style="color:#4e73df"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   // convertir en chaine de caractère le tableau
+  
+   $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
    $rev->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnes=$rev->fetchAll();
@@ -226,11 +237,15 @@ ul a{margin-left:3%;}
 	 $time= date('H:i');
      $time1= date('H:i');
 	 $tva =$_POST['tva'];
-	 $total =$_POST['mons'];
 	 
 	 if(!isset($_POST['mons'])){
 		
      $total=0;		
+	 }
+	 
+	 else{
+		 
+		 $total=$_POST['mons'];
 	 }
 	 
 	 $ty="client facturé";
@@ -429,7 +444,7 @@ ul a{margin-left:3%;}
 							':tim2'=>$time1,
 							':nbr'=>$nombre_jours,
 							':num'=>$_POST['numero'],
-							':us'=>$_SESSION['user'],
+							':us'=>$user_datas,
 							':client'=>$name,
 							':pc'=>$client,
 							':mont'=>$monts,
@@ -534,7 +549,7 @@ ul a{margin-left:3%;}
 							':tim2'=>$time1,
 							':nbr'=>$nombre,
 							':num'=>$_POST['numero'],
-							':us'=>$_SESSION['user'],
+							':us'=>$user_datas,
 							':client'=>$name,
 							':pc'=>$client,
 							':mont'=>$monts,
