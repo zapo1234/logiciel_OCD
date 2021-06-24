@@ -63,10 +63,10 @@ include('inc_session.php');
 
 .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
-.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:18px;font-weight:bold;background:green} .datas1{}
-.data3{background:#1E90FF;font-size:22px;font-weight:bold;color:white} .datas3{}
-.data2{background:#4B0082;font-weight:bold;font-size:18px;color:white;} .datas2{}
-.data4{background:#AB040E;font-weight:bold;font-size:18px;color:white;border:2px solid #AB040E;}
+.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:16px;font-weight:none;background:green} .datas1{}
+.data3{background:#1E90FF;font-size:16px;font-weight:none;color:white} .datas3{}
+.data2{background:#4B0082;font-weight:none;font-size:16px;color:white;} .datas2{}
+.data4{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
 .der{font-size:12.5px;} .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
