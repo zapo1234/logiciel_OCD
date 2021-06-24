@@ -5,7 +5,7 @@ include('inc_session.php');
 
 if($_POST['action']=="fetchs") {
 	 
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd');
+ $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
@@ -33,12 +33,12 @@ if($_POST['action']=="fetchs") {
 	if($donnes['status']==1){
 	 $name="dépense effectuée";
 	 $mettre ='<a href="#" class="mettre" title="mettre à jour" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i>Mettre à jour</a><br/>';
-	 $annul='<a href="#" class="modifier" title="modifier" data-id4='.$donnes['id'].'"><i class="fab fa-telegram"></i>Annuler</a><br/>';
+	 $annul='<a href="#" class="annul" title="annuler" data-id4='.$donnes['id'].'"><i class="fab fa-telegram"></i> Annuler</a><br/>';
 	}
 	elseif($donnes['status']==2){
 	 $name="crédit fournisseur";
-	 $mettre='<a href="#" class="mettre" title="mettre à jour" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i>Mettre à jour</a><br/>';
-	 $annul='<a href="#" class="modifier" title="modifier" data-id4='.$donnes['id'].'"><i class="fab fa-telegram"></i>Annuler</a><br/>';
+	 $mettre='<a href="#" class="mettre" title="mettre à jour" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i>  Mettre à jour</a><br/>';
+	 $annul='<a href="#" class="annul" title="modifier" data-id4='.$donnes['id'].'"><i class="fab fa-telegram"></i> Annuler</a><br/>';
 	}
 	
 	else{
@@ -55,7 +55,7 @@ if($_POST['action']=="fetchs") {
 	
 	echo'<tr class="datas'.$donnes['status'].'">
 	     <td><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> enregistrement effectué le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
-		 '.$donnes['user'].'</span></td>
+		 <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i> par '.$donnes['user'].'</span></td>
 		 <td><span class="der">N° facture: '.$donnes['numero_facture'].'<br/><div class="data'.$donnes['status'].'">'.$name.'</span></div></td>
 		 <td><span class="repas">'.$donnes['designation'].'</td>
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
@@ -63,7 +63,7 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">'.$donnes['montant'].'xof</td>
 		 <td> Action à gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
 		 '.$mettre.'
-		  <a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i>modifier</a><br/>
+		  <a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i> Modifier</a><br/>
 		 '.$annul.'
 		  
 		  </div></td>

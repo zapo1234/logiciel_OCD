@@ -80,7 +80,10 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}.der{padding-left:5%;}
 #affiche{margin-top:15px;} .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;} 
+td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
+.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .action{cursor:pointer;}
+.data1{color:white;font-size:16px;font-weight:none;background:green}
+.data2{color:white;font-size:16px;font-weight:none;background:#1E90FF;}
 </style>
 
 </head>
@@ -434,13 +437,22 @@ td,th{text-align:center;}
    $('#pak').css('display','none');
    $('.reini').css('display','none');
  });
+ 
+ $(document).on('click','.action',function(){
+	var id = $(this).data('id2');
+  // afficher 
+  $('#content'+id).slideToggle();
+  if(id ===3){
+ $('.datas').css('height','120px');	
+  }
+});
 
 // afficher les données des dépenses
   // afficher les données des encaissements
   function loads() {
 				var action="fetchs";
 				$.ajax({
-					url: "depenses_validate_datas.php",
+					url: "depenses_view_datas.php",
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
@@ -563,11 +575,17 @@ calcul();
    // formulaire d'envoi et enregsitrement des dépenses
    $('#form_depense').on('submit', function(event) {
 	  var action ="insert";
-  event.preventDefault();
-  var regex = /^[a-zA-Z0-9éçàùèàè!:;]{0,150}$/;	
-  var form_data =$(this).serialize();
+	  var fact =$('#fact').val();
+    event.preventDefault();
+    var regex = /^[a-zA-Z0-9éçàùèàè!:;]{0,150}$/;	
+	var rege =  /^[a-zA-Z0-9-]{0,15}$/
+   var form_data =$(this).serialize();
   
-  $('.designation').each(function() {
+  if(fact.length > 10) {
+	  $('#erros').html('le numéro de la facture ne peut pas dépasser 10 caractères');  
+  }
+  
+   $('.designation').each(function() {
 	 
 	 if($(this).val().length >150){
 		$('#erros').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i> le champ désignation pas plus de 150 caractères');
@@ -618,9 +636,9 @@ calcul();
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'depenses_validate_datas.php',// on traite par la fichier
-	data:form_data,action:action,
+	data:form_data,
 	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#result_depense').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>vos dépenses sont bien enregistrées</button>');
+      $('#result_depense').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>Dépenses enregsitrées</button>');
 	  $('#pak').css('display','none');
 	  $('#examp').css('display','none');
 	  load();
