@@ -81,9 +81,14 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}.der{padding-left:5%;}
 #affiche{margin-top:15px;} .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
-.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .action{cursor:pointer;}
+.datas{border:2px solid white;box-shadow:2px 2px 1px 1px;font-size:12px;background-color:white;} .action{cursor:pointer;}
 .data1{color:white;font-size:16px;font-weight:none;background:green}
 .data2{color:white;font-size:16px;font-weight:none;background:#1E90FF;}
+.annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
+.annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
+.data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
+.repas{font-size:15px;} .actions{cursor:pointer;}
+.datis{border:2px solid white;box-shadow:1px 1px 1px 1px;font-size:15px;background-color:white;}
 </style>
 
 </head>
@@ -92,7 +97,7 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 
         <?php include('inc_menu_principale.php');?>
         <!-- End of Sidebar -->
-
+         <div id="data_annuler"></div><!--retour ajax -- annuler-->
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
@@ -355,6 +360,18 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 
 </div>
 
+ <div class="annuler" style="display:none">
+   <form method="post" id="form_annul" action="">
+   <h1>Êtes vous sûr d'annuler cette dépenses ? <span id="id_fact"></span><br/></h1>
+   <div class="action"><button type="button" class="annul" title="Annuler">Annuler</button><button type="button" class="annuls">ok</button></div>
+   <input type="hidden" name="ids" id="ids">
+  <input type="hidden" name="token" id="token" value="<?php
+  //Le champ caché a pour valeur le jeton
+   echo $_SESSION['token'];?>">
+   </form>
+   </div>
+
+
  <div class="reini" style="display:none">
  <form method="post" id="form_reini" action="">
  <h1>Réinitialiser votre caisse journalière</h1>
@@ -363,6 +380,8 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
  </form>
 
  </div><!--reini---->
+ 
+ <div id="data_modifier"></div><!--données modifier depense-->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
 
@@ -436,16 +455,31 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+   $('.annuler').css('display','none');
+   $('.detail').css('display','none');
+   $('.datas').css('display','none');
  });
  
  $(document).on('click','.action',function(){
 	var id = $(this).data('id2');
   // afficher 
   $('#content'+id).slideToggle();
+   $('#content'+id).css('position','fixed');
   if(id ===3){
  $('.datas').css('height','120px');	
   }
 });
+
+$(document).on('click','.actions',function(){
+	var id = $(this).data('id7');
+  // afficher 
+  $('#contents'+id).slideToggle();
+  $('#contents'+id).css('position','fixed');
+  if(id ===3){
+ $('.datas').css('height','120px');	
+  }
+});
+
 
 // afficher les données des dépenses
   // afficher les données des encaissements
@@ -571,6 +605,22 @@ calcul();
 
 	});
 
+
+    // delete home--
+ $(document).on('click','.modifier', function(){
+	 // recupere la variable
+	 var id = $(this).data('id3');
+	 var action = "modifier";
+	
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'depenses_view_datas.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_modifier').html(data);
+	}
+	});
+ });
 	
    // formulaire d'envoi et enregsitrement des dépenses
    $('#form_depense').on('submit', function(event) {
@@ -657,7 +707,39 @@ calcul();
   });
 
 
+  //
+  
+  // delete home--
+ $(document).on('click','.annul', function(){
+	 // recupere la variable
+	 var id = $(this).data('id4');
+	 var action = "annuler";
+    // affiche les differentes
+	$('.annuler').css('display','block');
+	$('#id_fact').text(id);
+    $('#pak').css('display','block');
+	$('#ids').val(id);
+	
+	$(document).on('click','.annuls', function(){
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'depenses_view_datas.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_annuler').html(data);
+     $('.annuler').css('display','none');
+     $('#pak').css('display','none');
+	 loads();
+	}
+		
+	});
+	
+	setInterval(function(){
+		 $('#data_annuler').html('');
+	 },4000);
 
+ });
+ });
 
 	// envoi du formulaire pour reinitalisation des montants
 
