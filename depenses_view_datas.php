@@ -76,8 +76,7 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">voir</span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"> <i class="fas fa-plus" style="font-size:10px";></i></span>
 		 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
 		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
-		 '.$mettre.'
-		 '.$modif.'
+		 '.$modif.'<br/>
 		 '.$annul.'
 		  </div></td>
 	    </tr>';
@@ -125,4 +124,96 @@ if($_POST['action']=="fetchs") {
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
 	    
 	  
+	}
+	
+	
+	if($_POST['action']=="modifier"){
+	
+	$id =$_POST['id'];
+	
+	// aller chercher les auteurs en écriture sur une facture
+	 $res=$bds->prepare('SELECT date,numero_facture,designation,fournisseur,nature,user,montant,status FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
+   $res->execute(array(':ids'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$res->fetch();
+    
+	echo'<div class="result">
+	     <h4>Modifier les données de la dépense sélectionnée</h4>
+		 <form method="post" id="form_modif" action="">
+		 <div class="h"><label>N° facture</label><br/> :<input type="text" id="facts" name="facts" value="'.$donns['numero_facture'].'"><br/><span class="error1"></span></div>
+		 <div class="h"><label>Status :<br/><select id="status" name="status" required><option value="'.$donns['status'].'">'.$donns['nature'].'</option>
+		 <option value="1">dépense effectuée</option><option value="2">crédit fournisseur</option></select><br/></div>
+		 <div class="h"><label>Date</label> :<br/><input type="date" id="date" name="dat" value="'.$donns['date'].'" required></div>
+		 <div class="h"><label>Désignation:</label><br/><input type="text" name="designatio" id="designatio" value="'.$donns['designation'].'"><br/><span class="error4"></span></div>
+		 <div class="h"><label>fournisseur:</label><br/><input type="text" name="fournisseu" id="fournisseu" value="'.$donns['fournisseur'].'"><br/><span class="error3"></span></div>
+		 <div class="h"><label>Montant:</label><br/><input type="text" name="montant" id="montant" value="'.$donns['montant'].'"><br/><span class="error6"></span></div>
+		 <input type="hidden" id="md" name="md" value="'.$id.'">
+		 <input type="hidden" name="token" id="token" value="'.$_SESSION['token'].'">
+		 <div class="h"><input type="button" id="modif" value="Modifier"></label></div>
+		 </form>
+	  </div>';
+   
+   
+	}
+	
+	if($_POST['action']=="modi"){
+	$id =$_POST['md'];
+    
+	$designation = trim(strip_tags($_POST['designatio']));
+	$fournisseur = trim(strip_tags($_POST['fournisseu']));
+	$date =$_POST['date'];
+	$fact =$_POST['facts'];
+	$status =$_POST['status'];
+	$montant =$_POST['montant'];
+	
+	if($status==1){
+    $nature='dépense effectuée'; 
+	}
+ 
+    if($status==2){
+	$nature='crédit fournisseur'; 
+   }
+	
+	 $rej=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$rej->fetch();
+   $rej->closeCursor();
+
+   // aller chercher les auteurs en écriture sur une facture
+	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
+   $res->execute(array(':ids'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$res->fetch();
+    
+	// on ajoute le user qui as annulé la facture
+	// création d'un tableau pour recupérer les users
+   $user_data = $donns['user'].', <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>  modifiée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   // convertir en chaine de caractère le tableau
+   $user = explode(',',$user_data);
+   
+   $user_datas = implode(',',$user);
+    // on modifer les montants
+	// on modifie les données de la base de données guide
+         $ret=$bds->prepare('UPDATE depense SET date= :dat, numero_facture= :fact, designation= :desi, fournisseur= :fourni, user = :us, nature= :nat, montant= :mont, status= :stat 
+		 WHERE id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':dat'=>$date,
+		                    ':fact'=>$fact,
+		                    ':desi'=>$designation,
+							':fourni'=>$fournisseur,
+							':us'=>$user_datas,
+							':nat'=>$nature,
+		                    ':stat'=>$status,
+							':mont'=>$montant,
+							':ids'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+    
+// on modifie les données de la base de données guide
+         $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE id= :ids AND email_ocd= :email_ocd');
+        $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant']+$montant,
+		                    ':ids'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']));
+							
+			
+		
 	}

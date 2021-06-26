@@ -89,6 +89,11 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 .data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
 .repas{font-size:15px;} .actions{cursor:pointer;}
 .datis{border:2px solid white;box-shadow:1px 1px 1px 1px;font-size:15px;background-color:white;}
+.result{z-index:4;width:550px;height:650px;border:2px solid #eee;background-color:white;position:absolute;top:150px;left:30%;}
+.h{margin-top:20px;margin-left:4%;} #designatio,#fournisseu{width:400px;height:50px;}
+input {border:color:1px solid #eee;height:30px;} #modif{width: 180px;height: 40px;color: white;background: #0FAE3A;text-align: center;
+    border: 2px solid #0FAE3A;
+border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 </style>
 
 </head>
@@ -342,9 +347,11 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 					<div id="result_depense"></div><!--retour ajax donnees depenses-->
 
   <div  id="examp" style="display:none">
-  <div class="donnes2">Ajouter des dépenses<button type="button" id="dir" title="ajouter des entrées">+</button> <span class="der">N° facture<input type="text" name="fact" id="fact"></div>
-
+  
 <form method="post" id="form_depense" action="">
+   <div class="donnes2">Ajouter des dépenses<button type="button" id="dir" title="ajouter des entrées">+</button> <span class="der">N° facture<input type="text" name="fact" id="fact"></div>
+
+   
    <table  id="affiche">
 
    </table><!--recuperation tableau depenses-->
@@ -381,7 +388,7 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 
  </div><!--reini---->
  
- <div id="data_modifier"></div><!--données modifier depense-->
+ <div id="data_modifier">ZAPO</div><!--données modifier depense-->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
 
@@ -458,13 +465,13 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
    $('.annuler').css('display','none');
    $('.detail').css('display','none');
    $('.datas').css('display','none');
+   $('.result').css('display','none');
  });
  
  $(document).on('click','.action',function(){
 	var id = $(this).data('id2');
   // afficher 
   $('#content'+id).slideToggle();
-   $('#content'+id).css('position','fixed');
   if(id ===3){
  $('.datas').css('height','120px');	
   }
@@ -474,7 +481,6 @@ $(document).on('click','.actions',function(){
 	var id = $(this).data('id7');
   // afficher 
   $('#contents'+id).slideToggle();
-  $('#contents'+id).css('position','fixed');
   if(id ===3){
  $('.datas').css('height','120px');	
   }
@@ -525,7 +531,7 @@ $(document).on('click','#dir', function(){
  html +='<td><input type="text" class="designation" id="designation" name="designation[]" placeholder="Désignation" required></td>';
  html +='<td><input type="text" class="fournisseur" id="fournisseur" name="fournisseur[]" placeholder="fournisseur"/></td>';
  html +='<td><select name="des[]" id="des"><option value="1">dépense effectué</option><option value="2">crédit fournisseur</option></select></td>';
- html +='<td><input type="text" class="montant" id="montant'+cont+'" name="montant[]" placeholder="Montant" required></td>';
+ html +='<td><input type="number" class="montant" id="montant'+cont+'" name="montant[]" placeholder="Montant" required></td>';
  html +='<td><button class="remove" name="remove" id="'+cont+'"><i class="material-icons" style="font-size:25px">highlight_off</i></button></td>';
  html +='</tr>';
 $('#affiche').append(html);
@@ -618,6 +624,7 @@ calcul();
 	data:{id:id,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data_modifier').html(data);
+	 $('#pak').css('display','block');
 	}
 	});
  });
@@ -628,11 +635,16 @@ calcul();
 	  var fact =$('#fact').val();
     event.preventDefault();
     var regex = /^[a-zA-Z0-9éçàùèàè!:;]{0,150}$/;	
-	var rege =  /^[a-zA-Z0-9-]{0,15}$/
+	var rege =  /^[a-zA-Z0-9-]{0,15}$/;
+	var reg =   /^[0-9]{0,15}$/;
    var form_data =$(this).serialize();
   
   if(fact.length > 10) {
 	  $('#erros').html('le numéro de la facture ne peut pas dépasser 10 caractères');  
+  }
+  
+  if(!rege.test($('#fact').val())) {
+	 $('#erros').html('le numéro de la facture doit comporter un chiffre,nombre ou un tiret'); 
   }
   
    $('.designation').each(function() {
@@ -726,7 +738,7 @@ calcul();
 	url:'depenses_view_datas.php',// on traite par la fichier
 	data:{id:id,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data_annuler').html(data);
+     $('#data_annuler').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>Dépense modifiée</button>');
      $('.annuler').css('display','none');
      $('#pak').css('display','none');
 	 loads();
@@ -740,6 +752,58 @@ calcul();
 
  });
  });
+
+    
+   $(document).on('click','#modif', function(){
+	 var action ="modi";
+	 var md = $('#md').val();
+	 var date = $('#date').val();
+	 var fournisseu =$('#fournisseu').val();
+	 var designatio =$('#designatio').val();
+	 var status =$('#status').val();
+	 var montant = $('#montant').val();
+	 var facts = $('#facts').val();
+	 
+	 if(date.length!="" && status!=""){
+	 if(designatio.length!="" && designatio.length < 150){	 
+	if(fournisseu.length < 150) {
+	if(montant.length < 10){
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'depenses_view_datas.php',// on traite par la fichier
+	data:{md:md,montant:montant,action:action,facts:facts,date:date,fournisseu:fournisseu,status:status,designatio:designatio},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_modifier').html(data);
+     $('#pak').css('display','none');
+     loads();
+	}
+		
+	});
+	
+	 }
+	 
+	 else{
+		$('.error6').html('* le montant est obligatoire et moins de 10 chiffres');		
+		 
+	 }
+	 
+	}
+	 
+	 else{
+		$('.error3').html('* le fournisseur  est moins de 150 caractères');		
+		 
+	 }
+	 
+	 }
+	 
+	 else{
+		$('.error4').html('* la désignation est obligatoire et moins de 150 caractères');		
+		 
+	 }
+	 
+	 }
+	   
+  });
 
 	// envoi du formulaire pour reinitalisation des montants
 

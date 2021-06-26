@@ -15,7 +15,7 @@ include('inc_session.php');
  $nature=$_POST['des'];
  $monts=$_POST['idy'];
  $user =$_SESSION['user'];
- $numero_facture= html_entity_decode($_POST['fact']);
+ $numero_facture= $_POST['fact'];
 
  for($count=0;  $count<count($_POST['ti']); $count++){
 	
