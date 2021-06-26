@@ -146,7 +146,7 @@ if($_POST['action']=="fetchs") {
 		 <div class="h"><label>Date</label> :<br/><input type="date" id="date" name="dat" value="'.$donns['date'].'" required></div>
 		 <div class="h"><label>Désignation:</label><br/><input type="text" name="designatio" id="designatio" value="'.$donns['designation'].'"><br/><span class="error4"></span></div>
 		 <div class="h"><label>fournisseur:</label><br/><input type="text" name="fournisseu" id="fournisseu" value="'.$donns['fournisseur'].'"><br/><span class="error3"></span></div>
-		 <div class="h"><label>Montant:</label><br/><input type="text" name="montant" id="montant" value="'.$donns['montant'].'"><br/><span class="error6"></span></div>
+		 <div class="h"><label>Montant:</label><br/><input type="text" id="monts" value="'.$donns['montant'].'"><br/><span class="error6"></span></div>
 		 <input type="hidden" id="md" name="md" value="'.$id.'">
 		 <input type="hidden" name="token" id="token" value="'.$_SESSION['token'].'">
 		 <div class="h"><input type="button" id="modif" value="Modifier"></label></div>
@@ -164,7 +164,7 @@ if($_POST['action']=="fetchs") {
 	$date =$_POST['date'];
 	$fact =$_POST['facts'];
 	$status =$_POST['status'];
-	$montant =$_POST['montant'];
+	$monts =$_POST['monts'];
 	
 	if($status==1){
     $nature='dépense effectuée'; 
@@ -203,14 +203,14 @@ if($_POST['action']=="fetchs") {
 							':us'=>$user_datas,
 							':nat'=>$nature,
 		                    ':stat'=>$status,
-							':mont'=>$montant,
+							':mont'=>$monts,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
     
 // on modifie les données de la base de données guide
          $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE id= :ids AND email_ocd= :email_ocd');
-        $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant']+$montant,
+        $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant']+$monts,
 		                    ':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']));
 							

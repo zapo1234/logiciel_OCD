@@ -761,17 +761,17 @@ calcul();
 	 var fournisseu =$('#fournisseu').val();
 	 var designatio =$('#designatio').val();
 	 var status =$('#status').val();
-	 var montant = $('#montant').val();
+	 var monts = $('#monts').val();
 	 var facts = $('#facts').val();
 	 
 	 if(date.length!="" && status!=""){
 	 if(designatio.length!="" && designatio.length < 150){	 
 	if(fournisseu.length < 150) {
-	if(montant.length < 10){
+	if(monts.length < 10){
 	 $.ajax({
 	type:'POST', // on envoi les donnes
 	url:'depenses_view_datas.php',// on traite par la fichier
-	data:{md:md,montant:montant,action:action,facts:facts,date:date,fournisseu:fournisseu,status:status,designatio:designatio},
+	data:{md:md,monts:monts,action:action,facts:facts,date:date,fournisseu:fournisseu,status:status,designatio:designatio},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data_modifier').html(data);
      $('#pak').css('display','none');
