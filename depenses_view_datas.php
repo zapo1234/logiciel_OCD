@@ -2,7 +2,20 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+$record_peage=7;
+$page="";
+  
+  if(isset($_POST['page'])){
+$page = $_POST['page'];
+}
 
+else {
+
+$page=1;	
+	
+}
+
+$smart_from =($page -1)*$record_peage;
 if($_POST['action']=="fetchs") {
 	 
  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
@@ -80,7 +93,23 @@ if($_POST['action']=="fetchs") {
 		 '.$annul.'
 		  </div></td>
 	    </tr>';
-    }	  
+    }
+
+       echo'</table>';
+
+     	// on compte
+		// on compte le nombre de ligne de la table facture
+	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE email_ocd= :email_ocd');
+     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    $dns=$reg->fetch();
+	
+	$totale_page=$dns['nbrs']/$record_peage;
+	$totale_page = ceil($totale_page);
+	
+	for($i=1; $i<=$totale_page; $i++) {
+	   
+	   echo'<div class="pied_page"><button class="bout" id="'.$i.'">'.$i.'</button></div>';
+    }   
   }
   
   if($_POST['action']=="annuler"){
@@ -116,9 +145,8 @@ if($_POST['action']=="fetchs") {
 					 ));
     
 // on modifie les données de la base de données guide
-         $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE id= :ids AND email_ocd= :email_ocd');
+         $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE  email_ocd= :email_ocd');
         $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant'],
-		                    ':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']));
 					 
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
@@ -153,7 +181,7 @@ if($_POST['action']=="fetchs") {
 		 </form>
 	  </div>';
    
-   
+         
 	}
 	
 	if($_POST['action']=="modi"){
@@ -174,10 +202,10 @@ if($_POST['action']=="fetchs") {
 	$nature='crédit fournisseur'; 
    }
 	
-	 $rej=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donnees=$rej->fetch();
-   $rej->closeCursor();
+	 $ren=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $ren->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$ren->fetch();
+   $ren->closeCursor();
 
    // aller chercher les auteurs en écriture sur une facture
 	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
@@ -187,7 +215,7 @@ if($_POST['action']=="fetchs") {
     
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
-   $user_data = $donns['user'].', <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>  modifiée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   $user_data = $donns['user'].', modifiée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
    
@@ -209,10 +237,13 @@ if($_POST['action']=="fetchs") {
 					 ));
     
 // on modifie les données de la base de données guide
-         $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE id= :ids AND email_ocd= :email_ocd');
-        $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant']+$monts,
-		                    ':ids'=>$id,
-                            ':email_ocd'=>$_SESSION['email_ocd']));
+        $montant =$donnees['depense']-$donns['montant'];
+		$montas =$montant+$monts;
+         // on modifie les données de la base de données guide
+  $ret=$bds->prepare('UPDATE tresorie_customer SET depense= :des WHERE email_ocd= :email_ocd');
+  $ret->execute(array(':des'=>$montas,
+                       ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
 							
 			
 		

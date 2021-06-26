@@ -2,9 +2,26 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+ $record_peage=7;
+$page="";
+  
+  if(isset($_POST['page'])){
+$page = $_POST['page'];
+}
+
+else {
+
+$page=1;	
+	
+}
+
+$smart_from =($page -1)*$record_peage;
+	
+
    if($_POST['action']=="fetch") {
+	   
    // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT 0,10');
+    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	// on boucle sur les les resultats
@@ -106,7 +123,7 @@ include('inc_session.php');
 	
     // afficher dans un tableau les données des chambres
 	echo'<tr class="datas'.$donnees['type'].'">
-	     <td><span class="dat'.$donnees['type'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> Facture émise le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+	     <td><span class="dat'.$donnees['type'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der">facture<br/>
 		 '.$data_user.'</span></td>
 		 <td><span class="der">N° facture: '.$nombre.'<br/><div class="data'.$donnees['type'].'">'.$name.'</span></div>
 		 <i class="far fa-user" style="font-size:16px;"></i> Client :'.$donnees['clients'].'</td>
@@ -127,14 +144,28 @@ include('inc_session.php');
 	
       echo'</tbody>
      </table>';
-
+	 
+	 // on compte le nombre de ligne de la table facture
+	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM facture WHERE email_ocd= :email_ocd');
+     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    $dns=$reg->fetch();
+	
+	// on compte
+	$totale_page=$dns['nbrs']/$record_peage;
+	$totale_page = ceil($totale_page);
+	
+	for($i=1; $i<=$totale_page; $i++) {
+	   
+	   echo'<div class="pied_page"><button class="bout" id="'.$i.'">'.$i.'</button></div>';
+    }
+	
    }
    
    if($_POST['action']=="details"){
 	   // recupérer le chiffre
 	 $id =$_POST['id'];
 	  // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,adresse,clients,check_in,check_out,piece_identite,montant,reste,avance,time,time1,user,types,id_fact,email_client,numero FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT date,adresse,clients,check_in,check_out,piece_identite,montant,reste,avance,mont_tva,time,time1,user,types,id_fact,email_client,numero FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
@@ -172,6 +203,24 @@ include('inc_session.php');
 		  </tr>';
 		  }
 		  echo'</table>
+		 
+		  <div class="h">
+		  <table class="list">
+		  <tr>
+		  <th>Montant à payer </th>
+		  <th>Taxe(TVA)</td>
+		  <th>Acompte sur facture</th>
+		  <th> Reste à payer</td>
+		  </tr>
+		  <tr>
+		  <td>'.$donnees['montant'].'xof</td>
+		  <td>'.$donnees['mont_tva'].'xof</td>
+		  <td>'.$donnees['avance'].'xof</td>
+		  <td>'.$donnees['reste'].'xof</td>
+		  </tr>
+		  </table>
+		  </div>
+		  
 		  <div class="h"><i class="fas fa-edit" style="color:#4e73df;font-size:20px;"></i> historique ecritures,facture éditéé et modifiée</div>
 		  <div class="hs">'.str_replace($rt,$rem,$donnees['user']).'</div>
 		  </div> 
@@ -221,7 +270,7 @@ include('inc_session.php');
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));			 
-           echo'<div class="enre">vous avez annulé la facture</div>';
+           echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
 	   
    }
 

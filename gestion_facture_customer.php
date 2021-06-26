@@ -62,7 +62,8 @@ include('inc_session.php');
 }
 
 .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:12px;}
+td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
+td{font-size:16px;}
 .datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:16px;font-weight:none;background:green} .datas1{}
 .data3{background:#1E90FF;font-size:16px;font-weight:none;color:white} .datas3{}
 .data2{background:#4B0082;font-weight:none;font-size:16px;color:white;} .datas2{}
@@ -80,7 +81,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
   .liste td{width:150px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
-#form_logo{display:none;}
+#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
 </style>
 
 </head>
@@ -450,6 +451,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 	var id = $(this).data('id2');
   // afficher 
   $('#content'+id).slideToggle();
+  
   if(id ===3){
  $('.datas').css('height','120px');	
   }
@@ -482,6 +484,10 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 	}
 		
 	});
+	
+	setInterval(function(){
+		 $('#data_annuler').html('');
+	 },4000);
 
  });
  });
@@ -503,12 +509,12 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
  });
   
   
-  function loads() {
+  function loads(page) {
 				var action="fetch";
 				$.ajax({
 					url: "result_facture_home.php",
 					method: "POST",
-					data:{action:action},
+					data:{action:action,page:page},
 					success: function(data) {
 						$('#results').html(data);
 					}
@@ -516,6 +522,13 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 			}
 
 			loads();
+			
+  // pagintion
+  $(document).on('click','.bout',function(){
+	  var page =$(this).attr("id");
+	  loads(page);
+   });
+  
 			
   
   function load() {
