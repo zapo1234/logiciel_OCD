@@ -36,6 +36,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
      $icons='<i class="far fa-user"></i> <i class="far fa-user"></i>';
 
     }
+	
+	
 
      elseif($num ==3){
 
@@ -83,7 +85,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	}
 	
 	else{
-		$type ="non renseigné";
+		$type = $typs;
 	}
 	$second_type =html_entity_decode($_POST['typs']);
 	
@@ -129,7 +131,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		// insere les données dans la base de données dans la base de donnes chambres
 		
-		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons)');
+		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
@@ -141,7 +143,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 						  ':equipement'=>$equipement,
 						  ':equipements'=>$equipements,
 						  ':infos'=>$infos,
-                          ':icons'=>$icons
+                          ':icons'=>$icons,
+						  ':type'=>$type,
 						  ));
 						  
 		// enregsitrer les images correspondant à la chambre

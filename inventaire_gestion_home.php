@@ -73,7 +73,7 @@ th{text-align:center;background:white;color:black;font-size:13px;text-transform:
  .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
-ul a{margin-left:3%;} #form_logo{display:none;}
+ul a{margin-left:3%;} #form_logo{display:none;};
 </style>
 
 </head>
@@ -112,13 +112,13 @@ ul a{margin-left:3%;} #form_logo{display:none;}
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                           <option selected>lister</option>
-                           <option selected>5</option>
-						   <option selected>15</option>
-						   <option selected>25</option>
-						   <option selected>35</option>
-                         </select>
-                          </div>  
+                         <option selected>Type de logement</option>
+						  <option value="1">chambre single</option><option value="2">chambre double</option>
+                           <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
+                          <option value="7">studio double</option>
+                          </select>
+						  
+                          </div>    
                         </div>
                     </form>
 
