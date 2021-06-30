@@ -12,7 +12,7 @@ if(isset($_GET['id_fact'])){
 	$req->closeCursor();
 	
 	// recupére les données de la facture
-	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva FROM facture WHERE   id_fact= :id_fact AND email_ocd= :email_ocd ');
+	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva,data_montant FROM facture WHERE   id_fact= :id_fact AND email_ocd= :email_ocd ');
     $res->execute(array(':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$donns= $res->fetch();
@@ -22,7 +22,11 @@ if(isset($_GET['id_fact'])){
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
     $donnes=$rej->fetch();
    
-	//créer un tableau vide 
+	//créer un tableau pour la data montant
+	
+	$data_user = $donns['data_montant'];
+	$datas_user = explode(',',$data_user);
+
 
     if($_POST['action']=="modify"){
 		
@@ -102,17 +106,20 @@ if(isset($_GET['id_fact'])){
 			}
 			
 			$montants = $donns['montant']-floatval($donns['montant_repas']);
+			$monta = $montants + floatval($mont_tva);
 			
 			echo'<div class="montant"><h5>récapitulatif des montants</h5>
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
-			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span></div>
-			<div class="tot">Montant <span class="mont">'.$montants.'</span>xof</div>
+			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'xof</span></div>
+			<div class="tot">Montant HT <span class="mont">'.$montants.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
-			<div>facture  payée <input type="checkbox" name="status" value="1">  Non payée <input type="checkbox" name="status" value="2">
-			</div>';
-			echo'</div>';
-			echo'<div><input type="submit" id="add_local" value="valider"></div>';
+			<h3>Moyens de paiment</h3>
+			<div class="moyens">espèce<br/> <input type="nuumber" id="paie1" name="paie1" value="'.$datas_user[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$datas_user[1].'"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[3].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[4].'"><br/>
+			</div>
+		     <div><input type="submit" id="add_local" value="valider"></div>';
 		
 	  
 
@@ -531,11 +538,7 @@ if(isset($_GET['id_fact'])){
 	                    ':email_ocd'=>$_SESSION['email_ocd']));				
 	
     
-					 
-
-
-    
-    }
+	}
 }	
 
  ?>

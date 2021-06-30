@@ -63,7 +63,7 @@ include('inc_session.php');
 
 .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
 td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
-td{font-size:16px;}
+td{font-size:18px;font-family:arial;}
 .datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:16px;font-weight:none;background:green} .datas1{}
 .data3{background:#1E90FF;font-size:16px;font-weight:none;color:white} .datas3{}
 .data2{background:#4B0082;font-weight:none;font-size:16px;color:white;} .datas2{}
@@ -481,6 +481,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
      $('.annuler').css('display','none');
      $('#pak').css('display','none');
 	 loads();
+	 load();
 	}
 		
 	});

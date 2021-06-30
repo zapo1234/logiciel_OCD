@@ -143,6 +143,15 @@ include('inc_session.php');
 			
 			
 			$total = $total +($pays*$_POST['nbjour']);
+			if(!isset($_POST['taxe'])){
+				$taxe =0;
+			}
+			
+			else{
+			$taxe=$_POST['taxe'];
+			}
+			$totals = $total -($pays*$_POST['nbjour']);
+			$monta = $total + floatval($taxe);
 			 
 			echo'<div class="hom"><h5>'.$values['type'].'</h5>
 			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
@@ -161,9 +170,12 @@ include('inc_session.php');
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
-			<div class="tot">Montant <span class="mont">'.$total.'</span>xof</div>
+			<div class="tot">Montant HT <span class="mont">'.$total.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$total.'"></span>
-			<div>facture  payée <input type="checkbox" name="status" value="1">  Non payée <input type="checkbox" name="status" value="2">
+			<h3>Moyens de paiment</h3>
+			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
 			</div>';
 			echo'</div>';
 			echo'<div><input type="submit" id="add_local" value="valider"></div>';
@@ -345,7 +357,15 @@ include('inc_session.php');
 			}
 			
 			
+			if(!isset($_POST['taxe'])){
+				$taxe =0;
+			}
+			
+			else{
+			$taxe=$_POST['taxe'];
+			}
 			$totals = $total -($pays*$_POST['nbjour']);
+			$monta = $totals + floatval($taxe);
 		}
 		  
 		  // on recupére la dernière valeur du tableau
@@ -358,9 +378,12 @@ include('inc_session.php');
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"><span class="tva"></span></div>
-			<div class="tot">Montant <span class="mont">'.$totals.'</span>xof</div>
+			<div class="tot">Montant HT <span class="mont">'.$totals.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
-			<div>facture  payée <input type="checkbox" name="status" value="1">  Non payée <input type="checkbox" name="status" value="2">
+			<h3>Moyens de paiment</h3>
+			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
 			</div>';
 			echo'</div>';
 			echo'<div><input type="submit" id="add_local" value="valider"></div>';
