@@ -443,7 +443,7 @@ ul a{margin-left:3%;}
          $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
-		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -548,7 +548,7 @@ ul a{margin-left:3%;}
          $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
-		  status= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
           $reg->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -556,7 +556,7 @@ ul a{margin-left:3%;}
 							':cko'=>$date2,
 							':tim1'=>$time,
 							':tim2'=>$time1,
-							':nbr'=>$nombre,
+							':nbr'=>$nombre_jours,
 							':num'=>$_POST['numero'],
 							':us'=>$user_datas,
 							':client'=>$name,
