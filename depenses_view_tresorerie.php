@@ -151,7 +151,7 @@ if($_POST['action']=="fetchs") {
 	
 	elseif(50< $a  AND $a <80){
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:65%">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:65%;background:#AAF9BB;font-size:16px;">25</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3-red w3-round-large" style="width:20%">25</div>
@@ -209,7 +209,7 @@ if($_POST['action']=="fetchs") {
 	
 	elseif(50< $c  AND $c <80){
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:65%">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:65%;background:#AADAF9;font-size:16px;">25</div>
   </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3-red w3-round-large" style="width:20%">25</div>
