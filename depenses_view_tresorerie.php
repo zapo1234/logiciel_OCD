@@ -119,12 +119,24 @@ if($_POST['action']=="fetchs") {
 	// calcule des pourcentage entre entrées et sorties chiffre
 	$number1 =array_sum($datac);
 	$number2 =array_sum($datac1);
+	$number3 =array_sum($datac2);
+	$number4 = array_sum($datac3);
+	$num_data = $number1+$number3+$number4;
 	
+	if($number1!=0 AND $number4!=0 AND $number2!=0 AND $number3!=0){
 	$data_number =$number1+$number2;
 	
+	$data_numbers =$num_data +$number2;
+	
+	// prévision net 
 	$a = $number1*100/$data_number;
 	$b = $number2*100/$data_number;
 	
+	// prévision sous réservation
+	$c = $num_data*100/$data_numbers;
+	$d = $number2*100/$data_numbers;
+	
+	// prévison net
 	if($a > 80) {
 		$indicateur='<div class="w3-progress-container">
     <div id="myBar" class="w3-progressbar w3-green" style="width:85%">
@@ -180,6 +192,63 @@ if($_POST['action']=="fetchs") {
 		
 	}
 	
+	
+	// prevision sous réserve de réservation
+	
+	if($c > 80) {
+		$indicateuc='<div class="w3-progress-container">
+    <div id="myBar" class="w3-progressbar w3-green" style="width:85%">
+    <div class="w3-center w3-text-white">25%</div>
+    </div>
+    </div><br>';
+	$indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-red w3-round-large" style="width:5%">25</div>
+  </div><br>';
+	$names= 'Activité en forte croissance';
+	}
+	
+	elseif(50< $c  AND $c <80){
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:65%">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-red w3-round-large" style="width:20%">25</div>
+  </div><br>';
+	$names= 'Activité en  croissance';
+	}
+	
+	elseif(30<$c  AND $c < 50) {
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:40%">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-red w3-round-large" style="width:60%">25</div>
+  </div><br>';
+	  $names= 'trésorerie moyenne';
+	}
+	
+	elseif(10 < $c AND $c <30){
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:20%">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-red w3-round-large" style="width:70%">25</div>
+  </div><br>';
+  
+	  $names= ' Attention ,trésorerie faible';
+		
+	}
+	
+	else{
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:5%">25</div>
+    </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-red w3-round-large" style="width:90%">25</div>
+  </div><br>';
+	  $names= ' Attention ,Activité fortement déficitaire';
+		
+	}
 	// indicateur sur les sorties
 	
 	
@@ -190,11 +259,17 @@ if($_POST['action']=="fetchs") {
 		 <div>Indicateur</div><br/>
 		 <div>'.$indicateur.'</div><br/><br/>
 		 <div>'.$indicateurs.'</div><br/><br/>
+		 <h3>Résultat attendu</h3>
 		 
-		 <h3>Prévision attendu(réservation)</h3><br/>
-		 <h3>Résultat de progression</h3>
+		 <h3>Prévision attendu(réservation)</h3><br/><br/>
+		 
+		 <div>'.$indicateuc.'</div><br/><br/>
+		 <div>'.$indicateurc.'</div><br/><br/>
+		 <h3>Résultat attendu</h3>
         </div>';	
   }
+  
+}
   
   
   
