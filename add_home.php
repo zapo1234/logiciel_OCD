@@ -171,7 +171,7 @@ include('inc_session.php');
 			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
 			<div class="tot">Montant HT <span class="mont">'.$total.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="monta">'.$monta.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$total.'"></span>
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
@@ -379,7 +379,7 @@ include('inc_session.php');
 			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"><span class="tva"></span></div>
 			<div class="tot">Montant HT <span class="mont">'.$totals.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mont">'.$totals.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>

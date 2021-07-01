@@ -163,12 +163,68 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$ans = $dat1[0];
 	
    
-   $user_data = '<i class="fas fa-pen"style="color:green;font-size:16px;"></i> edité le  '.$js.'/'.$mms.'/'.$ans.' par  '.$_SESSION['user'].'';
+   $user_data = '<i class="fas fa-pen"style="color:green;font-size:13px;"></i> edité le  '.$js.'/'.$mms.'/'.$ans.' à '.date('H:i').'  par  '.$_SESSION['user'].'';
    
    $direction = $_POST['to'];
    // récupére les variable dans différentes cas possible de séjour
    
    $prix_repas =$_POST['monts'];
+   
+   if(empty($_POST['paie1']) AND empty($_POST['paie2'])  AND empty($_POST['paie3']) AND empty($_POST['paie4'])){
+	  $total =$_POST['total']+$_POST['taxe'];	  
+	 $data_status ='espéce :'.$total.',';   
+   }
+   
+   
+   
+   if(!empty($_POST['paie1'])) {
+	   
+	  $status1 = 'espéces :'.$_POST['paie1'].' xof';
+	  $num1 =$_POST['paie1'];
+   }
+   
+   else{
+	   
+	   $status1 = ' ';
+	   $num1 ="0";
+   }
+   
+   if(!empty($_POST['paie2'])) {
+	   
+	  $status2 = 'Carte Bancaire :'.$_POST['paie2'].' xof';
+	  $num2 = $_POST['paie2'];
+   }
+   
+   else{
+	   
+	   $status2 = ' ';
+	   $num2="0";
+   }
+   
+   if(!empty($_POST['paie3'])) {
+	   
+	  $status3 = 'Mobile  monney :'.$_POST['paie3'].' xof';
+	  $num3= $_POST['paie3'];
+   }
+   
+   else{
+	   
+	   $status3 = ' ';
+	   $num3="0";
+   }
+   
+   if(!empty($_POST['paie4'])) {
+	   
+	  $status4 = 'chéques :'.$_POST['paie4'].' xof';
+	  $num4 = $_POST['paie4'];
+   }
+   
+   else{
+	   
+	   $status4 = ' ';
+	   $num4 ="0";
+   }
+   //
    
    if(empty($_POST['taxe'])){
 	   
@@ -224,9 +280,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 $taxe =$_POST['taxe'];
 	 $total =$_POST['total'];
 	 $ty="client facturé";
-	 $status =$_POST['status'];
+	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
+	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
+	 $status =$data_status;
 	 
-	 $monts = $total+ floatval($prix_repas);
+	 $monts = $total+floatval($prix_repas)+floatval($taxe);
    }
    
  if($_POST['to']=="réservation") {
@@ -258,9 +316,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 $taxe =$_POST['taxe'];
      $total = $_POST['total'];
      $ty="réservation client";
-	 $status =$_POST['status'];
+	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
+	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
+	 $status =$data_status;
      
-     $monts =$total+floatval($prix_repas);	 
+     $monts =$total+floatval($prix_repas)+$taxe;	 
 	   
    }
    
@@ -296,10 +356,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
      $tva =$_POST['tva'];
 	 $taxe =$_POST['taxe'];
      $total = $_POST['total'];
-     $ty= "horaire client"; 
-     $status =$_POST['status'];	 
+     $ty= "horaire client";
+     $data_status = $status1.','.$status2.','.$status3.','.$status4;
+     $data_num = $num1.','.$num2.','.$num3.','.$num4; 
+     $status =$data_status;
 	  
-     $monts =$total+floatval($prix_repas);	  
+     $monts =$total+floatval($prix_repas)+$taxe;	  
 	}
 
    // récupérer les variables en boucles
@@ -364,8 +426,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			}
 	  
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,moyen_paiement,data_montant,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -388,7 +450,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':mont_tva'=>$taxe,
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
-							':status'=>$status,
+							':moyen_paiement'=>$status,
+							':data_montant'=>$data_num,
 							':types'=>$ty
 						  ));
             				  
@@ -461,8 +524,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		
 	   }
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,status,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:status,:types)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,moyen_paiement,data_montant,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -485,7 +548,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':mont_tva'=>$taxe,
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
-							':status'=>$status,
+							':moyen_paiement'=>$status,
+							':data_montant'=>$data_num,
 							':types'=>$ty
 						  ));
 						  

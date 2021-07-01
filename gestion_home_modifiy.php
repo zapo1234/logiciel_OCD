@@ -217,7 +217,8 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 }
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}
+ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;} .moyens{display:none}
 
 </style>
 
@@ -667,6 +668,11 @@ echo $_SESSION['token'];?>">
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+ });
+ 
+ $(document).on('click','.h31', function(){
+ $('.moyens').css('display','block'); 
+	 
  });
  
  $(document).on('change','.to',function(){
@@ -1133,6 +1139,9 @@ echo $_SESSION['token'];?>">
 	    var paynuite = $('#cout_nuite'+id).val();
 	    var paypass = $('#cout_pass'+id).val();
 	    var to = $('#to').val();
+		var acomp =$('#acomp').val();
+		var monta = $('.monta').text();
+		var mont = parseFloat(monta);
 		
 	// on lance l'apel ajax
 	  $.ajax({
@@ -1166,6 +1175,10 @@ echo $_SESSION['token'];?>">
 		var acomp =$('#acomp').val();
 		var rest =$('#rest').val();
 		var rep =$('#rep').val();
+		var monta =$('.mon').text();
+		var result = parseFloat(monta);
+		
+		if(acomp < result){
 	// on lance l'apel ajax
 	  $.ajax({
 	  type: 'POST', // on envoi les donnes
@@ -1184,7 +1197,12 @@ echo $_SESSION['token'];?>">
 	 
 	});
 	
-		
+	}
+
+  else{
+	 // inséré un petit message pour 
+	 $('.eror').html('<div style="color:red;font-size:12px;"><i class="fas fa-check-circle" style="color:red;font-size:12px"></i> l\'acompte doit etre <br/>inférieur au montant httc');
+    }	
 	});
 	
 	// calculer les sommes automatiquement du récapitualitif
@@ -1274,8 +1292,22 @@ echo $_SESSION['token'];?>">
 	  
 	 $(document).on('click','#add_local', function() {
 	// on traite le fichier recherche apres le retour
-	  $('#form1').submit();
+	  var acomp =$('#acomp').val();
+	  var monta =$('.mon').text();
+	  var montas = $('.montas').text();
+	  var mts = parseFloat(montas);
+	  var results = parseFloat(monta);
 	  
+	  if($('#mts').hasClass('montas')) {
+		 var results = parseFloat(monta)+parseFloat(montas); 
+	  }
+	   if(acomp < results){
+	   $('#form1').submit();
+	   }
+	   else{
+		 // inséré un petit message pour 
+	  $('.eror').html('<div style="color:#AB040E;font-size:13px;"><i class="fas fa-check-circle" style="color:#AB040E;font-size:12px"></i> l\'acompte doit etre <br/>inférieur au montant httc');  
+	   }
 	});
 	 
 	 // envoi du formulaire

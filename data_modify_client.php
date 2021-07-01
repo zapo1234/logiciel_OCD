@@ -195,6 +195,63 @@ ul a{margin-left:3%;}
    
    $prix_repas =$_POST['rep'];
    
+   // Type de moyens de paiment
+   if(empty($_POST['paie1']) AND empty($_POST['paie2'])  AND empty($_POST['paie3']) AND empty($_POST['paie4'])){
+	  $total =$_POST['total']+$_POST['taxe'];	  
+	 $data_status ='espéce :'.$total.',';   
+   }
+   
+   
+   
+   if(!empty($_POST['paie1'])) {
+	   
+	  $status1 = 'espéces :'.$_POST['paie1'].'xof';
+	  $num1 =$_POST['paie1'];
+   }
+   
+   else{
+	   
+	   $status1 = ' ';
+	   $num1 ="0";
+   }
+   
+   if(!empty($_POST['paie2'])) {
+	   
+	  $status2 = 'Carte Bancaire :'.$_POST['paie2'].'xof';
+	  $num2 = $_POST['paie2'];
+   }
+   
+   else{
+	   
+	   $status2 = ' ';
+	   $num2="0";
+   }
+   
+   if(!empty($_POST['paie3'])) {
+	   
+	  $status3 = 'Mobile  monney :'.$_POST['paie3'].'xof';
+	  $num3= $_POST['paie3'];
+   }
+   
+   else{
+	   
+	   $status3 = ' ';
+	   $num3="0";
+   }
+   
+   if(!empty($_POST['paie4'])) {
+	   
+	  $status4 = 'chéques :'.$_POST['paie4'].'xof';
+	  $num4 = $_POST['paie4'];
+   }
+   
+   else{
+	   
+	   $status4 = ' ';
+	   $num4 ="0";
+   }
+   
+   
    if(empty($_POST['taxe'])){
 	   
 	 $_POST['taxe']=0;  
@@ -263,6 +320,9 @@ ul a{margin-left:3%;}
 	 
 	 $monts = $total+$total1+floatval($prix_repas);
 	 $taxe = $monts*$tva/100;
+	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
+	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
+	 $status =$data_status;
    }
    
  if($_POST['to']=="réservation") {
@@ -311,8 +371,12 @@ ul a{margin-left:3%;}
 	 else{
      $total1 = $_POST['mon'];
 	 }
-     $monts =$total+$total1+floatval($prix_repas);	 
+     $monts =$total+$total1+floatval($prix_repas)+$_POST['taxe'];
+     $reste= floatval($monts)- floatval($avance);	 
 	   $taxe = $monts*$tva/100;
+	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
+	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
+	 $status =$data_status;
    }
    
  if($_POST['to']=="horaire") {
@@ -330,8 +394,8 @@ ul a{margin-left:3%;}
 	   $dat3 = $_POST['tim'];
        $dat4 = $_POST['tis'];
 	   
-	   $avance=$_POST['acomp'];
-     $reste=$_POST['rest'];
+	  $avance=$_POST['acomp'];
+     
 	   
      $mode =2;	 
 	 $rete_payer="";
@@ -368,8 +432,12 @@ ul a{margin-left:3%;}
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
 	  
-     $monts =$total+$total1+floatval($prix_repas);
-     $taxe = $monts*$tva/100;	 
+     $monts =$total+$total1+floatval($prix_repas)+$_POST['taxe'];
+	 $reste= floatval($monts)- floatval($avance);
+     $taxe = $monts*$tva/100;
+     $data_status = $status1.','.$status2.','.$status3.','.$status4;
+	 $data_num = $num1.','.$num2.','.$num3.','.$num4; 
+	 $status =$data_status;
 	}
 
    // récupérer les variables en boucles
@@ -443,7 +511,7 @@ ul a{margin-left:3%;}
          $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
-		  moyen_paiement= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -463,7 +531,8 @@ ul a{margin-left:3%;}
 							':tv'=>$tva,
 							':mtva'=>$taxe,
 							':ty'=>$mode,
-							':stat'=>$status,
+							':moyen_paie'=>$status,
+							':data_mont'=>$data_num,
 							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
@@ -548,7 +617,7 @@ ul a{margin-left:3%;}
          $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
-		  moyen_paiement= :stat, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
           $reg->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -568,7 +637,8 @@ ul a{margin-left:3%;}
 							':tv'=>$tva,
 							':mtva'=>$taxe,
 							':ty'=>$mode,
-							':stat'=>$status,
+							':moyen_paie'=>$status,
+							':data_mont'=>$data_mum,
 							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']

@@ -85,7 +85,8 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
   100% { transform: rotate(360deg); }
 }
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}
+ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;}
 </style>
 
 </head>
@@ -1028,22 +1029,28 @@ echo $_SESSION['token'];?>">
 		
 	var tva = $('#tva').val();
 	var totals =$('#total').val();
+	var monta = $('.monta').text();
+	
 	
 	if(tva > 0 && tva.length <3 && tva.length!=""){
 	var result = parseFloat(totals)*parseFloat(tva);
 	var resul = parseFloat(result)/100;
 	var results = resul.toFixed(2);
+	var t = parseFloat(results)+parseFloat(totals);
+	var ts = t.toFixed(2);
 	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+	$('.monta').text(ts);
 	}
 
     if(tva.length ==""){
      var results = 0;
 	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
-    }		
+    $('.monta').text(totals);
+	}		
   });
   
   $(document).on('keyup','#account',function(){
-	 var totals =  $('#total').val();	 
+	 var totals =  $('.monta').text();	 
 	 var account = $('#account').val();
 	 if(account >0){
 		var result = parseFloat(totals) - parseFloat(account);
