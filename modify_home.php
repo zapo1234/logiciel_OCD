@@ -67,11 +67,11 @@ if(isset($_GET['id_fact'])){
 	     	$count =count($tab);
 			if($count ==1){
 			  $local ="local";
-			  echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'</div></div>';
+			  echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 			}
 			
 			elseif($count ==0){
-				echo'<div><div class="titre"></div></div>';
+				echo'<div><div class="titre"></div></div><br/><span class="eror"></span>';
 				
 			}
 			
@@ -105,19 +105,19 @@ if(isset($_GET['id_fact'])){
 			$mont_tva = $donns['mont_tva'];
 			}
 			
-			$montants = $donns['montant']-floatval($donns['montant_repas']);
-			$monta = $montants + floatval($mont_tva);
+			$montants = $donns['montant']-floatval($donns['montant_repas'])-floatval($mont_tva);
+			$monta = $donns['montant'];
 			
 			echo'<div class="montant"><h5>récapitulatif des montants</h5>
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
-			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'xof</span></div>
+			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span>xof</div>
 			<div class="tot">Montant HT <span class="mont">'.$montants.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mont">'.$monta.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
-			<h3>Moyens de paiment</h3>
+			<div class="h31" style="cursor:pointer">Moyens de paiment +</div>
 			<div class="moyens">espèce<br/> <input type="nuumber" id="paie1" name="paie1" value="'.$datas_user[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$datas_user[1].'"><br/>
-			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[3].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[4].'"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[3].'"><br/>
 			</div>
 		     <div><input type="submit" id="add_local" value="valider"></div>';
 		
@@ -277,7 +277,7 @@ if(isset($_GET['id_fact'])){
 		
 			
 			echo'<div class="montant">
-			<div class="tot">Montant Ajoutée <span class="mons">'.$total.'</span>xof</div>
+			<div class="tot">Montant Ajoutée <span id="mts" class="montas">'.$total.'</span>xof</div>
 			<input type="hidden" name="mons" id="mons" value="'.$total.'"></span>';
 			echo'</div>';
 		
@@ -467,8 +467,8 @@ if(isset($_GET['id_fact'])){
 			
 			echo'
 			<div class="montant">
-			<div class="tot">Montant <span class="mont">'.$totals.'</span>xof</div>
-			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
+			<div class="tot">Montant <span id="mts" class="montas">'.$totals.'</span>xof</div>
+			<input type="hidden" name="mons" id="mons" value="'.$totals.'"></span>
 			</div>';
 		
 		  }	
@@ -496,7 +496,10 @@ if(isset($_GET['id_fact'])){
 
 	
 
-	$monts =$total1-$montan;
+	$monta =$total1-$montan+ floatval($_POST['rep']);
+	$taxe = $monta*$_POST['taxe']/100;
+	
+	$monts =$monta+$taxe;
 	
 	if($total1 !=0 AND $_POST['acompt']!=0) {
 	$mont = $monts-$_POST['acomp'];
@@ -509,11 +512,12 @@ if(isset($_GET['id_fact'])){
 	
 	// modifie les données
 	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps WHERE email_ocd= :email_ocd AND id_fact= :id');
+         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$monts,
 		                    ':ds'=>$_POST['acomp'],
 							':rs'=>$mont,
 							':rps'=>$_POST['rep'],
+							':tva'=>$taxe,
 							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
