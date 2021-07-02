@@ -87,7 +87,7 @@ ul a{margin-left:3%;}
 	$rej->closeCursor();
 
   // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,user FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT date,user,montant,mont_tva FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
@@ -318,8 +318,12 @@ ul a{margin-left:3%;}
 	 $status =$_POST['status'];
 	 $total1 =$_POST['mon'];
 	 
-	 $monts = $total+$total1+floatval($prix_repas);
-	 $taxe = $monts*$tva/100;
+	 $mont = $donnees['montant']-$donnees['mont_tva']+floatval($prix_repas)+$total;
+	 $monts = $mont+$mont*$tva/100;
+	 $taxe = $mont*$tva/100;
+	 // montant à ajouter sur tresorie_customer
+	 $totals = $total + $total*$tva/100;
+	
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
 	 $status =$data_status;
@@ -371,9 +375,15 @@ ul a{margin-left:3%;}
 	 else{
      $total1 = $_POST['mon'];
 	 }
-     $monts =$total+$total1+floatval($prix_repas)+$_POST['taxe'];
-     $reste= floatval($monts)- floatval($avance);	 
-	   $taxe = $monts*$tva/100;
+     
+	 $mont = $donnees['montant']-$donnees['mont_tva']+floatval($prix_repas)+$total;
+	 $monts = $mont+$mont*$tva/100;
+	 $taxe = $mont*$tva/100;
+	 // montant à ajouter sur tresorie_customer
+	 $totals = $total + $total*$tva/100;
+	 
+     $reste= floatval($mont)- floatval($avance);	 
+	 $taxe = $monts*$tva/100;
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
 	 $status =$data_status;
@@ -432,8 +442,13 @@ ul a{margin-left:3%;}
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
 	  
-     $monts =$total+$total1+floatval($prix_repas)+$_POST['taxe'];
-	 $reste= floatval($monts)- floatval($avance);
+     $mont = $donnees['montant']-$donnees['mont_tva']+floatval($prix_repas)+$total;
+	 $monts = $mont+$mont*$tva/100;
+	 $taxe = $mont*$tva/100;
+	 // montant à ajouter sur tresorie_customer
+	 $totals = $total + $total*$tva/100;
+	 
+	 $reste= floatval($mont)- floatval($avance);
      $taxe = $monts*$tva/100;
      $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4; 
@@ -541,7 +556,7 @@ ul a{margin-left:3%;}
 						  
 			// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donns['encaisse']+$monts,
+        $ret->execute(array(':des'=>$donns['encaisse']+$totals,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,
                             ':email_ocd'=>$_SESSION['email_ocd']
@@ -646,7 +661,7 @@ ul a{margin-left:3%;}
             				
 		 // on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donns['encaisse']+$monts,
+        $ret->execute(array(':des'=>$donns['encaisse']+$totals,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,
                             ':email_ocd'=>$_SESSION['email_ocd']
