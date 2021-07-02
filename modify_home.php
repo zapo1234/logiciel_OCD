@@ -494,7 +494,9 @@ if(isset($_GET['id_fact'])){
 	
 	// le montant du local suprimé
 	$montan = $dnns['montant']* floatval($_POST['nbjour']);
-
+    
+	// calculons la taxe pour ce montant
+	$taxe_mont = $montan*$_POST['taxe']/100;
 	
 
 	$monta =$total1-$montan+ floatval($_POST['rep']);
@@ -517,11 +519,6 @@ if(isset($_GET['id_fact'])){
 	// on compte le nombre d'element dans le tableau.
 	$count = count($_SESSION['add_home']);
 	
-	if($count ==1) {
-		$montant = $donnes['encaiss']-$montan-floatval($_POST['mont_ta']);
-		
-	}
-	
 	// modifie les données
 	// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE email_ocd= :email_ocd AND id_fact= :id');
@@ -536,7 +533,7 @@ if(isset($_GET['id_fact'])){
 					 
 	 // on modifie les données de la base de données guide
          $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $rem->execute(array(':des'=>$montant,
+        $rem->execute(array(':des'=>$montant-$taxe_mont,
 		                    ':res'=>$donnes['reste']+$reste1,
 					        ':reser'=>$donnes['reservation']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
