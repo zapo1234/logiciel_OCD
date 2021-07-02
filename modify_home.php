@@ -111,7 +111,7 @@ if(isset($_GET['id_fact'])){
 			echo'<div class="montant"><h5>récapitulatif des montants</h5>
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
-			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span>xof</div>
+			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span><input type="hidden" name="mont_ta" value="'.$mont_tva.'">xof</div>
 			<div class="tot">Montant HT <span class="mont">'.$montants.'</span>xof</div>
 			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
@@ -492,6 +492,7 @@ if(isset($_GET['id_fact'])){
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$dnns=$req->fetch();
 	
+	// le montant du local suprimé
 	$montan = $dnns['montant']* floatval($_POST['nbjour']);
 
 	
@@ -501,6 +502,9 @@ if(isset($_GET['id_fact'])){
 	
 	$monts =$monta+$taxe;
 	
+	// remplacer les montant dans la table tabletable_customer
+	$montant = $donnes['encaisse']-$montan;
+	
 	if($total1 !=0 AND $_POST['acompt']!=0) {
 	$mont = $monts-$_POST['acomp'];
     }
@@ -508,6 +512,14 @@ if(isset($_GET['id_fact'])){
 	else{
 		
 	$mont =0;
+	}
+	
+	// on compte le nombre d'element dans le tableau.
+	$count = count($_SESSION['add_home']);
+	
+	if($count ==1) {
+		$montant = $donnes['encaiss']-$montan-floatval($_POST['mont_ta']);
+		
 	}
 	
 	// modifie les données
@@ -524,8 +536,8 @@ if(isset($_GET['id_fact'])){
 					 
 	 // on modifie les données de la base de données guide
          $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $rem->execute(array(':des'=>$donnes['encaisse']-$montan,
-		                    ':res'=>$donnes['reste']+$_POST['rep'],
+        $rem->execute(array(':des'=>$montant,
+		                    ':res'=>$donnes['reste']+$reste1,
 					        ':reser'=>$donnes['reservation']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
