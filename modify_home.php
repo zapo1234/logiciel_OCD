@@ -483,7 +483,7 @@ if(isset($_GET['id_fact'])){
 	$total1 = $_POST['mon'];
 	$account1= $_POST['acomp'];
 	$reste1 = $_POST['rest'];
-	$total =$_POST['mons'];
+	
     
 	//
 	
@@ -533,10 +533,8 @@ if(isset($_GET['id_fact'])){
 					 ));
 					 
 	 // on modifie les données de la base de données guide
-         $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
+         $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des  WHERE email_ocd= :email_ocd');
         $rem->execute(array(':des'=>$montant-$taxe_mont,
-		                    ':res'=>$donnes['reste']-$donns['reste']+$reste1,
-					        ':reser'=>$donnes['reservation']-$donns['avance']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	
