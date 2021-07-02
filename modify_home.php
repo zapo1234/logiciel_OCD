@@ -483,6 +483,7 @@ if(isset($_GET['id_fact'])){
 	$total1 = $_POST['mon'];
 	$account1= $_POST['acomp'];
 	$reste1 = $_POST['rest'];
+	$total =$_POST['mons'];
     
 	//
 	
@@ -524,7 +525,7 @@ if(isset($_GET['id_fact'])){
          $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$monts,
 		                    ':ds'=>$_POST['acomp'],
-							':rs'=>$mont,
+							':rs'=>$monts-$_POST['acomp'],
 							':rps'=>$_POST['rep'],
 							':tva'=>$taxe,
 							':id'=>$id_fact,
@@ -534,8 +535,8 @@ if(isset($_GET['id_fact'])){
 	 // on modifie les données de la base de données guide
          $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $rem->execute(array(':des'=>$montant-$taxe_mont,
-		                    ':res'=>$donnes['reste']+$reste1,
-					        ':reser'=>$donnes['reservation']+$_POST['acomp'],
+		                    ':res'=>$donnes['reste']-$donns['reste']+$reste1,
+					        ':reser'=>$donnes['reservation']-$donns['avance']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	
