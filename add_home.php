@@ -267,13 +267,13 @@ include('inc_session.php');
 			$count = $count -1;
 			if($count ==1){
 			  $local ="local";
-			  echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
+			  echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 			
 			}
 			
 			if($count >1){
 				$local ="locaux";
-				echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
+				echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 			
 			}
 			
