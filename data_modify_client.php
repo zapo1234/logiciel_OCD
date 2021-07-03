@@ -197,11 +197,14 @@ ul a{margin-left:3%;}
    
    // Type de moyens de paiment
    if(empty($_POST['paie1']) AND empty($_POST['paie2'])  AND empty($_POST['paie3']) AND empty($_POST['paie4'])){
-	  $total =$_POST['total']+$_POST['taxe'];	  
+	  $total =$_POST['mon']+$_POST['mont_ta'];	  
 	 $data_status ='espéce :'.$total.',';   
    }
    
-   
+   if($_POST['paie1']=="0" AND $_POST['paie2']=="0"  AND $_POST['paie3']=="" AND $_POST['paie4']=="0"){
+	  $total =$_POST['mon']+$_POST['mont_ta'];	  
+	 $data_status ='espéce :'.$total.',';   
+   }
    
    if(!empty($_POST['paie1'])) {
 	   
@@ -381,8 +384,7 @@ ul a{margin-left:3%;}
 	 $taxe = $mont*$tva/100;
 	 // montant à ajouter sur tresorie_customer
 	 $totals = $total + $total*$tva/100;
-	 
-     $reste= floatval($mont)- floatval($avance);	 
+	 	 
 	 $taxe = $monts*$tva/100;
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
@@ -441,10 +443,11 @@ ul a{margin-left:3%;}
 	 $total1 =$_POST['mon'];
      $ty= "horaire client"; 
      $status =$_POST['status'];	 
-	  
+	 //calcule des montants
      $mont = $donnees['montant']-$donnees['mont_tva']+floatval($prix_repas)+$total;
 	 $monts = $mont+$mont*$tva/100;
 	 $taxe = $mont*$tva/100;
+	 
 	 // montant à ajouter sur tresorie_customer
 	 $totals = $total + $total*$tva/100;
 	 
@@ -541,7 +544,7 @@ ul a{margin-left:3%;}
 							':pc'=>$client,
 							':mont'=>$monts,
 							':avc'=>$avance,
-							':rest'=>$reste,
+							':rest'=>$donnees['montant']-$_POST['acomp'],
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
@@ -557,8 +560,8 @@ ul a{margin-left:3%;}
 			// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$totals,
-		                    ':res'=>$donns['reste']+$reste,
-					        ':reser'=>$donns['reservation']+$avance,
+		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
+					        ':reser'=>$donns['reservation']-$donnees['avance']+$avance,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
@@ -647,7 +650,7 @@ ul a{margin-left:3%;}
 							':pc'=>$client,
 							':mont'=>$monts,
 							':avc'=>$avance,
-							':rest'=>$reste,
+							':rest'=>$donnees['montant']-$$_POST['acomp'],
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
@@ -662,8 +665,8 @@ ul a{margin-left:3%;}
 		 // on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$totals,
-		                    ':res'=>$donns['reste']+$reste,
-					        ':reser'=>$donns['reservation']+$avance,
+		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
+					        ':reser'=>$donns['reservation']-$donnees['montant']+$avance,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
