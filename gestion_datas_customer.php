@@ -1088,8 +1088,20 @@ echo $_SESSION['token'];?>">
 	  
 	 $(document).on('click','#add_local', function() {
 	// on traite le fichier recherche apres le retour
-	  $('#form1').submit();
-	  
+	  var acomp = $('#account').val();
+	  if(acomp==""){
+		 acomp =0; 
+	  }
+	  var montas = $('#total').val();
+	  var result = parseFloat(acomp);
+	  var result1 = parseFloat(montas);
+	  if(result < result1){
+	   $('#form1').submit();
+	   }
+	   else{
+		 // inséré un petit message pour 
+	  $('.eror').html('<div style="color:#AB040E;font-size:13px;"><i class="fas fa-check-circle" style="color:#AB040E;font-size:12px"></i> l\'acompte doit etre <br/>inférieur au montant httc');  
+	   }
 	});
 	 
 	 // envoi du formulaire

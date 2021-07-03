@@ -1177,18 +1177,26 @@ echo $_SESSION['token'];?>">
 		var rep =$('#rep').val();
 		var monta =$('.mon').text();
 		var result = parseFloat(monta);
+		var taxe =$('#tva').val();
+	    
+		if(acomp==""){
+		acomp =0;
+		}
+		// result
+		var results = parseFloat(monta)-parseFloat(acomp);
 		
-		if(acomp < result){
+		if(acomp < result || acompt==result){
 	// on lance l'apel ajax
 	  $.ajax({
 	  type: 'POST', // on envoi les donnes
 	  url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>",// on traite par la fichier
-	  data:{id:id,nbjour:nbjour,to:to,mon:mon,rest:rest,acomp:acomp,rep:rep,action:action},
+	  data:{id:id,nbjour:nbjour,to:to,mon:mon,taxe:taxe,rest:rest,acomp:acomp,rep:rep,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#homs'+id).html('');
 		$('#resul').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:red"></i>local suprimé de la liste</button>');
 	    loads();
 		load();
+		$('#rest').val(results);
 		$('.buttons').click();
 
       },
@@ -1237,7 +1245,7 @@ echo $_SESSION['token'];?>">
   });
   
   $(document).on('keyup','#acomp',function(){
-	 var totals =  $('#mon').val();	 
+	 var totals =  $('.mon').text();	 
 	 var account = $('#acomp').val();
 	 if(account >0){
 		var result = parseFloat(totals) - parseFloat(account);
