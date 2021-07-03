@@ -294,7 +294,7 @@ ul a{margin-left:3%;} #form_logo{display:none;}
                     <!-- 404 Error Text -->
                     <div class="center">
                     <div class="content1"><div class="der1"><i class="fas fa-home"></i>  Type de local</div><span class="der2"><i class="fas fa-info-circle"></i> information du local</span>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div><div  class="der3"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div><div class="der6">Bloquer Accès</div></div>
+					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div><div  class="der3"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div><div class="der6"><i class="fas fa-key"></i> Bloquer Accès</div></div>
  
                    </div>
 
