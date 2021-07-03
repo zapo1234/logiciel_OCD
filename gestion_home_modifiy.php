@@ -1245,10 +1245,11 @@ echo $_SESSION['token'];?>">
   });
   
   $(document).on('keyup','#acomp',function(){
-	 var totals =  $('.mon').text();	 
+	 var totals =  $('.mon').text();
+     var montas = $('.montas').text();	 
 	 var account = $('#acomp').val();
 	 if(account >0){
-		var result = parseFloat(totals) - parseFloat(account);
+		var result = parseFloat(totals)+parseFloat(montas) - parseFloat(account);
         $('#rest').val(result);
 	 }
 	 
