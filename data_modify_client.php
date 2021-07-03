@@ -87,7 +87,7 @@ ul a{margin-left:3%;}
 	$rej->closeCursor();
 
   // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,user,montant,mont_tva FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT date,user,montant,reste,avance,mont_tva FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
@@ -665,8 +665,8 @@ ul a{margin-left:3%;}
 		 // on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$totals,
-		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
-					        ':reser'=>$donns['reservation']-$donnees['montant']+$avance,
+		                    ':res'=>$donns['reste']-$donnees['reste']+$_POST['rest'],
+					        ':reser'=>$donns['reservation']-$donnees['montant']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
