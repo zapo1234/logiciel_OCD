@@ -83,10 +83,11 @@ include('inc_session.php');
 
 #der11{width:58%;border:1px solid #eee;margin-left:0%;padding:2%;} td{width:500px;color:black;padding-top:20px;}
 #der12{width:58%;border:1px solid #eee;margin-left:19%;padding:2%;display:none;}
+#der13{width:58%;border:1px solid #eee;margin-left:38%;padding:4%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
-
+.def{color:black;}
 h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
-
+h3{font-size:18px;color:#C80620;font-weight:bold;margin-top:10px;}
 ul a{margin-left:3%;} #form_logo{display:none;} 
 
 .remove-padding {
@@ -380,7 +381,8 @@ img {
 					 </div><!--der12-->
 					 
 					 <div id="der13">
-					 
+					 <h3><i class="fas fa-minus-circle"></i> Ce local est indisponible à ces dates suivantes</h3>
+					 <div class="def">Motif(pour cas de réservation,présence clients au sein du local,travaux ou divers)</div>
 					 
 					 </div><!--der11-->
 					 
@@ -523,6 +525,7 @@ img {
 	$('.der2').css({"border":"1px solid #eee","color":"black"});
 	$('#der11').css('display','block');
 	$('#der12').css('display','none');
+	$('#der13').css('display','none');
 	});
  
  $('.der2').click(function(){
@@ -533,6 +536,7 @@ img {
  $('.der5').css({"border":"1px solid #eee","color":"black"});
  $('#der11').css('display','none');
  $('#der12').css('display','block');
+ $('#der13').css('display','none');
 	 
  });
  
@@ -542,6 +546,9 @@ img {
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der4').css({"border":"1px solid #eee","color":"black"});
  $('.der5').css({"border":"1px solid #eee","color":"black"});
+ $('#der11').css('display','none');
+ $('#der12').css('display','none');
+ $('#der13').css('display','block');
  });
  
  $('.der4').click(function(){
