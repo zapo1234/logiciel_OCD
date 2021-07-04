@@ -6,7 +6,27 @@ include('inc_session.php');
 	 
 	 header('location:index.php');
  }
+ 
+  // requete pour aller chercher les valeurs 
+   $home = $_GET['home'];
+  // emttre la requete sur le fonction
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+						));
+	
+	$datas = $req->fetch();
 
+    // on recupère les données
+	$donnees = $req->fetch();
+	$req->closeCursor();
+	// recupére les images existant
+
+	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $res->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+					   ));
+  
 ?>
 
 <!DOCTYPE html>
@@ -54,10 +74,25 @@ include('inc_session.php');
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
-.der1,.der2,.der3,.der4,.der5,.der6{width:250px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
+.der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
+.der1{border-bottom:4px solid #0661BC;color:#0661BC;}
+
+h2{color:black;font-weight:none;text-align:center;margin-top:250px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
+
 ul a{margin-left:3%;} #form_logo{display:none;} 
+
+.remove-padding {
+  padding: 0;
+}
+
+img {
+  image-rendering: auto;
+}
+
+
+
 </style>
 
 </head>
@@ -293,10 +328,72 @@ ul a{margin-left:3%;} #form_logo{display:none;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i>  Type de local</div><span class="der2"><i class="fas fa-info-circle"></i> information du local</span>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div><div  class="der3"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div><div class="der6"><i class="fas fa-key"></i> Bloquer Accès</div></div>
- 
-                   </div>
+                    <div class="content1"><div class="der1"><i class="fas fa-home"></i>  Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
+					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div  class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div><div class="der5"><i class="fas fa-key"></i> Bloquer Accès</div></div>
+                     
+					 <div class="content2">
+					 
+					 <div id="der11">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 <div id="der12">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 <div id="der13">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 <div id="der14">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 <div id="der15">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 <div id="der15">
+					 
+					 
+					 </div><!--der11-->
+					 
+					 
+					 </div>
+					 
+					<div class="content3">
+					<h2><i class="fas fa-camera"></i> Les images du local</h2>
+					<div class="container-fluid remove-padding">
+
+                <div class="container-fluid remove-padding">
+				<div class="col">
+
+               <div class="slicky">
+			   
+			   </div>
+                <?php
+				  //while($datas =$res->fetch()) {
+				  //echo'<div>
+                  //<img src="upload_image/'.$datas['name_upload'].'" width="90%" height="680px" alt="'.$datas['name_upload'].'" style="margin-left:5%;"/>
+                  //</div>';				  
+					  
+				  //}
+				 ?>
+
+              
+
+                </div><!--col-->
+				
+               </div><!--fluid remove padding-->				
+					
+					</div>
+                   
+				   </div>
 
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
@@ -372,8 +469,52 @@ ul a{margin-left:3%;} #form_logo{display:none;}
    $('.reini').css('display','none');
  });
  
+    $('.der1').click(function(){
+	$('.der1').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+	$('.der3').css({"border":"1px solid #eee","color":"black"});
+	$('.der4').css({"border":"1px solid #eee","color":"black"});
+	$('.der5').css({"border":"1px solid #eee","color":"black"});
+	$('.der2').css({"border":"1px solid #eee","color":"black"});
+	});
  
-});
+ $('.der2').click(function(){
+ $('.der1').css({"border":"1px solid #eee","color":"black"});
+ $('.der2').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der3').css({"border":"1px solid #eee","color":"black"});
+ $('.der4').css({"border":"1px solid #eee","color":"black"});
+ $('.der5').css({"border":"1px solid #eee","color":"black"});
+ $('.der6').css({"border":"1px solid #eee","color":"black"});
+	 
+ });
+ 
+ $('.der3').click(function(){
+ $('.der1').css({"border":"1px solid #eee","color":"black"});
+ $('.der3').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der2').css({"border":"1px solid #eee","color":"black"});
+ $('.der4').css({"border":"1px solid #eee","color":"black"});
+ $('.der5').css({"border":"1px solid #eee","color":"black"});
+ });
+ 
+ $('.der4').click(function(){
+ $('.der1').css({"border":"1px solid #eee","color":"black"});
+ $('.der4').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der2').css({"border":"1px solid #eee","color":"black"});
+ $('.der3').css({"border":"1px solid #eee","color":"black"});
+ $('.der4').css({"border":"1px solid #eee","color":"black"});
+ $('.der5').css({"border":"1px solid #eee","color":"black"});
+ });
+ 
+ $('.der5').click(function(){
+ $('.der1').css({"border":"1px solid #eee","color":"black"});
+ $('.der5').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der2').css({"border":"1px solid #eee","color":"black"});
+ $('.der3').css({"border":"1px solid #eee","color":"black"});
+ $('.der4').css({"border":"1px solid #eee","color":"black"});
+ $('.der2').css({"border":"1px solid #eee","color":"black"});
+ });
+ 
+ 
+ });
 </script>
 </body>
 
