@@ -26,6 +26,10 @@ include('inc_session.php');
     $res->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 					   ));
+					   
+    $rem='<span class="ts"></span>';
+	$rt=",";
+	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
   
 ?>
 
@@ -48,7 +52,7 @@ include('inc_session.php');
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -77,9 +81,11 @@ include('inc_session.php');
 .der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
+#der11{width:58%;border:1px solid #eee;margin-left:0%;padding:2%;} td{width:500px;color:black;padding-top:20px;}
+#der12{width:58%;border:1px solid #eee;margin-left:19%;padding:2%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 
-h2{color:black;font-weight:none;text-align:center;margin-top:250px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
+h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
 
 ul a{margin-left:3%;} #form_logo{display:none;} 
 
@@ -92,7 +98,7 @@ img {
 }
 
 
-
+.ts{padding-left:4px;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
 </style>
 
 </head>
@@ -105,6 +111,14 @@ img {
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
+                        
+                    </div>
+					
+					<div class="bs">
+                        
+                    </div>
+					
+					<div class="bs">
                         
                     </div>
 				
@@ -328,20 +342,42 @@ img {
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i>  Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div  class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div><div class="der5"><i class="fas fa-key"></i> Bloquer Accès</div></div>
+                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
+					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div> <div class="der5"><i class="fas fa-key"></i> Bloquer Accès</div></div>
                      
 					 <div class="content2">
 					 
 					 <div id="der11">
+					 <table>
+					 <tr>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Type </span> <br/><?php echo $datas['type_logement'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Local désignée :</span> <br/> <?php echo $datas['chambre'];?></td>
+					 </tr>
+					 <tr>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Description :</span> <br/><?php echo $datas['infos'];?></td>
+					
+					 </tr>
 					 
+					 </table>
 					 
 					 </div><!--der11-->
 					 
 					 <div id="der12">
-					 
-					 
-					 </div><!--der11-->
+					 <table>
+					 <tr>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre d'occupant(s)(min)</span> : <br/><?php echo $datas['occupant'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre de lit(s) :</span> <br/> <?php echo $datas['nombre_lits'];?></td>
+					 </tr>
+					 <tr>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Prix/nuité :</span> <br/><?php echo $datas['cout_nuite'];?>xof</td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Prix/horaire :</span> <br/><?php echo $datas['cout_pass'];?>xof</td>
+					</tr>
+					<tr>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipements principales : </span><br/><?php echo $datas['equipement'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipement sécondaires : </span><br/><?php  echo str_replace($rt,$rs,$datas['equipements']);?></td>
+					</tr>
+					 </table>
+					 </div><!--der12-->
 					 
 					 <div id="der13">
 					 
@@ -368,30 +404,40 @@ img {
 					 
 					<div class="content3">
 					<h2><i class="fas fa-camera"></i> Les images du local</h2>
-					<div class="container-fluid remove-padding">
-
-                <div class="container-fluid remove-padding">
-				<div class="col">
-
-               <div class="slicky">
-			   
-			   </div>
-                <?php
-				  //while($datas =$res->fetch()) {
-				  //echo'<div>
-                  //<img src="upload_image/'.$datas['name_upload'].'" width="90%" height="680px" alt="'.$datas['name_upload'].'" style="margin-left:5%;"/>
-                  //</div>';				  
-					  
-				  //}
-				 ?>
-
-              
-
-                </div><!--col-->
-				
-               </div><!--fluid remove padding-->				
+					<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+	
+	<?php
+	while($data =$res->fetch()) {
+	echo'<img src="upload_image/'.$data['name_upload'].'" class="d-block w-100" alt="...">';
+	}
+	?>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 					
-					</div>
+					
                    
 				   </div>
 
@@ -441,7 +487,7 @@ img {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -475,21 +521,24 @@ img {
 	$('.der4').css({"border":"1px solid #eee","color":"black"});
 	$('.der5').css({"border":"1px solid #eee","color":"black"});
 	$('.der2').css({"border":"1px solid #eee","color":"black"});
+	$('#der11').css('display','block');
+	$('#der12').css('display','none');
 	});
  
  $('.der2').click(function(){
  $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der2').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der2').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
  $('.der3').css({"border":"1px solid #eee","color":"black"});
  $('.der4').css({"border":"1px solid #eee","color":"black"});
  $('.der5').css({"border":"1px solid #eee","color":"black"});
- $('.der6').css({"border":"1px solid #eee","color":"black"});
+ $('#der11').css('display','none');
+ $('#der12').css('display','block');
 	 
  });
  
  $('.der3').click(function(){
  $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der3').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der3').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der4').css({"border":"1px solid #eee","color":"black"});
  $('.der5').css({"border":"1px solid #eee","color":"black"});
@@ -497,16 +546,15 @@ img {
  
  $('.der4').click(function(){
  $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der4').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der3').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border":"1px solid #eee","color":"black"});
  $('.der5').css({"border":"1px solid #eee","color":"black"});
  });
  
  $('.der5').click(function(){
  $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der5').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
+ $('.der5').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der3').css({"border":"1px solid #eee","color":"black"});
  $('.der4').css({"border":"1px solid #eee","color":"black"});
