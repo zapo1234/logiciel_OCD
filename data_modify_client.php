@@ -147,9 +147,16 @@ ul a{margin-left:3%;}
      $fin_date = mktime(0, 0, 0, $mm1, $j1, $an);
 	 
 	 $tab = [];
+	 $french = [];
 	  for($i = $debut_date; $i <= $fin_date; $i+=86400)
      {
-       $dates =  date("Y-m-d",$i);
+       
+	   	   // date en francais
+	   $data_french = date("d-m-Y",$i);
+	   
+	   $data_fren = explode(' ', $data_french);
+	   
+	   $dates =  date("Y-m-d",$i);
 	   
 	   $dates = explode(' ',$dates);
 	   
@@ -158,9 +165,16 @@ ul a{margin-left:3%;}
 		 $tab[] = $dats;  
 		   
 	   }
+	   
+	   foreach($data_fren as $das){
+		   
+		 $french[] = $das;  
+		   
+	   }
 	 }
 	 
 	 $datas = implode(',',$tab);
+	 $datas_fren = implode(',',$french);// date en francais recupéré
 	 
 	} 
 	
@@ -511,12 +525,13 @@ ul a{margin-left:3%;}
 	           
                 	
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
+							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id
 	                        ));				
@@ -617,12 +632,13 @@ ul a{margin-left:3%;}
 					
 					
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
+							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id
 	                        ));		

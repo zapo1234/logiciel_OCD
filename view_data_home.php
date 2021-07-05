@@ -12,7 +12,7 @@ include('inc_session.php');
   // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
@@ -95,7 +95,7 @@ include('inc_session.php');
 #der12{width:58%;border:1px solid #eee;margin-left:19%;padding:2%;display:none;}
 #der13{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
 #der14{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
-#der15{width:48%;border:1px solid #eee;margin-left:47.5%;padding:4%;display:none;}
+#der15{padding:3%;width:48%;border:1px solid #eee;margin-left:47.5%;padding:4%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}
 h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
@@ -115,7 +115,8 @@ img {
 .ts{padding-left:7px;color:black;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
 .dt{padding-left:2px;} .dr{margin-left:25%;width:150px;height:47px;background:#15CD09;border:2px solid #15CD09;border-radius:10px;}
 .re{padding-left:8px;} .tar{font-size:20px;color:#06A5C8;}
-.acces{margin-left:15%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
+.acces{margin-left:25%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
+.access{margin-left:25%;width:150px;background:#15CD09;border:2px solid #15CD09;color:white;height:35px;border-radius:15px;}
 </style>
 
 </head>
@@ -360,7 +361,7 @@ img {
                     <!-- 404 Error Text -->
                     <div class="center">
                     <div class="content1"><div class="der1"><i class="fas fa-home"></i> Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div> <div class="der5"><i class="fas fa-key"></i> Bloquer Accès</div></div>
+					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div> <div class="der5"><i class="fas fa-key"></i>Accès au local</div></div>
                      
 					 <div class="content2">
 					 
@@ -452,20 +453,18 @@ img {
 					    </div>';
 				  }
 				  
-				 if(empty($ret)){
-					  
-					echo'le local est disponible';  
-				  }
-					 
+					 echo'<div id="der15">';
+					if($datas['type'] ==0){
+					 echo'<h4>Bloquer toutes actions sur ce local</h4>
+					 <div><button class="acces" data-id1="'.$_GET['home'].'">Bloquer l\'accès</button></div>';
+					}
+					
+					else{
+						echo'<h4>Activez l\'accès du local</h4>
+					  <div><button class="access" data-id1="'.$_GET['home'].'">Activer l\'accès</button></div>';
+					}
+					echo'</div>';
 					 ?>
-					
-					
-					<div id="der15">
-					 <h4>Bloquer toutes actions sur ce local</h4>
-					 <div><button class="acces">Bloquer l'accès</button></div>
-					 
-					 </div><!--der11-->
-					 
 					 
 					 </div>
 					 
@@ -508,7 +507,7 @@ img {
                    
 				   </div>
 
- <div id="result_reini"></div><!--div result_reini-->
+ <div id="result"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
     
 	</div>
@@ -591,6 +590,8 @@ img {
 	$('#der11').css('display','block');
 	$('#der12').css('display','none');
 	$('#der13').css('display','none');
+	$('#der14').css('display','none');
+	$('#der15').css('display','none');
 	});
  
  $('.der2').click(function(){
@@ -603,7 +604,7 @@ img {
  $('#der12').css('display','block');
  $('#der13').css('display','none');
  $('#der14').css('display','none');
-	 
+ $('#der15').css('display','none'); 
  });
  
  $('.der3').click(function(){
@@ -616,6 +617,7 @@ img {
  $('#der12').css('display','none');
  $('#der13').css('display','block');
  $('#der14').css('display','none');
+ $('#der15').css('display','none');
  });
  
  $('.der4').click(function(){
@@ -642,6 +644,34 @@ img {
  $('#der13').css('display','none');
  $('#der14').css('display','none');
  $('#der15').css('display','block');
+ });
+ 
+ $('.acess').click(function(){
+	 var id = $(this).data('id1');
+	 var action="acess";
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	  $('#result').html(data)
+	 
+	}
+  });
+ });
+ 
+ $('.access').click(function(){
+	 var id = $(this).data('id1');
+	 var action="access";
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	  $('#result').html(data)
+	 
+	}
+  });
  });
  
  

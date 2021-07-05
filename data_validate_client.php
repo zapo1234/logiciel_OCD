@@ -114,20 +114,35 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
      $fin_date = mktime(0, 0, 0, $mm1, $j1, $an);
 	 
 	 $tab = [];
+	 $french = [];
 	  for($i = $debut_date; $i <= $fin_date; $i+=86400)
      {
        $dates =  date("Y-m-d",$i);
 	   
+	   // date en francais
+	   $data_french = date("d-m-Y",$i);
+	   
+	   $data_fren = explode(' ', $data_french);
+	   
 	   $dates = explode(' ',$dates);
+	   
 	   
 	   foreach($dates as $dats){
 		   
 		 $tab[] = $dats;  
 		   
 	   }
+	   
+	   foreach($data_fren as $das){
+		   
+		 $french[] = $das;  
+		   
+	   }
+	   
 	 }
 	 
-	 $datas = implode(',',$tab);
+	 $datas = implode(',',$tab);// format en anglais recupère avec Mysql
+	 $datas_fren = implode(',',$french);// date en francais recupéré
 	 
 	} 
 	
@@ -168,7 +183,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $direction = $_POST['to'];
    // récupére les variable dans différentes cas possible de séjour
    
-   $prix_repas =$_POST['monts'];
+   $prix_repa =$_POST['monts'];
+   $prix_repas =floatval($prix_repa)*18/100;
    
    if(empty($_POST['paie1']) AND empty($_POST['paie2'])  AND empty($_POST['paie3']) AND empty($_POST['paie4'])){
 	  $total =$_POST['total']+$_POST['taxe'];	  
@@ -414,14 +430,16 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
+							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
-							  ':id_fact'=>$id_fact
+							  ':id_fact'=>$id_fact,
+							  ':type'=>$mode
 	                        ));				
 			}
 	  
@@ -510,13 +528,15 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 						  ));
 						  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
+							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dat,
-							  ':id_fact'=>$id_fact
+							  ':id_fact'=>$id_fact,
+							  ':type'=>$mode
 	                        ));		
 		
 	  
