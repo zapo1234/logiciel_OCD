@@ -95,7 +95,7 @@ include('inc_session.php');
 #der12{width:58%;border:1px solid #eee;margin-left:19%;padding:2%;display:none;}
 #der13{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
 #der14{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
-
+#der15{width:48%;border:1px solid #eee;margin-left:47.5%;padding:4%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}
 h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
@@ -114,7 +114,8 @@ img {
 
 .ts{padding-left:7px;color:black;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
 .dt{padding-left:2px;} .dr{margin-left:25%;width:150px;height:47px;background:#15CD09;border:2px solid #15CD09;border-radius:10px;}
-.re{padding-left:8px;}
+.re{padding-left:8px;} .tar{font-size:20px;color:#06A5C8;}
+.acces{margin-left:15%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
 </style>
 
 </head>
@@ -444,8 +445,8 @@ img {
 					// afficher la div 14
 					
 					echo'<div id="der14">
-					     <h4>Visualiser les cas d\'utilisation du local par les clients</h4>
-						 <div class="tar><i class="fas fa-check-circle" style="font-size:18px"></i> '.$a.' séjour(s) consommés</div><br/>
+					     <h4>Visualiser les cas d\'utilisation du local par les clients à ce jour</h4>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$a.' séjour(s) consommés</div><br/>
 						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$b.' réservation(s) </div><br/>
 						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$c.' passage(s) horaire</div>
 					    </div>';
@@ -459,14 +460,9 @@ img {
 					 ?>
 					
 					
-					 
-					 <div id="der15">
-					 
-					 
-					 </div><!--der11-->
-					 
-					 <div id="der15">
-					 
+					<div id="der15">
+					 <h4>Bloquer toutes actions sur ce local</h4>
+					 <div><button class="acces">Bloquer l'accès</button></div>
 					 
 					 </div><!--der11-->
 					 
@@ -632,6 +628,7 @@ img {
  $('#der12').css('display','none');
  $('#der13').css('display','none');
  $('#der14').css('display','block');
+ $('#der15').css('display','none');
  });
  
  $('.der5').click(function(){
@@ -640,7 +637,11 @@ img {
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der3').css({"border":"1px solid #eee","color":"black"});
  $('.der4').css({"border":"1px solid #eee","color":"black"});
- $('.der2').css({"border":"1px solid #eee","color":"black"});
+ $('#der11').css('display','none');
+ $('#der12').css('display','none');
+ $('#der13').css('display','none');
+ $('#der14').css('display','none');
+ $('#der15').css('display','block');
  });
  
  
