@@ -7,6 +7,8 @@ include('inc_session.php');
 	 header('location:index.php');
  }
  
+ else{
+ 
   // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
@@ -16,10 +18,15 @@ include('inc_session.php');
 						));
 	
 	$datas = $req->fetch();
-
-    // on recupère les données
-	$donnees = $req->fetch();
-	$req->closeCursor();
+    $req->closeCursor();
+	
+	// emttre la requete sur le fonction
+    $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $ret->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+						));
+	
+	
 	// recupére les images existant
 
 	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
@@ -27,10 +34,13 @@ include('inc_session.php');
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 					   ));
 					   
+    
+					   
     $rem='<span class="ts"></span>';
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
-  
+	$re ='<span class="re">.</span>';
+ }
 ?>
 
 <!DOCTYPE html>
@@ -83,11 +93,14 @@ include('inc_session.php');
 
 #der11{width:58%;border:1px solid #eee;margin-left:0%;padding:2%;} td{width:500px;color:black;padding-top:20px;}
 #der12{width:58%;border:1px solid #eee;margin-left:19%;padding:2%;display:none;}
-#der13{width:58%;border:1px solid #eee;margin-left:38%;padding:4%;display:none;}
+#der13{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
+#der14{width:58%;border:1px solid #eee;margin-left:37.5%;padding:4%;display:none;}
+
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}
 h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
 h3{font-size:18px;color:#C80620;font-weight:bold;margin-top:10px;}
+h4{font-size:18px;color:black;font-weight:bold;margin-top:10px;}
 ul a{margin-left:3%;} #form_logo{display:none;} 
 
 .remove-padding {
@@ -99,7 +112,9 @@ img {
 }
 
 
-.ts{padding-left:4px;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
+.ts{padding-left:7px;color:black;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
+.dt{padding-left:2px;} .dr{margin-left:25%;width:150px;height:47px;background:#15CD09;border:2px solid #15CD09;border-radius:10px;}
+.re{padding-left:8px;}
 </style>
 
 </head>
@@ -380,16 +395,70 @@ img {
 					 </table>
 					 </div><!--der12-->
 					 
-					 <div id="der13">
-					 <h3><i class="fas fa-minus-circle"></i> Ce local est indisponible à ces dates suivantes</h3>
+					 
+					 <?php
+					 
+					 echo'<div id="der13">
+					 <h3><i class="fas fa-minus-circle"></i> Ce local est indisponible aux dates suivantes</h3>
 					 <div class="def">Motif(pour cas de réservation,présence clients au sein du local,travaux ou divers)</div>
+					 ';
 					 
-					 </div><!--der11-->
+					 if(!empty($ret)){
+						$donnes =$ret->fetchAll(); 
+					 $tab =[]; // pour les séjour facturé
+					 $array =[];// pour les réservation
+					 $ses =[]; // pour les horaire facturé
+					 foreach($donnes as $dats){
+						
+					$data = $dats['date_french'];
+                      
+					  
+					 // pour les statisque
+					    $datos = $dats['type'].',';
+					  // on trans forme sous forme de tableau
+					   $dat =explode(',',$datos);  
+						 foreach($dat as $datas){
+                         // mettre les élements dans un tableau $tab pour les séjour facturé
+						 if($datas ==1){
+						  $tab[] = $datas;							
+						}
+						// mettre les élements dans un tableau $array pour les réservations
+						if($datas ==2){
+						  $array[] = $datas;							
+						}
+						// mettre les élements 
+						if($datas ==3) {
+						$ses[] = $datas;
+						}
+	                }
+					}
+			         echo'<span>'.str_replace($rt,$re,$data).'</span><br/><br/>';
+					echo'<button class="dr">Actualiser la liste<br/>regulièrement</button></div>';
+					
+					  // on compte le nombre 
+					 // on compte le nombre d'elements dans les tableau
+                        $a = count($tab);
+                        $b = count($array);
+                        $c = count($ses);
+						
+					// afficher la div 14
+					
+					echo'<div id="der14">
+					     <h4>Visualiser les cas d\'utilisation du local par les clients</h4>
+						 <div class="tar><i class="fas fa-check-circle" style="font-size:18px"></i> '.$a.' séjour(s) consommés</div><br/>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$b.' réservation(s) </div><br/>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$c.' passage(s) horaire</div>
+					    </div>';
+				  }
+				  
+				 if(empty($ret)){
+					  
+					echo'le local est disponible';  
+				  }
 					 
-					 <div id="der14">
-					 
-					 
-					 </div><!--der11-->
+					 ?>
+					
+					
 					 
 					 <div id="der15">
 					 
@@ -537,6 +606,7 @@ img {
  $('#der11').css('display','none');
  $('#der12').css('display','block');
  $('#der13').css('display','none');
+ $('#der14').css('display','none');
 	 
  });
  
@@ -549,6 +619,7 @@ img {
  $('#der11').css('display','none');
  $('#der12').css('display','none');
  $('#der13').css('display','block');
+ $('#der14').css('display','none');
  });
  
  $('.der4').click(function(){
@@ -557,6 +628,10 @@ img {
  $('.der2').css({"border":"1px solid #eee","color":"black"});
  $('.der3').css({"border":"1px solid #eee","color":"black"});
  $('.der5').css({"border":"1px solid #eee","color":"black"});
+ $('#der11').css('display','none');
+ $('#der12').css('display','none');
+ $('#der13').css('display','none');
+ $('#der14').css('display','block');
  });
  
  $('.der5').click(function(){
