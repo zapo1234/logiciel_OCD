@@ -33,7 +33,7 @@ $smart_from =($page -1)*$record_peage;
      <tr class="tf">
 	  <th scope="col">Date</th>
       <th scope="col">Informations</th>
-	  <th scope="col">Montant(HT)</th>
+	  <th scope="col">Montant(TTC)</th>
 	  <th scope="col">Tva(%)</th>
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
@@ -165,7 +165,7 @@ $smart_from =($page -1)*$record_peage;
 	   // recupérer le chiffre
 	 $id =$_POST['id'];
 	  // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,adresse,clients,check_in,check_out,piece_identite,montant,reste,avance,mont_tva,time,time1,user,types,id_fact,email_client,numero FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT date,adresse,clients,email_client,numero,check_in,check_out,time,time1,nombre,piece_identite,montant,reste,avance,mont_tva,user,moyen_paiement,types,id_fact,type FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
@@ -192,14 +192,15 @@ $smart_from =($page -1)*$record_peage;
 		  <table class="liste">
 		  <th class="h">Type de logement</th>
 		  <th class="h">Local facturé</th>
-		  <th class="h"> Prix hors taxe</th>
+		  <th class="h"> Prix hors taxe(unitaire)</th>
+		  <th class="h">Temps éffectué</th>
 		  ';
 		  
 		  while($datas=$req->fetch()){
 		  echo'<tr>
 		  <td class="h">'.$datas['type_logement'].'</td>
 		  <td class="h">'.$datas['chambre'].'</td>
-		  <td class="h">'.$datas['montant'].'</td>
+		  <td class="h">'.$datas['montant'].'xof x'.$donnees['nombre'].'</td>
 		  </tr>';
 		  }
 		  echo'</table>
@@ -211,12 +212,14 @@ $smart_from =($page -1)*$record_peage;
 		  <th>Taxe(TVA)</td>
 		  <th>Acompte sur facture</th>
 		  <th> Reste à payer</td>
+		  <th> Moyens de paimement</td>
 		  </tr>
 		  <tr>
 		  <td>'.$donnees['montant'].'xof</td>
 		  <td>'.$donnees['mont_tva'].'xof</td>
 		  <td>'.$donnees['avance'].'xof</td>
 		  <td>'.$donnees['reste'].'xof</td>
+		  <td>'.str_replace($rt,$rem,$donnees['moyen_paiement']).'</td>
 		  </tr>
 		  </table>
 		  </div>
@@ -255,7 +258,7 @@ $smart_from =($page -1)*$record_peage;
 
     	// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donnees['montant']-$donns['montant'],
+        $ret->execute(array(':des'=>$donnees['encaisse']-$donns['montant'],
 							':rs'=>$donnees['reservation']-$donns['avance'],
 							':re'=>$donnees['reste']-$donns['reste'],
                             ':email_ocd'=>$_SESSION['email_ocd']
