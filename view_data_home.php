@@ -453,18 +453,9 @@ img {
 					    </div>';
 				  }
 				  
-					 echo'<div id="der15">';
-					if($datas['type'] ==0){
-					 echo'<h4>Bloquer toutes actions sur ce local</h4>
-					 <div><button class="acces" data-id1="'.$_GET['home'].'">Bloquer l\'accès</button></div>';
-					}
-					
-					else{
-						echo'<h4>Activez l\'accès du local</h4>
-					  <div><button class="access" data-id1="'.$_GET['home'].'">Activer l\'accès</button></div>';
-					}
-					echo'</div>';
-					 ?>
+					?>
+					 
+					 <div id="result"></div><!--div result-->
 					 
 					 </div>
 					 
@@ -507,7 +498,6 @@ img {
                    
 				   </div>
 
- <div id="result"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
     
 	</div>
@@ -659,6 +649,22 @@ img {
 	}
   });
  });
+ 
+ // afficher les données des encaissements
+  function load() {
+				var action="fetch";
+				$.ajax({
+					url: "result_view_home.php?home=<?php echo$_GET['home'];?>",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+			}
+
+			load();
+ 
  
  $('.access').click(function(){
 	 var id = $(this).data('id1');

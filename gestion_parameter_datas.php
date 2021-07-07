@@ -52,16 +52,14 @@ include('inc_session.php');
 .der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
-#der11{width:58%;border:1px solid #eee;margin-left:0%;padding:2%;} td{width:500px;color:black;padding-top:20px;}
-#der12{}
+#der11{width:60%;margin-left:15%;} td{width:500px;color:black;padding-top:20px;}
+#der12{width:60%;margin-left:15%;display:none;}
 #der13{}
 #der14{}
 #der15{}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}
-h2{color:black;font-weight:none;text-align:center;margin-top:80px;margin-left:35%;width:400px;border-bottom:1px solid #eee;font-family:arial;}
-h3{font-size:18px;color:#C80620;font-weight:bold;margin-top:10px;}
-h4{font-size:18px;color:black;font-weight:bold;margin-top:10px;}
+h2{color:#0661BC;width:600px;font-size:28px;font-weight:none;text-align:center;margin-top:80px;margin-left:10%;border-bottom:1px solid #eee;font-family:arial;}
 ul a{margin-left:3%;} #form_logo{display:none;} 
 
 .remove-padding {
@@ -73,11 +71,9 @@ img {
 }
 
 
-.ts{padding-left:7px;color:black;} .t_name{color:#15CD09;font-weight:bold;font-family:arial;}
-.dt{padding-left:2px;} .dr{margin-left:25%;width:150px;height:47px;background:#15CD09;border:2px solid #15CD09;border-radius:10px;}
-.re{padding-left:8px;} .tar{font-size:20px;color:#06A5C8;}
-.acces{margin-left:25%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
-.access{margin-left:25%;width:150px;background:#15CD09;border:2px solid #15CD09;color:white;height:35px;border-radius:15px;}
+.form-row{margin-top:25px;} input{height:35px;}
+#name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
+#cl{width:320px;height:40px;border:1px solid #eee;}
 </style>
 
 </head>
@@ -321,27 +317,110 @@ img {
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div> <div class="der5"><i class="fas fa-key"></i>Accès au local</div></div>
+					
+                    <div class="content1"><div class="der1">Votre entreprise <i class="fas fa-building"></i></div><div class="der2">Ajouter des comptes  <i class="fas fa-users"></i></div>
+					 <div class="der3"> Lister des utilisateurs  <i class="fas fa-table"></i></div> <div class="der4">Attribuer des horaires  <i class="fas fa-calendar-alt"></i></div> <div class="der5">Gérér les accès  <i class="fas fa-key"></i></div></div>
                      
 					 <div class="content2">
 					 
-					 <div id="der11">
-					 <table>
-					 <tr>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Type </span> <br/></td>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Local désignée :</span> <br/></td>
-					 </tr>
-					 <tr>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Description :</span> <br/></td>
-					
-					 </tr>
-					 
-					 </table>
-					 
-					 </div><!--der11-->
-					 
 					 <div id="der12">
+					 <h2>Créer un compte pour votre collaborateur</h2>
+					 <form method="post" id="form2" action="">
+                     <div class="form-row">
+                    <div class="col">
+                       <label>Nom </label><br/><input type="text" class="form-control" placeholder="First name" required>
+                      </div>
+                    <div class="col">
+                    <label>Prénom</label><br/><input type="text" class="form-control" placeholder="Last name" required>
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Numéro télephone</label><br/><input type="text" class="form-control" placeholder="First name">
+                      </div>
+                    <div class="col">
+                    <br/><select id="cl" class="" aria-label=".form-select-lg example" required>
+                   <option selected>Attribuer un role</option>
+                 <option value="1">Responsable</option>
+                  <option value="2">Gestionnaire</option>
+                  <option value="3">Réceptionniste(caisse)</option>
+               </select>
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Email(utilisé)</label><br/><input type="text" class="form-control" placeholder="First name" required>
+                      </div>
+                    <div class="col">
+                   <label>Mot de pass</label> <input type="password" class="form-control" placeholder="Password" required>
+                    </div>
+				 
+                 </div>
+				 
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <input type="submit" id="names" value="Enregistrer">
+                      </div>
+				  
+                 </div>
+				 
+                  </form>
+					 
+					 </div><!--der12-->
+					 
+					 <div id="der11">
+					 <form method="post" id="form1" action="">
+					 <h2>Informations sur votre entreprise</h2>
+                     <div class="form-row">
+                    <div class="col">
+                       <label>Nom de la societé(dénomination)</label><br/><input type="text" class="form-control" placeholder="First name">
+                      </div>
+                    <div class="col">
+                    <label>Email(societé)</label><br/><input type="text" class="form-control" placeholder="Last name">
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Numéro télephone</label><br/><input type="text" class="form-control" placeholder="First name">
+                      </div>
+                    <div class="col">
+                    <label>Numéro sécondaire(si existe)</label><br/><input type="text" class="form-control" placeholder="Last name">
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Adresse</label><br/><input type="text" class="form-control" placeholder="First name">
+                      </div>
+                    <div class="col">
+                   <label></label> <input type="text" class="form-control" placeholder="Last name">
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Importer votre logo</label><input type="file" class="form-control" placeholder="First name">
+                      </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <input type="submit" id="name" value="Valider">
+                      </div>
+				  
+                 </div>
+				 </form>
+					 
 					 
 					 </div><!--der12-->
 					 
@@ -367,7 +446,7 @@ img {
 					
 					</div>
 
- <div id="home_data"></div><!--div home-->
+        <div id="home_data"></div><!--div home-->
     
 	</div>
                 <!-- /.container-fluid -->
