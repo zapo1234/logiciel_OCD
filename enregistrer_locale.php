@@ -21,7 +21,7 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
 }
  try{
 
-	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse FROM tresorie_customer WHERE email_ocd= :email_ocd');
+	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
@@ -112,7 +112,7 @@ $mode=1;
     
 	if(isset($_POST['chamb'])) {
      
-	for($count=0;  $count<count($_POST['chamb']); $count++){    
+    for($count=0;  $count<count($_POST['chambr']); $count++){  	 
 		
 		$id_chambre=$ids[$count];
 		$date1=$dat1;
@@ -224,6 +224,10 @@ $mode=1;
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
                        ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
+					 
+				// on detruire le tableau de session des données
+				
+				unset($_SESSION['add_home']);
 		
 		    echo'<div id="pak"></div>';
 				

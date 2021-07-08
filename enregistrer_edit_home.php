@@ -48,45 +48,46 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
 	// type de logement
-	$type =$_POST['type'];
-	$typs =$_POST['typs'];
-	if(isset($types)){
-	$type=$types;
-	}
-	else{
+	$type = $_POST['type'];
+	$typs = $_POST['typs'];
+	
+	if(!empty($typs)){
+		$type=$_POST['typs'];
 		
-	  $type= $_POST['type'];
 	}
 	
-	if($type=""){
-	$type=$_POST['typs'];
-	}
-	else if($type ==0){
+	 if($type == 1){
 		$type ="chambre single";
 	}
-	elseif($type == 1){
+	elseif($type == 2){
 		
 		$type="chambre double";
 	}
 	
-	elseif($type ==2){
+	elseif($type == 3){
 		$type="chambre triple";
 	}
 	
-	elseif($type ==3) {
+	elseif($type == 4) {
 		$type ="chambre twin";
 	}
-	elseif($type == 4){
+	elseif($type == 5){
 		$type ="chambre standard";
 	}
 	
-	elseif($type == 5){
+	elseif($type == 6){
 		$type ="studio double";
 	}
 	
-	else{
-		$type =$typs;
+	elseif($type == 7){
+		
+		$type ="sutdio double";
 	}
+	
+	else{
+		$type = $typs;
+	}
+	
 	$second_type =html_entity_decode($_POST['typs']);
 	
 	// cout du locale

@@ -2,6 +2,11 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+  $req=$bdd->prepare('SELECT email_ocd,denomination,password,user,permission,code_employes FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$req->fetch();
+	$req->closeCursor();
+
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +49,6 @@ include('inc_session.php');
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
-.action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
-.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
 .der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
@@ -74,6 +76,7 @@ img {
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
 #cl{width:320px;height:40px;border:1px solid #eee;}
+label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;position:absolute;top:500px;left:5%;color:white;width:300px;height:100px;}
 </style>
 
 </head>
@@ -378,38 +381,54 @@ img {
 					 <h2>Informations sur votre entreprise</h2>
                      <div class="form-row">
                     <div class="col">
-                       <label>Nom de la societé(dénomination)</label><br/><input type="text" class="form-control" placeholder="First name">
+                       <label>Nom de la societé(dénomination)</label><br/><input type="text" id="nam" name="nam" class="form-control" placeholder="First name" required><br/>
+					   <span class="nam"></span>
                       </div>
                     <div class="col">
-                    <label>Email(societé)</label><br/><input type="text" class="form-control" placeholder="Last name">
+                    <label>Email(societé)</label><br/><input type="text" id="email" name="email" class="form-control" placeholder="Last name" required><br/>
+					<span class="email"></span>
                     </div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Numéro télephone</label><br/><input type="text" class="form-control" placeholder="First name">
+                       <label>Numéro télephone</label><br/><input type="text" id="numero" name="numero" class="form-control" placeholder="First name"><br/>
+					   <span class="numero"></span>
                       </div>
                     <div class="col">
-                    <label>Numéro sécondaire(si existe)</label><br/><input type="text" class="form-control" placeholder="Last name">
+                    <label>Numéro sécondaire(si existe)</label><br/><input type="text" id="numero1" name="numero1" class="form-control" placeholder="Last name"><br/>
+					<span class="numero1"></span>
                     </div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Adresse</label><br/><input type="text" class="form-control" placeholder="First name">
+                       <label>Adresse</label><br/><input type="text" id="adress" class="form-control" placeholder="First name"><br/>
+					   <span class="adress"></span>
                       </div>
                     <div class="col">
-                   <label></label> <input type="text" class="form-control" placeholder="Last name">
+                   <label>Adresse suite</label> <input type="text" id="adress1" class="form-control" placeholder="Last name">
                     </div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Importer votre logo</label><input type="file" class="form-control" placeholder="First name">
+                       <label>N° d'enregistrement</label><br/><input type="text" id="enre" name="enre" class="form-control" placeholder="First name">
                       </div>
+                    <div class="col">
+                   <label>N° de compte contribuable</label> <input type="text" id="compt" name="compt" class="form-control" placeholder="Last name">
+                    </div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Importer votre logo</label><input type="file" name="logo" class="form-control" placeholder="First name">
+                      <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
+					  </div>
 				 
                  </div>
 				 
@@ -419,6 +438,7 @@ img {
                       </div>
 				  
                  </div>
+				 <div id="datas"></div><!--datas retour ajax -->
 				 </form>
 					 
 					 
@@ -446,7 +466,7 @@ img {
 					
 					</div>
 
-        <div id="home_data"></div><!--div home-->
+        
     
 	</div>
                 <!-- /.container-fluid -->
@@ -584,7 +604,87 @@ img {
  $('#der15').css('display','block');
  });
  
-
+  $('#form1').on('submit', function(event) {
+	event.preventDefault();
+      
+	 var form_data = $(this).serialize();
+	 var nam = $('#nam').val();
+	 var adress = $('#adress').val();
+	 var adress = $('#adress1').val();
+	 var numero = $('#numero').val();
+	 var numero1 = $('#numero1').val();
+	 var compt = $('#compt').val();
+	 var enre = $('#enre').val();
+	 var email = $('#email').val();
+	 
+	 
+	 // regex //
+	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
+    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
+    var number = /^[0-9+]{8,14}$/;
+	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+    
+	
+   if(nam.length==""){
+		$('#nam').css('border-color','red');
+		
+	}
+	 
+	 else if (nam.length > 60){
+      $('.nam').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depassé 60');
+    }
+	
+	else if (adress.length >100){
+      $('.adress').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> l\'adresse ne doit pas dépasser 100 caractères');
+    }
+	 
+	 else if (!reg.test(email)){
+      $('.email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email ');
+    }
+	
+	 else if (!number.test(numero)){
+      $('.numero').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur  sur la syntaxe du numéro de téléphone ');
+    }
+	
+	
+	 else if (numero.length > 14){
+      $('.numero').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro de télephone ne doit pas depasser 14chiffres');
+    }
+	
+	else if (enre.length > 14){
+      $('.enre').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro d\'immatricualtion ne doit pas dépasser 14chiffres');
+    }
+	
+	else if (compt.length > 14){
+      $('.compt').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro du compte contribuable ne doit pas depasser 14chiffres');
+    }
+	
+	else{
+		
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'datas_parameter.php',// on traite par la fichier
+	data:form_data,
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#datas').html(data);
+	 
+	}
+    });
+	
+	setInterval(function(){
+		 $('#datas').html('');
+		 location.reload(true);
+	 },3000);
+		
+	}
+	
+ });
+  
+  $(document).on('submit','#form2',function(){
+	  
+	  
+	  
+  });
  
  
  });

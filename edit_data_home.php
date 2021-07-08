@@ -96,7 +96,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
  
  .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;}
+ul a{margin-left:3%;} #form_logo{display:none;}
 </style>
 
 </head>
