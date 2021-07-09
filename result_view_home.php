@@ -2,7 +2,10 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-// requete pour aller chercher les valeurs 
+ 
+     if($_POST['action']=="fetch"){
+		 
+		 // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
@@ -10,8 +13,6 @@ include('inc_session.php');
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
     $datas = $req->fetch();
- 
-     if($_POST['action']=="fetch"){
 		 
 				   echo'<div id="der15">';
 					if($datas['type'] ==0){
@@ -53,6 +54,111 @@ include('inc_session.php');
 							
 							)); 
 	  
+	  
+  }
+  
+  
+  if($_POST['action']=="parameter") {
+	  
+	 if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token']))
+		
+ {
+	//Si le jeton de la session correspond à celui du formulaire
+	if($_SESSION['token'] != $_POST['token'])
+	{
+		//On stocke le timestamp qu'il était il y a 15 minutes
+		$timestamp_ancien = time() - (5*60);
+		//Si le jeton n'est pas expiré
+		if($_SESSION['token_time'] < $timestamp_ancien)
+		{
+		     echo'<body onload="alert(\'OCD ne vous reconnais pas  , vous n\'avez pas acces à la page \')">';
+	           echo'<meta http-equiv = "refresh" content="0; URL= index.php">';
+		}
+	  }
+   }
+   
+   // on recupére les données de la table 
+   
+   $req=$bdd->prepare('SELECT email_ocd,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$req->fetch();
+	$req->closeCursor();
+	
+	$jour = array("Dim","Lun","Mar","Mercredi","Jeu","Vendr","Sam");
+   $mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
+    $dateDuJour = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
+    $date=$dateDuJour;
+    $heure = date('H:i');
+   
+   // on recupére les variable transmise
+   
+   $denomination =$donnees['denomination'];
+   $adresse =$donnees['adresse'];
+   $numero_cci =$donnees['numero_cci'];
+   $id_entreprise =$donnees['id_entreprise'];
+   $date = $dateDuJour;
+   $heure =date('H:I');
+   $email =$_POST['emails'];
+   $pass =$_POST['password'];
+   $emails =$_SESSION['email_ocd'];
+   
+   $name = trim(strip_tags($_POST['nom']));
+   $prenom = trim(strip_tags($_POST['prenom']));
+   $role =$_POST['role'];
+   $log="";
+   $numero_compte ="";
+   $user =$name.' '.$prenom;
+   $etat ="";
+   
+   if($role ==1){
+	 $status =1;
+     $categoris="dirigeant";
+     $permission ="user:boos";	 
+	}
+   elseif($role ==2){
+	  $status =2;
+     $categories="Responsable";
+     $permission ="user:boos";	 
+	   
+   }
+   
+   elseif($role ==3){
+	 $status =2;
+     $categories="Gestionnaire";
+     $permission ="user:gestionnaire";  
+	   
+   }
+   
+   else{
+	 $status =4;
+     $categories="Receptionniste";
+     $permission ="user:employes";  
+   }
+   
+   
+   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> Le compte à été créer !</button>
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+
+   // insertion des données dans la table facture
+		$rev=$bdd->prepare('INSERT INTO inscription_client (email_ocd,email_user,email_ocd,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,logo) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,logo)');
+	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+		                     ':email_user'=>$email,
+		                    ':denomination'=>$denomination,
+							':adresse'=>$adresse,
+							':numero_cci'=>$numero_cci,
+							':id_entreprise'=>$id_entreprise,
+							':user'=>$user,
+							':permission'=>$permission,
+							':password'=>$pass,
+							':categories'=>$categories,
+						    ':numero_compte'=>$_POST['numero'],
+					        ':date'=>$date,
+						    ':heure'=>$heure,
+						    ':etat'=>$etat,
+						    ':logo'=>$log
+						  ));
+  
 	  
   }
 

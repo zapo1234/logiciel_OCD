@@ -90,16 +90,13 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$mt = $donnes['id_fact'];
 	$mt = floatval($mt);
 	$id_fact=$mt+0.0001;
-		
 	}
 	
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
 	$dates2 =$_POST['das'];
 
-	
 	$dates1 = explode('-',$dates1);
-	
 	$j = $dates1[2];
 	$mm = $dates1[1];
 	$an = $dates1[0];
@@ -121,25 +118,17 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	   
 	   // date en francais
 	   $data_french = date("d-m-Y",$i);
-	   
 	   $data_fren = explode(' ', $data_french);
-	   
 	   $dates = explode(' ',$dates);
 	   
-	   
 	   foreach($dates as $dats){
-		   
-		 $tab[] = $dats;  
-		   
-	   }
+		   $tab[] = $dats;  
+		 }
 	   
 	   foreach($data_fren as $das){
-		   
-		 $french[] = $das;  
-		   
-	   }
-	   
-	 }
+		   $french[] = $das;  
+		 }
+	  }
 	 
 	 $datas = implode(',',$tab);// format en anglais recupère avec Mysql
 	 $datas_fren = implode(',',$french);// date en francais recupéré
@@ -194,23 +183,19 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    
    
    if(!empty($_POST['paie1'])) {
-	   
-	  $status1 = 'espéces :'.$_POST['paie1'].' xof';
+	   $status1 = 'espéces :'.$_POST['paie1'].' xof';
 	  $num1 =$_POST['paie1'];
    }
    
    else{
-	   
 	   $status1 = ' ';
 	   $num1 ="0";
    }
    
    if(!empty($_POST['paie2'])) {
-	   
-	  $status2 = 'Carte Bancaire :'.$_POST['paie2'].' xof';
-	  $num2 = $_POST['paie2'];
+	   $status2 = 'Carte Bancaire :'.$_POST['paie2'].' xof';
+	   $num2 = $_POST['paie2'];
    }
-   
    else{
 	   
 	   $status2 = ' ';
@@ -218,20 +203,17 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    }
    
    if(!empty($_POST['paie3'])) {
-	   
-	  $status3 = 'Mobile  monney :'.$_POST['paie3'].' xof';
+	   $status3 = 'Mobile  monney :'.$_POST['paie3'].' xof';
 	  $num3= $_POST['paie3'];
    }
    
    else{
-	   
 	   $status3 = ' ';
 	   $num3="0";
    }
    
    if(!empty($_POST['paie4'])) {
-	   
-	  $status4 = 'chéques :'.$_POST['paie4'].' xof';
+	   $status4 = 'chéques :'.$_POST['paie4'].' xof';
 	  $num4 = $_POST['paie4'];
    }
    

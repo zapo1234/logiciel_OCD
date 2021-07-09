@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $req=$bdd->prepare('SELECT email_ocd,denomination,password,user,permission,code_employes FROM inscription_client WHERE email_ocd= :email_ocd');
+  $req=$bdd->prepare('SELECT email_ocd,denomination,password,user,permission FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
@@ -75,8 +75,9 @@ img {
 
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
-#cl{width:320px;height:40px;border:1px solid #eee;}
-label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;position:absolute;top:500px;left:5%;color:white;width:300px;height:100px;}
+#role{width:320px;height:40px;border:1px solid #eee;}
+label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
+.up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 </style>
 
 </head>
@@ -331,45 +332,47 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 					 <form method="post" id="form2" action="">
                      <div class="form-row">
                     <div class="col">
-                       <label>Nom </label><br/><input type="text" class="form-control" placeholder="First name" required>
-                      </div>
+                       <label>Nom </label><br/><input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
+                      <br/><span class="nom"></span></div>
                     <div class="col">
-                    <label>Prénom</label><br/><input type="text" class="form-control" placeholder="Last name" required>
-                    </div>
+                    <label>Prénom</label><br/><input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
+                    <br/><span class="prenom"></span></div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Numéro télephone</label><br/><input type="text" class="form-control" placeholder="First name">
-                      </div>
+                       <label>Numéro télephone</label><br/><input type="text" id="num" name="num" class="form-control" placeholder="numero">
+                      <br/><span class="num"></span></div>
                     <div class="col">
-                    <br/><select id="cl" class="" aria-label=".form-select-lg example" required>
-                   <option selected>Attribuer un role</option>
-                 <option value="1">Responsable</option>
-                  <option value="2">Gestionnaire</option>
-                  <option value="3">Réceptionniste(caisse)</option>
+                    <br/><select id="role" name="role" required>
+                   <option value="">Attribuer un role</option>
+                 <option value="1">Dirigeant</option>
+				 <option value="2">Responsable</option>
+                  <option value="3">Gestionnaire</option>
+                  <option value="4">Réceptionniste(caisse)</option>
                </select>
-                    </div>
+                    <br/><span class="role"></span></div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Email(utilisé)</label><br/><input type="text" class="form-control" placeholder="First name" required>
+                       <label>Email(utilisé)</label><br/><input type="text" id="emails" name="emails" class="form-control" placeholder="First name" required><br/>
+					   <span class="emails"></span>
                       </div>
                     <div class="col">
-                   <label>Mot de pass</label> <input type="password" class="form-control" placeholder="Password" required>
-                    </div>
-				 
+                   <label>Mot de pass</label> <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
+                    <br/><span class="pass"></span></div>
+				 <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
                  </div>
 				 
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <input type="submit" id="names" value="Enregistrer">
+                       <input type="submit" id="names" value="créer le compte">
                       </div>
-				  
+				  <div id="data"></div><!--ajax--->
                  </div>
 				 
                   </form>
@@ -377,7 +380,7 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 					 </div><!--der12-->
 					 
 					 <div id="der11">
-					 <form method="post" id="form1" action="">
+					 <form method="post" id="form1"  enctype="multipart/form-data">
 					 <h2>Informations sur votre entreprise</h2>
                      <div class="form-row">
                     <div class="col">
@@ -405,11 +408,11 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Adresse</label><br/><input type="text" id="adress" class="form-control" placeholder="First name"><br/>
+                       <label>Adresse</label><br/><input type="text" id="adress" name="adress" class="form-control" placeholder="First name"><br/>
 					   <span class="adress"></span>
                       </div>
                     <div class="col">
-                   <label>Adresse suite</label> <input type="text" id="adress1" class="form-control" placeholder="Last name">
+                   <label>Adresse suite</label> <input type="text" id="adress1" name="adress1" class="form-control" placeholder="Last name">
                     </div>
 				 
                  </div>
@@ -617,8 +620,7 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 	 var enre = $('#enre').val();
 	 var email = $('#email').val();
 	 
-	 
-	 // regex //
+	// regex //
 	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
     var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
     var number = /^[0-9+]{8,14}$/;
@@ -664,7 +666,10 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'datas_parameter.php',// on traite par la fichier
-	data:form_data,
+	async: false,
+	data:new FormData(this),
+	contentType:false,
+	processData:false,
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#datas').html(data);
 	 
@@ -674,17 +679,82 @@ label{font-family:arial;color:black;} .enre{background:black;opacity:0.3;positio
 	setInterval(function(){
 		 $('#datas').html('');
 		 location.reload(true);
-	 },3000);
+	 },5000);
 		
 	}
 	
  });
   
-  $(document).on('submit','#form2',function(){
+  $(document).on('click','#names', function(event) {
+	  event.preventDefault();
 	  
+	  var action="parameter";
+	 var form_data = $(this).serialize();
+	 var nom = $('#nom').val();
+	 var role = $('#role').val();
+	 var prenom = $('#prenom').val();
+	 var password = $('#pass').val();
+	 var num =$('#num').val();
+	 var emails = $('#emails').val();
+	 
+	 // regex //
+	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
+    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
+    var number = /^[0-9+]{8,14}$/;
+	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
+	
+	if(nom.length==""){
+		$('#nom').css('border-color','red');
+		
+	}
+	 
+	 else if (nom.length > 60){
+      $('.nom').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depasser 60');
+    }
+	
+	else if (role==""){
+      $('.role').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> vous devez choisir un role pour l\'utilisateur');
+    }
+	 
+	 else if (!reg.test(emails)){
+      $('.email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
+    }
+	
+	else if (nom.length > 12){
+      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du mot de pass ne doit pas depasser 12');
+    }
+	
+	else if (!pass.test(password)){
+      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le mot de pass doit contenir une lettre, un chiffre et un caractère sépcial(!$@#)');
+    }
+	
+	 else if (!number.test(num)){
+      $('.num').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
+    }
+	
+	
+	else{
+		
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,emails:emails,num:num,password:password,nom:nom,role:role},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data').html(data);
+	 
+	}
+    });
+	
+	setInterval(function(){
+		 $('#data').html('');
+		 location.reload(true);
+	 },5000);
+		
+	}
+	 
 	  
-	  
-  });
+	});
  
  
  });
