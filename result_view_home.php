@@ -79,7 +79,7 @@ include('inc_session.php');
    
    // on recupére les données de la table 
    
-   $req=$bdd->prepare('SELECT email_ocd,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req=$bdd->prepare('SELECT DISTINCT email_ocd,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
@@ -91,13 +91,13 @@ include('inc_session.php');
     $heure = date('H:i');
    
    // on recupére les variable transmise
-   
+   echo$donnees['denomination'];
    $denomination =$donnees['denomination'];
    $adresse =$donnees['adresse'];
    $numero_cci =$donnees['numero_cci'];
    $id_entreprise =$donnees['id_entreprise'];
    $date = $dateDuJour;
-   $heure =date('H:I');
+   $heure =date('H:i');
    $email =$_POST['emails'];
    $pass =$_POST['password'];
    $emails =$_SESSION['email_ocd'];
@@ -110,38 +110,36 @@ include('inc_session.php');
    $user =$name.' '.$prenom;
    $etat ="";
    
-   if($role ==1){
-	 $status =1;
-     $categoris="dirigeant";
-     $permission ="user:boos";	 
+   if($role==1){
+	 $status=1;
+     $categories="dirigeant";
+     $permission ="user:boss";	 
 	}
-   elseif($role ==2){
-	  $status =2;
+   elseif($role==2){
+	  $status=2;
      $categories="Responsable";
-     $permission ="user:boos";	 
-	   
+     $permission ="user:boss";	 
    }
    
-   elseif($role ==3){
-	 $status =2;
+   elseif($role==3){
+	 $status=3;
      $categories="Gestionnaire";
      $permission ="user:gestionnaire";  
-	   
-   }
+	}
    
    else{
-	 $status =4;
+	 $status=4;
      $categories="Receptionniste";
      $permission ="user:employes";  
    }
+   $stat="";
    
-   
-   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> Le compte à été créer !</button>
+   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données dans la table facture
-		$rev=$bdd->prepare('INSERT INTO inscription_client (email_ocd,email_user,email_ocd,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,logo)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,status,logo) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:logo)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -149,13 +147,15 @@ include('inc_session.php');
 							':numero_cci'=>$numero_cci,
 							':id_entreprise'=>$id_entreprise,
 							':user'=>$user,
+							':numero'=>$_POST['num'],
 							':permission'=>$permission,
 							':password'=>$pass,
 							':categories'=>$categories,
-						    ':numero_compte'=>$_POST['numero'],
+						    ':numero_compte'=>$numero_compte,
 					        ':date'=>$date,
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,
+							':status'=>$status,
 						    ':logo'=>$log
 						  ));
   
