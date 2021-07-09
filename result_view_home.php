@@ -2,6 +2,13 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+$options = [
+    'salt' => your_custom_function_for_salt(), 
+    //write your own code to generate a suitable & secured salt
+    'cost' => 12 // the default cost is 10
+];
+
+$hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
  
      if($_POST['action']=="fetch"){
 		 
