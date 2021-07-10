@@ -3,6 +3,9 @@ include('connecte_db.php');
 include('inc_session.php');
 
    
+  $req=$bdd->prepare('SELECT id,logo FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees =$req->fetch();
 
 ?>
 
@@ -16,20 +19,29 @@ include('inc_session.php');
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                 </div>
-                <div class="side"><button onclick="document.getElementById('fichier').click(); return false;" id="logo-button"><i class="fas fa-camera" style="font-size:20px;"></i></button>
+                <div class="side">
 				<div id="upload">
-				
+				<?php
+				echo'<img id="logo" src="image_logo/'.$donnees['logo'].'" width="155px" height="155px" alt="'.$donnees['logo'].'">';
+				?>
 				</div><!--affichage ajax log-->
 				</div>
             </a><br/><br/><br/><br/>
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Tableau de bord</span>
-                </a>
-            </li>
+            <?php
+			
+			if($_SESSION['permission']=="user:boss") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="tableau_bord_data.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tableau de bord</span></a>
+            </li>';			
+				
+			}
+			
+			?>
 			
 			<li class="nav-item">
                 <a class="nav-link" href="gestion_data_home.php">
@@ -88,24 +100,32 @@ include('inc_session.php');
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="gestion_datas_depenses.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Dépense</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+            <?php
+			
+			if($_SESSION['permission']=="user:boss") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="gestion_data_tresorerie.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Trésorie</span></a>
-            </li>
+                    <span>Trésorerie</span></a>
+            </li>';			
+				
+			}
+			
+			?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="gestion_datas_messager.php">
                     <i class="fas fa-comment-alt"></i>
                     <span>Equipes messanger</span></a>
             </li>
@@ -115,9 +135,9 @@ include('inc_session.php');
 			if($_SESSION['permission']=="user:boss") {
 			
             echo'<li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="gestion_parameter_datas.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Paramètre compte</span></a>
+                    <span>Paramètre</span></a>
             </li>';			
 				
 			}
@@ -129,7 +149,4 @@ include('inc_session.php');
 
         </ul>
 		
-		<form id="form_logo" method="post" action="upload_logo.php" enctype="multipart/form-data">
-        <input type="file" name="fichier" id="fichier" />
-        <input type="submit" id="envoyer" />
-       </form>
+		
