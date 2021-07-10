@@ -11,7 +11,7 @@ if(isset($_POST['id_ocd'])) {
     $date=$dateDuJour;
     $heure = date('H:i');
 	
-	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission FROM inscription_client WHERE email_user= :email_user');
+	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_POST['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
@@ -25,7 +25,8 @@ if(isset($_POST['id_ocd'])) {
 	
 	if($_POST['id_ocd']==$donnees['password']) {
 		
-		if($_POST['email_ocd']!=$fuller['email_ocd']) {
+		$active="off";
+		if($donnees['active']!=$active) {
 			
 			$_SESSION['email_ocd']=$donnees['email_ocd'];
 			$_SESSION['pose']= $_POST['id_ocd'];
@@ -49,7 +50,7 @@ if(isset($_POST['id_ocd'])) {
 		
 	 else{
 	 
-      	echo'<div class="dnn">Accès au compte bloqué</div>'; 
+      	echo'<div class="dnn">Votre compte est desactivé</div>'; 
 	}
 		
 	}
