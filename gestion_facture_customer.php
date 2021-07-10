@@ -74,14 +74,16 @@ td{font-size:18px;font-family:arial;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
-.detail{width:550px;background:white;position:absolute;z-index:4;border:2px solid #eee;
+.detail{width:590px;background:white;position:absolute;z-index:4;border:2px solid #eee;
  font-size:15px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black;
  top:150px;margin-left:20%;}
   h4{text-align:center;margin-top:8px;font-size:18px;border-bottom:1px solid #eee;}
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
-  .liste td{width:150px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
+  .liste td{width:150px;} .list td{font-size:14px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
 #form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
+.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;}
 </style>
 
 </head>

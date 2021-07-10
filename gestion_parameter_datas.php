@@ -74,7 +74,7 @@ img {
 
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
-#role{width:320px;height:40px;border:1px solid #eee;}
+#role,#roles{width:320px;height:40px;border:1px solid #eee;}
 label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
@@ -82,7 +82,7 @@ td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial
 #modifier{margin-left:30%;margin-top:3px;width:200px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;}
 .bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
-tr{border:1px solid #eee;}
+tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 </style>
 
 </head>

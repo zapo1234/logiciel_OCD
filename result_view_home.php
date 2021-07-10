@@ -225,9 +225,6 @@ include('inc_session.php');
 	
 	// supprimer 
    $id=$_POST['id'];
-   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  L\'utilisateur à été suprimé !
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-   
    $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,numero,status FROM inscription_client WHERE email_ocd= :email_ocd AND id= :id');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
                        ':id'=>$id
@@ -236,9 +233,7 @@ include('inc_session.php');
   $user = $donnees['user'];
   
 					  
-   
-	
-	echo'<form method="post" id="form3" action="">
+         echo'<form method="post" id="form3" action="">
                    		
                     <h2>Modifier les données de ce utilisateur</h2>
 					<div class="form-row">
