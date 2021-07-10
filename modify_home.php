@@ -77,7 +77,7 @@ if(isset($_GET['id_fact'])){
 			
 			else{
 				$local ="locaux";
-				echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'<br/>sur la facture</div></div>';
+				echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'<br/>sur la facture</div></div><br/><span class="eror"></span>';
 			}
 			
 		 
