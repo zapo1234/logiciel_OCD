@@ -23,7 +23,7 @@ include('inc_session.php');
    
    // on recupére les variable transmise
    
-   $name = trim(strip_tags($_POST['name']));
+   $name = trim(strip_tags($_POST['nam']));
    $email =$_POST['email'];
    $adresse = trim(strip_tags($_POST['adress']));
    $adresse1 =trim(strip_tags($_POST['adress1']));
@@ -31,17 +31,18 @@ include('inc_session.php');
    $numero1 =$_POST['numero1'];
    $compt = trim(strip_tags($_POST['compt']));
    $enre = trim(strip_tags($_POST['enre']));
+   $active ="off";
    
-   if(isset($_FILES['logo']['name']) && $_FILES['logo']['error']==0) {
+   if(isset($_FILES['logo']['name']) AND $_FILES['logo']['error']==0) {
    $infosfichier=pathinfo($_FILES['logo']['name']);
   $extension_upload= strtolower($infosfichier['extension']);
-  $type_extension = array('png','jpeg','gif','jpg');
+  $type_extension = array('png','jpeg','gif','jpg','PNG','JPG');
 
-  if($_FILES['fichier']['size']>100000) {
+  if($_FILES['logo']['size']>1000000) {
 	echo'<div class="up">fichier trop lourd</div>';
   }
 
- elseif(!in_array($extension_upload,$type_extension)) {
+  elseif(!in_array($extension_upload,$type_extension)) {
 	
 	echo'<div class="up">l\'extension du fichier n\'est pas autorisée</div>';
   }
@@ -56,22 +57,23 @@ include('inc_session.php');
    }
    
   else{
-	  $nvname="";  
+	  $nvname="zapo";  
    }
    
    
-    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:18px;"></i> Vos données sont bien enregistrées</button>
+    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Prise en compte !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, logo= :log WHERE email_ocd= :email_ocd');
+         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_ocd= :email_ocd');
         $ret->execute(array(':email'=>$email,
 		                    ':des'=>$name,
 					        ':reser'=>$adresse,
 							':cci'=>$compt,
 							':id_en'=>$enre,
 							':res'=>$numero,
+							':ac'=> $active,
 							':log'=>$nvname,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));

@@ -2,13 +2,16 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-$options = [
-    'salt' => your_custom_function_for_salt(), 
+//$options = [
+   // 'salt' => your_custom_function_for_salt(), 
     //write your own code to generate a suitable & secured salt
-    'cost' => 12 // the default cost is 10
-];
+    //'cost' => 12 // the default cost is 10
+//];
 
-$hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
+//$hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
+
+    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,active FROM inscription_client WHERE email_ocd= :email_ocd');
+    $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  
      if($_POST['action']=="fetch"){
 		 
@@ -86,7 +89,7 @@ $hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
    
    // on recupére les données de la table 
    
-   $req=$bdd->prepare('SELECT DISTINCT email_ocd,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req=$bdd->prepare('SELECT DISTINCT email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
@@ -141,6 +144,7 @@ $hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
    }
    $stat="";
    
+   
    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
@@ -168,6 +172,111 @@ $hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
   
 	  
   }
+  
+  
+  if($_POST['action']=="add_user"){
+	  
+	        echo'<table>
+					<tr>
+					<th></th>
+					<th>Nom && prénom</th>
+					<th>Email_user</th>
+					<th>Numéro(télephone)</th>
+					<th>Poste</th>
+					<th>Action</th>
+					<th>Status(accès)</th>
+					</tr>';
+					while($donnees=$reh->fetch()){
+					
+					if($donnees['active']=="off"){
+					$active='<boutton type="button" class="bl" title="activer le user">bloqué</button>';
+					}
+					
+					else{
+						$active='<boutton type="button" class="acs" title="désactiver le user">ouvert</button>';
+				   }
+					echo'<tr>
+					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
+					<td>'.$donnees['user'].' </td>
+					<td>'.$donnees['email_user'].' </td>
+					<td>'.$donnees['numero'].'</td>
+					<td>'.$donnees['categories'].' </td>
+					<td><a href="#" data-id1='.$donnees['id'].' class="edit" title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
+					    <a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>
+						<td>'.$active.'</td>
+					</tr>';
+					}
+					echo'</table>';
+					
+	    }
+  
+  if($_POST['action']=="delete"){
+	  
+	$id =$_POST['id'];
+     echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  L\'utilisateur à été suprimé !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+     // surprimer le la ligne 
+     $res = $bdd->prepare('DELETE FROM inscription_client WHERE id= :id AND email_ocd= :email_ocd');
+     $res->execute(array(':id'=>$id,':email_ocd'=>$_SESSION['email_ocd'])); 
+      
+   }
+
+  if($_POST['action']=="edit"){
+	
+	// supprimer 
+   $id=$_POST['id'];
+   $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,numero,status FROM inscription_client WHERE email_ocd= :email_ocd AND id= :id');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+                       ':id'=>$id
+					  ));
+  $donnees = $req->fetch();
+  $user = $donnees['user'];
+  
+					  
+   
+	
+	echo'<form method="post" id="form3" action="">
+                   		
+                    <h2>Modifier les données de ce utilisateur</h2>
+					<div class="form-row">
+                    <div class="col">
+                       <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="'.$donnees['user'].'" required>
+                      <br/><span class="noms"></span></div>
+                    </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Numéro télephone</label><br/><input type="text" id="nums" name="nums" class="form-control" value="'.$donnees['numero'].'" placeholder="numero">
+                      <br/><span class="nums"></span></div>
+                    <div class="col">
+                    <br/><select id="roles" name="roles" required>
+                   <option value="'.$donnees['status'].'">'.$donnees['categories'].'</option>
+                 <option value="1">Dirigeant</option>
+				 <option value="2">Responsable</option>
+                  <option value="3">Gestionnaire</option>
+                  <option value="4">Réceptionniste(caisse)</option>
+               </select>
+                    <br/><span class="roles"></span></div>
+				 
+                 </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>Email(utilisé)</label><br/><input type="text" id="emais" name="emais" class="form-control" value="'.$donnees['email_user'].'" required><br/>
+					   <span class="emais"></span>
+                      </div>
+                    <div class="col">
+                   <label>Nouveau mot de pass</label> <input type="password" id="pas" name="pas" class="form-control">
+                    <br/><span class="pas"></span></div>
+				   <input type="hidden" name="ids" value="'.$donnees['id'].'">
+                  </div>
+				 <div class="form-row">
+                    <div class="col">
+                       <input type="submit" id="modifier" value="Modifier">
+                      </div>
+                 </div>
+				 </form>';
+		}
 
 
 

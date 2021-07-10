@@ -2,10 +2,9 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $req=$bdd->prepare('SELECT email_ocd,denomination,password,user,permission FROM inscription_client WHERE email_ocd= :email_ocd');
+  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donnees=$req->fetch();
-	$req->closeCursor();
+   
 
 ?>
 
@@ -50,13 +49,13 @@ include('inc_session.php');
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 
-#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.8;}
 .der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
 #der11{width:60%;margin-left:15%;} td{width:500px;color:black;padding-top:20px;}
 #der12{width:60%;margin-left:15%;display:none;}
-#der13{}
+#der13{width:60%;margin-left:15%;display:none;}
 #der14{}
 #der15{}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
@@ -78,6 +77,11 @@ img {
 #role{width:320px;height:40px;border:1px solid #eee;}
 label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
+td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
+#form3{width:700px;height:550px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
+#modifier{margin-left:30%;margin-top:3px;width:200px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;}
+.bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
+tr{border:1px solid #eee;}
 </style>
 
 </head>
@@ -449,6 +453,9 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 					 
 					 
 					<div id="der13">
+					<h2>Liste des utilisateurs de votre compte</h2>
+					 
+					 <div id="resultat"></div>
 					 
 					 </div><!--der13-->
 					 
@@ -501,7 +508,8 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
     <!-- Logout Modal-->
     <!-- Modal -->
   
-
+<!-- retour ajax edit user-->
+<div id="datos"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
 
@@ -540,6 +548,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+   $('#form3').css('display','none');
  });
  
     $('.der1').click(function(){
@@ -739,7 +748,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,emails:emails,num:num,password:password,nom:nom,role:role},
+	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data').html(data);
 	 
@@ -755,7 +764,124 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	 
 	  
 	});
- 
+	
+	// afficher les user
+	function load() {
+				var action="add_user";
+				$.ajax({
+					url: "result_view_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultat').html(data);
+					}
+				});
+			}
+
+			load();
+	
+	$(document).on('click','.delete', function() {
+	 var action="delete";
+	 var id = $(this).data('id2');
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,id:id},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data').html(data);
+	 }
+    });
+	
+	setInterval(function(){
+		 $('#data').html('');
+		 location.reload(true);
+	 },5000);
+    	 
+	});
+	
+	$(document).on('click','.edit', function() {
+	 var action="edit";
+	 var id = $(this).data('id1');
+	 
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,id:id},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#pak').css('display','block');
+	 $('#datos').html(data);
+	 }
+    });
+    	 
+	});
+	
+	$(document).on('click','#modifier', function() {
+	event.preventDefault();
+	var action="editvalide";
+	 var form_data = $(this).serialize();
+	 var noms = $('#noms').val();
+	 var roles = $('#roles').val();
+	 var password = $('#pas').val();
+	 var nums =$('#nums').val();
+	 var emais = $('#emais').val();
+	 var ids =$('#ids').val();
+	 
+	 // regex //
+	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
+    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
+    var number = /^[0-9+]{8,14}$/;
+	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
+	
+	if(nom.length==""){
+		$('#noms').css('border-color','red');
+		
+	}
+	 
+	 else if (noms.length > 60){
+      $('.noms').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depasser 60');
+    }
+	
+	else if (role==""){
+      $('.roles').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> vous devez choisir un role pour l\'utilisateur');
+    }
+	 
+	 else if (!reg.test(emais)){
+      $('.emais').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
+    }
+	
+	else if (password!=""){
+      
+	  if (pas.length > 12){
+      $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du mot de pass ne doit pas depasser 12');
+    }
+	
+	if (!pass.test(password)){
+      $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le mot de pass doit contenir une lettre, un chiffre et un caractère sépcial(!$@#)');
+    }
+	
+	  $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du mot de pass ne doit pas depasser 12');
+    }
+	 else if (!number.test(num)){
+      $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
+    }
+	
+	else{
+		
+		$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,ids:ids,emais:emais,nums:nums,prenom:prenom,password:password,noms:noms,roles:roles},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data').html(data);
+		
+	}
+	
+	});
+	}
+	
+	});
+	
  
  });
 </script>
