@@ -81,6 +81,7 @@ td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial
 #form3{width:700px;height:550px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
 #modifier{margin-left:30%;margin-top:3px;width:200px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;}
 .bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
+.acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
 tr{border:1px solid #eee;}
 </style>
 
@@ -812,6 +813,49 @@ tr{border:1px solid #eee;}
 	 $('#datos').html(data);
 	 }
     });
+	
+    	 
+	});
+	
+	$(document).on('click','.bl', function() {
+	 var action="bloquer";
+	 var id = $(this).data('id3');
+	 
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,id:id},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	 $('#datos').html(data);
+	 load();
+	 }
+    });
+	
+	setInterval(function(){
+		 $('#datos').html('');
+		 location.reload(true);
+	 },5000);
+    	 
+	});
+	
+	$(document).on('click','.acs', function() {
+	 var action="acces";
+	 var id = $(this).data('id4');
+	 
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{action:action,id:id},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	 $('#datos').html(data);
+	 load();
+	 }
+    });
+	
+	setInterval(function(){
+		 $('#datos').html('');
+		 location.reload(true);
+	 },5000);
     	 
 	});
 	

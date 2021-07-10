@@ -189,11 +189,11 @@ include('inc_session.php');
 					while($donnees=$reh->fetch()){
 					
 					if($donnees['active']=="off"){
-					$active='<boutton type="button" class="bl" title="activer le user">bloqué</button>';
+					$active='<button type="button" class="bl" data-id3="'.$donnees['id'].'" title="activer le user">bloqué</button>';
 					}
 					
 					else{
-						$active='<boutton type="button" class="acs" title="désactiver le user">ouvert</button>';
+						$active='<button type="button" class="acs" data-id4="'.$donnees['id'].'" title="désactiver le user">ouvert</button>';
 				   }
 					echo'<tr>
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
@@ -225,6 +225,9 @@ include('inc_session.php');
 	
 	// supprimer 
    $id=$_POST['id'];
+   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  L\'utilisateur à été suprimé !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+   
    $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,numero,status FROM inscription_client WHERE email_ocd= :email_ocd AND id= :id');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
                        ':id'=>$id
@@ -277,6 +280,39 @@ include('inc_session.php');
                  </div>
 				 </form>';
 		}
+		
+	
+ if($_POST['action']=="bloquer"){
+	$id=$_POST['id']; 
+	$active="on";
+    // Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> ce compte à été activé !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>'; 
+		 
+		 $ret=$bdd->prepare('UPDATE inscription_client SET active= :ac  WHERE id= :id AND email_ocd= :email_ocd');
+        $ret->execute(array(':ac'=>$active,
+		                    ':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));	
+	 }
+ 
+  if($_POST['action']=="acces"){
+	 
+	 $id =$_POST['id'];
+	 // Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> Ce compte à été bloqué !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+		
+		$active="off";
+         $ret=$bdd->prepare('UPDATE inscription_client SET  active= :ac  WHERE id= :id AND email_ocd= :email_ocd');
+        $ret->execute(array(':ac'=>$active,
+		                    ':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	 
+	 }
 
 
 
