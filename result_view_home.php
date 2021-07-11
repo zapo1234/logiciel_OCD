@@ -2,15 +2,8 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-//$options = [
-   // 'salt' => your_custom_function_for_salt(), 
-    //write your own code to generate a suitable & secured salt
-    //'cost' => 12 // the default cost is 10
-//];
 
-//$hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
-
-    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,active FROM inscription_client WHERE email_ocd= :email_ocd');
+    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,etat,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
     $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  
      if($_POST['action']=="fetch"){
@@ -178,7 +171,7 @@ include('inc_session.php');
   
   if($_POST['action']=="add_user"){
 	  
-	        echo'<table>
+	        echo'<table class="tab">
 					<tr>
 					<th></th>
 					<th>Nom && prénom</th>
@@ -187,6 +180,7 @@ include('inc_session.php');
 					<th>Poste</th>
 					<th>Action</th>
 					<th>Status(accès)</th>
+					<th>Online(user)</th>
 					</tr>';
 					while($donnees=$reh->fetch()){
 					
@@ -197,6 +191,16 @@ include('inc_session.php');
 					else{
 						$active='<button type="button" class="acs" data-id4="'.$donnees['id'].'" title="désactiver le user">ouvert</button>';
 				   }
+				   
+				   if($donnees['etat']=="connecte"){
+					   
+					  $etat ='<i class="fas fa-circle" style="font-sze:16px;color:#3DEA29"></i>  en ligne';
+				   }
+				   
+				   else{
+					   
+					   $etat ='dernière connexion depuis le'.$donnees['date'].' à '.$donnees['heure'].' ';
+				   }
 					echo'<tr>
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
 					<td>'.$donnees['user'].' </td>
@@ -206,6 +210,7 @@ include('inc_session.php');
 					<td><a href="#" data-id1='.$donnees['id'].' class="edit" title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
 					    <a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>
 						<td>'.$active.'</td>
+						<td>'.$etat.'</td>
 					</tr>';
 					}
 					echo'</table>';
@@ -329,7 +334,65 @@ include('inc_session.php');
 
 
 
+  if($_POST['action']=="editvalidate"){
+	  $ids = $_POST['ids'];
+     	$password =$_POST['password'];  
+	  // hash sur le mot de pass
+	  $options = [
+      'cost' => 12 // the default cost is 10
+   ];
 
+  $hash = password_hash($password, PASSWORD_DEFAULT, $options);
+	
+	  
+	  // recupére les variables
+	  
+	  $noms =$_POST['noms'];
+	  $nums =$_POST['nums'];
+	  $roles =$_POST['roles'];
+	  $prenom =$_POST['prenom'];
+	  $email =$_POST['emais'];
+	  
+	  if($roles==1){
+	 $status=1;
+     $categories="dirigeant";
+     $permission ="user:boss";	 
+	}
+   elseif($roles==2){
+	  $status=2;
+     $categories="Responsable";
+     $permission ="user:boss";	 
+   }
+   
+   elseif($roles==3){
+	 $status=3;
+     $categories="Gestionnaire";
+     $permission ="user:gestionnaire";  
+	}
+   
+   else{
+	 $status=4;
+     $categories="Receptionniste";
+     $permission ="user:employes";  
+   }
+	  // Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Vos données sont modifiées !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+	  // modifier les valeurs dans la table
+	  
+	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user = :email, user:us, numero= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id, email_ocd= :email_ocd');
+       $ret->execute(array(':email'=>$email,
+	                       ':us'=>$noms,
+						   ':num'=>$numero,
+						   ':pass'=>$hash,
+						   ':perm'=>$permission,
+						   ':cat'=>$categories,
+						   ':stat'=>$status,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));	
+	  
+ }
 
 
 
