@@ -95,7 +95,7 @@ td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
 tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
-.resultats{width:60%;}
+.resultats{width:60%;} 
 </style>
 
 </head>
@@ -398,7 +398,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
                     <div class="col">
                    <label>Nouveau mot de pass</label> <input type="password" id="pas" name="pas" class="form-control">
                     <br/><span class="pas"></span></div>
-				   <input type="hidden" name="ids" value="<?php echo$ids;?>">
+				   <input type="hidden" name="ids" id="ids" value="<?php echo$ids;?>">
                   </div>
 				 <div class="form-row">
                     <div class="col">
@@ -525,12 +525,14 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
       $('.emais').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
     }
 	
-	 else if (!number.test(nums)){
+	else if(nums!=""){
+	  if (!number.test(nums)){
       $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
-    }
+     }
+	}
 	
 	else if (!pass.test(password)){
-      $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du mot de pass');
+      $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du mot de pass');
     }
 	
 	else{
@@ -538,14 +540,18 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 		$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,ids:ids,emais:emais,nums:nums,prenom:prenom,password:password,noms:noms,roles:roles},
+	data:{action:action,ids:ids,emais:emais,nums:nums,password:password,noms:noms,roles:roles},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#donns').html(data);
+	 $('#pak').css('display','none');	
 	}
-	
 	});
-	}
 	
+	setInterval(function(){
+		 $('#donns').html('');
+		 location.reload(true);
+	 },5000);
+	}
 	});
  
  });
