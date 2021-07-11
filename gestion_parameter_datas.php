@@ -55,7 +55,7 @@ include('inc_session.php');
 
 #der11{width:60%;margin-left:15%;} td{width:500px;color:black;padding-top:20px;}
 #der12{width:60%;margin-left:15%;display:none;}
-#der13{width:60%;margin-left:15%;display:none;}
+#der13{width:65%;margin-left:10%;display:none;}
 #der14{}
 #der15{width:60%;margin-left:15%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
@@ -78,12 +78,13 @@ img {
 label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
-#form3{width:700px;height:550px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
+#form3{width:40%;height:550px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
 #modifier,#modipass{margin-left:30%;margin-top:3px;width:220px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;height:35px border-radius:15px;}
 .bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
 tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
+.resultats{width:60%;}
 </style>
 
 </head>
@@ -96,7 +97,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <div class="titre">Lexique 1</div>  
+                    <div class="titre">Instruction 1</div>  
                     <div>
 					<li>Gérer les informations de votre entreprise</li>
 					<li>Fournir un logo qui serait visualiser sur vos facture</li>
@@ -108,7 +109,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 					</div><!--lexique 1-->
 					
 					<div class="bs">
-                     <div class="titre">Lexique 2</div>  
+                     <div class="titre">Instruction 2</div>  
                     
 					<li>Ajouter des comptes pour vos employés</li>
 					<li>Possibilité d'ajouter 5 compte maximum</li>
@@ -119,7 +120,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
                     </div>
 					
 					<div class="bs">
-                     <div class="titre">Lexique 3</div>  
+                     <div class="titre">Instruction 3</div>  
 					<li>Ajouter des comptes pour vos employés</li>
 					<li>Possibilité d'ajouter 5 compte maximum</li>
 					<li>Fournir un email et un mot de pass</li>
@@ -822,6 +823,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	data:{action:action,id:id},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data').html(data);
+	 load();
 	 }
     });
 	
@@ -938,7 +940,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	
 	  $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du mot de pass ne doit pas depasser 12');
     }
-	 else if (!number.test(num)){
+	 else if (!number.test(nums)){
       $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
     }
 	
@@ -950,7 +952,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	data:{action:action,ids:ids,emais:emais,nums:nums,prenom:prenom,password:password,noms:noms,roles:roles},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data').html(data);
-		
+	  load();
 	}
 	
 	});

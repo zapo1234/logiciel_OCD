@@ -2,9 +2,22 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-   
+   $record_peage=5;
+$page="";
+
+if(isset($_POST['page'])){
+$page = $_POST['page'];
+}
+
+else {
+
+$page=1;	
+	
+}
+
+$smart_from =($page -1)*$record_peage;
    // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,icons,infos FROM chambre WHERE email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	
@@ -16,13 +29,15 @@ include('inc_session.php');
 	// entete du tableau
 	 echo'	<table class="table">
      <thead>
-     <tr>
-      <th scope="col">Type de logement</th>
+     <tr class="tf">
+      <th scope="col"><i class="material-icons" style="font-size:17px;color:#111E7F">home</i>Type de logement</th>
 	  <th scope="col">Local désigné</th>
-      <th scope="col">Nbrs(occupant)</th>
-	  <th scope="col">Tarif du jour</th>
-      <th scope="col">équipements</th>
+	  <th scope="col">équipements</th>
+	   <th scope="col">équipements(S)</th>
+	   <th scope="col">Nbrs(occupant)</th>
+	  <th scope="col">Tarif</th>
 	  <th scope="col">Description</th>
+	  <th scope="col">Découvrir</th>
 	  <th scope="col">modifier</th>
 	  <th scope="col">suprimer</th>
       </tr>
@@ -33,13 +48,16 @@ include('inc_session.php');
 	
 	// afficher dans un tableau les données des chambres
 	 echo'<tr>
-      <td>'.$donnees['type_logement'].'</td>
-	  <td>'.$donnees['chambre'].'</td>
+      <td> <span class="home">'.$donnees['type_logement'].'</span></td>
+	  <td class="color">'.$donnees['chambre'].'</td>
+	  <td><h3>équipements</h3><span class="div">'.str_replace($rt,$rem,$donnees['equipement']).'</span></td>
+	  <td><i style="font-size:12px" class="fa">&#xf00c;</i> '.str_replace($rt,$rs,$donnees['equipements']).'
+	  </td>
       <td>'.$donnees['icons'].'</td>
-	  <td>'.$donnees['cout_nuite'].' FR</td>
-      <td><span class="div">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><br/> <i style="font-size:12px" class="fa">&#xf00c;</i> '.str_replace($rt,$rs,$donnees['equipements']).'</td>
-	  <td>'.$donnees['infos'].'</td>
-	  <td><a href="edit_data_home.php?home='.$donnees['id_chambre'].'"><i class="material-icons" style="font-size:16px">create</i></a></td>
+	  <td class="color">tarif/journalier<br/>'.$donnees['cout_nuite'].' FR<br/><br/>tarif/horaire<br/>'.$donnees['cout_pass'].'FR</td>
+      <td>'.$donnees['infos'].'</td>
+	  <td><a href="view_data_home.php?home='.$donnees['id_chambre'].'" title="plus d\'infos"><i class="fas fa-eye" style="font-size:13px"></i></a></td>
+	  <td><a href="edit_data_home.php?home='.$donnees['id_chambre'].'" title="modifier"><i class="material-icons" style="font-size:13px">create</i></a></td>
 	  <td><a href="#" data-id1='.$donnees['id_chambre'].' class="home"><i class="fas fa-trash"></i></a></td>
 	  </tr>';
 	}
@@ -47,7 +65,17 @@ include('inc_session.php');
 	echo' 
       </tbody>
      </table>';
-
+    $req->closeCursor();
+   // on compte le nombre de ligne de la table
+   $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd');
+    $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $dns=$reg->fetch();
+   $totale_page=$dns['nbrs']/$record_peage;
    
+   echo'<div class="pied_function">';
+   for($i=1; $i<=$totale_page; $i++) {
+	   
+	   echo'<div class="pied_page" style="cursor:pointer"><button class="bout" id="'.$i.'">'.$i.'</div>';
+    }
 
 ?>

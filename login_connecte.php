@@ -4,6 +4,13 @@ include('connecte_db.php');
 
 if(isset($_POST['id_ocd'])) {
 	
+	//$options = [
+   // 'salt' => your_custom_function_for_salt(), 
+    //write your own code to generate a suitable & secured salt
+    //'cost' => 12 // the default cost is 10
+//];
+
+//$hash = password_hash($your_password, PASSWORD_DEFAULT, $options);
 	
 	$jour = array("Dim","Lun","Mar","Mercredi","Jeu","Vendr","Sam");
    $mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
@@ -29,6 +36,7 @@ if(isset($_POST['id_ocd'])) {
 		if($donnees['active']!=$active) {
 			
 			$_SESSION['email_ocd']=$donnees['email_ocd'];
+			$_SESSION['email_user']=$_POST['email_ocd'];
 			$_SESSION['pose']= $_POST['id_ocd'];
 			$_SESSION['user']= $donnees['user'];
 			$_SESSION['permission'] = $donnees['permission'];
@@ -37,10 +45,10 @@ if(isset($_POST['id_ocd'])) {
 			  
 			  
 			  //On modifie les donnees
-	           $reks=$bdd->prepare('UPDATE inscription_client SET etat=\'connecte\', date= :nvte, heure = :nvh WHERE email_ocd= :email_ocd');
+	           $reks=$bdd->prepare('UPDATE inscription_client SET etat=\'connecte\', date= :nvte, heure = :nvh WHERE email_user= :email_user');
 			   $reks->execute(array( ':nvte'=>$date,
 									':nvh'=>$heure,
-							  ':email_ocd'=>$_POST['email_ocd']));
+							       ':email_user'=>$_POST['email_ocd']));
 	 // on renvoi la page
        echo'<SCRIPT LANGUAGE="JavaScript">
        document.location.href="acceuil_gestion_hotel.php"
