@@ -354,7 +354,6 @@ if($_POST['action']=="editvalidate"){
 	  $noms =$_POST['noms'];
 	  $nums =$_POST['nums'];
 	  $roles =$_POST['roles'];
-	  $prenom =$_POST['prenom'];
 	  $email =$_POST['emais'];
 	  
 	  if($roles==1){
@@ -379,21 +378,18 @@ if($_POST['action']=="editvalidate"){
      $categories="Receptionniste";
      $permission ="user:employes";  
    }
-	  // Actualiser des données les données dans la base de données inscription_client
-   // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Vos données sont modifiées !
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-	  // modifier les valeurs dans la table
 	  
-	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user = :email, user:us, numero= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
+	  
+	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
        $ret->execute(array(':email'=>$email,
 	                       ':us'=>$noms,
-						   ':num'=>$numero,
+						   ':num'=>$nums,
 						   ':pass'=>$hash,
 						   ':perm'=>$permission,
 						   ':cat'=>$categories,
 						   ':stat'=>$status,
-                            ':email_ocd'=>$_SESSION['email_ocd']
+						   ':id'=>$ids,
+                           ':email_ocd'=>$_SESSION['email_ocd']
 					 ));	
 	  
  }
