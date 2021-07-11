@@ -143,8 +143,8 @@ include('inc_session.php');
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données dans la table facture
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,status,active,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:active,:logo)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,date,heure,etat,status,active,logo) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:active,:logo)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -153,6 +153,7 @@ include('inc_session.php');
 							':id_entreprise'=>$id_entreprise,
 							':user'=>$user,
 							':numero'=>$_POST['num'],
+							':numero1'=>$_POST['num'],
 							':permission'=>$permission,
 							':password'=>$pass,
 							':categories'=>$categories,
@@ -194,12 +195,12 @@ include('inc_session.php');
 				   
 				   if($donnees['etat']=="connecte"){
 					   
-					  $etat ='<i class="fas fa-circle" style="font-sze:16px;color:#3DEA29"></i>  en ligne';
+					  $etat ='<i class="fas fa-circle" style="font-size:12px;color:#3DEA29"></i>  en ligne';
 				   }
 				   
 				   else{
 					   
-					   $etat ='dernière connexion depuis le'.$donnees['date'].' à '.$donnees['heure'].' ';
+					   $etat ='<span class="dert">connecté depuis le'.$donnees['date'].', à '.$donnees['heure'].'</span>';
 				   }
 					echo'<tr>
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
@@ -207,7 +208,7 @@ include('inc_session.php');
 					<td>'.$donnees['email_user'].' </td>
 					<td>'.$donnees['numero'].'</td>
 					<td>'.$donnees['categories'].' </td>
-					<td><a href="#" data-id1='.$donnees['id'].' class="edit" title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
+					<td><a href="gestion_parameter_data.php?user='.$donnees['id'].'"  title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
 					    <a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>
 						<td>'.$active.'</td>
 						<td>'.$etat.'</td>
@@ -277,7 +278,7 @@ include('inc_session.php');
                   </div>
 				 <div class="form-row">
                     <div class="col">
-                       <input type="submit" id="modifier" value="Modifier">
+                       <input type="button" id="modifier" value="Modifier">
                       </div>
                  </div>
 				 </form>';
@@ -324,17 +325,22 @@ include('inc_session.php');
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Mot de pass crée !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-		$pass =$_POST['pass'];
+		$password =$_POST['pass'];  
+	  // hash sur le mot de pass
+	  $options = [
+      'cost' => 12 // the default cost is 10
+     ];
+
+    $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+	
          $ret=$bdd->prepare('UPDATE inscription_client SET  password= :pass  WHERE  email_user= :email_user');
-        $ret->execute(array(':pass'=>$pas,
-                            ':email_ocd'=>$_SESSION['email_ocd']
+        $ret->execute(array(':pass'=>$hash,
+                            ':email_user'=>$_SESSION['email_user']
 					 ));	
 		
 		}
 
-
-
-  if($_POST['action']=="editvalidate"){
+if($_POST['action']=="editvalidate"){
 	  $ids = $_POST['ids'];
      	$password =$_POST['password'];  
 	  // hash sur le mot de pass
@@ -344,9 +350,7 @@ include('inc_session.php');
 
   $hash = password_hash($password, PASSWORD_DEFAULT, $options);
 	
-	  
-	  // recupére les variables
-	  
+	 // recupére les variables
 	  $noms =$_POST['noms'];
 	  $nums =$_POST['nums'];
 	  $roles =$_POST['roles'];
@@ -381,7 +385,7 @@ include('inc_session.php');
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 	  // modifier les valeurs dans la table
 	  
-	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user = :email, user:us, numero= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id, email_ocd= :email_ocd');
+	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user = :email, user:us, numero= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
        $ret->execute(array(':email'=>$email,
 	                       ':us'=>$noms,
 						   ':num'=>$numero,

@@ -2,9 +2,21 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories FROM inscription_client WHERE email_ocd= :email_ocd');
-   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ if(!isset($_GET['user'])){
+	
+   header('location:index.php');	
+ }
+ $user =$_GET['user'];
+  $req=$bdd->prepare('SELECT id,email_ocd,email_user,password,numero,numero1,user,categories FROM inscription_client WHERE id= :id AND email_ocd= :email_ocd');
+   $req->execute(array(':id'=>$user,
+                       ':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees =$req->fetch();
    
+   $email =$donnees['email_user'];
+   $users =$donnees['user'];
+   $numero =$donnees['numero1'];
+   $categories =$donnees['categories'];
+   $ids=$user;
 
 ?>
 
@@ -44,7 +56,6 @@ include('inc_session.php');
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -84,7 +95,7 @@ td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
 tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
-.resultats{width:60%;} .dert{font-family:10px;}
+.resultats{width:60%;}
 </style>
 
 </head>
@@ -354,151 +365,52 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
                      
 					 <div class="content2">
 					 
-					 <div id="der12">
-					 <h2>Créer un compte pour votre collaborateur</h2>
-					 <form method="post" id="form2" action="">
-                     <div class="form-row">
+					 <form method="post" id="form3" action="zapo.php">
+                   		
+                    <h2>Modifier les données de ce utilisateur</h2>
+					<div class="form-row">
                     <div class="col">
-                       <label>Nom </label><br/><input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
-                      <br/><span class="nom"></span></div>
-                    <div class="col">
-                    <label>Prénom</label><br/><input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
-                    <br/><span class="prenom"></span></div>
-				 
-                 </div>
+                       <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="<?php echo$users;?>" required>
+                      <br/><span class="noms"></span></div>
+                    </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Numéro télephone</label><br/><input type="text" id="num" name="num" class="form-control">
-                      <br/><span class="num"></span></div>
+                       <label>Numéro télephone</label><br/><input type="text" id="nums" name="nums" class="form-control" value="<?php echo$numero;?>" placeholder="numero">
+                      <br/><span class="nums"></span></div>
                     <div class="col">
-                    <br/><select id="role" name="role" required>
-                   <option value="">Attribuer un role</option>
+                    <br/><select id="roles" name="roles" required>
+                   <option value="<?phpecho$categories;?>"><?php echo$categories;?></option>
                  <option value="1">Dirigeant</option>
 				 <option value="2">Responsable</option>
                   <option value="3">Gestionnaire</option>
                   <option value="4">Réceptionniste(caisse)</option>
                </select>
-                    <br/><span class="role"></span></div>
+                    <br/><span class="roles"></span></div>
 				 
                  </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Email(utilisé)</label><br/><input type="text" id="emails" name="emails" class="form-control"  required><br/>
-					   <span class="emails"></span>
+                       <label>Email(utilisé)</label><br/><input type="text" id="emais" name="emais" class="form-control" value="<?php echo$email;?>" required><br/>
+					   <span class="emais"></span>
                       </div>
                     <div class="col">
-                   <label>Mot de pass</label> <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
-                    <br/><span class="pass"></span></div>
-				 <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
-                 </div>
-				 
-				 
+                   <label>Nouveau mot de pass</label> <input type="password" id="pas" name="pas" class="form-control">
+                    <br/><span class="pas"></span></div>
+				   <input type="hidden" name="ids" value="<?php echo$ids;?>">
+                  </div>
 				 <div class="form-row">
                     <div class="col">
-                       <input type="submit" id="names" value="créer le compte">
+                       <input type="button" id="modifier" value="Modifier">
+					   <a href="gestion_parameter_datas.php"><input type="button" id="modifier" value="retour au paramètres"></a>
                       </div>
-				  <div id="data"></div><!--ajax--->
                  </div>
-				 
-                  </form>
-					 
-					 </div><!--der12-->
-					 
-					 <div id="der11">
-					 <form method="post" id="form1"  enctype="multipart/form-data">
-					 <h2>Informations sur votre entreprise</h2>
-                     <div class="form-row">
-                    <div class="col">
-                       <label>Nom de la societé(dénomination)</label><br/><input type="text" id="nam" name="nam" class="form-control" placeholder="First name" required><br/>
-					   <span class="nam"></span>
-                      </div>
-                    <div class="col">
-                    <label>Email(societé)</label><br/><input type="text" id="email" name="email" class="form-control" placeholder="Email" required><br/>
-					<span class="email"></span>
-                    </div>
-				 
-                 </div>
-				 
-				 <div class="form-row">
-                    <div class="col">
-                       <label>Numéro télephone</label><br/><input type="text" id="numero" name="numero" class="form-control" placeholder="Votre numéro"><br/>
-					   <span class="numero"></span>
-                      </div>
-                    <div class="col">
-                    <label>Numéro sécondaire(si existe)</label><br/><input type="text" id="numero1" name="numero1" class="form-control" placeholder="Last name"><br/>
-					<span class="numero1"></span>
-                    </div>
-				 
-                 </div>
-				 
-				 <div class="form-row">
-                    <div class="col">
-                       <label>Adresse</label><br/><input type="text" id="adress" name="adress" class="form-control" placeholder="Votre adresse"><br/>
-					   <span class="adress"></span>
-                      </div>
-                    <div class="col">
-                   <label>Adresse suite</label> <input type="text" id="adress1" name="adress1" class="form-control" placeholder="Last name">
-                    </div>
-				 
-                 </div>
-				 
-				 <div class="form-row">
-                    <div class="col">
-                       <label>N° d'enregistrement</label><br/><input type="text" id="enre" name="enre" class="form-control" placeholder="First name">
-                      </div>
-                    <div class="col">
-                   <label>N° de compte contribuable</label> <input type="text" id="compt" name="compt" class="form-control" placeholder="Last name">
-                    </div>
-				 
-                 </div>
-				 
-				 <div class="form-row">
-                    <div class="col">
-                       <label>Importer votre logo</label><input type="file" name="logo" class="form-control" placeholder="First name">
-                      <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
-					  </div>
-				 
-                 </div>
-				 
-				 <div class="form-row">
-                    <div class="col">
-                       <input type="submit" id="name" value="Valider">
-                      </div>
-				  
-                 </div>
-				 <div id="datas"></div><!--datas retour ajax -->
 				 </form>
 					 
-					 
-					 </div><!--der12-->
-					 
-					 
-					<div id="der13">
-					<h2>Liste des utilisateurs de votre compte</h2>
-					 
-					 <div id="resultat"></div>
-					 
-					 </div><!--der13-->
-					 
-					  <div id="der14">
-					     
-					    </div><!--der15-->
-				  
-				  
 					
 					 
-					 <div id="der15">
-					 <h2>Modifier votre mot de pass</h2>
-					 <form method="post" id="form4" action="">
-                     <div class="form-row">
-                    <div class="col">
-                   <label>Nouveau Mot de pass</label><br/><input type="password" class="form-control" name="past" id="past" required>
-                    <br/><span class="pass"></span></div>
-                    </div>
-					 <input type="button" id="modipass" value="Nouveau mot de pass">
-					 </form>
+					 
 				</div><!--div result-->
 
 					 
@@ -547,7 +459,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 
 <div id="donns"></div>
 <!--div black-->
-<div id="pak" style="display:none"></div>
+<div id="pak"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -577,170 +489,17 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
- 
  });
  
- $('#pak').click(function(){
-	$('#examp').css('display','none');
-   $('#pak').css('display','none');
-   $('.reini').css('display','none');
-   $('#form3').css('display','none');
- });
- 
-    $('.der1').click(function(){
-	$('.der1').css({"border-bottom":"3px solid #0661BC","color":"#0661BC"});
-	$('.der3').css({"border":"1px solid #eee","color":"black"});
-	$('.der4').css({"border":"1px solid #eee","color":"black"});
-	$('.der5').css({"border":"1px solid #eee","color":"black"});
-	$('.der2').css({"border":"1px solid #eee","color":"black"});
-	$('#der11').css('display','block');
-	$('#der12').css('display','none');
-	$('#der13').css('display','none');
-	$('#der14').css('display','none');
-	$('#der15').css('display','none');
-	});
- 
- $('.der2').click(function(){
- $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der2').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
- $('.der3').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border":"1px solid #eee","color":"black"});
- $('.der5').css({"border":"1px solid #eee","color":"black"});
- $('#der11').css('display','none');
- $('#der12').css('display','block');
- $('#der13').css('display','none');
- $('#der14').css('display','none');
- $('#der15').css('display','none'); 
- });
- 
- $('.der3').click(function(){
- $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der3').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
- $('.der2').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border":"1px solid #eee","color":"black"});
- $('.der5').css({"border":"1px solid #eee","color":"black"});
- $('#der11').css('display','none');
- $('#der12').css('display','none');
- $('#der13').css('display','block');
- $('#der14').css('display','none');
- $('#der15').css('display','none');
- });
- 
- $('.der4').click(function(){
- $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
- $('.der2').css({"border":"1px solid #eee","color":"black"});
- $('.der3').css({"border":"1px solid #eee","color":"black"});
- $('.der5').css({"border":"1px solid #eee","color":"black"});
- $('#der11').css('display','none');
- $('#der12').css('display','none');
- $('#der13').css('display','none');
- $('#der14').css('display','block');
- $('#der15').css('display','none');
- });
- 
- $('.der5').click(function(){
- $('.der1').css({"border":"1px solid #eee","color":"black"});
- $('.der5').css({"border-bottom":"4px solid #0661BC","color":"#0661BC"});
- $('.der2').css({"border":"1px solid #eee","color":"black"});
- $('.der3').css({"border":"1px solid #eee","color":"black"});
- $('.der4').css({"border":"1px solid #eee","color":"black"});
- $('#der11').css('display','none');
- $('#der12').css('display','none');
- $('#der13').css('display','none');
- $('#der14').css('display','none');
- $('#der15').css('display','block');
- });
- 
-  $('#form1').on('submit', function(event) {
-	event.preventDefault();
-      
-	 var form_data = $(this).serialize();
-	 var nam = $('#nam').val();
-	 var adress = $('#adress').val();
-	 var adress = $('#adress1').val();
-	 var numero = $('#numero').val();
-	 var numero1 = $('#numero1').val();
-	 var compt = $('#compt').val();
-	 var enre = $('#enre').val();
-	 var email = $('#email').val();
-	 
-	// regex //
-	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
-    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
-    var number = /^[0-9+]{8,14}$/;
-	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-    
+ $(document).on('click','#modifier', function() {
 	
-   if(nam.length==""){
-		$('#nam').css('border-color','red');
-		
-	}
-	 
-	 else if (nam.length > 60){
-      $('.nam').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depassé 60');
-    }
-	
-	else if (adress.length >100){
-      $('.adress').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> l\'adresse ne doit pas dépasser 100 caractères');
-    }
-	 
-	 else if (!reg.test(email)){
-      $('.email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email ');
-    }
-	
-	 else if (!number.test(numero)){
-      $('.numero').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur  sur la syntaxe du numéro de téléphone ');
-    }
-	
-	
-	 else if (numero.length > 14){
-      $('.numero').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro de télephone ne doit pas depasser 14chiffres');
-    }
-	
-	else if (enre.length > 14){
-      $('.enre').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro d\'immatricualtion ne doit pas dépasser 14chiffres');
-    }
-	
-	else if (compt.length > 14){
-      $('.compt').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro du compte contribuable ne doit pas depasser 14chiffres');
-    }
-	
-	else{
-		
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'datas_parameter.php',// on traite par la fichier
-	async: false,
-	data:new FormData(this),
-	contentType:false,
-	processData:false,
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#datas').html(data);
-	 
-	}
-    });
-	
-	setInterval(function(){
-		 $('#datas').html('');
-		 location.reload(true);
-	 },5000);
-		
-	}
-	
- });
-  
-  $(document).on('click','#names', function(event) {
-	  event.preventDefault();
-	  
-	  var action="parameter";
-	 var form_data = $(this).serialize();
-	 var nom = $('#nom').val();
-	 var role = $('#role').val();
-	 var prenom = $('#prenom').val();
-	 var password = $('#pass').val();
-	 var num =$('#num').val();
-	 var emails = $('#emails').val();
+	var action="editvalidate";
+	 var noms = $('#noms').val();
+	 var roles = $('#roles').val();
+	 var password = $('#pas').val();
+	 var nums =$('#nums').val();
+	 var emais = $('#emais').val();
+	 var ids =$('#ids').val();
 	 
 	 // regex //
 	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
@@ -749,190 +508,44 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
 	
-	if(nom.length==""){
-		$('#nom').css('border-color','red');
+	if(noms.length==""){
+		$('#noms').css('border-color','red');
 		
 	}
 	 
-	 else if (nom.length > 60){
-      $('.nom').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depasser 60');
+	 else if (noms.length > 60){
+      $('.noms').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du nom ne doit pas depasser 60');
     }
 	
-	else if (role==""){
-      $('.role').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> vous devez choisir un role pour l\'utilisateur');
+	else if (roles==""){
+      $('.roles').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> vous devez choisir un role pour l\'utilisateur');
     }
 	 
-	 else if (!reg.test(emails)){
-      $('.email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
+	 else if (!reg.test(emais)){
+      $('.emais').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
     }
 	
-	else if (nom.length > 12){
-      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du mot de pass ne doit pas depasser 12');
+	 else if (!number.test(nums)){
+      $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
     }
 	
 	else if (!pass.test(password)){
-      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le mot de pass doit contenir une lettre, un chiffre et un caractère sépcial(!$@#)');
-    }
-	
-	 else if (!number.test(num)){
-      $('.num').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
-    }
-	
-	
-	else{
-		
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role},
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data').html(data);
-	 
-	}
-    });
-	
-	setInterval(function(){
-		 $('#data').html('');
-		 location.reload(true);
-	 },5000);
-		
-	}
-	 
-	  
-	});
-	
-	// afficher les user
-	function load() {
-				var action="add_user";
-				$.ajax({
-					url: "result_view_home.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultat').html(data);
-					}
-				});
-			}
-
-			load();
-	
-	$(document).on('click','.delete', function() {
-	 var action="delete";
-	 var id = $(this).data('id2');
-	 $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,id:id},
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data').html(data);
-	 load();
-	 }
-    });
-	
-	setInterval(function(){
-		 $('#data').html('');
-		 location.reload(true);
-	 },5000);
-    	 
-	});
-	
-	$(document).on('click','.edit', function() {
-	 var action="edit";
-	 var id = $(this).data('id1');
-	 
-	 $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,id:id},
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#pak').css('display','block');
-	 $('#datos').html(data);
-	 }
-    });
-	
-    	 
-	});
-	
-	$(document).on('click','.bl', function() {
-	 var action="bloquer";
-	 var id = $(this).data('id3');
-	 
-	 $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,id:id},
-	success:function(data) { // on traite le fichier recherche apres le retour
-	 $('#datos').html(data);
-	 load();
-	 }
-    });
-	
-	setInterval(function(){
-		 $('#datos').html('');
-		 location.reload(true);
-	 },5000);
-    	 
-	});
-	
-	$(document).on('click','.acs', function() {
-	 var action="acces";
-	 var id = $(this).data('id4');
-	 
-	 $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,id:id},
-	success:function(data) { // on traite le fichier recherche apres le retour
-	 $('#datos').html(data);
-	 load();
-	 }
-    });
-	
-	setInterval(function(){
-		 $('#datos').html('');
-		 location.reload(true);
-	 },5000);
-    	 
-	});
-	
-	
-	
-	$(document).on('click','#modipass', function() {
-	var action= "modipass";
-	var pass = $('#past').val();
-	var pas = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
-     
-	if(pass.length==""){
-		$('#pass').css('border-color','red');
-	}
-	
-	else if (pass.length > 12){
-      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>Le nombre de caractères est entre 8 et 12 pour le mot de pass');
-    }
-	
-	else if (!pas.test(pass)){
-      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>Erreur sur la syntaxe du mot de pass');
+      $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du mot de pass');
     }
 	
 	else{
 		
-	$.ajax({
+		$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_view_home.php',// on traite par la fichier
-	data:{pass:pass,action:action},
+	data:{action:action,ids:ids,emais:emais,nums:nums,prenom:prenom,password:password,noms:noms,roles:roles},
 	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#datos').html(data);
-		
+     $('#donns').html(data);
 	}
 	
 	});
-	
-	setInterval(function(){
-		 $('#datos').html('');
-		 location.reload(true);
-	 },5000);
-		
 	}
+	
 	});
  
  });
