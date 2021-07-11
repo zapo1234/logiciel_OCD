@@ -37,7 +37,7 @@ include('inc_session.php');
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
+    .bs{padding:2%;color:black;background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -57,7 +57,7 @@ include('inc_session.php');
 #der12{width:60%;margin-left:15%;display:none;}
 #der13{width:60%;margin-left:15%;display:none;}
 #der14{}
-#der15{}
+#der15{width:60%;margin-left:15%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}
 h2{color:#0661BC;width:600px;font-size:28px;font-weight:none;text-align:center;margin-top:80px;margin-left:10%;border-bottom:1px solid #eee;font-family:arial;}
@@ -79,10 +79,11 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
 #form3{width:700px;height:550px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
-#modifier{margin-left:30%;margin-top:3px;width:200px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;}
+#modifier,#modipass{margin-left:30%;margin-top:3px;width:220px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;height:35px border-radius:15px;}
 .bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
 tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
 </style>
 
 </head>
@@ -95,15 +96,35 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                        
+                    <div class="titre">Lexique 1</div>  
+                    <div>
+					<li>Gérer les informations de votre entreprise</li>
+					<li>Fournir un logo qui serait visualiser sur vos facture</li>
+					<li>Des informations restent facultavES</li>
+					<li>Respecter 60 caractères minimum(nom,email)</li>
+
+                    </div>					
+                    
+					</div><!--lexique 1-->
+					
+					<div class="bs">
+                     <div class="titre">Lexique 2</div>  
+                    
+					<li>Ajouter des comptes pour vos employés</li>
+					<li>Possibilité d'ajouter 5 compte maximum</li>
+					<li>Fournir un email et un mot de pass</li>
+					<li>Mot de pass doit etre au plus de 12 caractères<br/>(une lettre(miniscule et majuscule),un nombre,)
+					  un caractère contenant(@!$#) obligatoire</li>
+                    <li>lister vos utilisateur et gérer les actions</li>					  
                     </div>
 					
 					<div class="bs">
-                        
-                    </div>
-					
-					<div class="bs">
-                        
+                     <div class="titre">Lexique 3</div>  
+					<li>Ajouter des comptes pour vos employés</li>
+					<li>Possibilité d'ajouter 5 compte maximum</li>
+					<li>Fournir un email et un mot de pass</li>
+					<li>Mot de pass doit etre au plus de 12 caractères<br/>(une lettre(miniscule et majuscule),un nombre,)
+					  un caractère contenant(@!$#) obligatoire</li>    
                     </div>
 				
                 </div>
@@ -467,7 +488,18 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 				  
 					
 					 
-					 <div id="der15"></div><!--div result-->
+					 <div id="der15">
+					 <h2>Modifier votre mot de pass</h2>
+					 <form method="post" id="form4" action="">
+                     <div class="form-row">
+                    <div class="col">
+                   <label>Nouveau Mot de pass</label><br/><input type="password" class="form-control" name="pass" id="pass" required>
+                    <br/><span class="pass"></span></div>
+                    </div>
+					 <input type="submit" id="modipass" value="Nouveau mot de pass">
+					 </form>
+				</div><!--div result-->
+
 					 
 					 </div>
 					 
@@ -926,6 +958,35 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	
 	});
 	
+	$('#form4').on('submit', function(event) {
+	event.preventDefault();
+	var action= "modipass";
+	var pass = $('#pass').val();
+	var pas = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
+      
+	if(pass.length==""){
+		$('#pass').css('border-color','red');
+	}
+	
+	else if (!pas.test(pass)){
+      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>Erreur sur la syntaxe du mot de pass');
+    }
+	
+	else{
+		
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{pass:pass,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#datos').html(data);
+		
+	}
+	
+	});
+		
+	}
+	});
  
  });
 </script>

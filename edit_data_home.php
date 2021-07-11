@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-if(!isset($_GET['home']) AND !empty($_GET['home'])) {
+if(!isset($_GET['home'])) {
 	
 	header('location:index.php');
 } 
@@ -10,19 +10,32 @@ if(!isset($_GET['home']) AND !empty($_GET['home'])) {
    // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE id_chambre= :id_chambre');
-    $req->execute(array(':id_chambre'=>$home));
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+						));
 
     // on recupère les données
 	$donnees = $req->fetch();
 	// recupére les images existant
 	// on recupére les equipement checkbox
+	$type =$donnees['type_logement'];
+	$occupant =$donnees['occupant'];
+	$chambre =$donnees['chambre'];
+	$nbrs_lits = $donnees['nombre_lits'];
+	$cout_nuite =$donnees['cout_nuite'];
+	$cout_pass =$donnees['cout_pass'];
+	$infos =$donnees['infos'];
 	$data = $donnees['equipement'];
 	$data1  = $donnees['equipements'];
-
+    
+	$req->closeCursor();
 	 
-	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre');
-    $res->execute(array(':id_chambre'=>$home));
+	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $res->execute(array(':id_chambre'=>$home,
+	                     ':email_ocd'=>$_SESSION['email_ocd']
+	                     
+						 ));
 
 ?>
 <!DOCTYPE html>
@@ -96,7 +109,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
  
  .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;}
+ul a{margin-left:3%;} #form_logo{display:none;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 </style>
 
 </head>
@@ -335,7 +348,7 @@ ul a{margin-left:3%;} #form_logo{display:none;}
 	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
       <label for="inputPassword4">type de local *</label>
       <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example">
-                           <option value="<?phpecho$donnees['type_logement']?>"><?phpecho$donnees['type_logement'];?></option>
+                           <option value="<?phpecho$type?>"><?phpecho$type;?></option>
 						   <option value="0">chambre single</option><option value="1">chambre double</option>
                            <option value="2">chambre triple</option><option value="3">chambre twin</option><option value="4">chambre standard</option><option value="5">chambre deluxe</option>
                           <option value="6">studio double</option>
@@ -343,30 +356,30 @@ ul a{margin-left:3%;} #form_logo{display:none;}
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Autre type</label>
-      <input type="text" class="form-control" name="typs" id="inputEmail4" value="<?php echo$donnees['type_logement'];?>">
+      <input type="text" class="form-control" name="typs" id="inputEmail4" value="<?php echo$type;?>">
     </div>
   
 
    <div class="form-group col-md-6">
       <label for="inputEmail4">identifier votre local *</label>
-      <input type="text" class="form-control" name="ids" id="ids" required value="<?php echo$donnees['chambre'];?>" required>
+      <input type="text" class="form-control" name="ids" id="ids" required value="<?php echo$chambre;?>" required>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">occupants possible *</label>
-      <input type="number" class="form-control" id="num" name="num" value="<?php echo$donnees['occupant'];?>" required>
+      <input type="number" class="form-control" id="num" name="num" value="<?php echo$occupant;?>" required>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Nombre de lits*</label>
-      <input type="number" class="form-control" id="nums" name="nums" value="<?php echo$donnees['nombre_lits'];?>">
+      <input type="number" class="form-control" id="nums" name="nums" value="<?php echo$nbrs_lits;?>">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">cout nuité *</label>
-      <input type="number" class="form-control" id="count" name="cout" value="<?php echo$donnees['cout_nuite'];?>" required>
+      <input type="number" class="form-control" id="count" name="cout" value="<?php echo$cout_nuite;?>" required>
     </div>
     
 	<div class="form-group col-md-6">
       <label for="inputPassword4">cout pass </label>
-      <input type="number" class="form-control" id="counts" name="couts" value="<?php echo$donnees['cout_pass'];?>" placeholder="">
+      <input type="number" class="form-control" id="counts" name="couts" value="<?php echo$cout_pass;?>">
     </div>
     
      <div class="form-group col-md-12">
@@ -400,7 +413,7 @@ ul a{margin-left:3%;} #form_logo{display:none;}
    <h2>Informations facultatives</h2>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">informations complementaire</label>
-    <textarea class="form-control" name="infos" id="infos" rows="3"><?php echo$donnees['infos'];?></textarea>
+    <textarea class="form-control" name="infos" id="infos" rows="3"><?php echo$infos;?></textarea>
   </div>
   
   <div class="d"><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)

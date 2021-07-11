@@ -119,6 +119,7 @@ include('inc_session.php');
    $numero_compte ="";
    $user =$name.' '.$prenom;
    $etat ="";
+   $active="off";
    
    if($role==1){
 	 $status=1;
@@ -149,8 +150,8 @@ include('inc_session.php');
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données dans la table facture
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,status,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:logo)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,permission,password,categories,numero_compte,date,heure,etat,status,active,logo) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:active,:logo)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -167,6 +168,7 @@ include('inc_session.php');
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,
 							':status'=>$status,
+							':active'=>$active,
 						    ':logo'=>$log
 						  ));
   
@@ -308,6 +310,22 @@ include('inc_session.php');
 					 ));
 	 
 	 }
+	 
+	 
+	if($_POST['action']=="modipass") {
+	
+    // Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Mot de pass crée !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+		
+		$pass =$_POST['pass'];
+         $ret=$bdd->prepare('UPDATE inscription_client SET  password= :pass  WHERE  email_user= :email_user');
+        $ret->execute(array(':pass'=>$pas,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));	
+		
+		}
 
 
 
