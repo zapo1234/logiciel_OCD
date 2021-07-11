@@ -379,6 +379,10 @@ if($_POST['action']=="editvalidate"){
      $permission ="user:employes";  
    }
 	  
+	  // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Vos données sont bien modifiées !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+		
 	  
 	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
        $ret->execute(array(':email'=>$email,
@@ -392,6 +396,8 @@ if($_POST['action']=="editvalidate"){
                            ':email_ocd'=>$_SESSION['email_ocd']
 					 ));	
 	  
+ 
+    echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_parameter_datas.php"/>';
  }
 
 
