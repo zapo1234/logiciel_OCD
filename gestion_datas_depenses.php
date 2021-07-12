@@ -32,8 +32,8 @@ include('inc_session.php');
     <style>
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
+    .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
+    .bs{width:340px;height:300px;border:1px solid #eee;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -80,7 +80,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}.der{padding-left:5%;}
 #affiche{margin-top:15px;} .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
+td,th{text-align:center;}td{font-size:16px;font-family:arial;} a{color:black;text-decoration:none;font-size:12px;}
 .datas{border:2px solid white;box-shadow:2px 2px 1px 1px;font-size:12px;background-color:white;} .action{cursor:pointer;}
 .data1{color:white;font-size:16px;font-weight:none;background:green}
 .data2{color:white;font-size:16px;font-weight:none;background:#1E90FF;}
@@ -92,8 +92,14 @@ td,th{text-align:center;} a{color:black;text-decoration:none;font-size:12px;}
 .result{z-index:4;width:550px;height:650px;border:2px solid #eee;background-color:white;position:absolute;top:150px;left:30%;}
 .h{margin-top:20px;margin-left:4%;} #designatio,#fournisseu{width:400px;height:50px;}
 input {border:color:1px solid #eee;height:30px;} #modif{width: 180px;height: 40px;color: white;background: #0FAE3A;text-align: center;
-    border: 2px solid #0FAE3A;
+border: 2px solid #0FAE3A;} 
 border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
+.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
+.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
 </style>
 
 </head>
@@ -106,12 +112,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                        <h6 class="collapse-header">Point journalier caisse</h6>
-                        <a class="collapse-item" href="login.html">Encaissé</a><br/>
-                        <a class="collapse-item" href="register.html">Facture non payé</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Réservation</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Dépenses</a>
-                        <div class="collapse-divider"></div>
+                        
 
                     </div>
 
@@ -489,12 +490,12 @@ $(document).on('click','.actions',function(){
 
 // afficher les données des dépenses
   // afficher les données des encaissements
-  function loads() {
+  function loads(page) {
 				var action="fetchs";
 				$.ajax({
 					url: "depenses_view_datas.php",
 					method: "POST",
-					data:{action:action},
+					data:{action:action,page:page},
 					success: function(data) {
 						$('#resul_depense').html(data);
 					}
@@ -504,7 +505,11 @@ $(document).on('click','.actions',function(){
 			loads();
 
 
-
+    // pagintion
+  $(document).on('click','.bout',function(){
+	  var page =$(this).attr("id");
+	  loads(page);
+   });
 
   // afficher les données des encaissements
   function load() {
@@ -738,9 +743,10 @@ calcul();
 	url:'depenses_view_datas.php',// on traite par la fichier
 	data:{id:id,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data_annuler').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>Dépense modifiée</button>');
+     $('#data_annuler').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>dépense annulée</div>');
      $('.annuler').css('display','none');
      $('#pak').css('display','none');
+	 load();
 	 loads();
 	}
 		
@@ -776,9 +782,14 @@ calcul();
      $('#data_modifier').html(data);
      $('#pak').css('display','none');
      loads();
+	 load();
 	}
 		
 	});
+	
+	setInterval(function(){
+		 $('.enre').html('');
+	 },4000);
 	
 	 }
 	 

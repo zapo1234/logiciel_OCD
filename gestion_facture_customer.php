@@ -33,9 +33,9 @@ include('inc_session.php');
 	
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
-    .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
+    .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
+    .bs{width:340px;height:300px;border:1px solid #eee;}
+	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
@@ -81,9 +81,12 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
   .liste td{width:150px;} .list td{font-size:14px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
-#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
+#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:5%;margin-top:5px;font-size:16px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
 </style>
 
 </head>
@@ -96,12 +99,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                        <h6 class="collapse-header">Point journalier caisse</h6>
-                        <a class="collapse-item" href="login.html">Encaissé</a><br/>
-                        <a class="collapse-item" href="register.html">Facture non payé</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Réservation</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Dépenses</a>
-                        <div class="collapse-divider"></div>
+                       
                       
                     </div>
 					
