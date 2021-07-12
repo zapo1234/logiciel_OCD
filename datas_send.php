@@ -68,18 +68,18 @@ include('inc_session.php');
 	// prévison net
 	if($a > 80) {
 		$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-red w3-round-large" style="width:85%;background:#AAF9BB;font-size:16px;color:#AAF9BB;">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:85%;background:#3DEA29;font-size:16px;color:#3DEA29;">25</div>
     </div>
     </div><br>';
 	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-red w3-round-large" style="width:5%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:5%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
 	$name= 'Activité en forte croissance';
 	}
 	
 	elseif(50< $a  AND $a <80){
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:70%;background:#AAF9BB;font-size:16px;color:#AAF9BB">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:70%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:45%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -89,7 +89,7 @@ include('inc_session.php');
 	
 	elseif(30<$a  AND $a < 50) {
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#AAF9BB;">25</div>
+    <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>

@@ -16,6 +16,13 @@ include('inc_session.php');
 	
 	$donnees = $req->fetch();
 	
+   // recupere les valeurs
+   $clients =$donnees['clients'];
+   $email =$donnees['email_client'];
+   $piece = $donnees['piece_identite'];
+   $numero = $donnees['numero'];
+   $adresse =$donnees['adresse'];
+	
 	$number =$donnees['id_fact'];
 	
 	// recupérer le chiffre
@@ -219,6 +226,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:5%;margin-top:5px;font-size:16px;} .moyens{display:none}
+#logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
 </style>
 
@@ -497,25 +505,25 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" value="<?php echo$donnees['clients'];?>">
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" value="<?php echo$clients;?>">
     </div>
   
 
    <div class="form-group col-md-6">
       <label for="inputEmail4">piéce d'identité *</label>
-      <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro" value="<?php echo$donnees['piece_identite'];?>">
+      <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro" value="<?php echo$piece;?>">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre" value="<?php echo$donnees['numero'];?>">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre" value="<?php echo$numero;?>">
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut" value="<?php echo$donnees['email_client'];?>">
+      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut" value="<?php echo$email;?>">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif" value="<?php echo$donnees['adresse'];?>">
+      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif" value="<?php echo$adresse;?>">
     </div>
     
     <h2>Information hébergement</h2>

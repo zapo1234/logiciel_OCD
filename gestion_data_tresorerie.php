@@ -81,9 +81,15 @@ ul a{margin-left:3%;} #form_logo{display:none;}
 border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white;border-right:1px solid white;border-bottom:2px solid #3C52C7;font-size:20px;width:120px;}
 .export{margin-left:50%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
-#derr,#indicateur{float:left;margin-left:2%;} 
-#derr{width:65%;} #indicateur{margin-left:4%;}
+#resul_depense,#indicateur{float:left;margin-left:2%;} 
+#resul_depense{width:65%;} #indicateur{margin-left:4%;}
 .pied_page{margin-left:20%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
+h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
+.montants{margin-left:30%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:30%;font-size:30px;color:#D20A22;font-weight:bold;}
+.name{font-size:15px;margin-left:5%;color:black;} .monta{margin-left:30%;font-size:30px;color:#0A68D2;font-weight:bold;}
+.montac{margin-left:30%;font-size:30px;color:#E45416;font-weight:bold;} .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.td{margin-left:7%;margin-top:5px;font-size:16px;}
+#logo{position:absolute;top:6px;left:1.3%;border-radius:50%;}
 </style>
 
 </head>
@@ -329,7 +335,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
                     <div class="center">
                     
 					<div id="resul_depense"></div><!--retour ajax sur la lsite des dépenses-->
-		
+		            <div id="indicateur"></div>
   <div class="reini" style="display:none">
  <form method="post" id="form_reini" action="">
  <h1>Réinitialiser votre caisse journalière</h1>
@@ -437,9 +443,23 @@ $(document).on('click','.actions',function(){
   }
 });
 
-			
 
-// afficher les données des dépenses
+  // afficher les données des dépenses
+  // afficher les données des encaissements
+	function affich() {
+				$.ajax({
+					url: "datas_send.php",
+					method: "POST",
+					success: function(data) {
+						$('#indicateur').html(data);
+				   }
+				});
+			}
+
+			affich();
+			
+	// afficher les données des dépenses
+   // afficher les données des dépenses
   // afficher les données des encaissements
   function loads(page) {
 				var action="fetchs";
