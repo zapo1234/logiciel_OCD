@@ -84,7 +84,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 }
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:5%;margin-top:5px;font-size:16px;}
+.td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 </style>
 
 </head>

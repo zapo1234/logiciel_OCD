@@ -60,6 +60,32 @@ include('inc_session.php');
 	  $nvname="zapo";  
    }
    
+   // on recupére le nom de l'image dans la base de données
+   $rej=$bds->prepare('SELECT logo FROM inscription_client WHERE email_ocd= :email_ocd');
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$rej->fetchAll();
+  
+  $array =[];
+  foreach($donnees as $logo){
+	 $data = $logo['logo'];
+     $datas = explode(',',$data);	 
+	 
+     foreach($datas as $dat){
+        // insere les données dans un tableau
+		$array[]=$dat;
+
+     }		 
+  }
+  
+  $nombre = count($array);
+  
+  if($nombre!=0){
+	
+   // suprime l'image sur le disque
+    unlink('image_upload/'.$array[0].'');   
+	  
+  }
+   
    
     echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Prise en compte !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
