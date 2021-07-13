@@ -47,7 +47,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
 	// type de logement
-	$type = $_POST['type'];
+	$types = $_POST['type'];
 	$typs = $_POST['typs'];
 	
 	if(!empty($typs)){
@@ -56,36 +56,41 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	}
 	
 	
-	 if($type == 1){
+	 if($types == 1){
 		$type ="chambre single";
 	}
-	elseif($type == 2){
+	elseif($types == 2){
 		
 		$type="chambre double";
 	}
 	
-	elseif($type == 3){
+	elseif($types == 3){
 		$type="chambre triple";
 	}
 	
-	elseif($type == 4) {
+	elseif($types == 4) {
 		$type ="chambre twin";
 	}
-	elseif($type == 5){
+	elseif($types == 5){
 		$type ="chambre standard";
 	}
 	
-	elseif($type == 6){
+	elseif($types == 6){
 		$type ="studio double";
 	}
 	
-	elseif($type == 7){
+	elseif($types == 7){
 		
 		$type ="sutdio double";
 	}
 	
+	elseif($types == 8){
+		$type ="sutdio double";
+		
+	}
+	
 	else{
-		$type = $typs;
+		$types = $typs;
 	}
 	$second_type =html_entity_decode($_POST['typs']);
 	
@@ -129,9 +134,10 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	
 	else {
 		
+		$active ="on";
 		// insere les données dans la base de données dans la base de donnes chambres
 		
-		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type)');
+		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
@@ -144,7 +150,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 						  ':equipements'=>$equipements,
 						  ':infos'=>$infos,
                           ':icons'=>$icons,
-						  ':type'=>$type,
+						  ':type'=>$types,
+						  ':active'=>$active
 						  ));
 						  
 		// enregsitrer les images correspondant à la chambre

@@ -11,21 +11,21 @@ include('inc_session.php');
 		 // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type,active FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
     $datas = $req->fetch();
 		 
 				   echo'<div id="der15">';
-					if($datas['type'] ==0){
+					if($datas['active'] =="on"){
 					 echo'<h4>Bloquer toutes actions sur ce local</h4>
 					 <div><button class="acces" data-id1="'.$_GET['home'].'">Bloquer l\'accès</button></div>';
 					}
 					
 					else{
 						echo'<h4>Activez l\'accès du local</h4>
-					  <div><button class="access" data-id1="'.$_GET['home'].'">Activer l\'accès</button></div>';
+					  <div><button class="access" data-id2="'.$_GET['home'].'">Activer l\'accès</button></div>';
 					}
 					echo'</div>'; 
 		}
@@ -402,7 +402,39 @@ if($_POST['action']=="editvalidate"){
 
 
 
+ // activer l'active sur un local
+ if($_POST['action']=="accs"){
+	
+   $id =$_POST['id'];
+   $active ="on";
+   // Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été activé !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+		
+	$ret=$bdd->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+        $ret->execute(array(':act'=>$active,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	}
 
+// bloquer  les actions sur un local
+ if($_POST['action']=="acss"){
+	
+   $id =$_POST['id'];
+   $active ="off";
+	
+	// Actualiser des données les données dans la base de données inscription_client
+   // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à eté bloqué !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+		
+	
+	$ret=$bdd->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+        $ret->execute(array(':act'=>$active,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	}
 
 
 

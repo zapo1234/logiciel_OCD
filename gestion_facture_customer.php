@@ -81,7 +81,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
   .liste td{width:150px;} .list td{font-size:14px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
-#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
+#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
