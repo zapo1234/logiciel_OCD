@@ -61,7 +61,7 @@ include('inc_session.php');
    }
    
    // on recupére le nom de l'image dans la base de données
-   $rej=$bds->prepare('SELECT logo FROM inscription_client WHERE email_ocd= :email_ocd');
+   $rej=$bdd->prepare('SELECT logo FROM inscription_client WHERE email_ocd= :email_ocd');
    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$rej->fetchAll();
   
@@ -73,18 +73,15 @@ include('inc_session.php');
      foreach($datas as $dat){
         // insere les données dans un tableau
 		$array[]=$dat;
-
      }		 
   }
   
   $nombre = count($array);
-  
   if($nombre!=0){
 	
    // suprime l'image sur le disque
-    unlink('image_upload/'.$array[0].'');   
-	  
-  }
+    unlink('image_logo/'.$array[0].'');   
+ }
    
    
     echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Prise en compte !</button>

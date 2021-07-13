@@ -74,7 +74,7 @@ include('inc_session.php');
 	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:7%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
-	$name= 'Activité en forte croissance';
+	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en forte croissance';
 	}
 	
 	elseif(50< $a  AND $a <80){
@@ -84,7 +84,7 @@ include('inc_session.php');
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:45%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
-	$name= 'Activité en  croissance';
+	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en  croissance';
 	}
 	
 	elseif(30<$a  AND $a < 50) {
@@ -105,7 +105,7 @@ include('inc_session.php');
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
   
-	  $name= ' Attention ,trésorerie faible';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
 		
 	}
 	
@@ -116,7 +116,7 @@ include('inc_session.php');
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
-	  $name= ' Attention ,Activité fortement déficitaire';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
 		
 	}
 	
@@ -161,7 +161,7 @@ include('inc_session.php');
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
   </div><br>';
   
-	  $names= ' Attention ,trésorerie faible';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
 		
 	}
 	
@@ -172,7 +172,7 @@ include('inc_session.php');
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
   </div><br>';
-	  $names= ' Attention ,Activité fortement déficitaire';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
 		
 	}
 	// indicateur sur les sorties
@@ -185,7 +185,7 @@ include('inc_session.php');
 		 <div class="montan"> - '.$number2.' xof</div><br/>
 		 <div>'.$indicateurs.'</div><br/><br/>
 		 <h4>Résultat attendu</h4>
-		 <div class="name"><i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> '.$name.'</div><br/><br/>
+		 <div class="name">'.$name.'</div><br/><br/>
 		 
 		 <h4>Prévision attendu(réservation <br/>Acompte/reste à solder)</h4><br/>
 		 <div class="monta"> + '.$number3.'xof</div><br/>
@@ -194,7 +194,7 @@ include('inc_session.php');
 		 <div class="montac">'.$number4.'xof  ?</div><br/>
 		 <div>'.$indicateurc.'</div><br/><br/>
 		 <h4>Résultat attendu</h4>
-		 <div class="name"><i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>'.$names.'</div><br/><br/>
+		 
 		</div>';
 	}
 
