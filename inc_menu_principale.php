@@ -35,7 +35,7 @@ include('inc_session.php');
 			
             echo'<li class="nav-item">
                 <a class="nav-link" href="tableau_bord_data.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-chart-line"></i>
                     <span>Tableau de bord</span></a>
             </li>';			
 				
@@ -136,7 +136,7 @@ include('inc_session.php');
 			
             echo'<li class="nav-item">
                 <a class="nav-link" href="gestion_parameter_datas.php">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-cog"></i>
                     <span>Paramètre</span></a>
             </li>';			
 				

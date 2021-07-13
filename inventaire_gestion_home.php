@@ -15,7 +15,7 @@ include('inc_session.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - 404</title>
+    <title>Logiciel en mode Saas</title>
 
     <!-- Custom fonts for this template-->
   
@@ -74,7 +74,8 @@ th{text-align:center;background:white;color:black;font-size:13px;text-transform:
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
 ul a{margin-left:3%;} #form_logo{display:none;} 
-.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
+.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
+#logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 </style>
 
 </head>

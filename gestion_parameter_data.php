@@ -376,7 +376,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Numéro télephone</label><br/><input type="text" id="nums" name="nums" class="form-control" value="<?php echo$numero;?>" placeholder="numero">
+                       <label>Numéro télephone</label><br/><input type="number" id="nums" name="nums" class="form-control" value="<?php echo$numero;?>" placeholder="numero">
                       <br/><span class="nums"></span></div>
                     <div class="col">
                     <br/><select id="roles" name="roles" required>
@@ -525,11 +525,9 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
       $('.emais').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email');
     }
 	
-	else if(nums!=""){
-	  if (!number.test(nums)){
-      $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
+	else if(nums.length >14){
+	 $('.nums').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nombre de caractères du numéro de téléphoneest au plus 14 chiffres');
      }
-	}
 	
 	else if (!pass.test(password)){
       $('.pas').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du mot de pass');
@@ -547,10 +545,6 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 	}
 	});
 	
-	setInterval(function(){
-		 $('#donns').html('');
-		 location.reload(true);
-	 },5000);
 	}
 	});
  

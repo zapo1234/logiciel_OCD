@@ -117,6 +117,7 @@ img {
 .re{padding-left:8px;} .tar{font-size:20px;color:#06A5C8;}
 .acces{margin-left:25%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
 .access{margin-left:25%;width:150px;background:#15CD09;border:2px solid #15CD09;color:white;height:35px;border-radius:15px;}
+#logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 </style>
 
 </head>

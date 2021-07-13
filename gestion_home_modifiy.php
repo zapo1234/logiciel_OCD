@@ -22,6 +22,7 @@ include('inc_session.php');
    $piece = $donnees['piece_identite'];
    $numero = $donnees['numero'];
    $adresse =$donnees['adresse'];
+   $date=$donnees['date'];
 	
 	$number =$donnees['id_fact'];
 	
@@ -486,7 +487,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border
     <div class="form-group col-md-6">
       <div class="input-group">
 	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
-    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required value="<?php echo$donnees['date'];?>">                                               
+    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required value="<?php echo$date;?>">                                               
   </div>
  </div>
 
