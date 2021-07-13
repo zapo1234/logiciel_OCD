@@ -26,24 +26,19 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 	
 	$ids=html_entity_decode($_POST['ids']);
 	$nums=$_POST['nums'];
-    $num= $_POST['num'];// nombre de personne 
-    if($num ==1){
-      $icons = '<i class="far fa-user"></i>';
+    $num=$_POST['num'];// nombre de personne 
+    if($num==1){
+      $icons='<i class="far fa-user"></i>';
     }
-    elseif($num ==2){
+    elseif($num==2){
      $icons='<i class="far fa-user"></i> <i class="far fa-user"></i>';
 
     }
 
-     elseif($num ==3){
+     elseif($num==3){
 
        $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }
-	 
-	 else{
-		 
-		 
-	 }
 
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
@@ -83,6 +78,12 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 		
 		$type ="sutdio double";
 	}
+	
+	elseif($type == 8){
+		$type ="appartement meublé";
+		
+	}
+	
 	
 	else{
 		$type = $typs;

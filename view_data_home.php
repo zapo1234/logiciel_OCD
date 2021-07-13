@@ -19,24 +19,15 @@ include('inc_session.php');
 	
 	$datas = $req->fetch();
     $req->closeCursor();
+
 	
-	// emttre la requete sur le fonction
+// emttre la requete sur le fonction
     $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $ret->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
 	
-	
-	// recupére les images existant
-
-	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
-    $res->execute(array(':id_chambre'=>$home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']
-					   ));
-					   
-    
-					   
-    $rem='<span class="ts"></span>';
+	$rem='<span class="ts"></span>';
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
 	$re ='<span class="re">.</span>';
@@ -71,8 +62,8 @@ include('inc_session.php');
     <style>
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:0px;}
+    .bg{width:340px;border:2px solid #eee;height:300px;}
+   
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -118,6 +109,8 @@ img {
 .acces{margin-left:25%;width:150px;background:#EA6D11;border:2px solid #EA6D11;color:white;height:35px;border-radius:15px;}
 .access{margin-left:25%;width:150px;background:#15CD09;border:2px solid #15CD09;color:white;height:35px;border-radius:15px;}
 #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.img_image{cursor:pointer;}
+.enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 </style>
 
 </head>
@@ -129,17 +122,23 @@ img {
         
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
-                    <div class="bs">
-                        
-                    </div>
-					
-					<div class="bs">
-                        
-                    </div>
-					
-					<div class="bs">
-                        
-                    </div>
+                   
+				   <?php
+					// recupére les images existant
+			$home=$_GET['home'];
+          $res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+          $res->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+					   ));
+			$donns=$res->fetchAll();
+            
+            foreach($donns as $donnes){			
+	      echo'<div class="bs">
+		    <img  data-id="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_image" width="300" height="290" alt="'.$donnes['name_upload'].'">
+			</div><br/>';	
+				
+			}
+				?>
 				
                 </div>
 
@@ -414,9 +413,8 @@ img {
 					 foreach($donnes as $dats){
 						
 					$data = $dats['date_french'];
-                      
-					  
-					 // pour les statisque
+					
+				     // pour les statisque
 					    $datos = $dats['type'].',';
 					  // on trans forme sous forme de tableau
 					   $dat =explode(',',$datos);  
@@ -456,50 +454,18 @@ img {
 				  
 					?>
 					 
-					 <div id="result"></div><!--div result-->
+					 <div id="result"></div><!--result ajax -->
 					 
 					 </div>
 					 
 					<div class="content3">
 					<h2><i class="fas fa-camera"></i> Les images du local</h2>
-					<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-	
-	<?php
-	while($data =$res->fetch()) {
-	echo'<img src="upload_image/'.$data['name_upload'].'" class="d-block w-100" alt="...">';
-	}
-	?>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-					
-					
+					<div id="zoom"></div><!--afficher les images en zoom-->
                    
 				   </div>
 
  <div id="home_data"></div><!--div home-->
+ <div id="result"></div>
     
 	</div>
                 <!-- /.container-fluid -->
@@ -637,9 +603,11 @@ img {
  $('#der15').css('display','block');
  });
  
- $('.acess').click(function(){
-	 var id = $(this).data('id1');
-	 var action="acess";
+ 
+ // activer les actions sur le local
+ $(document).on('click','.access',function(){
+	 var id = $(this).data('id2');
+	 var action="acss";
 	 $.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_view_home.php',// on traite par la fichier
@@ -649,7 +617,53 @@ img {
 	 
 	}
   });
+  
+  setInterval(function(){
+		 $('#result').html('');
+		 location.reload(true);
+	 },5000);
+  
  });
+ 
+ // on affiche l'image
+ //bloquer les actions sur le local
+ $(document).on('click','.img_image',function(){
+	 var id = $(this).data('id');
+	 var action="zoom";
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:"result_view_home.php?home=<?php echo$_GET['home'];?>",// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	  $('#zoom').html(data)
+	 
+	}
+  });
+ });
+  
+ 
+ //bloquer les actions sur le local
+ $(document).on('click','.acces',function(){
+	 var id = $(this).data('id1');
+	 var action="accs";
+	 $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_view_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+	  $('#result').html(data)
+	 
+	}
+  });
+  
+  setInterval(function(){
+		 $('#result').html('');
+		 location.reload(true);
+	 },5000);
+  
+ });
+ 
+ 
  
  // afficher les données des encaissements
   function load() {
@@ -665,23 +679,6 @@ img {
 			}
 
 			load();
- 
- 
- $('.access').click(function(){
-	 var id = $(this).data('id1');
-	 var action="access";
-	 $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
-	data:{id:id,action:action},
-	success:function(data) { // on traite le fichier recherche apres le retour
-	  $('#result').html(data)
-	 
-	}
-  });
- });
- 
- 
  });
 </script>
 </body>

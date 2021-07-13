@@ -471,24 +471,13 @@ echo$_SESSION['token'];?>">
     <!-- Logout Modal-->
     <!-- Modal -->
  <div id="html"></div><!--affichage retour ajax-->
- <div  id="examp" style="display:none">
+ <div id="examp" style="display:none">
  <div id="error"></div><!--affichage erreur-->
 
   <div id="delete_img"></div><!-- affichage retour ajax-->
 
  </div>
 
-<!-- div delete home-->
-<div id="block_delete" style="display:none">
-<h3>êtes-vous sûr de vouloir supprimer ce local ?</h3>
-<form method="post" action="">
-<button type="button" id="button_delete">ok</button>
-<button type="button" id="button_annuler">Annuler</button>
-<input type="hidden" name="ids" id="ids">
-<input type="hidden" name="token" id="token" value="<?php
-//Le champ caché a pour valeur le jeton
-echo $_SESSION['token'];?>">
-</form>
 </div>
 
 <div id="data_delete"></div><!--retour ajax-->
