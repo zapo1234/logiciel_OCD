@@ -85,9 +85,11 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	}
 	
 	elseif($types == 8){
-		$type ="sutdio double";
+		$type ="appartement meublé";
 		
 	}
+	
+	
 	
 	else{
 		$types = $typs;

@@ -15,10 +15,10 @@ include('inc_session.php');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
-    $datas = $req->fetch();
+    $data = $req->fetch();
 		 
 				   echo'<div id="der15">';
-					if($datas['active'] =="on"){
+					if($data['active']=="on"){
 					 echo'<h4>Bloquer toutes actions sur ce local</h4>
 					 <div><button class="acces" data-id1="'.$_GET['home'].'">Bloquer l\'accès</button></div>';
 					}
@@ -28,6 +28,7 @@ include('inc_session.php');
 					  <div><button class="access" data-id2="'.$_GET['home'].'">Activer l\'accès</button></div>';
 					}
 					echo'</div>'; 
+
 		}
  
  
@@ -406,23 +407,24 @@ if($_POST['action']=="editvalidate"){
  if($_POST['action']=="accs"){
 	
    $id =$_POST['id'];
-   $active ="on";
+   $active="off";
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été activé !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-	$ret=$bdd->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+	$ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
+		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	}
 
-// bloquer  les actions sur un local
+// actionner   les actions sur un local
  if($_POST['action']=="acss"){
 	
    $id =$_POST['id'];
-   $active ="off";
+   $active ="on";
 	
 	// Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
@@ -430,8 +432,9 @@ if($_POST['action']=="editvalidate"){
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
 	
-	$ret=$bdd->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+	$ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
+		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	}
