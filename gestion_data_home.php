@@ -8,10 +8,82 @@ if(!isset($_GET['data'])){
   
   // recupère les dates  par ordre croissant 
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd LIMIT 0,9');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE email_ocd= :email_ocd');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	$don = $req->fetchAll();
+	
+	foreach($don as $donnees) {
+	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE  id_chambre="'.$donnees['id_chambre'].'"');
+    $donns = $rec->fetchAll();
+	 $array = [];
+	 $tab = [];
+	foreach($donns as $datas) {
+		
+		if($datas['type']!=0){
+		//pour sejour ou réservation
+		if($datas['type']==1 OR $datas['type']==3){
+		$data = $datas['date'];
+		$dat = explode(',',$data);
+		// pour les sejours et réservation
+		foreach($dat as $value){
+		$array[] = $value;		
+	    }
+		}
+		// pour le pass.
+		if($datas['type']==2){
+		$datos =$datas['date'];
+		$dats = explode(',',$datos);
+		// pour les sejours et réservation
+		foreach($dats as $values){
+		$tab[] = $values;		
+	   }
+		
+	  }
+	 }
+	}
+	
+    $nombre = count($array);
+	$nombres = count($tab);
+	// pour les séjour et réservation
+	// recupére la date passé en paramètre
+	$date =$_GET['data'];
+	$date = explode('-',$date);
+	
+	$j = $date[2];
+	$mm = $date[1];
+	$an = $date[0];
+	// date
+	$date_english = $j.'-'.$mm.'-'.$an;
+	if($nombre!=0){	
+    $debut = min($array);
+    $sortie = max($array);
+   // on recupére le premier et la dernier date
+    // si le client est facturé sur un séjour ou reservation
+	if($debut < $date_english AND $date_english < $sortie) {
+	$color ='occupe';
+	$status ='le client est présent dans le local';	
+	}
+	// if le local est réserve
+	if($date_english < $debut){
+	$color ='reserve';
+	$status ='le local est réservé';
+	}
+	
+	// Le local est libre
+	  if(!in_array($date_english,$array)) {
+		$color='libre';
+		$status ='le local est libre';
+	}
+	if($donnees['active']=="off"){
+		$color='bloque';
+		$status ='le local n\'est pas disponible';
+		
+	}
+	
+	}
+	
+  }
 
 ?>
 
@@ -136,7 +208,7 @@ ul.winners li{
   
 }
 
-.h4{width:90%;border-bottom:1px solid #eee;font-size:18px;}
+.h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
 .di{font-size:13px;color:black;}
 
