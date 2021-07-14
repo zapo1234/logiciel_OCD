@@ -147,6 +147,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		  $array[] = $horaire;  
 	}
 	  $horaires = implode(',',$array);
+	  $datas_fren = implode(',',$array);
 	}
 	
    // on recupére les variable fixe

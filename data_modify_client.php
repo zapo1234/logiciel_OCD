@@ -190,6 +190,7 @@ ul a{margin-left:3%;}
 		  $array[] = $horaire;  
 	}
 	  $horaires = implode(',',$array);
+	  $datas_fren = implode(',',$array);// date en francais recupéré
 	}
 	
    // on recupére les variable fixe
