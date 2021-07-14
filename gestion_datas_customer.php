@@ -146,7 +146,7 @@ ul.winners li{
 	            <?php
 		// afficher les dernières enregistrements
 		// aller chercher les auteurs en écriture sur une facture
-	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id ASC LIMIT 0,5');
+	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
         
 		 while($donnes=$res->fetch()){

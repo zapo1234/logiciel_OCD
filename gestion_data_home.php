@@ -2,6 +2,17 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+if(!isset($_GET['data'])){
+	header('location:index.php');
+  }
+  
+  // recupère les dates  par ordre croissant 
+  // emttre la requete sur le fonction
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd LIMIT 0,9');
+    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	
+	$don = $req->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +83,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
+.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
 
 .dep {
   animation: spin 2s linear infinite;
@@ -124,6 +136,9 @@ ul.winners li{
   
 }
 
+.h4{width:90%;border-bottom:1px solid #eee;font-size:18px;}
+.dir{font-size:13px;padding-left:2%;color:black;}
+.di{font-size:13px;color:black;}
 
 </style>
 
@@ -402,7 +417,11 @@ ul.winners li{
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  
+            <div class="h4">Suivi en temps réel de l'etat d'occupation de vos locaux <br/>
+			<span class="di"> le local est libre</span> <i class="fas fa-square" style="font-size:13px;color:#039E0F;"></i> <span class="dir">le local est occupé par le client</span> <i class="fas fa-square" style="font-size:13px;color:#BC0820"></i> <span class="dir">le local est réservé </span> 
+			 <i class="fas fa-square" style="font-size:13px;color:#1369E5;"></i>  <span class="dir" style="font-size:13px">le local est bloqué</span> <i class="fas fa-square" style="font-size:13px;color:#E55C13;"></i>
+			
+			</div>
  
     
 	</div>

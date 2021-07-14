@@ -54,7 +54,7 @@ $smart_from =($page -1)*$record_peage;
 	  <td><i style="font-size:12px" class="fa">&#xf00c;</i> '.str_replace($rt,$rs,$donnees['equipements']).'
 	  </td>
       <td>'.$donnees['icons'].'</td>
-	  <td class="color">tarif/journalier<br/>'.$donnees['cout_nuite'].' FR<br/><br/>tarif/horaire<br/>'.$donnees['cout_pass'].'FR</td>
+	  <td class="color">tarif/journalier<br/>'.$donnees['cout_nuite'].' xof<br/><br/>tarif/horaire<br/>'.$donnees['cout_pass'].'xof</td>
       <td>'.$donnees['infos'].'</td>
 	  <td><a href="view_data_home.php?home='.$donnees['id_chambre'].'" title="plus d\'infos"><i class="fas fa-eye" style="font-size:13px"></i></a></td>
 	  <td><a href="edit_data_home.php?home='.$donnees['id_chambre'].'" title="modifier"><i class="material-icons" style="font-size:13px">create</i></a></td>
@@ -71,6 +71,7 @@ $smart_from =($page -1)*$record_peage;
     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $dns=$reg->fetch();
    $totale_page=$dns['nbrs']/$record_peage;
+   $totale_page = ceil($totale_page);
    
    echo'<div class="pied_function">';
    for($i=1; $i<=$totale_page; $i++) {
