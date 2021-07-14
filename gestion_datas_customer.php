@@ -43,7 +43,7 @@ include('inc_session.php');
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
 #examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
-h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
+h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
 background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
 .form1,.form2{display:none;}
@@ -88,6 +88,42 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+
+.reservation,.pass,.sejour{padding:left:2%;}
+.sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
+
+.live-infos{
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color:white;
+  
+}
+ul.winners{
+  position: absolute;
+  top: 0;
+  width: 200%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.winners li{
+  /*height: 50px;*/
+  border-bottom: 1px #eee solid;
+  line-height: 50px;
+  font-size: 1rem;
+  color: black;
+  padding-left: 2rem;
+}
+.mentions{
+  display: block;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  
+}
+
+
 </style>
 
 </head>
@@ -102,6 +138,46 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
                     <div class="bs">
                     <h1>Les enregistrements récents</h1>
                       
+                  <div class="container">
+ 
+                  <div class="live-infos">
+                   
+				   <ul class="winners">
+	            <?php
+		// afficher les dernières enregistrements
+		// aller chercher les auteurs en écriture sur une facture
+	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id ASC LIMIT 0,5');
+        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+        
+		 while($donnes=$res->fetch()){
+			
+          if($donnes['type']==1){
+            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
+		    $type ='<span class="sejour">'.$donnes['types'].'</span>';
+			
+		  }
+        	
+          if($donnes['type']==2){
+             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
+			 $type ='<span class="pass">'.$donnes['types'].'</span>';
+		  }
+
+          if($donnes['type']==3){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="reservation">'.$donnes['types'].'</span>';
+		  }	  
+			 
+		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
+		       '.$type.' '.$donnes['montant'].' xof</li>';
+		}
+		       ?>
+				   
+				</ul>
+	               
+				  </div><!--livre-infos-->
+	              
+				  </div><!--live-infos-->
+					  
                     </div>
 					
 					
@@ -1126,6 +1202,33 @@ echo $_SESSION['token'];?>">
 	  
 	  
   });
+  
+  $(function(){
+  var winners_list = $('.winners li');
+  var ul_height = $('.winners').outerHeight();
+  $('.winners').append(winners_list.clone());
+
+  var i = 0;
+  (function displayWinners(i){
+    setTimeout(function(){
+      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
+        $('.winners').css('top', '0');
+      }
+      var li_height = $(winners_list[i]).outerHeight();
+      $('.winners').animate({
+        top: '-=' + li_height + 'px'}, 500);
+      if( i == winners_list.length - 1){
+        i = 0;
+      }else{
+        i++;
+      }
+      displayWinners(i);
+      
+    }, 3500);
+  })(i);
+  
+});
+
 
 });
 </script>

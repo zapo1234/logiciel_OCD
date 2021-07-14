@@ -94,7 +94,7 @@ td,th{text-align:center;}td{font-size:16px;font-family:arial;} a{color:black;tex
 input {border:color:1px solid #eee;height:30px;} #modif{width: 180px;height: 40px;color: white;background: #0FAE3A;text-align: center;
 border: 2px solid #0FAE3A;} 
 border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
-.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:40px;height:40px;background:white;}
+.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
@@ -112,7 +112,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                        
+                      
 
                     </div>
 

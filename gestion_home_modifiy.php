@@ -163,9 +163,8 @@ include('inc_session.php');
     <style>
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
-    .bs{background:white;width:340px;border:2px solid white;padding:4%;margin-top:0px;}
-    .titre{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
+    .bs{width:340px;height:300px;border:1px solid #eee;}
+	.titre{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -229,6 +228,46 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border
 .td{margin-left:5%;margin-top:5px;font-size:16px;} .moyens{display:none}
 #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
+.td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+
+
+.reservation,.pass,.sejour{padding:left:2%;}
+.sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
+
+.live-infos{
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color:white;
+  
+}
+ul.winners{
+  position: absolute;
+  top: 0;
+  width: 200%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.winners li{
+  /*height: 50px;*/
+  border-bottom: 1px #eee solid;
+  line-height: 50px;
+  font-size: 1rem;
+  color: black;
+  padding-left: 2rem;
+}
+.mentions{
+  display: block;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  
+}
+
 </style>
 
 </head>
@@ -241,12 +280,47 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                     <h6 class="collapse-header">Point journalier caisse</h6>
-                        <a class="collapse-item" href="login.html">Encaissé</a><br/>
-                        <a class="collapse-item" href="register.html">Facture non payé</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Réservation</a><br/>
-                        <a class="collapse-item" href="forgot-password.html">Dépenses</a>
-                        <div class="collapse-divider"></div>
+                     <h1>Les enregistrements récents</h1>
+                      
+                  <div class="container">
+ 
+                  <div class="live-infos">
+                   
+				   <ul class="winners">
+	            <?php
+		// afficher les dernières enregistrements
+		// aller chercher les auteurs en écriture sur une facture
+	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id ASC LIMIT 0,5');
+        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+        
+		 while($donnes=$res->fetch()){
+			
+          if($donnes['type']==1){
+            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
+		    $type ='<span class="sejour">'.$donnes['types'].'</span>';
+			
+		  }
+        	
+          if($donnes['type']==2){
+             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
+			 $type ='<span class="pass">'.$donnes['types'].'</span>';
+		  }
+
+          if($donnes['type']==3){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="reservation">'.$donnes['types'].'</span>';
+		  }	  
+			 
+		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
+		       '.$type.' '.$donnes['montant'].' xof</li>';
+		}
+		       ?>
+				   
+				</ul>
+	               
+				  </div><!--livre-infos-->
+	              
+				  </div><!--live-infos-->
                       
                     </div>
 					
@@ -1359,6 +1433,34 @@ echo $_SESSION['token'];?>">
 	alert(zapo);	 
 	  
   });
+  
+  
+  $(function(){
+  var winners_list = $('.winners li');
+  var ul_height = $('.winners').outerHeight();
+  $('.winners').append(winners_list.clone());
+
+  var i = 0;
+  (function displayWinners(i){
+    setTimeout(function(){
+      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
+        $('.winners').css('top', '0');
+      }
+      var li_height = $(winners_list[i]).outerHeight();
+      $('.winners').animate({
+        top: '-=' + li_height + 'px'}, 500);
+      if( i == winners_list.length - 1){
+        i = 0;
+      }else{
+        i++;
+      }
+      displayWinners(i);
+      
+    }, 3500);
+  })(i);
+  
+});
+
 
 });
 </script>

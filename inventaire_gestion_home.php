@@ -62,7 +62,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
 
 .x{color:#4e73df;font-weight:bold;} .ts{padding-left:4%;} .center{width:90%;margin-left:5%;background-color:white;}
-.table{width:95%;margin-left:3%;margin-top:30px;border:1px solid #eee;} td,th{color:black;text-align:center;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+.table{width:95%;margin-left:5%;margin-top:30px;border:1px solid #eee;} td,th{color:black;text-align:center;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 th{background-color:#E0E9F7;text-align:center;color:black;font-size:15px;text-transform:capitalize;}
 .div{color:green;} #block_delete{position: absolute;top:200px;left:40%;width:370px;;height:160px;background-color:white;z-index:4;}
  h3{color:black;padding-top:5%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;text-align:center;}
@@ -434,14 +434,15 @@ echo $_SESSION['token'];?>">
 <!-- div delete home-->
 <div id="block_delete" style="display:none">
 <h3>êtes-vous sûr de vouloir supprimer ce local ?</h3>
-<form method="post" action="">
-<button type="button" id="button_delete">ok</button>
-<button type="button" id="button_annuler">Annuler</button>
+<form method="post" id="envoi" action="">
+
 <input type="hidden" name="ids" id="ids">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
 </form>
+<button type="button" id="button_delete">ok</button>
+
 </div>
 
 <div id="data_delete"></div><!--retour ajax-->
