@@ -5,85 +5,6 @@ include('inc_session.php');
 if(!isset($_GET['data'])){
 	header('location:index.php');
   }
-  
-  // recupère les dates  par ordre croissant 
-  // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE email_ocd= :email_ocd');
-    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-	
-	$don = $req->fetchAll();
-	
-	foreach($don as $donnees) {
-	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE  id_chambre="'.$donnees['id_chambre'].'"');
-    $donns = $rec->fetchAll();
-	 $array = [];
-	 $tab = [];
-	foreach($donns as $datas) {
-		
-		if($datas['type']!=0){
-		//pour sejour ou réservation
-		if($datas['type']==1 OR $datas['type']==3){
-		$data = $datas['date'];
-		$dat = explode(',',$data);
-		// pour les sejours et réservation
-		foreach($dat as $value){
-		$array[] = $value;		
-	    }
-		}
-		// pour le pass.
-		if($datas['type']==2){
-		$datos =$datas['date'];
-		$dats = explode(',',$datos);
-		// pour les sejours et réservation
-		foreach($dats as $values){
-		$tab[] = $values;		
-	   }
-		
-	  }
-	 }
-	}
-	
-    $nombre = count($array);
-	$nombres = count($tab);
-	// pour les séjour et réservation
-	// recupére la date passé en paramètre
-	$date =$_GET['data'];
-	$date = explode('-',$date);
-	
-	$j = $date[2];
-	$mm = $date[1];
-	$an = $date[0];
-	// date
-	$date_english = $j.'-'.$mm.'-'.$an;
-	if($nombre!=0){	
-    $debut = min($array);
-    $sortie = max($array);
-   // on recupére le premier et la dernier date
-    // si le client est facturé sur un séjour ou reservation
-	if($debut < $date_english AND $date_english < $sortie) {
-	$color ='occupe';
-	$status ='le client est présent dans le local';	
-	}
-	// if le local est réserve
-	if($date_english < $debut){
-	$color ='reserve';
-	$status ='le local est réservé';
-	}
-	
-	// Le local est libre
-	  if(!in_array($date_english,$array)) {
-		$color='libre';
-		$status ='le local est libre';
-	}
-	if($donnees['active']=="off"){
-		$color='bloque';
-		$status ='le local n\'est pas disponible';
-		
-	}
-	
-	}
-	
-  }
 
 ?>
 
@@ -210,7 +131,7 @@ ul.winners li{
 
 .h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
-.di{font-size:13px;color:black;}
+.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;}
 
 </style>
 
@@ -492,8 +413,152 @@ ul.winners li{
             <div class="h4">Suivi en temps réel de l'etat d'occupation de vos locaux <br/>
 			<span class="di"> le local est libre</span> <i class="fas fa-square" style="font-size:13px;color:#039E0F;"></i> <span class="dir">le local est occupé par le client</span> <i class="fas fa-square" style="font-size:13px;color:#BC0820"></i> <span class="dir">le local est réservé </span> 
 			 <i class="fas fa-square" style="font-size:13px;color:#1369E5;"></i>  <span class="dir" style="font-size:13px">le local est bloqué</span> <i class="fas fa-square" style="font-size:13px;color:#E55C13;"></i>
-			
 			</div>
+			<?php
+			
+			// recupère les dates  par ordre croissant 
+  // emttre la requete sur le fonction
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE email_ocd= :email_ocd');
+    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	
+	$don = $req->fetchAll();
+	
+	foreach($don as $donnees) {
+	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE  id_chambre="'.$donnees['id_chambre'].'"');
+    $donns = $rec->fetchAll();
+	 $array = [];
+	 $tab = [];
+	 $date =[];
+	foreach($donns as $datas) {
+		
+		if($datas['type']!=0){
+		//pour sejour ou réservation
+		if($datas['type']==1 OR $datas['type']==3){
+		$data = $datas['date'];
+		$dat = explode(',',$data);
+		// pour les sejours et réservation
+		foreach($dat as $value){
+		$array[] = $value;		
+	    }
+		}
+		// pour le pass.
+		if($datas['type']==2){
+		// pour les heures en date
+		$datos =$datas['date'];
+		// pour les jours en date
+		$datis =$datas['dates'];
+		
+		$dats = explode(',',$datos);
+		$da = explode(',',$datis);
+		// pour les dates en heures
+		foreach($dats as $values){
+		$tab[] = $values;		
+	   }
+	   
+	   // pour les dates en jours
+	   foreach($da as $valus){
+		$date[] = $valus;		
+	   }
+		
+	  }
+	 }
+	}
+	
+    $nombre = count($array);
+	$nombres = count($tab);
+	$nombr = count($date);
+	
+
+	// pour les séjour et réservation
+	// recupére la date passé en paramètre
+	$date =$_GET['data'];
+	$date = explode('-',$date);
+
+	$j = $date[2];
+	$mm = $date[1];
+	$an = $date[0];
+	// recupération des variable $_GET date et jours
+	$date_english = $j.'-'.$mm.'-'.$an;
+	$heure =$_GET['home_heure'];
+	if($nombre!=0){		
+    // recupéré les valeurs max et min des tableau
+	$debut = min($array);
+	$sortie = max($array);
+	
+   // on recupére le premier et la dernier date
+    // si le client est facturé sur un séjour ou reservation
+	if($debut < $date_english AND $date_english < $sortie) {
+	
+	$color ='occupe';
+	$status ='le client est présent dans le local';	
+	
+	}
+	// if le local est réserve
+	elseif($date_english < $debut){
+	$color ='reserve';
+	$status ='le local est réservé';
+	}
+	
+	// Le local est libre
+	  elseif(!in_array($date_english,$array)) {
+	// verification pour le cas des sejours pass
+	    $color='libre';
+		$status ='le local est libre';
+	
+    }
+	
+	else{
+		$color='libre';
+		$status ='le local est libre';
+	
+	}
+   
+    }
+	
+	if($nombres!=0){
+	// recupéré les valeurs max et min des tableau
+	$debuts = min($array);
+	$sorties = max($array);
+	//
+	if(in_array($heure,$tab) AND in_array($date_english,$date)){
+		// verification pour le cas des sejours pass
+	    $color='occupé';
+		$status ='le client fait un pass présentement';
+	}
+	elseif($debuts < $date_english AND $date_english < $sorties AND in_array($date_english,$date)){
+		// verification pour le cas des sejours pass
+	    $color='occupe';
+		$status ='le client fait un pass présentement';
+	}
+  }
+	
+	
+	if($donnees['active']=="off"){
+		$color='bloque';
+		$status ='le local n\'est pas disponible';
+	}
+	
+	if($nombre==0 AND $nombr==0 AND $nombres==0){
+		$color='libre';
+		$status ='le local est libre';
+		
+	}
+
+	 echo'<div class="homes" id="home'.$color.'">
+		      <h3>'.$donnees['type_logement'].'</h3>
+			  <div class="titre">'.$donnees['chambre'].'</div>
+			  <div class="dt">'.$status.'</div>
+		     </div>';	
+	
+	
+  
+	}		
+	// afficher les locaux		
+			
+		
+			
+			?>
+			
  
     
 	</div>
