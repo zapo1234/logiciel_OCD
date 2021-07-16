@@ -137,8 +137,9 @@ margin-left:2%;}
 h3{font-size:16px;text-transform:capitalize;}
 .titre{font-family:arial;font-size:16px;text-transform:capitalize;}
 #homeoccupe{background:#F45E79;border:2px solid #F45E79;color:black;}
-#homereserve{background:#83CEF3;color:83CEF3;color:black}
-.dt{color:white;}
+#homereserve{background:#83CEF3;color:#83CEF3;color:black;border:2px solid #83CEF3}
+#homelibre{background:#5EF482;color:#5EF482;border:2px solid #5EF482;color:black;}
+.dt{color:white;} .dry{padding-left:65%;}
 </style>
 
 </head>
@@ -506,7 +507,7 @@ h3{font-size:16px;text-transform:capitalize;}
     // si le client est facturé sur un séjour ou reservation
 	if($debut < $date_english AND $date_english < $sortie) {
 	$color ='occupe';
-	$status ='un client est présent dans le local,<br/>il pourra etre libre à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'</span>';	
+	$status ='un client est présent dans le local,<br/>il pourra etre libre à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
 	
 	}
 	// if le local est réserve
