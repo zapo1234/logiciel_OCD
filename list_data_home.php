@@ -4,12 +4,13 @@ include('inc_session.php');
 
    
     // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd LIMIT 0,9');
-    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	$active="on";
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,20');
+    $req->execute(array(':ac'=>$active,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
 	$don = $req->fetchAll();
-	
-    //// emttre la requete sur le fonction
+	 //// emttre la requete sur le fonction
     //$rec=$bds->query('SELECT id_chambre,date FROM home_occupation');
     //$donns = $rec->fetchAll();
 	//$rec->closeCursor();
@@ -24,7 +25,7 @@ include('inc_session.php');
 	
 	
 	// on récupére les données sql
-	$reb=$bds->query('SELECT id_chambre,date,dates FROM home_occupation');
+	$reb=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation');
     $dons = $reb->fetchAll();
 	
 	$tab =[];
@@ -41,28 +42,35 @@ include('inc_session.php');
 	
 	
 	foreach($don as $donnees) {
-	$rec=$bds->query('SELECT id_chambre,date,dates FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
+	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
     $donns = $rec->fetchAll();
 	 $array = [];
+	 $tabs = [];
 	foreach($donns as $datas) {
 		
+		// pour les sejours en date
+		if($datas['type']!=0){
+		//pour sejour ou réservation
+		if($datas['type']==1 OR $datas['type']==3){
 		$data = $datas['date'];
-		
 		$dat = explode(',',$data);
+		}
 		
 		foreach($dat as $value){
-		
-        $array[] = $value;		
-	   
+		$array[] = $value;		
 	   }
+		
+	  }
+		
 	}
 
      $tab = $array;
-    $nombre = count($array);	
-    $debut = current($array);
-    $sortie = end($array);
-   
-	// on recupére le premier et la dernier date
+	 // on verifie le nombre d'élement dans le tableau
+	 $nombre = count($array);
+    if($nombre!=0){	
+    $debut = min($array);
+    $sortie = max($array);
+   // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
 	 
 	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
@@ -105,11 +113,31 @@ include('inc_session.php');
 	// la vairable en envoi
 	$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
    
-        $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+      
+		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
 	 }	 
     
 	 }
+	}
+	
+	else{
+		
+	$dates1 = explode('-',$_POST['days']);
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	$dates2 = explode('-',$_POST['das']);
+	$j1 = $dates2[2];
+	$mm1 = $dates2[1];
+	$an1 = $dates2[0];
+		
+		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+		$a="h5";
+		// la vairable en envoi
+	  $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+   
+	}
 	 
 	 // si le client est facturé sur une horaire
 	 
