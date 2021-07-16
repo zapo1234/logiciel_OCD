@@ -139,7 +139,8 @@ h3{font-size:16px;text-transform:capitalize;}
 #homeoccupe{background:#F45E79;border:2px solid #F45E79;color:black;}
 #homereserve{background:#83CEF3;color:#83CEF3;color:black;border:2px solid #83CEF3}
 #homelibre{background:#5EF482;color:#5EF482;border:2px solid #5EF482;color:black;}
-.dt{color:white;} .dry{padding-left:65%;}
+#homebloque{background:#FAB672;border:2px solid #FAB672;color:black;}
+.dt{color:white;font-size:13px;} .dry{padding-left:65%;}
 </style>
 
 </head>
@@ -436,6 +437,7 @@ h3{font-size:16px;text-transform:capitalize;}
 	 $array = [];
 	 $tab = [];
 	 $date =[];
+	 $bloque =[];
 	foreach($donns as $datas) {
 		
 		if($datas['type']!=0){
@@ -468,12 +470,24 @@ h3{font-size:16px;text-transform:capitalize;}
 	   }
 		
 	  }
+	  
+	  if($datas['type']==5){
+		$df =$datas['dates'].',';
+        $df = explode(',',$df);
+        foreach($df as $valu){
+         $bloque[]= $valu;
+        }			
+		  
+	  }
 	 }
 	}
 	
-    $nombre = count($array);
-	$nombres = count($tab);
-	$nombr = count($date);
+	
+	
+    $nombre = count($array);// pour le sejour et réservation
+	$nombres = count($tab);// pour les horaires
+	$nombr = count($date);//
+	$nom = count($bloque);//pour les chambres bloquées
 	
 // pour les séjour et réservation
 	// recupére la date passé en paramètre
@@ -515,8 +529,7 @@ h3{font-size:16px;text-transform:capitalize;}
 	$color ='reserve';
 	$status ='le local est réservé, et sera occupé <br/>à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
 	}
-	
-	
+
 	else{
 		$color='libre';
 		$status ='le local est libre';
@@ -524,6 +537,11 @@ h3{font-size:16px;text-transform:capitalize;}
 	}
    
     }
+	
+	 if($nom!=0){
+		$color='bloque';
+		$status ='le local est bloqué temporairement<br/><span class="drt"><i class="fas fa-minus-circle" style="font-size:16px;padding-left:70%;"></span></i></span>';
+	}
 	
 	if($nombres!=0){
 	// recupéré les valeurs max et min des tableau
@@ -541,13 +559,12 @@ h3{font-size:16px;text-transform:capitalize;}
 		$status ='le client fait un pass présentement';
 	}
   }
+  
 	
-	
-	if($nombre==0 AND $nombr==0 AND $nombres==0){
+     if($nombre==0 AND $nombr==0 AND $nombres==0 AND $nom==0){
 		$color='libre';
 		$status ='le local est libre';
-		
-	}
+   }
 
 	 echo'<div class="homes" id="home'.$color.'">
 		      <h3>'.$donnees['type_logement'].'</h3>
