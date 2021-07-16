@@ -131,8 +131,14 @@ ul.winners li{
 
 .h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
-.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;}
+.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:150px;padding:1%;border:1px solid #eee;
+margin-left:2%;}
 
+h3{font-size:16px;text-transform:capitalize;}
+.titre{font-family:arial;font-size:16px;text-transform:capitalize;}
+#homeoccupe{background:#F45E79;border:2px solid #F45E79;color:black;}
+#homereserve{background:#83CEF3;color:83CEF3;color:black}
+.dt{color:white;}
 </style>
 
 </head>
@@ -468,8 +474,7 @@ ul.winners li{
 	$nombres = count($tab);
 	$nombr = count($date);
 	
-
-	// pour les séjour et réservation
+// pour les séjour et réservation
 	// recupére la date passé en paramètre
 	$date =$_GET['data'];
 	$date = explode('-',$date);
@@ -485,27 +490,31 @@ ul.winners li{
 	$debut = min($array);
 	$sortie = max($array);
 	
+	// convertion des dates 
+	
+	$dates1 = explode('-',$debut);
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dates2 = explode('-',$sortie);
+	$j1 = $dates2[2];
+	$mm1 = $dates2[1];
+	$an1 = $dates2[0];
+	
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
 	if($debut < $date_english AND $date_english < $sortie) {
-	
 	$color ='occupe';
-	$status ='le client est présent dans le local';	
+	$status ='un client est présent dans le local,<br/>il pourra etre libre à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'</span>';	
 	
 	}
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='le local est réservé';
+	$status ='le local est réservé, et sera occupé <br/>à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
 	}
 	
-	// Le local est libre
-	  elseif(!in_array($date_english,$array)) {
-	// verification pour le cas des sejours pass
-	    $color='libre';
-		$status ='le local est libre';
-	
-    }
 	
 	else{
 		$color='libre';
@@ -522,7 +531,7 @@ ul.winners li{
 	//
 	if(in_array($heure,$tab) AND in_array($date_english,$date)){
 		// verification pour le cas des sejours pass
-	    $color='occupé';
+	    $color='occupe';
 		$status ='le client fait un pass présentement';
 	}
 	elseif($debuts < $date_english AND $date_english < $sorties AND in_array($date_english,$date)){
@@ -532,11 +541,6 @@ ul.winners li{
 	}
   }
 	
-	
-	if($donnees['active']=="off"){
-		$color='bloque';
-		$status ='le local n\'est pas disponible';
-	}
 	
 	if($nombre==0 AND $nombr==0 AND $nombres==0){
 		$color='libre';
