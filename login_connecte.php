@@ -51,7 +51,7 @@ if(isset($_POST['id_ocd'])) {
 							       ':email_user'=>$_POST['email_ocd']));
 	 // on renvoi la page
        echo'<SCRIPT LANGUAGE="JavaScript">
-       document.location.href="acceuil_gestion_hotel.php"
+       document.location.href="tableau_data_home.php"
         </SCRIPT>';	
 			  
 		}

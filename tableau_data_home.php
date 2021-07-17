@@ -2,6 +2,88 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+  $rev=$bds->prepare('SELECT id,date,dates,type FROM home_occupation WHERE email_ocd= :email_ocd');
+  $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ $data=$rev->fetchAll();
+ 
+ // initialiser des tableau pour les donnees
+  $array =[];
+  $arr =[];
+  foreach($data as $donnees){
+	if($donnees['type']==3){
+       $dat=$donnees['type'];
+	   // on le met dans un tableau
+	   $dats = explode(',',$dat);
+	   foreach($dats as $valu){
+		 $array[]=$valu;
+	  }
+	}
+  }
+  $a =count($array);
+  if($a==1){
+	 $reserve ='1 local';
+  }
+  
+  else{
+	  
+	 $reserve=''.$a.' locaux'; 
+  }
+  
+  
+  $rev->closeCursor();
+
+
+$req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
+ $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ $datas=$req->fetchAll();
+ 
+ // créer 4 tableau vide
+	$datac =[];
+	$datac1 =[];
+	$datac2 =[];
+	$datac3 =[];
+  foreach($datas as $donnes){
+
+  // recupére les montant et les mettre dans un tableau
+	$data1 =$donnes['entree'].',';
+	$data2= $donnes['sorties'].',';
+	$data3 =$donnes['reservation'].',';
+	$data4 =$donnes['reste'].',';
+	
+	// on créer un tableaux pour mettre les valeurs
+	$datas1 = explode(',',$data1);
+	$datas2 = explode(',',$data2);
+	$datas3 = explode(',',$data3);
+	$datas4 = explode(',',$data4);
+	
+	foreach($datas1 as $values) {
+	$datac[] =$values;
+	}
+	
+	foreach($datas2 as $values1) {
+	$datac1[] =$values1;
+	}
+	
+	foreach($datas3 as $values2) {
+	$datac2[] =$values2;
+	}
+	
+	foreach($datas4 as $values3) {
+	$datac3[] =$values3;
+	}
+	
+  }
+
+ // calcule des pourcentage entre entrées et sorties chiffre
+	$number1 =array_sum($datac);
+	$number2 =array_sum($datac1);
+	$number3 =array_sum($datac2);
+	$number4 = array_sum($datac3);
+ //
+
+   
+
+
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +206,19 @@ ul.winners li{
   
 }
 
+.center{background:#eee;} .conte1{width:100%;height:300px;} .cont1,.cont12,.cont13,.cont14{float:left;} .conte2{width:100%;height:300px;}
+ .cont1{border-bottom:4px solid #0FF955; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont12{border-bottom:4px solid #7BCCF8; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont13{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
 
+.cont14{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+
+
+.montant1{font-weight:bold;color:#0FF955;font-size:30px;margin-top:30px;margin-left:10%;} .monai{padding-left:20%;}
+.montant2{font-weight:bold;color:#7BCCF8;font-size:30px;margin-top:30px;margin-left:10%;}
+.montant3{font-weight:bold;color:#F87B90;font-size:30px;margin-top:30px;margin-left:10%;}
+
+.cont2{float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;border:3px solid white;}
 </style>
 
 </head>
@@ -401,123 +495,55 @@ ul.winners li{
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_validate_client.php">
- <div  id="examp" style="display:none">
-  <h2> Les informations du client </h2>
-   
-   <div class="form-row">
-    <div class="form-group col-md-6">
-      <div class="input-group">
-	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
-    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required>                                               
-  </div>
- </div>
-
-   <div class="form-group col-md-6">
-      <div class="input-group">
-	  <label for="inputPassword4">Civilité client *<br/></label>
-     <select id="civil" class="civil" name="civil">
-     <option value="sans">type</option><option value="couple">couple</option>
-	 <option value="monsieur">Monsieur</option>
-	 <option value="madame">Madame</option>    
-      <option value="famille">famille</option>
-	  <option value="sans">sans précision</option>
-    </select>	  
-   </div>
-
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
-    </div>
+					<?php
+					echo'<div class="conte1">';
+					echo'<div class="cont1">
+					     <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:green"></i>  Encaissement séjour&pass</div>
+					     <div class="montant1">'.$number1.'<span class="monai">xof</span></div>
+						 </div>
+						 
+						 <div class="cont12">
+						 <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:#7BCCF8;"></i> Acompte Réservation</div>
+					     <div class="montant2">'.$number3.'<span class="monai">xof</span></div>
+						 </div>
+						 
+						 <div class="cont13">
+						 <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:#F87B90;"></i> Dépenses éffectuées</div>
+					     <div class="montant3">'.$number2.'<span class="monai">xof</span></div>
+						 </div>
+					
+					     <div class="cont14">
+						 <div class="titre"><i class="fas fa-coins" style="font-size:18px"></i> Crédit fournisseur</div>
+					     </div>';
+					
+					 echo'</div>';
+					 
+					 
+					echo'<div class="conte2">';
+					echo'<div class="cont2">
+					     <div class="titre"><i class="fas fa-house-user"></i>  Nombre(s) de locaux réservés</div>
+					     <div class="dtx">'.$reserve.'</div>
+						 </div>
+						
+						 <div class="cont2">
+						 <div class="titre"><i class="fas fa-user-friends"></i>  Nombre de clients facturés</div>
+					     </div>
+						 
+						 <div class="cont2">
+						 <div class="titre"><i class="fas fa-coins" style="font-size:14px"></i>  Nombre de factures annulées</div>
+					     </div>
+					
+					     <div class="cont2">
+						 <div class="titre"><i class="fas fa-sync"></i> Réinitialiser votre Dashbord</div>
+					     </div>';
+					
+					 echo'</div>';
+					 
+					?>
   
-
-   <div class="form-group col-md-6">
-      <label for="inputEmail4">piéce d'identité *</label>
-      <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
-    </div>
-     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
-    </div>
-    
-    <h2>Information hébergement</h2>
-	
-	<div class="form-group col-md-6">
-      <label for="inputPassword4">Type de séjour</label>
-      <select id="to" class="to" name="to" required>
-     <option value="sans">type</option><option value="séjour">séjour facturé</option>
-	 <option value="horaire">horaire facturé</option>
-	 <option value="réservation">réservation</option>
-	 </select></div>
-	
-	<div class="form-group col-md-6">
-      
-     </div>
-	
-     <div class="form1 col-md-6">
-	  <label for="inputPassword4">Date d'entrée(check_in) </label>
-      <input type="date" name="days" id="days" class="form-control" id="inputPassword4" placeholder="">
-     </div>
-	
-	 <div class="form1 col-md-6">
-      <label for="inputPassword4">Date du départ(check_out) </label>
-      <input type="date" name="das" id="das" class="form-control" id="inputPassword4" placeholder="">
-    </div>
-	
-	<div class="form2 col-md-6">
-	  <label for="inputPassword4">Heure d'entrée(check_in) </label>
-      <input type="time" name="tim" id="tim" class="form-control" id="inputPassword4" placeholder="">
-     </div>
-	
-	 <div class="form2 col-md-6">
-      <label for="inputPassword4">Heure du départ(check_out) </label>
-      <input type="time" name="tis" id="tis" class="form-control" id="inputPassword4" placeholder="">
-    </div>
-	
-  </div>
-  <span class="errors"></span>
-   <button type="button" class="buttons">continuer</button>
- </div>
- 
- <div class="content">
- <div class="content1">
- <div class="h3"><span id="h3"></span><span class="nbjour"></span></div>
- <span class="client"></span>
- </div>
-
-
- <input type="hidden" id="nbjour" name="nbjour">
- 
-</div><!--content-->
-
-
-
-<div class="contents">
-<div id="resultat_home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
-
- <div class="content2">
-  <h4> Les détails sur le séjour </h4>
-  <div id="results"></div><!--div-affiche data home selectionné-->
-  
- </div>
-<input type="hidden" name="token" id="token" value="<?php
-//Le champ caché a pour valeur le jeton
-echo $_SESSION['token'];?>">
- </div><!--content2--> 
- </form>
- 
  
     
-	</div>
+	                 </div><!--center-->
 
  <div class="reini" style="display:none">
  <form method="post" id="form_reini" action="">
