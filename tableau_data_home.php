@@ -3,11 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 
 // recupére les utilisateur connecté et leur status
-
-   $req=$bdd->prepare('SELECT user,permission,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
-   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donnees=$req->fetch();
-	$req->closeCursor();
+  
 
  $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -407,6 +403,11 @@ ul.winners li{
 .dtx{font-weight:bold;color:#04850C;font-size:30px;margin-left:15%;margin-top:15px;}
 .dtt{color:#06308E;font-weight:bold;font-size:30px;margin-left:15%;margin-top:15px;}
 .dts{font-weight:bold;color:#C10D23;font-size:30px;margin-left:15%;margin-top:15px;}
+
+.user{border-bottom:1px solid #eee;padding-top:5px;font-size:15px;color:font-weight:none;}
+.contens,.contens1{float:left}
+.contens{width:47%;background:white;height:250px;margin-left:2%;margin-top:-40px;}
+.contens1{width:47%;background:white;height:250px;margin-left:3%;margin-top:-40px;}
 </style>
 
 </head>
@@ -465,7 +466,28 @@ ul.winners li{
 					
 					
 					<div class="bg">
-                        <h2>Historique des utilisateurs(en ligne)</h2>
+          
+              <h2>Historique des utilisateurs(en ligne)</h2>
+		
+		<div class="users">
+		
+		<?php
+        $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
+        $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   		
+		  while($dato=$rq->fetch()){
+	     if($dato['active']=="on"){
+	       $action='<i class="fas fa-circle" style="font-size:14px;color:green;"></i>  en ligne';
+	      }
+          else{
+          $action=' en ligne depuis '.$dato['date'].' à '.$dato['heure'].' ';
+	     }
+
+         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'</div><br/>';	 
+       }
+     ?>
+						
+						</div>
                       
                     </div>
                 </div>
@@ -727,9 +749,10 @@ ul.winners li{
 						 <div class="titre"><i class="fas fa-sync"></i> Réinitialiser votre Dashbord</div>
 					     </div>
 						 
+						 </div>
+						 
 						 <div class="tresor">
-						 <div class="contens"></div><div class="contens1"></div>
-						 </div>';
+						 <div class="contens"></div><div class="contens1"></div>';
 					
 					 echo'</div>';
 					 
