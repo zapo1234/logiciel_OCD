@@ -18,15 +18,20 @@ include('inc_session.php');
 		 $array[]=$valu;
 	  }
 	}
+
   }
   $a =count($array);
   if($a==1){
 	 $reserve ='1 local';
   }
+  elseif($a==0){
+	  
+	$reserve ='0 local'; 
+  }
   
   else{
 	  
-	 $reserve=''.$a.' locaux'; 
+	 $reserve=' '.$a.' locaux'; 
   }
   
   
@@ -79,9 +84,192 @@ $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FR
 	$number2 =array_sum($datac1);
 	$number3 =array_sum($datac2);
 	$number4 = array_sum($datac3);
- //
-
-   
+ 
+   	$num_data = $number1+$number3+$number4;
+	
+	if($number1!=0 AND $number4!=0 AND $number2!=0 AND $number3!=0){
+	$data_number =$number1+$number2;
+	
+	$data_numbers =$num_data +$number2;
+	
+	// prévision net 
+	$a = $number1*100/$data_number;
+	$b = $number2*100/$data_number;
+	
+	// prévision sous réservation
+	$c = $num_data*100/$data_numbers;
+	$d = $number2*100/$data_numbers;
+	
+	// prévison net
+	if($a > 80) {
+		$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:85%;background:#3DEA29;font-size:16px;color:#3DEA29;">25</div>
+    </div>
+    </div><br>';
+	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:7%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  </div><br>';
+	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en forte croissance';
+	}
+	
+	elseif(50< $a  AND $a <80){
+	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:70%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
+  </div><br>';
+  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:45%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  </div><br>';
+	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en  croissance';
+	}
+	
+	elseif(30<$a  AND $a < 50) {
+	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
+  </div><br>';
+  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  </div><br>';
+	  $name= 'trésorerie moyenne';
+	}
+	
+	elseif(10 < $a AND $a <30){
+	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3- w3-round-large" style="width:20%";background:#AAF9BB;font-size:16px;color:#AAF9BB>25</div>
+  </div><br>';
+  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  </div><br>';
+  
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+		
+	}
+	
+	else{
+	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3-blue w3-round-large" style="width:5%;background:#AAF9BB;font-size:16px;color:#AAF9BB;">25</div>
+    </div><br>';
+  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  </div><br>';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+		
+	}
+	
+	
+	// prevision sous réserve de réservation
+	
+	if($c > 80) {
+		$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:85%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+  </div><br>';
+	$indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:5%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
+  </div><br>';
+	$names= 'Activité en forte croissance';
+	}
+	
+	elseif(50< $c  AND $c <80){
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:65%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:20%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
+  </div><br>';
+	$names= 'Activité en  croissance';
+	}
+	
+	elseif(30<$c  AND $c < 50) {
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:40%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
+  </div><br>';
+	  $names= 'trésorerie moyenne';
+	}
+	
+	elseif(10 < $c AND $c <30){
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:20%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+  </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
+  </div><br>';
+  
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+		
+	}
+	
+	else{
+	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:7%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+    </div><br>';
+  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
+    <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
+  </div><br>';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+		
+	}
+}
+ $req->closeCursor();
+ 
+ // recupérer les donnees sur la facture
+ 
+  $rev=$bds->prepare('SELECT type FROM facture WHERE email_ocd= :email_ocd');
+  $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+  $datos=$rev->fetchAll();
+  
+  $tab=[];
+  $tabs=[];
+  foreach($datos as $dataf){
+	if($dataf['type']!=4) {
+    $type =$dataf['type'];
+    $types = explode(',',$type);
+    foreach($types as $ty){
+     $tab[]=$ty;
+    }		
+   }
+   else{
+	 $type =$dataf['type'];
+    $types = explode(',',$type);
+    foreach($types as $ty){
+     $tabs[]=$ty;
+    }  
+	   
+   }
+  }
+  
+  // le nombre d'elements dans le tab
+  $b=count($tab);
+  
+  if($b==0 OR empty($b)){
+	$clients ='Zéro client facturé';
+  }
+  
+  elseif($b==1){
+	 $clients ='1 client facturé'; 
+  }
+  
+  else{
+	  
+	 $clients = ' '.$b.' clients facturés'; 
+  }
+  
+  // le nombre d'elements dans le tab
+  $c=count($tabs);
+  
+  if($c==0 OR empty($c)){
+	$cl =' 0 facture annulée';
+  }
+  
+  elseif($b==1){
+	 $cl ='1 facture annulée'; 
+  }
+  
+  else{
+	  
+	 $cl = ' '.$c.' factures annulées'; 
+  } 
 
 
 ?>
@@ -219,6 +407,10 @@ ul.winners li{
 .montant3{font-weight:bold;color:#F87B90;font-size:30px;margin-top:30px;margin-left:10%;}
 
 .cont2{float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;border:3px solid white;}
+
+.dtx{font-weight:bold;color:#04850C;font-size:30px;margin-left:15%;margin-top:15px;}
+.dtt{color:#06308E;font-weight:bold;font-size:30px;margin-left:15%;margin-top:15px;}
+.dts{font-weight:bold;color:#C10D23;font-size:30px;margin-left:15%;margin-top:15px;}
 </style>
 
 </head>
@@ -277,7 +469,7 @@ ul.winners li{
 					
 					
 					<div class="bg">
-                        <div id="resultats"></div>
+                        <h2>Historique des utilisateurs(en ligne)</h2>
                       
                     </div>
                 </div>
@@ -521,17 +713,19 @@ ul.winners li{
 					 
 					echo'<div class="conte2">';
 					echo'<div class="cont2">
-					     <div class="titre"><i class="fas fa-house-user"></i>  Nombre(s) de locaux réservés</div>
+					     <div class="titre"><i class="fas fa-house-user" style="color:#04850C"></i>  Nombre(s) de locaux réservés</div>
 					     <div class="dtx">'.$reserve.'</div>
 						 </div>
 						
 						 <div class="cont2">
-						 <div class="titre"><i class="fas fa-user-friends"></i>  Nombre de clients facturés</div>
-					     </div>
+						 <div class="titre"><i class="fas fa-user-friends" style="color:#06308E"></i>  Nombre de clients facturés</div>
+					     <div class="dtt">'.$clients.'</div>
+						 </div>
 						 
 						 <div class="cont2">
-						 <div class="titre"><i class="fas fa-coins" style="font-size:14px"></i>  Nombre de factures annulées</div>
-					     </div>
+						 <div class="titre"><i class="fas fa-coins" style="font-size:14px;color:#C10D23"></i>  Nombre de factures annulées</div>
+					     <div class="dts">'.$cl.'</div>
+						 </div>
 					
 					     <div class="cont2">
 						 <div class="titre"><i class="fas fa-sync"></i> Réinitialiser votre Dashbord</div>
