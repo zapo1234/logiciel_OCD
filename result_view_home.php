@@ -410,7 +410,7 @@ if($_POST['action']=="editvalidate"){
    $active="off";
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été activé !
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
 	$ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
@@ -418,29 +418,72 @@ if($_POST['action']=="editvalidate"){
 		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-	}
+					 
+					 
+	$id_fact="";
+     $date="1";
+     $horaires="1";
+     $active="off";
+     $datas_fren="1";
+	 $dates="1";
+     $activ = 5;	 
+	// inserer dans la table home_occupation
+			  
+					// on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
+		 $reys->execute(array(':id_chambre'=>$id,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':date'=>$horaires,
+							  ':date_french'=>$datas_fren,
+							  ':dates'=>$dates,
+							  ':id_fact'=>$id_fact,
+							  ':type'=>$activ
+	                        ));		
+	     }
 
 // actionner   les actions sur un local
  if($_POST['action']=="acss"){
 	
    $id =$_POST['id'];
    $active ="on";
-	
+  $types =5;
 	// Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à eté bloqué !
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à eté activé !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-	
-	$ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+  $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
 		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
+					 
+	// supprimer l'entrée de la chambre
+	$res =$bds->prepare('DELETE FROM home_occupation WHERE id_chambre= :id AND type= :ty AND email_ocd= :email_ocd');
+	$res->execute(array(':id'=>$id,
+	                    ':ty'=>$types,
+						':email_ocd'=>$_SESSION['email_ocd']
+						));
+	
 	}
 
 
-
+   if($_POST['action']=="zoom"){
+	   
+	   $id=$_POST['id'];
+	   $home =$_GET['home'];
+	   // afficher l'image en cours
+	   $req=$bds->prepare('SELECT name_upload FROM photo_chambre WHERE email_ocd= :email_ocd AND id= :id AND id_chambre= :ids');
+       $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+                       ':id'=>$id,
+					   ':ids'=>$home
+					  ));
+		$donnees=$req->fetch();
+		
+		echo'<img src="upload_image/'.$donnees['name_upload'].'" width="1150px" height="700px">';
+	   $req->closeCursor();
+   }
 
 
 
