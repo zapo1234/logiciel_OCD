@@ -2,43 +2,14 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $rev=$bds->prepare('SELECT id,date,dates,type FROM home_occupation WHERE email_ocd= :email_ocd');
-  $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
- $data=$rev->fetchAll();
- 
- // initialiser des tableau pour les donnees
-  $array =[];
-  $arr =[];
-  foreach($data as $donnees){
-	if($donnees['type']==3){
-       $dat=$donnees['type'];
-	   // on le met dans un tableau
-	   $dats = explode(',',$dat);
-	   foreach($dats as $valu){
-		 $array[]=$valu;
-	  }
-	}
+// recupére les utilisateur connecté et leur status
 
-  }
-  $a =count($array);
-  if($a==1){
-	 $reserve ='1 local';
-  }
-  elseif($a==0){
-	  
-	$reserve ='0 local'; 
-  }
-  
-  else{
-	  
-	 $reserve=' '.$a.' locaux'; 
-  }
-  
-  
-  $rev->closeCursor();
+   $req=$bdd->prepare('SELECT user,permission,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$req->fetch();
+	$req->closeCursor();
 
-
-$req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
+ $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
  
@@ -221,15 +192,16 @@ $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FR
   
   $tab=[];
   $tabs=[];
+  $array=[];
   foreach($datos as $dataf){
-	if($dataf['type']!=4) {
+	if($dataf['type']==1 OR $dataf['type']==2 OR $dataf['type']==3) {
     $type =$dataf['type'];
     $types = explode(',',$type);
     foreach($types as $ty){
      $tab[]=$ty;
     }		
    }
-   else{
+   if($dataf['type']==4){
 	 $type =$dataf['type'];
     $types = explode(',',$type);
     foreach($types as $ty){
@@ -237,6 +209,30 @@ $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FR
     }  
 	   
    }
+   
+   if($dataf['type']==3){
+	 $dat=$dataf['type'];
+	   // on le met dans un tableau
+	   $dats = explode(',',$dat);
+	   foreach($dats as $valu){
+		 $array[]=$valu;
+	  }
+	}
+
+  }
+  
+  $a =count($array);
+  if($a==1){
+	 $reserve ='1 local';
+  }
+  elseif($a==0 OR empty($array)){
+	  
+	$reserve ='0 local'; 
+  }
+  
+  else{
+	  
+	 $reserve=' '.$a.' locaux'; 
   }
   
   // le nombre d'elements dans le tab
@@ -729,7 +725,11 @@ ul.winners li{
 					
 					     <div class="cont2">
 						 <div class="titre"><i class="fas fa-sync"></i> Réinitialiser votre Dashbord</div>
-					     </div>';
+					     </div>
+						 
+						 <div class="tresor">
+						 <div class="contens"></div><div class="contens1"></div>
+						 </div>';
 					
 					 echo'</div>';
 					 
