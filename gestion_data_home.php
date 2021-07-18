@@ -566,11 +566,11 @@ h3{font-size:16px;text-transform:capitalize;}
 		$status ='le local est libre';
    }
 
-	 echo'<div class="homes" id="home'.$color.'">
+	 echo'<div><a href="view_data_home.php?home='.$donnees['id_chambre'].'"><div class="homes" id="home'.$color.'">
 		      <h3>'.$donnees['type_logement'].'</h3>
 			  <div class="titre">'.$donnees['chambre'].'</div>
 			  <div class="dt">'.$status.'</div>
-		     </div>';	
+		     </div></a></div>';	
 	
 	
   
