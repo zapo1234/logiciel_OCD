@@ -45,6 +45,7 @@ include('inc_session.php');
 	}
 	
   }
+  
 
  // calcule des pourcentage entre entrées et sorties chiffre
 	$number1 =array_sum($datac);
@@ -60,15 +61,15 @@ include('inc_session.php');
 	$data_numbers =$num_data +$number2;
 	
 	// prévision net 
-	$a = $number1*100/$data_number;
+	$ac = $number1*100/$data_number;
 	$b = $number2*100/$data_number;
 	
 	// prévision sous réservation
-	$c = $num_data*100/$data_numbers;
+	$cb = $num_data*100/$data_numbers;
 	$d = $number2*100/$data_numbers;
 	
 	// prévison net
-	if($a > 80) {
+	if($ac > 80) {
 		$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:85%;background:#3DEA29;font-size:16px;color:#3DEA29;">25</div>
     </div>
@@ -79,7 +80,7 @@ include('inc_session.php');
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en forte croissance';
 	}
 	
-	elseif(50< $a  AND $a <80){
+	elseif(50< $ac  AND $ac <80){
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
   </div><br>';
@@ -89,7 +90,7 @@ include('inc_session.php');
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en  croissance';
 	}
 	
-	elseif(30<$a  AND $a < 50) {
+	elseif(30<$ac  AND $ac < 50) {
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
   </div><br>';
@@ -99,7 +100,7 @@ include('inc_session.php');
 	  $name= 'trésorerie moyenne';
 	}
 	
-	elseif(10 < $a AND $a <30){
+	elseif(10 < $ac AND $ac <30){
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3- w3-round-large" style="width:20%";background:#AAF9BB;font-size:16px;color:#AAF9BB>25</div>
   </div><br>';
@@ -125,7 +126,7 @@ include('inc_session.php');
 	
 	// prevision sous réserve de réservation
 	
-	if($c > 80) {
+	if($cb > 80) {
 		$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:85%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
   </div><br>';
@@ -135,7 +136,7 @@ include('inc_session.php');
 	$names= 'Activité en forte croissance';
 	}
 	
-	elseif(50< $c  AND $c <80){
+	elseif(50< $cb  AND $cb <80){
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:65%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
   </div><br>';
@@ -145,7 +146,7 @@ include('inc_session.php');
 	$names= 'Activité en  croissance';
 	}
 	
-	elseif(30<$c  AND $c < 50) {
+	elseif(30<$cb  AND $cb < 50) {
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:40%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
   </div><br>';
@@ -155,7 +156,7 @@ include('inc_session.php');
 	  $names= 'trésorerie moyenne';
 	}
 	
-	elseif(10 < $c AND $c <30){
+	elseif(10 < $cb AND $cb <30){
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:20%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
   </div><br>';
@@ -281,6 +282,7 @@ include('inc_session.php');
 
     <!-- Custom fonts for this template-->
     <!-- Custom fonts for this template -->
+	<link rel="stylesheet" href="/lib/w3.css"><!-- bar progression indicateur-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -306,6 +308,8 @@ include('inc_session.php');
 #examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
+
+h3{padding:1%;text-align:center;padding-top:10px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
 background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
 .form1,.form2{display:none;}
@@ -406,8 +410,8 @@ ul.winners li{
 
 .user{border-bottom:1px solid #eee;padding-top:5px;font-size:15px;color:font-weight:none;}
 .contens,.contens1{float:left}
-.contens{width:47%;background:white;height:250px;margin-left:2%;margin-top:-40px;}
-.contens1{width:47%;background:white;height:250px;margin-left:3%;margin-top:-40px;}
+.contens{width:47%;background:white;height:250px;margin-left:2%;margin-top:-50px;padding-left:5%;}
+.contens1{width:47%;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
 </style>
 
 </head>
@@ -752,7 +756,24 @@ ul.winners li{
 						 </div>
 						 
 						 <div class="tresor">
-						 <div class="contens"></div><div class="contens1"></div>';
+						 <div class="contens">
+						 <h3>Prévisionnel NET Trésorie</h3>
+						 <h4>Indicateur</h4>
+		                <div class="montants">+'.$ac.'%</div>
+		                <div>'.$indicateur.'</div>
+		                <div class="montan"></div><br/>
+		               <div>'.$indicateurs.'</div><br/>
+		               
+						 </div>
+						 
+						 <div class="contens1">
+						 <h3>Prévisionnel BRUT Trésorie(Acompte réservation)</h3>
+						 <h4>Indicateur</h4>
+						 <div class="monta">+'.$cb.'%</div>
+		                  <div>'.$indicateuc.'</div>
+		                  <div class="montac"></div><br/>
+		                  <div>'.$indicateurc.'</div>
+						 </div>';
 					
 					 echo'</div>';
 					 
