@@ -138,7 +138,7 @@ $smart_from =($page -1)*$record_peage;
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="gestion_datas_facture.php?id_fact="'.$nombre.'"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
+		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 	    </tr>';
 	}
 	
@@ -272,7 +272,13 @@ $smart_from =($page -1)*$record_peage;
 							':tys'=>$tys,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
-					 ));			 
+					 ));
+        // vous suprimer les données dans home_occupation
+        $rey =$bds->prepare('DELETE FROM home_occupation WHERE id_fact= :id AND email_ocd= :email_ocd');
+		$rey->execute(array(':id'=>$id,
+		                    ':email_ocd'=>$_SESSION['email_ocd']
+							));
+       		
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
 	   
    }
