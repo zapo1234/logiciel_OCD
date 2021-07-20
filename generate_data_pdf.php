@@ -22,8 +22,9 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
    <style type="text/css">
     .content2{width:100%;height:200px;border:1px solid #eee;} 
-    table{margin-top:50px;} .cont1,.conten1{float:left;} .conten1{width:40%;} .cont1{position:absolute;top:100px;left:65%;}
-	.content3{margin-top:40px;}
+    table{margin-top:50px;} .cont1,.conten1{float:left;} #logo{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} .cont1{position:absolute;top:100px;left:65%;}
+	.content3{margin-top:40px;} 
+	
 
    </style>
 
@@ -39,7 +40,7 @@
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 					   
     // aller chercher les auteurs en écriture sur une facture
-   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,email_client,nombre,montant,reste,avance,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,numero,email_client,nombre,montant,reste,avance,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
@@ -59,17 +60,18 @@
    
    echo'<div class="content2">
         
-		<div class="conten1" style="float:left"><img  src="image_logo/'.$donnees['logo'].'" alt="'.$donnees['logo'].'" style="width:150px;height=150px;border-radius:50%";>
-		<br/><span class="entre">Entreprise '.$donnees['denomination'].'</span><br/>
-		<span class="tel">Numéro tel '.$donnees['numero'].'</span><br/>
+		<div class="conten1" style="float:left"><div class="con"><img id="logo" src="image_logo/'.$donnees['logo'].'" alt="'.$donnees['logo'].'"></div>
+		<br/><br/><span class="entre">Entreprise '.$donnees['denomination'].'</span><br/><br/>
+		<span class="tel">Numéro tel '.$donnees['numero'].'</span><br/><br/>
+		<span class="tel">Email '.$donnees['email_ocd'].'</span><br/><br/>
 		<span class="adresse">Adresse '.$donnees['adresse'].'</span>
 		</div>
 		
 		<div class="cont1" style="float:left">
-	     <span class="fact">Date d\'édition:'.$donns['date'].'</span><br/>
+	     <span class="fact">Date d\'édition:'.$donns['date'].'</span><br/><br/>
 		<span class="name"> Nom client:'.$donns['clients'].'</span><br/><br/>
-		<span class="name"> Numéro:'.$_GET['id_fact'].'</span><br/>
-		<span class="email"> Numéro:'.$donns['email_client'].'</span><br/>
+		<span class="name"> Numéro:'.$donns['numero'].'</span><br/>
+		<span class="email">Email:'.$donns['email_client'].'</span><br/>
 		
 		</div><!--cont1-->
 		
@@ -99,16 +101,20 @@
 		$montant=$donns['montant']-floatval($donns['mont_tva']);
 		echo'<table class="tab">
 		     <tr>
-			 <td>Cout(déjeuner/repas)</td>
-			 <td>Total(Hors taxe)</td>
-			 <td>Taxe(TVA)</td>
-			 <td>Nét à payer</td>
+			 <td>Montant(repas)</td>
+			 <td>'.$donns['montant_repas'].'xof</td>
 			 </tr>
 			 <tr>
-			 <td>'.$donns['montant_repas'].'</td>
-			 <td>'.$montant.'</td>
-			 <td>'.$donns['tva'].'</td>
-			 <td>'.$donns['montant'].'</td>
+			 <td>Montant(HT)</td>
+			 <td>'.$montant.' xof</td>
+			 </tr>
+			 <tr>
+			 <td>TVA(%)</td>
+			 <td>'.$donns['tva'].' %</td>
+			 </tr>
+			 <tr>
+			 <td>Montant(TTC)</td>
+			 <td>'.$donns['montant'].' xof</td>
 			 </tr>
 		    </table>
 	
