@@ -5,7 +5,7 @@ include('inc_session.php');
    
     // emttre la requete sur le fonction
 	$active="on";
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,20');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,9');
     $req->execute(array(':ac'=>$active,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
@@ -48,35 +48,47 @@ include('inc_session.php');
 	 $tabs = [];
 	foreach($donns as $datas) {
 		
-		// pour les sejours en date
 		if($datas['type']!=0){
 		//pour sejour ou réservation
 		if($datas['type']==1 OR $datas['type']==3){
 		$data = $datas['date'];
 		$dat = explode(',',$data);
-		}
-		
+		// pour les sejours et réservation
 		foreach($dat as $value){
 		$array[] = $value;		
+	    }
+		}
+		// pour le pass.
+		if($datas['type']==2){
+		// pour les heures en date
+		$datos =$datas['date'];
+		// pour les jours en date
+		$datis =$datas['dates'];
+		
+		$dats = explode(',',$datos);
+		$da = explode(',',$datis);
+		// pour les dates en heures
+		foreach($dats as $values){
+		$tabs[] = $values;		
 	   }
-		
-	  }
-		
+	   
+	   // pour les dates en jours
+	 }
+	}
 	}
 
      $tab = $array;
 	 // on verifie le nombre d'élement dans le tableau
 	 $nombre = count($array);
+	 $nombr = count($tabs);
     if($nombre!=0){	
     $debut = min($array);
     $sortie = max($array);
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
-	 
-	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
+	
      if(in_array(($_POST['days']),$array)){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+      $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
@@ -98,6 +110,8 @@ include('inc_session.php');
 	 
 
      else{
+		 
+		if($nombre==0){
          $dates1 = explode('-',$_POST['days']);
 	
 	$j = $dates1[2];
@@ -116,56 +130,39 @@ include('inc_session.php');
       
 		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
-	 }	 
-    
 	 }
-	}
+
+     }	 
+    
 	
-	else{
-		
-	$dates1 = explode('-',$_POST['days']);
-	$j = $dates1[2];
-	$mm = $dates1[1];
-	$an = $dates1[0];
-	$dates2 = explode('-',$_POST['das']);
-	$j1 = $dates2[2];
-	$mm1 = $dates2[1];
-	$an1 = $dates2[0];
-		
-		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
-		$a="h5";
-		// la vairable en envoi
-	  $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-   
 	}
 	 
 	 // si le client est facturé sur une horaire
 	 
-	 if($_POST['to']=="horaire"){
+	 if($nombr!=0){
+		 $debuts = min($tabs);
+           $sorties = max($tabs);
 		 
-		 
-		 if(in_array(($_POST['tim']),$array)  AND $donns['dates']==$_POST['dat']){
+		 if(in_array(($_POST['tim']),$tabs)  AND $donns['dates']==$_POST['dat']){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
 	 
-      elseif(in_array(($_POST['tis']),$array)  AND $donns['dates']==$_POST['dat']){
+      elseif(in_array(($_POST['tis']),$tabs)  AND $donns['dates']==$_POST['dat']){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 	 }
 	 
-	  elseif(in_array(($_POST['dat']),$tab)){
+	  elseif(in_array(($_POST['dat']),$tabs)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
-	 
-	 
 	 
 	 else{
 		 
