@@ -77,14 +77,24 @@ img {
 #role,#roles{width:320px;height:40px;border:1px solid #eee;}
 label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
-td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
+
 #form3{width:40%;height:600px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
 #modifier,#modipass{margin-left:30%;margin-top:3px;width:220px;text-align:center;color:white;background:#0661BC;border:2px solid #0661BC;height:35px border-radius:15px;}
 .bl{background:#B9102C;width:100px;color:white;text-align:center;height:25px;border:2px solid #B9102C;border-radius:15px;}
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
-tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+ #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
 .resultats{width:60%;} .dert{font-family:10px;}
+
+#tab td, #tab th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tab tr:nth-child(even){background-color: #f2f2f2;}
+
+#tab tr:hover {background-color: #ddd;}
+
+#tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+
 </style>
 
 </head>
