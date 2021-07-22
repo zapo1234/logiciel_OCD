@@ -44,7 +44,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	   
  
- $req=$bds->prepare('SELECT date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+ $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
@@ -55,6 +55,7 @@ $smart_from =($page -1)*$record_peage;
   echo'	<table id="tabs">
      <thead>
      <tr class="tf">
+	 <th></th>
 	  <th scope="col">Date de cloture</th>
 	  <th scope="col">Entrées en caisse</th>
       <th scope="col">Sorties de caisse</th>
@@ -73,6 +74,17 @@ $smart_from =($page -1)*$record_peage;
 	$datac2 =[];
 	$datac3 =[];
   foreach($datas as $donnes){
+	  
+	  // afficher la le checkout en fonction de la permission
+	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		
+		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
+		
+	}
+	else{
+		
+		$put="";
+	}
 
    $date1=$donnes['date'];
 	$date1 = explode('-',$date1);
@@ -81,6 +93,7 @@ $smart_from =($page -1)*$record_peage;
 	$an = $date1[0];
 	
      echo'<tr class="datas'.$j.'/'.$mm.'/'.$an.'">
+	     <td>'.$put.'</td>
 	     <td>'.$j.'/'.$mm.'/'.$an.'</td>
 		 <td><span class="repas">'.$donnes['entree'].'xof</td>
 		 <td><span class="repas">'.$donnes['sorties'].'xof</td>

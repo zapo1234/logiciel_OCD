@@ -68,8 +68,16 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
   margin-top:10px;
   }
   
-  .table{width:70%;} .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;} td{font-size:18px;font-family:arial;}
+  
+  #tabs td, #tabs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tabs tr:nth-child(even){background-color:#f2f2f2;}
+
+#tabs tr:hover {background-color: #ddd;}
+
+#tabs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tabs{margin-top:10px;}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -79,11 +87,11 @@ td,th{text-align:center;} td{font-size:18px;font-family:arial;}
 ul a{margin-left:3%;} #form_logo{display:none;} 
 .clic{width:180px;height:40px;color:white;background:#0FAE3A;text-align:center;border:2px solid #0FAE3A;
 border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white;border-right:1px solid white;border-bottom:2px solid #3C52C7;font-size:20px;width:120px;}
-.export{margin-left:50%;margin-bottom:5px;} .csv{margin-left:2%;}
+.export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 #resul_depense,#indicateur{float:left;margin-left:2%;} 
 #resul_depense{width:65%;} #indicateur{margin-left:4%;}
-.pied_page{margin-left:20%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
+.pied_page{margin-left:20%;margin-top:25px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .montants{margin-left:30%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:30%;font-size:30px;color:#D20A22;font-weight:bold;}
 .name{font-size:15px;margin-left:5%;color:black;} .monta{margin-left:30%;font-size:30px;color:#0A68D2;font-weight:bold;}
