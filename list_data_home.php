@@ -46,6 +46,7 @@ include('inc_session.php');
     $donns = $rec->fetchAll();
 	 $array = [];
 	 $tabs = [];
+	 $date=[];
 	foreach($donns as $datas) {
 		
 		if($datas['type']!=0){
@@ -73,6 +74,11 @@ include('inc_session.php');
 	   }
 	   
 	   // pour les dates en jours
+	   foreach($da as $valus){
+		$date[] = $valus;		
+	   }
+	   
+	   // pour les dates en jours
 	 }
 	}
 	}
@@ -81,7 +87,10 @@ include('inc_session.php');
 	 // on verifie le nombre d'élement dans le tableau
 	 $nombre = count($array);
 	 $nombr = count($tabs);
-    if($nombre!=0){	
+    
+	
+	
+	if($nombre!=0){	
     $debut = min($array);
     $sortie = max($array);
    // on recupére le premier et la dernier date
@@ -139,37 +148,37 @@ include('inc_session.php');
 	 
 	 // si le client est facturé sur une horaire
 	 
+	 if($nombr==0){
+		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
+		 $a="h5";
+		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>'; 
+	}
+	 
 	 if($nombr!=0){
 		 $debuts = min($tabs);
            $sorties = max($tabs);
 		 
-		 if(in_array(($_POST['tim']),$tabs)  AND $donns['dates']==$_POST['dat']){
+		 if(in_array(($_POST['tim']),$tabs) AND in_array(($_POST['tis']),$tabs)  AND in_array($_POST['dat'],$date)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
 	 
-      elseif(in_array(($_POST['tis']),$tabs)  AND $donns['dates']==$_POST['dat']){
+      elseif($debuts < $_POST['tim']  AND $_POST['tim']< $sorties  AND in_array($_POST['dat'],$date)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 	 }
 	 
-	  elseif(in_array(($_POST['dat']),$tabs)){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
-		$a="h6";
-		$envoi="";
-	 }
-	 
 	 else{
 		 
+		 if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
-		$a="h5";
-		$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-		 
+		 $a="h5";
+		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+		}
 		 
 	 }
 		 
