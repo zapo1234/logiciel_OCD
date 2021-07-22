@@ -77,29 +77,44 @@ ul a{margin-left:3%;} #form_logo{display:none;} .tt{margin-left:50%;margin-top:1
 #dir{margin-left:1.5%;background:#3C52C7;border:2px solid #3C52C7;color:white;font-weight:bold;}
 .clic{width:180px;height:40px;color:white;background:#0FAE3A;text-align:center;border:2px solid #0FAE3A;
 border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white;border-right:1px solid white;border-bottom:2px solid #3C52C7;font-size:20px;width:120px;}
-.export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
+.export{margin-left:45%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}.der{padding-left:5%;}
-#affiche{margin-top:15px;} .table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;}td{font-size:16px;font-family:arial;} a{color:black;text-decoration:none;font-size:12px;}
+#affiche{margin-top:15px;} 
+ a{color:black;text-decoration:none;font-size:12px;}
 .datas{border:2px solid white;box-shadow:2px 2px 1px 1px;font-size:12px;background-color:white;} .action{cursor:pointer;}
-.data1{color:white;font-size:16px;font-weight:none;background:green}
-.data2{color:white;font-size:16px;font-weight:none;background:#1E90FF;}
+.data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
+.data2{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
+.data4{background:#C81C31;font-weight:none;font-size:16px;color:black;border:2px solid #C81C31;border-radius:20px;}
+.data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;border-radius:20px;color:black}
+
 .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
-.data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
+
 .repas{font-size:15px;} .actions{cursor:pointer;}
-.datis{border:2px solid white;box-shadow:1px 1px 1px 1px;font-size:15px;background-color:white;}
+.datis{color:black;border:2px solid white;box-shadow:1px 1px 1px 1px;font-size:15px;background-color:white;width:360px;}
 .result{z-index:4;width:550px;height:650px;border:2px solid #eee;background-color:white;position:absolute;top:150px;left:30%;}
 .h{margin-top:20px;margin-left:4%;} #designatio,#fournisseu{width:400px;height:50px;}
 input {border:color:1px solid #eee;height:30px;} #modif{width: 180px;height: 40px;color: white;background: #0FAE3A;text-align: center;
 border: 2px solid #0FAE3A;} 
 border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
-.pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
+.pied_page{margin-left:60%;margin-top:15px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+ #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+.delete{margin-left:10%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
+ 
+ #tls td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tls tr:nth-child(even){background-color:#f2f2f2;}
+
+#tls tr:hover {background-color: #ddd;}
+
+#tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tls{margin-top:10px;}
+ 
 </style>
 
 </head>
