@@ -53,7 +53,13 @@
 
 #tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;}
 
+ .text_facture{font-size:150px;transform:rotate(45deg)
  
+    -ms-transform: rotate(45deg); /* Internet Explorer */
+    -moz-transform: rotate(45deg); /* Firefox */
+    -webkit-transform: rotate(45deg); /* Safari et Chrome */
+    -o-transform: rotate(45deg); /* Opera */
+ }
 	
    </style>
 
@@ -149,6 +155,8 @@
 		}
 		 
 		echo'</table>';
+		
+		echo'<div class="text_facture">Facture</div>';
 		
 		$montant=$donns['montant']-floatval($donns['mont_tva']);
 		echo'<table id="tab">
