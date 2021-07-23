@@ -53,12 +53,13 @@
 
 #tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;}
 
- .text_facture{font-size:150px;transform:rotate(45deg)
- 
-    -ms-transform: rotate(45deg); /* Internet Explorer */
-    -moz-transform: rotate(45deg); /* Firefox */
-    -webkit-transform: rotate(45deg); /* Safari et Chrome */
-    -o-transform: rotate(45deg); /* Opera */
+ .text_facture{font-size:150px;
+-webkit-transform: rotate(50deg);
+-moz-transform: rotate(50deg);
+-o-transform: rotate(50deg);
+ writing-mode: rl-bt;
+ position:fixed;
+ color:#F0EFEF;
  }
 	
    </style>
