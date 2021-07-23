@@ -42,6 +42,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 
+.delete{margin-left:15%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
@@ -61,15 +62,28 @@ include('inc_session.php');
   100% { transform: rotate(360deg); }
 }
 
-.table,th{font-size:16px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black}
-td,th{text-align:center;} .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
-td{font-size:18px;font-family:arial;}
-.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} .data1{color:white;font-size:16px;font-weight:none;background:green} .datas1{}
-.data3{background:#1E90FF;font-size:16px;font-weight:none;color:white} .datas3{}
-.data2{background:#4B0082;font-weight:none;font-size:16px;color:white;} .datas2{}
-.data4{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
+ 
+ #tb td, #tb th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tb tr:nth-child(even){background-color:#f2f2f2;}
+
+#tb tr:hover {background-color: #ddd;}
+
+#tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tb{margin-top:10px;}
+ 
+ 
+ 
+ .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
+
+.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} 
+.data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
+.data3{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
+.data4{background:#C81C31;font-weight:none;font-size:16px;color:black;border:2px solid #C81C31;border-radius:20px;} .datas2{}
+.data{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
-.der{font-size:12.5px;} .export{margin-left:80%;margin-bottom:5px;} .csv{margin-left:2%;}
+.der{font-size:12.5px;} .export{margin-left:40%;margin-bottom:5px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
@@ -81,12 +95,13 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   .h{padding-left:10%;margin-top:18px;font-size:15px;} .num{padding-left:2%}
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
   .liste td{width:150px;} .list td{font-size:14px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
-#form_logo{display:none;} .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
+#form_logo{display:none;} .pied_page{margin-left:60%;margin-top:10px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:5%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+ #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+.drt{color:green;font-size:13px;font-weight:bold;}
 </style>
 
 </head>
@@ -411,6 +426,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="result"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -546,6 +562,20 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 
 			load();
 			
+	$(document).on('click','.pdf',function(){
+	var id = $(this).data('id4');
+	var action = "generate";
+	               $.ajax({
+					url: "generate_data_pdf.php",
+					method: "POST",
+					data:{id:id,action:action},
+					success: function(data) {
+						$('#pak').css('display','block');
+						$('#resultats').html(data);
+					}
+				});
+          });
+	
 	// afficher la div pour réinitailiser les chiffres	
 	$(document).on('click','.butt',function(){
     $('.reini').css('display','block');
@@ -581,6 +611,43 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 	  
 	  
   });
+  
+  $(document).on('click','.delete',function(){
+ var checkbox = $('.form-check-input:checked');
+ var action="delete_check";
+ if(checkbox.length > 0) {
+	var checkbox_value = [];
+ $(checkbox).each(function() {
+	checkbox_value.push($(this).val());
+ });
+ 
+ $.ajax({
+	type:'POST', // on envoi les donnes
+	async: false,
+	url:'result_facture_home.php',// on traite par la fichier
+	data:{checkbox_value:checkbox_value,action:action},
+	success:function() {
+	 loads();
+	 var nombre = checkbox.length;
+	 if(nombre==1){
+	   var nbrs ="supression d'une facture"; 
+	 }
+	 
+	 else{
+		 var nbrs = 'vous avez suprimez'+nombre+'facture'; 
+	 }
+	 
+	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>  <span class="drt">'+nbrs+'</span></div>');
+	 }
+   });
+   }
+ 
+ else {
+	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune facture selectionnée</span></div>');
+	 
+ }
+ 
+ });
    
    });
    

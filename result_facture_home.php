@@ -321,8 +321,17 @@ $smart_from =($page -1)*$record_peage;
    
    if($_POST['action']=="delete_check"){
 	   
-	echo'ZAPO MARTIAL';   
-	   
-   }
+	 if(isset($_POST['checkbox_value'])){
+   $email=$_SESSION['email_ocd'];
+   
+	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
+		$req="DELETE FROM facture WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$statement= $bds->prepare($req);
+		$statement->execute();
+		
+    }
+		
+ }
+}
 
 ?>
