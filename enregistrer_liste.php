@@ -28,18 +28,16 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	
 	$ids=html_entity_decode($_POST['ids']);
 	$nums=$_POST['nums'];
-    $num= $_POST['num'];// nombre de personne 
-    if($num ==1){
+    $num=$_POST['num'];// nombre de personne 
+    if($num==1){
       $icons = '<i class="far fa-user"></i>';
     }
-    elseif($num ==2){
+    elseif($num==2){
      $icons='<i class="far fa-user"></i> <i class="far fa-user"></i>';
 
     }
 	
-	
-
-     elseif($num ==3){
+	elseif($num==3){
 
        $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }

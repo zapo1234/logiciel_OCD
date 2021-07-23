@@ -174,7 +174,7 @@ include('inc_session.php');
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color:white;z-index:2;opacity: 0.6;}
 #examp{display:block;border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
-h2{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
+h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
 background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
 .form1,.form2{display:none;}
@@ -236,7 +236,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:14px;}.print{border
 
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
-
+.pass{color:#650699;font-weight:bold;}
 .live-infos{
   width: 250px;
   height: 200px;
@@ -561,7 +561,7 @@ ul.winners li{
     <div class="form-group col-md-6">
       <div class="input-group">
 	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
-    <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required value="<?php echo$date;?>">                                               
+    <input type="date" name="dat" id="dat" class="form-control"  required value="<?php echo$date;?>">                                               
   </div>
  </div>
 

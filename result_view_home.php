@@ -173,7 +173,7 @@ include('inc_session.php');
   
   if($_POST['action']=="add_user"){
 	  
-	        echo'<table class="tab">
+	        echo'<table id="tab">
 					<tr>
 					<th></th>
 					<th>Nom && prénom</th>
