@@ -18,16 +18,42 @@ $page=1;
 $smart_from =($page -1)*$record_peage;
 if($_POST['action']=="fetchs") {
 	 
+ 
+ // recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+    $rel=$bdd->prepare('SELECT  permission FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+ 
+ 
  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
+  if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		
+		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
+	<select name="delete_line" id="delete_line">
+	<option value="">Suprimer</option>
+	<option value="10">10 lignes</option>
+	<option value="30">30 lignes</option>
+	<option value="50">50 lignes</option>
+	</select> ';
+		
+	}
+	else{
+		
+		$puts="";
+	}
+	
   // on boucle sur les les resultats
-	echo'<div class="expor"><h2>Gestion des dépenses de votre activité</h2> <span class="export">Export  <button type="button" class="excel">Excel <i class="far fa-file-excel"></i></button>
-	<button type="button" class="csv">Csv <i class="fas fa-file-csv"></i></button><span></div>';
-  echo'	<table class="table">
+	// on boucle sur les les resultats
+	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excels.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	<span>'.$puts.'</form></div>';
+  echo'	<table id="tls">
      <thead>
      <tr class="tf">
+	 <th></th>
 	  <th scope="col">Date</th>
 	  <th scope="col">N°facture(si existe)</th>
       <th scope="col">Désignation</th>
@@ -42,6 +68,18 @@ if($_POST['action']=="fetchs") {
   foreach($datas as $donnes){
 
     $nombre =$donnes['status'];
+	// afficher la le checkout en fonction de la permission
+	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		
+		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['numero_facture'].'">';
+		
+	}
+	else{
+		
+		$put="";
+	}
+	
+	
 	
 	if($donnes['status']==1){
 	 $name="dépense effectuée";
@@ -80,8 +118,9 @@ if($_POST['action']=="fetchs") {
 	$rt=",";
 	
 	echo'<tr class="datas'.$donnes['status'].'">
+	    <td>'.$put.'</td>
 	     <td><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> enregistrement effectué le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
-		 <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i> par '.$data_user.'</span></td>
+		 <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></td>
 		 <td><span class="der">N° facture: '.$donnes['numero_facture'].'<br/><div class="data'.$donnes['status'].'">'.$name.'</span></div></td>
 		 <td><span class="repas">'.$donnes['designation'].'</td>
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
