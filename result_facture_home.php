@@ -19,18 +19,41 @@ $smart_from =($page -1)*$record_peage;
 	
 
    if($_POST['action']=="fetch") {
+	
+    // recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+    $rel=$bdd->prepare('SELECT  permission FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
 	   
    // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
+	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		
+		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
+	<select name="delete_line" id="delete_line">
+	<option value="">Suprimer</option>
+	<option value="10">10 lignes</option>
+	<option value="30">30 lignes</option>
+	<option value="50">50 lignes</option>
+	</select> ';
+		
+	}
+	else{
+		
+		$puts="";
+	}
+	
 	// on boucle sur les les resultats
-	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2> <span class="export">Export  <button type="button" class="excel">Excel <i class="far fa-file-excel"></i></button>
-	<button type="button" class="csv">Csv <i class="fas fa-file-csv"></i></button><span></div>';
+	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excel.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	<span>'.$puts.'</form></div>';
 	// entete du tableau
-	 echo'	<table class="table">
+	 echo'	<table id="tb">
      <thead>
      <tr class="tf">
+	 <th></th>
 	  <th scope="col">Date</th>
       <th scope="col">Informations</th>
 	  <th scope="col">Montant(TTC)</th>
@@ -49,6 +72,18 @@ $smart_from =($page -1)*$record_peage;
 	$nombre =$donnees['id_fact'];
 	// recupérer le chiffre
 	$nombre =substr($nombre,2);
+	
+	// afficher la le checkout en fonction de la permission
+	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		
+		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].'">';
+		
+	}
+	else{
+		
+		$put="";
+	}
+	
 	
 	if($donnees['type']==1){
 	$name =" Séjour facturé";
@@ -123,10 +158,11 @@ $smart_from =($page -1)*$record_peage;
 	
     // afficher dans un tableau les données des chambres
 	echo'<tr class="datas'.$donnees['type'].'">
+	     <td>'.$put.'</td>
 	     <td><span class="dat'.$donnees['type'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der">facture<br/>
 		 '.$data_user.'</span></td>
 		 <td><span class="der">N° facture: '.$nombre.'<br/><div class="data'.$donnees['type'].'">'.$name.'</span></div>
-		 <i class="far fa-user" style="font-size:16px;"></i> Client :'.$donnees['clients'].'</td>
+		 <i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span></td>
 		 <td><span class="mont">'.$donnees['montant'].' xof</span></td>
 		 <td><span class="mont">'.$donnees['mont_tva'].' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
@@ -280,6 +316,12 @@ $smart_from =($page -1)*$record_peage;
 							));
        		
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
+	   
+   }
+   
+   if($_POST['action']=="delete_check"){
+	   
+	echo'ZAPO MARTIAL';   
 	   
    }
 

@@ -66,8 +66,8 @@
   <?php
   // id facture
   $id ='0.'.$_GET['id_fact'];
-  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,user,numero,adresse,logo FROM inscription_client WHERE email_ocd= :email_ocd');
-   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,user,numero,adresse,logo FROM inscription_client WHERE email_user= :email_user');
+   $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees =$req->fetch();
    // emttre la requete sur le fonction
     $reg=$bds->prepare('SELECT  check_in,check_out,time1,time2,chambre,montant FROM bord_informations WHERE email_ocd= :email_ocd AND id_fact= :id');

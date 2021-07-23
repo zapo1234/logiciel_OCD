@@ -1,4 +1,4 @@
-<?php
+ ;<?php
 include('connecte_db.php');
 include('inc_session.php');
 
@@ -61,35 +61,23 @@ include('inc_session.php');
    }
    
    // on recupére le nom de l'image dans la base de données
-   $rej=$bdd->prepare('SELECT logo FROM inscription_client WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donnees=$rej->fetchAll();
+   $rej=$bdd->prepare('SELECT logo FROM inscription_client WHERE email_user= :email_user');
+   $rej->execute(array(':email_user'=>$_SESSION['email_user']));
+   $donnees=$rej->fetch();
   
-  $array =[];
-  foreach($donnees as $logo){
-	 $data = $logo['logo'];
-     $datas = explode(',',$data);	 
+ if($donnees['logo']!=""){
 	 
-     foreach($datas as $dat){
-        // insere les données dans un tableau
-		$array[]=$dat;
-     }		 
-  }
-  
-  $nombre = count($array);
-  if($nombre!=0){
-	
-   // suprime l'image sur le disque
-    unlink('image_logo/'.$array[0].'');   
+  // on suprimer le fichier existant
+	unlink ("image_logo/" .$donnees['logo']);
  }
-   
+  
    
     echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Prise en compte !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_ocd= :email_ocd');
+         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');
         $ret->execute(array(':email'=>$email,
 		                    ':des'=>$name,
 					        ':reser'=>$adresse,
@@ -98,7 +86,7 @@ include('inc_session.php');
 							':res'=>$numero,
 							':ac'=> $active,
 							':log'=>$nvname,
-                            ':email_ocd'=>$_SESSION['email_ocd']
+                            ':email_user'=>$_SESSION['email_user']
 					 ));
 
 

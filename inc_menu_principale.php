@@ -3,9 +3,21 @@ include('connecte_db.php');
 include('inc_session.php');
 
    
-  $req=$bdd->prepare('SELECT id,logo FROM inscription_client WHERE email_ocd= :email_ocd');
-   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+  $req=$bdd->prepare('SELECT id,logo FROM inscription_client WHERE email_user= :email_user');
+   $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees =$req->fetch();
+   
+   $date=date('Y-m-d');
+   $dates =explode('-',$date);
+   
+    $j = $dates[2];
+	$mm = $dates[1];
+	$an = $dates[0];
+	
+	$dats = $j.'-'.$mm.'-'.$an;
+
+  
+   $dat =date('H:i');
 
 ?>
 
@@ -34,7 +46,7 @@ include('inc_session.php');
 			if($_SESSION['permission']=="user:boss") {
 			
             echo'<li class="nav-item">
-                <a class="nav-link" href="tableau_bord_data.html">
+                <a class="nav-link" href="tableau_data_home.php">
                     <i class="fas fa-chart-line"></i>
                     <span>Tableau de bord</span></a>
             </li>';			
@@ -44,7 +56,7 @@ include('inc_session.php');
 			?>
 			
 			<li class="nav-item">
-                <a class="nav-link" href="gestion_data_home.php">
+                <a class="nav-link" href="gestion_data_home.php?data=<?php echo$dats;?>&home_heure=<?php echo$dat;?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Bord local</span>
                 </a>
@@ -92,7 +104,7 @@ include('inc_session.php');
             <li class="nav-item active">
                 <a class="nav-link" title="facture clients" href="gestion_facture_customer.php"
                     aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-coins"></i>
                     <span>Factures</span>
                 </a>
                 
