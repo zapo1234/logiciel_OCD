@@ -441,6 +441,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="result"></div><!--retour ajax-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -857,6 +858,43 @@ calcul();
 
 
   });
+  
+ $(document).on('click','.delete',function(){
+ var checkbox = $('.form-check-input:checked');
+ var action="delete_check";
+ if(checkbox.length > 0) {
+	var checkbox_value = [];
+ $(checkbox).each(function() {
+	checkbox_value.push($(this).val());
+ });
+ 
+ $.ajax({
+	type:'POST', // on envoi les donnes
+	async: false,
+	url:'depenses_view_datas.php',// on traite par la fichier
+	data:{checkbox_value:checkbox_value,action:action},
+	success:function() {
+	 loads();
+	 var nombre = checkbox.length;
+	 if(nombre==1){
+	   var nbrs ="supression d'une dépense"; 
+	 }
+	 
+	 else{
+		 var nbrs = 'vous avez suprimez <span class="drt">'+nombre+'</span>factures'; 
+	 }
+	 
+	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
+	 }
+   });
+   }
+ 
+ else {
+	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune dépense selectionnée</span></div>');
+	 
+ }
+ 
+ });
 
 });
 </script>

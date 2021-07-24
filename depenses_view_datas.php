@@ -26,7 +26,7 @@ if($_POST['action']=="fetchs") {
 	$donns =$rel->fetch();
  
  
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
+ $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
@@ -71,7 +71,7 @@ if($_POST['action']=="fetchs") {
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		
-		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['numero_facture'].'">';
+		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
 		
 	}
 	else{
@@ -287,3 +287,19 @@ if($_POST['action']=="fetchs") {
 			
 		
 	}
+	
+	
+ if($_POST['action']=="delete_check"){
+	 
+	if(isset($_POST['checkbox_value'])){
+   $email=$_SESSION['email_ocd'];
+   
+	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
+		$req="DELETE FROM depense WHERE id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$statement= $bds->prepare($req);
+		$statement->execute();
+		
+    }
+		 
+ }
+ }

@@ -50,8 +50,9 @@ $smart_from =($page -1)*$record_peage;
 	
 	echo'<div id="derr">';
   // on boucle sur les les resultats
-	echo'<div class="expor"><h2>Suivi de la trésorie de l\'activité</h2> <span class="export">Export  <button type="button" class="excel">Excel <i class="far fa-file-excel"></i></button>
-	<button type="button" class="csv">Csv <i class="fas fa-file-csv"></i></button><span>'.$puts.'</div>';
+	// on boucle sur les les resultats
+	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excelc.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	<span>'.$puts.'</form></div>';
   echo'	<table id="tabs">
      <thead>
      <tr class="tf">

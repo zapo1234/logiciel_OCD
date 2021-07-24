@@ -91,6 +91,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
+.pass{color:#650699;font-weight:bold;}
 
 .live-infos{
   width: 250px;
