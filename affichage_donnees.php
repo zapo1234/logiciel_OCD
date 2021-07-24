@@ -10,33 +10,23 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste 
    $rej->closeCursor();
 
 if($_POST['action']== "fetch") {
-  
+  echo'<h1>Encaissement journalier</h1>
 
+
+ <div class="td"> Facture soldée:</div>
+ <div class="tds">'.$donnees['encaisse'].' XOF</div>
+
+ <div class="td"> Dépense </div>
+ <div class="tdv">'.$donnees['depense'].' XOF</div>
  
-  
-  echo'<div class ="h1">Encaissement journalier</div>
- <table id="montant">
- <tr class="en">
- <td><i style="font-size:18px;color:green" class="fa">&#xf063;</i> Facture soldée:</td>
- <td>'.$donnees['encaisse'].' XOF</td>
- </tr>
- <tr class="en">
- <td><i style="font-size:18px;color:red;" class="fa">&#xf062;</i> Dépense </td>
- <td>'.$donnees['depense'].' XOF</td>
- </tr>
- <tr class="en">
- <td><i style="font-size:18px;color:#1E90FF" class="fa">&#xf07a;</i>  Acompte réservation</td>
- <td>'.$donnees['reservation'].' XOF</td>
- </tr>
+ <div class="td"> Acompte réservation</div>
+ <div class="tdc">'.$donnees['reservation'].' XOF</div>
  
- <tr class="en">
- <td><i style="font-size:18px;color:#1E90FF" class="fa">&#xf07a;</i> Reste à payer réservation</td>
- <td>'.$donnees['reste'].' XOF</td>
- </tr>
+ <div class="td">Reste à payer réservation</div>
+ <div class="tdc">'.$donnees['reste'].' XOF</div>';
  
- </table>';
- 
- echo'<div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>  réinitialiser</button>';
+  echo'<div><button type="button" class="print" title="imprimer sa caisse journalière">imprimer</button>';
+  echo'<div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button>';
  
 
 }
@@ -67,13 +57,8 @@ $monts=0;
 		                    ':ds'=>$monts,
 							':rs'=>$monts,
 							':re'=>$monts,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
-					 
-	  
-  	
-	
-}
+                            ':email_ocd'=>$_SESSION['email_ocd']));
+		}
 
  if($_POST['action']=="recap"){
 	 
@@ -84,7 +69,6 @@ $monts=0;
     $req->execute(array(':id_fact'=>$id,':email_ocd'=>$_SESSION['email_ocd']));
 	
 	// on recupére les chambres dans la boucle au cas 
-	
 	// entre la requete sur le fonction
     $res=$bds->prepare('SELECT  type_logement,chambre,montant,id_chambre FROM bord_informations WHERE id_fact= :id_fact AND email_ocd= :email_ocd');
     $res->execute(array(':id_fact'=>$id,':email_ocd'=>$_SESSION['email_ocd']));
@@ -100,36 +84,26 @@ $monts=0;
 		}
 		
 		else{
-			
 			$fact ='Séjour facturé de '.$donnees['nombre'].'jours';
 		}
 		$avance="";
 		$reste="";
 	}
-	
 	elseif($donnees['type']==2){
-		
 		if($donnees['nombre']==1){
 		$fact ='Horaire facturé de '.$donnees['nombre'].'heure';
-		
 		}
-		
 		else{
-			
 			$fact ='Horaire facturé de '.$donnees['nombre'].'heures';
-		
 		}
 	}
 	
 	else{
-		
 		$fact ='Réservation client';
 	}
-	
 	echo'<div class="titre">Récaputilatif</div>
 	      <div class="h6">'.$fact.'</div>
 		  <div class="ds">Local concerné</div>'; 
-	 
 	 // on boucle sur la requete
 	  echo'<table class="">';
 	 while($donns =$res->fetch()){
@@ -176,6 +150,20 @@ $monts=0;
 			 </tr>
 		   </table>';
 	 
+	}
+	
+	if($_POST['action']=="delete_check"){
+		
+		if(isset($_POST['checkbox_value'])){
+   $email=$_SESSION['email_ocd'];
+   
+	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
+		$req="DELETE FROM tresorie_user WHERE id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$statement= $bds->prepare($req);
+		$statement->execute();
+		
+    }
+	}
 	}
 
 ?>

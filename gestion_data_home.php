@@ -519,7 +519,7 @@ h3{font-size:16px;text-transform:capitalize;}
 	
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
-	if($debut < $date_english AND $date_english < $sortie) {
+	if($debut < $date_english AND $date_english < $sortie AND in_array($date_english,$array)) {
 	$color ='occupe';
 	$status ='un client est présent dans le local,<br/>il pourra etre libre à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
 	

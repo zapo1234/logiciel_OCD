@@ -81,6 +81,8 @@ include('inc_session.php');
 .data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
 .data3{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
 .data4{background:#C81C31;font-weight:none;font-size:16px;color:black;border:2px solid #C81C31;border-radius:20px;} .datas2{}
+.data2{background:#AB34FA;font-weight:none;font-size:16px;color:black;border:2px solid #AB34FA;border-radius:20px;} .datas2{}
+
 .data{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
 .button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
 .der{font-size:12.5px;} .export{margin-left:40%;margin-bottom:5px;} .csv{margin-left:2%;}
@@ -634,10 +636,10 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 	 }
 	 
 	 else{
-		 var nbrs = 'vous avez suprimez'+nombre+'facture'; 
+		 var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span>factures'; 
 	 }
 	 
-	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>  <span class="drt">'+nbrs+'</span></div>');
+	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
 	 }
    });
    }
