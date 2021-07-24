@@ -62,11 +62,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.9;}
 
-.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
-.dep {
-  animation: spin 2s linear infinite;
-  margin-top:10px;
-  }
+.enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
   
   
   #tabs td, #tabs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
@@ -389,6 +385,7 @@ h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="result"></div><!--div-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -535,6 +532,48 @@ $(document).on('click','.actions',function(){
 
 
   });
+  
+  $(document).on('click','.delete',function(){
+ var checkbox = $('.form-check-input:checked');
+ var action="delete_check";
+ if(checkbox.length > 0) {
+	var checkbox_value = [];
+ $(checkbox).each(function() {
+	checkbox_value.push($(this).val());
+ });
+ 
+ $.ajax({
+	type:'POST', // on envoi les donnes
+	async: false,
+	url:'depenses_view_tresorerie.php',// on traite par la fichier
+	data:{checkbox_value:checkbox_value,action:action},
+	success:function() {
+	 loads();
+	 var nombre = checkbox.length;
+	 if(nombre==1){
+	   var nbrs ="supression d'une entrée"; 
+	 }
+	 
+	 else{
+		 var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span> entrées'; 
+	 }
+	 
+	 $('#result').html('<div class="enre"><span class="d"><i class="fas fa-exclamation-circle" style="font-size:16px;color:green;"></i>'+nbrs+'</div>');
+	 }
+	 
+   });
+   setInterval(function(){
+		 $('#result').html('');
+	 },5000);
+   
+   }
+ 
+ else {
+	$('#result').html('<div class="enre"><span class="d"><i class="fas fa-exclamation-circle" style="font-size:16px;color:green;"></i> aucune facture selectionnée</span></div>');
+	 
+ }
+ 
+ });
 
 });
 </script>
