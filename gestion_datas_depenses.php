@@ -117,6 +117,17 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
  
 </style>
 
+<script>
+ function printContent(el) {
+	 var restorepage = document.body.innerHTML;
+	 var printcontent = document.getElementById(el).innerHTML;
+	 document.body.innerHTML = printcontent;
+	 window.print();
+	 document.body.innerHTML = restorepage;
+	}
+ 
+ </script> 
+
 </head>
 
 <body id="page-top">
@@ -134,7 +145,9 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 					<div class="bg">
                         <div id="resultats"></div>
-
+             <div><button type="button" class="print" title="imprimer sa caisse journalière" onclick="printContent('caisse')">imprimer</div>
+            <div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</div>
+ 
                     </div>
                 </div>
 
@@ -895,6 +908,8 @@ calcul();
  }
  
  });
+ 
+ 
 
 });
 </script>
