@@ -102,7 +102,7 @@ include('inc_session.php');
 		$envoi="";
 	 }
 
-     elseif($_POST['days'] < $debut  AND $_POST['das']> $sortie){
+     if($_POST['days'] < $debut  AND $_POST['das']> $sortie){
 
        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
@@ -110,17 +110,14 @@ include('inc_session.php');
 
      }		 
 
-     elseif(in_array(($_POST['das']),$array)){
+     if(in_array(($_POST['das']),$array)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
 	 
-
-     else{
-		 
-		if($nombre==0){
+	if($nombre==0){
          $dates1 = explode('-',$_POST['days']);
 	
 	$j = $dates1[2];
@@ -141,10 +138,7 @@ include('inc_session.php');
 		$a="h5";
 	 }
 
-     }	 
-    
-	
-	}
+    }
 	 
 	 // si le client est facturé sur une horaire
 	 
@@ -165,20 +159,25 @@ include('inc_session.php');
 		$envoi="";
 	 }
 	 
-      elseif($debuts < $_POST['tim']  AND $_POST['tim']< $sorties  AND in_array($_POST['dat'],$date)){
+      if($debuts < $_POST['tim'] AND $_POST['tim']< $sorties  AND in_array($_POST['dat'],$date)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 	 }
 	 
-	 else{
+	 if(!in_array($_POST['dat'],$date)){
+		$name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
+		 $a="h5";
+		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
 		 
-		 if($nombr==0){
+        }
+	 
+	 if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
 		 $a="h5";
 		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-		}
+		
 		 
 	 }
 		 
@@ -186,8 +185,7 @@ include('inc_session.php');
 	
 	     echo'<div class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
-			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text">Prix négocié(nuité)<input type="number"  class="prix" id="prix'.$donnees['id_chambre'].'" min="0"></span>
-			 <span class="tex">Prix négocié(horaire)<input type="number"  class="pric" id="pric'.$donnees['id_chambre'].'" min="0"></span><br/><br/>
+			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
 			 <span class="but1"><a href="#" data-id1="'.$donnees['id_chambre'].'" title="voir disponibilité">check</a></span><span class="but2">'.$envoi.'</span>
 			 <input type="hidden"  name="hidden_name" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'">

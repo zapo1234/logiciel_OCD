@@ -82,14 +82,14 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	
 	if(empty($donnes)) {
 	 
-     $id_fact=0.0001;	 
+     $id_fact=0.00001;	 
 		
 	}
 	
 	else{
 	$mt = $donnes['id_fact'];
 	$mt = floatval($mt);
-	$id_fact=$mt+0.0001;
+	$id_fact=$mt+0.00001;
 	}
 	
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
