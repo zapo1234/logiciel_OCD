@@ -112,6 +112,7 @@ if(isset($_GET['id_fact'])){
 			<div class="rest">'.$adjout.'</div>
 			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span><input type="hidden" name="mont_ta" value="'.$mont_tva.'">xof</div>
+			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
 			<div class="tot">Montant HT <span class="mont">'.$montants.'</span>xof</div>
 			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
