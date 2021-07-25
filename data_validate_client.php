@@ -161,6 +161,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
    
+   
     $dat1 = explode('-',$_POST['dat']);
 	
 	$js = $dat1[2];
@@ -237,13 +238,15 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    }
    
    if(empty($_POST['monts'])){
-	   
-	 $_POST['monts']=0;  
+	   $_POST['monts']=0;  
    }
    
    if(empty($_POST['tva'])) {
-	   
-	  $_POST['tva']==0; 
+	   $_POST['tva']=0; 
+   }
+   
+   if(empty($_POST['remise'])){
+	   $_POST['remise']=0;
    }
    
    
@@ -427,8 +430,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			}
 	  
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,moyen_paiement,data_montant,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -449,6 +452,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':montant_repas'=>$prix_repas,
 						    ':tva'=>$tva,
 							':mont_tva'=>$taxe,
+							':remise'=>$_POST['remise'],
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
 							':moyen_paiement'=>$status,
@@ -527,8 +531,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		
 	   }
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,id_fact,type,moyen_paiement,data_montant,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -549,6 +553,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':montant_repas'=>$prix_repas,
 						    ':tva'=>$tva,
 							':mont_tva'=>$taxe,
+							':remise'=>$_POST['remise'],
 						    ':id_fact'=>$id_fact,
 							':type'=>$mode,
 							':moyen_paiement'=>$status,
