@@ -544,7 +544,7 @@ ul a{margin-left:3%;}
        	// on modifie les données de la table home_occupation
          $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
-		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
+		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, remise= :remi, type= :ty,
 		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
@@ -564,6 +564,7 @@ ul a{margin-left:3%;}
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
+							':remi'=>$_POST['remise'],
 							':ty'=>$mode,
 							':moyen_paie'=>$status,
 							':data_mont'=>$data_num,
@@ -651,7 +652,7 @@ ul a{margin-left:3%;}
 	   // Action update sur facture 
          $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
-		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, type= :ty,
+		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, remise= :remi, type= :ty,
 		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE email_ocd= :email_ocd AND id_fact= :id');
           $reg->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
@@ -671,6 +672,7 @@ ul a{margin-left:3%;}
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
+							':remi'=>$_POST['remise'],
 							':ty'=>$mode,
 							':moyen_paie'=>$status,
 							':data_mont'=>$data_mum,
