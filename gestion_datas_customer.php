@@ -127,6 +127,17 @@ ul.winners li{
 
 </style>
 
+<script>
+ function printContent(el) {
+	 var restorepage = document.body.innerHTML;
+	 var printcontent = document.getElementById(el).innerHTML;
+	 document.body.innerHTML = printcontent;
+	 window.print();
+	 document.body.innerHTML = restorepage;
+	}
+ 
+ </script> 
+
 </head>
 
 <body id="page-top">
@@ -184,8 +195,14 @@ ul.winners li{
 					
 					<div class="bg">
                         <div id="resultats"></div>
-                      
+            <div><button type="button" class="print" title="imprimer sa caisse journalière" onclick="printContent('caisse')">imprimer</button></div>
+            <div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>
+ 
                     </div>
+					
+					
+					
+				
                 </div>
 
         <!-- Content Wrapper -->
@@ -1231,6 +1248,8 @@ echo $_SESSION['token'];?>">
   })(i);
   
 });
+
+// imprimer sa caisse user 
 
 
 });
