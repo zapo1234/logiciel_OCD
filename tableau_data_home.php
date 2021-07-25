@@ -55,6 +55,18 @@ include('inc_session.php');
  
    	$num_data = $number1+$number3+$number4;
 	
+	if($num_data==0){
+		
+	$ac =0;
+	$b=0;
+	$d=0;
+	$indicateuc="";
+	$indicateur="";
+	$indicateurs="";
+	$indicateurc="";
+	$cb=0;
+	}
+	
 	if($number1!=0 AND $number4!=0 AND $number2!=0 AND $number3!=0){
 	$data_number =$number1+$number2;
 	
@@ -67,6 +79,9 @@ include('inc_session.php');
 	// prévision sous réservation
 	$cb = $num_data*100/$data_numbers;
 	$d = $number2*100/$data_numbers;
+	
+	$ac =substr($ac,0,4);
+	$cb =substr($cb,0,4);
 	
 	// prévison net
 	if($ac > 80) {
@@ -301,7 +316,7 @@ include('inc_session.php');
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:1300px;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -391,18 +406,18 @@ ul.winners li{
 }
 
 .center{background:#eee;} .conte1{width:100%;height:300px;} .cont1,.cont12,.cont13,.cont14{float:left;} .conte2{width:100%;height:300px;}
- .cont1{border-bottom:4px solid #0FF955; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
-.cont12{border-bottom:4px solid #7BCCF8; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
-.cont13{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+ .cont1{border-bottom:4px solid #0FF955; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont12{border-bottom:4px solid #7BCCF8; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont13{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
 
-.cont14{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont14{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:300px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
 
 
 .montant1{font-weight:bold;color:#0FF955;font-size:30px;margin-top:30px;margin-left:10%;} .monai{padding-left:20%;}
 .montant2{font-weight:bold;color:#7BCCF8;font-size:30px;margin-top:30px;margin-left:10%;}
 .montant3{font-weight:bold;color:#F87B90;font-size:30px;margin-top:30px;margin-left:10%;}
 
-.cont2{float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;border:3px solid white;}
+.cont2{float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;border:3px solid white;}
 
 .dtx{font-weight:bold;color:#04850C;font-size:30px;margin-left:15%;margin-top:15px;}
 .dtt{color:#06308E;font-weight:bold;font-size:30px;margin-left:15%;margin-top:15px;}
@@ -410,8 +425,10 @@ ul.winners li{
 
 .user{border-bottom:1px solid #eee;padding-top:5px;font-size:15px;color:font-weight:none;}
 .contens,.contens1{float:left}
-.contens{width:47%;background:white;height:250px;margin-left:2%;margin-top:-50px;padding-left:5%;}
-.contens1{width:47%;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
+.contens{width:570px;background:white;height:250px;margin-left:2%;margin-top:-50px;padding-left:5%;}
+.contens1{width:570px;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
+.montants{font-size:25px;margin-left:60%;color:#04850C;font-weight:bold;}
+.monta{font-size:25px;margin-left:60%;color:#06308E;font-weight:bold;}
 </style>
 
 </head>
@@ -481,7 +498,7 @@ ul.winners li{
    		
 		  while($dato=$rq->fetch()){
 	     if($dato['active']=="on"){
-	       $action='<i class="fas fa-circle" style="font-size:14px;color:green;"></i>  en ligne';
+	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
           else{
           $action=' en ligne depuis '.$dato['date'].' à '.$dato['heure'].' ';
@@ -492,6 +509,10 @@ ul.winners li{
      ?>
 						
 						</div>
+		<div class="resutat">
+		<h2>Résultat de trésorerie</h2>
+		
+		</div>
                       
                     </div>
                 </div>
@@ -762,9 +783,7 @@ ul.winners li{
 		                <div class="montants">+'.$ac.'%</div>
 		                <div>'.$indicateur.'</div>
 		                <div class="montan"></div><br/>
-		               <div>'.$indicateurs.'</div><br/>
-		               
-						 </div>
+		                </div>
 						 
 						 <div class="contens1">
 						 <h3>Prévisionnel BRUT Trésorie(Acompte réservation)</h3>
@@ -772,8 +791,8 @@ ul.winners li{
 						 <div class="monta">+'.$cb.'%</div>
 		                  <div>'.$indicateuc.'</div>
 		                  <div class="montac"></div><br/>
-		                  <div>'.$indicateurc.'</div>
-						 </div>';
+		                
+		                   </div>';
 					
 					 echo'</div>';
 					 
