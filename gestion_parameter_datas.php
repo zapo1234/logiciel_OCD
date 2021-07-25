@@ -734,7 +734,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	setInterval(function(){
 		 $('#datas').html('');
 		 location.reload(true);
-	 },500000);
+	 },3000);
 		
 	}
 	
@@ -804,7 +804,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	setInterval(function(){
 		 $('#data').html('');
 		 location.reload(true);
-	 },5000);
+	 },3000);
 		
 	}
 	 
