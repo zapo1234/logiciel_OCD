@@ -125,7 +125,7 @@ include('inc_session.php');
 		$envoi="";
 	 }
 	 
-	 if(!in_array(($_POST['dat']),$array) AND !in_array(($_POST['das']),$array) AND !in_array(($_POST['days']),$array)){
+	 if(!in_array($_POST['dat'],$array) AND !in_array($_POST['das'],$array) AND !in_array($_POST['days'],$array)){
 		$j = $dates1[2];
 	$mm = $dates1[1];
 	$an = $dates1[0];
