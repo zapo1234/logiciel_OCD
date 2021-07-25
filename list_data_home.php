@@ -96,13 +96,13 @@ include('inc_session.php');
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
 	
-     if(in_array(($_POST['days']),$array)){
+     if(in_array($_POST['days'],$array)){
       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
 
-     if($_POST['days'] < $debut  AND $_POST['das']> $sortie){
+     if($_POST['days'] < $debut  AND $_POST['das']<$sortie){
 
        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
@@ -110,12 +110,41 @@ include('inc_session.php');
 
      }		 
 
-     if(in_array(($_POST['das']),$array)){
+     if(in_array($_POST['das'],$array)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
 	 }
+	 
+	 
+	 if(in_array($_POST['dat'],$array)){
+
+        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+		$a="h6";
+		$envoi="";
+	 }
+	 
+	 if(!in_array(($_POST['dat']),$array) AND !in_array(($_POST['das']),$array) AND !in_array(($_POST['days']),$array)){
+		$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dates2 = explode('-',$_POST['das']);
+	
+	$j1 = $dates2[2];
+	$mm1 = $dates2[1];
+	$an1 = $dates2[0];
+	
+	// la vairable en envoi
+	$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+   
+      
+		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+		$a="h5"; 
+		 
+	 }
+	}
 	 
 	if($nombre==0){
          $dates1 = explode('-',$_POST['days']);
@@ -136,9 +165,7 @@ include('inc_session.php');
       
 		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
-	 }
-
-    }
+	}
 	 
 	 // si le client est facturé sur une horaire
 	 
@@ -152,7 +179,7 @@ include('inc_session.php');
 		 $debuts = min($tabs);
            $sorties = max($tabs);
 		 
-		 if(in_array(($_POST['tim']),$tabs) AND in_array(($_POST['tis']),$tabs)  AND in_array($_POST['dat'],$date)){
+		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$date)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
