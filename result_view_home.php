@@ -284,39 +284,6 @@ include('inc_session.php');
                  </div>
 				 </form>';
 		}
-		
-	
- if($_POST['action']=="bloquer"){
-	$id=$_POST['id']; 
-	$active="on";
-    // Actualiser des données les données dans la base de données inscription_client
-   // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> ce compte à été activé !
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>'; 
-		 
-		 $ret=$bdd->prepare('UPDATE inscription_client SET active= :ac  WHERE id= :id AND email_ocd= :email_ocd');
-        $ret->execute(array(':ac'=>$active,
-		                    ':id'=>$id,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));	
-	 }
- 
-  if($_POST['action']=="acces"){
-	 
-	 $id =$_POST['id'];
-	 // Actualiser des données les données dans la base de données inscription_client
-   // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> Ce compte à été bloqué !
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-		
-		$active="off";
-         $ret=$bdd->prepare('UPDATE inscription_client SET  active= :ac  WHERE id= :id AND email_ocd= :email_ocd');
-        $ret->execute(array(':ac'=>$active,
-		                    ':id'=>$id,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
-	 
-	 }
 	 
 	 
 	if($_POST['action']=="modipass") {
@@ -420,13 +387,13 @@ if($_POST['action']=="editvalidate"){
 					 ));
 					 
 					 
-	$id_fact="";
-     $date="1";
-     $horaires="1";
+	$id_fact=0;
+     $date="";
+     $horaires="";
      $active="off";
-     $datas_fren="1";
-	 $dates="1";
-     $activ = 5;	 
+     $datas_fren="";
+	 $dates="";
+     $activ=5;	 
 	// inserer dans la table home_occupation
 			  
 					// on recupére les date dans la base de donnnées.
@@ -440,7 +407,7 @@ if($_POST['action']=="editvalidate"){
 							  ':id_fact'=>$id_fact,
 							  ':type'=>$activ
 	                        ));		
-	     }
+	 }
 
 // actionner   les actions sur un local
  if($_POST['action']=="acss"){
