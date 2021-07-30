@@ -369,6 +369,39 @@ if($_POST['action']=="editvalidate"){
  }
 
 
+  if($_POST['action']=="bloquer"){
+	 $active="off";
+	 $id=$_POST['id'];
+    //modifier la permission	 
+	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':act'=>$active,
+		                    ':ids'=>$id,
+							':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+					 
+	// on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez bloqué l\'accès !</div>';
+		  
+	  
+	 }
+  
+  if($_POST['action']=="acces"){
+	 $active="on";
+	 $id=$_POST['id'];
+    //modifier la permission	 
+	  $active="on";
+    //modifier la permission	 
+	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':act'=>$active,
+		                    ':ids'=>$id,
+							':email_ocd'=>$_SESSION['email_ocd']
+					 )); 
+					 
+	  // on modifie les données de la base de données guide
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez activé l\'accès !</div>';
+		     
+	}
+
 
  // activer l'active sur un local
  if($_POST['action']=="accs"){
@@ -380,7 +413,7 @@ if($_POST['action']=="editvalidate"){
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-	$ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+	    $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
 		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
