@@ -1,3 +1,25 @@
+<?php
+ include('connecte_db.php');
+include('inc_session.php'); 
+   $req=$bdd->prepare('SELECT user FROM inscription_client WHERE email_user= :email_user');
+   $req->execute(array(':email_user'=>$_SESSION['email_user']));
+   $donnees =$req->fetch();
+   
+   $date=date('Y-m-d');
+   $dates =explode('-',$date);
+   
+    $j = $dates[2];
+	$mm = $dates[1];
+	$an = $dates[0];
+	
+	$dats = $j.'-'.$mm.'-'.$an;
+
+  
+   $dat =date('H:i');
+
+
+?>
+
 <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -148,29 +170,22 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span id="im" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo$donnees['user'];?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div id="data" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Mon compte
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Déconnexion
                                 </a>
                             </div>
                         </li>

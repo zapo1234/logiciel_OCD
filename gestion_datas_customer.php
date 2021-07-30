@@ -630,6 +630,11 @@ echo $_SESSION['token'];?>">
    $('#email').val(email);
  });
  
+ $('#im').click(function(){
+	$('#data').css('display','block');
+	 
+ });
+ 
  $('#pak').click(function(){
 	$('#examp').css('display','none');
    $('#pak').css('display','none');

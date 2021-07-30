@@ -41,7 +41,7 @@ if(!isset($_GET['data'])){
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:#eee;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -97,6 +97,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
 .pass{color:#650699;font-weight:bold;}
+.annule{color:#C81C31;font-weight:bold}
 
 .live-infos{
   width: 250px;
@@ -182,7 +183,12 @@ h3{font-size:16px;text-transform:capitalize;}
           if($donnes['type']==3){
             $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
 			$type ='<span class="reservation">'.$donnes['types'].'</span>';
-		  }	  
+		  }	
+
+         if($donnes['type']==4){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="annule">'.$donnes['types'].'</span>';
+		  }		  
 			 
 		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
 		       '.$type.' '.$donnes['montant'].' xof</li>';
@@ -660,6 +666,10 @@ h3{font-size:16px;text-transform:capitalize;}
    $('#pak').css('display','block');
    var email = "default@gmail.com";
    $('#email').val(email);
+ });
+ 
+ $('#im').click(function(){
+ $('#data').css('display','block');
  });
  
  $('#pak').click(function(){

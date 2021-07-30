@@ -413,6 +413,12 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
  
  });
  
+ $('#im').click(function(){
+	 
+	 $('#data').css('display','block');
+	 
+ });
+ 
  $('#pak').click(function(){
 	$('#examp').css('display','none');
    $('#pak').css('display','none');

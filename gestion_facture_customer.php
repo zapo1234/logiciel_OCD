@@ -301,6 +301,10 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
    $('.detail').css('display','none');
  });
  
+ $('#im').click(function(){
+	$('#data').css('display','block');
+});
+ 
  // action sur l'onglet gére
  
  $(document).on('click','.action',function(){
