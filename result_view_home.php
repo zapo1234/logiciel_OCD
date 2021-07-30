@@ -3,7 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 
 
-    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,etat,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
+    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,etat,date,heure,active,logo FROM inscription_client WHERE email_ocd= :email_ocd');
     $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  
      if($_POST['action']=="fetch"){
@@ -83,8 +83,8 @@ include('inc_session.php');
    
    // on recupére les données de la table 
    
-   $req=$bdd->prepare('SELECT DISTINCT email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise FROM inscription_client WHERE email_ocd= :email_ocd');
-   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $req=$bdd->prepare('SELECT DISTINCT email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,logo FROM inscription_client WHERE email_user= :email_user');
+   $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
 	
@@ -95,7 +95,6 @@ include('inc_session.php');
     $heure = date('H:i');
    
    // on recupére les variable transmise
-   echo$donnees['denomination'];
    $denomination =$donnees['denomination'];
    $adresse =$donnees['adresse'];
    $numero_cci =$donnees['numero_cci'];
@@ -119,7 +118,7 @@ include('inc_session.php');
    $name = trim(strip_tags($_POST['nom']));
    $prenom = trim(strip_tags($_POST['prenom']));
    $role =$_POST['role'];
-   $log="";
+   $log=$donnees['logo'];
    $numero_compte ="";
    $user =$name.' '.$prenom;
    $etat ="";
@@ -133,7 +132,7 @@ include('inc_session.php');
    elseif($role==2){
 	  $status=2;
      $categories="Responsable";
-     $permission ="user:boss";	 
+     $permission ="user:responsable";	 
    }
    
    elseif($role==3){
@@ -149,6 +148,17 @@ include('inc_session.php');
    }
    $stat="";
    
+   // initialisation d'un tableau
+   $tab =[];
+   foreach($reh as $datas){
+	 $dat = $datas['email_ocd'];
+     foreach($dat as $values){
+     $tab[] = $values;
+    }		 
+	}
+	
+	$a=count($tab);
+	if($a < 5){
    
    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
@@ -178,6 +188,7 @@ include('inc_session.php');
 						  ));
   
 	  
+  }
   }
   
   
@@ -213,6 +224,16 @@ include('inc_session.php');
 					   
 					   $etat ='<span class="dert">connecté depuis le'.$donnees['date'].', à '.$donnees['heure'].'</span>';
 				   }
+				   
+				   if($donnees['permission']=="user:boss"){
+					  $sup=""; 
+				   }
+				   
+				   else{
+					   
+					 $sup= '<a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>';
+				   }
+				   
 					echo'<tr>
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
 					<td>'.$donnees['user'].' </td>
@@ -220,7 +241,7 @@ include('inc_session.php');
 					<td>'.$donnees['numero'].'</td>
 					<td>'.$donnees['categories'].' </td>
 					<td><a href="gestion_parameter_data.php?user='.$donnees['id'].'"  title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
-					    <a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>
+					    '.$sup.'
 						<td>'.$active.'</td>
 						<td>'.$etat.'</td>
 					</tr>';
