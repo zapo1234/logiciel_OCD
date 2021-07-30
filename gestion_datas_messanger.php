@@ -73,20 +73,6 @@ include('inc_session.php');
 
 #tb{margin-top:10px;}
  
- 
- 
- .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
-
-.datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} 
-.data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
-.data3{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
-.data4{background:#C81C31;font-weight:none;font-size:16px;color:black;border:2px solid #C81C31;border-radius:20px;} .datas2{}
-.data2{background:#AB34FA;font-weight:none;font-size:16px;color:black;border:2px solid #AB34FA;border-radius:20px;} .datas2{}
-
-.data{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;}
-.button{background-color:#224abe;border:2px solid #224abe;color:white;} .mont{font-family:arial:font-size:20px;color:#224abe;font-weight:bold;}
-.der{font-size:12.5px;} .export{margin-left:40%;margin-bottom:5px;} .csv{margin-left:2%;}
-.csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
@@ -101,8 +87,19 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
-.message{margin-top:680px;} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
-.sends{position:absolute;left:77%;top:800px;background:white;padding:0.8%;border-radius:50%;}
+#result{width:100%;height:680px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
+.sends{cursor:pointer;position:absolute;left:77%;top:800px;background:white;padding:0.8%;border-radius:50%;}
+
+.datas_messanger{color:black;margin-top:8px;width:35%;background:white;margin-left:1%;padding:2%;
+border-radius:25px;}
+
+.h1{margin-bottom:3px;} .boss,.gestionnaire,.employes{font-size:15px;color:black;text-transform:capitalize;font-weight:bold;}
+
+#statusboss{padding-left:70%;color:green;font-size:18px;font-weight:bold;} .dt{padding-left:10%;} .donnes{font-family:arial;font-size:14px;}
+#statusgestionnaire{padding-left:70%;color:blue;font-size:18px;font-weight:bold;} .dt{padding-left:10%;font-size:13px;} .donnes{font-family:arial;font-size:14px;}
+#statusemployes{padding-left:70%;color:#F43E78;font-size:18px;font-weight:bold;}
+
+#datasboss{margin-left:60%;background:#A3F8D5;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
 
 </style>
 
@@ -155,184 +152,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
                         </div>
                     </form>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Type ou nombre de place chambre" aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
+                    <?php include('inc_menu1.php');?>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -346,11 +166,12 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 					<div id="result"></div>
 					
 					<div class="message">
-					
-					<textarea name="message" id="message" rows="3">Taper un message</textarea>
+					<form method="post" action="" id="form-sendm">
+					<span id="error"></span><!--message d'erreur'-->
+					<textarea name="message" id="message" rows="3" placeholder="Taper votre message"></textarea>
 					<div class="sends"><i class="fa fa-paper-plane" aria-hidden="true" style="color:green"></i></div>
 					</div>
- 
+                    </form>
                    </div><!--content-->
  
  
@@ -392,7 +213,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
-<div id="result"></div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -419,6 +240,97 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   <script type="text/javascript">
    $(document).ready(function(){
     
+	function load() {
+				var action="fetch";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+			}
+
+			load();
+	 
+	$('.sends').click(function(){
+	 
+	 var action="send";
+    // on récupére la variable
+    var message = $('#message').val();
+
+    if(message.length=="") {
+      $('#message').css({"border":"2px solid red","color":"black"});
+	}
+
+   else if(message.length > 450)	{
+	   
+	   $('#error').html('votre message ne peut pas dépasser 450 caractères');
+   }
+   
+   else{
+	   
+	  $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'messanger_datas.php',// on traite par la fichier
+	data:{action:action,message:message},
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#result').html(data);
+	  load();
+	  $('#message').val('');
+	 }
+    });
+	  
+   }
+		
+  });
+  
+  
+  //Fonction valide formulaire appui entrée
+      $(document).keypress(function(e){
+        if(e.keyCode == 13){
+        var action="send";
+    // on récupére la variable
+	var action="send";
+    var message = $('#message').val();
+
+    if(message.length=="") {
+      $('#message').css({"border":"2px solid red","color":"black"});
+	}
+
+   else if(message.length > 450){
+	   
+	   $('#error').html('votre message ne peut pas dépasser 450 caractères');
+   } 
+   
+    else{
+          
+          $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:"action=envoi&message="+message+'&action='+action,
+            async:true,
+            success: function(data){
+            $('#result').html(data);
+			load();
+			$('#message').val('');
+         
+            }
+          });
+         }
+		}
+		});
+      function envoi() {
+        document.getElementById('form-sendm').submit();
+      }
+	
+	 
+	$('#message').keyup(function(){
+
+
+
+    });		
    
    });
    

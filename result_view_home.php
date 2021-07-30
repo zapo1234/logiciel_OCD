@@ -103,7 +103,17 @@ include('inc_session.php');
    $date = $dateDuJour;
    $heure =date('H:i');
    $email =$_POST['emails'];
+   
    $pass =$_POST['password'];
+   
+    // $password =$_POST['pass'];  
+	  // hash sur le mot de pass
+	 // $options = [
+     // 'cost' => 12 // the default cost is 10
+     //];
+
+    //$hash = password_hash($password, PASSWORD_BCRYPT, $options);
+   
    $emails =$_SESSION['email_ocd'];
    
    $name = trim(strip_tags($_POST['nom']));
@@ -373,10 +383,9 @@ if($_POST['action']=="editvalidate"){
 	 $active="off";
 	 $id=$_POST['id'];
     //modifier la permission	 
-	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids AND email_ocd= :email_ocd');
+	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids');
         $ret->execute(array(':act'=>$active,
-		                    ':ids'=>$id,
-							':email_ocd'=>$_SESSION['email_ocd']
+		                    ':ids'=>$id
 					 ));
 					 
 	// on modifie les données de la base de données guide
@@ -391,10 +400,9 @@ if($_POST['action']=="editvalidate"){
     //modifier la permission	 
 	  $active="on";
     //modifier la permission	 
-	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids AND email_ocd= :email_ocd');
+	  $ret=$bdd->prepare('UPDATE inscription_client SET  active= :act  WHERE  id= :ids');
         $ret->execute(array(':act'=>$active,
-		                    ':ids'=>$id,
-							':email_ocd'=>$_SESSION['email_ocd']
+		                    ':ids'=>$id
 					 )); 
 					 
 	  // on modifie les données de la base de données guide

@@ -62,8 +62,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
 
 .x{color:#4e73df;font-weight:bold;} .ts{padding-left:4%;} .center{width:90%;margin-left:5%;background-color:white;}
-.table{width:95%;margin-left:5%;margin-top:30px;border:1px solid #eee;} td,th{color:black;text-align:center;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
-th{background-color:#E0E9F7;text-align:center;color:black;font-size:15px;text-transform:capitalize;}
+
 .div{color:green;} #block_delete{position: absolute;top:200px;left:40%;width:370px;;height:160px;background-color:white;z-index:4;}
  h3{color:black;padding-top:5%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;text-align:center;}
  #button_annuler{width:120px;margin-left:6%;height:40px;color:white;background:red;margin-top:20px;border:2px solid red;text-align:center;border-radius:15px;}
@@ -76,6 +75,16 @@ th{background-color:#E0E9F7;text-align:center;color:black;font-size:15px;text-tr
 ul a{margin-left:3%;} #form_logo{display:none;} 
 .pied_page{margin-left:60%;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
 #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+
+#tb td, #tb th {border: 1px solid #ddd;padding:3px;width:250px;text-align:center;font-size:14px;}
+
+#tb tr:nth-child(even){background-color:#f2f2f2;}
+
+#tb tr:hover {background-color: #ddd;}
+
+#tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tb{margin-top:10px;} #tb td{height:90px;color:black}
 </style>
 
 </head>

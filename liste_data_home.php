@@ -27,7 +27,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	// on boucle sur les les resultats
 	// entete du tableau
-	 echo'	<table class="table">
+	 echo'	<table id="tb">
      <thead>
      <tr class="tf">
       <th scope="col"><i class="material-icons" style="font-size:17px;color:#111E7F">home</i>Type de logement</th>

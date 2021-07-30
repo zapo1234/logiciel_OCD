@@ -92,6 +92,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
 .pass{color:#650699;font-weight:bold;}
+.annule{color:#C81C31;font-weight:bold}
 
 .live-infos{
   width: 250px;
@@ -177,7 +178,12 @@ ul.winners li{
           if($donnes['type']==3){
             $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
 			$type ='<span class="reservation">'.$donnes['types'].'</span>';
-		  }	  
+		  }
+          
+		  if($donnes['type']==4){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="annule">'.$donnes['types'].'</span>';
+		  }	
 			 
 		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
 		       '.$type.' '.$donnes['montant'].' xof</li>';

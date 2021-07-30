@@ -24,24 +24,7 @@ include('inc_session.php');
 	echo'<div class="content_home">';
 	
 	
-	// on récupére les données sql
-	$reb=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation');
-    $dons = $reb->fetchAll();
-	
-	$tab =[];
-	foreach($dons as $dats){
-		
-		$dats = $dats['date'];
-		$da = explode(',',$dats);
-		
-		foreach($da as $dates){
-		 $tab[] = $dates;		
-		}
-	  }
-	
-	
-	
-	foreach($don as $donnees) {
+     foreach($don as $donnees) {
 	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE id_chambre="'.$donnees['id_chambre'].'"');
     $donns = $rec->fetchAll();
 	 $array = [];

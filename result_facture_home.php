@@ -329,9 +329,23 @@ $smart_from =($page -1)*$record_peage;
 		$statement= $bds->prepare($req);
 		$statement->execute();
 		
-    }
+		// suprimer dans la table bord_informations
 		
- }
+		$rev="DELETE FROM bord_informations WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$statement= $bds->prepare($rev);
+		$statement->execute();
+		
+		// suprimer dans la table home_occupation
+		$reg="DELETE FROM home_occupation WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$statement= $bds->prepare($reg);
+		$statement->execute();
+    }
+	
+	// suprimer dans la table home_occupation
+  }
 }
+
+
+
 
 ?>
