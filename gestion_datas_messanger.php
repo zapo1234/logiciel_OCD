@@ -90,7 +90,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 #result{width:100%;height:680px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
 .sends{cursor:pointer;position:absolute;left:77%;top:800px;background:white;padding:0.8%;border-radius:50%;}
 
-.datas_messanger{color:black;margin-top:8px;width:35%;background:white;margin-left:1%;padding:2%;
+.datas_messanger{color:black;margin-top:8px;width:40%;background:white;margin-left:1%;padding:2%;
 border-radius:25px;}
 
 .h1{margin-bottom:3px;} .boss,.gestionnaire,.employes{font-size:15px;color:black;text-transform:capitalize;font-weight:bold;}
@@ -100,7 +100,8 @@ border-radius:25px;}
 #statusemployes{padding-left:70%;color:#F43E78;font-size:18px;font-weight:bold;}
 
 #datasboss{margin-left:60%;background:#A3F8D5;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
-
+.action{padding-left:75%;cursor:pointer;} .divaction{width:100px;padding:2%;background:white;color:black;border-radius:15px;}
+.divaction a{color:black;font-size:14px;text-align:center;text-decoration:none;}
 </style>
 
 
@@ -286,6 +287,9 @@ border-radius:25px;}
 		
   });
   
+  $('#im').click(function(){
+ $('#data').css('display','block');
+ });
   
   //Fonction valide formulaire appui entrée
       $(document).keypress(function(e){
@@ -325,6 +329,13 @@ border-radius:25px;}
         document.getElementById('form-sendm').submit();
       }
 	
+	 $(document).on('click','.action',function(){
+	   	var id = $(this).data('id1');	
+      // on affiche la div
+       $('#id'+id).slideToggle();	  
+		 	
+	 });
+	 
 	 
 	$('#message').keyup(function(){
 

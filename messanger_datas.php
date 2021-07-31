@@ -51,9 +51,9 @@ foreach($donnes as $datas){
   // afficher le message
   
   echo'<div class="datas_messanger" id="datas'.$css.'">
-      <div class="hss"><span class="'.$css.'">'.$datas['name'].' </span><span class="dt">'.$jj.'/'.$mm.'/'.$an.' à '.$hh.':'.$hh1.' <span class="action" id="datas'.$datas['id'].'"></span></div>
-	  <div class="'.$datas['id'].'" style="display:none"><a href="#" class="sup_edit">Modifier</a><br/><a href="#" class="sup_send">suprimer</a></div>
-	  <div class="donnes">'.htmlspecialchars($datas['message']).'</div>
+      <div><span class="action" data-id1="'.$datas['id'].'" class="datas'.$datas['id'].'" title="action"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span> <span id="id'.$datas['id'].'" class="divaction" style="display:none"><a href="#" class="sup_send"><i class="far fa-trash-alt" aria-hidden="true"></i>  suprimer</a></span></div>
+	  <div class="hss"><span class="'.$css.'">'.$datas['name'].' </span><span class="dt">'.$jj.'/'.$mm.'/'.$an.' à '.$hh.':'.$hh1.' </div>
+	   <div class="donnes">'.htmlspecialchars($datas['message']).'</div>
        <div><span class="status" id="status'.$css.'">'.$names.'</div>
 	   </div>';
   
