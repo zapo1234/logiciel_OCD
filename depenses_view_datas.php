@@ -89,6 +89,13 @@ if($_POST['action']=="fetchs") {
 	 $modif='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'><i class="fab fa-telegram"></i> Modifier</a><br/>';
 	}
 	
+	elseif($donnes['status']==4){
+	 $name="remboursement effectué";
+	 $mettre='';
+	 $annul='';
+	 $modif='';
+	}
+	
 	else{
 	$name="dépense annulée";
 	$mettre="";
@@ -321,14 +328,29 @@ if($_POST['action']=="fetchs") {
    $user_datas = implode(',',$user);
     // on modifer les montants
 	// on modifie les données de la base de données guide
-         
+        if($montant < $donns['montant']){ 
 		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE id= :ids AND email_ocd= :email_ocd');
         $ret->execute(array(':us'=>$user_datas,
 		                    ':mont'=>$monts,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-    
+        }
+		
+		if($montant==$donns['montant']){
+		$nature ="remboursement effectué";
+        $status=4;		
+			
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':us'=>$user_datas,
+		                    ':mont'=>$monts,
+							':nat'=>$nature,
+							':stat'=>$status,
+							':ids'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));	
+			
+		}
       
   }
  
