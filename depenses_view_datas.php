@@ -70,26 +70,21 @@ if($_POST['action']=="fetchs") {
     $nombre =$donnes['status'];
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
-		
 		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
-		
 	}
 	else{
-		
 		$put="";
 	}
 	
-	
-	
 	if($donnes['status']==1){
 	 $name="dépense effectuée";
-	 $mettre ='<a href="#" class="mettre" title="mettre à jour" data-id5='.$donnes['id'].'><i class="fab fa-telegram"></i>Mettre à jour</a><br/>';
+	 $mettre ='';
 	 $annul='<a href="#" class="annul" title="annuler" data-id4='.$donnes['id'].'><i class="fab fa-telegram"></i> Annuler</a><br/>';
 	 $modif ='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i> Modifier</a><br/>';
 	}
 	elseif($donnes['status']==2){
 	 $name="crédit fournisseur";
-	 $mettre='<a href="#" class="mettre" title="mettre à jour" data-id5='.$donnes['id'].'><i class="fab fa-telegram"></i>  Mettre à jour</a><br/>';
+	 $mettre='<a href="#" class="mettre" title="mettre à jour" data-id5='.$donnes['id'].'><i class="fab fa-telegram"></i>Payer le crédit</a><br/>';
 	 $annul='<a href="#" class="annul" title="annuler" data-id4='.$donnes['id'].'><i class="fab fa-telegram"></i> Annuler</a><br/>';
 	 $modif='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'><i class="fab fa-telegram"></i> Modifier</a><br/>';
 	}
@@ -128,6 +123,7 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">voir</span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"> <i class="fas fa-plus" style="font-size:10px";></i></span>
 		 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
 		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
+		 '.$mettre.'<br/>
 		 '.$modif.'<br/>
 		 '.$annul.'
 		  </div></td>
@@ -168,7 +164,7 @@ if($_POST['action']=="fetchs") {
     
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
-   $user_data = $donns['user'].',<i class="fas fa-exclamation-circle" style="font-size:13px;color:#AB040E;"></i>  annulée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   $user_data = $donns['user'].', <i class="fas fa-exclamation-circle" style="font-size:13px;color:#AB040E;"></i> '.$_SESSION['user'].' a  annulé le  '.date('d-m-Y').'à  '.date('H:i').'</span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
    
@@ -185,7 +181,7 @@ if($_POST['action']=="fetchs") {
     
 // on modifie les données de la base de données guide
          $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE  email_ocd= :email_ocd');
-        $rev->execute(array(':dep'=>$donnees['depense']-$donns['montant'],
+        $rev->execute(array(':dep'=>$donnees['depense']-$donnes['montant'],
                             ':email_ocd'=>$_SESSION['email_ocd']));
 					 
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
@@ -254,7 +250,7 @@ if($_POST['action']=="fetchs") {
     
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
-   $user_data = $donns['user'].', modifiée le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
+   $user_data = $donns['user'].',  <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].' à modifié le  '.date('d-m-Y').'à  '.date('H:i').'<span class="edit"></span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
    
@@ -303,3 +299,36 @@ if($_POST['action']=="fetchs") {
 		 
  }
  }
+ 
+  // mise à jour du crédit fournisseur
+  if($_POST['action']=="mettre"){
+	  $id =$_POST['id'];
+	  $ids = $_POST['ids'];
+	  $montant = $_POST['mont'];
+	 // aller chercher les auteurs en écriture sur une facture
+	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
+   $res->execute(array(':ids'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$res->fetch();
+    
+	$monts=$donns['montant']-$montant;
+	// on ajoute le user qui as annulé la facture
+	// création d'un tableau pour recupérer les users
+   $user_data = $donns['user'].', <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].' à payer la somme de '.$montant.' xof  le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"></span>';
+   // convertir en chaine de caractère le tableau
+   $user = explode(',',$user_data);
+   
+   $user_datas = implode(',',$user);
+    // on modifer les montants
+	// on modifie les données de la base de données guide
+         
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':us'=>$user_datas,
+		                    ':mont'=>$monts,
+							':ids'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+    
+      
+  }
+ 
