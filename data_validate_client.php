@@ -27,8 +27,9 @@ include('inc_session.php');
 <style>
  
   
- #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity:0.6;}
+ #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.9;}
 label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
+ 
  .dep {
   animation: spin 2s linear infinite;
   margin-top:10px;font-size:45px;font-weight:bold;
@@ -39,8 +40,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
   100% { transform: rotate(360deg); }
 }
 .nam{color:black;font-weight:bold;}
-.enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:18px;width:280px;height:100px;padding:2%;text-align:center;background-color:white;
+.enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:18px;width:280px;height:200px;padding:2%;text-align:center;background-color:white;
 }
+.dr{font-size:18px;text-align:center;}
 </style>
 
 </head>
@@ -387,8 +389,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 
 		// on redirige vers la page
 		 echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<r/>
-			 </div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/>
+			 <div class="dr">'.$ty.'</div>
 		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
@@ -464,8 +466,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			// on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
-		                    ':res'=>$donns['reste']+$reste,
-					        ':reser'=>$donns['reservation']+$avance,
+		                    ':res'=>$donns['reste']+floatval($reste),
+					        ':reser'=>$donns['reservation']+floatval($avance),
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
@@ -489,7 +491,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			
 		  echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
-		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
+			 <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 

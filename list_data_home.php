@@ -18,7 +18,7 @@ $page=1;
 $smart_from =($page -1)*$record_peage;
     // emttre la requete sur le fonction
 	$active="on";
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT '.$smart_from.','.$record_peage.'');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,30');
     $req->execute(array(':ac'=>$active,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
@@ -97,6 +97,7 @@ $smart_from =($page -1)*$record_peage;
       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
+		$css="indispo";
 	 }
 
      if($debut < $_POST['days'] AND $_POST['das']< $sortie){
@@ -104,6 +105,7 @@ $smart_from =($page -1)*$record_peage;
        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
+		$css="indispo";
 
      }		 
 
@@ -112,6 +114,7 @@ $smart_from =($page -1)*$record_peage;
         $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
+		$css="indispo";
 	 }
 	 
 	 
@@ -120,6 +123,7 @@ $smart_from =($page -1)*$record_peage;
         $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
+		$css="indispo";
 	 }
 	 
 	 
@@ -141,7 +145,7 @@ $smart_from =($page -1)*$record_peage;
       
 		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5"; 
-		 
+		$css="dispo";
 	 }
 	
 	}
@@ -149,8 +153,7 @@ $smart_from =($page -1)*$record_peage;
 	 
 	 
     if($nombre==0){
-         $dates1 = explode('-',$_POST['days']);
-	
+    $dates1 = explode('-',$_POST['days']);
 	$j = $dates1[2];
 	$mm = $dates1[1];
 	$an = $dates1[0];
@@ -167,15 +170,12 @@ $smart_from =($page -1)*$record_peage;
       
 		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
+		$css="dispo";
 	}
 	 
 	 // si le client est facturé sur une horaire
 	 
-	 if($nombr==0){
-		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
-		 $a="h5";
-		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>'; 
-	}
+	 
 	 
 	 if($nombr!=0){
 		 $debuts = min($tabs);
@@ -189,6 +189,7 @@ $smart_from =($page -1)*$record_peage;
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
+		$css="indispo";
 	 }
 	 
       if($debuts < $_POST['tim'] AND $_POST['tim']< $sorties  AND in_array($_POST['dat'],$date)){
@@ -196,6 +197,7 @@ $smart_from =($page -1)*$record_peage;
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
+		$css="indispo";
 	 }
 	
 	 
@@ -204,13 +206,15 @@ $smart_from =($page -1)*$record_peage;
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
 		 $a="h5";
 		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-		
+		 $css="dispo";
 		 
 	 }
 		 
 	 }
+	 
+	 
 	
-	     echo'<div class="content3">
+	     echo'<div  class="content3'.$css.'">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
@@ -224,8 +228,8 @@ $smart_from =($page -1)*$record_peage;
 	
 	}
 	
-  
-	
-	echo'</div>';
+   echo'</div>';
+   
+   
 
 ?>
