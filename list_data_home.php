@@ -2,10 +2,23 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-   
+   $record_peage=9;
+$page="";
+
+if(isset($_POST['page'])){
+$page = $_POST['page'];
+}
+
+else {
+
+$page=1;	
+	
+}
+
+$smart_from =($page -1)*$record_peage;
     // emttre la requete sur le fonction
 	$active="on";
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,9');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':ac'=>$active,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
@@ -29,7 +42,7 @@ include('inc_session.php');
     $donns = $rec->fetchAll();
 	 $array = [];
 	 $tabs = [];
-	 $date=[];
+	 $dones=[];
 	foreach($donns as $datas) {
 		
 		if($datas['type']!=0){
@@ -58,7 +71,7 @@ include('inc_session.php');
 	   
 	   // pour les dates en jours
 	   foreach($da as $valus){
-		$date[] = $valus;		
+		$dones[] = $valus;		
 	   }
 	   
 	   // pour les dates en jours
@@ -76,6 +89,7 @@ include('inc_session.php');
 	if($nombre!=0){	
     $debut = min($array);
     $sortie = max($array);
+	$date =date('Y-m-d');
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
 	
@@ -85,7 +99,7 @@ include('inc_session.php');
 		$envoi="";
 	 }
 
-     if($_POST['days'] < $debut  AND $_POST['das']<$sortie){
+     if($debut < $_POST['days'] AND $_POST['das']< $sortie){
 
        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
@@ -108,6 +122,7 @@ include('inc_session.php');
 		$envoi="";
 	 }
 	 
+	 
 	 if(!in_array($_POST['dat'],$array) AND !in_array($_POST['das'],$array) AND !in_array($_POST['days'],$array)){
 	$dates1 = explode('-',$_POST['days']);
 	$j = $dates1[2];
@@ -128,9 +143,12 @@ include('inc_session.php');
 		$a="h5"; 
 		 
 	 }
+	
 	}
 	 
-	if($nombre==0){
+	 
+	 
+    if($nombre==0){
          $dates1 = explode('-',$_POST['days']);
 	
 	$j = $dates1[2];
@@ -162,6 +180,9 @@ include('inc_session.php');
 	 if($nombr!=0){
 		 $debuts = min($tabs);
            $sorties = max($tabs);
+		   // pour les dates du jours
+		   $sort = max($dones);
+		   $date= date('Y-m-d');
 		 
 		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$date)){
 
@@ -176,13 +197,8 @@ include('inc_session.php');
 		$a="h6";
 		$envoi ="";
 	 }
+	
 	 
-	 if(!in_array($_POST['dat'],$date)){
-		$name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
-		 $a="h5";
-		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-		 
-        }
 	 
 	 if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';

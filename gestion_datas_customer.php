@@ -321,12 +321,12 @@ ul.winners li{
 	
      <div class="form1 col-md-6">
 	  <label for="inputPassword4">Date d'entrée(check_in) </label>
-      <input type="date" name="days" id="days" class="form-control" id="inputPassword4" placeholder="">
+      <input type="date" name="days" id="days" class="form-control"  placeholder="">
      </div>
 	
 	 <div class="form1 col-md-6">
       <label for="inputPassword4">Date du départ(check_out) </label>
-      <input type="date" name="das" id="das" class="form-control" id="inputPassword4" placeholder="">
+      <input type="date" name="das" id="das" class="form-control"  placeholder="">
     </div>
 	
 	<div class="form2 col-md-6">
