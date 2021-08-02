@@ -27,7 +27,7 @@ include('inc_session.php');
 <style>
  
   
- #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.9;}
+ #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.7;}
 label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
  
  .dep {
@@ -42,7 +42,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .nam{color:black;font-weight:bold;}
 .enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:18px;width:280px;height:200px;padding:2%;text-align:center;background-color:white;
 }
-.dr{font-size:18px;text-align:center;}
+.dr{font-size:18px;text-align:center;margin-top:10px;}
 </style>
 
 </head>
@@ -389,10 +389,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 
 		// on redirige vers la page
 		 echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
 			 <div class="dr">'.$ty.'</div>
-		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:13px;"></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
+             <meta http-equiv="Refresh" content="5; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
@@ -490,9 +490,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	    //
 			
 		  echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
-			 <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
+			 <div class="dr">'.$ty.'</div>
+		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
+             <meta http-equiv="Refresh" content="5; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
