@@ -76,7 +76,7 @@
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 					   
     // aller chercher les auteurs en écriture sur une facture
-   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,numero,email_client,nombre,montant,reste,avance,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
+   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,numero,email_client,nombre,montant,reste,avance,remise,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
@@ -160,6 +160,7 @@
 		echo'<div class="text_facture">Facture</div>';
 		
 		$montant=$donns['montant']-floatval($donns['mont_tva']);
+		$montant_reel = $donns['montant']-floatval($donns['remise']);
 		echo'<table id="tab">
 		     <tr>
 			 <td>Montant(repas)</td>
@@ -174,8 +175,16 @@
 			 <td>'.$donns['tva'].' %</td>
 			 </tr>
 			 <tr>
+			 <td>Remise sur facture(TTC)</td>
+			 <td>'.$donns['remise'].' xof</td>
+			 </tr>
+			 <tr>
 			 <td>Montant(TTC)</td>
 			 <td>'.$donns['montant'].' xof</td>
+			 </tr>
+			 <tr>
+			 <td>Doit payer(TTC)</td>
+			 <td>'.$montant_reel.' xof</td>
 			 </tr>
 		    </table>
 	
