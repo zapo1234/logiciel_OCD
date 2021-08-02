@@ -526,15 +526,16 @@ ul a{margin-left:3%;}
 	           
                 	
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
-							  ':id_fact'=>$id
+							  ':id_fact'=>$id,
+							  ':type'=>$mode
 	                        ));				
 		}
        }
@@ -601,7 +602,7 @@ ul a{margin-left:3%;}
 	
 			echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
-		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
+		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:13px;">
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		
@@ -634,15 +635,16 @@ ul a{margin-left:3%;}
 					
 					
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
-							  ':id_fact'=>$id
+							  ':id_fact'=>$id,
+							  ':type'=>$mode
 	                        ));		
 					
 	      }    				
