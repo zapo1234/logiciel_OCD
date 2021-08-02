@@ -54,7 +54,8 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
-.content_home{width:75%;margin-top:15px;display:none;height:950px;} .content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:275px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home{width:75%;margin-top:15px;display:none;height:950px;overflow-y:scroll;} .content3dispo{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content3indispo{display:none;}
 .content_home,.content2{float:left;display:none;} .content2{margin-left:0.2%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:40%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
@@ -125,6 +126,8 @@ ul.winners li{
   
 }
 
+.pied_page{margin-left:60%;margin-top:10px;}
+.bout{float:left;margin-left:1%;width:30px;height:30px;background:white;color:#0C80E7;border:2px solid white;border-radius:50%;font-weight:bold;}
 
 </style>
 
@@ -362,6 +365,7 @@ ul.winners li{
 
  <div class="content2">
   <h4> Les détails sur le séjour </h4>
+  
   <div id="results"></div><!--div-affiche data home selectionné-->
   
  </div>
@@ -975,11 +979,20 @@ echo $_SESSION['token'];?>">
   });
   
   $(document).on('keyup','#account',function(){
-	 var totals =  $('.monta').text();	 
+	 var totals =  $('.monta').text();
+     var tota = parseFloat(totals);	 
 	 var account = $('#account').val();
 	 if(account >0){
+	  
+	  if(account < tota){
 		var result = parseFloat(totals) - parseFloat(account);
         $('#rpay').val(result);
+		
+	  }
+	  else{
+		$('erreur acompte trop grand'); 
+	 }
+	 
 	 }
 	 
 	 if(account.length ==""){

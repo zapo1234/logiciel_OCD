@@ -1337,11 +1337,17 @@ echo $_SESSION['token'];?>">
   
   $(document).on('keyup','#acomp',function(){
 	 var totals =  $('.mon').text();
+	 var tota = parseFloat(totals);
      var montas = $('.montas').text();	 
 	 var account = $('#acomp').val();
 	 if(account >0 || account==0){
+		if(account < tota){
 		var result = parseFloat(totals) - parseFloat(account);
         $('#rest').val(result);
+	 }
+	 else{
+		$('#rest').val(0);
+	 }
 	 }
 	 
 	 if(account.length ==""){
