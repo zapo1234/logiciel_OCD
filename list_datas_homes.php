@@ -118,7 +118,7 @@ $smart_from =($page -1)*$record_peage;
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='le local est réservé, et sera occupé <br/>à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
+	$status ='le local est réservé, et sera occupé <br/> partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
 	}
 
 	else{
@@ -136,8 +136,8 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($nombres!=0){
 	// recupéré les valeurs max et min des tableau
-	$debuts = min($array);
-	$sorties = max($array);
+	$debuts = min($tab);
+	$sorties = max($tab);
 	//
 	if(in_array($heure,$tab) AND in_array($date_english,$date)){
 		// verification pour le cas des sejours pass
