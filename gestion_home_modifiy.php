@@ -185,7 +185,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
-.content_home{width:80%;margin-top:15px;background:white;height:950px;overflow-y:scroll;} 
+.content_home{width:80%;margin-top:15px;background:#eee;height:950px;overflow-y:scroll;} 
 .content3dispo{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 .content3indispo{display:none;}
 .content_home,.content2{float:left;display:none;} .content2{margin-left:0.3%;}
@@ -1339,8 +1339,8 @@ echo $_SESSION['token'];?>">
 	 var totals =  $('.mon').text();
      var montas = $('.montas').text();	 
 	 var account = $('#acomp').val();
-	 if(account >0){
-		var result = parseFloat(totals)+parseFloat(montas) - parseFloat(account);
+	 if(account >0 || account==0){
+		var result = parseFloat(totals) - parseFloat(account);
         $('#rest').val(result);
 	 }
 	 
