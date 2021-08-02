@@ -54,13 +54,39 @@ $smart_from =($page -1)*$record_peage;
 		foreach($dat as $value){
 		$array[] = $value;		
 	    }
+		}
+		// pour le pass.
+		if($datas['type']==2){
+		// pour les heures en date
+		$datos =$datas['date'];
+		// pour les jours en date
+		$datis =$datas['dates'];
 		
-		$tab = $array;
+		$dats = explode(',',$datos);
+		$da = explode(',',$datis);
+		// pour les dates en heures
+		foreach($dats as $values){
+		$tabs[] = $values;		
+	   }
+	   
+	   // pour les dates en jours
+	   foreach($da as $valus){
+		$dones[] = $valus;		
+	   }
+	   
+	   // pour les dates en jours
+	 }
+	}
+	}
+
+     $tab = $array;
 	 // on verifie le nombre d'élement dans le tableau
 	 $nombre = count($array);
-
-		
-		if($nombre!=0){	
+	 $nombr = count($tabs);
+    
+	if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
+	
+	if($nombre!=0){	
     $debut = min($array);
     $sortie = max($array);
 	$date =date('Y-m-d');
@@ -124,9 +150,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	}
 	 
-	 
-	 
-    if($nombre==0){
+	 if($nombre==0){
     $dates1 = explode('-',$_POST['days']);
 	$j = $dates1[2];
 	$mm = $dates1[1];
@@ -149,36 +173,19 @@ $smart_from =($page -1)*$record_peage;
 	 
 	 // si le client est facturé sur une horaire
 	 
-	}
-		// pour le pass.
-		if($datas['type']==2){
-		// pour les heures en date
-		$datos =$datas['date'];
-		// pour les jours en date
-		$datis =$datas['dates'];
-		
-		$dats = explode(',',$datos);
-		$da = explode(',',$datis);
-		// pour les dates en heures
-		foreach($dats as $values){
-		$tabs[] = $values;		
-	   }
-	   
-	   // pour les dates en jours
-	   foreach($da as $valus){
-		$dones[] = $valus;		
-	   }
-	   
-	   $nombr =count($tabs);
-	   // pour les dates en jours
-	   if($nombr!=0){
+	} 
+	
+	if($_POST['to']=="horaire"){
+	 
+	 if($nombr!=0){
 		 $debuts = min($tabs);
            $sorties = max($tabs);
 		   // pour les dates du jours
 		   $sort = max($dones);
 		   $date= date('Y-m-d');
+		   
 		 
-		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$date)){
+		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$dones)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
@@ -186,16 +193,16 @@ $smart_from =($page -1)*$record_peage;
 		$css="indispo";
 	 }
 	 
-      if($debuts < $_POST['tim'] AND $_POST['tim']< $sorties  AND in_array($_POST['dat'],$date)){
+      if($debuts < $_POST['tim'] AND $_POST['tis']< $sorties  AND in_array($_POST['dat'],$dones)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 		$css="indispo";
 	 }
+	 }
+	 
 	
-	 
-	 
 	 if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
 		 $a="h5";
@@ -205,12 +212,11 @@ $smart_from =($page -1)*$record_peage;
 	 }
 		 
 	 }
+	
 	 
-	}
-	}
-	}
-
-          echo'<div  class="content3'.$css.'">
+	 
+	
+	     echo'<div  class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
