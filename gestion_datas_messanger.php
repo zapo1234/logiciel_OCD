@@ -332,7 +332,11 @@ border-radius:25px;}
 	 $(document).on('click','.action',function(){
 	   	var id = $(this).data('id1');	
       // on affiche la div
-       $('#id'+id).slideToggle();	  
+       $('#id'+id).slideToggle();
+       
+	   for(id-1; id <5000; id++){
+        $('#id'+id).css('display','none');
+        }			
 		 	
 	 });
 	 
