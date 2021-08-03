@@ -84,7 +84,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .datas{border:2px solid white;box-shadow:2px 2px 1px 1px;font-size:12px;background-color:white;} .action{cursor:pointer;}
 .data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
 .data2{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
-.data4{color:green;font-weight:bold;}
+.data4{color:green;font-weight;}
 .data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;border-radius:20px;color:black}
 
 .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
@@ -238,7 +238,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
    <form method="post" id="form_paye" action="">
    <h1>Montant payé(crédit mise à jours) </h1>
    <div><input type="mumber" id="mont" name="mont"/></div>
-   <div class="action"><button type="button" class="annul" title="Annuler">Annuler</button><button type="button" class="put">payer</button></div>
+   <div class="action"><button type="button" class="sup" title="Annuler">Annuler</button><button type="button" class="put">payer</button></div>
    <input type="hidden" name="idf" id="idf">
   <input type="hidden" name="token" id="token" value="<?php
   //Le champ caché a pour valeur le jeton
@@ -251,7 +251,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
  <form method="post" id="form_reini" action="">
  <h1>Réinitialiser votre caisse journalière</h1>
  <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
- <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+ <div class="action"><button type="button" class="sup">Annuler</button><input type="submit" class="ok" value="ok"></div>
  </form>
 
  </div><!--reini---->
@@ -329,6 +329,12 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
  
  $('#im').click(function(){
  $('#data').css('display','block');
+ });
+ 
+ $('.sup').click(function(){
+	$('#pak').css('display','none');
+    $('.reini').css('display','none');	
+	 
  });
  
 

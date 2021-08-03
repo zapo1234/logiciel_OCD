@@ -384,7 +384,7 @@ echo $_SESSION['token'];?>">
  <form method="post" id="form_reini" action="">
  <h1>Réinitialiser votre caisse journalière</h1>
  <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
- <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+ <div class="action"><button type="button" class="sup">Annuler</button><input type="submit" class="ok" value="ok"></div>
  </form>
  
  </div><!--reini---->
@@ -466,6 +466,12 @@ echo $_SESSION['token'];?>">
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+ });
+ 
+ $('.sup').click(function(){
+	$('#pak').css('display','none');
+    $('.reini').css('display','none');	
+	 
  });
  
  $(document).on('change','.to',function(){
