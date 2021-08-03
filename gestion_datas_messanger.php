@@ -336,7 +336,12 @@ border-radius:25px;}
        
 	   for(id-1; id <5000; id++){
         $('#id'+id).css('display','none');
-        }			
+        }
+
+        for(5000; id > 0; id--){
+        $('#id'+id).css('display','none');
+        }	
+		 			
 		 	
 	 });
 	 
