@@ -102,6 +102,8 @@ border-radius:25px;}
 #datasboss{margin-left:60%;background:#A3F8D5;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
 .action{padding-left:75%;cursor:pointer;} .divaction{width:100px;padding:2%;background:white;color:black;border-radius:15px;}
 .divaction a{color:black;font-size:14px;text-align:center;text-decoration:none;}
+#supboss{margin-left:68%;font-family:arial;border:2px solid #eee;border-radius:20px;} 
+#supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
 </style>
 
 
@@ -289,6 +291,23 @@ border-radius:25px;}
   
   $('#im').click(function(){
  $('#data').css('display','block');
+ });
+ 
+ $(document).on('click','.sup_send',function(){
+	 var id =$(this).data('id2');
+	 var action="sup";
+	 
+	 $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action,id:id},
+            async:true,
+            success: function(data){
+            $('#result').html(data);
+			load();
+			}
+          });
+	 
  });
   
   //Fonction valide formulaire appui entrée
