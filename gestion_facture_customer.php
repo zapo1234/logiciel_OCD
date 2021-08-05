@@ -104,6 +104,20 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
 .drt{color:green;font-size:13px;font-weight:bold;}
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
 </style>
 
 <script>
@@ -292,8 +306,15 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     // afficher les données des encaissements
-  $('#pak').click(function(){
+     
+	  $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+	 
+	 // afficher les données des encaissements
+ 
+
+ $('#pak').click(function(){
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
