@@ -172,6 +172,6 @@ if($_POST['action']=="send"){
         $dns=$reg->fetch();
 		
          echo'<div class="count">votre compte a emis plus de <br/><span class="dr">'.$dns['nbrs'].'</span></div>';		
-			
+		 $reg->closeCursor();
 		}
 ?>

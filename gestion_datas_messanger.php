@@ -105,10 +105,11 @@ border-radius:25px;}
 #supboss{margin-left:68%;font-family:arial;border:2px solid #eee;border-radius:20px;} 
 #supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
 h2{text-align:center;font-size:16px;color:black} .bs,.bg{padding:2%;}
-#form_sup{margin-left:20%;margin-top:10px;} #sends{margin-left:5%;margin-top:30px;}
+#form_sup{margin-left:20%;margin-top:10px;} #sends{margin-left:6%;margin-top:30px;width:150px;height:30px;color:#F7361C;color:white;border:2px solid #F7361C;
+background:#F7361C;}
 .mot{color:black;margin-left:15%;margin-top:60px;} .count{margin-left:15%;margin-top:50px;}
-.dr{padding-left:30%;font-size:23px;padding-top:10px;font-weight:bold;}
-.mots{padding-left:30%;font-size:23px;padding-top:10px;font-weight:bold;}
+.dr{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;color:#3589E3;}
+.mots{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;}
 </style>
 
 
@@ -396,7 +397,7 @@ h2{text-align:center;font-size:16px;color:black} .bs,.bg{padding:2%;}
 	 
 	 
 	$('#message').keyup(function(){
-
+     var action ="write";
 
 
     });		
