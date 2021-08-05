@@ -94,7 +94,20 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 
 #tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
 </style>
 
 </head>
@@ -407,7 +420,11 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
   <script type="text/javascript">
    $(document).ready(function(){
 
-   $('#but').click(function(){
+  $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+
+  $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
  
@@ -639,6 +656,21 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 	 
 	  
 	});
+	
+	// compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
 	
 	// afficher les user
 	function load() {
