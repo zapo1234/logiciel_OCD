@@ -93,7 +93,10 @@ foreach($donnes as $datas){
  }
 
  }
+ $res->closeCursor();
 }
+
+ 
 
 
 if($_POST['action']=="send"){
@@ -160,4 +163,15 @@ if($_POST['action']=="send"){
 							':email'=>$_SESSION['email_ocd']
 							));
 		 }
+		 
+		if($_POST['action']=="count_message"){
+		
+		// compte le nom de message dans la table
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM messanger WHERE email_ocd= :email_ocd');
+        $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+        $dns=$reg->fetch();
+		
+         echo'<div class="count">votre compte a emis plus de <br/><span class="dr">'.$dns['nbrs'].'</span></div>';		
+			
+		}
 ?>

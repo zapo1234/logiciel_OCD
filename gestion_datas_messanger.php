@@ -104,6 +104,11 @@ border-radius:25px;}
 .divaction a{color:black;font-size:14px;text-align:center;text-decoration:none;}
 #supboss{margin-left:68%;font-family:arial;border:2px solid #eee;border-radius:20px;} 
 #supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
+h2{text-align:center;font-size:16px;color:black} .bs,.bg{padding:2%;}
+#form_sup{margin-left:20%;margin-top:10px;} #sends{margin-left:5%;margin-top:30px;}
+.mot{color:black;margin-left:15%;margin-top:60px;} .count{margin-left:15%;margin-top:50px;}
+.dr{padding-left:30%;font-size:23px;padding-top:10px;font-weight:bold;}
+.mots{padding-left:30%;font-size:23px;padding-top:10px;font-weight:bold;}
 </style>
 
 
@@ -118,14 +123,21 @@ border-radius:25px;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                       
-                      
-                    </div>
+                     <h2>Evaluer le compteur</h2>
+					 <div id="results"></div><!--ajax--result-->
+                      <div class="mot">Messages maximum à émmetre<br/><span class="mots">2500</span></div>
+					
+					  </div>
 					
 					
 					<div class="bg">
-                        
-              
+                     <h2>Suprimer des messsages du compteur</h2>
+                     <form method="post" id="form_sup" action="">
+					 <input type="checkbox" name="1_sup" value="50"> Suprimer 50 entrées<br/><br/>
+					 <input type="checkbox" name="2_sup" value="50"> Suprimer 100 entrées<br/><br/>
+					 <input type="checkbox" name="3_sup" value="50"> Suprimer 200 entrées<br/><br/>
+					 <input type="submit" id="sends" value="suprimer">
+					  </form>
                     </div>
                 </div>
 
@@ -243,6 +255,21 @@ border-radius:25px;}
   <script type="text/javascript">
    $(document).ready(function(){
     
+	function loads() {
+				var action="count_message";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#results').html(data);
+					}
+				});
+			}
+
+			loads();
+			
+			
 	function load() {
 				var action="fetch";
 				$.ajax({
@@ -281,6 +308,7 @@ border-radius:25px;}
 	success:function(data) { // on traite le fichier recherche apres le retour
       $('#result').html(data);
 	  load();
+	  loads();
 	  $('#message').val('');
 	 }
     });
@@ -305,6 +333,7 @@ border-radius:25px;}
             success: function(data){
             $('#result').html(data);
 			load();
+			loads();
 			}
           });
 	 
@@ -337,6 +366,7 @@ border-radius:25px;}
             success: function(data){
             $('#result').html(data);
 			load();
+			loads();
 			$('#message').val('');
          
             }
