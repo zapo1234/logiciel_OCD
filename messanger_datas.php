@@ -124,6 +124,14 @@ if($_POST['action']=="send"){
 							  ':date'=>$date,
 							  ':heure'=>$heure
 	                        ));
+		
+		// insert by new_message by count new message
+	     $res=$bds->prepare('INSERT INTO new_message (email_ocd,email_user,name) VALUES(:email_ocd,:email_user,:name)');
+		 $res->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_user'=>$_SESSION['email_user'],
+							  ':name'=>$_SESSION['user']
+	                        ));
+		
      }
 	 
 	 if($_POST['action']=="sup"){
@@ -173,5 +181,11 @@ if($_POST['action']=="send"){
 		
          echo'<div class="count">votre compte a emis plus de <br/><span class="dr">'.$dns['nbrs'].'</span></div>';		
 		 $reg->closeCursor();
+		}
+		
+		if($_POST['action']=="write"){
+			// afficher le messange
+         echo'<span class="der">'.$_SESSION['user'].' est entrain d\'écrire...<br/></span>';		
+			
 		}
 ?>

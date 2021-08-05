@@ -110,6 +110,7 @@ background:#F7361C;}
 .mot{color:black;margin-left:15%;margin-top:60px;} .count{margin-left:15%;margin-top:50px;}
 .dr{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;color:#3589E3;}
 .mots{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;}
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 </style>
 
 
@@ -134,9 +135,9 @@ background:#F7361C;}
 					<div class="bg">
                      <h2>Suprimer des messsages du compteur</h2>
                      <form method="post" id="form_sup" action="">
-					 <input type="checkbox" name="1_sup" value="50"> Suprimer 50 entrées<br/><br/>
-					 <input type="checkbox" name="2_sup" value="50"> Suprimer 100 entrées<br/><br/>
-					 <input type="checkbox" name="3_sup" value="50"> Suprimer 200 entrées<br/><br/>
+					 <input type="checkbox" class="co1" name="1_sup" value="50"> Suprimer 50 entrées<br/><br/>
+					 <input type="checkbox" class="co2" name="2_sup" value="50"> Suprimer 100 entrées<br/><br/>
+					 <input type="checkbox" class="co3" name="3_sup" value="50"> Suprimer 200 entrées<br/><br/>
 					 <input type="submit" id="sends" value="suprimer">
 					  </form>
                     </div>
@@ -182,6 +183,7 @@ background:#F7361C;}
 					<div id="result"></div>
 					
 					<div class="message">
+					<span id="message_datas"></span><!--reponse--><br/>
 					<form method="post" action="" id="form-sendm">
 					<span id="error"></span><!--message d'erreur'-->
 					<textarea name="message" id="message" rows="3" placeholder="Taper votre message"></textarea>
@@ -396,12 +398,27 @@ background:#F7361C;}
 	 });
 	 
 	 
-	$('#message').keyup(function(){
+	$('#message').keydown(function(){
      var action ="write";
+       $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+			$('#message_datas').css('display','block');
+		    }
+          });
 
+    });	
 
-    });		
-   
-   });
+     $('#message').keyup(function(){
+     var action ="write";
+      $('#message_datas').hide(2000);
+		   
+      });
+
+    });	
    
   </script>
