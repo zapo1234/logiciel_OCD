@@ -760,6 +760,23 @@ transition: all 200ms;}
 			}
 
 			view();
+			
+	// click sur les news message
+	
+	$(document).on('click','#sms',function(){
+		  var action ="click_messsage";
+		  $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+	
+		    }
+          });
+		  
+	  });
 	
    $('#but').click(function(){
    $('#examp').css('display','block');

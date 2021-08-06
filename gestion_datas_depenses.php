@@ -385,6 +385,37 @@ $(document).on('click','.actions',function(){
   }
 });
 
+// compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
+			
+	// click sur les news message
+	
+	$(document).on('click','#sms',function(){
+		  var action ="click_messsage";
+		  $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+	
+		    }
+          });
+		  
+	  });
 
 // afficher les données des dépenses
   // afficher les données des encaissements
