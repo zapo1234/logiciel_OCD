@@ -97,7 +97,20 @@ h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
-
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
 </style>
 
 </head>
@@ -234,7 +247,10 @@ h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-
+   $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+  
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
@@ -288,6 +304,21 @@ $(document).on('click','.actions',function(){
 			}
 
 			affich();
+			
+	// compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
 			
 	// afficher les données des dépenses
    // afficher les données des dépenses
@@ -359,6 +390,23 @@ $(document).on('click','.actions',function(){
 
 
   });
+  
+  // click sur les news message
+	
+	$(document).on('click','#sms',function(){
+		  var action ="click_messsage";
+		  $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+	
+		    }
+          });
+		  
+	  });
   
   $(document).on('click','.delete',function(){
  var checkbox = $('.form-check-input:checked');
