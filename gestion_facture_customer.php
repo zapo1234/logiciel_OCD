@@ -175,8 +175,7 @@ transition: all 200ms;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Lister des factures  <button type="button" class="btn btn-primary" id="but">
-                              +</button>
+                               Lister des factures  
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
