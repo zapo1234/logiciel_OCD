@@ -364,6 +364,21 @@ transition: all 200ms;}
    $('.reini').css('display','none');
  });
  
+ // compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
+ 
   // afficher les données des encaissements
   function loads(page) {
 				var action="fetch";

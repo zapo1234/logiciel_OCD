@@ -746,6 +746,21 @@ transition: all 200ms;}
 	$('.drop').slideToggle();
 	});
 	
+	// compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
+	
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
