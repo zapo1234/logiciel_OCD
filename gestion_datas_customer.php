@@ -129,7 +129,20 @@ ul.winners li{
 
 .pied_page{margin-left:60%;margin-top:10px;}
 .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;color:#0C80E7;border:2px solid white;border-radius:50%;font-weight:bold;}
-
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
 </style>
 
 <script>
@@ -449,6 +462,10 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
+
+  $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
 
    $('#but').click(function(){
    $('#examp').css('display','block');

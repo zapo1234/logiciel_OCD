@@ -118,6 +118,20 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 #tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
 #tls{margin-top:10px;}
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
  
 </style>
 
@@ -320,6 +334,10 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
   <script type="text/javascript">
    $(document).ready(function(){
 
+   $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+	
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
