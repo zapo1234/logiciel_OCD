@@ -390,6 +390,21 @@ transition: all 200ms;}
     
  });
   
+  // compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
+  
   
   function loads(page) {
 				var action="fetch";
