@@ -158,7 +158,7 @@ include('inc_session.php');
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:20%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
   </div><br>';
-	$names= 'Activité en  croissance';
+	$names= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"> </i> Activité en  croissance';
 	}
 	
 	elseif(30<$cb  AND $cb < 50) {
@@ -255,7 +255,7 @@ include('inc_session.php');
   }
   
   elseif($b==1){
-	 $clients ='1 client facturé'; 
+	 $clients ='un client facturé'; 
   }
   
   else{
@@ -263,15 +263,15 @@ include('inc_session.php');
 	 $clients = ' '.$b.' clients facturés'; 
   }
   
-  // le nombre d'elements dans le tab
+  // le nombre d'elements dans le tabs
   $c=count($tabs);
   
-  if($c==0 OR empty($c)){
-	$cl =' 0 facture annulée';
+  if($c==0){
+	$cl='aucune facture annulée';
   }
   
   elseif($b==1){
-	 $cl ='1 facture annulée'; 
+	 $cl='une facture annulée'; 
   }
   
   else{
@@ -279,6 +279,29 @@ include('inc_session.php');
 	 $cl = ' '.$c.' factures annulées'; 
   } 
 
+
+ // recupére les depense du crédit fournisseur dans ta table depense
+ $rev=$bds->prepare('SELECT montant,status FROM depense WHERE email_ocd= :email_ocd');
+ $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ $datac=$rev->fetchAll();
+ // creer un tableau
+ $data =[];
+ 
+ foreach($datac as $dats){
+	 if($dats['status']==2){
+    $dat= $dats['montant'];
+	// créer un tableau
+	$dat = explode(',',$dat);
+	
+	foreach($dat as $value){
+	 $data[]=$value;
+	}
+   }
+ }
+// la somme des valeur du tableau pour les crédit fournisseur
+ $sum = array_sum($data);   
+	 
+ 
 
 ?>
 
@@ -429,6 +452,22 @@ ul.winners li{
 .contens1{width:570px;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
 .montants{font-size:25px;margin-left:60%;color:#04850C;font-weight:bold;}
 .monta{font-size:25px;margin-left:60%;color:#06308E;font-weight:bold;}
+.h{font-family:arial;margin-left:5%;font-size:18px;}
+
+#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
+.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+background-color: white;
+border-radius: 20px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: black;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 250px;
+padding: 0 25px;
+transition: all 200ms;}
 </style>
 
 </head>
@@ -516,7 +555,10 @@ ul.winners li{
 						</div>
 		<div class="resutat">
 		<h2>Résultat de trésorerie</h2>
-		
+		<h3>Précision Net:</h3>
+		<div class="h"><?php echo$name;?></div><br/>
+		<h3>Prévision attendu:</h3>
+		<div class="h"><?php echo$names;?></div>
 		</div>
                       
                     </div>
@@ -577,7 +619,8 @@ ul.winners li{
 					
 					     <div class="cont14">
 						 <div class="titre"><i class="fas fa-coins" style="font-size:18px"></i> Crédit fournisseur</div>
-					     </div>';
+					     <div class="montant3">'.$sum.'<span class="monai">xof</span></div>
+						 </div>';
 					
 					 echo'</div>';
 					 
@@ -699,7 +742,10 @@ ul.winners li{
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-
+     $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+	
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');
