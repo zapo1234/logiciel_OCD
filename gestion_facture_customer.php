@@ -116,7 +116,7 @@ display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
 padding: 0 25px;
-transition: all 200ms;}
+transition: all 200ms;} .datas_messanger{border-bottom:1px solid #eee;}
 </style>
 
 <script>

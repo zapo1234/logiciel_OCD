@@ -111,7 +111,7 @@ background:#F7361C;}
 .dr{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;color:#3589E3;}
 .mots{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+.drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
 border-radius: 20px;
 border-width: 0;
@@ -121,10 +121,10 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
-}
+.datas_messanger{border-bottom:1px solid #eee;}
+
 
 </style>
 
