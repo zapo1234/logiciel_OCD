@@ -292,7 +292,22 @@ transition: all 200ms;}
 
 			view();
 			
-			
+	// afficher les données des encaissements
+    // compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();	
+		
 	
 	// compter les nouveaux message
 	function views() {
