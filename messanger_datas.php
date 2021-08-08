@@ -111,7 +111,22 @@ if($_POST['action']=="send"){
  $date = date('Y-m-d');
  $heure =date('H:i');
  
- 
+   $res=$bds->prepare('SELECT email_ocd FROM new_message WHERE email_ocd= :email_ocd ');
+   $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnes =$res->fetchAll();
+   
+   // create 
+   $tab = [];
+   
+   foreach($donnes as $datas){
+	   
+	   $datas =$datas['email_ocd'];
+	   $datas1= explode(',',$datas);
+	   foreach($datas1 as $data){
+		  $tab[] = $data;
+	   }
+   }
+
  // insert into table
   // on recupére les date dans la base de donnnées.
 	     $reys=$bds->prepare('INSERT INTO messanger (email_ocd,name,permission,message,email_user,date,heure) 
@@ -142,9 +157,9 @@ if($_POST['action']=="send"){
 		 $message=$_SESSION['user']. ' a suprimé son message';
 		 
 		 // on recupere la permission du user connecté
-   $res=$bds->prepare('SELECT permission FROM messanger WHERE id= :ids AND  email_ocd= :email_ocd');
+   $res=$bds->prepare('SELECT id,message,permission FROM messanger WHERE id= :ids AND  email_user= :email_user');
    $res->execute(array(':ids'=>$id,
-                       ':email_ocd'=>$_SESSION['email_ocd']
+                       ':email_user'=>$_SESSION['email_user']
 					   ));
 	$donnees =$res->fetch();
 	
@@ -160,6 +175,7 @@ if($_POST['action']=="send"){
 		$permission ="supemployes";
 		
 	}
+	 if($donnees['id']==$id){
      // modifié le message
 	 // on modifie les données de la base de données guide
          $ret=$bds->prepare('UPDATE messanger SET  message= :mess, permission= :pm, date= :dt, heure= :ht WHERE id= :ids AND email_ocd= :email');
@@ -171,6 +187,7 @@ if($_POST['action']=="send"){
 							':email'=>$_SESSION['email_ocd']
 							));
 		 }
+	 }
 		 
 		if($_POST['action']=="count_message"){
 		
@@ -188,4 +205,35 @@ if($_POST['action']=="send"){
          echo'<span class="der">'.$_SESSION['user'].' est entrain d\'écrire...<br/></span>';		
 			
 		}
+		
+		if($_POST['action']=="news"){
+			
+		// nombre d'entrées de message
+       		// compte le nom de message dans la table
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM new_message WHERE email_user!= :email_user');
+        $reg->execute(array(':email_user'=>$_SESSION['email_user']));
+        $dns=$reg->fetch();
+		
+        if(empty($reg)){
+		  echo'';
+		}
+		
+		elseif($dns['nbrs']==0) {
+			echo'';
+		}
+		else{
+			echo'<button type="button" class="ss">'.$dns['nbrs'].'</button>';
+			
+		}
+		
+		$reg->closeCursor();
+		}
+		
+		// reinitialiser la notification des nouveau message
+		if($_POST['action']=="click"){
+		// effcacez les message 
+		$reg=$bds->prepare('DELETE FROM new_message WHERE email_user!= :email_user');
+        $reg->execute(array(':email_user'=>$_SESSION['email_user']));
+        echo'ZAPO4';
+	   }
 ?>
