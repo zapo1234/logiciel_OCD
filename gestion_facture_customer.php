@@ -105,7 +105,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
 .drt{color:green;font-size:13px;font-weight:bold;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+.drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
 border-radius: 20px;
 border-width: 0;
@@ -115,7 +115,6 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
 </style>
@@ -311,7 +310,20 @@ transition: all 200ms;}
 	});
 	 
 	 // afficher les données des encaissements
- 
+    // compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
 
  $('#pak').click(function(){
 	$('#examp').css('display','none');

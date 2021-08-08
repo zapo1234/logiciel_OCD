@@ -291,6 +291,24 @@ transition: all 200ms;}
 			}
 
 			view();
+			
+			
+	
+	// compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
+					
 	
 	// compter le nombre de message maximum à envoyer
 	function loads() {
@@ -453,6 +471,21 @@ transition: all 200ms;}
       $('#message_datas').hide(2000);
 		   
       });
+	  
+	  $(document).on('click','#sms',function(){
+		  var action ="click_messsage";
+		  $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+	
+		    }
+          });
+		  
+	  });
 
     });	
    

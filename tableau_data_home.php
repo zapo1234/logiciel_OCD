@@ -455,7 +455,7 @@ ul.winners li{
 .h{font-family:arial;margin-left:5%;font-size:18px;}
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+.drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
 border-radius: 20px;
 border-width: 0;
@@ -465,9 +465,12 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-height: 250px;
-padding: 0 25px;
-transition: all 200ms;}
+padding: 0 30px;
+transition: all 200ms;
+}
+
+.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
+margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 </style>
 
 </head>
@@ -683,7 +686,7 @@ transition: all 200ms;}
  </div><!--reini---->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
-    
+  <div id="message_datas"></div><!--div home-->  
 	</div>
                 <!-- /.container-fluid -->
 
@@ -747,6 +750,23 @@ transition: all 200ms;}
 	});
 	
 	// compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
+			
+	// click sur les news message
+	
+	// compter les nouveaux message
 	function view() {
 				var action="news";
 				$.ajax({
@@ -764,7 +784,7 @@ transition: all 200ms;}
 	// click sur les news message
 	
 	$(document).on('click','#sms',function(){
-		  var action ="click_messsage";
+		  var action ="click";
 		  $.ajax({
             type: 'POST',
             url:'messanger_datas.php',
@@ -772,7 +792,7 @@ transition: all 200ms;}
             async:true,
             success: function(data){
             $('#message_datas').html(data);
-	
+	         view();
 		    }
           });
 		  
