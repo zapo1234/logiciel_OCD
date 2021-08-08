@@ -285,6 +285,9 @@ font-size: 1em;
 height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
+.datas_messanger{border-bottom:1px solid #eee;}
+.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
+margin-left:-10px;}
 </style>
 
 </head>
@@ -605,6 +608,8 @@ echo $_SESSION['token'];?>">
  $('.moyens').css('display','block'); 
 	 
  });
+ 
+ 
  
  $(document).on('change','.to',function(){
 	var selectedOptions = $('#to option:selected').text(); 
@@ -1230,6 +1235,59 @@ echo $_SESSION['token'];?>">
 			}
 
 			load();
+			
+	$('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+	 
+	 // afficher les données des encaissements
+    // compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
+			
+	// click sur les news message
+	
+	$(document).on('click','#sms',function(){
+		  var action ="click";
+		  $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#message_datas').html(data);
+	
+		    }
+          });
+		  
+	  });
+  
+  // compter les nouveaux message
+	function view() {
+				var action="news";
+				$.ajax({
+					url: "messanger_datas.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#sms').html(data);
+					}
+				});
+			}
+
+			view();
+  
 	
     // afficher la div pour réinitailiser les chiffres	
 	$(document).on('click','.butt',function(){

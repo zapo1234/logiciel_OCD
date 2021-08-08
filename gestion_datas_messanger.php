@@ -125,7 +125,8 @@ padding: 0 25px;
 transition: all 200ms;}
 .datas_messanger{border-bottom:1px solid #eee;}
 
-
+.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
+margin-left:-10px;}
 </style>
 
 
@@ -308,22 +309,6 @@ transition: all 200ms;}
 
 			views();	
 		
-	
-	// compter les nouveaux message
-	function views() {
-				var action="fetchs";
-				$.ajax({
-					url: "news_messages.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultats_messages').html(data);
-					}
-				});
-			}
-
-			views();
-					
 	
 	// compter le nombre de message maximum à envoyer
 	function loads() {
