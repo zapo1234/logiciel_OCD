@@ -130,7 +130,7 @@ ul.winners li{
 .pied_page{margin-left:60%;margin-top:10px;}
 .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;color:#0C80E7;border:2px solid white;border-radius:50%;font-weight:bold;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+.drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
 border-radius: 20px;
 border-width: 0;
@@ -140,9 +140,11 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
+
+.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
+margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 </style>
 
 <script>
@@ -1118,6 +1120,22 @@ echo $_SESSION['token'];?>">
   })(i);
   
 });
+
+ // compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
+
 
 // imprimer sa caisse user 
 // compter les nouveaux message
