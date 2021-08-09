@@ -143,6 +143,7 @@ h3{font-size:16px;text-transform:capitalize;}
 #homebloque{background:#FAB672;border:2px solid #FAB672;color:black;}
 .dt{color:white;font-size:13px;} .dry{padding-left:65%;} .pied_page{margin-left:60%;margin-top:10px;}
 .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;color:#0C80E7;border:2px solid white;border-radius:50%;font-weight:bold;}
+
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
@@ -154,8 +155,11 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-padding: 0 25px;
-transition: all 200ms;}
+padding: 0 30px;
+transition: all 200ms;
+}
+
+
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 </style>
@@ -364,6 +368,21 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
    $('#pak').css('display','none');
    $('.reini').css('display','none');
  });
+ 
+ // compter les nouveaux message
+	function views() {
+				var action="fetchs";
+				$.ajax({
+					url: "news_messages.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats_messages').html(data);
+					}
+				});
+			}
+
+			views();
  
  // compter les nouveaux message
 	function view() {
