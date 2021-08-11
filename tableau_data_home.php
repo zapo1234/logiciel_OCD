@@ -335,11 +335,11 @@ include('inc_session.php');
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
-    .bs{width:340px;height:300px;border:1px solid #eee;}
+    .bs{width:90%;height:300px;border:1px solid #eee;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:1300px;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -429,27 +429,27 @@ ul.winners li{
 }
 
 .center{background:#eee;} .conte1{width:100%;height:300px;} .cont1,.cont12,.cont13,.cont14{float:left;} .conte2{width:100%;height:300px;}
- .cont1{border-bottom:4px solid #0FF955; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
-.cont12{border-bottom:4px solid #7BCCF8; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
-.cont13{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+ .cont1{border-bottom:4px solid #0FF955; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont12{border-bottom:4px solid #7BCCF8; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont13{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
 
-.cont14{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:300px;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
+.cont14{border-bottom:4px solid #F87B90; float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;} .cont2{float:left;} .titre{font-family:arial;text-align:center;color:black;font-size:18px;}
 
 
 .montant1{font-weight:bold;color:#0FF955;font-size:30px;margin-top:30px;margin-left:10%;} .monai{padding-left:20%;}
 .montant2{font-weight:bold;color:#7BCCF8;font-size:30px;margin-top:30px;margin-left:10%;}
 .montant3{font-weight:bold;color:#F87B90;font-size:30px;margin-top:30px;margin-left:10%;}
 
-.cont2{float:left;margin-left:2%;padding:1%;width:280px;height:200px;background:white;border:3px solid white;}
+.cont2{float:left;margin-left:2%;padding:1%;width:23%;height:200px;background:white;border:3px solid white;}
 
-.dtx{font-weight:bold;color:#04850C;font-size:30px;margin-left:15%;margin-top:15px;}
-.dtt{color:#06308E;font-weight:bold;font-size:30px;margin-left:15%;margin-top:15px;}
-.dts{font-weight:bold;color:#C10D23;font-size:30px;margin-left:15%;margin-top:15px;}
+.dtx{font-weight:bold;color:#04850C;font-size:30px;margin-left:5%;margin-top:15px;}
+.dtt{color:#06308E;font-weight:bold;font-size:30px;margin-left:5%;margin-top:15px;}
+.dts{font-weight:bold;color:#C10D23;font-size:30px;margin-left:5%;margin-top:15px;}
 
 .user{border-bottom:1px solid #eee;padding-top:5px;font-size:15px;color:font-weight:none;}
 .contens,.contens1{float:left}
-.contens{width:570px;background:white;height:250px;margin-left:2%;margin-top:-50px;padding-left:5%;}
-.contens1{width:570px;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
+.contens{width:46%;background:white;height:250px;margin-left:2%;margin-top:-50px;padding-left:5%;}
+.contens1{width:46%;background:white;height:250px;margin-left:3%;margin-top:-50px;padding-left:5%;}
 .montants{font-size:25px;margin-left:60%;color:#04850C;font-weight:bold;}
 .monta{font-size:25px;margin-left:60%;color:#06308E;font-weight:bold;}
 .h{font-family:arial;margin-left:5%;font-size:18px;}
@@ -607,22 +607,22 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 					echo'<div class="conte1">';
 					echo'<div class="cont1">
 					     <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:green"></i>  Encaissement séjour&pass</div>
-					     <div class="montant1">'.$number1.'<span class="monai">xof</span></div>
+					     <div class="montant1">'.$number1.'<br/><span class="monai">xof</span></div>
 						 </div>
 						 
 						 <div class="cont12">
 						 <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:#7BCCF8;"></i> Acompte Réservation</div>
-					     <div class="montant2">'.$number3.'<span class="monai">xof</span></div>
+					     <div class="montant2">'.$number3.'<br/><span class="monai">xof</span></div>
 						 </div>
 						 
 						 <div class="cont13">
 						 <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:#F87B90;"></i> Dépenses éffectuées</div>
-					     <div class="montant3">'.$number2.'<span class="monai">xof</span></div>
+					     <div class="montant3">'.$number2.'<br/><span class="monai">xof</span></div>
 						 </div>
 					
 					     <div class="cont14">
 						 <div class="titre"><i class="fas fa-coins" style="font-size:18px"></i> Crédit fournisseur</div>
-					     <div class="montant3">'.$sum.'<span class="monai">xof</span></div>
+					     <div class="montant3">'.$sum.'<br/><span class="monai">xof</span></div>
 						 </div>';
 					
 					 echo'</div>';
