@@ -150,12 +150,13 @@ margin-left:-10px;}
 					
 					<div class="bg">
                      <h2>Suprimer des messsages du compteur</h2>
-                     <form method="post" id="form_sup" action="">
-					 <input type="checkbox" class="co1" name="1_sup" value="50"> Suprimer 50 entrées<br/><br/>
-					 <input type="checkbox" class="co2" name="2_sup" value="50"> Suprimer 100 entrées<br/><br/>
-					 <input type="checkbox" class="co3" name="3_sup" value="50"> Suprimer 200 entrées<br/><br/>
-					 <input type="submit" id="sends" value="suprimer">
+                     <form method="post" id="form_sup" action="delete_datas.php">
+					 <input type="checkbox" class="co1" id="co1" name="co1"  value="50"> Suprimer 50 entrées<br/><br/>
+					 <input type="checkbox" class="co2" id="co2" name="co2"  value="100"> Suprimer 100 entrées<br/><br/>
+					 <input type="checkbox" class="co3" id="co3" name="co3"  value="150"> Suprimer 200 entrées<br/><br/>
+					 <input type="button" id="sends" value="suprimer">
 					  </form>
+					  <div id="resul"></div><!--div--ajax-->
                     </div>
                 </div>
 
@@ -486,6 +487,40 @@ margin-left:-10px;}
           });
 		  
 	  });
+	  
+	  $(".co1").click(function(){
+		
+       $("#co2").prop('checked',false);	
+       $("#co3").prop('checked',false);		   
+		  
+	  });
+	  
+	  $(".co2").click(function(){
+		
+       $("#co1").prop('checked',false);	
+       $("#co3").prop('checked',false);		   
+		  
+	  });
+	  
+	  $(".co3").click(function(){
+		
+       $("#co1").prop('checked',false);	
+       $("#co2").prop('checked',false);		   
+		  
+	  });
+	  
+	  $('#sends').click(function(){
+	  if($("#co1").is(':checked') || $("#co2").is(':checked') || $("#co2").is(':checked')){
+        $('#form_sup').submit();
+	  }
+
+  else{
+
+    }	
+	
+	 
+      });
+		 		
 
     });	
    
