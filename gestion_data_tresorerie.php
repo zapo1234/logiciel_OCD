@@ -38,7 +38,7 @@ include('inc_session.php');
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:95%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
@@ -86,7 +86,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 #resul_depense,#indicateur{float:left;margin-left:2%;} 
-#resul_depense{width:65%;} #indicateur{margin-left:4%;}
+#resul_depense{width:60%;} #indicateur{width:30%;margin-left:5%;}
 .pied_page{margin-left:20%;margin-top:25px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .montants{margin-left:30%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:30%;font-size:30px;color:#D20A22;font-weight:bold;}
@@ -98,7 +98,7 @@ h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
 .tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
+.drop{position:absolute;top:50px;width:350px;height:200px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
 border-radius: 20px;
 border-width: 0;
@@ -108,11 +108,19 @@ cursor: pointer;
 display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
-height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
 </style>
-
+<script>
+ function printContent(el) {
+	 var restorepage = document.body.innerHTML;
+	 var printcontent = document.getElementById(el).innerHTML;
+	 document.body.innerHTML = printcontent;
+	 window.print();
+	 document.body.innerHTML = restorepage;
+	}
+ 
+ </script>
 </head>
 
 <body id="page-top">

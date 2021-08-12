@@ -32,8 +32,8 @@ include('inc_session.php');
     <style>
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
-    .bs{width:340px;height:300px;border:1px solid #eee;}
+    .bg{border:;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
+    .bs{width:340px;height:300px;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -59,7 +59,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 .content_home,.content2{float:left;display:none;} .content2{margin-left:0.2%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
-.dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:40%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
+.dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:30%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 .df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
 .intervalle{font-size:13px;padding-left:3%;} 
 h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
@@ -217,18 +217,9 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 					  
                     </div>
 					
-					
-					<div class="bg">
-                        <div id="resultats"></div>
-            <div><button type="button" class="print" title="imprimer sa caisse journalière" onclick="printContent('caisse')">imprimer</button></div>
-            <div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>
- 
-                    </div>
-					
-					
-					
-				
-                </div>
+	 <div id="resultats"></div>
+            
+			</div>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
