@@ -36,7 +36,7 @@ if(!isset($_GET['id_fact'])) {
 <style>
  
   
- #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity:0.6;}
+ #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.7;}
 label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
  .dep {
   animation: spin 2s linear infinite;
@@ -53,6 +53,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;}
+.dr{font-size:18px;text-align:center;margin-top:10px;}
 </style>
 
 </head>
@@ -341,7 +342,7 @@ ul a{margin-left:3%;}
 	 $taxe = $mont*$tva/100;
 	 // montant à ajouter sur tresorie_customer
 	 $totals = $total + $total*$tva/100;
-	
+	 $reste= floatval($monts)- floatval($avance);
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
 	 $status =$data_status;
@@ -401,6 +402,7 @@ ul a{margin-left:3%;}
 	 $totals = $total + $total*$tva/100;
 	 	 
 	 $taxe = $monts*$tva/100;
+	 $reste= floatval($total+$total1)- floatval($avance);
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
 	 $status =$data_status;
@@ -466,7 +468,7 @@ ul a{margin-left:3%;}
 	 // montant à ajouter sur tresorie_customer
 	 $totals = $total + $total*$tva/100;
 	 
-	 $reste= floatval($mont)- floatval($avance);
+	 $reste= floatval($total+$total1)- floatval($avance);
      $taxe = $monts*$tva/100;
      $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4; 
@@ -495,7 +497,8 @@ ul a{margin-left:3%;}
 		// on redirige vers la page
 		 echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
-		     <div class="dep"><i style="font-size:40px;color:green" class="fa">&#xf250;</i></div></div>
+		     <div class="dr">'.$ty.'</div>
+			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		
 	// verifier sur l'id_chambre est deja dans le tableau
@@ -561,7 +564,7 @@ ul a{margin-left:3%;}
 							':pc'=>$client,
 							':mont'=>$monts,
 							':avc'=>$avance,
-							':rest'=>$donnees['montant']-$_POST['acomp'],
+							':rest'=>$reste,
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
@@ -601,7 +604,7 @@ ul a{margin-left:3%;}
 	 $types = $type[$count];
 	
 			echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+             <div class="enre"><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:13px;">
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
@@ -670,14 +673,14 @@ ul a{margin-left:3%;}
 							':pc'=>$client,
 							':mont'=>$monts,
 							':avc'=>$avance,
-							':rest'=>$donnees['montant']-$$_POST['acomp'],
+							':rest'=>$reste,
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
 							':mtva'=>$taxe,
 							':remi'=>$_POST['remise'],
 							':ty'=>$mode,
 							':moyen_paie'=>$status,
-							':data_mont'=>$data_mum,
+							':data_mont'=>$data_num,
 							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
