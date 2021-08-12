@@ -200,6 +200,23 @@ $smart_from =($page -1)*$record_peage;
 		$envoi ="";
 		$css="indispo";
 	 }
+	 
+	 if(in_array($_POST['dat'],$dones)){
+		 
+		$name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+		$envoi ="";
+		$css="indispo"; 
+	 }
+	 
+	 if(!in_array($_POST['dat'],$dones)){
+		$name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
+		 $a="h5";
+		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+		 $css="dispo"; 
+		 
+	 }
+	 
 	 }
 	 
 	
@@ -214,9 +231,7 @@ $smart_from =($page -1)*$record_peage;
 	 }
 	
 	 
-	 
-	
-	     echo'<div  class="content3">
+	    echo'<div  class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
