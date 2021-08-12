@@ -84,6 +84,17 @@ include('inc_session.php');
 	$types="horaire";
 	$da2=$donnees['time'];
 	$da3=$donnees['time1'];
+	$da2 = substr($da2,5);
+	$da3 = substr($da3,5);
+	$date1=$donnees['date'];
+	$date1 = explode('-',$date1);
+	$j = $date1[2];
+	$mm = $date1[1];
+	$an = $date1[0];
+	
+	$date =$j.'/'.$mm.'/'.$an;
+	
+	
 	$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$donnees['clients'].'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$donnees['numero'].'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$da2.'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$da3.'</span> </span>';	
 	
    $type_sejour = '<select id="to" class="to" name="to" required>
@@ -100,7 +111,7 @@ include('inc_session.php');
 	else{
 		
 		$jour ='Durée : <span class="det">'.$donnees['nombre'].'jours </span>';
-		$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$donnees['clients'].'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$donnees['numero'].'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$donnees['check_in'].'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$donnees['check_out'].'</span> </span>';	
+		$reference ='Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'.$date.'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '.$date.'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'.$donnees['check_in'].'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'.$date.'</span> </span>';	
 	    $type="Réservation";
 	}
 	
@@ -486,6 +497,8 @@ margin-left:-10px;}
 	
   </div>
   <span class="errors"></span>
+  <a href="gestion_facture_customer.php" title="retour liste facture"><button type="button" class="butto">retour</button>
+   
    <button type="button" class="buttons">continuer</button>
  </div>
  
@@ -603,8 +616,6 @@ echo $_SESSION['token'];?>">
  });
  
  $('#pak').click(function(){
-	$('#examp').css('display','none');
-   $('#pak').css('display','none');
    $('.reini').css('display','none');
  });
  
