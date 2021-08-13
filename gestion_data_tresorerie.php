@@ -89,9 +89,9 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 #resul_depense{width:60%;} #indicateur{width:30%;margin-left:5%;}
 .pied_page{margin-left:20%;margin-top:25px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
-.montants{margin-left:30%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:30%;font-size:30px;color:#D20A22;font-weight:bold;}
-.name{font-size:15px;margin-left:5%;color:black;} .monta{margin-left:30%;font-size:30px;color:#0A68D2;font-weight:bold;}
-.montac{margin-left:30%;font-size:30px;color:#E45416;font-weight:bold;} .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.montants{margin-left:15%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:15%;font-size:30px;color:#D20A22;font-weight:bold;}
+.name{font-size:15px;margin-left:5%;color:black;} .monta{margin-left:15%;font-size:30px;color:#0A68D2;font-weight:bold;}
+.montac{margin-left:15%;font-size:30px;color:#E45416;font-weight:bold;} .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:7%;margin-top:5px;font-size:16px;}
 #logo{position:absolute;top:6px;left:1.3%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
@@ -130,16 +130,7 @@ transition: all 200ms;}
          <div id="data_annuler"></div><!--retour ajax -- annuler-->
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
-                    <div class="bs">
-                        
-
-                    </div>
-
-
-					<div class="bg">
-                        <div id="resultats"></div>
-
-                    </div>
+                  
                 </div>
 
         <!-- Content Wrapper -->

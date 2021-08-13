@@ -497,7 +497,7 @@ margin-left:-10px;}
 	
   </div>
   <span class="errors"></span>
-  <a href="gestion_facture_customer.php" title="retour liste facture"><button type="button" class="butto">retour</button>
+  <a href="gestion_facture_customer.php" title="retour liste facture"><button type="button" class="butto">retour</button></a>
    
    <button type="button" class="buttons">continuer</button>
  </div>

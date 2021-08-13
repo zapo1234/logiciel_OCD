@@ -87,9 +87,10 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
-.tds{font-size:28px;margin-left:12%;color:#09A81F;}
-.tdv{font-size:28px;margin-left:12%;color:#A80913;}
-.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;margin-left:10%;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;margin-left:10%;font-weight:bold;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;margin-left:10%;font-weight:bold;}
+.td{margin-left:10%;}
 
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
@@ -145,6 +146,7 @@ transition: all 200ms;}
 
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
+footer.sticky-footer{}
 </style>
 
 <script>

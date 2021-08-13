@@ -100,10 +100,10 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 #form_logo{display:none;} .pied_page{margin-left:60%;margin-top:10px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
-.tds{font-size:28px;margin-left:12%;color:#09A81F;}
-.tdv{font-size:28px;margin-left:12%;color:#A80913;}
-.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
-.drt{color:green;font-size:13px;font-weight:bold;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;margin-left:10%;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;margin-left:10%;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;margin-left:10%;}
+.td{margin-left:10%;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
