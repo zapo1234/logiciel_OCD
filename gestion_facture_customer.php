@@ -72,7 +72,7 @@ include('inc_session.php');
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
 #tb{margin-top:10px;}
- 
+#results{overflow-y:scroll;height:1000px;} 
  
  
  .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
