@@ -481,8 +481,9 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{position:absolute;left:7%;width:300px;display:block;background:white;
-height:1300px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+height:1800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 }
 
 
