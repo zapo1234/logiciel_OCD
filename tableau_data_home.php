@@ -472,6 +472,22 @@ transition: all 200ms;
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
+
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+
+
 </style>
 
 </head>
