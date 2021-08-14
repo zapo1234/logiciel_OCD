@@ -2,11 +2,11 @@
 include('connecte_db.php');
 include('inc_session.php');
 
- $record_peage=7;
+ $record_peage=20;
 $page="";
   
   if(isset($_POST['page'])){
-$page = $_POST['page'];
+$page = (int) strip_tags($_POST['page']);
 }
 
 else {
@@ -27,7 +27,7 @@ $smart_from =($page -1)*$record_peage;
 	$donns =$rel->fetch();
 	   
    // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
@@ -130,6 +130,16 @@ $smart_from =($page -1)*$record_peage;
 		
 	}
 	
+	if($donnees['society']==""){
+		
+	  $trasmi="";	
+	}
+	
+	else{
+		
+	$trasmi='transmise par'.$donnees['society'].'';
+	}
+	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -167,7 +177,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="mont">'.$donnees['mont_tva'].' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
-		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'</td>
+		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/>'.$trasmi.'</td>
 		 <td><a href="#" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  '.$modif.'
@@ -190,10 +200,22 @@ $smart_from =($page -1)*$record_peage;
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
 	
-	for($i=1; $i<=$totale_page; $i++) {
+	 echo'<div class="pied_page">';
+   if($page > 1){
+	  $page =$page-1;
+	  echo'<div class="p"><button type="button" class="but"><a href="gestion_facture_customer.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+   }
+   for($i=1; $i<=$totale_page; $i++) {
 	   
-	   echo'<div class="pied_page"><button class="bout" id="'.$i.'">'.$i.'</button></div>';
+	   echo'<div class="pied" style="cursor:pointer"><button class="bout" id="'.$i.'">'.$i.'</div>';
     }
+	
+	if($i > $page){
+		$page =$page+1;
+		echo'<div class="p"><button type="button"><a href="gestion_facture_customer.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+	}
+	
+	echo'</div>';
 	
    }
    
