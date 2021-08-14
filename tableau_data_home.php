@@ -471,7 +471,7 @@ transition: all 200ms;
 
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
-
+.drops{display:none;}
 
 @media (max-width: 575.98px) { 
 
@@ -481,7 +481,10 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
+.drops{position:absolute;left:7%;width:300px;display:block;background:white;
+height:1300px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 }
+
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { ... }
@@ -764,6 +767,12 @@ ul{display:none;}
    $(document).ready(function(){
      $('#sms').click(function(){
 	$('.drop').slideToggle();
+	$('.drops').css('display','none');
+	});
+	
+	 $('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
 	});
 	
 	// compter les nouveaux message
