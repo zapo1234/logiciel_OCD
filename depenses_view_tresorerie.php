@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-$record_peage=12;
+$record_peage=20;
 $page="";
   
   if(isset($_POST['page'])){
