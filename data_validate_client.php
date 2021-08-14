@@ -77,6 +77,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$rej->closeCursor();
 	
 	
+	// fixer les numero de facture
 	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE email_ocd= :email_ocd ORDER BY id DESC');
    $reb->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnes=$reb->fetch();
@@ -94,6 +95,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$id_fact=$mt+0.00001;
 	}
 	
+	
+	
+	// definir les varaible au cas de sejour
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
 	$dates2 =$_POST['das'];
@@ -137,6 +141,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	 
 	} 
 	
+	// on defini le séjour au cas de variable horaire
 	if($_POST['to']=="horaire") {
 	 
 	 $dates3 =$_POST['tim'];
@@ -162,6 +167,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $numero_compte=$_SESSION['email_ocd'];
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
+   $code =$_SESSION['code'];
+   $society =$_SESSION['society'];
    
    
     $dat1 = explode('-',$_POST['dat']);
@@ -394,8 +401,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
              <meta http-equiv="Refresh" content="5; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
-		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type) 
-		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type)');
+		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code,society) 
+		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type,:code,:society)');
 	     $rey->execute(array(':email_ocd'=>$email,
 	                        ':id_chambre'=>$ids_chambre,
 						    ':type_logement'=>$types,
@@ -459,7 +466,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':type'=>$mode,
 							':moyen_paiement'=>$status,
 							':data_montant'=>$data_num,
-							':types'=>$ty
+							':types'=>$ty,
+							':code'=>$code,
+							':society'=>$society
 						  ));
             				  
 						  
@@ -534,8 +543,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		
 	   }
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -561,7 +570,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':type'=>$mode,
 							':moyen_paiement'=>$status,
 							':data_montant'=>$data_num,
-							':types'=>$ty
+							':types'=>$ty,
+							':code'=>$code,
+							':society'=>$society
 						  ));
 						  
 						  
