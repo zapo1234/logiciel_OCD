@@ -204,6 +204,8 @@ ul a{margin-left:3%;}
    $numero_compte=$_SESSION['email_ocd'];
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
+   $code =$_SESSION['code'];
+   $society =$_SESSION['society'];
    
    
    $direction = $_POST['to'];
@@ -523,7 +525,8 @@ ul a{margin-left:3%;}
 						    ':encaisser'=>$encaisser,
 						    ':rete_payer'=>$rete_payer,
 		                    ':id_fact'=>$id,
-						    ':type'=>$ty
+						    ':type'=>$ty,
+
 						  ));
 				
 	           
@@ -578,14 +581,27 @@ ul a{margin-left:3%;}
 					 ));
             				  
 						  
-			// on modifie les données de la base de données guide
+		
+ 		// on modifie les données de la base de données guide
+		if($_SESSION['code']==0){
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$totals,
 		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
 					        ':reser'=>$donns['reservation']-$donnees['avance']+$avance,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-					 
+		}
+        
+        else{
+
+          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
+          $ret->execute(array(':des'=>$donns['encaisse']+$totals,
+		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
+					        ':reser'=>$donns['reservation']-$donnees['avance']+$avance,
+                            ':code'=>$_SESSION['code'],
+							':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+		}			
 					 
 			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
@@ -687,13 +703,26 @@ ul a{margin-left:3%;}
 					 ));
             				
 		 // on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
+        if($_SESSION['code']==0){
+		$ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$totals,
 		                    ':res'=>$donns['reste']-$donnees['reste']+$_POST['rest'],
 					        ':reser'=>$donns['reservation']-$donnees['montant']+$_POST['acomp'],
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-					 
+		}
+
+         else{
+
+         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
+        $ret->execute(array(':des'=>$donns['encaisse']+$totals,
+		                    ':res'=>$donns['reste']-$donnees['reste']+$_POST['rest'],
+					        ':reser'=>$donns['reservation']-$donnees['montant']+$_POST['acomp'],
+							':code'=>$_SESSION['code'],
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+           
+         }		   
 					 
 			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
