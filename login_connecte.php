@@ -18,17 +18,11 @@ if(isset($_POST['id_ocd'])) {
     $date=$dateDuJour;
     $heure = date('H:i');
 	
-	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active FROM inscription_client WHERE email_user= :email_user');
+	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active,code,society FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_POST['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
-	
-	// on verifie la connexion instantanees
-   $ren=$bdd->prepare('SELECT email_ocd  FROM activer_compte WHERE email_ocd = :email_ocd');
-   $ren->execute(array(':email_ocd'=>$_POST['email_ocd']));
-   $fuller=$ren->fetch();
-   $ren->closeCursor();
-  // on recupere variable
+
 	
 	if($_POST['id_ocd']==$donnees['password']) {
 		
@@ -40,6 +34,8 @@ if(isset($_POST['id_ocd'])) {
 			$_SESSION['pose']= $_POST['id_ocd'];
 			$_SESSION['user']= $donnees['user'];
 			$_SESSION['permission'] = $donnees['permission'];
+			$_SESSION['code']= $donnees['code'];
+			$_SESSION['society']= $donnees['society'];
 			 $_SESSION['pmd']= sha1(uniqid('',true).'_'.mt_rand());
 	          $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
 			  

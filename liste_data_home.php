@@ -15,11 +15,20 @@ $page=1;
 	
 }
 
+// on recupere les variable existante $_SESSION 
+
 $smart_from =($page -1)*$record_peage;
    // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
-    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-	
+   if($_SESSION['code']!=0) {
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':code'=>$_SESSION['code'],
+	                   ':email_ocd'=>$_SESSION['email_ocd']));
+   }
+   
+   else{
+	 $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));  
+	 }
 	
 	$rem='<span class="ts"></span>';
 	$rt=",";
@@ -73,10 +82,24 @@ $smart_from =($page -1)*$record_peage;
    $totale_page=$dns['nbrs']/$record_peage;
    $totale_page = ceil($totale_page);
    
-   echo'<div class="pied_function">';
+   
+   echo'<div class="pied_page">';
+   if($page > 1){
+	  $page =$page-1;
+	  echo'<div class="p"><button class="but"><a href="inventaire_gestion_home.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+   }
    for($i=1; $i<=$totale_page; $i++) {
 	   
-	   echo'<div class="pied_page" style="cursor:pointer"><button class="bout" id="'.$i.'">'.$i.'</div>';
+	   echo'<div class="pied" style="cursor:pointer"><button class="bout" id="'.$i.'">'.$i.'</div>';
     }
+	
+	if($i > $page){
+		$page =$page+1;
+		echo'<div class="p"><button><a href="inventaire_gestion_home.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+	}
+	
+	echo'</div>';
+	
+	
 
 ?>

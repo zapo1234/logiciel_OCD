@@ -136,8 +136,9 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		$active ="on";
 		// insere les données dans la base de données dans la base de donnes chambres
-		
-		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active)');
+		$code = $_SESSION['code'];
+		$society =$_SESSION	['society'];
+		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active,code,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active,:code,:society)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
@@ -151,7 +152,9 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 						  ':infos'=>$infos,
                           ':icons'=>$icons,
 						  ':type'=>$types,
-						  ':active'=>$active
+						  ':active'=>$active,
+						  ':code'=>$code,
+						  ':society'=>$society
 						  ));
 						  
 		// enregsitrer les images correspondant à la chambre

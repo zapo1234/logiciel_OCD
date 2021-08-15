@@ -19,7 +19,7 @@ $smart_from =($page -1)*$record_peage;
 	 
  // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,society FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	
@@ -42,6 +42,15 @@ $smart_from =($page -1)*$record_peage;
 		
 		$puts="";
 	}
+	
+	if($donns['society']!=""){
+		
+	  $transmi = 'de '.$donns['society'].'';
+	}
+	
+	else{
+		$transmi ="";
+	}
 	   
  
  $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
@@ -63,7 +72,7 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Entrées en caisse(réservation)</th>
 	  <th scope="col">Reste à solder(réservation)</th>
 	  <th scope="col">Gestionnaire</th>
-	  <th scope="col">Détails</td>
+	  <th scope="col">Lieu d\'excercice</td>
       </tr>
       </thead>
       <tbody>';
@@ -100,8 +109,8 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$donnes['sorties'].'xof</td>
 		 <td><span class="repas">'.$donnes['reservation'].'xof</td>
 		 <td><span class="repas">'.$donnes['reste'].'xof</td>
-		 <td><span class="repas">'.$donnes['user_gestionnaire'].'</td>
-		 <td></td>
+		 <td><span class="repas">'.$donnes['user_gestionnaire'].'<br/><span class="der">'.$transmi.'</span></td>
+		 <td>'.$donns['society'].'</td>
 		</td></td>
 	    </tr>';
     }

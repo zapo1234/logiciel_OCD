@@ -22,13 +22,24 @@ $smart_from =($page -1)*$record_peage;
 	
     // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,society FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
-	   
+	 
+    if($_SESSION['code']!=0){	 
    // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	
+	}
+	
+	else{
+		// emttre la requete sur le fonction
+    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':code'=>$_SESSION['code'],
+	                   ':email_ocd'=>$_SESSION['email_ocd']));
+		
+	}
 	
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		
@@ -78,10 +89,22 @@ $smart_from =($page -1)*$record_peage;
 		
 		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].'">';
 		
+	if($donnees['society']==""){
+		
+	  $trasmi="";	
+	}
+	
+	else{
+		
+	$trasmi='transmise par'.$donnees['society'].'';
+	}
+	
 	}
 	else{
 		
 		$put="";
+	   $trasmi='transmise par'.$donnees['society'].'';
+	
 	}
 	
 	
@@ -130,15 +153,7 @@ $smart_from =($page -1)*$record_peage;
 		
 	}
 	
-	if($donnees['society']==""){
-		
-	  $trasmi="";	
-	}
 	
-	else{
-		
-	$trasmi='transmise par'.$donnees['society'].'';
-	}
 	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
