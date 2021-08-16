@@ -569,6 +569,15 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
         $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    		
 		  while($dato=$rq->fetch()){
+		    if($dato['society']==""){
+			 $transmi="";  
+		   }
+		   
+		   else{
+			   
+			  $transmi ='travail à'.$dato['society'].''; 
+		   } 
+			
 	     if($dato['active']=="on"){
 	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
@@ -576,7 +585,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
           $action=' en ligne depuis '.$dato['date'].' à '.$dato['heure'].' ';
 	     }
 
-         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/> venant de '.$dato['society'].'</div> ';	 
+         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/>'.$transmi.'</div> ';	 
        }
      ?>
 						
