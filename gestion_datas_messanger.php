@@ -87,7 +87,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
-#result{width:100%;height:680px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
+#result{width:100%;height:580px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
 .sends{cursor:pointer;position:absolute;left:77%;top:800px;background:white;padding:0.8%;border-radius:50%;}
 
 .datas_messanger{color:black;margin-top:8px;width:40%;background:white;margin-left:1%;padding:2%;
@@ -132,6 +132,7 @@ margin-left:-10px;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -144,6 +145,22 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+#but{display:none;} .datas_messanger{padding-left:0%;}
+
+.datas_messanger{color:black;margin-top:8px;width:70%;background:white;margin-left:1%;padding:2%;
+border-radius:25px;}
+
+.h1{margin-bottom:3px;} .boss,.gestionnaire,.employes{font-size:15px;color:black;text-transform:capitalize;font-weight:bold;}
+.sup_send{margin-left:5%;}
+#statusboss{padding-left:10%;} .dt{padding-left:10%;} .donnes{font-family:arial;font-size:14px;}
+#statusgestionnaire{padding-left:10%;} .dt{padding-left:10%;font-size:13px;} .donnes{font-family:arial;font-size:14px;}
+#statusemployes{padding-left:10%;}
+
+#datasboss{margin-left:10%;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
+#supboss{margin-left:10%;} 
+#supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
+.divaction{width:50px;padding:1%;background:white;color:#eee;border-radius:15px;}
+.sup_send{color:white;}
 }
 
 
