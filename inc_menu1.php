@@ -110,6 +110,16 @@ include('inc_session.php');
         $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    		
 		  while($dats=$rq->fetch()){
+		   
+		   if($dats['society']==""){
+			 $transmi="";  
+		   }
+		   
+		   else{
+			   
+			  $transmi ='travail à '.$dats['society'].''; 
+		   }
+		 
 	     if($dato['active']=="on"){
 	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
@@ -117,7 +127,7 @@ include('inc_session.php');
           $action='en ligne depuis '.$dats['date'].' à '.$dats['heure'].' ';
 	     }
 
-         echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> venant de'.$dats['society'].'</div>';	 
+         echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> '.$transmi.'</div>';	 
        }
      ?>
 	 
