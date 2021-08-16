@@ -3,7 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 
    
-  $req=$bdd->prepare('SELECT id,logo FROM inscription_client WHERE email_user= :email_user');
+  $req=$bdd->prepare('SELECT id,logo,user FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees =$req->fetch();
    
@@ -17,7 +17,7 @@ include('inc_session.php');
 	$dats = $j.'-'.$mm.'-'.$an;
 
   
-   $dat =date('H:i');
+   $dat=date('H:i');
 
 ?>
 
@@ -25,7 +25,7 @@ include('inc_session.php');
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -139,7 +139,7 @@ include('inc_session.php');
             <li class="nav-item">
                 <a class="nav-link" href="gestion_datas_messanger.php">
                     <i class="fas fa-comment-alt"></i>
-                    <span>Equipes messanger</span></a>
+                    <span>Equipes messanger</span><span id="data_sms"></span><!--retour ajax--></a>
             </li>
 			
 			<?php

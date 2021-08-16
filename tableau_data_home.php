@@ -471,8 +471,11 @@ transition: all 200ms;
 
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
-.drops{display:none;}
 
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;}
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -482,8 +485,9 @@ ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
 .drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
-height:1800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;}
 }
 
 
@@ -561,7 +565,7 @@ height:1800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 		<div class="users">
 		
 		<?php
-        $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active FROM inscription_client WHERE email_ocd= :email_ocd');
+        $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE email_ocd= :email_ocd');
         $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    		
 		  while($dato=$rq->fetch()){
@@ -572,11 +576,12 @@ height:1800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
           $action=' en ligne depuis '.$dato['date'].' à '.$dato['heure'].' ';
 	     }
 
-         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'</div><br/>';	 
+         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/> venant de '.$dato['society'].'</div> ';	 
        }
      ?>
 						
-						</div>
+	</div>
+	
 		<div class="resutat">
 		<h2>Résultat de trésorerie</h2>
 		<h3>Précision Net:</h3>
@@ -769,11 +774,17 @@ height:1800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
      $('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
+
 	});
 	
 	 $('#news_data').click(function(){
 	$('.drops').slideToggle();
 	$('.drop').css('display','none');
+	
+	});
+	
+	 $('#news').click(function(){
+	$('.users').slideToggle();
 	});
 	
 	// compter les nouveaux message
