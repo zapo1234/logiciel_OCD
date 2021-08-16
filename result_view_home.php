@@ -200,7 +200,7 @@ include('inc_session.php');
   if($_POST['action']=="add_user"){
 	  
 	        echo'<table id="tab">
-					<tr>
+					<tr class="tab">
 					<th></th>
 					<th>Nom && prénom</th>
 					<th>Email_user</th>
@@ -240,7 +240,7 @@ include('inc_session.php');
 					 $sup= '<a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>';
 				   }
 				   
-					echo'<tr>
+					echo'<tr class="tab">
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
 					<td>'.$donnees['user'].' </td>
 					<td>'.$donnees['email_user'].' </td>
@@ -252,8 +252,19 @@ include('inc_session.php');
 						<td>'.$active.'</td>
 						<td>'.$etat.'</td>
 					</tr>';
+			// pour affichage mobile
+            echo'<div id="mobile">';		
+			echo'<div class="mobile">
+		     <div>'.$donnees['user'].' Numéro:'.$donnees['numero'].'<br/>'.$etat.'</div>
+		     <div class="df">'.$active.' <a href="gestion_parameter_data.php?user='.$donnees['id'].'"  title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>  '.$sup.'</div>
+		    </div>
+			</div>';
+					
 					}
 					echo'</table>';
+		
+		
+		
 					
 	    }
   

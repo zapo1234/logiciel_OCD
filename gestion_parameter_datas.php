@@ -84,7 +84,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 .acs{background:#10B910;width:100px;color:white;text-align:center;height:25px;border:2px solid #10B910;border-radius:15px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
-.resultats{width:60%;} .dert{font-family:10px;}
+.resultats{width:90%;} .dert{font-family:10px;}
 
 #tab td, #tab th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
 
@@ -93,6 +93,8 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 #tab tr:hover {background-color: #ddd;}
 
 #tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tab{width:90%;}
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
@@ -110,6 +112,7 @@ padding: 0 25px;
 transition: all 200ms;}
 
 .drops{display:none;}  .users{display:none} #news_data{display:none;}
+.mobile{display:none}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
@@ -125,6 +128,11 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.dy{display:none;} .input{display:none;} h2{position:absolute;top:140px;left:-35%;font-size:16px;}
+form{margin-top:100px;} #names,#name{margin-left:2%;} #modipass,#modifier{margin-left:-5%;}
+.tab{display:none}  .mobile{color:blac;font-size:12px;width:100%;display:block;margin-left:15%;border-bottom:1px solid #eee;
+padding-bottom:15px;} .df{margin-left:30%;}
+#resultat{margin-top:100px;}
 }
 
 
@@ -219,8 +227,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
                     <!-- 404 Error Text -->
                     <div class="center">
 					
-                    <div class="content1"><div class="der1">Votre entreprise <i class="fas fa-building"></i></div><div class="der2">Ajouter des comptes  <i class="fas fa-users"></i></div>
-					 <div class="der3"> Lister des utilisateurs  <i class="fas fa-table"></i></div> <div class="der4">Attribuer des horaires  <i class="fas fa-calendar-alt"></i></div> <div class="der5">Gérér les accès  <i class="fas fa-key"></i></div></div>
+                    <div class="content1"><div class="der1"><span class="dy">Votre entreprise</span> <i class="fas fa-building"></i></div><div class="der2"><span class="dy">Ajouter des comptes</span>  <i class="fas fa-users"></i></div>
+					 <div class="der3"><span class="dy"> Lister des utilisateurs</span>  <i class="fas fa-table"></i></div> <div class="der4"><span class="dy">Attribuer des horaires</span>  <i class="fas fa-calendar-alt"></i></div> <div class="der5"><span class="dy">Gérér les accès</span>  <i class="fas fa-key"></i></div></div>
                      
 					 <div class="content2">
 					 
