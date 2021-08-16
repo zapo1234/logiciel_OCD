@@ -16,6 +16,8 @@ include('inc_session.php');
 
   
    $dat =date('H:i');
+   
+   // compter le nombre de nouveaux message
 
 
 ?>
@@ -53,49 +55,109 @@ include('inc_session.php');
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
+                                <span class="badge badge-success badge-counter" id="news_data">1+</span>
+                                <span class="badge badge-success badge-counter" id="news">1+</span>
+                                
+							</a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
+							
+							<div class="drops" aria-labelledby="messagesDropdown" style="display:none">
+                              
+                            <div class="dev">
+							<h2>Dernier enregistrement</h2>
+							<?php
+			// afficher les dernières enregistrements
+		// aller chercher les auteurs en écriture sur une facture
+	    $reh=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+        $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+        				
+			while($dones=$reh->fetch()){
+			
+            if($dones['type']==1){
+            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
+		    $type ='<span class="sejour">'.$dones['types'].'</span>';
+			
+		  }
+        	
+          if($dones['type']==2){
+             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
+			 $type ='<span class="pass">'.$dones['types'].'</span>';
+		  }
+
+          if($dones['type']==3){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="reservation">'.$dones['types'].'</span>';
+		  }
+
+		  if($dones['type']==4){
+            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
+			$type ='<span class="annule">'.$dones['types'].'</span>';
+		  }
+			 
+		 echo'<div class="us">'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$dones['clients'].'<br/>
+		       '.$type.' '.$dones['montant'].' xof</div>';
+		}
+							
+		$reh->closeCursor();				
+			?>
+			
+		<h2>Historique des utilisateurs(en ligne)</h2>
+		
+		<div class="users">
+		
+		<?php
+        $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE email_ocd= :email_ocd');
+        $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   		
+		  while($dats=$rq->fetch()){
+	     if($dato['active']=="on"){
+	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
+	      }
+          else{
+          $action='en ligne depuis '.$dats['date'].' à '.$dats['heure'].' ';
+	     }
+
+         echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> venant de'.$dats['society'].'</div>';	 
+       }
+     ?>
+	 
+	 <?php
+	 // requete qui va chercher les montants
+
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$rej->fetch();
+   $rej->closeCursor();
+
+  echo'<h1>Encaissement journalier</h1>
+
+  <div id="caisse">
+ <div class="td"> Facture soldée:</div>
+ <div class="tds">'.$donns['encaisse'].' XOF</div>
+
+ <div class="td"> Dépense </div>
+ <div class="tdv">'.$donns['depense'].' XOF</div>
+ 
+ <div class="td"> Acompte réservation</div>
+ <div class="tdc">'.$donns['reservation'].' XOF</div>
+ 
+ <div class="td">Reste à payer réservation</div>
+ <div class="tdc">'.$donns['reste'].' XOF</div>
+       
+  </div>';
+ 
+	?>
+						
+		</div>
+							
+	   </div>
+
+							
+                                
+                                
+								
+                                </div>
+                            
                         </li>
 
                         <!-- Nav Item - Messages -->
@@ -104,64 +166,16 @@ include('inc_session.php');
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge" id="sms"></span><!--resultat ajax-->
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
+                            <div class="drop" aria-labelledby="messagesDropdown" style="display:none">
+                                <h6>Derniers Messages</h6>
+                                
+								<div id="resultats_messages"></div><!--ajax --->
+                                
+								<div class="views"><a href="gestion_datas_messanger.php" title="voir plus">voir plus</a></div>
+                                </div>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -183,7 +197,7 @@ include('inc_session.php');
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="deconnexion.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Déconnexion
                                 </a>

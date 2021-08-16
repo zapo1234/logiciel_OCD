@@ -50,7 +50,7 @@ include('inc_session.php');
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.8;}
-.der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:240px;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
+.der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:20%;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
 #der11{width:60%;margin-left:15%;} td{width:500px;color:black;padding-top:20px;}
@@ -137,7 +137,7 @@ transition: all 200ms;}
                     
 					<li>Ajouter des comptes pour vos employés</li>
 					<li>Possibilité d'ajouter 5 compte maximum</li>
-					<li>Fournir un email et un mot de pass</li>
+					<li>En cas de plusieurs site(attribuer un code filiale)</li>
 					<li>Mot de pass doit etre entre 8 12 caractères<br/>(une lettre(miniscule et majuscule),un nombre,)
 					  un caractère contenant(@!$#) obligatoire</li>
                     <li>lister vos utilisateur et gérer les actions</li>					  
@@ -228,6 +228,18 @@ transition: all 200ms;}
                     <br/><span class="role"></span></div>
 				 
                  </div>
+				 
+				 <div class="form-row">
+                    <div class="col">
+                       <label>code(filiale)</label><br/><input type="number" id="code" name="code" class="form-control" placeholder="exemple 01"  required><br/>
+					   <span class="code"></span>
+                      </div>
+                    <div class="col">
+                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site" required>
+                    <br/><span class="socie"></span></div>
+				 <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
+                 </div>
+				 
 				 
 				 <div class="form-row">
                     <div class="col">
@@ -597,6 +609,8 @@ transition: all 200ms;}
 	 var password = $('#pass').val();
 	 var num =$('#num').val();
 	 var emails = $('#emails').val();
+	 var code =$('#code').val();
+	 var society = $('#society').val();
 	 
 	 // regex //
 	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
@@ -604,7 +618,7 @@ transition: all 200ms;}
     var number = /^[0-9+]{8,14}$/;
 	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
-	
+	var cod = /^[0-9]{1,2}$/;
 	if(nom.length==""){
 		$('#nom').css('border-color','red');
 		
@@ -634,13 +648,16 @@ transition: all 200ms;}
       $('.num').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du numéro de téléphone');
     }
 	
+	 else if (!cod.test(code)){
+      $('.code').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du code filiale');
+    }
 	
 	else{
 		
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_view_home.php',// on traite par la fichier
-	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role},
+	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role,code:code,society:society},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data').html(data);
 	 

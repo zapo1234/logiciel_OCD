@@ -487,7 +487,7 @@ ul{display:none;}
 .drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
-#news_data{display:block;} #news{display:none;} .users{display:block;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 }
 
 

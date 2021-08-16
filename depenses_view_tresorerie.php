@@ -60,7 +60,7 @@ $smart_from =($page -1)*$record_peage;
 	echo'<div id="derr">';
   // on boucle sur les les resultats
 	// on boucle sur les les resultats
-	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excelc.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	echo'<div class="expor"><h2>Suivi des montants journaliers encaissés</h2><form method="post" action="excelc.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
 	<span>'.$puts.'</form></div>';
   echo'	<table id="tabs">
      <thead>
@@ -118,10 +118,16 @@ $smart_from =($page -1)*$record_peage;
        echo'</table>';
        // on compte
 		// on compte le nombre de ligne de la table facture
+	 if($_SESSION['code']==0){
 	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE email_ocd= :email_ocd');
      $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-    $dns=$reg->fetch();
-	
+	 }
+	 else{
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE code= :code AND email_ocd= :email_ocd');
+     $reg->execute(array(':code'=>$_SESSION['code'],
+	                     ':email_ocd'=>$_SESSION['email_ocd'])); 
+	}
+	$dns=$reg->fetch();
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
 	

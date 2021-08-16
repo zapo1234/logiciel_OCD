@@ -3,7 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 
 
-    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,etat,date,heure,active,logo FROM inscription_client WHERE email_ocd= :email_ocd');
+    $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,society,categories,etat,date,heure,active,logo FROM inscription_client WHERE email_ocd= :email_ocd');
     $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  
      if($_POST['action']=="fetch"){
@@ -102,18 +102,18 @@ include('inc_session.php');
    $date = $dateDuJour;
    $heure =date('H:i');
    $email =$_POST['emails'];
-   
-   $pass =$_POST['password'];
-   
-    // $password =$_POST['pass'];  
-	  // hash sur le mot de pass
-	 // $options = [
-     // 'cost' => 12 // the default cost is 10
-     //];
+   // 
+   $pass=$_POST['pass'];
+    
+	   //hash sur le mot de pass
+	   $options = [
+       'cost' => 12 // the default cost is 10
+       ];
 
-    //$hash = password_hash($password, PASSWORD_BCRYPT, $options);
+    
+	$hash = password_hash($pass, PASSWORD_BCRYPT, $options);
    
-   $emails =$_SESSION['email_ocd'];
+    $emails = $_SESSION['email_ocd'];
    
    $name = trim(strip_tags($_POST['nom']));
    $prenom = trim(strip_tags($_POST['prenom']));
@@ -123,6 +123,8 @@ include('inc_session.php');
    $user =$name.' '.$prenom;
    $etat ="";
    $active="off";
+   $code =$_POST['code'];
+   $society =$_POST['society'];
    
    if($role==1){
 	 $status=1;
@@ -152,20 +154,21 @@ include('inc_session.php');
    $tab =[];
    foreach($reh as $datas){
 	 $dat = $datas['email_ocd'];
+	 $dat = explode(',',$dat);
      foreach($dat as $values){
      $tab[] = $values;
     }		 
 	}
 	
 	$a=count($tab);
-	if($a < 5){
+	if($a < 12){
    
    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
-   // insertion des données dans la table facture
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,date,heure,etat,status,active,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:date,:heure,:etat,:status,:active,:logo)');
+   // insertion des données pour création des users compte
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -176,9 +179,11 @@ include('inc_session.php');
 							':numero'=>$_POST['num'],
 							':numero1'=>$_POST['num'],
 							':permission'=>$permission,
-							':password'=>$pass,
+							':password'=>$hash,
 							':categories'=>$categories,
 						    ':numero_compte'=>$numero_compte,
+							':code'=>$code,
+							':society'=>$society,
 					        ':date'=>$date,
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,
@@ -191,7 +196,7 @@ include('inc_session.php');
   }
   }
   
-  
+  // afficher les users comptes
   if($_POST['action']=="add_user"){
 	  
 	        echo'<table id="tab">
@@ -201,6 +206,7 @@ include('inc_session.php');
 					<th>Email_user</th>
 					<th>Numéro(télephone)</th>
 					<th>Poste</th>
+					<th>Lieux d\'excercice</th>
 					<th>Action</th>
 					<th>Status(accès)</th>
 					<th>Online(user)</th>
@@ -240,6 +246,7 @@ include('inc_session.php');
 					<td>'.$donnees['email_user'].' </td>
 					<td>'.$donnees['numero'].'</td>
 					<td>'.$donnees['categories'].' </td>
+					<td>'.$donnees['society'].'</td>
 					<td><a href="gestion_parameter_data.php?user='.$donnees['id'].'"  title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>
 					    '.$sup.'
 						<td>'.$active.'</td>
@@ -250,6 +257,7 @@ include('inc_session.php');
 					
 	    }
   
+  // suprimer des users comptes
   if($_POST['action']=="delete"){
 	  
 	$id =$_POST['id'];
@@ -260,6 +268,8 @@ include('inc_session.php');
      $res->execute(array(':id'=>$id,':email_ocd'=>$_SESSION['email_ocd'])); 
       
    }
+   
+   // modifier des users compte
 
   if($_POST['action']=="edit"){
 	
