@@ -73,7 +73,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 #tabs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tabs{margin-top:10px;}
+#tabs{margin-top:10px;color:black;}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -110,6 +110,32 @@ font-family: Arial,sans-serif;
 font-size: 1em;
 padding: 0 25px;
 transition: all 200ms;}
+
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;}
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+}
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+
+
+
 </style>
 <script>
  function printContent(el) {
