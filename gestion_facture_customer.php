@@ -145,7 +145,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .delete_line{display:none;} h2{font-size:15px;} .export{margin-left:3%;}
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
-.annuler{margin-left:3%;}
+.annuler{margin-left:3%;} .dp{padding-left:2%;font-size:20px;color:black;font-weight:bold;}
 }
 
 
