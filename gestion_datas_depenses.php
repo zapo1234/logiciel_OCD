@@ -104,9 +104,10 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 .pied_page{margin-left:60%;margin-top:15px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
-.tds{font-size:28px;margin-left:12%;color:#09A81F;}
-.tdv{font-size:28px;margin-left:12%;color:#A80913;}
-.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+.tds{font-size:28px;margin-left:12%;color:#09A81F;margin-left:10%;}
+.tdv{font-size:28px;margin-left:12%;color:#A80913;margin-left:10%;}
+.tdc{font-size:28px;margin-left:12%;color:#0E84D1;margin-left:10%;}
+.td{margin-left:10%;}
 .delete{margin-left:10%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
  
  #tls td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
@@ -132,6 +133,32 @@ font-size: 1em;
 height: 250px;
 padding: 0 25px;
 transition: all 200ms;}
+
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+.mobile{display:none}
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;}
+
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.mobile{display:block;} .tf,#tf{display:none;}
+}
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+
  
 </style>
 
@@ -163,9 +190,7 @@ transition: all 200ms;}
 
 					<div class="bg">
                         <div id="resultats"></div>
-             <div><button type="button" class="print" title="imprimer sa caisse journalière" onclick="printContent('caisse')">imprimer</div>
-            <div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</div>
- 
+             
                     </div>
                 </div>
 
@@ -212,7 +237,7 @@ transition: all 200ms;}
                     <!-- 404 Error Text -->
                     <div class="center">
                     
-					<div id="resul_depense">ZAPO</div><!--retour ajax sur la lsite des dépenses-->
+					<div id="resul_depense"></div><!--retour ajax sur la lsite des dépenses-->
 					<div id="result_depense"></div><!--retour ajax donnees depenses-->
 
   <div  id="examp" style="display:none">

@@ -119,7 +119,7 @@ if($_POST['action']=="fetchs") {
 	$rem='<br/>';
 	$rt=",";
 	
-	echo'<tr class="datas'.$donnes['status'].'">
+	echo'<tr class="datas'.$donnes['status'].'" id="tf">
 	    <td>'.$put.'</td>
 	     <td><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> enregistrement effectué le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 		 <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></td>
@@ -135,6 +135,14 @@ if($_POST['action']=="fetchs") {
 		 '.$annul.'
 		  </div></td>
 	    </tr>';
+		
+		echo'<div class="mobile">
+		     <div><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis par <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
+		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="mt">'.$donnes['montant'].'
+			 <div class="data'.$donnes['status'].'">'.$name.'</span></div></div>
+		     '.$modif.'<br/>'.$annul.'</div>
+	       </div>';
     }
 
        echo'</table>';
