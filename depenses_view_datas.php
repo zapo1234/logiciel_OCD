@@ -148,10 +148,19 @@ if($_POST['action']=="fetchs") {
        echo'</table>';
 
      	// on compte
-		// on compte le nombre de ligne de la table facture
+	 
+	 // on compte le nombre de ligne de la table facture
+	 if($_SESSION['code']==0){
 	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE email_ocd= :email_ocd');
      $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-    $dns=$reg->fetch();
+	 }
+	 
+	 else{
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE code= :code AND email_ocd= :email_ocd');
+        $reg->execute(array(':code'=>$_SESSION['code'],
+	                    ':email_ocd'=>$_SESSION['email_ocd'])); 
+	 }
+	$dns=$reg->fetch();
 	
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
