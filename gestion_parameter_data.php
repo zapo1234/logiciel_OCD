@@ -96,6 +96,33 @@ td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial
 tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .titre{font-family:arial;text-align:center;margin-top:3px;font-size:18px;color:#EA4629}
 .resultats{width:60%;} 
+
+
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+.mobile{display:none}
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;} 
+
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+#form3{width:330px;height:700px;margin-left:-20%;} input{display:block;}
+#modifier, #modipass {
+margin-left:5%;} h2{margin-left:-50%;font-size:16px;border:0px;} #nums,#emais{width:300px;}
+#role,#roles{width:200px;}
+}
+}
+
+
 </style>
 
 </head>

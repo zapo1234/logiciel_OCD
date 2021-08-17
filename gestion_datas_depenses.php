@@ -137,7 +137,7 @@ transition: all 200ms;}
 .drops{display:none;}  .users{display:none} #news_data{display:none;}
 .mobile{display:none}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
-.navbar-nav{background:#06308E;}
+.navbar-nav{background:#06308E;} 
 
 @media (max-width: 575.98px) { 
 
@@ -151,7 +151,12 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-.mobile{display:block;} .tf,#tf{display:none;}
+.mobile{margin-left:5%;margin-top:15px;display:block;color:black;border-bottom:2px solid #eee;padding-bottom:20px;} .tf,#tf{display:none;}
+.form-select{display:none;} .export{margin-left:3%;} .pied_page{margin-left:3%;}
+.dp{padding-left:2%;font-size:20px;color:black;font-weight:bold;}
+.data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
+.annu,.annuler{margin-left:2%;width:260px;} .result{width:300px;margin-left:-100px;height:750px;}
+#designatio,#fournisseu{height:100px;width:280px;}
 }
 
 
@@ -295,7 +300,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 
  </div><!--reini---->
  
- <div id="data_modifier">ZAPO</div><!--données modifier depense-->
+ <div id="data_modifier"></div><!--données modifier depense-->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
 

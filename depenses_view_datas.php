@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-$record_peage=7;
+$record_peage=20;
 $page="";
   
   if(isset($_POST['page'])){
@@ -137,11 +137,11 @@ if($_POST['action']=="fetchs") {
 	    </tr>';
 		
 		echo'<div class="mobile">
-		     <div><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis par <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+		     <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
-		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="mt">'.$donnes['montant'].'
+		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
 			 <div class="data'.$donnes['status'].'">'.$name.'</span></div></div>
-		     '.$modif.'<br/>'.$annul.'</div>
+		     '.$mettre.'   '.$modif.'  '.$annul.'</div>
 	       </div>';
     }
 
