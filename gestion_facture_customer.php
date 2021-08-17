@@ -90,6 +90,10 @@ include('inc_session.php');
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
+.envoyer{background-color: white;width: 350px;height: 200px;border: 3px solid #eee;padding: 3%;position: absolute;z-index: 4;
+    top: 200px;
+    margin-left: 20%;
+}
 .detail{width:590px;background:white;position:absolute;z-index:4;border:2px solid #eee;
  font-size:15px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black;
  top:150px;margin-left:20%;}
@@ -119,6 +123,37 @@ padding: 0 25px;
 transition: all 200ms;} .datas_messanger{border-bottom:1px solid #eee;}
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;}
+
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+.mobile{display:none;} 
+
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;}
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.form-select{display:none;} .mobile{font-size:14px;color:black;margin-left:3%;display:block;margin-top:15px;border-bottom:1px solid #eee;padding-bottom:10px;} .tf,#tf{display:none;} 
+.delete_line{display:none;} h2{font-size:15px;} .export{margin-left:3%;}
+#results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
+.bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
+.annuler{margin-left:3%;}
+}
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+
+
 </style>
 
 <script>
@@ -149,9 +184,6 @@ margin-left:-10px;}
 					
 					<div class="bg">
                         <div id="resultats"></div>
-                      <div><button type="button" class="print" title="imprimer sa caisse journalière" onclick="printContent('caisse')">imprimer</div>
-                      <div class="h2"><button type="button" class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</div>
- 
               
                     </div>
                 </div>
@@ -180,9 +212,18 @@ margin-left:-10px;}
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Type de facture</option>
-						  <option value="1">encaissé</option><option value="2">réservation</option>
-                           <option value="4">Annuler</option>
+                         <option selected>Recherchez</option>
+						  <option value="01">Janvier</option><option value="02">Février</option>
+                           <option value="03">Mars</option>
+						   <option value="04">Avril</option>
+						   <option value="05">Mai</option>
+						   <option value="06">Juin</option>
+						   <option value="07">Juillet</option>
+						   <option value="08">Aout</option>
+						   <option value="09">Septembre</option>
+						   <option value="10">Octobre</option>
+						   <option value="11">Novembre</option>
+						   <option value="12">Décembre</option>
                           </select>
 						  
                           </div>  
@@ -228,10 +269,12 @@ margin-left:-10px;}
   </div><!--annul---->
   
   <div class="envoyer" style="display:none">
-   <form method="post" id="form_annul" action="">
-   <h1>Êtes vous sûr d'annuler la facture <span id="id_fact"></span><br/></h1>
+   <form method="post" id="form_envoi" action="">
+   <h1>Envoyer la facture <br/> à l'adresse mail</h1>
+   <div>Client:<span id="nam"></span></div>
+   <div><input type="email" id="emails" name="emails"></div>
    <div class="action"><button type="button" class="envoi">Annuler</button><button type="button" class="envois" value="ok"></button></div>
-   <input type="hidden" name="ids" id="ids">
+   <input type="hidden" name="value" id="value">
   <input type="hidden" name="token" id="token" value="<?php
   //Le champ caché a pour valeur le jeton
    echo $_SESSION['token'];?>">
@@ -333,6 +376,7 @@ margin-left:-10px;}
    $('.reini').css('display','none');
    $('.annuler').css('display','none');
    $('.detail').css('display','none');
+   $('.envoyer').css('display','none');
  });
  
  $('#im').click(function(){
@@ -366,6 +410,39 @@ margin-left:-10px;}
 	$('#ids').val(id);
 	
 	$(document).on('click','.annuls', function(){
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_facture_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_annuler').html(data);
+     $('.annuler').css('display','none');
+     $('#pak').css('display','none');
+	 loads();
+	 load();
+	}
+		
+	});
+	
+	setInterval(function(){
+		 $('#data_annuler').html('');
+	 },4000);
+
+ });
+ });
+ 
+ // delete home--
+ $(document).on('click','.envoi', function(){
+	 // recupere la variable
+	 var id = $(this).data('id3');
+	 var action = "mail";
+    // affiche les differentes
+	$('.envoyer').css('display','block');
+	$('#pak').css('display','block');
+	$('#id_fact').text(id);
+	$('#value').val(id);
+	
+	$(document).on('click','.envois', function(){
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_facture_home.php',// on traite par la fichier
@@ -558,6 +635,22 @@ margin-left:-10px;}
  }
  
  });
+ 
+ $(document).on('click','.details',function(){
+	   	var id = $(this).data('id2');	
+      // on affiche la div
+       $('#id'+id).slideToggle();
+       
+	   for(id-1; id <5000; id++){
+        $('#id'+id).css('display','none');
+        }
+
+        for(5000; id > 0; id--){
+        $('#id'+id).css('display','none');
+        }	
+		 			
+		 	
+	 });
    
    });
    

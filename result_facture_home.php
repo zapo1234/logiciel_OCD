@@ -26,7 +26,7 @@ $smart_from =($page -1)*$record_peage;
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	 
-    if($_SESSION['code']!=0){	 
+    if($_SESSION['code']==0){	 
    // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -113,7 +113,7 @@ $smart_from =($page -1)*$record_peage;
 	$jour = $donnees['nombre'].'jours';
 	$encaiss="";
 	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
-	$annul='<a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
+	$annul='';
 	}
 	elseif($donnees['type']==2){
 		
@@ -182,7 +182,7 @@ $smart_from =($page -1)*$record_peage;
 	$data_user = $users[0];
 	
     // afficher dans un tableau les données des chambres
-	echo'<tr class="datas'.$donnees['type'].'">
+	echo'<tr class="datas'.$donnees['type'].'" id="tf">
 	     <td>'.$put.'</td>
 	     <td><span class="dat'.$donnees['type'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der">facture<br/>
 		 '.$data_user.'</span></td>
@@ -201,6 +201,13 @@ $smart_from =($page -1)*$record_peage;
 		  </div></td>
 		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 	    </tr>';
+		
+		echo'<div class="mobile">
+		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
+		     <div class="data'.$donnees['type'].'">'.$name.'</span><br/></div>
+			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span>
+		     '.$annul.'<br/></div>
+	       </div>';
 	}
 	
       echo'</tbody>
