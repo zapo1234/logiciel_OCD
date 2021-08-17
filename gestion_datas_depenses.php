@@ -157,6 +157,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
 .annu,.annuler{margin-left:2%;width:260px;} .result{width:300px;margin-left:-100px;height:750px;}
 #designatio,#fournisseu{height:100px;width:280px;}
+#designation,#description,#fournisseur,#ti{display:block;}
 }
 
 
