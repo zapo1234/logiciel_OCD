@@ -71,15 +71,52 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 
  try{
 	
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	 // recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+	
+	
+	if($donns['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$donns['code'];
+		}
+		
+		if($donns['permission']=="user:boss"){
+			
+			$calls="";
+		}
+		
+		if($donns['permission']=="user:gestionnaire"){
+			$calls="transmis par le gestionnaire";
+		}
+		
+		if($donns['permission']=="user:employes"){
+			if($donns['code']==0){
+			$calls='transmis par le réceptionniste';
+			}
+			
+			else{
+				$calls='transmis par '.$donns['society'].'';
+			}
+		}
+		
+	
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+   $rej->execute(array(':code'=>$session,
+                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
 	
 	
 	// fixer les numero de facture
-	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE email_ocd= :email_ocd ORDER BY id DESC');
-   $reb->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC');
+   $reb->execute(array(':code'=>$session,
+                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnes=$reb->fetch();
 	$reb->closeCursor();
 	
@@ -437,8 +474,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			}
 	  
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society,:calls)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -466,29 +503,22 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':data_montant'=>$data_num,
 							':types'=>$ty,
 							':code'=>$_SESSION['code'],
-							':society'=>$_SESSION['society']
+							':society'=>$_SESSION['society'],
+							':calls'=>$calls
+							
 						  ));
             				  
 						  
 			// on modifie les données de la base de données guide
-        if($_SESSION['code']==0) {
-		$ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donns['encaisse']+$monts,
-		                    ':res'=>$donns['reste']+$reste,
-					        ':reser'=>$donns['reservation']+$avance,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
-		}
-
-        else{
+        
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,
-							':code'=>$_SESSION['code'],
+							':code'=>$session,
 		                   ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-		}			 
+					 
 					 
 			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
@@ -552,8 +582,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		
 	   }
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society)');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls) 
+		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society,:calls)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -581,30 +611,21 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':data_montant'=>$data_num,
 							':types'=>$ty,
 							':code'=>$_SESSION['code'],
-							':society'=>$_SESSION['society']
+							':society'=>$_SESSION['society'],
+							':calls'=>$calls
 						  ));
 						  
 						  
 			// on modifie les données de la base de données guide
-        if($_SESSION['code']==0) {
-		$ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donns['encaisse']+$monts,
-		                    ':res'=>$donns['reste']+$reste,
-					        ':reser'=>$donns['reservation']+$avance,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
-		}
-
-        else{
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,
-							':code'=>$_SESSION['code'],
+							':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 
-        }			
+        			
 					 
 			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);

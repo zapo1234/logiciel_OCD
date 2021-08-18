@@ -22,12 +22,12 @@ $smart_from =($page -1)*$record_peage;
 	
     // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission,society FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	 
-	if($_SESSION['code']==0){
-		  $session==0;
+	if($donns['code']==0){
+		  $session=0;
 		}
 		
 		else{
@@ -41,7 +41,7 @@ $smart_from =($page -1)*$record_peage;
 		
 	
 	
-	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if($donns['permission']=="user:boss"){
 		
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
 	<select name="delete_line" id="delete_line">
@@ -85,25 +85,16 @@ $smart_from =($page -1)*$record_peage;
 	$nombre =substr($nombre,2);
 	
 	// afficher la le checkout en fonction de la permission
-	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if($donns['permission']=="user:boss"){
 		
 		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].'">';
 		
-	if($donnees['society']==""){
-		
-	  $trasmi="";	
-	}
-	
-	else{
-		
-	$trasmi='transmise par'.$donnees['society'].'';
-	}
 	
 	}
 	else{
 		
 		$put="";
-	   $trasmi='transmise par'.$donnees['society'].'';
+		
 	
 	}
 	
@@ -192,7 +183,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="mont">'.$donnees['mont_tva'].' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
-		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/>'.$trasmi.'</td>
+		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/></td>
 		 <td><a href="#" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  '.$modif.'
