@@ -111,8 +111,8 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
+height:2800px;overflow-y:scroll}  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #form3{width:330px;height:700px;margin-left:-20%;} input{display:block;}
@@ -517,6 +517,11 @@ margin-left:5%;} h2{margin-left:-50%;font-size:16px;border:0px;} #nums,#emais{wi
    $('#examp').css('display','block');
    $('#pak').css('display','block');
  });
+ 
+  $('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+  });
  
  $(document).on('click','#modifier', function() {
 	

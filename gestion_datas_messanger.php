@@ -516,7 +516,7 @@ border-radius:25px;}
       });
 	  
 	  $(document).on('click','#sms',function(){
-		  var action ="click_messsage";
+		  var action ="click";
 		  $.ajax({
             type: 'POST',
             url:'messanger_datas.php',

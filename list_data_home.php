@@ -18,19 +18,19 @@ $page=1;
 $smart_from =($page -1)*$record_peage;
     // emttre la requete sur le fonction
 	$active="on";
-	if($_SESSION['code']!=0){
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code AND active= :ac LIMIT 0,30');
-    $req->execute(array(':ac'=>$active,
-	                    ':code'=>$_SESSION['code'],
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
-	}
-	
-	else{
+	if($_SESSION['code']==0){
+		  $session=0;
+		}
 		
-		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd  AND active= :ac LIMIT 0,30');
-        $req->execute(array(':ac'=>$active,
+		else{
+		$session=$_SESSION['code'];
+		}
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code AND active= :ac LIMIT 0,80');
+    $req->execute(array(':ac'=>$active,
+	                    ':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
-	}
+	
+
 	
 	$don = $req->fetchAll();
 	 //// emttre la requete sur le fonction

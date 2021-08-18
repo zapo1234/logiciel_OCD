@@ -19,8 +19,16 @@ $smart_from =($page -1)*$record_peage;
 
 // recupère les dates  par ordre croissant 
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
-    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    if($_SESSION['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':code'=>$session,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
 	$don = $req->fetchAll();
 	
@@ -110,11 +118,13 @@ $smart_from =($page -1)*$record_peage;
 	
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
-	if($debut < $date_english AND $date_english < $sortie AND in_array($date_english,$array)) {
+	if($debut <= $date_english AND $date_english <= $sortie AND in_array($date_english,$array)) {
 	$color ='occupe';
 	$status ='un client est présent dans le local,<br/>le local sera libre  à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
 	
 	}
+	
+	
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';

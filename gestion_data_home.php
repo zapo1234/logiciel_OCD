@@ -175,10 +175,12 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+.us{padding-bottom:5px;margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.h4{font-size:18px;color:black;text-align:center;} #resul{width:95%;}
+.center{height:2500px;} .homes{margin-left:15%;}
 }
 
 
@@ -218,8 +220,16 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 	            <?php
 		// afficher les dernières enregistrements
 		// aller chercher les auteurs en écriture sur une facture
-	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
-        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	    if($_SESSION['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+        $res->execute(array(':code'=>$session,
+		                    ':email_ocd'=>$_SESSION['email_ocd']));
         
 		 while($donnes=$res->fetch()){
 			
@@ -385,7 +395,11 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
      $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
-
+	
+	$('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+	});
    $('#but').click(function(){
    $('#examp').css('display','block');
    $('#pak').css('display','block');

@@ -26,20 +26,20 @@ $smart_from =($page -1)*$record_peage;
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	 
-    if($_SESSION['code']==0){	 
-   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
-    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	if($_SESSION['code']==0){
+		  $session==0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
 	
-	}
-	
-	else{
 		// emttre la requete sur le fonction
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society FROM facture WHERE email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
-    $req->execute(array(':code'=>$_SESSION['code'],
+    $req->execute(array(':code'=>$session,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 		
-	}
+	
 	
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		

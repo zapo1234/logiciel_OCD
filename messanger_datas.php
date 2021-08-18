@@ -7,6 +7,14 @@ include('inc_session.php');
    $donnees =$req->fetch();
    $req->closeCursor();
    
+   if($_SESSION['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+   
    $res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE email_ocd= :email_ocd ORDER BY id DESC');
    $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donnes =$res->fetchAll();
@@ -234,6 +242,12 @@ if($_POST['action']=="send"){
 		// effcacez les message 
 		$reg=$bds->prepare('DELETE FROM new_message WHERE email_user!= :email_user');
         $reg->execute(array(':email_user'=>$_SESSION['email_user']));
-        echo'ZAPO4';
+	   }
+	   
+	   if($_POST['action']=="delete_data"){
+		   $email = $_SESSION['email_ocd'];
+		   echo'zapo';
+		
+		
 	   }
 ?>
