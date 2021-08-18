@@ -21,16 +21,26 @@ if($_POST['action']=="fetchs") {
  
  // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
  
+    if($donns['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$donns['code'];
+		}
  
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
- $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+ $req->execute(array(':code'=>$session,
+                     ':email_ocd'=>$_SESSION['email_ocd']));
+ 
+
  $datas=$req->fetchAll();
 	
-  if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+  if($donns['permission']=="user:boss"){
 		
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
 	<select name="delete_line" id="delete_line">
@@ -69,7 +79,7 @@ if($_POST['action']=="fetchs") {
 
     $nombre =$donnes['status'];
 	// afficher la le checkout en fonction de la permission
-	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if($donns['permission']=="user:boss"){
 		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
 	}
 	else{
@@ -175,15 +185,28 @@ if($_POST['action']=="fetchs") {
 	  
 	 $id=$_POST['id']; 
      
-    $rej=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	if($_SESSION['code']==0){
+		  $session==0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		} 
+   
+   $rej=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+   $rej->execute(array(':code'=>$session,
+                       ':email_ocd'=>$_SESSION['email_ocd']));
+
    $donnees=$rej->fetch();
    $rej->closeCursor();
 
    // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
+   
+   $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND code= :code AND email_ocd= :email_ocd');
    $res->execute(array(':ids'=>$id,
+                       ':code'=>$session,
                       ':email_ocd'=>$_SESSION['email_ocd']));
+   
    $donns=$res->fetch();
     
 	// on ajoute le user qui as annulé la facture
@@ -204,8 +227,16 @@ if($_POST['action']=="fetchs") {
 					 ));
     
 // on modifie les données de la base de données guide
-         $rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE  email_ocd= :email_ocd');
+        if($_SESSION['code']==0){
+		  $session==0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+		$rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE code= :code AND  email_ocd= :email_ocd');
         $rev->execute(array(':dep'=>$donnees['depense']-$donnes['montant'],
+		                    ':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd']));
 					 
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
