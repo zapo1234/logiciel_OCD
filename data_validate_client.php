@@ -92,16 +92,16 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		}
 		
 		if($donns['permission']=="user:gestionnaire"){
-			$calls="transmis par le gestionnaire";
+			$calls="gestionnaire";
 		}
 		
 		if($donns['permission']=="user:employes"){
 			if($donns['code']==0){
-			$calls='transmis par le réceptionniste';
+			$calls='réceptionniste';
 			}
 			
 			else{
-				$calls='transmis par '.$donns['society'].'';
+				$calls='transmis de '.$donns['society'].'';
 			}
 		}
 		

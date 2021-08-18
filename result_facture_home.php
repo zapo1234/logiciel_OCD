@@ -31,7 +31,7 @@ $smart_from =($page -1)*$record_peage;
 		}
 		
 		else{
-		$session=$_SESSION['code'];
+		$session=$donns['code'];
 		}
 	
 		// emttre la requete sur le fonction
@@ -50,15 +50,25 @@ $smart_from =($page -1)*$record_peage;
 	<option value="30">30 lignes</option>
 	<option value="50">50 lignes</option>
 	</select> ';
+	
+	$export='<form method="post" action="excel.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
-		
-		$puts="";
+	   $puts="";
+		$export="";
 	}
 	
+   if($donns['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$donns['code'];
+		}
+		
 	// on boucle sur les les resultats
-	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excel.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	echo'<div class="expor">'.$export.'
 	<span>'.$puts.'</form></div>';
 	// entete du tableau
 	 echo'	<table id="tb">
@@ -97,6 +107,34 @@ $smart_from =($page -1)*$record_peage;
 		
 	
 	}
+	
+	// recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+	
+	
+	if($donns['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$donns['code'];
+		}
+		
+		if($donns['permission']=="user:boss"){
+			
+			$calls='<span class="boss">'.$donns['call'].'</span>';
+		}
+		
+		if($donns['permission']=="user:gestionnaire"){
+			$calls='<span class="gestionnaire">'.$donns['call'].'</span>';
+		}
+		
+		if($donns['permission']=="user:employes"){
+			$calls='<span class="employe">'.$donns['call'].'</span>';
+		}
 	
 	
 	if($donnees['type']==1){
@@ -183,7 +221,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="mont">'.$donnees['mont_tva'].' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
-		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/></td>
+		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
 		 <td><a href="#" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  '.$modif.'
@@ -195,7 +233,7 @@ $smart_from =($page -1)*$record_peage;
 		
 		echo'<div class="mobile">
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
-		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
+		     <div class="data'.$donnees['type'].'">'.$name.'<br/>'.$calls.'</div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
 		     '.$annul.'<br/></div>
 	       </div>';
