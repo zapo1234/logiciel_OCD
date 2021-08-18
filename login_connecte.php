@@ -44,13 +44,24 @@ if(isset($_POST['id_ocd'])) {
 	           $reks=$bdd->prepare('UPDATE inscription_client SET etat=\'connecte\', date= :nvte, heure = :nvh WHERE email_user= :email_user');
 			   $reks->execute(array( ':nvte'=>$date,
 									':nvh'=>$heure,
-							       ':email_user'=>$_POST['email_ocd']));
+		
+		':email_user'=>$_POST['email_ocd']));
 	 // on renvoi la page
+	  if($donnees['permission']=="user:boss" OR $donnees['permission']=="user:gestionnaire"){
        echo'<SCRIPT LANGUAGE="JavaScript">
        document.location.href="tableau_data_home.php"
         </SCRIPT>';	
 			  
 		}
+
+		
+		if($donnees['permission']=="user:employes"){
+			
+			echo'<SCRIPT LANGUAGE="JavaScript">
+           document.location.href="gestion_datas_customer.php"
+           </SCRIPT>';	
+		}
+	}
 		
 	 else{
 	 
