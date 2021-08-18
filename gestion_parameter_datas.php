@@ -253,9 +253,8 @@ padding-bottom:15px;} .df{margin-left:30%;}
                     <br/><select id="role" name="role" required>
                    <option value="">Attribuer un role</option>
                  <option value="1">Dirigeant</option>
-				 <option value="2">Responsable</option>
                   <option value="3">Gestionnaire</option>
-                  <option value="4">Réceptionniste(caisse)</option>
+                  <option value="4">Employé(caisse)</option>
                </select>
                     <br/><span class="role"></span></div>
 				 

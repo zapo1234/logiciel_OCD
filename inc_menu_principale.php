@@ -3,7 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 
    
-  $req=$bdd->prepare('SELECT id,logo,user FROM inscription_client WHERE email_user= :email_user');
+  $req=$bdd->prepare('SELECT id,logo,user,permission FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees =$req->fetch();
    
@@ -43,7 +43,17 @@ include('inc_session.php');
             <!-- Nav Item - Dashboard -->
             <?php
 			
-			if($_SESSION['permission']=="user:boss") {
+			if($donnees['permission']=="user:boss") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="tableau_data_home.php">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span></a>
+            </li>';			
+				
+			}
+			
+			if($donnees['permission']=="user:gestionnaire") {
 			
             echo'<li class="nav-item">
                 <a class="nav-link" href="tableau_data_home.php">
@@ -120,7 +130,17 @@ include('inc_session.php');
             <!-- Nav Item - Tables -->
             <?php
 			
-			if($_SESSION['permission']=="user:boss") {
+			if($donnees['permission']=="user:boss") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="gestion_data_tresorerie.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Trésorerie</span></a>
+            </li>';			
+				
+			}
+			
+			if($donnees['permission']=="user:gestionnaire") {
 			
             echo'<li class="nav-item">
                 <a class="nav-link" href="gestion_data_tresorerie.php">
@@ -144,7 +164,7 @@ include('inc_session.php');
 			
 			<?php
 			
-			if($_SESSION['permission']=="user:boss") {
+			if($donnees['permission']=="user:boss") {
 			
             echo'<li class="nav-item">
                 <a class="nav-link" href="gestion_parameter_datas.php">
@@ -153,6 +173,17 @@ include('inc_session.php');
             </li>';			
 				
 			}
+			
+			if($donnees['permission']=="user:gestionnaire") {
+			
+            echo'<li class="nav-item">
+                <a class="nav-link" href="gestion_parameter_datas.php">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètre</span></a>
+            </li>';			
+				
+			}
+			
 			
 			?>
 

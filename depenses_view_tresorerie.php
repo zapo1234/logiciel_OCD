@@ -27,7 +27,7 @@ $smart_from =($page -1)*$record_peage;
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
-	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if($donns['permission']=="user:boss"){
 		
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
 	<select name="delete_line" id="delete_line">
@@ -43,14 +43,7 @@ $smart_from =($page -1)*$record_peage;
 		$puts="";
 	}
 	
-	if($donns['society']!=""){
-		
-	  $transmi = 'de '.$donns['society'].'';
-	}
 	
-	else{
-		$transmi ="";
-	}
 	   
  
  $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
@@ -86,7 +79,7 @@ $smart_from =($page -1)*$record_peage;
   foreach($datas as $donnes){
 	  
 	  // afficher la le checkout en fonction de la permission
-	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if($donns['permission']=="user:boss"){
 		
 		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnes['id'].'">';
 		
@@ -109,12 +102,12 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$donnes['sorties'].'xof</td>
 		 <td><span class="repas">'.$donnes['reservation'].'xof</td>
 		 <td><span class="repas">'.$donnes['reste'].'xof</td>
-		 <td><span class="repas">'.$donnes['user_gestionnaire'].'<br/><span class="der">'.$transmi.'</span></td>
+		 <td><span class="repas">'.$donnes['user_gestionnaire'].'<br/><span class="der"></span></td>
 		 <td>'.$donns['society'].'</td>
 		</td></td>
 	    </tr>';
 		echo'<div class="mobile">
-		     <div>'.$put.' <i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].' '.$transmi.'</span></div>
+		     <div>'.$put.' <i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].'</span></div>
 		     <div>Recette encaissée<span class="der"><span> '.$donnes['entree'].'xof</div>
 			 <div>Dépense effectuée <span class="der">'.$donnes['sorties'].'xof</span></div>
 		     <div>Acompte réservation <span class="der">'.$donnes['reservation'].'xof</span></div>
@@ -127,14 +120,17 @@ $smart_from =($page -1)*$record_peage;
        // on compte
 		// on compte le nombre de ligne de la table facture
 	 if($_SESSION['code']==0){
-	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE email_ocd= :email_ocd');
-     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-	 }
-	 else{
+		  $session=0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+	 
 		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE code= :code AND email_ocd= :email_ocd');
-     $reg->execute(array(':code'=>$_SESSION['code'],
+     $reg->execute(array(':code'=>$session,
 	                     ':email_ocd'=>$_SESSION['email_ocd'])); 
-	}
+	
 	$dns=$reg->fetch();
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
