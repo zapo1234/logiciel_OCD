@@ -100,7 +100,7 @@ border-radius:25px;}
 #statusemployes{padding-left:70%;color:#F43E78;font-size:18px;font-weight:bold;}
 
 #datasboss{margin-left:60%;background:#A3F8D5;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
-.action{padding-left:75%;cursor:pointer;} .divaction{width:100px;padding:2%;background:white;color:black;border-radius:15px;}
+.action{padding-left:70%;cursor:pointer;} .divaction{width:100px;padding:2%;background:white;color:black;border-radius:15px;}
 .divaction a{color:black;font-size:14px;text-align:center;text-decoration:none;}
 #supboss{margin-left:68%;font-family:arial;border:2px solid #eee;border-radius:20px;} 
 #supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
@@ -133,6 +133,7 @@ margin-left:-10px;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -141,9 +142,9 @@ margin-left:-10px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+.us{padding-bottom:5px;margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #but{display:none;} .datas_messanger{padding-left:0%;}
 
@@ -160,7 +161,7 @@ border-radius:25px;}
 #supboss{margin-left:10%;} 
 #supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
 .divaction{width:50px;padding:1%;background:white;color:#eee;border-radius:15px;}
-.sup_send{color:white;}
+.sup_send{color:white;} .action{padding-left:30%;}
 }
 
 

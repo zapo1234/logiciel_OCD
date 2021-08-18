@@ -111,6 +111,7 @@ include('inc_session.php');
    		
 		  while($dats=$rq->fetch()){
 		   
+		   if($dats['permission']=="user:boss" OR $dats['permission']="user:gestionnaire"){
 		   if($dats['society']==""){
 			 $transmi="";  
 		   }
@@ -120,7 +121,7 @@ include('inc_session.php');
 			  $transmi ='travail à '.$dats['society'].''; 
 		   }
 		 
-	     if($dato['active']=="on"){
+	     if($dats['active']=="on"){
 	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
           else{
@@ -129,6 +130,7 @@ include('inc_session.php');
 
          echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> '.$transmi.'</div>';	 
        }
+	  }
      ?>
 	 
 	 <?php

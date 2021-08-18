@@ -204,8 +204,8 @@ $smart_from =($page -1)*$record_peage;
 		
 		echo'<div class="mobile">
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
-		     <div class="data'.$donnees['type'].'">'.$name.'</span><br/></div>
-			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span>
+		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
+			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
 		     '.$annul.'<br/></div>
 	       </div>';
 	}

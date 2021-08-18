@@ -581,8 +581,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 	     if($dato['active']=="on"){
 	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
-          else{
-          $action=' en ligne depuis '.$dato['date'].' à '.$dato['heure'].' ';
+          if($dato['active']=="off"){
+          $action=' connecté depuis '.$dato['date'].' à '.$dato['heure'].' ';
 	     }
 
          echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/>'.$transmi.'</div> ';	 

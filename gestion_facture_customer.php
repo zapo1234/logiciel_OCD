@@ -137,15 +137,16 @@ margin-left:-10px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;padding-bottom:5px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .form-select{display:none;} .mobile{font-size:14px;color:black;margin-left:3%;display:block;margin-top:15px;border-bottom:1px solid #eee;padding-bottom:10px;} .tf,#tf{display:none;} 
 .delete_line{display:none;} h2{font-size:15px;} .export{margin-left:3%;}
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
-.annuler{margin-left:3%;} .dp{padding-left:2%;font-size:20px;color:black;font-weight:bold;}
+.annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
+h1{margin-top:10px;}
 }
 
 
@@ -353,6 +354,11 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 	  $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
+	
+	 $('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+	 });
 	 
 	 // afficher les données des encaissements
     // compter les nouveaux message

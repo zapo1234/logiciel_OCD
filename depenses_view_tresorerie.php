@@ -88,7 +88,7 @@ $smart_from =($page -1)*$record_peage;
 	  // afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		
-		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
+		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnes['id'].'">';
 		
 	}
 	else{
@@ -102,7 +102,7 @@ $smart_from =($page -1)*$record_peage;
 	$mm = $date1[1];
 	$an = $date1[0];
 	
-     echo'<tr class="datas'.$j.'/'.$mm.'/'.$an.'">
+     echo'<tr class="datas'.$j.'/'.$mm.'/'.$an.'" id="tf">
 	     <td>'.$put.'</td>
 	     <td>'.$j.'/'.$mm.'/'.$an.'</td>
 		 <td><span class="repas">'.$donnes['entree'].'xof</td>
@@ -113,6 +113,14 @@ $smart_from =($page -1)*$record_peage;
 		 <td>'.$donns['society'].'</td>
 		</td></td>
 	    </tr>';
+		echo'<div class="mobile">
+		     <div>'.$put.' <i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].' '.$transmi.'</span></div>
+		     <div>Recette encaissée<span class="der"><span> '.$donnes['entree'].'xof</div>
+			 <div>Dépense effectuée <span class="der">'.$donnes['sorties'].'xof</span></div>
+		     <div>Acompte réservation <span class="der">'.$donnes['reservation'].'xof</span></div>
+		     <div>Reste à payer<span class="der">'.$donnes['reste'].'xof</span></div>
+		     
+	       </div>';
     }
 
        echo'</table>';
