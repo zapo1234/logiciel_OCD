@@ -23,6 +23,10 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
   $req=$bds->query('SELECT id_chambre FROM chambre');
   $donnees= $req->fetch();
   $id_chambre = rand(1,10000000);
+  
+  $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
  
 if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $donnees['id_chambre']!=$id_chambre) {
 	
@@ -136,9 +140,9 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		$active ="on";
 		// insere les données dans la base de données dans la base de donnes chambres
-		$code = $_SESSION['code'];
-		$society =$_SESSION	['society'];
-		$rey=$bds->prepare('INSERT INTO chambre (id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active,code,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active,:code,:society)');
+		$code = $donns['code'];
+		$society = $donns['society'];
+		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active,code,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active,:code,:society)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
