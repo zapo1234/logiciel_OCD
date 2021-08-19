@@ -194,6 +194,11 @@ include('inc_session.php');
 		
 	}
 }
+
+else{
+$names="";
+$name="";
+}
  $req->closeCursor();
  
  // recupérer les donnees sur la facture

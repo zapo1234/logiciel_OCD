@@ -131,11 +131,6 @@ include('inc_session.php');
      $categories="dirigeant";
      $permission ="user:boss";	 
 	}
-   elseif($role==2){
-	  $status=2;
-     $categories="Responsable";
-     $permission ="user:responsable";	 
-   }
    
    elseif($role==3){
 	 $status=3;

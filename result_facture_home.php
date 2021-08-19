@@ -102,10 +102,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	}
 	else{
-		
 		$put="";
-		
-	
 	}
 	
 	// recuperer la permission pour afficher le checkout
@@ -114,8 +111,7 @@ $smart_from =($page -1)*$record_peage;
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	
-	
-	if($donns['code']==0){
+ if($donns['code']==0){
 		  $session=0;
 		}
 		
@@ -133,7 +129,7 @@ $smart_from =($page -1)*$record_peage;
 		}
 		
 		if($donns['permission']=="user:employes"){
-			$calls='<span class="employe">'.$donnees['call'].'</span>';
+			$calls='<span class="employes">'.$donnees['calls'].'</span>';
 		}
 	
 	
@@ -156,7 +152,7 @@ $smart_from =($page -1)*$record_peage;
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
 	 $name ="Réservation";
-	 $encaiss='<a href="#" class="envoi" title="Encaisser" data-id6='.$donnees['id_fact'].'"><i class="fas fa-arrow-square-right" sytle="font-size:13px;color:green"></i> Encaisser</a><br/>';
+	 $encaiss="";
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
@@ -232,10 +228,14 @@ $smart_from =($page -1)*$record_peage;
 	    </tr>';
 		
 		echo'<div class="mobile">
+		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/>'.$calls.'</div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
-		     '.$annul.'<br/></div>
+		     '.$modif.'
+			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
+		     '.$encaiss.'
+			 <br/>'.$annul.'<br/><span class="dg">'.$donnees['calls'].'</span></div>
 	       </div>';
 	}
 	
@@ -418,6 +418,37 @@ $smart_from =($page -1)*$record_peage;
   }
 }
 
+if($_POST['action']=="mail"){
+	
+	if($_SESSION['code']==0){
+	 $session=0;
+	}
+	else{
+		$session=$_SESSION['code'];
+	}
+	// aller chercher les auteurs en écriture sur une facture
+	$id=$_POST['id'];
+	 $res=$bds->prepare('SELECT email_client FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':code'=>$session,
+                       ':id'=>$id,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
+   $donns=$res->fetch();
+	
+	echo'<div class="envoyer">
+   <form method="post" id="form_envoi" action="">
+   <h1>Envoyer la facture <br/> à l\'adresse mail</h1>
+   <div>Client:<span id="nam"></span></div>
+   <div><input type="email" id="emails" name="emails" value="'.$donns['email_client'].'"></div>
+   <div class="action"><button type="button" class="envoi">Annuler</button> <button type="button" class="env">envoyer</button></div>
+   <input type="hidden" name="value" id="'.$id.'">
+  <input type="hidden" name="token" id="token" value="<?php
+  //Le champ caché a pour valeur le jeton
+   '.$_SESSION['token'].'">
+   </form>
+ 
+  </div>';
+	
+}
 
 
 

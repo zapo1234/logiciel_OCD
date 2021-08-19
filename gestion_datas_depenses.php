@@ -41,7 +41,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
-#examp{border:2px solid #eee;padding:3%;position:absolute;width:60%;height:700px;z-index:3;left:15%;top:20px;background-color:white;border-radius:10px;}
+#examp{border:2px solid #eee;padding:3%;position:absolute;width:65%;height:700px;z-index:3;left:15%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2{border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
@@ -137,7 +137,7 @@ transition: all 200ms;}
 .drops{display:none;}  .users{display:none} #news_data{display:none;}
 .mobile{display:none}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
-.navbar-nav{background:#06308E;} 
+.navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
 
 @media (max-width: 575.98px) { 
 
@@ -153,11 +153,12 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .mobile{margin-left:5%;margin-top:15px;display:block;color:black;border-bottom:2px solid #eee;padding-bottom:20px;} .tf,#tf{display:none;}
 .form-select{display:none;} .export{margin-left:3%;} .pied_page{margin-left:3%;}
-.dp{padding-left:2%;font-size:20px;color:black;font-weight:bold;}
-.data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
+.dp{padding-left:15%;font-size:20px;color:black;font-weight:bold;}
+.data1,.data2,.data3,.data4{width:400px;height:60px;width:30%;text-align:center;}
 .annu,.annuler{margin-left:2%;width:260px;} .result{width:300px;margin-left:-100px;height:750px;}
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
+.dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
 }
 
 

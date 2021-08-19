@@ -90,7 +90,7 @@ include('inc_session.php');
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annuls{width:40px;height:40px;background:#224abe;margin-left:10%;color:white;border:2px solid #224abe;margin-top:10px;}
-.envoyer{background-color: white;width: 350px;height: 200px;border: 3px solid #eee;padding: 3%;position: absolute;z-index: 4;
+.envoyer{background-color: white;width: 350px;height: 230px;border: 3px solid #eee;padding: 3%;position: absolute;z-index: 4;
     top: 200px;
     margin-left: 20%;
 }
@@ -129,8 +129,11 @@ margin-left:-10px;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
-@media (max-width: 575.98px) { 
 
+.employes{color:black;}
+
+@media (max-width: 575.98px) { 
+.envoyer{margin-left:-5%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -141,12 +144,12 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;padding-bottom:5px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-.form-select{display:none;} .mobile{font-size:14px;color:black;margin-left:3%;display:block;margin-top:15px;border-bottom:1px solid #eee;padding-bottom:10px;} .tf,#tf{display:none;} 
+.form-select{display:none;} .mobile{font-size:15px;color:black;margin-left:3%;display:block;margin-top:15px;border-bottom:1px solid #eee;padding-bottom:5px;} .tf,#tf{display:none;} 
 .delete_line{display:none;} h2{font-size:15px;} .export{margin-left:3%;}
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
-.bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:50%;text-align:center;}
+.bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
-h1{margin-top:10px;}
+h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;}
 }
 
 
@@ -262,20 +265,6 @@ h1{margin-top:10px;}
    <h1>Êtes vous sûr d'annuler la facture <span id="id_fact"></span><br/></h1>
    <div class="action"><button type="button" class="annul">Annuler</button><button type="button" class="annuls">ok</button></div>
    <input type="hidden" name="ids" id="ids">
-  <input type="hidden" name="token" id="token" value="<?php
-  //Le champ caché a pour valeur le jeton
-   echo $_SESSION['token'];?>">
-   </form>
- 
-  </div><!--annul---->
-  
-  <div class="envoyer" style="display:none">
-   <form method="post" id="form_envoi" action="">
-   <h1>Envoyer la facture <br/> à l'adresse mail</h1>
-   <div>Client:<span id="nam"></span></div>
-   <div><input type="email" id="emails" name="emails"></div>
-   <div class="action"><button type="button" class="envoi">Annuler</button><button type="button" class="envois" value="ok"></button></div>
-   <input type="hidden" name="value" id="value">
   <input type="hidden" name="token" id="token" value="<?php
   //Le champ caché a pour valeur le jeton
    echo $_SESSION['token'];?>">
@@ -443,29 +432,14 @@ h1{margin-top:10px;}
 	 var id = $(this).data('id3');
 	 var action = "mail";
     // affiche les differentes
-	$('.envoyer').css('display','block');
-	$('#pak').css('display','block');
-	$('#id_fact').text(id);
-	$('#value').val(id);
-	
-	$(document).on('click','.envois', function(){
 	$.ajax({
 	type:'POST', // on envoi les donnes
 	url:'result_facture_home.php',// on traite par la fichier
 	data:{id:id,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data_annuler').html(data);
-     $('.annuler').css('display','none');
-     $('#pak').css('display','none');
-	 loads();
-	 load();
+     $('#pak').css('display','block');
 	}
-		
-	});
-	
-	setInterval(function(){
-		 $('#data_annuler').html('');
-	 },4000);
 
  });
  });

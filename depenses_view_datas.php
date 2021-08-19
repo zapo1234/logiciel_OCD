@@ -15,6 +15,14 @@ $page=1;
 	
 }
 
+if($_SESSION['code']==0){
+		  $session=0;
+		}
+		
+		else{
+		$session=$_SESSION['code'];
+		}
+
 $smart_from =($page -1)*$record_peage;
 if($_POST['action']=="fetchs") {
 	 
@@ -33,7 +41,7 @@ if($_POST['action']=="fetchs") {
 		$session=$donns['code'];
 		}
  
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+ $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
  $req->execute(array(':code'=>$session,
                      ':email_ocd'=>$_SESSION['email_ocd']));
  
@@ -49,16 +57,20 @@ if($_POST['action']=="fetchs") {
 	<option value="30">30 lignes</option>
 	<option value="50">50 lignes</option>
 	</select> ';
+	
+	$action='<form method="post" action="excels.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
 		
 		$puts="";
+		$action="";
 	}
 	
   // on boucle sur les les resultats
 	// on boucle sur les les resultats
-	echo'<div class="expor"><h2>Gestion des factures de vos clients</h2><form method="post" action="excels.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>
+	
+	echo'<div class="expor"><h2>Gérez les dépenses de l \'entreprise</h2>'.$action.'
 	<span>'.$puts.'</form></div>';
   echo'	<table id="tls">
      <thead>
@@ -137,7 +149,7 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">'.$donnes['designation'].'</td>
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
 		 <td><span class="repas">'.$donnes['montant'].'xof</td>
-		 <td><span class="repas">voir</span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"> <i class="fas fa-plus" style="font-size:10px";></i></span>
+		 <td><span class="dg">'.$donnes['calls'].'</span><br/><span class="repas">voir</span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"> <i class="fas fa-plus" style="font-size:10px";></i></span>
 		 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
 		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
 		 '.$mettre.'<br/>
@@ -147,11 +159,14 @@ if($_POST['action']=="fetchs") {
 	    </tr>';
 		
 		echo'<div class="mobile">
-		     <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+		     <div><span class="repas"></span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
+			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
+			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
 		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
-			 <div class="data'.$donnes['status'].'">'.$name.'</span></div></div>
-		     '.$mettre.'   '.$modif.'  '.$annul.'</div>
+			 <div class="data'.$donnes['status'].'">'.$name.'</div></div>
+		     '.$mettre.'   '.$modif.'  '.$annul.'<span class="dg">'.$donnes['calls'].'</span></div>
+			 
 	       </div>';
     }
 
@@ -330,8 +345,9 @@ if($_POST['action']=="fetchs") {
         $montant =$donnees['depense']-$donns['montant'];
 		$montas =$montant+$monts;
          // on modifie les données de la base de données guide
-  $ret=$bds->prepare('UPDATE tresorie_customer SET depense= :des WHERE email_ocd= :email_ocd');
-  $ret->execute(array(':des'=>$montas,
+  $ret=$bds->prepare('UPDATE tresorie_customer SET depense= :des WHERE code= :code AND email_ocd= :email_ocd');
+  $ret->execute(array(':code'=>$session,
+                       ':des'=>$montas,
                        ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 							
@@ -377,8 +393,9 @@ if($_POST['action']=="fetchs") {
     // on modifer les montants
 	// on modifie les données de la base de données guide
         if($montant < $donns['montant']){ 
-		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE id= :ids AND email_ocd= :email_ocd');
-        $ret->execute(array(':us'=>$user_datas,
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':code'=>$session,
+		                    ':us'=>$user_datas,
 		                    ':mont'=>$monts,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
@@ -389,8 +406,9 @@ if($_POST['action']=="fetchs") {
 		$nature ="remboursement effectué";
         $status=4;		
 			
-		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE id= :ids AND email_ocd= :email_ocd');
-        $ret->execute(array(':us'=>$user_datas,
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
+        $ret->execute(array(':code'=>$session,
+		                    ':us'=>$user_datas,
 		                    ':mont'=>$monts,
 							':nat'=>$nature,
 							':stat'=>$status,
