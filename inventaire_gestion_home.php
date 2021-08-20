@@ -260,8 +260,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
       <select name="site" class="forms form-select-sm" aria-label=".form-select-sm example">
                            <option value="">choisir</option>
 						   <option value="1">site 1</option>
-                           <option value="3">site 2</option>
-                           <option value="7">site 3</option>
+                           <option value="2">site 2</option>
+                           <option value="3">site 3</option>
 						  
                           </select>
     </div>
