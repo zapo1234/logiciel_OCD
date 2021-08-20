@@ -254,6 +254,17 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
       <label for="inputPassword4">cout pass </label>
       <input type="number" class="form-control" id="counts" name="couts" placeholder="">
     </div>
+	
+	<div class="form-group col-md-6">
+      <label for="inputPassword4">Localisation(en cas de moins 1 site) </label>
+      <select name="site" class="forms form-select-sm" aria-label=".form-select-sm example">
+                           <option value="">choisir</option>
+						   <option value="1">site 1</option>
+                           <option value="3">site 2</option>
+                           <option value="7">site 3</option>
+						  
+                          </select>
+    </div>
     
      <div class="form-group col-md-12">
         <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
