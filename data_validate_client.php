@@ -73,13 +73,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	
 	 // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,code,society FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	
-	
 	if($donns['code']==0){
-		  $session=0;
+		$session=0;
 		}
 		
 		else{
@@ -87,12 +86,16 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		}
 		
 		if($donns['permission']=="user:boss"){
-			
 			$calls="";
 		}
 		
 		if($donns['permission']=="user:gestionnaire"){
-			$calls="gestionnaire";
+			if($donns['code']==0){
+			$calls='transmis par le gestionnaire';
+			}
+			else{
+			$calls='Gestionnaire de '.$donns['society'].'';
+			}
 		}
 		
 		if($donns['permission']=="user:employes"){
@@ -101,16 +104,17 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			}
 			
 			else{
-				$calls='transmis de '.$donns['society'].'';
+				$calls='Récéptionniste de '.$donns['society'].'';
 			}
 		}
 		
 	
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation,code FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
    $rej->execute(array(':code'=>$session,
                        ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
+	
 	
 	
 	// fixer les numero de facture
@@ -460,8 +464,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
@@ -469,7 +473,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id_fact,
-							  ':type'=>$mode
+							  ':type'=>$mode,
+							  ':code'=>$session
 	                        ));				
 			}
 	  
@@ -566,15 +571,16 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 						  ));
 						  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
+		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dat,
 							  ':id_fact'=>$id_fact,
-							  ':type'=>$mode
+							  ':type'=>$mode,
+							  ':code'=>$session,
 	                        ));		
 		
 	  
@@ -617,6 +623,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 						  
 						  
 			// on modifie les données de la base de données guide
+		 
          $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
