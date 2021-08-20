@@ -20,16 +20,17 @@ $smart_from =($page -1)*$record_peage;
 // recupère les dates  par ordre croissant 
   // emttre la requete sur le fonction
     if($_SESSION['code']==0){
-		  $session=0;
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		else{
 		$session=$_SESSION['code'];
-		}
+		
     $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
-	
+		}
 	$don = $req->fetchAll();
 	
 	foreach($don as $donnees) {
