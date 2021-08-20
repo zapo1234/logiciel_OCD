@@ -130,7 +130,7 @@ margin-left:-10px;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
-.employes{color:black;}
+.employes{color:black;} .gestionnaire{color:black;} .boss{color:black;}
 
 @media (max-width: 575.98px) { 
 .envoyer{margin-left:-5%;}
