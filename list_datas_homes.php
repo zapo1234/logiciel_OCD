@@ -33,7 +33,7 @@ $smart_from =($page -1)*$record_peage;
 	$don = $req->fetchAll();
 	
 	foreach($don as $donnees) {
-	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE code="'.$session.'" AND  id_chambre="'.$donnees['id_chambre'].'"');
+	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE code="'.$_SESSION['code'].'" AND  id_chambre="'.$donnees['id_chambre'].'"');
     $donns = $rec->fetchAll();
 	 $array = [];
 	 $tab = [];

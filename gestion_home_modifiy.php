@@ -2,17 +2,20 @@
 include('connecte_db.php');
 include('inc_session.php');
 
- if(!isset($_GET['id_fact'])) {
+ if(!isset($_GET['id_fact'])AND !isset($_GET['code_data'])) {
 	 
 	 header('location:index.php');
  }
  
  // on envoi la requete
- 
+    $id_fact =$_GET['id_fact'];
+	$code =$_GET['code_data'];
   // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,email_client,montant,montant_repas,types,id_fact,nombre,type,numero,piece_identite,
-	civilite,tva,montant,avance,reste,nombre FROM facture WHERE id_fact= :id_fact AND email_ocd= :email_ocd');
-    $req->execute(array(':id_fact'=>$_GET['id_fact'],':email_ocd'=>$_SESSION['email_ocd']));
+	civilite,tva,montant,avance,reste,nombre FROM facture WHERE code= :code AND  id_fact= :id_fact AND email_ocd= :email_ocd');
+    $req->execute(array(':code'=>$code,
+	                    ':id_fact'=>$id_fact,
+		                ':email_ocd'=>$_SESSION['email_ocd']));
 	
 	$donnees = $req->fetch();
 	
@@ -346,11 +349,22 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
                    
 				   <ul class="winners">
 	            <?php
-		// afficher les dernières enregistrements
-		// aller chercher les auteurs en écriture sur une facture
-	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id ASC LIMIT 0,5');
+		$rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	    $donns =$rel->fetch();
+		if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+        $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-        
+        }
+		
+		// afficher les facture.
+		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
+		$session=$donns['code'];
+		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+        $res->execute(array(':code'=>$session,
+		                    ':email_ocd'=>$_SESSION['email_ocd']));
+		}
+		
 		 while($donnes=$res->fetch()){
 			
           if($donnes['type']==1){
@@ -1120,7 +1134,7 @@ echo $_SESSION['token'];?>">
 	// on lance l'apel ajax
 	  $.ajax({
 	  type: 'POST', // on envoi les donnes
-	   url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>",// on traite par la fichier
+	   url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>&code_data=<?php echo $_GET['code_data'];?>",// on traite par la fichier
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#results').html(data);
@@ -1163,7 +1177,7 @@ echo $_SESSION['token'];?>">
 	// on lance l'apel ajax
 	  $.ajax({
 	  type: 'POST', // on envoi les donnes
-	  url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>",// on traite par la fichier
+	  url: "modify_home.php?id_fact=<?php echo $_GET['id_fact'];?>&code_data=<?php echo $_GET['code_data'];?>",// on traite par la fichier
 	  data:{id:id,nbjour:nbjour,to:to,mon:mon,taxe:taxe,rest:rest,acomp:acomp,rep:rep,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#homs'+id).html('');
@@ -1248,7 +1262,7 @@ echo $_SESSION['token'];?>">
 				var action="modify";
 				var to =$('#to').val();
 				$.ajax({
-					url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>",
+					url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>&code_data=<?php echo$_GET['code_data'];?>",
 					method: "POST",
 					data:{action:action,to:to},
 					success: function(data) {
