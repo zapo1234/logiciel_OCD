@@ -67,7 +67,7 @@ include('inc_session.php');
 	$cb=0;
 	}
 	
-	if($number1!=0 AND $number4!=0 AND $number2!=0 AND $number3!=0){
+	if($number1!=0 OR $number4!=0 OR $number2!=0 OR $number3!=0){
 	$data_number =$number1+$number2;
 	
 	$data_numbers =$num_data +$number2;
@@ -727,7 +727,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
   <div id="message_datas"></div><!--div home-->  
-	</div>
+	
                 <!-- /.container-fluid -->
 
             </div>
