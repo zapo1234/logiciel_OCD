@@ -189,8 +189,14 @@ border-radius:25px;}
 					
 					  </div>
 					
-					
-					<div class="bg">
+					<?php
+	//afficher le checkout
+   	// emttre la requete sur le fonction
+        $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
+        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	     $donns =$rel->fetch();
+	            if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+					echo'<div class="bg">
                      <h2>Suprimer des messsages du compteur</h2>
                      <form method="post" id="form_sup" action="delete_datas.php">
 					 <input type="checkbox" class="co1" id="co1" name="co1"  value="50"> Suprimer 50 entrées<br/><br/>
@@ -199,7 +205,9 @@ border-radius:25px;}
 					 <input type="button" id="sends" value="suprimer">
 					  </form>
 					  <div id="resul"></div><!--div--ajax-->
-                    </div>
+                    </div>';
+				}
+					?>
                 </div>
 
         <!-- Content Wrapper -->

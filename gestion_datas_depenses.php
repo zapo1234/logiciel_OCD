@@ -416,7 +416,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 $(document).on('click','.actions',function(){
 	var id = $(this).data('id7');
   // afficher 
-  $('#contents'+id).slideToggle();
+  $('#contens'+id).slideToggle();
   if(id ===3){
  $('.datas').css('height','120px');	
   }

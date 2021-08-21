@@ -205,9 +205,22 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 	            <?php
 		// afficher les dernières enregistrements
 		// aller chercher les auteurs en écriture sur une facture
-	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+	    $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	    $donns =$rel->fetch();
+		if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+        $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-        
+        }
+		
+		// afficher les facture.
+		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
+		$session=$donns['code'];
+		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+        $res->execute(array(':code'=>$session,
+		                    ':email_ocd'=>$_SESSION['email_ocd']));
+		}
+		
 		 while($donnes=$res->fetch()){
 			
           if($donnes['type']==1){

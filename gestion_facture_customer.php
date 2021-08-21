@@ -382,7 +382,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
  
  $(document).on('click','.action',function(){
 	var id = $(this).data('id2');
-  // afficher 
+  // affich
   $('#content'+id).slideToggle();
   
   if(id ===3){

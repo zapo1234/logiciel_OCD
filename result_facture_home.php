@@ -29,17 +29,17 @@ $smart_from =($page -1)*$record_peage;
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
-        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,calls FROM facture WHERE email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
         $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		// afficher les facture.
-		if($donns['code']==1){
+		if($donns['code']==1 OR $donns['code']==2){
 		$session=$donns['code'];
 		// emttre la requete sur le fonction
-       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,calls FROM facture WHERE email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
        $req->execute(array(':code'=>$session,
-	                   ':email_ocd'=>$_SESSION['email_ocd']));
+	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}	
 	
 	
@@ -61,13 +61,8 @@ $smart_from =($page -1)*$record_peage;
 		$export="";
 	}
 	
-   if($donns['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$donns['code'];
-		}
+   // 
+  
 		
 	// on boucle sur les les resultats
 	echo'<div class="expor">'.$export.'
@@ -90,12 +85,11 @@ $smart_from =($page -1)*$record_peage;
       </thead>
       <tbody>';
        
-	while($donnees = $req->fetch()) {
+	while($donnees=$req->fetch()) {
 		
 	$nombre =$donnees['id_fact'];
 	// recupérer le chiffre
 	$nombre =substr($nombre,2);
-	
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss"){
 		
@@ -139,7 +133,7 @@ $smart_from =($page -1)*$record_peage;
 	$name =" Séjour facturé";
 	$jour = $donnees['nombre'].'jours';
 	$encaiss="";
-	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	$annul='';
 	}
 	elseif($donnees['type']==2){
@@ -147,16 +141,16 @@ $smart_from =($page -1)*$record_peage;
 	$name="Horaire facturé";
 	$jour = $donnees['nombre'].'heure';
 	$encaiss="";
-	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
-	$annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
+	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	$annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
 	 $name ="Réservation";
 	 $encaiss="";
-	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
-	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
+	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
+	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	else{
@@ -174,13 +168,9 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	else{
-		
 		$repas ="";
 		$monts="";
-		
 	}
-	
-	
 	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
@@ -220,22 +210,22 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
-		 <td><a href="#" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.'">
-		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
+		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.''.$donnees['code'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.''.$donnees['code'].'">
+		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  '.$modif.'
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
+		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 	    </tr>';
 		
 		echo'<div class="mobile">
-		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].' title="voir le détails">détails facture</a></br/><br/>
+		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/>'.$calls.'</div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
 		     '.$modif.'
-			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
+			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		     '.$encaiss.'
 			 <br/>'.$annul.'<br/><span class="dg">'.$donnees['calls'].'</span></div>
 	       </div>';
@@ -274,17 +264,22 @@ $smart_from =($page -1)*$record_peage;
    
    if($_POST['action']=="details"){
 	   // recupérer le chiffre
-	 $id =$_POST['id'];
+	 $id=$_POST['id'];
+	 $data = explode(',',$id);
+	 $id_fact = $data[0];
+	 $code = $data[1];
 	  // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,adresse,clients,email_client,numero,check_in,check_out,time,time1,nombre,piece_identite,montant,reste,avance,mont_tva,user,moyen_paiement,types,id_fact,type FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
-   $res->execute(array(':id'=>$id,
+	 $res=$bds->prepare('SELECT date,adresse,clients,email_client,numero,check_in,check_out,time,time1,nombre,piece_identite,montant,reste,avance,mont_tva,user,moyen_paiement,types,id_fact,type FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':code'=>$code,
+                       ':id'=>$id_fact,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
    
    // requete 
    // recupére les données de la base de données si $_GET['id_fact']
-   $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE id_fact= :id_fact AND email_ocd= :email_ocd ');
-    $req->execute(array(':id_fact'=>$id,
+   $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+    $req->execute(array(':code'=>$code,
+	                    ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
    
     $nombre =substr($donnees['id_fact'],2); 
@@ -346,15 +341,20 @@ $smart_from =($page -1)*$record_peage;
    if($_POST['action']=="deleted"){
 	   
 	 $id=$_POST['id']; 
+	 $data =explode(',',$id);
+	 $id_fact =$data[0];
+	 $code =$data[1];
      
-    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+   $rej->execute(array(':code'=>$code,
+                      ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$rej->fetch();
    $rej->closeCursor();
 
    // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,user,montant,reste,avance FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
-   $res->execute(array(':id'=>$id,
+	 $res=$bds->prepare('SELECT date,user,montant,reste,avance FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':code'=>$code,
+                       ':id'=>$id_fact,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
     
@@ -368,25 +368,28 @@ $smart_from =($page -1)*$record_peage;
     // on modifer les montants
 
     	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE email_ocd= :email_ocd');
+         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donnees['encaisse']-$donns['montant'],
 							':rs'=>$donnees['reservation']-$donns['avance'],
 							':re'=>$donnees['reste']-$donns['reste'],
+							':code'=>$code,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 		$ty="4";
 		$tys="facture annulé";
 		// on modifie le type dans la table facture
-         $ret=$bds->prepare('UPDATE facture SET user= :us, type= :ty, types= :tys WHERE id_fact= :id AND email_ocd= :email_ocd');
+         $ret=$bds->prepare('UPDATE facture SET user= :us, type= :ty, types= :tys WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':us'=>$user_datas,
 		                    ':ty'=>$ty,
 							':tys'=>$tys,
-							':id'=>$id,
+							':code'=>$code,
+							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
         // vous suprimer les données dans home_occupation
-        $rey =$bds->prepare('DELETE FROM home_occupation WHERE id_fact= :id AND email_ocd= :email_ocd');
-		$rey->execute(array(':id'=>$id,
+        $rey =$bds->prepare('DELETE FROM home_occupation WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+		$rey->execute(array(':code'=>$code,
+		                    ':id'=>$id_fact,
 		                    ':email_ocd'=>$_SESSION['email_ocd']
 							));
        		
@@ -397,21 +400,22 @@ $smart_from =($page -1)*$record_peage;
    if($_POST['action']=="delete_check"){
 	   
 	 if(isset($_POST['checkbox_value'])){
-   $email=$_SESSION['email_ocd'];
+     $email=$_SESSION['email_ocd'];
+	 $code =$_SESSION['code'];
    
 	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
-		$req="DELETE FROM facture WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$req="DELETE FROM facture WHERE code='".$code."' AND id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($req);
 		$statement->execute();
 		
 		// suprimer dans la table bord_informations
 		
-		$rev="DELETE FROM bord_informations WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$rev="DELETE FROM bord_informations WHERE code='".$code."' id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($rev);
 		$statement->execute();
 		
 		// suprimer dans la table home_occupation
-		$reg="DELETE FROM home_occupation WHERE id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$reg="DELETE FROM home_occupation WHERE code='".$code."' AND id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($reg);
 		$statement->execute();
     }

@@ -7,6 +7,10 @@
   // utilise les ouverture
   ob_start();
   
+  if(!isset($_GET['id_fact']) AND !isset($_GET['code_data'])){
+	 header('index.php');  
+  }
+  
   ?>
   
  
@@ -67,17 +71,20 @@
   <?php
   // id facture
   $id ='0.'.$_GET['id_fact'];
+  $code=$_GET['code_data'];
   $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,user,numero,adresse,logo FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees =$req->fetch();
    // emttre la requete sur le fonction
-    $reg=$bds->prepare('SELECT  check_in,check_out,time1,time2,chambre,montant FROM bord_informations WHERE email_ocd= :email_ocd AND id_fact= :id');
-    $reg->execute(array(':id'=>$id,
+    $reg=$bds->prepare('SELECT  check_in,check_out,time1,time2,chambre,montant FROM bord_informations WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+    $reg->execute(array(':code'=>$code,
+	                   ':id'=>$id,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 					   
     // aller chercher les auteurs en écriture sur une facture
-   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,numero,email_client,nombre,montant,reste,avance,remise,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE id_fact= :id AND email_ocd= :email_ocd');
-   $res->execute(array(':id'=>$id,
+   $res=$bds->prepare('SELECT date,check_in,check_out,time,time1,user,clients,numero,email_client,nombre,montant,reste,avance,remise,tva,mont_tva,montant_repas,id_fact,type,types FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+   $res->execute(array(':code'=>$code,
+                      ':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
    
