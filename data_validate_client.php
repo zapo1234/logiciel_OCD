@@ -78,11 +78,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$donns =$rel->fetch();
 	
 	if($donns['code']==0){
-		$session=0;
+		$session = $_GET['code_data'];
 		}
 		
 		else{
-		$session=$donns['code'];
+		$session=$_GET['code_data'];
 		}
 		
 		if($donns['permission']=="user:boss"){
@@ -208,6 +208,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $numero_compte=$_SESSION['email_ocd'];
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
+   $session = $_SESSION['code'];
    
    
     $dat1 = explode('-',$_POST['dat']);
@@ -508,7 +509,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':moyen_paiement'=>$status,
 							':data_montant'=>$data_num,
 							':types'=>$ty,
-							':code'=>$_SESSION['code'],
+							':code'=>$session,
 							':society'=>$_SESSION['society'],
 							':calls'=>$calls
 							
@@ -618,7 +619,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':moyen_paiement'=>$status,
 							':data_montant'=>$data_num,
 							':types'=>$ty,
-							':code'=>$_SESSION['code'],
+							':code'=>$session,
 							':society'=>$_SESSION['society'],
 							':calls'=>$calls
 						  ));

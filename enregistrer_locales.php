@@ -31,6 +31,16 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
    $donnes=$reb->fetch();
 	$reb->closeCursor();
 	
+	// on recupere les comprise dans l'intervale check in et checkout 
+	// et on les insere dans la base de données
+	
+	$dates1 =$_POST['days'];
+	$dates2 =$_POST['das'];
+	
+	// convertir 
+	$dates1= explode('-',$dates1);
+	
+	
 	if(empty($donnes)) {
 	 
      $id_fact=0.0001;	 

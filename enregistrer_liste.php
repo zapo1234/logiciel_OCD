@@ -52,6 +52,14 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	$types = $_POST['type'];
 	$typs = $_POST['typs'];
 	
+	$site = $_POST['site'];
+	if(empty($site)){
+	$site =0;
+	}
+	else{
+	$site = $_POST['site'];
+	}
+	
 	if(!empty($typs)){
 		$type=$_POST['typs'];
 		
@@ -140,7 +148,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		$active ="on";
 		// insere les données dans la base de données dans la base de donnes chambres
-		$code = $donns['code'];
+		
+		$code = $site;
 		$society = $donns['society'];
 		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,type,active,code,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:type,:active,:code,:society)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,

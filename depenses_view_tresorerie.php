@@ -19,7 +19,7 @@ $smart_from =($page -1)*$record_peage;
 	 
  // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission,society FROM inscription_client WHERE email_user= :email_user');
+    $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	

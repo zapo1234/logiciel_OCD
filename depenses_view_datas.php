@@ -149,8 +149,8 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">'.$donnes['designation'].'</td>
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
 		 <td><span class="repas">'.$donnes['montant'].'xof</td>
-		 <td><span class="dg">'.$donnes['calls'].'</span><br/><span class="repas">voir</span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"> <i class="fas fa-plus" style="font-size:10px";></i></span>
-		 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
+		 <td><span class="dg">'.$donnes['calls'].'</span><br/>voir<span class="actions" data-id7="'.$donnes['id'].'"> <i class="fas fa-plus" style="font-size:10px;"></i></span>
+		 <div class="datis" style="display:none" id="contens'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
 		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
 		 '.$mettre.'<br/>
 		 '.$modif.'<br/>
@@ -234,9 +234,10 @@ if($_POST['action']=="fetchs") {
     // on modifer le status
 	$status=3;
 	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE depense SET status= :stat, user= :us WHERE id= :ids AND email_ocd= :email_ocd');
+         $ret=$bds->prepare('UPDATE depense SET status= :stat, user= :us WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
         $ret->execute(array(':stat'=>$status,
 							 ':us'=>$user_datas,
+							 ':code'=>$session,
 							 ':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
@@ -266,7 +267,7 @@ if($_POST['action']=="fetchs") {
 	
 	// aller chercher les auteurs en écriture sur une facture
 	 $res=$bds->prepare('SELECT date,numero_facture,designation,fournisseur,nature,user,montant,status FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
-   $res->execute(array(':ids'=>$id,
+     $res->execute(array(':ids'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
     
@@ -360,9 +361,10 @@ if($_POST['action']=="fetchs") {
 	 
 	if(isset($_POST['checkbox_value'])){
    $email=$_SESSION['email_ocd'];
+   $code =$session;
    
 	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
-		$req="DELETE FROM depense WHERE id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$req="DELETE FROM depense WHERE code='".$session."' AND id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($req);
 		$statement->execute();
 		
@@ -394,9 +396,9 @@ if($_POST['action']=="fetchs") {
 	// on modifie les données de la base de données guide
         if($montant < $donns['montant']){ 
 		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
-        $ret->execute(array(':code'=>$session,
-		                    ':us'=>$user_datas,
+        $ret->execute(array(':us'=>$user_datas,
 		                    ':mont'=>$monts,
+							':code'=>$session,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
@@ -407,11 +409,11 @@ if($_POST['action']=="fetchs") {
         $status=4;		
 			
 		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
-        $ret->execute(array(':code'=>$session,
-		                    ':us'=>$user_datas,
+        $ret->execute(array(':us'=>$user_datas,
 		                    ':mont'=>$monts,
 							':nat'=>$nature,
 							':stat'=>$status,
+							':code'=>$session,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));	

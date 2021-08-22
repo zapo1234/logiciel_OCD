@@ -130,6 +130,25 @@ z-index:3;
 
 .ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
 margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
+
+.drops{display:none;}  .users{display:none} #news_data{display:none;}
+.mobile{display:none}
+.sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
+.navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
+
+@media (max-width: 575.98px) { 
+
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+ul{display:none;}
+.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
+height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+
+}
+
 </style>
 
 </head>
@@ -349,6 +368,15 @@ echo$_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
+
+    $('#sms').click(function(){
+	$('.drop').slideToggle();
+	});
+	
+	 $('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+	 });
 
    $('#but').click(function(){
    $('#examp').css('display','block');
