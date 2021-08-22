@@ -198,6 +198,10 @@ $smart_from =($page -1)*$record_peage;
 	
 	$data_user = $users[0];
 	
+	// réecrire les montants 2 chiffres après la virgule
+	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
+	$montant = number_format($donnees['montant'], 2, '.', '');
+	
     // afficher dans un tableau les données des chambres
 	echo'<tr class="datas'.$donnees['type'].'" id="tf">
 	     <td>'.$put.'</td>
@@ -205,8 +209,8 @@ $smart_from =($page -1)*$record_peage;
 		 '.$data_user.'</span></td>
 		 <td><span class="der">N° facture: '.$nombre.'<br/><div class="data'.$donnees['type'].'">'.$name.'</span></div>
 		 <i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span></td>
-		 <td><span class="mont">'.$donnees['montant'].' xof</span></td>
-		 <td><span class="mont">'.$donnees['mont_tva'].' xof</span></td>
+		 <td><span class="mont">'.$montant.' xof</span></td>
+		 <td><span class="mont">'.$mont_tva.' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
@@ -287,7 +291,9 @@ $smart_from =($page -1)*$record_peage;
 	// modifier en display block $donnees[user] pour écriture
 	$rem='<br/>';
 	$rt=",";
-  	
+  	$montant = number_format($donnees['montant'], 2, '.', '');
+	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
+	$reste = number_format($donnees['reste'], 2, '.', '');
 	 echo'<div class="detail">
 	      <h4>Détails de la facture</h4>
 	      <div class="h">N° de facture <span class="fact">'.$nombre.'</span><br/><span class="typ">Type de facture :  '.$donnees['types'].'</span></div>
@@ -310,7 +316,7 @@ $smart_from =($page -1)*$record_peage;
 		  </tr>';
 		  }
 		  echo'</table>
-		 
+		  
 		  <div class="h">
 		  <table class="list">
 		  <tr>
@@ -321,10 +327,10 @@ $smart_from =($page -1)*$record_peage;
 		  <th> Moyens de paimement</td>
 		  </tr>
 		  <tr>
-		  <td>'.$donnees['montant'].'xof</td>
-		  <td>'.$donnees['mont_tva'].'xof</td>
+		  <td>'.$montant.'xof</td>
+		  <td>'.$mont_tva.'xof</td>
 		  <td>'.$donnees['avance'].'xof</td>
-		  <td>'.$donnees['reste'].'xof</td>
+		  <td>'.$reste.'xof</td>
 		  <td>'.str_replace($rt,$rem,$donnees['moyen_paiement']).'</td>
 		  </tr>
 		  </table>

@@ -2,24 +2,28 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-if(isset($_GET['id_fact'])){
+if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
  $id_fact =$_GET['id_fact'];
+ $code =$_GET['code_data'];
 // recupére les données de la base de données si $_GET['id_fact']
-  $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE id_fact= :id_fact AND email_ocd= :email_ocd ');
-    $req->execute(array(':id_fact'=>$id_fact,
+  $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+    $req->execute(array(':code'=>$code,
+	                   ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$don = $req->fetchAll();
 	$req->closeCursor();
 	
 	// recupére les données de la facture
-	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva,data_montant FROM facture WHERE   id_fact= :id_fact AND email_ocd= :email_ocd ');
-    $res->execute(array(':id_fact'=>$id_fact,
+	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva,data_montant FROM facture WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+    $res->execute(array(':code'=>$code,
+	                    ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$donns= $res->fetch();
 	$res->closeCursor();
 	
-	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
-    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,reste FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+    $rej->execute(array(':code'=>$code,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
     $donnes=$rej->fetch();
    
 	//créer un tableau pour la data montant
@@ -29,9 +33,7 @@ if(isset($_GET['id_fact'])){
 
 
     if($_POST['action']=="modify"){
-		
-	 
-	 $tab =[];
+	$tab =[];
     foreach($don as $dos){
 	 
 	 $id =$dos['id_chambre'];
