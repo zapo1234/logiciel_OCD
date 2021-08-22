@@ -453,7 +453,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_modify_client.php?id_fact=<?php echo$_GET['id_fact'];?>">
+  <form method="post" id="form1" action="data_modify_client.php?id_fact=<?php echo$_GET['id_fact'];?>&code=<?php echo$_GET['code_data'];?>">
  <div  id="examp">
   <h2> Les informations du client </h2>
    
@@ -643,6 +643,16 @@ echo $_SESSION['token'];?>">
    $(document).ready(function(){
      $('#sms').click(function(){
 	$('.drop').slideToggle();
+	});
+	
+	$('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+	
+	});
+	
+	 $('#news').click(function(){
+	$('.users').slideToggle();
 	});
 	
  $('#but').click(function(){
@@ -1100,7 +1110,7 @@ echo $_SESSION['token'];?>">
 	// on lance l'apel ajax
 	$.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>",// on traite par la fichier
+	url: "modify_home.php?id_fact=<?php echo$_GET['id_fact'];?>&code_data=<?php echo$_GET['code_data'];?>",// on traite par la fichier
 	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,dat:dat,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#results').html(data);

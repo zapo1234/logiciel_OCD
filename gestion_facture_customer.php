@@ -549,9 +549,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
     $('#pak').css('display','block');
     });
 	
-
-	
-	// envoi du formulaire
+   // envoi du formulaire
 	 
 	 $('#form_reini').on('submit', function(event) {
 	event.preventDefault();
@@ -579,42 +577,64 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 	  
   });
   
-  $(document).on('click','.delete',function(){
- var checkbox = $('.form-check-input:checked');
- var action="delete_check";
- if(checkbox.length > 0) {
-	var checkbox_value = [];
- $(checkbox).each(function() {
-	checkbox_value.push($(this).val());
- });
- 
- $.ajax({
+  // envoi du formulaire
+	 
+	$('#delet').on('submit', function(event) {
+	event.preventDefault();
+	var action="delete_check";
+	$.ajax({
 	type:'POST', // on envoi les donnes
-	async: false,
 	url:'result_facture_home.php',// on traite par la fichier
-	data:{checkbox_value:checkbox_value,action:action},
-	success:function() {
-	 loads();
-	 var nombre = checkbox.length;
-	 if(nombre==1){
-	   var nbrs ="supression d'une facture"; 
-	 }
-	 
-	 else{
-		 var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span>factures'; 
-	 }
-	 
-	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
-	 }
-   });
-   }
+	data:{action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+       $('#result').html(data);
+	  load();
+	  }
+    });
+	
+	setInterval(function(){
+		 $('#result').html('');
+	 },4000);
+	  
+	  
+  });
+  
+  //$(document).on('click','.delete',function(){
+ //var checkbox = $('.form-check-input:checked');
+ //var action="delete_check";
+ //if(checkbox.length > 0) {
+//	var checkbox_value = [];
+ //$(checkbox).each(function() {
+	checkbox_value.push($(this).val());
+ //});
  
- else {
-	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune facture selectionnée</span></div>');
+ //$.ajax({
+//	type:'POST', // on envoi les donnes
+//	async: false,
+//	url:'result_facture_home.php',// on traite par la fichier
+//	data:{checkbox_value:checkbox_value,action:action},
+//	success:function() {
+//	 loads();
+//	 var nombre = checkbox.length;
+//	 if(nombre==1){
+//	   var nbrs ="supression d'une facture"; 
+//	 }
 	 
- }
+//	 else{
+		 //var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span>factures'; 
+//	 }
+	 
+//	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
+//	 }
+ //  });
+ //  }
  
- });
+ //else {
+//	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune facture selectionnée</span></div>');
+	 
+ //}
+ 
+ //});
  
  $(document).on('click','.details',function(){
 	   	var id = $(this).data('id2');	
