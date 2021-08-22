@@ -78,11 +78,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$donns =$rel->fetch();
 	
 	if($donns['code']==0){
-		$session = $donns['code_data'];
+		$session = $donns['code'];
 		}
 		
 		else{
-		$session=$donns['code_data'];
+		$session=$donns['code'];
 		}
 		
 		if($donns['permission']=="user:boss"){
