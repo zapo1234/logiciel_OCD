@@ -45,7 +45,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($donns['permission']=="user:boss"){
 		
-		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
+		$puts='<button type="submit" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
 	<select name="delete_line" id="delete_line">
 	<option value="">Suprimer</option>
 	<option value="10">10 lignes</option>
@@ -66,9 +66,10 @@ $smart_from =($page -1)*$record_peage;
 		
 	// on boucle sur les les resultats
 	echo'<div class="expor">'.$export.'
-	<span>'.$puts.'</form></div>';
+	<span></form></div>';
 	// entete du tableau
-	 echo'	<table id="tb">
+	 echo'<form method="post" id="delete_check" action="test.php">
+	 '.$puts.'<table id="tb">
      <thead>
      <tr class="tf">
 	 <th></th>
@@ -93,7 +94,7 @@ $smart_from =($page -1)*$record_peage;
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss"){
 		
-		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].'">';
+		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].','.$donnees['code'].',">';
 		
 	
 	}
@@ -226,7 +227,7 @@ $smart_from =($page -1)*$record_peage;
 		echo'<div class="mobile">
 		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
-		     <div class="data'.$donnees['type'].'">'.$name.'<br/>'.$calls.'</div>
+		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
 		     '.$modif.'
 			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
@@ -236,7 +237,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
       echo'</tbody>
-     </table>';
+     </table></form>';
 	 
 	 // on compte le nombre de ligne de la table facture
 	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM facture WHERE email_ocd= :email_ocd');
@@ -293,7 +294,7 @@ $smart_from =($page -1)*$record_peage;
 	$rt=",";
   	$montant = number_format($donnees['montant'], 2, '.', '');
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
-	$reste = number_format($donnees['reste'], 2, '.', '');
+	
 	 echo'<div class="detail">
 	      <h4>Détails de la facture</h4>
 	      <div class="h">N° de facture <span class="fact">'.$nombre.'</span><br/><span class="typ">Type de facture :  '.$donnees['types'].'</span></div>
@@ -330,7 +331,7 @@ $smart_from =($page -1)*$record_peage;
 		  <td>'.$montant.'xof</td>
 		  <td>'.$mont_tva.'xof</td>
 		  <td>'.$donnees['avance'].'xof</td>
-		  <td>'.$reste.'xof</td>
+		  <td>'.$donnees['reste'].'xof</td>
 		  <td>'.str_replace($rt,$rem,$donnees['moyen_paiement']).'</td>
 		  </tr>
 		  </table>
@@ -404,30 +405,53 @@ $smart_from =($page -1)*$record_peage;
    }
    
    if($_POST['action']=="delete_check"){
-	   
-	 if(isset($_POST['checkbox_value'])){
-     $email=$_SESSION['email_ocd'];
-	 $code =$_SESSION['code'];
-   
-	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
-		$req="DELETE FROM facture WHERE code='".$code."' AND id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+	if(isset($_POST['check'])){
+	
+	$email =$_SESSION['email_ocd'];
+     $check =$_POST['check'];
+	 $data = implode('',$check);
+	 $datas = explode(',',$data);
+	 
+	 $tab= [];
+	 $array =[];
+	 $str = "0.";
+	 foreach($datas as $values){
+		 
+		if(preg_match("/{$str}/i", $values)){
+          $tab[] = $values;
+        }
+        else{
+          $array[]=$values;
+        }			
+	 }
+	 
+	 foreach($tab as $vales){
+		
+      foreach($array as $valus){		
+		
+       	$req="DELETE FROM facture WHERE code='".$valus."' AND id_fact ='".$vales."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($req);
 		$statement->execute();
 		
 		// suprimer dans la table bord_informations
 		
-		$rev="DELETE FROM bord_informations WHERE code='".$code."' id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$rev="DELETE FROM bord_informations WHERE code='".$valus."'  AND id_fact ='".$vales."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($rev);
 		$statement->execute();
 		
 		// suprimer dans la table home_occupation
-		$reg="DELETE FROM home_occupation WHERE code='".$code."' AND id_fact ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$reg="DELETE FROM home_occupation WHERE code='".$valus."' AND id_fact ='".$vales."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($reg);
-		$statement->execute();
-    }
-	
-	// suprimer dans la table home_occupation
+		$statement->execute();	
+	  
+	  }
+	}
+   // suprimer dans la table home_occupation
   }
+  else{
+	 echo'il n\'y as pas  de facture sélectionnée'; 
+  }   
+	 
 }
 
 if($_POST['action']=="mail"){
