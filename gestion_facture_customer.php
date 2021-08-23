@@ -130,7 +130,10 @@ margin-left:-10px;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
-.employes{color:black;} .gestionnaire{color:black;} .boss{color:black;}
+.employes{color:black;color:black;} .gestionnaire{color:black;} .boss{color:black;}
+
+#caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
+.h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
 @media (max-width: 575.98px) { 
 .envoyer{margin-left:-5%;}
@@ -181,13 +184,13 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                       
+                       <div id="resultats"></div>
                       
                     </div>
 					
 					
 					<div class="bg">
-                        <div id="resultats"></div>
+                        
               
                     </div>
                 </div>
@@ -216,18 +219,8 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Recherchez</option>
-						  <option value="01">Janvier</option><option value="02">Février</option>
-                           <option value="03">Mars</option>
-						   <option value="04">Avril</option>
-						   <option value="05">Mai</option>
-						   <option value="06">Juin</option>
-						   <option value="07">Juillet</option>
-						   <option value="08">Aout</option>
-						   <option value="09">Septembre</option>
-						   <option value="10">Octobre</option>
-						   <option value="11">Novembre</option>
-						   <option value="12">Décembre</option>
+                         <option selected>lister sur un site</option>
+						  
                           </select>
 						  
                           </div>  

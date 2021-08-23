@@ -2,25 +2,27 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+  $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
 // requete qui va chercher les montants
-    if($_SESSION['code']==0){
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
+    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
-	else{
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
-   $rej->execute(array(':code'=>$_SESSION['code'],
+	 if($donns['permission']=="user:employes"){
+    $rej=$bds->prepare('SELECT   email_ocd,montant,encaisse,reservation,depense,reste,society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+     $rej->execute(array(':code'=>$_SESSION['code'],
                        ':email_ocd'=>$_SESSION['email_ocd']));
-		
-	}
-   $donnees=$rej->fetch();
-   $rej->closeCursor();
+  }
+  
+  if($_POST['action']=="fetch") {
+   while($donnees =$rej->fetch()){
+  
+  echo'<span class="h1">Caisse '.$donnees['society'].'</span>
 
-if($_POST['action']== "fetch") {
-  echo'<h1>Encaissement journalier</h1>
-
-<div id="caisse">
+   <div id="caisse">
  <div class="td"> Facture soldée:</div>
  <div class="tds">'.$donnees['encaisse'].' XOF</div>
 
@@ -33,13 +35,15 @@ if($_POST['action']== "fetch") {
  <div class="td">Reste à payer réservation</div>
  <div class="tdc">'.$donnees['reste'].' XOF</div>
   
-     <div><button type="button" class="print" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
-     <div class=""><button type="button" style="margin-top:12px;margin-left:5%;"class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>
-            
-					
- </div>';
+     
+ </div><br/><br/>';
+ }
  
-
+ echo'<div><button type="button" class="print" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
+     <div class=""><button type="button" style="margin-top:12px;margin-left:5%;"class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>';
+            
+ 
+  $rej->closeCursor();
 }
 
 if($_POST['action']=="dat"){
@@ -52,9 +56,7 @@ $monts=0;
 	$society=$_SESSION['society'];
 	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
-    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
-	$donns =$rel->fetch();
+   
 	
 	
 	if($donns['code']==0){
@@ -100,11 +102,12 @@ $monts=0;
 					));
    
    // on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, depense= :ds, reservation= :rs, reste= :re WHERE email_ocd= :email_ocd');
+         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, depense= :ds, reservation= :rs, reste= :re WHERE code= :code AND email_ocd= :email_ocd');
          $ret->execute(array(':des'=>$monts,
 		                    ':ds'=>$monts,
 							':rs'=>$monts,
 							':re'=>$monts,
+							':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd']));
 		}
 

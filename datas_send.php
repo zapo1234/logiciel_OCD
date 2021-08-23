@@ -52,7 +52,7 @@ include('inc_session.php');
 	$number4 = array_sum($datac3);
 	$num_data = $number1+$number3+$number4;
 	
-	if($number1!=0 AND $number4!=0 AND $number2!=0 AND $number3!=0){
+	if($number1!=0 OR $number4!=0 OR $number2!=0 OR $number3!=0){
 	$data_number =$number1+$number2;
 	
 	$data_numbers =$num_data +$number2;
