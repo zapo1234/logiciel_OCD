@@ -42,7 +42,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 
-.delete{margin-left:15%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
+.delete{margin-left:55%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
@@ -579,25 +579,21 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
   
   // envoi du formulaire
 	 
-	$('#delet').on('submit', function(event) {
+	$(document).on('submit','#formc', function(event) {
 	event.preventDefault();
-	var action="delete_check";
+	var form_data =$(this).serialize();
+	var action ="delete_check";
 	$.ajax({
 	type:'POST', // on envoi les donnes
-	url:'result_facture_home.php',// on traite par la fichier
-	data:{action:action},
-	success:function(data) { // on traite le fichier recherche apres le retour
+	url:'test.php',// on traite par la fichier
+	data:form_data,
+	success:function(data) { // on traite le fichier recherche apres retour
        $('#result').html(data);
-	  load();
+	  loads();
 	  }
     });
 	
-	setInterval(function(){
-		 $('#result').html('');
-	 },4000);
-	  
-	  
-  });
+	});
   
   //$(document).on('click','.delete',function(){
  //var checkbox = $('.form-check-input:checked');

@@ -45,7 +45,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($donns['permission']=="user:boss"){
 		
-		$puts='<button type="submit" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
+		$puts='<button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
 	<select name="delete_line" id="delete_line">
 	<option value="">Suprimer</option>
 	<option value="10">10 lignes</option>
@@ -68,7 +68,7 @@ $smart_from =($page -1)*$record_peage;
 	echo'<div class="expor">'.$export.'
 	<span></form></div>';
 	// entete du tableau
-	 echo'<form method="post" id="delete_check" action="test.php">
+	 echo'<form method="post" id="formc" action="">
 	 '.$puts.'<table id="tb">
      <thead>
      <tr class="tf">
@@ -443,6 +443,15 @@ $smart_from =($page -1)*$record_peage;
 		$reg="DELETE FROM home_occupation WHERE code='".$valus."' AND id_fact ='".$vales."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($reg);
 		$statement->execute();	
+		
+		if(count($tab)==1){
+		echo'<span class="fact">une facture suprimée</span>';
+		}
+		
+		else{
+		 $a=count($tab);
+		 echo'<span class="fact">'.$a.'factures suprimées</span>';
+		}
 	  
 	  }
 	}
