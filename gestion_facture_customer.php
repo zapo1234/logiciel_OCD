@@ -406,6 +406,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
      $('#data_annuler').html(data);
      $('.annuler').css('display','none');
      $('#pak').css('display','none');
+	 $('.modif').css('display','none');
 	 loads();
 	 load();
 	}

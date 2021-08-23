@@ -481,6 +481,9 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
+
+
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -692,7 +695,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 						 
 						 <div class="tresor">
 						 <div class="contens">
-						 <h3>Prévisionnel NET Trésorie</h3>
+						 <h3>Prévisionnel NET Trésorie(Sans acompte réservation)</h3>
 						 <h4>Indicateur</h4>
 		                <div class="montants">+'.$ac.'%</div>
 		                <div>'.$indicateur.'</div>

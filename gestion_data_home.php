@@ -167,6 +167,10 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
+#caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
+.h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
+
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}

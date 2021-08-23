@@ -138,6 +138,9 @@ transition: all 200ms;}
 .mobile{display:none}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
+#caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
+.h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
+
 
 @media (max-width: 575.98px) { 
 
@@ -190,14 +193,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                      
+                     <div id="resultats"></div> 
 
-                    </div>
-
-
-					<div class="bg">
-                        <div id="resultats"></div>
-             
                     </div>
                 </div>
 

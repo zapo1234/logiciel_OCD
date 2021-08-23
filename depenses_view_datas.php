@@ -33,20 +33,19 @@ if($_POST['action']=="fetchs") {
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
  
-    if($donns['code']==0){
-		  $session=0;
+    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE  email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+		  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
-		else{
+		if($donns['permission']=="user:employes"){
 		$session=$donns['code'];
+		$req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+        $req->execute(array(':code'=>$session,
+                     ':email_ocd'=>$_SESSION['email_ocd']));
 		}
  
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
- $req->execute(array(':code'=>$session,
-                     ':email_ocd'=>$_SESSION['email_ocd']));
- 
-
- $datas=$req->fetchAll();
+    $datas=$req->fetchAll();
 	
   if($donns['permission']=="user:boss"){
 		
@@ -250,10 +249,10 @@ if($_POST['action']=="fetchs") {
 		else{
 		$session=$_SESSION['code'];
 		}
-		$rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE code= :code AND  email_ocd= :email_ocd');
-        $rev->execute(array(':dep'=>$donnees['depense']-$donnes['montant'],
-		                    ':code'=>$session,
-                            ':email_ocd'=>$_SESSION['email_ocd']));
+		//$rev=$bds->prepare('UPDATE tresorie_customer SET depense= :dep WHERE code= //:code AND  email_ocd= :email_ocd');
+        //$rev->execute(array(':dep'=>$donnees['depense']-$donnes['montant'],
+		                   // ':code'=>$session,
+                           // ':email_ocd'=>$_SESSION['email_ocd']));
 					 
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
 	    
@@ -308,8 +307,10 @@ if($_POST['action']=="fetchs") {
 	$nature='crédit fournisseur'; 
    }
 	
-	 $ren=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $ren->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	  $session =$_SESSION['code'];
+	 $ren=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+      $ren->execute(array(':code'=>$session,
+                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$ren->fetch();
    $ren->closeCursor();
 
@@ -361,10 +362,9 @@ if($_POST['action']=="fetchs") {
 	 
 	if(isset($_POST['checkbox_value'])){
    $email=$_SESSION['email_ocd'];
-   $code =$session;
    
 	for($count= 0; $count < count($_POST['checkbox_value']); $count++) {
-		$req="DELETE FROM depense WHERE code='".$session."' AND id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
+		$req="DELETE FROM depense WHERE  id ='".$_POST['checkbox_value'][$count]."' AND email_ocd='".$email."'";
 		$statement= $bds->prepare($req);
 		$statement->execute();
 		

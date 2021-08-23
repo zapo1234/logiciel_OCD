@@ -36,6 +36,7 @@ $smart_from =($page -1)*$record_peage;
 	<option value="30">30 lignes</option>
 	<option value="50">50 lignes</option>
 	</select> ';
+	
 		
 	}
 	else{
@@ -44,11 +45,19 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	
-	   
- 
- $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
- $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
- $datas=$req->fetchAll();
+	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+       $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+      $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+
+   if($donns['permission']="user:employes"){
+	 $session=$donns['code'];
+    $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+      $req->execute(array(':code'=>$session,
+	                      ':email_ocd'=>$_SESSION['email_ocd']));
+   }	   
+   
+   $datas=$req->fetchAll();
 	
 	echo'<div id="derr">';
   // on boucle sur les les resultats

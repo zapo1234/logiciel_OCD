@@ -208,7 +208,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $numero_compte=$_SESSION['email_ocd'];
    $email =$_SESSION['email_ocd'];
    $email1 =$_POST['email'];
-   $session = $_SESSION['code'];
+   $session = $donns['code'];
    
    
     $dat1 = explode('-',$_POST['dat']);

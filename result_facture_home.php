@@ -217,7 +217,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
 		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.''.$donnees['code'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.''.$donnees['code'].'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
-		  '.$modif.'
+		  <span class="motif">'.$modif.'</span>
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
@@ -229,7 +229,7 @@ $smart_from =($page -1)*$record_peage;
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
-		     '.$modif.'
+		     <span class="modif">'.$modif.'</span>
 			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		     '.$encaiss.'
 			 <br/>'.$annul.'<br/><span class="dg">'.$donnees['calls'].'</span></div>
@@ -404,64 +404,7 @@ $smart_from =($page -1)*$record_peage;
 	   
    }
    
-   if($_POST['action']=="delete_check"){
-	if(isset($_POST['check'])){
-	
-	$email =$_SESSION['email_ocd'];
-     $check =$_POST['check'];
-	 $data = implode('',$check);
-	 $datas = explode(',',$data);
-	 
-	 $tab= [];
-	 $array =[];
-	 $str = "0.";
-	 foreach($datas as $values){
-		 
-		if(preg_match("/{$str}/i", $values)){
-          $tab[] = $values;
-        }
-        else{
-          $array[]=$values;
-        }			
-	 }
-	 
-	 foreach($tab as $vales){
-		
-      foreach($array as $valus){		
-		
-       	$req="DELETE FROM facture WHERE code='".$valus."' AND id_fact ='".$vales."' AND email_ocd='".$email."'";
-		$statement= $bds->prepare($req);
-		$statement->execute();
-		
-		// suprimer dans la table bord_informations
-		
-		$rev="DELETE FROM bord_informations WHERE code='".$valus."'  AND id_fact ='".$vales."' AND email_ocd='".$email."'";
-		$statement= $bds->prepare($rev);
-		$statement->execute();
-		
-		// suprimer dans la table home_occupation
-		$reg="DELETE FROM home_occupation WHERE code='".$valus."' AND id_fact ='".$vales."' AND email_ocd='".$email."'";
-		$statement= $bds->prepare($reg);
-		$statement->execute();	
-		
-		if(count($tab)==1){
-		echo'<span class="fact">une facture suprimée</span>';
-		}
-		
-		else{
-		 $a=count($tab);
-		 echo'<span class="fact">'.$a.'factures suprimées</span>';
-		}
-	  
-	  }
-	}
-   // suprimer dans la table home_occupation
-  }
-  else{
-	 echo'il n\'y as pas  de facture sélectionnée'; 
-  }   
-	 
-}
+   
 
 if($_POST['action']=="mail"){
 	
