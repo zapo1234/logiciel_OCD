@@ -443,7 +443,7 @@ if($_POST['action']=="editvalidate"){
 					 )); 
 					 
 	  // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez activé l\'accès !</div>';
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez activé l\'accès du local !</div>';
 		     
 	}
 
@@ -457,6 +457,15 @@ if($_POST['action']=="editvalidate"){
    // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+	
+	 $id_fact=0;
+     $date="";
+     $horaires="";
+     $active="off";
+     $datas_fren="";
+	 $dates="";
+     $activ=5;
+     $code=$_SESSION['code'];	 
 		
 	    $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
@@ -464,26 +473,20 @@ if($_POST['action']=="editvalidate"){
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
-					 
-	$id_fact=0;
-     $date="";
-     $horaires="";
-     $active="off";
-     $datas_fren="";
-	 $dates="";
-     $activ=5;	 
+		 
 	// inserer dans la table home_occupation
 			  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
+	   VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $reys->execute(array(':id_chambre'=>$id,
 		                      ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id_fact,
-							  ':type'=>$activ
+							  ':type'=>$activ,
+							  ':code'=>$code
 	                        ));		
 	 }
 
