@@ -5,6 +5,7 @@ include('inc_session.php');
 if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
  $id_fact =$_GET['id_fact'];
  $code =$_GET['code_data'];
+ $session = $_GET['code_data'];
 // recupére les données de la base de données si $_GET['id_fact']
   $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
     $req->execute(array(':code'=>$code,
@@ -54,7 +55,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	
  
 		     echo'<div class="hom" id="homs'.$dos['id_chambre'].'"><h5>'.$dos['type_logement'].'</h5>
-			<span class="d">'.$dos['chambre'].'</span><span class="dg">'.$dos['montant'].'x'.$donns['nombre'].' xof</span> 
+			<span class="d">'.$dos['chambre'].'</span><span class="dg">'.$dos['montant'].'x'.$donns['nombre'].' xof</span><span><input type="hidden" name="paie[]" value="'.$dos['montant'].'"> 
 			<input type="hidden" name="chambre[]" value="'.$dos['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$dos['type_logement'].'">
 			<input type="hidden" name="pay[]" value="'.$dos['montant'].'">
@@ -465,6 +466,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 		   
 		   $arrays = array_diff($tab,$array);
 		    $totals= array_sum($arrays);
+			 
 			
 		}
 			
@@ -481,17 +483,16 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 		// recupére les données 
        $id=$_POST['id'];
 	   $id_fact =$_GET['id_fact'];
-	
+	   $session=$_GET['code_data'];
 	// recupére les autres données
 	$total1 = $_POST['mon'];
 	$account1= $_POST['acomp'];
 	$reste1 = $_POST['rest'];
-	
-    
 	//
 	
-	$req=$bds->prepare('SELECT montant,mont_restant FROM bord_informations WHERE id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd ');
-    $req->execute(array(':id'=>$id,
+	$req=$bds->prepare('SELECT montant,mont_restant FROM bord_informations WHERE  code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+    $req->execute(array(':code'=>$session,
+	                    ':id'=>$id,
 	                    ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
 	$dnns=$req->fetch();
@@ -525,30 +526,34 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	
 	// modifie les données
 	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE email_ocd= :email_ocd AND id_fact= :id');
+         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$monts,
 		                    ':ds'=>$_POST['acomp'],
 							':rs'=>$monts-$_POST['acomp'],
 							':rps'=>$_POST['rep'],
 							':tva'=>$taxe,
+							':code'=>$session,
 							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
 	 // on modifie les données de la base de données guide
-         $rem=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des  WHERE email_ocd= :email_ocd');
-        $rem->execute(array(':des'=>$montant-$taxe_mont,
+         $rem=$bds->prepare('UPDATE tresorie_customer SET  encaisse= :des  WHERE code= :code AND email_ocd= :email_ocd');
+        $rem->execute(array(':code'=>$session,
+		                    ':des'=>$montant-$taxe_mont,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	
     // on surprime la data de delete dans la tableau
-    $res=$bds->prepare('DELETE  FROM bord_informations WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $res=$bds->prepare('DELETE  FROM bord_informations WHERE code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
     $res->execute(array(':id'=>$id,
+	                    ':code'=>$session,
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	// on surprime la data de delete dans la tableau
-    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE  id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
-    $rel->execute(array(':id'=>$id,
+    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $rel->execute(array(':code'=>$session,
+	                    ':id'=>$id,
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));				
 	

@@ -311,6 +311,10 @@ margin-left:-10px;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
+
+.butto{margin-left: 2%; margin-top: 20px; width: 250px;height: 40px;color: white;background: #ACD6EA;border-radius: 15px;text-transform: capitalize;
+    border: 2px solid #ACD6EA;
+}
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -1224,7 +1228,7 @@ echo $_SESSION['token'];?>">
 	var results = resul.toFixed(2);
 	var t = parseFloat(results)+parseFloat(totals);
 	var ts = t.toFixed(2);
-	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+	$('.tva').html('<span class="taxe">'+results+'</span> <input type="hidden" name="taxe" value="'+results+'">');	
 	$('.mon').text(ts);
 	}
 	
@@ -1235,12 +1239,12 @@ echo $_SESSION['token'];?>">
 
     if(tva.length ==""){
      var results = 0;
-	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+	$('.tva').html('<span class="taxe">'+results+'</span> <input type="hidden" name="taxe" value="'+results+'">');	
     }
      
 	if(totals ==0){
      var results = 0;
-	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
+	$('.tva').html('<span class="taxe">'+results+'</span><input type="hidden" name="taxe" value="'+results+'">');	
     }
    	
   });
@@ -1253,7 +1257,8 @@ echo $_SESSION['token'];?>">
 	 if(account >0 || account==0){
 		if(account < tota){
 		var result = parseFloat(totals) - parseFloat(account);
-        $('#rest').val(result);
+		var ts = result.toFixed(2);
+        $('#rest').val(ts);
 	 }
 	 else{
 		$('#rest').val(0);
@@ -1370,7 +1375,7 @@ echo $_SESSION['token'];?>">
 	  if($('#mts').hasClass('montas')) {
 		 var results = parseFloat(monta)+parseFloat(montas); 
 	  }
-	   if(acomp < results){
+	   if(acomp < results || acomp==results){
 	   $('#form1').submit();
 	   }
 	   else{

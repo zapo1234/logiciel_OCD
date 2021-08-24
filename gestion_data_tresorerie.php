@@ -85,8 +85,8 @@ ul a{margin-left:3%;} #form_logo{display:none;}
 border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white;border-right:1px solid white;border-bottom:2px solid #3C52C7;font-size:20px;width:120px;}
 .export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
-#resul_depense,#indicateur{float:left;margin-left:2%;} 
-#resul_depense{width:60%;} #indicateur{width:30%;margin-left:5%;}
+#resul_depense,#indicateur{float:left;}
+#resul_depense{width:60%;} #indicateur{width:30%;margin-left:8%;}
 .pied_page{margin-left:20%;margin-top:25px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .montants{margin-left:15%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:15%;font-size:30px;color:#D20A22;font-weight:bold;}
