@@ -2,6 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+ 
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +52,17 @@ include('inc_session.php');
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
 
+#paks{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
+
 .enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
 .dep {
   animation: spin 2s linear infinite;
   margin-top:10px;
+  width:100px;
+  position:absolute;
+  z-index:4;
+  top:200px;
+  left:45%;
   }
 
 @keyframes spin {
@@ -132,7 +140,7 @@ margin-left:-10px;}
 
 .employes{color:black;color:black;} .gestionnaire{color:black;} .boss{color:black;}
 
-#caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
+#caisse{font-size:18px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
 @media (max-width: 575.98px) { 
@@ -218,9 +226,33 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
                                Lister des factures  
                             </div>
 
-                        <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="list" name="list">
                          <option selected>lister sur un site</option>
-						  
+						 <?php
+			
+			// lister les les site pour afficher des facture
+			// recupére les permission 
+			// recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+        $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	     $donns =$rel->fetch();
+		 
+		 if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		 
+          $rel=$bds->prepare('SELECT code,society FROM tresorie_customer WHERE email_ocd= :email_ocd');
+         $rel->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+		 }
+		 if($donns['permission']=="user:employes"){
+			$rel=$bds->prepare('SELECT code,society FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+         $rel->execute(array(':code'=>$donns['code'],
+		                     ':email_ocd'=>$_SESSION['email_ocd'])); 
+			}
+         $donnees = $rel->fetchAll();
+			foreach($donnees as $value){
+	        echo'<option value="'.$value['code'].'">'.$value['society'].'</option>';
+              }
+					?>	  
                           </select>
 						  
                           </div>  
@@ -239,7 +271,8 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
                     <!-- 404 Error Text -->
                     <div class="center">
                     
-					<div id="results"></div>
+					<div id="results"></div><!--afficher les données-->
+					<div id="resu"></div><!--afficher des données-->
  
                    </div><!--content-->
  
@@ -305,6 +338,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
   
 
 <!--div black-->
+<div id="paks" style="display:none"><div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:white;font-size:25px;"></i></div></div>
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
 
@@ -330,318 +364,5 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
-  <script type="text/javascript">
-   $(document).ready(function(){
-     
-	  $('#sms').click(function(){
-	$('.drop').slideToggle();
-	});
-	
-	 $('#news_data').click(function(){
-	$('.drops').slideToggle();
-	$('.drop').css('display','none');
-	 });
-	 
-	 // afficher les données des encaissements
-    // compter les nouveaux message
-	function views() {
-				var action="fetchs";
-				$.ajax({
-					url: "news_messages.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultats_messages').html(data);
-					}
-				});
-			}
-
-			views();
-
- $('#pak').click(function(){
-	$('#examp').css('display','none');
-   $('#pak').css('display','none');
-   $('.reini').css('display','none');
-   $('.annuler').css('display','none');
-   $('.detail').css('display','none');
-   $('.envoyer').css('display','none');
- });
- 
- $('#im').click(function(){
-	$('#data').css('display','block');
-});
- 
- // action sur l'onglet gére
- 
- $(document).on('click','.action',function(){
-	var id = $(this).data('id2');
-  // affich
-  $('#content'+id).slideToggle();
+  <script src="js/facture.js"></script>
   
-  if(id ===3){
- $('.datas').css('height','120px');	
-  }
-});
-
-
- // 
- 
- // delete home--
- $(document).on('click','.annul', function(){
-	 // recupere la variable
-	 var id = $(this).data('id5');
-	 var action = "deleted";
-    // affiche les differentes
-	$('.annuler').css('display','block');
-	$('#id_fact').text(id);
-    $('#pak').css('display','block');
-	$('#ids').val(id);
-	
-	$(document).on('click','.annuls', function(){
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_facture_home.php',// on traite par la fichier
-	data:{id:id,action:action},
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data_annuler').html(data);
-     $('.annuler').css('display','none');
-     $('#pak').css('display','none');
-	 $('.modif').css('display','none');
-	 loads();
-	 load();
-	}
-		
-	});
-	
-	setInterval(function(){
-		 $('#data_annuler').html('');
-	 },4000);
-
- });
- });
- 
- // delete home--
- $(document).on('click','.envoi', function(){
-	 // recupere la variable
-	 var id = $(this).data('id3');
-	 var action = "mail";
-    // affiche les differentes
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'result_facture_home.php',// on traite par la fichier
-	data:{id:id,action:action},
-	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#data_annuler').html(data);
-     $('#pak').css('display','block');
-	}
-
- });
- });
- 
- $(document).on('click','.details', function(){
-	 // recupere la variable
-	 var id = $(this).data('id2');
-	 var action = "details";
-	 $.ajax({
-			      url: "result_facture_home.php",
-					method: "POST",
-					data:{id:id,action:action},
-					success: function(data) {
-						$('#details').html(data);
-						$('#pak').css('display','block');
-					}
-				});
-    
- });
- 
- // click sur les news message
-	
-	$(document).on('click','#sms',function(){
-		  var action ="click";
-		  $.ajax({
-            type: 'POST',
-            url:'messanger_datas.php',
-            data:{action:action},
-            async:true,
-            success: function(data){
-            $('#message_datas').html(data);
-	
-		    }
-          });
-		  
-	  });
-  
-  // compter les nouveaux message
-	function view() {
-				var action="news";
-				$.ajax({
-					url: "messanger_datas.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#sms').html(data);
-					}
-				});
-			}
-
-			view();
-  
-  
-  function loads(page) {
-				var action="fetch";
-				$.ajax({
-					url: "result_facture_home.php",
-					method: "POST",
-					data:{action:action,page:page},
-					success: function(data) {
-						$('#results').html(data);
-					}
-				});
-			}
-
-			loads();
-			
-  // pagintion
-  $(document).on('click','.bout',function(){
-	  var page =$(this).attr("id");
-	  loads(page);
-   });
-  
-			
-  
-  function load() {
-				var action="fetch";
-				$.ajax({
-					url: "affichage_donnees.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultats').html(data);
-					}
-				});
-			}
-
-			load();
-			
-	$(document).on('click','.pdf',function(){
-	var id = $(this).data('id4');
-	var action = "generate";
-	               $.ajax({
-					url: "generate_data_pdf.php",
-					method: "POST",
-					data:{id:id,action:action},
-					success: function(data) {
-						$('#pak').css('display','block');
-						$('#resultats').html(data);
-					}
-				});
-          });
-	
-	// afficher la div pour réinitailiser les chiffres	
-	$(document).on('click','.butt',function(){
-    $('.reini').css('display','block');
-    $('#pak').css('display','block');
-    });
-	
-   // envoi du formulaire
-	 
-	 $('#form_reini').on('submit', function(event) {
-	event.preventDefault();
-	
-	var action="dat";
-	var date=$('#reini').val();
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'affichage_donnees.php',// on traite par la fichier
-	data:{action:action,date:date},
-	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#pak').css('display','none');
-	  $('#result_reini').html(data);
-	  $('.reini').css('display','none');
-	  load();
-	  
-	 
-	}
-    });
-	
-	setInterval(function(){
-		 $('#result_reini').html('');
-	 },6000);
-	  
-	  
-  });
-  
-  // envoi du formulaire
-	 
-	$(document).on('submit','#formc', function(event) {
-	event.preventDefault();
-	var form_data =$(this).serialize();
-	var action ="delete_check";
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'test.php',// on traite par la fichier
-	data:form_data,
-	success:function(data) { // on traite le fichier recherche apres retour
-       $('#result').html(data);
-	  loads();
-	  }
-    });
-	
-	});
-  
-  //$(document).on('click','.delete',function(){
- //var checkbox = $('.form-check-input:checked');
- //var action="delete_check";
- //if(checkbox.length > 0) {
-//	var checkbox_value = [];
- //$(checkbox).each(function() {
-	checkbox_value.push($(this).val());
- //});
- 
- //$.ajax({
-//	type:'POST', // on envoi les donnes
-//	async: false,
-//	url:'result_facture_home.php',// on traite par la fichier
-//	data:{checkbox_value:checkbox_value,action:action},
-//	success:function() {
-//	 loads();
-//	 var nombre = checkbox.length;
-//	 if(nombre==1){
-//	   var nbrs ="supression d'une facture"; 
-//	 }
-	 
-//	 else{
-		 //var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span>factures'; 
-//	 }
-	 
-//	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
-//	 }
- //  });
- //  }
- 
- //else {
-//	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune facture selectionnée</span></div>');
-	 
- //}
- 
- //});
- 
- $(document).on('click','.details',function(){
-	   	var id = $(this).data('id2');	
-      // on affiche la div
-       $('#id'+id).slideToggle();
-       
-	   for(id-1; id <5000; id++){
-        $('#id'+id).css('display','none');
-        }
-
-        for(5000; id > 0; id--){
-        $('#id'+id).css('display','none');
-        }	
-		 			
-		 	
-	 });
-   
-   });
-   
-  </script>

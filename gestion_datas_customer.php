@@ -99,7 +99,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 
 .live-infos{
   width: 250px;
-  height: 200px;
+  height: 600px;
   overflow: hidden;
   position: relative;
   background-color:white;
@@ -153,10 +153,10 @@ footer.sticky-footer{}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
-#resultats{height:700px;overflow-y:scroll;padding-left:3%;width:230px;}
+#resultats{height:700px;overflow-y:scroll;padding-left:3%;width:270px;}
 
 #caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
-.h1{padding:1%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
+.h1{padding:1%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;} .site{font-size:12px;}
 
 @media (max-width: 575.98px) { 
 
@@ -215,14 +215,14 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
         $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	    $donns =$rel->fetch();
 		if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
-        $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+        $res=$bds->prepare('SELECT date,numero,clients,montant,type,types,society FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,10');
         $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
         }
 		
 		// afficher les facture.
 		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
 		$session=$donns['code'];
-		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
+		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types,society FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':code'=>$session,
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -251,7 +251,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 		  }	
 			 
 		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
-		       '.$type.' '.$donnes['montant'].' xof</li>';
+		       '.$type.' '.$donnes['montant'].' xof de <br/><span class="site">'.$donnes['society'].'</span></li>';
 		}
 		       ?>
 				   
@@ -263,7 +263,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 					  
                     </div>
 					
-	 <div id="resultats"></div>
+	 
             
 			</div>
 

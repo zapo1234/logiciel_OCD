@@ -2,7 +2,6 @@
 include('connecte_db.php');
 include('inc_session.php');
 if(isset($_GET['data_id'])){
-echo$_GET['data_id'];
  $record_peage=20;
 $page="";
   

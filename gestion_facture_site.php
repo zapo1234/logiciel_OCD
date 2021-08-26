@@ -383,6 +383,13 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 
 			lists();
 			
+	// pagintion
+  $(document).on('click','.bout',function(){
+	  var page =$(this).attr("id");
+	  lists(page);
+   });
+  
+			
 	$(document).on('change','#recher',function(){
 	 function recher(page) {
 				var action="list";
