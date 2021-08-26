@@ -81,14 +81,9 @@ ul a{margin-left:3%;}
 
  try{
 	
-	if($_SESSION['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$_SESSION['code'];
-		}
 	
+		$session=$_SESSION['code'];
+		
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE  code= :code AND  email_ocd= :email_ocd');
    $rej->execute(array(':code'=>$session,
                        ':email_ocd'=>$_SESSION['email_ocd']));
@@ -96,11 +91,12 @@ ul a{margin-left:3%;}
 	$rej->closeCursor();
 
   // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT date,user,montant,reste,avance,mont_tva FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT date,user,montant,reste,avance,mont_tva,user FROM facture WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
    $res->execute(array(':code'=>$session,
                        ':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
+   $res->closeCursor();
    
    $dat =$donnees['date'];
    
@@ -108,6 +104,11 @@ ul a{margin-left:3%;}
     $j = $dats[2];
 	$mm = $dats[1];
 	$an = $dats[0];
+	
+	// trnaformer la chaine de caractère user en tableau
+	$user = str_split($donnees['user']);
+	$result = count($user);
+	
    
    // création d'un tableau pour recupérer les users
    $user_data = $donnees['user'].',<i class="fas fa-list-alt" style="font-size:13px;color:#66FF8F;"></i>  modifié le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"><i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].'</span>';
@@ -116,11 +117,12 @@ ul a{margin-left:3%;}
    
    $user_datas = implode(',',$user);
   
-   $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE id_fact= :id AND email_ocd= :email_ocd');
-   $rev->execute(array(':id'=>$id,
+   $rev=$bds->prepare('SELECT email_ocd,id_chambre FROM bord_informations WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+   $rev->execute(array(':code'=>$session,
+                      ':id'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnes=$rev->fetchAll();
-   
+   $rev->closeCursor();
    // on regroupe tout les id_chambre dans un tableau deja facturé
    $arrays = [];
    foreach($donnes as $data){
@@ -216,10 +218,25 @@ ul a{margin-left:3%;}
    $code =$_SESSION['code'];
    $society =$_SESSION['society'];
    
+   // recupere la value rde la somme pour le total html
+   // on créer un tableau vide
+   $tab = [];
+   $som =$_POST['pay'];
+   // transformation en chaine de caractère
+   $som = implode(',',$som);
+   // on transform en tableau les données
+   $somme = explode(',',$som);
    
-   $direction = $_POST['to'];
+   foreach($somme as $value){
+	   $tab[]= $value;
+	 }
+   // cacule du montant HTTc
+   $sommes = array_sum($tab)*$_POST['nbjour']+$_POST['rep'];
+   $somm = $sommes*$_POST['tva']/100 +$sommes;
+   $taxe2 = $sommes*$_POST['tva']/100;
+   
+  $direction = $_POST['to'];
    // récupére les variable dans différentes cas possible de séjour
-   
    $prix_repas =$_POST['rep'];
    
    // Type de moyens de paiment
@@ -357,6 +374,8 @@ ul a{margin-left:3%;}
 	 $data_status = $status1.','.$status2.','.$status3.','.$status4;
 	 $data_num = $num1.','.$num2.','.$num3.','.$num4;
 	 $status =$data_status;
+	 
+	
    }
    
  if($_POST['to']=="réservation") {
@@ -496,7 +515,13 @@ ul a{margin-left:3%;}
    
    // boucler sur les valeurs pour entrer les données dans la bdd
 
+   // on peut modifier la facture 4fois 
+   
+   if($result < 1300){
+
    if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
+
+    
 
    for($count=0;  $count<count($_POST['chambre']); $count++){ 
    
@@ -507,7 +532,7 @@ ul a{margin-left:3%;}
 	 //
 		// on redirige vers la page
 		 echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dr">'.$ty.'</div>
 			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
@@ -576,12 +601,12 @@ ul a{margin-left:3%;}
 							':us'=>$user_datas,
 							':client'=>$name,
 							':pc'=>$client,
-							':mont'=>$monts,
+							':mont'=>$somm,
 							':avc'=>$avance,
 							':rest'=>$reste,
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
-							':mtva'=>$taxe,
+							':mtva'=>$taxe2,
 							':remi'=>$_POST['remise'],
 							':ty'=>$mode,
 							':moyen_paie'=>$status,
@@ -621,7 +646,7 @@ ul a{margin-left:3%;}
 	 $types = $type[$count];
 	
 			echo'<div id="pak"></div>
-             <div class="enre"><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué </div>
+             <div class="enre"><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:13px;">
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
@@ -690,12 +715,12 @@ ul a{margin-left:3%;}
 							':us'=>$user_datas,
 							':client'=>$name,
 							':pc'=>$client,
-							':mont'=>$monts,
+							':mont'=>$somm,
 							':avc'=>$avance,
 							':rest'=>$reste,
 							':mont_rep'=>$prix_repas,
 							':tv'=>$tva,
-							':mtva'=>$taxe,
+							':mtva'=>$taxe2,
 							':remi'=>$_POST['remise'],
 							':ty'=>$mode,
 							':moyen_paie'=>$status,
@@ -723,6 +748,16 @@ ul a{margin-left:3%;}
 
              		 
    }
+   }
+   else{
+	   
+	   echo'<div id="pak"></div>
+             <div class="enre"><i class="fas fa-check-circle" style="color:red;font-size:20px;"></i> Attention pas plus de 5 modifications aurotisées </div>
+		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:red;font-size:13px;"></i></div>
+             <meta http-equiv="Refresh" content="3; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+   }
+   
+   
   }
    catch(Exception $e)
   {
