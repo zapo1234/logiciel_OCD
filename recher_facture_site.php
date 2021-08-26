@@ -1,6 +1,7 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
+if(isset($_GET['data_id'])){
 echo$_GET['data_id'];
  $record_peage=20;
 $page="";
@@ -52,7 +53,7 @@ $smart_from =($page -1)*$record_peage;
 	<option value="50">50 lignes</option>
 	</select> ';
 	
-	$export='<form method="post" action="excel.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
+	$export='<form method="post" action="excel_site.php?data_id='.$code.'"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
@@ -264,6 +265,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	echo'</div>';
-	
+
+}	
    
   
