@@ -37,8 +37,9 @@ include('inc_session.php');
 		}
 
  // on recupere le montant
- $req=$bds->prepare('SELECT depense FROM tresorie_customer WHERE email_ocd= :email_ocd');
- $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ $req=$bds->prepare('SELECT depense FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+ $req->execute(array(':code'=>$donns['code'],
+                    ':email_ocd'=>$_SESSION['email_ocd']));
  $donnes=$req->fetch();
 
  $date=$_POST['ti'];
