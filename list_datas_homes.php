@@ -126,7 +126,7 @@ $smart_from =($page -1)*$record_peage;
     // si le client est facturé sur un séjour ou reservation
 	if($debut <= $date_english AND $date_english <= $sortie AND in_array($date_english,$array)) {
 	$color ='occupe';
-	$status ='un client est présent dans le local,<br/>le local sera libre  à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
+	$status ='un client est présent dans le local,<br/>il sera disponible à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
 	
 	}
 	
@@ -134,12 +134,12 @@ $smart_from =($page -1)*$record_peage;
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='le local est réservé, et sera occupé <br/> partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
+	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
 	}
 
 	else{
 		$color='libre';
-		$status ='le local est libre';
+		$status ='le local est disponible';
 	
 	}
    
@@ -170,7 +170,7 @@ $smart_from =($page -1)*$record_peage;
 	
      if($nombre==0 AND $nombr==0 AND $nombres==0 AND $nom==0){
 		$color='libre';
-		$status ='le local est libre';
+		$status ='le local est disponible';
    }
 
 	 echo'<div><a href="view_data_home.php?home='.$donnees['id_chambre'].'"><div class="homes" id="home'.$color.'">

@@ -214,68 +214,16 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <h1>Les enregistrements récents</h1>
+                    <h1>Différentes caisses journalières</h1>
                       
                   <div class="container">
  
-                  <div class="live-infos">
-                   
-				   <ul class="winners">
-	            <?php
-		// afficher les dernières enregistrements
-		// aller chercher les auteurs en écriture sur une facture
-	    if($_SESSION['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$_SESSION['code'];
-		}
-		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
-        $res->execute(array(':code'=>$session,
-		                    ':email_ocd'=>$_SESSION['email_ocd']));
-        
-		 while($donnes=$res->fetch()){
-			
-          if($donnes['type']==1){
-            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
-		    $type ='<span class="sejour">'.$donnes['types'].'</span>';
-			
-		  }
-        	
-          if($donnes['type']==2){
-             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
-			 $type ='<span class="pass">'.$donnes['types'].'</span>';
-		  }
-
-          if($donnes['type']==3){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="reservation">'.$donnes['types'].'</span>';
-		  }	
-
-         if($donnes['type']==4){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="annule">'.$donnes['types'].'</span>';
-		  }		  
-			 
-		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
-		       '.$type.' '.$donnes['montant'].' xof</li>';
-		}
-		       ?>
-				   
-				</ul>
-	               
-				  </div><!--livre-infos-->
+                  <div id="resultats"></div>
 	              
 				  </div><!--live-infos-->
 					  
                     </div>
-					
-					
-					<div class="bg">
-                        <div id="resultats"></div>
-                      
-                    </div>
+				
                 </div>
 
         <!-- Content Wrapper -->
