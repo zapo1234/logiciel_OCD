@@ -343,6 +343,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 <div id="paks" style="display:none"><div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:white;font-size:25px;"></i></div></div>
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
+<div id="panier"></div><!--panier facturation-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -407,7 +408,22 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 
 			recher();
 		
-	});		
+	});
+
+    // afficher le pannier
+  function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();	
 			
 			
 			

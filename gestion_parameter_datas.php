@@ -75,7 +75,7 @@ img {
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
 #role,#roles{width:320px;height:40px;border:1px solid #eee;}
-label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
+label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:690px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 
 #form3{width:40%;height:600px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}
@@ -437,6 +437,7 @@ padding-bottom:15px;} .df{margin-left:30%;}
 <div id="donns"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="panier"></div><!--retour panier facturation-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -858,6 +859,22 @@ padding-bottom:15px;} .df{margin-left:30%;}
 		
 	}
 	});
+	
+	
+	// afficher le pannier
+  function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();
 	
 	// click sur les news message
 	

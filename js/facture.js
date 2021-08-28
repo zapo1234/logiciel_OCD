@@ -265,7 +265,7 @@ $(document).ready(function(){
 	
 	$(document).on('change','#list',function(){
 	 function recher(page) {
-				var action="fetch";
+				var action="list";
 				var id=$('#list').val();
 				$.ajax({
 					url: "recher_facture_home.php",
@@ -274,6 +274,7 @@ $(document).ready(function(){
 					success: function(data) {
 						$('#results').css('display','none');
 						$('#resu').html(data);
+						
 					}
 				});
 			}
@@ -281,43 +282,22 @@ $(document).ready(function(){
 			recher();
 		
 	});
+	
+	// afficher le pannier
+  function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();
   
-  //$(document).on('click','.delete',function(){
- //var checkbox = $('.form-check-input:checked');
- //var action="delete_check";
- //if(checkbox.length > 0) {
-//	var checkbox_value = [];
- //$(checkbox).each(function() {
-	checkbox_value.push($(this).val());
- //});
- 
- //$.ajax({
-//	type:'POST', // on envoi les donnes
-//	async: false,
-//	url:'result_facture_home.php',// on traite par la fichier
-//	data:{checkbox_value:checkbox_value,action:action},
-//	success:function() {
-//	 loads();
-//	 var nombre = checkbox.length;
-//	 if(nombre==1){
-//	   var nbrs ="supression d'une facture"; 
-//	 }
-	 
-//	 else{
-		 //var nbrs = 'vous avez suprimez  <span class="drt">'+nombre+'</span>factures'; 
-//	 }
-	 
-//	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
-//	 }
- //  });
- //  }
- 
- //else {
-//	$('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> aucune facture selectionnée</span></div>');
-	 
- //}
- 
- //});
  
  $(document).on('click','.details',function(){
 	   	var id = $(this).data('id2');	
@@ -334,5 +314,7 @@ $(document).ready(function(){
 		 			
 		 	
 	 });
+	 
+	 
    
    });

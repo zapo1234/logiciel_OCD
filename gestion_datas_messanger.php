@@ -298,6 +298,7 @@ border-radius:25px;}
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="panier"></div><!--div ajax retour facturation-->
 
 
     <!-- Bootstrap core JavaScript-->
@@ -570,7 +571,22 @@ border-radius:25px;}
 	
 	 
       });
-		 		
+		 	
+
+	// afficher le pannier
+  function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();		
 
     });	
    
