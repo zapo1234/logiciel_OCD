@@ -38,6 +38,7 @@ include('inc_session.php');
 		  $count = count($_SESSION['add_home']);
 		  $item_array = array(
          'id'          =>   $_POST['id'],
+		 'to'          =>   $_POST['to'],
 		 'nbjour'      =>   $_POST['nbjour'],
          'prix_nuite'  =>   $pay,
          'prix_pass'   =>   $pay,
@@ -50,21 +51,16 @@ include('inc_session.php');
          );
 		 
 		 $_SESSION['add_home'][$count] = $item_array;
-				
-		}
+	   }
 	 
 	 else{
-		 
-		 
 	 }
-	
-		
 	}
 	 
 	 else{
-	 
-	    $item_array = array(
+	     $item_array = array(
          'id'          =>   $_POST['id'],
+		 'to'          =>  $_POST['to'],
 		 'nbjour'      =>   $_POST['nbjour'],
          'prix_nuite'  =>   $pay,
          'prix_pass'   =>   $pay,
@@ -75,59 +71,41 @@ include('inc_session.php');
 		 'montant'     =>   $pay*$_POST['nbjour']
 
          );
-         
          // enregistrer les élement dans un tableau
          $_SESSION['add_home'][] = $item_array;		 
-		   
 	   }
-	  
-	  if(!empty($_SESSION['add_home'])){
-		  
+	   if(!empty($_SESSION['add_home'])){
 		  $total =0;
 	     	$count =count($_SESSION['add_home']);
 			if($count ==1){
 			  $local ="local";
 			}
-			
 			else{
 				$local ="locaux";
 			}
 			echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
 			
 			foreach($_SESSION['add_home'] as $keys => $values){
-		
-			
-			if($_POST['to']=="réservation") {
-				
+		   if($_POST['to']=="réservation") {
 			 $adjout ='<div>Acompte(+):<br/><input type="number" id="account" name="account"><span class="account"></span></div>
 			<div>Reste à payér:<br/><input type="number" id="rpay" name="rpay"></div>';
-			 
 			}
 			if($_POST['to']=="séjour" OR $_POST['to']=="horaire") {
-				
 			$adjout ='<div class="dd">Acompte(+):<br/><input type="number" id="account" name="account"><span class="account"></span></div>
 			<div class="dd">Reste à payér:<br/><input type="number" id="rpay" name="rpay"></div>';
-			
 			}
 			
-			
 			if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
-				
 				if(!empty($_POST['prix_nuite'])){
-		
-             $pays = $values['prix_nuite'];	
-        		
-	          }
-	 
-	        else{
+		       $pays = $values['prix_nuite'];	
+        		}
+	         else{
 		 
 		     $pays = $values['paynuite'];
 	          }
-	 
 	        }
 				
-		
-			if($_POST['to']=="horaire"){
+		    if($_POST['to']=="horaire"){
 				
 				if(!empty($_POST['prix_pass'])){
 		
@@ -245,6 +223,7 @@ include('inc_session.php');
 	 
 	    $item_array = array(
          'id'          =>   $_POST['id'],
+		 'to'          =>   $_POST['to'],
 		 'nbjour'      =>   $_POST['nbjour'],
          'prix_nuite'  =>   $pay,
          'prix_pass'   =>   $pay,

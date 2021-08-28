@@ -65,14 +65,14 @@ if(isset($_POST['id_ocd'])) {
 		
 	 else{
 	 
-      	echo'<div class="dnn">Votre compte est desactivé</div>'; 
+      	echo'<div class="dnn" style="position:absolute">Votre compte est desactivé</div>'; 
 	}
 		
 	}
 	
 	else{
 	 
-      	echo'<div class="dnn">Vos identifiants OCD sont incorrectes...</div>'; 
+      	echo'<div class="dnn" style="position:absolute">Vos identifiants OCD sont incorrectes...</div>'; 
 	}
 	
 }
