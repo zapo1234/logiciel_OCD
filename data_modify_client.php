@@ -621,7 +621,7 @@ ul a{margin-left:3%;}
 		
  		// on modifie les données de la base de données guide
         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
-          $ret->execute(array(':des'=>$donns['encaisse']+$totals,
+          $ret->execute(array(':des'=>$donns['encaisse']-$donnees['montant']+$somm,
 		                    ':res'=>$donns['reste']-$donnees['reste']+$reste,
 					        ':reser'=>$donns['reservation']-$donnees['avance']+$avance,
                             ':code'=>$session,
@@ -733,7 +733,7 @@ ul a{margin-left:3%;}
             				
 		 // on modifie les données de la base de données guide
         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donns['encaisse']+$totals,
+        $ret->execute(array(':des'=>$donns['encaisse']-$donnees['montant']+$somm,
 		                    ':res'=>$donns['reste']-$donnees['reste']+$_POST['rest'],
 					        ':reser'=>$donns['reservation']-$donnees['montant']+$_POST['acomp'],
 							':code'=>$session,

@@ -15,24 +15,20 @@ $page=1;
 	
 }
 
-if($_SESSION['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$_SESSION['code'];
-		}
-
 $smart_from =($page -1)*$record_peage;
+
+ $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+ 
+   $session = $donns['code'];
+
 if($_POST['action']=="fetchs") {
 	 
  
  // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
-    $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
-    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
-	$donns =$rel->fetch();
- 
+   
     if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE  email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
 		  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -307,7 +303,7 @@ if($_POST['action']=="fetchs") {
 	$nature='crédit fournisseur'; 
    }
 	
-	  $session =$_SESSION['code'];
+	  $session=$donns['code'];
 	 $ren=$bds->prepare('SELECT email_ocd,depense FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
       $ren->execute(array(':code'=>$session,
                        ':email_ocd'=>$_SESSION['email_ocd']));
@@ -315,7 +311,7 @@ if($_POST['action']=="fetchs") {
    $ren->closeCursor();
 
    // aller chercher les auteurs en écriture sur une facture
-	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
+	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE  id= :ids AND email_ocd= :email_ocd');
    $res->execute(array(':ids'=>$id,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
@@ -395,10 +391,9 @@ if($_POST['action']=="fetchs") {
     // on modifer les montants
 	// on modifie les données de la base de données guide
         if($montant < $donns['montant']){ 
-		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont WHERE AND id= :ids AND email_ocd= :email_ocd');
         $ret->execute(array(':us'=>$user_datas,
 		                    ':mont'=>$monts,
-							':code'=>$session,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
@@ -408,12 +403,11 @@ if($_POST['action']=="fetchs") {
 		$nature ="remboursement effectué";
         $status=4;		
 			
-		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE code= :code AND id= :ids AND email_ocd= :email_ocd');
+		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE  id= :ids AND email_ocd= :email_ocd');
         $ret->execute(array(':us'=>$user_datas,
 		                    ':mont'=>$monts,
 							':nat'=>$nature,
 							':stat'=>$status,
-							':code'=>$session,
 							':ids'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));	

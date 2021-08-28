@@ -365,6 +365,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="panier"></div><!--afficher les facturation en cours-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -602,6 +603,21 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 			}
 
 			load();
+			
+			// afficher le pannier
+            function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();
  });
 </script>
 </body>
