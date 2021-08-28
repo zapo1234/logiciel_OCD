@@ -907,6 +907,21 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
   
 });
 
+ // afficher le pannier
+  function panier() {
+				var action="panier";
+				$.ajax({
+					url: "session_panier.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();
+
 
 });
 </script>
