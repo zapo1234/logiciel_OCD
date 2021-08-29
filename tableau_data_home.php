@@ -481,11 +481,11 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
-
+#panier{position:absolute;left:50%;top:15px;color:black;font-size:14px;}
 
 
 @media (max-width: 575.98px) { 
-
+#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -763,6 +763,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 
 <!--div black-->
 <div id="pak" style="display:none"></div>
+<div id="panier"></div><!--ajax panier  facturation-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
