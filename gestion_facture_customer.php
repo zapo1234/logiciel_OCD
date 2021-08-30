@@ -143,7 +143,15 @@ margin-left:-10px;}
 #caisse{font-size:18px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
+
+
 @media (max-width: 575.98px) { 
+#panier{display:none;}
 .envoyer{margin-left:-5%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
@@ -273,6 +281,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
                     
 					<div id="results"></div><!--afficher les données-->
 					<div id="resu"></div><!--afficher des données-->
+					
  
                    </div><!--content-->
  
@@ -341,6 +350,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 <div id="paks" style="display:none"><div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:white;font-size:25px;"></i></div></div>
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
+<div id="panier"></div><!--ajax panier facturation-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

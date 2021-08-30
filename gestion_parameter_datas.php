@@ -116,6 +116,13 @@ transition: all 200ms;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
+
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}

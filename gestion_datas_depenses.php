@@ -143,9 +143,14 @@ transition: all 200ms;}
 #caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
 
 @media (max-width: 575.98px) { 
-
+#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}

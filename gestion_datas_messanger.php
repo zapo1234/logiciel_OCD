@@ -133,9 +133,11 @@ margin-left:-10px;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
 
 @media (max-width: 575.98px) { 
-
+#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -251,7 +253,7 @@ border-radius:25px;}
 					
 					<div class="message">
 					<span id="message_datas"></span><!--reponse--><br/>
-					<form method="post" action="" id="form-sendm">
+					<form method="post" action="" id="form-sendm">l^k,
 					<span id="error"></span><!--message d'erreur'-->
 					<textarea name="message" id="message" rows="3" placeholder="Taper votre message"></textarea>
 					<div class="sends"><i class="fa fa-paper-plane" aria-hidden="true" style="color:green"></i></div>
