@@ -128,35 +128,53 @@ include('inc_session.php');
           $action='en ligne depuis '.$dats['date'].' à '.$dats['heure'].' ';
 	     }
 
-         echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> '.$transmi.'</div>';	 
+         echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> '.$transmi.'<br/></div>';	 
        }
 	  }
      ?>
 	 
 	 <?php
 	 // requete qui va chercher les montants
+     $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+	$rel->closeCursor();
+// requete qui va chercher les montants
+    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
+    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+	
+if($donns['permission']=="user:employes"){
+$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
+     society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+     $rej->execute(array(':code'=>$_SESSION['code'],
+                       ':email_ocd'=>$_SESSION['email_ocd']));
+  }  
+  
+ while($donnees =$rej->fetch()){
+  
+  echo'<span class="h1">Caisse '.$donnees['society'].'</span>
 
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste FROM tresorie_customer WHERE email_ocd= :email_ocd');
-   $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donns=$rej->fetch();
-   $rej->closeCursor();
-
-  echo'<h1>Encaissement journalier</h1>
-
-  <div id="caisse">
+   <div id="caisse">
  <div class="td"> Facture soldée:</div>
- <div class="tds">'.$donns['encaisse'].' XOF</div>
+ <div class="tds">'.$donnees['encaisse'].' XOF</div>
 
  <div class="td"> Dépense </div>
- <div class="tdv">'.$donns['depense'].' XOF</div>
+ <div class="tdv">'.$donnees['depense'].' XOF</div>
  
  <div class="td"> Acompte réservation</div>
- <div class="tdc">'.$donns['reservation'].' XOF</div>
+ <div class="tdc">'.$donnees['reservation'].' XOF</div>
  
  <div class="td">Reste à payer réservation</div>
- <div class="tdc">'.$donns['reste'].' XOF</div>
-       
-  </div>';
+ <div class="tdc">'.$donnees['reste'].' XOF</div>
+  
+     
+ </div><br/><br/>';
+   }
+  
+  
+   
  
 	?>
 						

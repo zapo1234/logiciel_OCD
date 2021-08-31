@@ -86,10 +86,8 @@ $natu='dépense effectué';
 					 ));
 	                
 					// confirmation 
-					
-	}
-
-  // on modifie les données de la base de données guide
+				}
+// on modifie les données de la base de données guide
   if($_SESSION['code']==0){
 		  $session=0;
 		}
