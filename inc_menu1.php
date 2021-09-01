@@ -1,9 +1,9 @@
 <?php
  include('connecte_db.php');
 include('inc_session.php'); 
-   $req=$bdd->prepare('SELECT user FROM inscription_client WHERE email_user= :email_user');
+   $req=$bdd->prepare('SELECT user,permission,code FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
-   $donnees =$req->fetch();
+   $donnes =$req->fetch();
    
    $date=date('Y-m-d');
    $dates =explode('-',$date);
@@ -130,22 +130,18 @@ include('inc_session.php');
 
          echo'<div class="user"><i class="far fa-user"></i> '.$dats['user'].' '.$action.'<br/> '.$transmi.'<br/></div>';	 
        }
+	   $rq->closeCursor();
 	  }
      ?>
 	 
 	 <?php
-	 // requete qui va chercher les montants
-     $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
-    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
-	$donns =$rel->fetch();
-	$rel->closeCursor();
 // requete qui va chercher les montants
-    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+    if($donnes['permission']=="user:boss" OR $donnes['permission']=="user:gestionnaire"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
-if($donns['permission']=="user:employes"){
+if($donnes['permission']=="user:employes"){
 $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
@@ -173,7 +169,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
  </div><br/><br/>';
    }
   
-  
+  $rej->closeCursor();
    
  
 	?>
@@ -214,7 +210,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span id="im" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo$donnees['user'];?></span>
+                                <span id="im" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo$donnes['user'];?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
