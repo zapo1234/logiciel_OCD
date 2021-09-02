@@ -81,13 +81,19 @@ include('inc_session.php');
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            
+			<?php
+			
+	if($donnees['permission']=="user:boss" OR $donnees['permission']=="user:gestionnaire"){
+			echo'<li class="nav-item">
                 <a class="nav-link collapsed" title="enregistrer vos locaux" href="inventaire_gestion_home.php"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class='fas fa-house-user'></i>
+                    <i class="fas fa-house-user"></i>
                     <span>Inventaire des locaux </span>
                 </a>
-            </li>
+            </li>';
+	       }
+			?>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
