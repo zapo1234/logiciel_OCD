@@ -481,9 +481,11 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
-#panier{position:absolute;left:50%;top:15px;color:black;font-size:14px;}
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
+opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
-
+/*------------------------------------------------------------------
+[ Responsive ]*/
 @media (max-width: 575.98px) { 
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -499,8 +501,19 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 }
 
 
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { ... }
+@media (max-width: 1024px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+
+ .drop{position:absolute;left:7%;width:300px;}
+.drops{padding:5%;position:absolute;left:-150px;width:540px;display:block;background:white;
+height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
+#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+
+
+}
 
 
 
@@ -688,7 +701,9 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 						 </div>
 					
 					     <div class="cont2">
-						 <div class="titre"><i class="fas fa-sync"></i> Réinitialiser votre Dashbord</div>
+						 <div class="titre"><i class="fas fa-sync"></i>
+						 Locaux indisponible
+						 </div>
 					     </div>
 						 
 						 </div>
