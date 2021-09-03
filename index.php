@@ -18,9 +18,12 @@
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 <!--===============================================================================================-->
 </head>
+<style>
+
+</style>
 <body>
 	
 	<div class="limiter">
@@ -31,29 +34,27 @@
 			<div class="container-login10">
 		
 		<div class="h1" style="width:700px;margin-left:-52%;color:white;font-size:26px;margin-top:50px;font-family:arial;">Responsable d'hôtels,d'appartements meublées privés<br/>Gagnez énormement de temps et gérez efficacement </div>
-		<h1 style="position:absolute;left:2%;top:300px;font-size:35px;color:white;">Simplifier en quelques clic la gestion de <br/>votre activité en temps réel et à distance.</h1>
+		<h1 style="position:absolute;left:2%;top:300px;font-size:42px;color:white;">Simplifier en quelques clic la gestion de <br/>votre activité en temps réel et à distance.</h1>
 		
 		</div>
 			
 			<div class="wrap-login100">
 				
-                 <div style="position:absolute;top:120px;left:69%;"><img id="img_logo" src="img/ocd.jpg" alt="ocd" width="200px" height="80px"></div>
-				<form class="login100-form validate-form" id="user_admin" method="post" action="" autocomplete="off">
+              <div style=""><img id="img_logo" src="img/ocd.jpg" alt="ocd" width="200px" height="80px"></div>
+			<form class="login100-form validate-form" id="user_admin" method="post" action="" autocomplete="off">
 					<span class="login100-form-title">
 						Espace utilisateurs
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email_ocd" id="email_ocd" placeholder="Votre Email">
-						<span class="focus-input100"></span>
+					<div class="wrap-input100 validate-input">
+				<input class="input100" type="text" name="email_ocd" id="email_ocd" placeholder="Votre Email">
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="id_ocd" id="id_ocd" placeholder="Password">
-						<span class="focus-input100"></span>
+					<div class="wrap-input100 validate-input">
+					<input class="input100" type="password" name="id_ocd" id="id_ocd" placeholder="Password">
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
@@ -95,11 +96,12 @@
 <!--===============================================================================================-->
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
 	
-	<div id="ass"></div>
-    <div id="as"></div>
+	<div id="ass" style="color:red;position:absolute;top:580px;left:68%;"></div>
+    <div id="as" style="color:red;position:absolute;top:580px;left:68%;"></div>
+	<div id="av"></div>
     <div id="visuel"></div>
-	
-	<script >
+   <?php include('head/inc_foot_scriptjs.php');?>
+	<script type="text/javascript">
  $(document).ready(function() {
 
 function envoi(){
@@ -110,7 +112,6 @@ $(function() {
 $(document).on('click','#sub',function() {
 	
 // on envoi le formulaire
-
 // on recupere les deux variale
 var email_ocd =$('#email_ocd').val();
 var id_ocd =$('#id_ocd').val();
@@ -132,7 +133,7 @@ if(email_ocd!="" && id_ocd!=""){
  }
  
  else {
-  $('#as').append('<div class="cir"> Entrer vos identifiants OCD !</div>');
+  $('#as').append('<div class="cir" style="position:absolute;width:300px;"> Entrer vos identifiants OCD !</div>');
   $('#email_ocd').css('borderColor','red');
   $('#id_ocd').css('borderColor','red');
   
