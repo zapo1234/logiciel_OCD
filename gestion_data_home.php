@@ -208,12 +208,12 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-
+.center{height:1700px;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
-#panier{margin-left:-20%;}
+#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
@@ -228,6 +228,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
+.center{height:1700px;}
 
 }
 
@@ -275,7 +276,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -416,7 +417,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <script type="text/javascript">
    $(document).ready(function(){
 
-     $('#sms').click(function(){
+    $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	 
+	 $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
 	
