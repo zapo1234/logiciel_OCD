@@ -513,7 +513,7 @@ height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} 
 .users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
-.user{padding-left:7%;} .dtt,.dts{font-size:20px;} h1{font-size:13px;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 }
 
 
