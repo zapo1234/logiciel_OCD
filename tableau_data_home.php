@@ -85,9 +85,9 @@ include('inc_session.php');
 	
 	// prévison net
 	if($ac > 80) {
-		$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:85%;background:#3DEA29;font-size:16px;color:#3DEA29;">25</div>
-    </div>
+		$indicateur='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
     </div><br>';
 	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:7%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -96,8 +96,9 @@ include('inc_session.php');
 	}
 	
 	elseif(50< $ac  AND $ac <80){
-	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:70%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
+	$indicateur='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:45%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -116,8 +117,9 @@ include('inc_session.php');
 	}
 	
 	elseif(10 < $ac AND $ac <30){
-	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3- w3-round-large" style="width:20%";background:#AAF9BB;font-size:16px;color:#AAF9BB>25</div>
+	$indicateur='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -142,8 +144,9 @@ include('inc_session.php');
 	// prevision sous réserve de réservation
 	
 	if($cb > 80) {
-		$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:85%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+		$indicateuc='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
 	$indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:5%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
@@ -152,8 +155,9 @@ include('inc_session.php');
 	}
 	
 	elseif(50< $cb  AND $cb <80){
-	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:65%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+	$indicateuc='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:20%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
@@ -162,8 +166,9 @@ include('inc_session.php');
 	}
 	
 	elseif(30<$cb  AND $cb < 50) {
-	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:40%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+	$indicateuc='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
@@ -172,8 +177,9 @@ include('inc_session.php');
 	}
 	
 	elseif(10 < $cb AND $cb <30){
-	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:20%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+	$indicateuc='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
   </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
@@ -184,8 +190,9 @@ include('inc_session.php');
 	}
 	
 	else{
-	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:7%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+	$indicateuc='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 7%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
     </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
@@ -483,7 +490,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
-opacity:0.7;padding:1%;color:white;border-radius:5px;}
+opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -495,27 +502,52 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
-.drop{position:absolute;left:7%;width:300px;}
-.drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
+.drop{position:absolute;left:7%;width:100%;background:white;}
+.drops{padding:2%;position:absolute;left:7%;width:100%;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+#accordionSidebar{width:100px;} .btn{display:block;}
 }
 
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{width:30%;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
-.drop{position:absolute;left:7%;width:300px;}
-.drops{padding:8%;position:absolute;left:-150px;width:540px;display:block;background:white;
-height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
 #news_data{display:block;} #news{display:none;} 
 .users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+#panier{margin-left:-20%;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+
 }
 
 
@@ -636,8 +668,8 @@ height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                        <i class="fa fa-bars" style="color:blue"></i>
                     </button>
 
                     <!-- Topbar Search -->
@@ -807,7 +839,12 @@ height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     $('#sms').click(function(){
+     
+	 $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	 
+	$('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
 
