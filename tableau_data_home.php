@@ -337,7 +337,8 @@ $name="";
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
+     .s{display:none;}
+	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{border:1px solid #eee;background:white;width:340px;height:30%;padding:4%;margin-top:0px;}
     .bs{width:340px;height:280px;border:1px solid #eee;}
@@ -487,6 +488,7 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
+.s{display:block;}
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
@@ -504,7 +506,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 @media (max-width: 1024px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{width:30%;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;left:7%;width:300px;}
 .drops{padding:8%;position:absolute;left:-150px;width:540px;display:block;background:white;
