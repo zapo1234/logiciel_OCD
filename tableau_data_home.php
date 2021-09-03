@@ -505,14 +505,15 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
-
- .drop{position:absolute;left:7%;width:300px;}
-.drops{padding:5%;position:absolute;left:-150px;width:540px;display:block;background:white;
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+.drop{position:absolute;left:7%;width:300px;}
+.drops{padding:8%;position:absolute;left:-150px;width:540px;display:block;background:white;
 height:1200px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
-#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-
-
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} h1{font-size:13px;}
 }
 
 
