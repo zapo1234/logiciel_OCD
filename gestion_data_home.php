@@ -192,9 +192,44 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 }
 
 
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { ... }
+@media (min-width: 768px) and (max-width: 991px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
 
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+#panier{margin-left:-20%;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+
+}
 
 
 </style>
