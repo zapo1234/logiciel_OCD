@@ -413,7 +413,6 @@ echo $_SESSION['token'];?>">
 		$('#accordionSidebar').css('display','block');
 	 });
 	 
-   
    $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});

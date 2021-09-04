@@ -583,7 +583,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
     var number = /^[0-9+]{8,14}$/;
 	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre, un chiffre et au moin un caractère spéciale
+	var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;// contient une lettre majuscule et miniscule, un chiffre et au moin un caractère spéciale
 	
 	if(noms.length==""){
 		$('#noms').css('border-color','red');

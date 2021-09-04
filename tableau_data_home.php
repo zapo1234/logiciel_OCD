@@ -507,7 +507,7 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#accordionSidebar{width:100px;} .btn{display:block;}
+#accordionSidebar{width:100px;} .btn{display:block;} .h1{font-size:14px;}
 }
 
 
