@@ -60,10 +60,18 @@ include('inc_session.php');
 	  $nvname="zapo";  
    }
    
+   // on recupere toutes les email 
+   
    // on recupére le nom de l'image dans la base de données
-   $rej=$bdd->prepare('SELECT logo FROM inscription_client WHERE email_user= :email_user');
+   $res=$bdd->prepare('SELECT email_ocd,email_user,logo FROM inscription_client WHERE email_ocd= :email_ocd');
+   $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnees=$res->fetchAll();
+   
+   // on recupére le nom de l'image dans la base de données
+   $rej=$bdd->prepare('SELECT email_ocd,logo FROM inscription_client WHERE email_user= :email_user');
    $rej->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees=$rej->fetch();
+   
   
  if($donnees['logo']!=""){
 	 

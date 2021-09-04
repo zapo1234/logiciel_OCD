@@ -174,12 +174,14 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+input{display:block;} .form-select{display:none;} #panier{display:none;}
+#examp{width:80%;margin-left:-15%;height:1100px;} .buttons{margin-left:2%;}
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
-#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#logo{display:none;width:100px;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
@@ -188,19 +190,19 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
-.btn{display:block;} 
+.btn{display:block;} .form-select{display:none;}
 
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
-height:2800px;overflow-y:scroll;z-index:5;}
-
+height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
+.content3 {width:40%;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{margin-left:-20%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:100px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}

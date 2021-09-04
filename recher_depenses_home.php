@@ -41,7 +41,7 @@ if(!isset($id) AND empty($id)){
  if(isset($_POST['id'])){
 	$id =$_POST['id'];
 	echo'<div id="pak"></div>
-             <div class="enre"><div></i>Afficher les dépenses<br/> 
+             <div class="enre"><div></i>Lister les dépenses<br/> 
 		     <div class="spinner-border text-primary" role="status">
              <span class="sr-only">Loading...</span>
              </div>

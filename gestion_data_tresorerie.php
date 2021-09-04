@@ -157,11 +157,11 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 .btn{display:block;} 
-
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:2.5%;}
+#indicateur{display:none;}
 }
 
 
@@ -182,8 +182,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:12.5%;}
-.btn{display:block;}
+.btn{display:block;} #indicateur{font-weight:15px;margin-left:10%;}
 }
+
 
 
 </style>
@@ -348,6 +349,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <script src="js/sb-admin-2.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/tresorerie.js"></script>
+  <script type="text/javascript">
+  $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+  
+  
+  </script>
 </body>
 
 </html>

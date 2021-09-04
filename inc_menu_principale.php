@@ -26,7 +26,10 @@ include('inc_session.php');
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-
+            <!--slideBar css --->
+             <div class="s">
+              <a href="deconnexion.php"></a>
+             </div>			 
             <!-- Sidebar - Brand -->
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">

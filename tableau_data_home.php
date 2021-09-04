@@ -86,7 +86,7 @@ include('inc_session.php');
 	// prévison net
 	if($ac > 80) {
 		$indicateur='<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
   </div>
     </div><br>';
 	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
@@ -97,7 +97,7 @@ include('inc_session.php');
 	
 	elseif(50< $ac  AND $ac <80){
 	$indicateur='<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
 </div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
@@ -118,7 +118,7 @@ include('inc_session.php');
 	
 	elseif(10 < $ac AND $ac <30){
 	$indicateur='<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
 </div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
@@ -507,7 +507,7 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#accordionSidebar{width:100px;} .btn{display:block;} .h1{font-size:14px;}
+#accordionSidebar{width:100px;} .btn{display:block;}
 }
 
 

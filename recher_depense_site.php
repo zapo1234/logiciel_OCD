@@ -2,6 +2,8 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+if(isset($_GET['data_id'])){
+
 $record_peage=20;
 $page="";
   
@@ -15,16 +17,8 @@ $page=1;
 	
 }
 
-if($_SESSION['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$_SESSION['code'];
-		}
 
 $smart_from =($page -1)*$record_peage;
-if($_POST['action']=="lists") {
 	 
 	 $code = $_GET['data_id'];
  
@@ -59,7 +53,7 @@ if($_POST['action']=="lists") {
 	<option value="50">50 lignes</option>
 	</select> ';
 	
-	$action='<form method="post" action="excels.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
+	$action='<form method="post" action="excels_site.php?data_id='.$code.'"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
@@ -174,18 +168,10 @@ if($_POST['action']=="lists") {
        echo'</table>';
 
      	// on compte
-	 
-	 // on compte le nombre de ligne de la table facture
-	 if($_SESSION['code']==0){
-	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE email_ocd= :email_ocd');
-     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-	 }
-	 
-	 else{
+	
 		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE code= :code AND email_ocd= :email_ocd');
         $reg->execute(array(':code'=>$code,
 	                    ':email_ocd'=>$_SESSION['email_ocd'])); 
-	 }
 	$dns=$reg->fetch();
 	
 	$totale_page=$dns['nbrs']/$record_peage;
@@ -196,6 +182,5 @@ if($_POST['action']=="lists") {
 	   echo'<div class="pied_page"><button class="bout" id="'.$i.'">'.$i.'</button></div>';
     }   
   }
-  
 
 ?>

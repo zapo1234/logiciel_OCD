@@ -50,7 +50,7 @@ if(!isset($id) AND empty($id)){
 	$dats = $j.'-'.$mm.'-'.$an;
     $dat=date('H:i');
 	echo'<div id="pak"></div>
-             <div class="enre"><div></i>Afficher les factures<br/> 
+             <div class="enre"><div></i>Afficher les disponibilités des locaux<br/> 
 		     <div class="spinner-border text-primary" role="status">
              <span class="sr-only">Loading...</span>
              </div>
