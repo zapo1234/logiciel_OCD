@@ -30,7 +30,7 @@ include('inc_session.php');
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-	
+	.s{display:none;}
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
@@ -166,10 +166,44 @@ border-radius:25px;}
 .sup_send{color:white;} .action{padding-left:30%;}
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
 
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { ... }
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+.center{height:1200px;} .detail{margin-left:2.5%;}
+}
 
+
+@media (min-width: 992px) and (max-width: 1200px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+.center{height:1400px;} .detail{margin-left:12.5%;}
+}
 
 </style>
 
@@ -222,7 +256,7 @@ border-radius:25px;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -253,7 +287,7 @@ border-radius:25px;}
 					
 					<div class="message">
 					<span id="message_datas"></span><!--reponse--><br/>
-					<form method="post" action="" id="form-sendm">l^k,
+					<form method="post" action="" id="form-sendm">
 					<span id="error"></span><!--message d'erreur'-->
 					<textarea name="message" id="message" rows="3" placeholder="Taper votre message"></textarea>
 					<div class="sends"><i class="fa fa-paper-plane" aria-hidden="true" style="color:green"></i></div>
@@ -328,6 +362,16 @@ border-radius:25px;}
   <script type="text/javascript">
    $(document).ready(function(){
     
+	 
+	$('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	
+	$('#news_data').click(function(){
+	$('.drops').slideToggle();
+	$('.drop').css('display','none');
+  });
+	
 	$('#sms').click(function(){
 	$('.drop').slideToggle();
 	});

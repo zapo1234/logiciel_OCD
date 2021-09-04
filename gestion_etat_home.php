@@ -457,11 +457,11 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
   function loads(page) {
 				var action="fetch";
 				$.ajax({
-					url: "list_datas_homes.php?data=<?php echo$_GET['data'];?>&home_heure=<?phpecho$_GET['home_heure'];?>",
+					url: "list_datas_homes.php?data=<?php echo$_GET['data'];?>&home_heure=<?php echo $_GET['home_heure'];?>&data_id=<?php echo$_GET['data_id'];?>",
 					method: "POST",
 					data:{action:action,page:page},
 					success: function(data) {
-						$('#resul').html(data);
+						$('#resu').html(data);
 					}
 				});
 			}

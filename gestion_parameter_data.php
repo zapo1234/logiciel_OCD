@@ -46,6 +46,7 @@ include('inc_session.php');
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
+	.s{display:none;}
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{background:white;width:340px;border:2px solid #eee;height:300px;padding:4%;margin-top:50px;}
@@ -103,6 +104,7 @@ tr{border:1px solid #eee;} #logo{position:absolute;top:6px;left:1.7%;border-radi
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;} 
 
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -120,6 +122,44 @@ height:2800px;overflow-y:scroll}  h2{margin-top:20px;border-top:1px solid #eee;c
 margin-left:5%;} h2{margin-left:-50%;font-size:16px;border:0px;} #nums,#emais{width:300px;}
 #role,#roles{width:200px;}
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+.center{height:1200px;} .detail{margin-left:2.5%;}
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+#panier{display:none;}
+#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+.us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
+#news_data{display:block;} #news{display:none;} 
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+#caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
+.user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
+.btn{display:block;} 
+
+.drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
+.drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
+height:2800px;overflow-y:scroll;z-index:5;}
+.center{height:1400px;} .detail{margin-left:12.5%;}
 }
 
 
@@ -512,6 +552,11 @@ margin-left:5%;} h2{margin-left:-50%;font-size:16px;border:0px;} #nums,#emais{wi
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
+
+    
+	$('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
 
    $('#but').click(function(){
    $('#examp').css('display','block');
