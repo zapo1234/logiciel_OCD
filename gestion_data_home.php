@@ -172,6 +172,8 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+.btn{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -189,6 +191,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .h4{font-size:18px;color:black;text-align:center;} #resul{width:95%;}
 .center{height:2500px;} .homes{margin-left:15%;}
+.btn{display:block;} .form-select{display:none;}
 }
 
 
@@ -229,6 +232,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1700px;}
+.btn{display:block;}
 
 }
 
@@ -292,6 +296,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 							
 							<div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="list" name="list">
                          <option selected>lister sur un site</option>
+						 <option value="tous">voir tous les sites</option>
 						 <?php
 			
 			// lister les les site pour afficher des facture

@@ -19,13 +19,35 @@ $smart_from =($page -1)*$record_peage;
 
 // recupère les dates  par ordre croissant 
   // emttre la requete sur le fonction
-    if($_SESSION['code']==0){
+  
+   // recuperer la permission pour afficher le checkout
+   	// emttre la requete sur le fonction
+    $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+  
+  
+    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+	if(!isset($_GET['data_id'])){
 	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+	
+	elseif($_GET['data_id']=="tous"){
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+       $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+	
+	else{
+		
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':code'=>$_GET['data_id'],
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	   }
 		}
 		
 		else{
-	$session=$_SESSION['code'];
+	$session=$donns['code'];
 	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
@@ -182,8 +204,21 @@ $smart_from =($page -1)*$record_peage;
 	}
 
    	// on compte le nombre de ligne de la table
+	if(!isset($_GET['data_id'])){
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd');
-    $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+	
+	elseif($_GET['data_id']=="tous"){
+	$reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd');
+   $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));	
+   }
+	else{
+	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE code= :code AND email_ocd= :email_ocd');
+	  $reg->execute(array(':code'=>$_GET['data_id'],
+	                      ':email_ocd'=>$_SESSION['email_ocd']));
+	}
+    
    $dns=$reg->fetch();
    $totale_page=$dns['nbrs']/$record_peage;
    $totale_page = ceil($totale_page);
