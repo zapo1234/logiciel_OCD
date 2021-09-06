@@ -135,22 +135,25 @@ margin-left:-10px;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
+.btn{display:none;}
+
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:800px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
 drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+height:2800px;overflow-y:scroll;display:none;} .users{display:none;}
+ h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{padding-bottom:5px;margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #but{display:none;} .datas_messanger{padding-left:0%;}
 
-.datas_messanger{color:black;margin-top:8px;width:70%;background:white;margin-left:1%;padding:2%;
+.datas_messanger{color:black;margin-top:8px;width:20%;background:white;margin-left:1%;padding:2%;
 border-radius:25px;}
 
 .h1{margin-bottom:3px;} .boss,.gestionnaire,.employes{font-size:15px;color:black;text-transform:capitalize;font-weight:bold;}
@@ -159,11 +162,17 @@ border-radius:25px;}
 #statusgestionnaire{padding-left:10%;} .dt{padding-left:10%;font-size:13px;} .donnes{font-family:arial;font-size:14px;}
 #statusemployes{padding-left:10%;}
 
-#datasboss{margin-left:10%;} #datasgestionnaire{margin-left:20%;background:#B9DFFB;}
-#supboss{margin-left:10%;} 
+#datasboss{margin-left:10%;width:20%;} #datasgestionnaire{margin-left:10%;background:#B9DFFB;width:20%;}
+#supboss{margin-left:10%;width:20%;} 
 #supgestionnaire{margin-left:20%;} #supemployes{margin-left:20%;} 
 .divaction{width:50px;padding:1%;background:white;color:#eee;border-radius:15px;}
 .sup_send{color:white;} .action{padding-left:30%;}
+.btn{display:block;} #searchDropdown{display:none;} .center{width:900px;}
+#message{width:250px;} .sends {cursor: pointer;position: absolute;left: 80%;top: 730px;
+    background: white;
+    padding: 0.8%;
+    border-radius: 50%;
+}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -182,7 +191,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1200px;} .detail{margin-left:2.5%;}
+.center{height:1200px;} .detail{margin-left:2.5%;}  
+.btn{display:none;} #searchDropdown{display:none;}
 }
 
 

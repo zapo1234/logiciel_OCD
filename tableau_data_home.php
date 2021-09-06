@@ -89,8 +89,8 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
   </div>
     </div><br>';
-	$indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:7%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+	$indicateurs='<div class="progress">
+  <div class="progress-bar progress-bg-striped" role="progressbar" style="width:7%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
   </div><br>';
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en forte croissance';
 	}
@@ -100,9 +100,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
 </div>
   </div><br>';
-  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:45%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
-  </div><br>';
+  $indicateurs='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 45%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en  croissance';
 	}
 	
@@ -110,9 +110,9 @@ include('inc_session.php');
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
   </div><br>';
-  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
-  </div><br>';
+  $indicateurs='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	  $name= 'trésorerie moyenne';
 	}
 	
@@ -121,8 +121,8 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
 </div>
   </div><br>';
-  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
+  $indicateurs='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
   </div><br>';
   
 	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
@@ -133,9 +133,9 @@ include('inc_session.php');
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3-blue w3-round-large" style="width:5%;background:#AAF9BB;font-size:16px;color:#AAF9BB;">25</div>
     </div><br>';
-  $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
-  </div><br>';
+  $indicateurs='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+ </div><br>';
 	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
 		
 	}
@@ -148,9 +148,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
   </div><br>';
-	$indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:5%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
-  </div><br>';
+	$indicateurc='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 5%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	$names= 'Activité en forte croissance';
 	}
 	
@@ -159,9 +159,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
   </div><br>';
-  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:20%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
-  </div><br>';
+  $indicateurc='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	$names= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"> </i> Activité en  croissance';
 	}
 	
@@ -170,9 +170,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
   </div><br>';
-  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
-  </div><br>';
+  $indicateurc='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	  $names= 'trésorerie moyenne';
 	}
 	
@@ -181,9 +181,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
   </div><br>';
-  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
-  </div><br>';
+  $indicateurc='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
   
 	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
 		
@@ -194,9 +194,9 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 7%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
     </div><br>';
-  $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
-  </div><br>';
+  $indicateurc='<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div><br>';
 	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
 		
 	}
@@ -507,7 +507,7 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#accordionSidebar{width:100px;} .btn{display:block;}
+#accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 }
 
 
@@ -527,7 +527,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-
+#searchDropdown{display:none;}
 }
 
 
@@ -546,7 +546,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
-height:2800px;overflow-y:scroll;z-index:5;}
+height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
 }
 

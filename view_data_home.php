@@ -152,6 +152,9 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.form-select{display:none;} .es{display:none;}
+#der11,#der12,#der13,#der14{width:95%;margin-left:2%;}
+#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;}
 }
 
 
@@ -172,6 +175,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}
+#searchDropdown{display:none;} 
 }
 
 
@@ -235,7 +239,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -266,8 +270,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> Type de local</div><div class="der2"><i class="fas fa-info-circle"></i> information du local</i></div>
-					 <div class="der3"><i class="fas fa-table"></i> Disponibilité</div> <div class="der4"><i class="fas fa-laptop-house"></i> Statistique d'occupation </div> <div class="der5"><i class="fas fa-key"></i>Accès au local</div></div>
+                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> <span class="es">Type de local</span></div><div class="der2"><i class="fas fa-info-circle"></i><span class="es"> information du local</span></i></div>
+					 <div class="der3"><i class="fas fa-table"></i> <span class="es">Disponibilité</span></div> <div class="der4"><i class="fas fa-laptop-house"></i><span class="es"> Statistiques </span></div> <div class="der5"><i class="fas fa-key"></i><span class="es">Accès au local</span></div></div>
                      
 					 <div class="content2">
 					 
