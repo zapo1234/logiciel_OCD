@@ -80,7 +80,7 @@ include('inc_session.php');
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
 #tb{margin-top:10px;}
-#results{overflow-y:scroll;height:1000px;} 
+#results{height:1000px;} 
  
  
  .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
@@ -145,10 +145,36 @@ margin-left:-10px;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
+.btn{display:none;} #result_s{padding:2%;color:black;z-index:5;position:absolute;top:50px;left:50%;background:white;
+width:40%;height:750px;overflow-y:scroll;}
+
+
+.content2{width:100%;height:200px;border:1px solid #eee;} .conten1{font-size:14px;} 
+     .cont1,.conten1{float:left;} #logos{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} 
+	 .cont1{position:absolute;top:100px;left:60%;background:#eee;width:260px;height:180px;border:1px solid #eee;padding-left:30px;padding-top:20px;}
+	.con3{margin-top:140px;width:100%;} .cont1{font-size:15px;}
+	
+	.number{font-family:arial;font-size:20px;text-transform:uppercase;}
+	.dr{font-family:arial;font-size:15px;padding-left:3%;}
+    .dv{padding-left:7%;} 
+	
+	#ts{font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
+	margin-top:50px;}
+	
+	#ts td{padding:4%;border:1px solid black;text-align;}
+	
+	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
+	margin-top:45px;margin-left:43%;}
+	
+	#tab td, #tab th {border: 1px solid #ddd;padding: 2px;width:70px;text-align:center;font-size:14px;}
+
+ .text_facture{font-size:120px;
+ writing-mode: rl-bt;
+ color:#F0EFEF;} .prin{width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
+
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
-
-
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -168,31 +194,10 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
-h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;}
+h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} 
 }
 
 
-@media (max-width: 575.98px) { 
-#panier{display:none;}
-#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
-ul{display:none;}
-.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
-.drop{position:absolute;left:7%;width:300px;}
-.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
-#news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-.mobile{margin-left:5%;margin-top:15px;display:block;color:black;border-bottom:2px solid #eee;padding-bottom:20px;} .tf,#tf{display:none;}
-.form-select{display:none;} .export{margin-left:3%;} .pied_page{margin-left:3%;}
-.dp{padding-left:15%;font-size:20px;color:black;font-weight:bold;}
-.data1,.data2,.data3,.data4{width:400px;height:60px;width:30%;text-align:center;}
-.annu,.annuler{margin-left:2%;width:260px;} .result{width:300px;margin-left:-100px;height:750px;}
-#designatio,#fournisseu{height:100px;width:280px;}
-#designation,#description,#fournisseur,#ti{display:block;}
-.dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-}
 
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -237,8 +242,6 @@ h2{font-size:14px;}
 }
 
  
-
-
 </style>
 
 <script>
@@ -413,6 +416,7 @@ h2{font-size:14px;}
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
 <div id="panier"></div><!--ajax panier facturation-->
+<div id="results_s"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -438,8 +442,20 @@ h2{font-size:14px;}
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/facture.js"></script>
   <script type="text/javascript">
-  $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
-	 });
+  $(document).on('click','.prints',function(){
+		  var action ="click";
+		  var id = $(this).data('id6');
+		  $.ajax({
+            type: 'POST',
+            url:'affiche_facture.php',
+            data:{action:action,id:id},
+            success: function(data){
+			$('#pak').css('display','block');
+            $('#results_s').html(data);
+			$('#results_s').css('display','block');
+	        }
+          });
+		 });
+  
   </script>
   
