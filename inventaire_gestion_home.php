@@ -2,7 +2,6 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-	 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +73,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
 ul a{margin-left:3%;} #form_logo{display:none;} 
-.pied_page{margin-left:60%;margin-top:10px} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;}
+.pied_page{margin-left:60%;margin-top:10px;width:30%;} .bout{background:#06308E;border:2px solid #06308E;color:white;border-radius:50px;float:left;margin-left:2%;width:30px;height:30px} 
 #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
 #tb td, #tb th {border: 1px solid #ddd;padding:3px;width:250px;text-align:center;font-size:14px;}
@@ -109,6 +108,7 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
 
 @media (max-width: 575.98px) { 
 #panier{display:none}
@@ -569,8 +569,27 @@ var infos = $('#infos').val();
 			}
 
 			load();
- 
-});
+			
+			
+	$(document).on('click','.bout',function(){
+	   	var id = $(this).attr("id");
+      // on affiche la div
+       $('#1').css('color','blue');
+       
+	   for(id-1; id <5000; id++){
+        $('#'+id).css('display','none');
+        }
+
+        for(5000; id > 0; id--){
+        $('#'+id).css('display','none');
+        }	
+		 			
+		 	
+	 });
+		
+		
+	});
+	
 </script>
 </body>
 

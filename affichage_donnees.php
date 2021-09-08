@@ -43,9 +43,11 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
  </div><br/><br/>';
  }
  
- echo'<div><button type="button" class="print" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
+  if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
+    echo'<div><button type="button" class="print" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
      <div class=""><button type="button" style="margin-top:12px;margin-left:5%;"class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>';
-            
+  }
+	 
  
   $rej->closeCursor();
 }
