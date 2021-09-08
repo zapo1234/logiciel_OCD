@@ -2,22 +2,26 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
+ $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
+	$rel->closeCursor();
 // requete qui va chercher les montants
     if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
-	 if($donns['permission']=="user:employes"){
-    $rej=$bds->prepare('SELECT   email_ocd,montant,encaisse,reservation,depense,reste,society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+if($donns['permission']=="user:employes"){
+$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
+     society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
                        ':email_ocd'=>$_SESSION['email_ocd']));
-  }
+  }  
   
   if($_POST['action']=="fetch") {
+	 
+	  
    while($donnees =$rej->fetch()){
   
   echo'<span class="h1">Caisse '.$donnees['society'].'</span>
@@ -47,8 +51,19 @@ include('inc_session.php');
 }
 
 if($_POST['action']=="dat"){
-$monts=0;
-
+	
+	$rel=$bdd->prepare('SELECT permission,code,society FROM inscription_client WHERE   email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+	$rel->closeCursor();
+	$monts=0;
+	
+	// recupére les données dans la base de données.
+	$rej=$bds->prepare('SELECT   email_ocd,montant,encaisse,reservation,depense,reste,society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+     $rej->execute(array(':code'=>$_SESSION['code'],
+                       ':email_ocd'=>$_SESSION['email_ocd']));
+     
+	 $donnees = $rej->fetch();
    // on redirige vers la page
           echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i> Opération réussie</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
@@ -57,8 +72,6 @@ $monts=0;
 	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
    
-	
-	
 	if($donns['code']==0){
 		  $session=0;
 		}
@@ -87,8 +100,7 @@ $monts=0;
 		}
   // on recupere les données pour les injecter dans la base de donnees	 
    // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO tresorie_user (date,email_ocd,user_gestionnaire,entree,sorties,reservation,reste,code,society,calls) 
-		VALUES(:date,:email_ocd,:user_gestionnaire,:entree,:sorties,:reservation,:reste,:code,:society,:calls)');
+		$rev=$bds->prepare('INSERT INTO tresorie_user (date,email_ocd,user_gestionnaire,entree,sorties,reservation,reste,code,society,calls)VALUES(:date,:email_ocd,:user_gestionnaire,:entree,:sorties,:reservation,:reste,:code,:society,:calls)');
 	     $rev->execute(array(':date'=>$_POST['date'],
 		                    ':email_ocd'=>$_SESSION['email_ocd'],
 							':user_gestionnaire'=>$_SESSION['user'],
@@ -96,7 +108,7 @@ $monts=0;
 							':sorties'=>$donnees['depense'],
 							':reservation'=>$donnees['reservation'],
 							':reste'=>$donnees['reste'],
-							':code'=>$code,
+							':code'=>$session,
 							':society'=>$society,
 							':calls'=>$calls
 					));

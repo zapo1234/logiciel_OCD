@@ -5,6 +5,8 @@ include('inc_session.php');
 if(!isset($_GET['data']) AND !isset($_GET['heure_home']) AND !isset($_GET['data_id'])){
 	header('location:index.php');
   }
+  
+  // recupere le nom du site 
 
 ?>
 
@@ -172,6 +174,9 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+.btn{display:none;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -294,6 +299,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 							
 							<div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="list" name="list">
                          <option selected>lister sur un site</option>
+						 <option value="tous">voir tous les sites</option>
 						 <?php
 			
 			// lister les les site pour afficher des facture

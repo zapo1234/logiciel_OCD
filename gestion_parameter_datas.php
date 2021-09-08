@@ -143,6 +143,7 @@ padding-bottom:15px;} .df{margin-left:30%;}
 #resultat{margin-top:100px;}
 }
 
+#code{width:250px;} .btn{display:none;}
 // Media query css
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -309,8 +310,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
                        <label>Numéro télephone</label><br/><input type="text" id="num" name="num" class="form-control">
                       <br/><span class="num"></span></div>
                     <div class="col">
-                    <br/><select id="role" name="role" required>
-                   <option value="">Attribuer un role</option>
+                    <br/><select id="role" name="role" class="form-control" required>
+                   <option value="">choisir sa fonction</option>
                  <option value="1">Dirigeant</option>
                   <option value="3">Gestionnaire</option>
                   <option value="4">Employé(caisse)</option>
@@ -321,7 +322,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>code(filiale)</label><br/><input type="number" id="code" name="code" class="form-control" placeholder="exemple 01"  required><br/>
+                       <label>Choisir un site</label>
+      <select id="code" name="code" class="form-control">
+        <option selected>Choose...</option>
+        <option value="1">site 1</option>
+		<option value="2">site 2</option>
+		<option value="3">site 3</option>
+      </select>
 					   <span class="code"></span>
                       </div>
                     <div class="col">

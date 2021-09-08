@@ -108,8 +108,8 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  .imgs{border-radius:20%;font-weight:bold;width:110px;color:white;text-align:center;padding:1%;background:#FF7133;border:2px solid #FF7133;color:block;margin-top:6px;margin-left:25%;}
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
  
- .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+ .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:105px;}
+ul a{margin-left:3%;} #form_logo{display:none;} #logo{position:absolute;top:30px;left:1.7%;border-radius:50%;}
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
@@ -135,6 +135,8 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .mobile{display:none}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
+.btn{display:none;}
+
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}

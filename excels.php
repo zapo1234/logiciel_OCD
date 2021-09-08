@@ -4,7 +4,7 @@ include('inc_session.php');
 
  // recupérer les données de la facture
 
- $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
+ $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,society FROM depense WHERE email_ocd= :email_ocd ORDER BY id DESC');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  
 	 echo'

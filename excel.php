@@ -5,7 +5,7 @@ include('inc_session.php');
  // recupérer les données de la facture
 
  // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT  date,adresse,numero,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,types FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact ASC');
+    $req=$bds->prepare('SELECT  date,adresse,numero,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,types,society FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact ASC');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	 echo'
@@ -22,6 +22,7 @@ include('inc_session.php');
 	  <th>Montant de repas</th>
 	  <th>Montant(TTC)</th>
 	  <th>Type</th>
+	  <th>Lieux d\'excercice</th>
       </tr>';
        
 	while($donnees = $req->fetch()) {
@@ -38,6 +39,7 @@ include('inc_session.php');
 		 <td>'.$donnees['montant_repas'].'</td>
 		 <td>'.$donnees['montant'].'</td>
 		 <td>'.$donnees['types'].'</td>
+		 <td>'.$donnees['society'].'</td>
 		 </tr>';
 	}
 	

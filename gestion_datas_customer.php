@@ -161,6 +161,7 @@ footer.sticky-footer{}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
+.btn{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}

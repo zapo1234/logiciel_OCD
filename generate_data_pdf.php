@@ -29,7 +29,6 @@
      .cont1,.conten1{float:left;} #logo{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} 
 	 .cont1{position:absolute;top:100px;left:60%;background:#eee;width:260px;height:180px;border:1px solid #eee;padding-left:30px;padding-top:20px;}
 	.content3{margin-top:40px;} .cont1{font-size:15px;}
-	
 	.number{font-family:arial;font-size:20px;text-transform:uppercase;}
 	.dr{font-family:arial;font-size:15px;padding-left:3%;}
     .dv{padding-left:7%;} 

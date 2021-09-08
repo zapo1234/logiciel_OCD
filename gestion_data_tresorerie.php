@@ -120,6 +120,7 @@ transition: all 200ms;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.6;padding:1%;color:white;border-radius:5px;}
 
+.btn{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
