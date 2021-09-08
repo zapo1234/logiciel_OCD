@@ -170,7 +170,7 @@ width:40%;height:750px;overflow-y:scroll;}
  .text_facture{font-size:120px;
  writing-mode: rl-bt;
  color:#F0EFEF;} .prin{position:fixed;left:65%;top:350px;width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
-
+ .dz{color:red;font-size:18px;}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/

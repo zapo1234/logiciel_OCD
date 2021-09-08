@@ -59,7 +59,8 @@ include('inc_session.php');
     $date2 =$donns['check_out'];
     $date = '.Date d\'entrée:'.$dat.' Date de sortie:'.$dat1.'';
      $time = 'Cout/nuité';
-     $time1 ='Nombre/jour(s)';	 
+     $time1 ='Nombre/jour(s)';	
+     $style="";	 
 	}
    
    if($donns['type']==2){
@@ -68,6 +69,17 @@ include('inc_session.php');
 	$date = '.Heure d\'entrée:'.$dat.' Heure de sortie:'.$dat1;	
 	$time ='Cout/horaire';
 	$time1='Nombre/d\'heure(s)';
+	$style="";
+   }
+   
+   if($donns['type']==4){
+	   
+	$date1 = $donns['check_in'];
+    $date2 =$donns['check_out'];
+    $date = '<span style="color:red"></span>';
+	$time ='cout';
+	$time1='temps';
+	$style="dz";
    }
    
    
@@ -93,7 +105,7 @@ include('inc_session.php');
 	     </div>';
 		
 	echo'<div class="con3">
-	     <div class="zz"> Type : '.$donns['types'].' <span class="z">'.$date.'</span></div></div>
+	     <div class="zz"> Type :<span class="'.$style.'"> '.$donns['types'].'</span> <span class="z">'.$date.'</span></div></div>
 	     <table id="ts">
 		 <tr>
 		 <th>Désignation du local</th>
@@ -119,6 +131,7 @@ include('inc_session.php');
 		
 		$montant=$donns['montant']-floatval($donns['mont_tva']);
 		$montant_reel = $donns['montant']-floatval($donns['remise']);
+		$reste = $montant_reel - floatval($donns['avance']);
 		echo'<table id="tab">
 		     <tr>
 			 <td>Montant(repas)</td>
@@ -137,11 +150,19 @@ include('inc_session.php');
 			 <td>'.$donns['remise'].' xof</td>
 			 </tr>
 			 <tr>
+			 <td>Accompte(TTC)</td>
+			 <td>'.$donns['avance'].' xof</td>
+			 </tr>
+			 
+			 <td><strong>Reste à payer (TTC)</strong></td>
+			 <td>'.$reste.' xof</td>
+			 </tr>
+			 
 			 <td>Montant(TTC)</td>
 			 <td>'.$donns['montant'].' xof</td>
 			 </tr>
 			 <tr>
-			 <td>Doit payer(TTC)</td>
+			 <td><strong>Somme payée(TTC)</strong></td>
 			 <td>'.$montant_reel.' xof</td>
 			 </tr>
 		    </table>
