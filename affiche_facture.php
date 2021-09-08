@@ -29,6 +29,15 @@ include('inc_session.php');
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$res->fetch();
    
+   // recupere la date au format français
+   $dat = explode('-',$donns['date']);
+	
+	$js = $dat[2];
+	$mms = $dat[1];
+	$dd = $dat[0];
+	//
+	$daty =$js.'/'.$mms.'/'.$dd.'';
+   
    $dates2 = explode('-',$donns['check_in']);
 	
 	$j = $dates2[2];
@@ -66,17 +75,17 @@ include('inc_session.php');
        <div id="result_s"><div class="content2">
         
 		<div class="conten1" style="float:left"><div class="con"><img id="logos" src="image_logo/'.$donnees['logo'].'" alt="'.$donnees['logo'].'"></div>
-		<br/><br/><span class="entre">Entreprise '.$donnees['denomination'].'</span><br/><br/>
-		<span class="tel">Numéro tel '.$donnees['numero'].'</span><br/><br/>
+		<br/><br/><span class="entre">Entreprise '.$donnees['denomination'].'</span><br/>
+		<span class="tel">Numéro tel '.$donnees['numero'].'</span><br/>
 		<span class="tel">Email '.$donnees['email_ocd'].'</span><br/><br/>
-		<span class="adresse">Adresse '.$donnees['adresse'].'</span><br/><br/><br/><br/>
+		<span class="adresse">Adresse '.$donnees['adresse'].'</span><br/><br/><br/>
 		<span class="number">N° facture:<strong>'.$array[0].'</strong></span><br/>
 		</div>
 		
 		<div class="cont1" style="float:left">
-	     <span class="fact">Date d\'édition:'.$donns['date'].'</span><br/><br/>
-		<span class="name">Nom client:<br/>'.$donns['clients'].'</span><br/><br/>
-		<span class="name">Numéro:'.$donns['numero'].'</span><br/><br/>
+	     <span class="fact">Date d\'édition:'.$daty.'</span><br/>
+		<span class="name">Nom client:<br/>'.$donns['clients'].'</span><br/>
+		<span class="name">Numéro:'.$donns['numero'].'</span><br/>
 		<span class="email">Email:'.$donns['email_client'].'</span><br/><br/>
 		
 		</div><!--cont1-->
@@ -136,7 +145,7 @@ include('inc_session.php');
 			 <td>'.$montant_reel.' xof</td>
 			 </tr>
 		    </table>
-	        <div><button type="button" class="prin" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer la facture</button></div>
+	        <div><button type="button" class="prin" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'result_s\')">imprimer la facture</button></div>
 			<div class="footers">'.$donnees['denomination'].' '.$donnees['email'].' '.$donnees['id_entreprise'].' </div>
          </div></div></div>';
 

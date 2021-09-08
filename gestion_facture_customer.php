@@ -27,7 +27,6 @@ include('inc_session.php');
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
@@ -163,14 +162,14 @@ width:40%;height:750px;overflow-y:scroll;}
 	
 	#ts td{padding:4%;border:1px solid black;text-align;}
 	
-	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
-	margin-top:45px;margin-left:43%;}
+	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 60%;
+	margin-top:45px;margin-left:33%;}
 	
 	#tab td, #tab th {border: 1px solid #ddd;padding: 2px;width:70px;text-align:center;font-size:14px;}
 
  .text_facture{font-size:120px;
  writing-mode: rl-bt;
- color:#F0EFEF;} .prin{width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
+ color:#F0EFEF;} .prin{position:fixed;left:65%;top:350px;width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
 
 
 /*------------------------------------------------------------------
@@ -241,6 +240,46 @@ height:2800px;overflow-y:scroll;z-index:5;}
 h2{font-size:14px;} 
 }
 
+/*------------------------------------------------------------------
+[ impression ]*/
+@media print{
+	
+body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
+  background-color :#fff;
+  font-family :Serif;
+  font-size:50pt;
+  color:black;
+}
+
+.content2{width:100%;height:200px;border:1px solid #eee;} 
+.conten1{font-size:25pt;} 
+ .cont1,.conten1{float:left;} #logos{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} 
+.cont1{position:absolute;top:100px;left:60%;background:#eee;width:300px;height:380px;border:1px solid #eee;padding-left:30px;padding-top:20px;}
+.con3{margin-top:230pt;width:100%;font-size:20pt;} .cont1{font-size:25pt;}
+	
+	.fact {color:#4e73df;font-weight:bold;font-size: 25pt;}
+	.number{font-family:arial;font-size:30pt;text-transform:uppercase;}
+	.dr{font-family:arial;font-size:15pt;padding-left:3%;}
+    .dv{padding-left:7%;} 
+	
+	#ts{font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
+	margin-top:50pt;}
+	
+	#ts td,th{padding:2%;border:1px solid black;text-align;font-size:20pt;}
+	
+	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 50%;
+	margin-top:25px;margin-left:40%;}
+	
+	#tab td, #tab th {border: 1px solid #ddd;padding: 2px;width:70px;text-align:center;font-size:20pt;}
+
+ .text_facture{font-size:80pt;
+ writing-mode: rl-bt;
+ color:#F0EFEF;} .prin{width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;display:none;}
+	
+	
+	
+	
+}
  
 </style>
 
