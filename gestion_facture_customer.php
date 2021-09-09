@@ -81,7 +81,7 @@ include('inc_session.php');
 #tb{margin-top:10px;}
 #results{height:1000px;} 
  
- 
+ .bout,.bous{float:left;}
  .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
 
 .datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} 
@@ -193,7 +193,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
-h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} 
+h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .bout,.bous{float:left;}
 }
 
 
@@ -216,7 +216,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:8.5%;margin-top:-60px;}
-h2{font-size:14px;}
+h2{font-size:14px;} .bout,.bous{float:left;}
 }
 
 
@@ -237,7 +237,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:12.5%;}
-h2{font-size:14px;} 
+h2{font-size:14px;} .bout,.bous{float:left;}
 }
 
 /*------------------------------------------------------------------

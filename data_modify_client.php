@@ -2,12 +2,13 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-if(!isset($_GET['id_fact'])) {
+if(!isset($_GET['id_fact']) AND !isset($_GET['code_data'])) {
 	
   header('location: index.php');
 }
 
  $id =$_GET['id_fact'];
+ $session =$_GET['code_data'];
  
 
 ?>
@@ -82,7 +83,7 @@ ul a{margin-left:3%;}
  try{
 	
 	
-		$session=$_SESSION['code'];
+		$session=$_GET['code_data'];
 		
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation FROM tresorie_customer WHERE  code= :code AND  email_ocd= :email_ocd');
    $rej->execute(array(':code'=>$session,
@@ -582,7 +583,19 @@ ul a{margin-left:3%;}
 		}
        }
 	  
-	   // update sur facture
+	   // update sur moyen paiment
+	    // modifie les moyens de paiment si possible
+	   // on modifie les données de la base de données guide
+        $rev=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+        $rev->execute(array(':ds'=>$dat,
+		                    ':mont'=>$num1,
+					        ':mont1'=>$num2,
+							':mont2'=>$num3,
+							':mont3'=>$num4,
+							':code'=>$session,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
 
        	// on modifie les données de la table home_occupation
          $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
@@ -617,7 +630,8 @@ ul a{margin-left:3%;}
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
             				  
-						  
+			
+			
 		
  		// on modifie les données de la base de données guide
         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
@@ -693,10 +707,24 @@ ul a{margin-left:3%;}
 							  ':type'=>$mode,
 							  ':code'=>$session
 	                        ));		
-					
-	      }    				
+			 }    				
 		
 	  }
+	  
+	   // modifie les moyens de paiment si possible
+	   // on modifie les données de la base de données guide
+       $res=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 
+	   WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+        $res->execute(array(':ds'=>$dat,
+		                    ':mont'=>$num1,
+					        ':mont1'=>$num2,
+							':mont2'=>$num3,
+							':mont3'=>$num4,
+							':code'=>$session,
+							':id'=>$id,
+							':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+           
 	   
 	   // Action update sur facture 
          $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,

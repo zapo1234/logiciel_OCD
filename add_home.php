@@ -153,7 +153,7 @@ include('inc_session.php');
 			<div class="tot">Montant TTC <span class="monta">'.$monta.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$total.'"></span>
 			<h3>Moyens de paiment</h3>
-			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
+			<div>espèce<br/> <input type="number" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
 			</div>';
 			echo'</div>';

@@ -161,7 +161,7 @@ footer.sticky-footer{}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-.btn{display:none;}
+.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}
@@ -329,7 +329,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Entrez des Clients  <button type="button" class="btn btn-primary" id="but">
+                               Entrez des Clients  <button type="button" class="bts bts-primary" id="but">
                               +</button>
                             </div>
 

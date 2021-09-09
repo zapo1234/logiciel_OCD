@@ -60,6 +60,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
+.bout,.bous{float:left;}
  #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
 
 #paks{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
@@ -147,6 +148,7 @@ transition: all 200ms;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
 .btn{display:none;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -265,7 +267,7 @@ height:2000px;overflow-y:scroll;z-index:5;}
                         <div class="input-group">
 
                            <div class="inputs">
-                             <button type="button" class="btn btn-primary" id="but">
+                             <button type="button" class="btn-primary" id="but">
                               Ajouter +</button>
                             </div>
 

@@ -479,6 +479,21 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':code'=>$session
 	                        ));				
 			}
+			
+			// insert dans moyen_tresorie  
+			$res=$bds->prepare('INSERT INTO moyen_tresorie (date,email_ocd,email_user,id_fact,montant,montant1,montant2,montant3,code) 
+		 VALUES(:date,:email_ocd,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
+		 
+		 $res->execute(array( ':date'=>$dat,
+		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_user'=>$_SESSION['email_user'],
+							  ':id_fact'=>$id_fact,
+		                      ':montant'=>$num1,
+							  ':montant1'=>$num2,
+							  ':montant2'=>$num3,
+							  ':montant3'=>$num4,
+							  ':code'=>$session
+	                        ));	
 	  
 	   // insertion des données dans la table facture
 		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls) 
@@ -586,10 +601,23 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':code'=>$session,
 	                        ));		
 		
-	  
-		
-		
-	   }
+	         }
+			 
+			// insert dans moyen_tresorie  
+			$res=$bds->prepare('INSERT INTO moyen_tresorie (date,email_ocd,email_user,id_fact,montant,montant1,montant2,montant3,code) 
+		 VALUES(:date,:email_ocd,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
+		 
+		 $res->execute(array(':date'=>$dat,
+		                     ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_user'=>$_SESSION['email_user'],
+							  ':id_fact'=>$id_fact,
+		                      ':montant'=>$num1,
+							  ':montant1'=>$num2,
+							  ':montant2'=>$num3,
+							  ':montant3'=>$num4,
+							  ':code'=>$session
+	                        ));	 
+			 
 	   // insertion des données dans la table facture
 		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls) 
 		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society,:calls)');
@@ -635,14 +663,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 
-        			
-					 
-			// on detruire le tableau de session des données
+        			// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
-
-
-             		 
-   }
+		}
   }
    catch(Exception $e)
   {
