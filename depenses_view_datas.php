@@ -185,10 +185,28 @@ if($_POST['action']=="fetchs") {
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
 	
-	for($i=1; $i<=$totale_page; $i++) {
+	  echo'<div class="pied_page">';
+   if($page > 1){
+	  $page =$page-1;
+	  echo'<button type="button" class="bous"><a href="gestion_datas_depenses.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
+   }
+   for($i=1; $i<=$totale_page; $i++) {
 	   
-	   echo'<div class="pied_page"><button class="bout" id="'.$i.'">'.$i.'</button></div>';
-    }   
+	   if($page!= $i){
+	   echo'<button class="bout" id="'.$i.'">'.$i.'</button>';
+	   }
+	   else{
+		   echo'<button class="bout" id="'.$i.'">'.$i.'</button> ';
+	   }
+	   
+    }
+	
+	if($i > $page){
+		$page =$page+1;
+		echo'<button type="button" class="bous"><a href="gestion_datas_depenses.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
+	}
+	
+	echo'</div>'; 
   }
   
   if($_POST['action']=="annuler"){

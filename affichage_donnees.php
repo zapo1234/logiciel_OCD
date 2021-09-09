@@ -5,7 +5,7 @@ include('inc_session.php');
  $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
-	$rel->closeCursor();
+	
 // requete qui va chercher les montants
     if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
@@ -54,7 +54,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
 
 if($_POST['action']=="dat"){
 	
-	$rel=$bdd->prepare('SELECT permission,code,society FROM inscription_client WHERE   email_user= :email_user');
+	$rel=$bdd->prepare('SELECT permission,code,society FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	$rel->closeCursor();
@@ -66,6 +66,99 @@ if($_POST['action']=="dat"){
                        ':email_ocd'=>$_SESSION['email_ocd']));
      
 	 $donnees = $rej->fetch();
+	 $rej->closeCursor();
+	 
+	 // recupere les myens de paiment du user de la date de cloture
+	 // recupére les données dans la base de données.
+	$red=$bds->prepare('SELECT date,   email_ocd,montant,montant1,montant2,montant3 FROM  moyen_tresorie WHERE code= :code AND email_user= :email_user AND date= :dat');
+     $red->execute(array(':code'=>$_SESSION['code'],
+	                     ':dat'=>$_POST['date'],
+                         ':email_user'=>$_SESSION['email_user']));
+     
+	 $dar = $red->fetchAll();
+	// recupere toute les montant de myens de paiement
+	// créer des tableau pour recupérer les données
+	$data =[];
+	$donne = [];
+	$donne1 = [];
+	$donne2 = [];
+	$donne3 = [];
+	
+	foreach($dar as $values){
+		$data1 = $values['date'];
+		$data2 = $values['montant'];// espece
+		$data3 = $values['montant1'];// carte bancaire
+		$data4 = $values['montant2'];// mobile monney
+		$data5 = $values['montant'];// espece chéque
+		// sinder les chaine de caractère en segment
+		$datas = explode(',' ,$data1);
+		$datas1 = explode(',', $data2);
+		$datas2 = explode(',', $data3);
+		$datas3 = explode(',', $data4);
+		$datas4 = explode(',', $data5);
+		// les date
+		foreach($datas as $value){
+		$data[] = $value;
+		}
+		//les montant espèce
+		foreach($datas1 as $valu){
+		$donne[] = $valu;
+		}
+		// paimement en cb
+		foreach($datas2 as $vale){
+		$donne1[] = $vale;
+		}
+		// paiement par mobile monney
+		foreach($datas3 as $vales){
+		$donne2[] = $vales;
+		}
+		// paiment par chéque
+		foreach($datas4 as $vlue){
+		$donne3[] = $vlue;
+		}
+	 }
+	 
+	 // on recupere les montant
+	 // paiement en espece
+	 $a = array_sum($donne).'xof';
+	 // paiment par cb
+	 $b = array_sum($donne1).'xof';
+	 // paiement en espece
+	 $c = array_sum($donne2).'xof';
+	 // paiment par cb
+	 $d = array_sum($donne3).'xof';
+	 
+	 if(empty($a)){
+		$paiement ="";
+	 }
+	 
+	 else{
+		$paiement ='<img src="https://img.icons8.com/ios-glyphs/30/000000/cash-in-hand.png"/> espéce caisse:'.$a.',';
+	 }
+	 if(empty($b)){
+		$paiement1=""; 
+	 }
+	 else{
+		 $paiement1='<i class="fa fa-cc-visa" aria-hidden="true"></i> carte bancaire :'.$b.',';
+	}
+	
+	if(empty($c)){
+		$paiement2=""; 
+	 }
+	 else{
+		 $paiement2='<img src="img/check_n.png" width="40px" height="40px"></i> Mobile monney :'.$c.',';
+	}
+	
+	if(empty($d)){
+		$paiement3=""; 
+	 }
+	 else{
+		 $paiement3='<img src="img/check.png" width="40px" height="40px" alt="check"></i> chéque :'.$d.',';
+	}
+	// variable 
+	$payments = $paiement.','.$paiement1.','.$paiement2.','.$paiement3.',';
+	 
+	 if(in_array($_POST['date'],$data)){
    // on redirige vers la page
           echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i> Opération réussie</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
@@ -73,6 +166,8 @@ if($_POST['action']=="dat"){
 	$society=$_SESSION['society'];
 	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
+	
+	
    
 	if($donns['code']==0){
 		  $session=0;
@@ -100,9 +195,9 @@ if($_POST['action']=="dat"){
 				$calls='transmis par '.$donns['society'].'';
 			}
 		}
-  // on recupere les données pour les injecter dans la base de donnees	 
+   // on recupere les données pour les injecter dans la base de donnees	 
    // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO tresorie_user (date,email_ocd,user_gestionnaire,entree,sorties,reservation,reste,code,society,calls)VALUES(:date,:email_ocd,:user_gestionnaire,:entree,:sorties,:reservation,:reste,:code,:society,:calls)');
+		$rev=$bds->prepare('INSERT INTO tresorie_user (date,email_ocd,user_gestionnaire,entree,sorties,reservation,reste,code,society,calls,moyen_paiement)VALUES(:date,:email_ocd,:user_gestionnaire,:entree,:sorties,:reservation,:reste,:code,:society,:calls,:moyen_paiement)');
 	     $rev->execute(array(':date'=>$_POST['date'],
 		                    ':email_ocd'=>$_SESSION['email_ocd'],
 							':user_gestionnaire'=>$_SESSION['user'],
@@ -112,7 +207,8 @@ if($_POST['action']=="dat"){
 							':reste'=>$donnees['reste'],
 							':code'=>$session,
 							':society'=>$society,
-							':calls'=>$calls
+							':calls'=>$calls,
+							':moyen_paiement'=>$payments
 					));
    
    // on modifie les données de la base de données guide
@@ -123,6 +219,14 @@ if($_POST['action']=="dat"){
 							':re'=>$monts,
 							':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd']));
+	     }
+		 
+		 else{
+		echo'<div class="enre" style="color:red"><div><i class="fas fa-check-circle" style="color:red"></i>date inconnue,essayer à nouveau</button>
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';	 
+			 
+		 }
+		
 		}
 
  if($_POST['action']=="recap"){

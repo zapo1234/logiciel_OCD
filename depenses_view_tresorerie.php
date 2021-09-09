@@ -24,7 +24,7 @@ $smart_from =($page -1)*$record_peage;
 	$donns =$rel->fetch();
 	
 	// emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,moyen_paiement FROM facture WHERE email_ocd= :email_ocd ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	
 	if($donns['permission']=="user:boss"){
@@ -44,7 +44,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	
- $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste,society FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+ $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste,society,moyen_paiement FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
@@ -63,6 +63,7 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Entrées en caisse(réservation)</th>
 	  <th scope="col">Reste à solder(réservation)</th>
 	  <th scope="col">Gestionnaire</th>
+	  <th scope="col">Moyen/paiement</th>
 	  <th scope="col">Lieu d\'excercice</td>
       </tr>
       </thead>
@@ -101,6 +102,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$donnes['reservation'].'xof</td>
 		 <td><span class="repas">'.$donnes['reste'].'xof</td>
 		 <td><span class="repas">'.$donnes['user_gestionnaire'].'<br/></td>
+		 <td>'.$donnes['moyen_paiement'].'</td>
 		 <td>'.$donnes['society'].'</td>
 		</tr>';
 		echo'<div class="mobile">
@@ -111,9 +113,11 @@ $smart_from =($page -1)*$record_peage;
 		     <div>Reste à payer<span class="der">'.$donnes['reste'].'xof</span></div>
 		     
 	       </div>';
+		   
     }
 
        echo'</table>';
+	   
        // on compte
 		// on compte le nombre de ligne de la table facture
 	 if($_SESSION['code']==0){

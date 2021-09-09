@@ -323,7 +323,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 
  <div class="reini" style="display:none">
  <form method="post" id="form_reini" action="">
- <h1>Réinitialiser votre caisse journalière</h1>
+ <h1>Réinitialiser votre caisse journalière<br/>Attention fixer la date courante</h1>
  <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
  <div class="action"><button type="button" class="sup">Annuler</button><input type="submit" class="ok" value="ok"></div>
  </form>

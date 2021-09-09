@@ -65,7 +65,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 #paks{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
 
-.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
+.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:65%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
 .dep {
   animation: spin 2s linear infinite;
   margin-top:10px;
@@ -100,7 +100,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 
 .repas{font-size:15px;} .actions{cursor:pointer;}
 .datis{color:black;border:2px solid white;box-shadow:1px 1px 1px 1px;font-size:15px;background-color:white;width:360px;}
-.result{z-index:4;width:550px;height:650px;border:2px solid #eee;background-color:white;position:absolute;top:150px;left:30%;}
+.result{z-index:4;width:550px;height:650px;border:2px solid #eee;background-color:white;position:absolute;top:70px;left:30%;}
 .h{margin-top:20px;margin-left:4%;} #designatio,#fournisseu{width:400px;height:50px;}
 input {border:color:1px solid #eee;height:30px;} #modif{width: 180px;height: 40px;color: white;background: #0FAE3A;text-align: center;
 border: 2px solid #0FAE3A;} 

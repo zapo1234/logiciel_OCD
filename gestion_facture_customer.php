@@ -392,7 +392,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
  
     <div class="reini" style="display:none">
    <form method="post" id="form_reini" action="">
-   <h1>Réinitialiser votre caisse journalière</h1>
+   <h1>Réinitialiser votre caisse journalière<br/>Fixer la date courante</h1>
    <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
   <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
    </form>

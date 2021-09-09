@@ -447,7 +447,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					
 					
 					<div class="bg">
-                        <div id="resultats"></div>
+                        
                       
                     </div>
                 </div>
@@ -497,7 +497,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_modify_client.php?id_fact=<?php echo$_GET['id_fact'];?>&code=<?php echo$_GET['code_data'];?>">
+  <form method="post" id="form1" action="data_modify_client.php?id_fact=<?php echo$_GET['id_fact'];?>&code_data=<?php echo$_GET['code_data'];?>">
  <div  id="examp">
   <h2> Les informations du client </h2>
    
