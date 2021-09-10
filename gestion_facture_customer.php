@@ -93,7 +93,7 @@ include('inc_session.php');
 
 
 
-#results{height:1000px;} 
+#results{} 
  
  .bout,.bous{float:left;}
  .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
@@ -237,6 +237,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:8.5%;margin-top:-60px;}
 h2{font-size:14px;} .bout,.bous{float:left;}
+.delete{position:absolute;left:70%;top:100px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 }
 
 
@@ -258,6 +259,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:12.5%;}
 h2{font-size:14px;} .bout,.bous{float:left;}
+.delete{position:absolute;left:62%;top:100px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 }
 
 /*------------------------------------------------------------------
@@ -403,12 +405,11 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                     <!-- 404 Error Text -->
                     <div class="center">
                     
-					<div id="results"></div><!--afficher les données-->
+                    <div id="results"></div><!--afficher les données-->
+					<div id="result_recher"></div><!--afficher des -->
 					<div id="resu"></div><!--afficher des données-->
-					<div id="result_recher"></div><!--afficher des données-->
- 
                    </div><!--content-->
- 
+                   
  
     <div class="reini" style="display:none">
    <form method="post" id="form_reini" action="">
@@ -517,23 +518,28 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
         })
 		  
 		$(document).on('keyup','#recher',function(){
-          var recher =$('#recher').val();
+          
+		  var recher =$('#recher').val();
 		  var action="recher";
+		  if(recher.length > 1){
 		  $.ajax({
             type: 'POST',
             url:'result_facture_home.php',
             data:{action:action,recher:recher},
             success: function(data){
             $('#result_recher').html(data);
-			$('#tab').css('display','none');
+			$('#tb').css('display','none');
+			$('.pied_page').css('display','none');
 	        }
           });
-
+          }
 		 });
 
-      	$(document).on('blur','#recher',function(){
-           $('#tbs').css('display','none');
-			$('#tb').css('display','block');
+      	
+		$(document).on('blur','#recher',function(){
+         $('#tb').css('display','block');
+         $('.pied_page').css('display','block');
+		 $('#result_recher').html('');
 		});			
 		  
 
