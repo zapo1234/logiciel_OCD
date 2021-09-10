@@ -139,7 +139,7 @@ border: 2px solid #F83127;}
 	display:none;
 	text-transform:capitalize;
 }
-.moyens{display:none;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -162,6 +162,7 @@ height:2800px;overflow-y:scroll}h2{margin-top:20px;border-top:1px solid #eee;col
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:90px;left:20%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 
 #indicateur{display:none;} .der{padding-left:3%;color:black;font-size:16px;}
+.btn{display:block;}
 }
 
 
@@ -377,6 +378,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     $(document).on('click','.moyen',function(){
 		var id = $(this).data('id2');
 		var action="payements";
+		var txt ='<span style="cursor:pointer" class="moyens" data-id3="'+id+'">fermer <i class="fas fa-angle-down"></i></span>';
 				$.ajax({
 					url: "depenses_view_tresorerie.php",
 					method: "POST",
@@ -384,21 +386,49 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					success: function(data) {
 						$('#paiement'+id).html(data);
 						$('#paiement'+id).css('display','block');
-						$('.moyen').css('display','none');
-						$('.moyens').css('display','block');
+						$('#first'+id).css('display','none');
+						$('#second'+id).html(txt);
 						$('#indicateur').css('display','none');
 					}
 				});
+	       });
 				
 		$(document).on('click','.moyens',function(){
 		    var id = $(this).data('id3');
-						$('.moyen').css('display','block');
+		    $('#first'+id).css('display','block');
 						$('.moyens').css('display','none');
 						$('#paiement'+id).css('display','none');
 						$('#indicateur').css('display','block');
 					});
-				
+					
+			
+         $(document).on('click','.moye',function(){
+		var id = $(this).data('id2');
+		var action="payements";
+		var txt ='<span style="cursor:pointer;color:#0C80E7;padding-left:65%" class="moyes" data-id3="'+id+'">fermer <i class="fas fa-angle-down"></i></span>';
+				$.ajax({
+					url: "depenses_view_tresorerie.php",
+					method: "POST",
+					data:{id:id,action:action},
+					success: function(data) {
+						$('#paiemen'+id).html(data);
+						$('#paiemen'+id).css('display','block');
+						$('#three'+id).css('display','none');
+						$('#four'+id).html(txt);
+						$('#indicateur').css('display','none');
+					}
+				});
+		
+		
 			});
+			
+			$(document).on('click','.moyes',function(){
+		    var id = $(this).data('id3');
+			  $('#three'+id).css('display','block');
+			  $('#four'+id).html('');
+			 $('#paiemen'+id).css('display','none');
+						
+					});
   
   </script>
 </body>
