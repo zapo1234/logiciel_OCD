@@ -42,7 +42,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 
-.delete{margin-left:55%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
+.delete{position:absolute;left:57%;top:120px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
@@ -79,6 +79,20 @@ include('inc_session.php');
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
 #tb{margin-top:10px;}
+
+
+#tbs td, #tbs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tbs tr:nth-child(even){background-color:#f2f2f2;}
+
+#tbs tr:hover {background-color: #ddd;}
+
+#tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tbs{margin-top:10px;}
+
+
+
 #results{height:1000px;} 
  
  .bout,.bous{float:left;}
@@ -127,10 +141,7 @@ display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
 padding: 0 25px;
-transition: all 200ms;} .datas_messanger{border-bottom:1px solid #eee;}
-.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
-margin-left:-10px;}
-
+transition: all 200ms;} 
 .drops{display:none;}  .users{display:none} #news_data{display:none;}
 .mobile{display:none;} 
 
@@ -170,8 +181,17 @@ width:40%;height:750px;overflow-y:scroll;}
  .text_facture{font-size:120px;
  writing-mode: rl-bt;
  color:#F0EFEF;} .prin{position:fixed;left:65%;top:350px;width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
- .dz{color:red;font-size:18px;}
-
+ .dz{color:red;font-size:18px;} #recher{width:25%;height:40px;
+ color:black;
+    padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e6f0;}
+ 
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -385,7 +405,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                     
 					<div id="results"></div><!--afficher les données-->
 					<div id="resu"></div><!--afficher des données-->
-					
+					<div id="result_recher"></div><!--afficher des données-->
  
                    </div><!--content-->
  
@@ -494,7 +514,31 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 			$('#results_s').css('display','block');
 	        }
           });
+        })
+		  
+		$(document).on('keyup','#recher',function(){
+          var recher =$('#recher').val();
+		  var action="recher";
+		  $.ajax({
+            type: 'POST',
+            url:'result_facture_home.php',
+            data:{action:action,recher:recher},
+            success: function(data){
+            $('#result_recher').html(data);
+			$('#tab').css('display','none');
+	        }
+          });
+
 		 });
+
+      	$(document).on('blur','#recher',function(){
+           $('#tbs').css('display','none');
+			$('#tb').css('display','block');
+		});			
+		  
+
+		 
+		 
   
   </script>
   
