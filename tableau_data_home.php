@@ -107,8 +107,9 @@ include('inc_session.php');
 	}
 	
 	elseif(30<$ac  AND $ac < 50) {
-	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
+	$indicateur='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  </div>
   </div><br>';
   $indicateurs='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
@@ -130,8 +131,9 @@ include('inc_session.php');
 	}
 	
 	else{
-	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:5%;background:#AAF9BB;font-size:16px;color:#AAF9BB;">25</div>
+	$indicateur='<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:5%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  </div>
     </div><br>';
   $indicateurs='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>

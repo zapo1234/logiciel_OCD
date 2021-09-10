@@ -14,7 +14,7 @@ else {
 $page=1;	
 	
 }
-
+ if($_POST['action']=="fetchs"){
 $smart_from =($page -1)*$record_peage;
 	 
  // recuperer la permission pour afficher le checkout
@@ -44,7 +44,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	
- $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste,society,moyen_paiement FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+ $req=$bds->prepare('SELECT id,date,entree,sorties,user_gestionnaire,reservation,reste,society,moyen_paiement,code FROM tresorie_user WHERE email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
 	
@@ -60,11 +60,10 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Date de cloture</th>
 	  <th scope="col">Entrées en caisse</th>
       <th scope="col">Sorties de caisse</th>
-	  <th scope="col">Entrées en caisse(réservation)</th>
+	  <th scope="col">Acompte(réservation)</th>
 	  <th scope="col">Reste à solder(réservation)</th>
-	  <th scope="col">Gestionnaire</th>
+	  <th scope="col">Géstionnaire</th>
 	  <th scope="col">Moyen/paiement</th>
-	  <th scope="col">Lieu d\'excercice</td>
       </tr>
       </thead>
       <tbody>';
@@ -93,7 +92,8 @@ $smart_from =($page -1)*$record_peage;
 	$j = $date1[2];
 	$mm = $date1[1];
 	$an = $date1[0];
-	
+	$rt='<br/>';
+	$rem=',';
      echo'<tr class="datas'.$j.'/'.$mm.'/'.$an.'" id="tf">
 	     <td>'.$put.'</td>
 	     <td>'.$j.'/'.$mm.'/'.$an.'</td>
@@ -101,10 +101,12 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$donnes['sorties'].'xof</td>
 		 <td><span class="repas">'.$donnes['reservation'].'xof</td>
 		 <td><span class="repas">'.$donnes['reste'].'xof</td>
-		 <td><span class="repas">'.$donnes['user_gestionnaire'].'<br/></td>
-		 <td>'.$donnes['moyen_paiement'].'</td>
-		 <td>'.$donnes['society'].'</td>
+		 <td><span class="repas">'.$donnes['user_gestionnaire'].' travail à '.$donnes['society'].'<br/></td>
+		 <td><span style="cursor:pointer" class="moyen" data-id2='.$donnes['id'].'>suivre <i class="fas fa-angle-down"></i></span> 
+		 <span style="cursor:pointer" class="moyens" data-id3='.$donnes['id'].'>fermer <i class="fas fa-angle-down"></i></span>
+		 <div id="paiement'.$donnes['id'].'" class="payements"></div></td>
 		</tr>';
+		// pour le mobile
 		echo'<div class="mobile">
 		     <div>'.$put.' <i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].'</span></div>
 		     <div>Recette encaissée<span class="der"><span> '.$donnes['entree'].'xof</div>
@@ -120,17 +122,17 @@ $smart_from =($page -1)*$record_peage;
 	   
        // on compte
 		// on compte le nombre de ligne de la table facture
+      // on compte le nombre de ligne de la table facture
 	 if($_SESSION['code']==0){
-		  $session=0;
-		}
-		
-		else{
-		$session=$_SESSION['code'];
-		}
+	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE email_ocd= :email_ocd');
+     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	 }
 	 
-		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM tresorie_user WHERE code= :code AND email_ocd= :email_ocd');
-     $reg->execute(array(':code'=>$session,
-	                     ':email_ocd'=>$_SESSION['email_ocd'])); 
+	 else{
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE code= :code AND email_ocd= :email_ocd');
+        $reg->execute(array(':code'=>$_SESSION['code'],
+	                    ':email_ocd'=>$_SESSION['email_ocd'])); 
+	 }
 	
 	$dns=$reg->fetch();
 	$totale_page=$dns['nbrs']/$record_peage;
@@ -142,4 +144,18 @@ $smart_from =($page -1)*$record_peage;
     }
   
    echo'</div>';
-  
+   $reg->closeCursor();
+ }
+ 
+ if($_POST['action']=="payements"){
+	// recupere les moyens de paiement dans la base de données
+	$id =$_POST['id'];
+	$req=$bds->prepare('SELECT moyen_paiement FROM tresorie_user WHERE id= :id ');
+ $req->execute(array(':id'=>$id));
+ $donnes =$req->fetch();
+ // on afficher
+   $rt=',';
+   $rem ='<br/>';
+   echo'<span>'.str_replace($rt,$rem,$donnes['moyen_paiement']).'</span>';
+   $req->closeCursor();
+ }

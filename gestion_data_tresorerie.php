@@ -63,7 +63,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.9;}
 
-.enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
+.enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:700px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
   
   
   #tabs td, #tabs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
@@ -84,7 +84,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 ul a{margin-left:3%;} #form_logo{display:none;} 
 .clic{width:180px;height:40px;color:white;background:#0FAE3A;text-align:center;border:2px solid #0FAE3A;
 border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white;border-right:1px solid white;border-bottom:2px solid #3C52C7;font-size:20px;width:120px;}
-.export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;}
+.export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;} h2{color:black;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 #resul_depense,#indicateur{float:left;}
 #resul_depense{width:60%;} #indicateur{width:30%;margin-left:8%;}
@@ -120,7 +120,26 @@ transition: all 200ms;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.6;padding:1%;color:white;border-radius:5px;}
 
-.btn{display:none;}
+.btn{display:none;} .delete{margin-left: 5%;margin-bottom: 10px;color:white;
+ background: #F83127;width:100px;height:30px;border-radius:15px;
+border: 2px solid #F83127;}
+
+.payements{
+   width :300px;
+   color:black;
+    padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+	display:none;
+	text-transform:capitalize;
+}
+.moyens{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -355,6 +374,31 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		$('#accordionSidebar').css('display','block');
 	 });
   
+    $(document).on('click','.moyen',function(){
+		var id = $(this).data('id2');
+		var action="payements";
+				$.ajax({
+					url: "depenses_view_tresorerie.php",
+					method: "POST",
+					data:{id:id,action:action},
+					success: function(data) {
+						$('#paiement'+id).html(data);
+						$('#paiement'+id).css('display','block');
+						$('.moyen').css('display','none');
+						$('.moyens').css('display','block');
+						$('#indicateur').css('display','none');
+					}
+				});
+				
+		$(document).on('click','.moyens',function(){
+		    var id = $(this).data('id3');
+						$('.moyen').css('display','block');
+						$('.moyens').css('display','none');
+						$('#paiement'+id).css('display','none');
+						$('#indicateur').css('display','block');
+					});
+				
+			});
   
   </script>
 </body>

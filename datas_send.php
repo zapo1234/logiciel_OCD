@@ -89,7 +89,7 @@ include('inc_session.php');
 	
 	elseif(30<$a  AND $a < 50) {
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3-blue w3-round-large" style="width:40%;background:#AAF9BB;font-size:16px;color:#3DEA29;">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:40%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:60%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -99,7 +99,7 @@ include('inc_session.php');
 	
 	elseif(10 < $a AND $a <30){
 	$indicateur='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3- w3-round-large" style="width:20%";background:#AAF9BB;font-size:16px;color:#AAF9BB>25</div>
+    <div class="w3-container w3 w3-round-large" style="width:20%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
   </div><br>';
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
@@ -135,7 +135,7 @@ include('inc_session.php');
 	
 	elseif(50< $c  AND $c <80){
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:65%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:65%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
   </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:20%;background:#F79F76;font-size:16px;color:#F79F76;">25</div>
@@ -167,7 +167,7 @@ include('inc_session.php');
 	
 	else{
 	$indicateuc='<div class="w3-light-grey w3-round-large" style="width:350px">
-    <div class="w3-container w3 w3-round-large" style="width:7%;background:#AADAF9;font-size:16px;color:#AADAF9;">25</div>
+    <div class="w3-container w3 w3-round-large" style="width:7%;background:#3DEA29;font-size:16px;color:#3DEA29">25</div>
     </div><br>';
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>

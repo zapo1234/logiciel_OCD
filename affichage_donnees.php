@@ -133,31 +133,32 @@ if($_POST['action']=="dat"){
 	 }
 	 
 	 else{
-		$paiement ='<img src="https://img.icons8.com/ios-glyphs/30/000000/cash-in-hand.png"/> espéce caisse:'.$a.',';
+		$paiement ='<img src="https://img.icons8.com/ios-glyphs/30/000000/cash-in-hand.png" width="18px" height="18px"/> espéce caisse:'.$a;
 	 }
 	 if(empty($b)){
 		$paiement1=""; 
 	 }
 	 else{
-		 $paiement1='<i class="fa fa-cc-visa" aria-hidden="true"></i> carte bancaire :'.$b.',';
+		 $paiement1='<img src="img/check_p.png" width="18px" height="18px"> carte bancaire :'.$b;
 	}
 	
 	if(empty($c)){
 		$paiement2=""; 
 	 }
 	 else{
-		 $paiement2='<img src="img/check_n.png" width="40px" height="40px"></i> Mobile monney :'.$c.',';
+		 $paiement2='<img src="img/check_n.png" width="18px" height="18px"> Mobile monney :'.$c;
 	}
 	
 	if(empty($d)){
 		$paiement3=""; 
 	 }
 	 else{
-		 $paiement3='<img src="img/check.png" width="40px" height="40px" alt="check"></i> chéque :'.$d.',';
+		 $paiement3='<img src="img/check.png" width="25px" height="25px" alt="check"> chéque :'.$d;
 	}
 	// variable 
-	$payments = $paiement.','.$paiement1.','.$paiement2.','.$paiement3.',';
+	$payments = $paiement.','.$paiement1.','.$paiement2.','.$paiement3;
 	 
+	 if($donnees['montant']==0 AND $donnees['depense'] AND $donnees['avance']==0){
 	 if(in_array($_POST['date'],$data)){
    // on redirige vers la page
           echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i> Opération réussie</button>
@@ -225,6 +226,8 @@ if($_POST['action']=="dat"){
 		echo'<div class="enre" style="color:red"><div><i class="fas fa-check-circle" style="color:red"></i>date inconnue,essayer à nouveau</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';	 
 			 
+		 }
+		 
 		 }
 		
 		}
