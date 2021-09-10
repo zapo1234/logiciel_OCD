@@ -102,8 +102,8 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="repas">'.$donnes['reservation'].'xof</td>
 		 <td><span class="repas">'.$donnes['reste'].'xof</td>
 		 <td><span class="repas">'.$donnes['user_gestionnaire'].' travail à '.$donnes['society'].'<br/></td>
-		 <td><span style="cursor:pointer" class="moyen" data-id2='.$donnes['id'].'>suivre <i class="fas fa-angle-down"></i></span> 
-		 <span style="cursor:pointer" class="moyens" data-id3='.$donnes['id'].'>fermer <i class="fas fa-angle-down"></i></span>
+		 <td><div id="first'.$donnes['id'].'"><span style="cursor:pointer" class="moyen" data-id2='.$donnes['id'].'>Moyen de paiment <i class="fas fa-angle-down"></i></span></div> 
+		 <div id="second'.$donnes['id'].'"></div>
 		 <div id="paiement'.$donnes['id'].'" class="payements"></div></td>
 		</tr>';
 		// pour le mobile
@@ -113,6 +113,11 @@ $smart_from =($page -1)*$record_peage;
 			 <div>Dépense effectuée <span class="der">'.$donnes['sorties'].'xof</span></div>
 		     <div>Acompte réservation <span class="der">'.$donnes['reservation'].'xof</span></div>
 		     <div>Reste à payer<span class="der">'.$donnes['reste'].'xof</span></div>
+			 
+			 <div class="pay">
+			 <div id="three'.$donnes['id'].'"><span style="cursor:pointer;color:#0C80E7;padding-left:40%;"  class="moye" data-id2='.$donnes['id'].'>Moyen de paiement <i class="fas fa-angle-down"></i></span></div> 
+		     <div id="four'.$donnes['id'].'"></div>
+		    <div id="paiemen'.$donnes['id'].'"  class="payements"></div>     </div>
 		     
 	       </div>';
 		   
