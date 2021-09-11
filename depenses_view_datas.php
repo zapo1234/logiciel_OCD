@@ -48,14 +48,14 @@ if($_POST['action']=="fetchs") {
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>';
 	
 	$action='<form method="post" action="excels.php">
-    Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="nom ou numéro" de facture">
+    Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur de numéro facture">
 	<span class="expo">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
 		
 		$puts='Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="nom ou numéro de facture">';
-		$action="";
+		$action='<input type="text" class="form" id="rechers" name="rechers" aria-describedby="emailHelp" placeholder="fournisseur ou numéro facture">';
 	}
 	
   // on boucle sur les les resultats

@@ -169,7 +169,7 @@ transition: all 200ms;}
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #e3e6f0;}
-
+.mobiles{display:none;} #rechers{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -194,7 +194,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #recher{width:80%;}
+.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{width:80%;} .mobiles{display:block;} #recher{display:none;}
 }
 
 
@@ -475,8 +475,6 @@ height:2000px;overflow-y:scroll;z-index:5;}
             success: function(data){
             $('#result_recher').html(data);
 			$('#tls').css('display','none');
-			$('.mobile').css('display','none');
-			$('.mobiles').css('display','block');
 			$('.pied_page').css('display','none');
 
 	        }
@@ -488,6 +486,33 @@ height:2000px;overflow-y:scroll;z-index:5;}
 		    $('#result_recher').html('');
 		  }
 		 });
+		 
+		  $(document).on('keyup','#rechers',function(){
+		  var recher =$('#recher').val();
+		  var action="recher";
+		  if(recher.length > 1){
+		  $.ajax({
+            type: 'POST',
+            url:'depenses_view_datas.php',
+            data:{action:action,recher:recher},
+            success: function(data){
+            $('#result_recher').html(data);
+			$('.mobile').css('display','none');
+			$('.mobiles').css('display','block');
+			$('.pied_page').css('display','none');
+
+	        }
+          });
+          }
+		  else{
+			  $('#tls').css('display','block');
+            $('.pied_page').css('display','block');
+			$('.mobile').css('display','block');
+			$('.mobiles').css('display','none');
+		    $('#result_recher').html('');
+		  }
+		 });
+		 
   </script>
 </body>
 
