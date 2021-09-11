@@ -41,8 +41,8 @@ include('inc_session.php');
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-
-.delete{position:absolute;left:57%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
+.expor{padding-left:2%;}
+.delete{position:absolute;left:67%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 .delet{position:absolute;left:57%;top:120px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -192,7 +192,9 @@ width:40%;height:750px;overflow-y:scroll;}
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #e3e6f0;} .btn{display:block;}
- .btn{display:none} #annul{background:white;color:black;} .mobiles{display:none;} #rechers{display:none;}
+ .btn{display:none} #annul{background:white;color:black;} .mobiles{display:none;} #rechers{display:none;} #date{width:20%;}
+ .but_recher{width:110px;height:30px;border-radius:15px;background:#09AB15;
+ border:2px solid #09AB15;color:white;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -240,7 +242,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:8.5%;margin-top:-60px;}
 h2{font-size:14px;} .bout,.bous{float:left;}
 .delete{position:absolute;left:70%;top:100px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
-#rechers{display:none;}
+#rechers{display:none;} 
 }
 
 
@@ -571,6 +573,11 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 			$('.mobiles').css('display','none');
 		    $('#result_recher').html('');
 		  }
+		 });
+		 
+		 $(document).on('click','.prin',function(){
+			$('#pak').css('display','none');
+			$('#results_s').css('display','none');
 		 });
 
   </script>

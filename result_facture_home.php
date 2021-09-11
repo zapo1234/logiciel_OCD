@@ -46,17 +46,19 @@ $smart_from =($page -1)*$record_peage;
 	if($donns['permission']=="user:boss"){
 		
 		$puts='<div class="d1"><button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="email" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="Entrer le nom du client">
-	  </span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
+	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="  filtre par nom ou numéro du client">
+	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
 		
 	}
 	else{
 	   $puts="";
-		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder="filter le nom du client" aria-label="Username" aria-describedby="basic-addon1">';
+		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder=" filtre par nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';
 		}
 		
+	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';
+		
 	// on boucle sur les les resultats
-	echo'<div class="expor">'.$export.'
+	echo'<div class="expor">'.$export.' '.$mobile.'
 	</form></div>';
 	// entete du tableau
 	 echo'<form method="post" id="formc" action="">
@@ -67,7 +69,7 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Date</th>
       <th scope="col">Informations</th>
 	  <th scope="col">Montant(TTC)</th>
-	  <th scope="col">Tva ajoutée</th>
+	  <th scope="col">Tva sur HT ajoutée</th>
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
@@ -216,7 +218,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
-		echo'<div class="mobile">
+		echo'<div class="mobile" id="mobile">
 		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
@@ -438,7 +440,7 @@ if($_POST['action']=="mail"){
 
  if($_POST['action']=="recher"){
 	 
-	$q= strtolower(htmlentities($_POST['recher']));
+	$q = trim(strip_tags($_POST['recher']));
 // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
@@ -448,8 +450,8 @@ if($_POST['action']=="mail"){
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
-        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) AND email_ocd= :email_ocd');
-        $req->execute(array(':q'=> $q.'%',
+        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) AND email_ocd= :email_ocd LIMIT 0,25');
+        $req->execute(array(':q'=> '%'.$q.'%',
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
@@ -457,32 +459,17 @@ if($_POST['action']=="mail"){
 		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
 		$session=$donns['code'];
 		//emttre la requete sur le fonction
-       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) email_ocd= :email_ocd AND code= :code');
-       $req->execute(array(':q'=> $q.'%',
+       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) AND email_ocd= :email_ocd AND code= :code LIMIT 0,25');
+       $req->execute(array(':q'=> '%'.$q.'%',
 	                       ':code'=>$session,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}
-
-       if($donns['permission']=="user:boss"){
-		
-		$puts='<div class="d1"><button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="email" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="Entrer le nom du client">
-	  </span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
-		
-	}
-	else{
-	   $puts="";
-		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder="filter le nom du client" aria-label="Username" aria-describedby="basic-addon1">';
-		}
-		
-	// on boucle sur les les resultats
-	echo'<div class="expor">'.$export.'
-	</form></div>';
-	// entete du tableau		
+   
 	
      // entete du tableau
-	 echo'<form method="post" id="form" action="">
-	 '.$puts.'<table id="tbs">
+	 echo'<form method="post" id="formd" action="">
+	 <button type="submit" value="ok" class="delet">suprimer <i class="far fa-trash-alt"></i></button>
+	 <table id="tbs">
      <thead>
      <tr class="tf">
 	 <th></th>
@@ -492,8 +479,8 @@ if($_POST['action']=="mail"){
 	  <th scope="col">Tva ajoutée</th>
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
-	  <th scope="col">Compléments</th>
-	  <th scope="col">Action</th>
+	  <th class="cols">Compléments</th>
+	  <th scope="col">Action/sur facture</th>
 	  <th scope="col">Imprimer/facture client</th>
       </tr>
       </thead>
@@ -556,7 +543,7 @@ if($_POST['action']=="mail"){
 	$jour = $donnees['nombre'].'heure';
 	$encaiss="";
 	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
-	$annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
+	$annul=' <a href="#"  title="Annuler" id="annul" class="annulc" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	elseif($donnees['type']==3){
@@ -564,7 +551,7 @@ if($_POST['action']=="mail"){
 	 $name ="Réservation";
 	 $encaiss="";
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
-	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
+	 $annul=' <a href="#"  title="Annuler" class="annulc" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
 	
 	else{
@@ -628,7 +615,7 @@ if($_POST['action']=="mail"){
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
-		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.''.$donnees['code'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.''.$donnees['code'].'">
+		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/>
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  <span class="motif">'.$modif.'</span>
 		  '.$encaiss.'
@@ -638,7 +625,7 @@ if($_POST['action']=="mail"){
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
-		echo'<div class="mobile">
+		echo'<div class="mobiles" id="mobiles">
 		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
@@ -652,7 +639,7 @@ if($_POST['action']=="mail"){
 	
       echo'</tbody>
      </table></form>';
-  
+      
 	 
  }
 
