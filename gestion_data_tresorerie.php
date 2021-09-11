@@ -39,7 +39,7 @@ include('inc_session.php');
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:95%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:98%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
@@ -66,7 +66,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:700px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
   
   
-  #tabs td, #tabs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+  #tabs td, #tabs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
 
 #tabs tr:nth-child(even){background-color:#f2f2f2;}
 
@@ -87,7 +87,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .export{margin-left:40%;margin-bottom:5px;padding-bottom:25px;} .csv{margin-left:2%;} h2{color:black;}
 .csv,.excel{background-color:#F026FA;border-radius:15px;color:white;border:2px solid #F026FA;}
 #resul_depense,#indicateur{float:left;}
-#resul_depense{width:60%;} #indicateur{width:30%;margin-left:8%;}
+#resul_depense{width:60%;} #indicateur{width:25%;margin-left:10%;font-size:16px;}
 .pied_page{margin-left:20%;margin-top:25px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .montants{margin-left:15%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:15%;font-size:30px;color:#D20A22;font-weight:bold;}
@@ -204,6 +204,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:12.5%;}
 .btn{display:block;} #indicateur{font-weight:15px;margin-left:10%;}
+#indicateur{display:none;}
 }
 
 

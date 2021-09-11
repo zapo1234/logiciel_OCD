@@ -24,7 +24,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
 	  
    while($donnees =$rej->fetch()){
   
-  echo'<span class="h1">Caisse '.$donnees['society'].'</span>
+  echo'<div class="bs"><span class="h1">Caisse '.$donnees['society'].'</span>
 
    <div id="caisse">
  <div class="td"> Facture soldée:</div>
@@ -40,7 +40,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
  <div class="tdc">'.$donnees['reste'].' XOF</div>
   
      
- </div><br/><br/>';
+ </div></div><br/><br/>';
  }
  
   if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
