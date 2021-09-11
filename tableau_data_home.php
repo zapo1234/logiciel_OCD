@@ -348,9 +348,13 @@ $name="";
     <style>
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
-    .bg{border:1px solid #eee;background:white;width:340px;height:30%;padding:4%;margin-top:0px;}
-    .bs{width:340px;height:280px;border:1px solid #eee;}
+    #collapse{background:#eee;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    
+    .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:white;}
+	.bc{background:white;width:250px;height:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;}
+	
+	.bd{margin-top:10px;margin-left:3%;} .users{width:250px;background:white;color:black;padding:2.5%;margin-left:4%;}
+		
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -529,12 +533,13 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-#searchDropdown{display:none;}
+#searchDropdown{display:none;} 
+#collapse{position:absolute;display:none;left:62%;height:1200px;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
-#panier{margin-left:-20%;}
+#panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
@@ -549,7 +554,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
-
+#collapse{position:absolute;display:none;left:70%;height:1200px;}
 }
 
 
@@ -565,7 +570,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
-                    <div class="bs">
+                    <div class="bn">
                     <h1>Les enregistrements récents</h1>
                       
                   <div class="container">
@@ -616,9 +621,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     </div>
 					
 					
-					<div class="bg">
+					<div class="bd">
           
-              <h2>Historique des utilisateurs(en ligne)</h2>
+              <h1> utilisateurs(en ligne)</h1>
 		
 		<div class="users">
 		
@@ -633,7 +638,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		   
 		   else{
 			   
-			  $transmi ='travail à'.$dato['society'].''; 
+			  $transmi ='travail à '.$dato['society'].''; 
 		   } 
 			
 	     if($dato['active']=="on"){
@@ -649,8 +654,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 						
 	</div>
 	
-		<div class="resutat">
-		<h2>Résultat de trésorerie</h2>
+		<div class="bc">
+		<h1>Résultat de trésorerie</h1>
 		<h3>Précision Net:</h3>
 		<div class="h"><?php echo$name;?></div><br/>
 		<h3>Prévision attendu:</h3>
@@ -853,7 +858,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	});
 	
 	 $('#news_data').click(function(){
-	$('.drops').slideToggle();
+	$('#collapse').slideToggle();
 	$('.drop').css('display','none');
 	
 	});
