@@ -93,6 +93,42 @@ $(document).ready(function(){
  });
  
  // delete home--
+ $(document).on('click','.annulc', function(){
+	 // recupere la variable
+	 var id = $(this).data('id5');
+	 var action = "deleted";
+    // affiche les differentes
+	$('.annuler').css('display','block');
+	$('#id_fact').text(id);
+    $('#pak').css('display','block');
+	$('#ids').val(id);
+	
+	$(document).on('click','.annuls', function(){
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_facture_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_annuler').html(data);
+     $('.annuler').css('display','none');
+     $('#pak').css('display','none');
+	 $('.modif').css('display','none');
+	 loads();
+	 load();
+	 $('#result_recher').css('display','none');
+	}
+		
+	});
+	
+	setInterval(function(){
+		 $('#data_annuler').html('');
+		 location.reload(true);
+	 },4000);
+
+ });
+ });
+ 
+ // delete home--
  $(document).on('click','.envoi', function(){
 	 // recupere la variable
 	 var id = $(this).data('id3');
