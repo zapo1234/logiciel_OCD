@@ -122,7 +122,19 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 #tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tls{margin-top:10px;}
+#tls{margin-top:10px;color:black;}
+
+ #tss td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tss tr:nth-child(even){background-color:#f2f2f2;}
+
+#tss tr:hover {background-color: #ddd;}
+
+#tss th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tss{margin-top:10px;color:black;}
+
+
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
 background-color: white;
@@ -147,7 +159,16 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
-.btn{display:none;}
+.btn{display:none;} #recher{width:25%;height:40px;
+ color:black;
+    padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e6f0;}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -173,7 +194,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;}
+.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block}
 }
 
 
@@ -317,6 +338,7 @@ height:2000px;overflow-y:scroll;z-index:5;}
 					<div id="resul_depense"></div><!--retour ajax sur la lsite des dépenses-->
 					<div id="result_depense"></div><!--retour ajax donnees depenses-->
 					<div id="resu"></div><!--retour ajax site unique-->
+					<div id="result_recher"></div><!--retour ajax-->
 
   <div  id="examp" style="display:none">
   
@@ -441,6 +463,31 @@ height:2000px;overflow-y:scroll;z-index:5;}
   $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').css('display','block');
 	 });
+	 
+	 $(document).on('keyup','#recher',function(){
+		  var recher =$('#recher').val();
+		  var action="recher";
+		  if(recher.length > 1){
+		  $.ajax({
+            type: 'POST',
+            url:'depenses_view_datas.php',
+            data:{action:action,recher:recher},
+            success: function(data){
+            $('#result_recher').html(data);
+			$('#tls').css('display','none');
+			$('.mobile').css('display','none');
+			$('.mobiles').css('display','block');
+			$('.pied_page').css('display','none');
+
+	        }
+          });
+          }
+		  else{
+			  $('#tls').css('display','block');
+            $('.pied_page').css('display','block');
+		    $('#result_recher').html('');
+		  }
+		 });
   </script>
 </body>
 

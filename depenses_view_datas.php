@@ -45,20 +45,16 @@ if($_POST['action']=="fetchs") {
 	
   if($donns['permission']=="user:boss"){
 		
-		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
-	<select name="delete_line" id="delete_line">
-	<option value="">Suprimer</option>
-	<option value="10">10 lignes</option>
-	<option value="30">30 lignes</option>
-	<option value="50">50 lignes</option>
-	</select> ';
+		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>';
 	
-	$action='<form method="post" action="excels.php"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
+	$action='<form method="post" action="excels.php">
+    Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="nom ou numéro" de facture">
+	<span class="expo">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
 		
-		$puts="";
+		$puts='Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="nom ou numéro de facture">';
 		$action="";
 	}
 	
@@ -432,5 +428,170 @@ if($_POST['action']=="fetchs") {
 			
 		}
       
+  }
+  
+  if($_POST['action']=="recher"){
+	  $q = trim(strip_tags($_POST['recher']));
+	  
+	 if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+		  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE(fournisseur LIKE :q OR numero_facture LIKE :q) AND email_ocd= :email_ocd ORDER BY id DESC LIMIT 0,25');
+		  $req->execute(array(':q'=> '%'.$q.'%',
+		                    ':email_ocd'=>$_SESSION['email_ocd']));
+		}
+		
+		if($donns['permission']=="user:employes"){
+		$session=$donns['code'];
+		$req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE(fournisseur LIKE :q OR numero_facture LIKE :q) AND code= :code AND email_ocd= :email_ocd LIMIT 0,25');
+        $req->execute(array(':q'=> '%'.$q.'%',
+		                   ':code'=>$session,
+                           ':email_ocd'=>$_SESSION['email_ocd']));
+		}
+ 
+    $datas=$req->fetchAll();
+	
+    // on boucle sur les les resultats
+	// on boucle sur les les resultats
+	
+  echo'	<table id="tss">
+     <thead>
+     <tr class="tf">
+	 <th></th>
+	  <th scope="col">Date</th>
+	  <th scope="col">N°facture(si existe)</th>
+      <th scope="col">Désignation</th>
+	  <th scope="col">fournisseur</th>
+	  <th scope="col">Montant</th>
+	  <th scope="col">Gestionnaire(écritures)</th>
+	  <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>';
+  
+  foreach($datas as $donnes){
+
+    $nombre =$donnes['status'];
+	// afficher la le checkout en fonction de la permission
+	if($donns['permission']=="user:boss"){
+		$put=' <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="'.$donnes['id'].'">';
+	}
+	else{
+		$put="";
+	}
+	
+	if($donnes['status']==1){
+	 $name="dépense effectuée";
+	 $mettre ='';
+	 $annul='<a href="#" class="annul" title="annuler" data-id4='.$donnes['id'].'><i class="fab fa-telegram"></i> Annuler</a><br/>';
+	 $modif ='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'"><i class="fab fa-telegram"></i> Modifier</a><br/>';
+	}
+	elseif($donnes['status']==2){
+	 $name="crédit fournisseur";
+	 $mettre='<a href="#" class="mettre" title="mettre à jour" data-id5='.$donnes['id'].'><i class="fab fa-telegram"></i>Payer le crédit</a><br/>';
+	 $annul='<a href="#" class="annul" title="annuler" data-id4='.$donnes['id'].'><i class="fab fa-telegram"></i> Annuler</a><br/>';
+	 $modif='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'><i class="fab fa-telegram"></i> Modifier</a><br/>';
+	}
+	
+	elseif($donnes['status']==4){
+	 $name="remboursement effectué";
+	 $mettre='';
+	 $annul='';
+	 $modif='';
+	}
+	
+	else{
+	$name="dépense annulée";
+	$mettre="";
+	$annul="";
+	$modif="";
+	}
+
+   $date1=$donnes['date'];
+	$date1 = explode('-',$date1);
+	$j = $date1[2];
+	$mm = $date1[1];
+	$an = $date1[0];
+	
+	$data =$donnes['user'];
+	$users = explode(',',$data);
+
+	$data_user = $users[0];
+	
+	
+	// modifier en display block $donnees[user] pour écriture
+	$rem='<br/>';
+	$rt=",";
+	
+	echo'<tr class="datas'.$donnes['status'].'" id="tf">
+	    <td>'.$put.'</td>
+	     <td><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> enregistrement effectué le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+		 <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></td>
+		 <td><span class="der">N° facture: '.$donnes['numero_facture'].'<br/><div class="data'.$donnes['status'].'">'.$name.'</span></div></td>
+		 <td><span class="repas">'.$donnes['designation'].'</td>
+		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
+		 <td><span class="repas">'.$donnes['montant'].'xof</td>
+		 <td><span class="dg">'.$donnes['calls'].'</span><br/>voir<span class="actions" data-id7="'.$donnes['id'].'"> <i class="fas fa-plus" style="font-size:10px;"></i></span>
+		 <div class="datis" style="display:none" id="contens'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
+		 <td>
+		 '.$mettre.'<br/>
+		 '.$modif.'<br/>
+		 '.$annul.'
+		  </div></td>
+	    </tr>';
+		
+		echo'<div class="mobiles" id="mobiles">
+		     <div><span class="repas"></span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
+			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
+			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
+			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
+		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
+			 <div class="data'.$donnes['status'].'">'.$name.'</div></div>
+		     '.$mettre.'   '.$modif.'  '.$annul.'<span class="dg">'.$donnes['calls'].'</span></div>
+			 
+	       </div>';
+    }
+
+       echo'</table>';
+
+     	// on compte
+	 
+	 // on compte le nombre de ligne de la table facture
+	 if($_SESSION['code']==0){
+	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE email_ocd= :email_ocd');
+     $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	 }
+	 
+	 else{
+		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM depense WHERE code= :code AND email_ocd= :email_ocd');
+        $reg->execute(array(':code'=>$_SESSION['code'],
+	                    ':email_ocd'=>$_SESSION['email_ocd'])); 
+	 }
+	$dns=$reg->fetch();
+	
+	$totale_page=$dns['nbrs']/$record_peage;
+	$totale_page = ceil($totale_page);
+	
+	  echo'<div class="pied_page">';
+   if($page > 1){
+	  $page =$page-1;
+	  echo'<button type="button" class="bous"><a href="gestion_datas_depenses.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
+   }
+   for($i=1; $i<=$totale_page; $i++) {
+	   
+	   if($page!= $i){
+	   echo'<button class="bout" id="'.$i.'">'.$i.'</button>';
+	   }
+	   else{
+		   echo'<button class="bout" id="'.$i.'">'.$i.'</button> ';
+	   }
+	   
+    }
+	
+	if($i > $page){
+		$page =$page+1;
+		echo'<button type="button" class="bous"><a href="gestion_datas_depenses.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
+	}
+	
+	echo'</div>';  
+	  
   }
  
