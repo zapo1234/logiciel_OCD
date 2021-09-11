@@ -140,6 +140,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
+.btn{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -154,7 +155,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .form-select{display:none;} .es{display:none;}
 #der11,#der12,#der13,#der14{width:95%;margin-left:2%;}
-#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;}
+#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;}
 }
 
 
@@ -195,7 +196,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1400px;} .detail{margin-left:12.5%;}
+.center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
 }
 
 </style>
@@ -221,7 +222,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
             
             foreach($donns as $donnes){			
 	      echo'<div class="bs">
-		    <img  data-id="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_image" width="300" height="290" alt="'.$donnes['name_upload'].'">
+		    <img  data-id="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_image" width="250" height="240" alt="'.$donnes['name_upload'].'">
 			</div><br/>';	
 				
 			}
@@ -436,6 +437,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
+
+   $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
 
    $('#but').click(function(){
    $('#examp').css('display','block');
