@@ -159,7 +159,7 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
-.btn{display:none;} #recher{width:25%;height:40px;
+.btn{display:none;} #recher,#rechers{width:25%;height:40px;
  color:black;
     padding-left: .100rem;
     margin: .175rem .175rem .175em;
@@ -178,7 +178,7 @@ transition: all 200ms;}
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;font-size:16px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
@@ -194,7 +194,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{width:80%;} .mobiles{display:block;} #recher{display:none;}
+.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tss{display:none;}
 }
 
 
@@ -488,7 +488,8 @@ height:2000px;overflow-y:scroll;z-index:5;}
 		 });
 		 
 		  $(document).on('keyup','#rechers',function(){
-		  var recher =$('#recher').val();
+			  
+		  var recher =$('#rechers').val();
 		  var action="recher";
 		  if(recher.length > 1){
 		  $.ajax({
@@ -505,7 +506,6 @@ height:2000px;overflow-y:scroll;z-index:5;}
           });
           }
 		  else{
-			  $('#tls').css('display','block');
             $('.pied_page').css('display','block');
 			$('.mobile').css('display','block');
 			$('.mobiles').css('display','none');

@@ -54,14 +54,15 @@ if($_POST['action']=="fetchs") {
 	}
 	else{
 		
-		$puts='Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="nom ou numéro de facture">';
-		$action='<input type="text" class="form" id="rechers" name="rechers" aria-describedby="emailHelp" placeholder="fournisseur ou numéro facture">';
+		$puts='Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur ou numéro de facture">';
+		$action="";
 	}
 	
+	$mobile='<input type="text" class="form" id="rechers" name="recher" aria-describedby="emailHelp" placeholder="fournisseur ou numéro de facture">';
   // on boucle sur les les resultats
 	// on boucle sur les les resultats
 	
-	echo'<div class="expor"><h2>Gérez les dépenses de l \'entreprise</h2>'.$action.'
+	echo'<div class="expor"><h2>Gérez les dépenses de l \'entreprise</h2>'. ' '.$mobile.' ' .$action.'
 	<span>'.$puts.'</form></div>';
   echo'	<table id="tls">
      <thead>
@@ -521,7 +522,7 @@ if($_POST['action']=="fetchs") {
 	$rem='<br/>';
 	$rt=",";
 	
-	echo'<tr class="datas'.$donnes['status'].'" id="tf">
+	echo'<tr class="datas'.$donnes['status'].'" id="t">
 	    <td>'.$put.'</td>
 	     <td><span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> enregistrement effectué le<br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 		 <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></td>
@@ -538,7 +539,7 @@ if($_POST['action']=="fetchs") {
 		  </div></td>
 	    </tr>';
 		
-		echo'<div class="mobiles" id="mobiles">
+		echo'<div class="mobiles">
 		     <div><span class="repas"></span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
 			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
 			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
