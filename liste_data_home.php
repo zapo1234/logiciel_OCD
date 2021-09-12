@@ -94,7 +94,7 @@ $smart_from =($page -1)*$record_peage;
    echo'<div class="pied_page">';
    if($page > 1){
 	  $page =$page-1;
-	  echo'<div class="p"><button class="but"><a href="inventaire_gestion_home.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+	  echo'<div class="p"><a href="inventaire_gestion_home.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></div>'; 
    }
    for($i=1; $i<=$totale_page; $i++) {
 	   
@@ -103,7 +103,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($i > $page){
 		$page =$page+1;
-		echo'<div class="p"><button><a href="inventaire_gestion_home.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
+		echo'<div class="p"><button><a href="inventaire_gestion_home.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
 	}
 	
 	echo'</div>';

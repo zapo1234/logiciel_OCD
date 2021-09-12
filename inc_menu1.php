@@ -101,7 +101,7 @@ include('inc_session.php');
 		$reh->closeCursor();				
 			?>
 			
-		<h2>Historique des utilisateurs(en ligne)</h2>
+		<h2>utilisateurs(en ligne)</h2>
 		
 		<div class="users">
 		

@@ -194,7 +194,7 @@ width:40%;height:750px;overflow-y:scroll;}
     border: 1px solid #e3e6f0;} .btn{display:block;}
  .btn{display:none} #annul{background:white;color:black;} .mobiles{display:none;} #rechers{display:none;} #date{width:20%;}
  .but_recher{width:110px;height:30px;border-radius:15px;background:#09AB15;
- border:2px solid #09AB15;color:white;}
+ border:2px solid #09AB15;color:white;} 
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -220,7 +220,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 .excel{display:none;}
 .delete{position:absolute;left:10%;top:230px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} .btn{display:block}
 #searchDropdown{display:none;} .mobiles{color:black;} #recher{display:none;}
-#rechers{display:block;width:70%;}
+#rechers{display:block;width:70%;} .but_recher{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
