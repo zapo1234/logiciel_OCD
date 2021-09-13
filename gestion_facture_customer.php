@@ -42,8 +42,8 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 .expor{padding-left:2%;}
-.delete{position:absolute;left:67%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
-.delet{position:absolute;left:57%;top:120px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
+.delete,.delet{position:absolute;left:67%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
+
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
@@ -194,7 +194,25 @@ width:40%;height:750px;overflow-y:scroll;}
     border: 1px solid #e3e6f0;} .btn{display:block;}
  .btn{display:none} #annul{background:white;color:black;} .mobiles{display:none;} #rechers{display:none;} #date{width:20%;}
  .but_recher{width:110px;height:30px;border-radius:15px;background:#09AB15;
- border:2px solid #09AB15;color:white;} 
+ border:2px solid #09AB15;color:white;} #recher_date{padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 3px solid white;
+	width:20%;height:200px;
+	position:absolute;
+	z-index:4;
+	left:40%;
+	top:100px;
+	display:none;
+	color:black;
+	padding:2%;
+ }
+ h3{color:black;font-family:arial;font-size:18px;text-align:center;}
+ #search_date{width:90%;color:black;font-size:18px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -218,9 +236,13 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
 h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .bout,.bous{float:left;}
 .excel{display:none;}
-.delete{position:absolute;left:10%;top:230px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} .btn{display:block}
+.delete,.delet{position:absolute;left:80%;top:130px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} .btn{display:block}
 #searchDropdown{display:none;} .mobiles{color:black;} #recher{display:none;}
-#rechers{display:block;width:70%;} .but_recher{display:none;}
+#rechers{display:block;width:70%;} .but_recher{} .dh{display:none;}
+#recher_date{width:65%;position:absolute;
+	z-index:4;
+	left:10%;
+	top:100px;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -241,8 +263,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:8.5%;margin-top:-60px;}
 h2{font-size:14px;} .bout,.bous{float:left;}
-.delete{position:absolute;left:70%;top:100px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
-#rechers{display:none;} 
+.delete,.delet{position:absolute;left:94%;top:125px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
+#rechers{display:none;}  #recher_date{width:30%;} #search_recher{font-size:18px;} .dh{display:none;}
 }
 
 
@@ -264,8 +286,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:12.5%;}
 h2{font-size:14px;} .bout,.bous{float:left;}
-.delete{position:absolute;left:62%;top:100px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
-#rechers{display:none;}
+.delete{position:absolute;left:74%;top:120px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
+#rechers{display:none;} #recher_date{width:30%;} #search_recher{font-size:18px;}
 }
 
 /*------------------------------------------------------------------
@@ -475,7 +497,25 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
 <div id="panier"></div><!--ajax panier facturation-->
-<div id="results_s"></div>
+<div id="results_s"></div><!--div pour afficher les facture imprimer-->
+<div id="recher_date">
+<h3>Sélectionnez une période</h3>
+<select id="search_date" name="search_date" class="form-control">
+        <option selected>Choisir...</option>
+        <option value="01">Janvier</option>
+		<option value="02">Février</option>
+		<option value="03">Mars</option>
+		<option value="04">Avril</option>
+		<option value="05">Mai</option>
+		<option value="06">Juin</option>
+		<option value="07">Juillet</option>
+		<option value="08">Août</option>
+		<option value="09">Septembre</option>
+		<option value="10">Octobre</option>
+		<option value="11">Novembre</option>
+		<option value="12">Décembre</option>
+      </select>
+</div><!--bloc pour rechercher les facture à partir des date-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -579,6 +619,12 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 			$('#pak').css('display','none');
 			$('#results_s').css('display','none');
 		 });
+		 
+		   $(document).on('click','.but_recher',function(){
+			$('#recher_date').css('display','block');
+			$('#pak').css('display','block');
+			
+		});
 
   </script>
   
