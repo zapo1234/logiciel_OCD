@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 13 sep. 2021 à 09:16
+-- Généré le :  lun. 13 sep. 2021 à 09:22
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -147,27 +147,6 @@ CREATE TABLE IF NOT EXISTS `depense` (
   KEY `code` (`code`),
   KEY `fournisseur` (`fournisseur`)
 ) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `depense`
---
-
-INSERT INTO `depense` (`id`, `email_ocd`, `numero_facture`, `date`, `designation`, `fournisseur`, `user`, `nature`, `montant`, `status`, `code`, `society`, `calls`) VALUES
-(86, 'zapomartial@yahoo.fr', '133440', '2021-09-23', 'cie sodeci', 'cie sodeci', 'kouame ange,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>kouame ange Ã  modifiÃ© le  01-09-2021Ã   09:33<span class=\"edit\"></span>,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>kouame ange Ã  modifiÃ© le  03-09-2021Ã   11:41<span class=\"edit\"></span>', 'dÃ©pense effectuÃ©e', '50000', 1, 0, '', ''),
-(87, 'zapomartial@yahoo.fr', '', '2021-09-08', 'cie sodeci mariam', 'cie sodeci', 'tino tino tino, <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>tino tino tino Ã  payer la somme de 20000 xof  le  09-09-2021Ã   11:59 par   <span class=\"edit\"></span>', 'remboursement effectuÃ©', '0', 4, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(89, 'zapomartial@yahoo.fr', '', '2021-09-30', 'GIL', 'spdeci', 'tino tino tino,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>tino tino tino Ã  modifiÃ© le  09-09-2021Ã   11:55<span class=\"edit\"></span>,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>tino tino tino Ã  modifiÃ© le  09-09-2021Ã   11:59<span class=\"edit\"></span>,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>tino tino tino Ã  modifiÃ© le  09-09-2021Ã   11:59<span class=\"edit\"></span>, <i class=\"fas fa-exclamation-circle\" style=\"font-size:13px;color:#AB040E;\"></i> tino tino tino a  annulÃ© le  10-09-2021Ã   09:04</span>', 'dÃ©pense effectuÃ©e', '50009', 3, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(90, 'zapomartial@yahoo.fr', '', '2021-09-17', 'cie sodeci', 'cie sodeci', 'kouame kady terry,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>kouame kady terry Ã  modifiÃ© le  07-09-2021Ã   17:26<span class=\"edit\"></span>,  <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>kouame kady terry Ã  modifiÃ© le  07-09-2021Ã   17:27<span class=\"edit\"></span>, <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>kouame kady terry Ã  payer la somme de 20000 xof  le  07-09-2021Ã   17:27 par   <span class=\"edit\"></span>', 'remboursement effectuÃ©', '0', 4, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(91, 'zapomartial@yahoo.fr', '', '2021-09-17', 'zapo martial', 'bock 66 treichvill', 'kouame kady terry', 'dÃ©pense effectuÃ©', '100000', 1, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(92, 'zapomartial@yahoo.fr', '', '2021-09-23', 'zapo martial', 'bock 66 treichvill', 'kouame kady terry', 'dÃ©pense effectuÃ©', '200000', 1, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(93, 'zapomartial@yahoo.fr', '', '2021-09-22', '10 cassire de coca', 'bock 66 treichvill', 'kouame kady terry', 'dÃ©pense effectuÃ©', '230000', 1, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(94, 'zapomartial@yahoo.fr', '', '2021-09-23', 'zapo martial', 'bock 66 treichvill', 'kouame kady terry', 'dÃ©pense effectuÃ©', '300000', 1, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(95, 'zapomartial@yahoo.fr', '', '2021-09-30', '10 cassire de coca', 'bock 66 treichvill', 'kouame kady terry', 'crÃ©dit fournisseur', '40000', 2, 1, 'Hotel Baleine Yamssoukro', 'transmis par Hotel Baleine Yamssoukro'),
-(99, 'zapomartial@yahoo.fr', '23444', '2021-09-24', 'zapo martial', 'bock 66 treichvill', 'tino tino tino', 'crÃ©dit fournisseur', '40000', 2, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(100, 'zapomartial@yahoo.fr', '23444', '2021-09-16', '10 casiers de sucrerie', '20939982', 'tino tino tino', 'dÃ©pense effectuÃ©', '20000', 1, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(101, 'zapomartial@yahoo.fr', '2392980', '2021-09-16', '10 casiers de sucrerie', 'bock 66 treichvill', 'tino tino tino, <i class=\"fas fa-exclamation-circle\" style=\"font-size:13px;color:#AB040E;\"></i> koubo alexis troure a  annulÃ© le  11-09-2021Ã   12:49</span>', 'dÃ©pense effectuÃ©', '30000', 3, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(102, 'zapomartial@yahoo.fr', '2392980', '2021-09-23', 'facture cie , sodeci', 'bock chill', 'tino tino tino, <i class=\"fas fa-user-edit\" style=\"font-size:13px;color:#4e73df;\"></i>koubo alexis troure Ã  payer la somme de 50000 xof  le  11-09-2021Ã   12:48 par   <span class=\"edit\"></span>', 'remboursement effectuÃ©', '0', 4, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(103, 'zapomartial@yahoo.fr', '', '2021-09-16', '10 cassire de coca', 'bock 66 treichvill', 'tino tino tino', 'dÃ©pense effectuÃ©', '20000', 1, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi'),
-(105, 'zapomartial@yahoo.fr', '2309828', '2021-09-16', '10 casiers de sucrerie', 'bock 66 treichvill', 'koubo alexis troure, <i class=\"fas fa-exclamation-circle\" style=\"font-size:13px;color:#AB040E;\"></i> koubo alexis troure a  annulÃ© le  11-09-2021Ã   12:42</span>', 'crÃ©dit fournisseur', '300000', 3, 2, 'Hotel baleine Abidjan vridi', 'transmis par Hotel baleine Abidjan vridi');
 
 -- --------------------------------------------------------
 
