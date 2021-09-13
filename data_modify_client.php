@@ -103,7 +103,7 @@ ul a{margin-left:3%;}
    
    $dats = explode('-',$dat);
     $j = $dats[2];
-	$mm = $dats[1];
+	$mm = $dats[1];// search_date facture
 	$an = $dats[0];
 	
 	// trnaformer la chaine de caractère user en tableau
@@ -601,7 +601,7 @@ ul a{margin-left:3%;}
          $ret=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, remise= :remi, type= :ty,
-		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ, search_date= :sh WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -627,7 +627,8 @@ ul a{margin-left:3%;}
 							':typ'=>$ty,
 							':id'=>$id,
 							':code'=>$session,
-                            ':email_ocd'=>$_SESSION['email_ocd']
+                            ':email_ocd'=>$_SESSION['email_ocd'],
+							':sh'=>$mm
 					 ));
             				  
 			
@@ -730,7 +731,7 @@ ul a{margin-left:3%;}
          $reg=$bds->prepare('UPDATE facture SET date= :des, civilite= :ds, adresse= :rs, check_in= :cke, check_out= :cko, time= :tim1, time1= :tim2,
 		  nombre= :nbr, numero= :num, user= :us, clients= :client, piece_identite= :pc, montant= :mont, avance= :avc,
 		  reste= :rest, montant_repas= :mont_rep, tva= :tv, mont_tva= :mtva, remise= :remi, type= :ty,
-		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+		  moyen_paiement= :moyen_paie, data_montant= :data_mont, types= :typ, search_date= :sh WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
           $reg->execute(array(':des'=>$dat,
 		                    ':ds'=>$civilite,
 							':rs'=>$adresse,
@@ -756,7 +757,8 @@ ul a{margin-left:3%;}
 							':typ'=>$ty,
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd'],
-							':code'=>$session
+							':code'=>$session,
+							':sh'=>$mm
 					 ));
             				
 		 // on modifie les données de la base de données guide
