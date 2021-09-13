@@ -37,7 +37,7 @@ if(!isset($id) AND empty($id)){
   </style>
  
 <?php
-
+ if($_POST['action']=="list"){
  if(isset($_POST['id'])){
 	$id =$_POST['id'];
 	echo'<div id="pak"></div>
@@ -48,6 +48,21 @@ if(!isset($id) AND empty($id)){
                </div>
              <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_site.php?data_id='.$id.'"/>';
 	 }
+	 
+ }
+	 // recherche des facture sur des période
+	 if($_POST['action']=="search"){
+		$id=$_POST['id'];
+        if(isset($id)){		
+		 echo'<div id="pak"></div>
+             <div class="enre"><div></i>Afficher les factures<br/> 
+		     <div class="spinner-border text-primary" role="status">
+             <span class="sr-only">Loading...</span>
+             </div>
+               </div>
+             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_data.php?data_date='.$id.'"/>';
+		 }
+		}
 
 
 ?>
