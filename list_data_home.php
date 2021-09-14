@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-   $record_peage=9;
+$record_peage=9;
 $page="";
 
 if(isset($_POST['page'])){
@@ -10,9 +10,7 @@ $page = $_POST['page'];
 }
 
 else {
-
 $page=1;	
-	
 }
 
 $smart_from =($page -1)*$record_peage;
@@ -21,7 +19,6 @@ $smart_from =($page -1)*$record_peage;
 	if($_SESSION['code']==0){
 		  $session=0;
 		}
-		
 		else{
 		$session=$_SESSION['code'];
 		}
@@ -30,24 +27,18 @@ $smart_from =($page -1)*$record_peage;
 	                    ':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
-
-	
-	$don = $req->fetchAll();
+    $don = $req->fetchAll();
 	 //// emttre la requete sur le fonction
     //$rec=$bds->query('SELECT id_chambre,date FROM home_occupation');
     //$donns = $rec->fetchAll();
 	//$rec->closeCursor();
-	
 	$rem='<span class="ts"></span>';
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
-	
 	// on boucle sur les les resultats
-       
-	echo'<div class="content_home">';
+      echo'<div class="content_home">';
 	
-	
-     foreach($don as $donnees) {
+	foreach($don as $donnees) {
 	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE code="'.$session.'" AND id_chambre="'.$donnees['id_chambre'].'"');
     $donns = $rec->fetchAll();
 	 $array = [];
@@ -110,32 +101,33 @@ $smart_from =($page -1)*$record_peage;
 		$css="indispo";
 	 }
 
-     if($debut < $_POST['days'] AND $_POST['das']< $sortie){
-
-       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+     if($debut <= $_POST['days'] AND $_POST['das']<= $sortie){
+     $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
 		$css="indispo";
+     }
 
-     }		 
-
-     if(in_array($_POST['das'],$array)){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+    if($debut <= $_POST['days'] AND $sortie <= $_POST['das']){
+        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+		$envoi="";
+		$css="indispo";
+	}		 
+    
+	if(in_array($_POST['das'],$array)){
+      $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
 		$css="indispo";
 	 }
-	 
 	 
 	 if(in_array($_POST['dat'],$array)){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
+       $name='<i class="fas fa-exclamation-circle" style="color:red;"></i> indisponible';
 		$a="h6";
 		$envoi="";
 		$css="indispo";
 	 }
-	 
 	 
 	 if(!in_array($_POST['dat'],$array) AND !in_array($_POST['das'],$array) AND !in_array($_POST['days'],$array)){
 	$dates1 = explode('-',$_POST['days']);
@@ -148,18 +140,14 @@ $smart_from =($page -1)*$record_peage;
 	$j1 = $dates2[2];
 	$mm1 = $dates2[1];
 	$an1 = $dates2[0];
-	
 	// la vairable en envoi
 	$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
    
-      
-		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+      $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5"; 
 		$css="dispo";
 	 }
-	
 	}
-	 
 	 if($nombre==0){
     $dates1 = explode('-',$_POST['days']);
 	$j = $dates1[2];
@@ -180,13 +168,10 @@ $smart_from =($page -1)*$record_peage;
 		$a="h5";
 		$css="dispo";
 	}
-	 
 	 // si le client est facturé sur une horaire
-	 
 	} 
 	
 	if($_POST['to']=="horaire"){
-	 
 	 if($nombr!=0){
 		 $debuts = min($tabs);
            $sorties = max($tabs);
@@ -194,7 +179,6 @@ $smart_from =($page -1)*$record_peage;
 		   $sort = max($dones);
 		   $date= date('Y-m-d');
 		   
-		 
 		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$dones)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
@@ -212,8 +196,7 @@ $smart_from =($page -1)*$record_peage;
 	 }
 	 
 	 if(in_array($_POST['dat'],$dones)){
-		 
-		$name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		 $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 		$css="indispo"; 
@@ -224,24 +207,18 @@ $smart_from =($page -1)*$record_peage;
 		 $a="h5";
 		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
 		 $css="dispo"; 
-		 
 	 }
+	}
 	 
-	 }
-	 
-	
-	 if($nombr==0){
+	if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
 		 $a="h5";
 		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
 		 $css="dispo";
-		 
-	 }
-		 
-	 }
+	  }
+	}
 	
-	 
-	    echo'<div  class="content3">
+	 echo'<div  class="content3">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
@@ -252,10 +229,8 @@ $smart_from =($page -1)*$record_peage;
 			 <input type="hidden" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'">
 			<input type="hidden" id="type'.$donnees['id_chambre'].'" value="'.$donnees['type_logement'].'">
 			 </div>';
-	
-	}
-	
-   echo'</div>';
+      }
+	echo'</div>';
    
    
 
