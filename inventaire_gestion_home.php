@@ -14,11 +14,8 @@ else {
 $page=1;	
 	
 }
-
-
-	//paginition
-	
-	 // on compte le nombre de ligne de la table
+    //paginition
+	// on compte le nombre de ligne de la table
    if($_SESSION['code']==0){
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd');
    $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -37,7 +34,7 @@ $page=1;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -143,7 +140,7 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-
+#society{width:40%;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none}
@@ -399,7 +396,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <div class="form-group col-md-6">
 	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
       <label for="inputPassword4">type de local *</label>
-      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example">
+      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example" required>
                            <option value="">Type de logement</option>
 						   <option value="1">chambre single</option><option value="2">chambre double</option>
                            <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
@@ -437,15 +434,18 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	
 	<div class="form-group col-md-6">
       <label for="inputPassword4">Localisation(au cas ou vous avez plusieurs site) </label>
-      <select name="site" class="forms form-select-sm" aria-label=".form-select-sm example">
-                           <option value="">choisir</option>
-						   <option value="1">site 1</option>
-                           <option value="2">site 2</option>
-                           <option value="3">site 3</option>
-						  
-                          </select>
+     <select id="site" name="site" class="form-control">
+        <option selected>Choisir...</option>
+        <option value="1">site 1</option>
+		<option value="2">site 2</option>
+		<option value="2">site 3</option>
+      </select>
     </div>
 	
+	<div class="form-group col-md-6">
+      <label for="inputPassword4">Nommer vos sites </label>
+      <input type="text" class="form-control" id="societ" name="societ" placeholder="">
+    </div>
     
      <div class="form-group col-md-12">
         <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
@@ -577,13 +577,14 @@ echo $_SESSION['token'];?>">
   var regex = /^[a-zA-Z0-9]{2,15}(\s[a-zA-Z0-9]{2,20}){0,4}$/;
  var rege = /^[a-zA-Z0-9-]{2,15}(\s[a-zA-Z0-9-]{2,15}){0,3}$/;
  var number = /^[0-9]{1,2}$/;
- var inf = /^[a-zA-Z0-9éàèçé]{0,200}$/;
+ var inf = /^[a-zA-Z0-9éàèçé]{0,130}$/;
+ var info = /^[a-zA-Z0-9éàèçé]{0,130}$/;
 // on ecrits les variable
 var ids =$('#ids').val();
 var num =$('#num').val();
 var nums =$('#nums').val();
 var infos = $('#infos').val();
-
+var societ = $('#societ').val();
 
  if(ids.length> 60) {
 	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>nombre max de caractère est de 50 nom du client');
