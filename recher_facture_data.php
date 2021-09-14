@@ -3,7 +3,7 @@ include('connecte_db.php');
 include('inc_session.php');
 if(isset($_GET['data_date'])) {
 	
- $record_peage=20;
+ $record_peage=25;
 $page="";
   
   if(isset($_POST['page'])){
@@ -41,7 +41,7 @@ $smart_from =($page -1)*$record_peage;
 		// emttre la requete sur le fonction
        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE search_date LIKE :q AND email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
        $req->execute(array(':q'=> $q.'%',
-	                       ':code'=>$code,
+	                       ':code'=>$session,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}	
 	
@@ -58,7 +58,7 @@ $smart_from =($page -1)*$record_peage;
 		$export="";
 	}
 	
-   // on boucle sur les les resultats
+  // on boucle sur les les resultats
 	echo'<div class="expor">'.$export.'
 	<span></form></div>';
 	// entete du tableau
@@ -75,13 +75,15 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
 	  <th scope="col">Action</th>
-	  <th scope="col">Imprimer</th>
+	  <th scope="col">Imprimer/facture client</th>
       </tr>
       </thead>
       <tbody>';
        
-	while($donnees=$req->fetch()) {
-		
+	$donnes=$req->fetchAll();// recupere toutes les données
+	
+	if(!empty($donnes))  {
+	foreach($donnes as $donnees){
 	$nombre =$donnees['id_fact'];
 	// recupérer le chiffre
 	$nombre =substr($nombre,2);
@@ -102,7 +104,7 @@ $smart_from =($page -1)*$record_peage;
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	
- if($donns['code']==0){
+     if($donns['code']==0){
 		  $session=0;
 		}
 		
@@ -216,6 +218,7 @@ $smart_from =($page -1)*$record_peage;
 		  '.$annul.'
 		  </div></td>
 		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
+		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
 		// affichage sur mobile
@@ -258,46 +261,11 @@ $smart_from =($page -1)*$record_peage;
 		$page =$page+1;
 		echo'<div class="p"><button type="button"><a href="gestion_facture_customer.php?page='.($page+1).'"><i class="fa fa-angle-right" aria-hidden="true" style="font-size=33px;color:black"></i></a></button></div>'; 
 	}
-	
 	echo'</div>';
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	else{
+		echo'<h4>Aucune facture n\'a été trouveé</h4>';
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

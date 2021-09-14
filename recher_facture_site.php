@@ -27,9 +27,8 @@ $smart_from =($page -1)*$record_peage;
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
-        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE code= :code AND email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
-        $req->execute(array(':code'=>$code,
-		                    ':email_ocd'=>$_SESSION['email_ocd']));
+        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+        $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		// afficher les facture.
@@ -44,13 +43,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($donns['permission']=="user:boss"){
 		
-		$puts='<button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
-	<select name="delete_line" id="delete_line">
-	<option value="">Suprimer</option>
-	<option value="10">10 lignes</option>
-	<option value="30">30 lignes</option>
-	<option value="50">50 lignes</option>
-	</select> ';
+		$puts='<button type="submit" value="ok" class="delete"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button>';
 	
 	$export='<form method="post" action="excel_site.php?data_id='.$code.'"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		

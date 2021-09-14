@@ -45,8 +45,9 @@ if(!isset($_GET['data_date'])){
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
+.expor{padding-left:2%;}
+.delete,.delet{position:absolute;left:67%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 
-.delete{position:absolute;top:115px;left:53%;color:white;background:#F83127;border:2px solid #F83127}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
@@ -74,7 +75,7 @@ if(!isset($_GET['data_date'])){
 }
 
  
- #tb td, #tb th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+ #tb td, #tb th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:16px;}
 
 #tb tr:nth-child(even){background-color:#f2f2f2;}
 
@@ -82,10 +83,24 @@ if(!isset($_GET['data_date'])){
 
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tb{margin-top:10px;}
-#results{overflow-y:scroll;height:1000px;} 
+#tb{margin-top:10px;color:black;font-size:16px;}
+
+
+#tbs td, #tbs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+
+#tbs tr:nth-child(even){background-color:#f2f2f2;}
+
+#tbs tr:hover {background-color: #ddd;}
+
+#tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+
+#tbs{margin-top:10px;}
+
+
+
+#results{} 
  
- 
+ .bout,.bous{float:left;}
  .action{cursor:pointer;} a{color:black;text-decoration:none;font-size:15px;}
 
 .datas{width:100px;border:2px solid white;box-shadow:1px 1px 1px 1px;} 
@@ -131,10 +146,7 @@ display: inline-block;
 font-family: Arial,sans-serif;
 font-size: 1em;
 padding: 0 25px;
-transition: all 200ms;} .datas_messanger{border-bottom:1px solid #eee;}
-.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
-margin-left:-10px;}
-
+transition: all 200ms;} 
 .drops{display:none;}  .users{display:none} #news_data{display:none;}
 .mobile{display:none;} 
 
@@ -144,8 +156,67 @@ margin-left:-10px;}
 .employes{color:black;color:black;} .gestionnaire{color:black;} .boss{color:black;}
 
 #caisse{font-size:18px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
-.h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;} .btn{display:none;}
-#panier{position:fixed;left:50%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+.h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
+
+#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+
+.btn{display:none;} #result_s{padding:2%;color:black;z-index:5;position:absolute;top:50px;left:50%;background:white;
+width:40%;height:750px;overflow-y:scroll;}
+
+
+.content2{width:100%;height:200px;border:1px solid #eee;} .conten1{font-size:14px;} 
+     .cont1,.conten1{float:left;} #logos{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} 
+	 .cont1{position:absolute;top:100px;left:60%;background:#eee;width:260px;height:180px;border:1px solid #eee;padding-left:30px;padding-top:20px;}
+	.con3{margin-top:140px;width:100%;} .cont1{font-size:15px;}
+	
+	.number{font-family:arial;font-size:20px;text-transform:uppercase;}
+	.dr{font-family:arial;font-size:15px;padding-left:3%;}
+    .dv{padding-left:7%;} 
+	
+	#ts{font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
+	margin-top:50px;}
+	
+	#ts td{padding:4%;border:1px solid black;text-align;}
+	
+	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 60%;
+	margin-top:45px;margin-left:33%;}
+	
+	#tab td, #tab th {border: 1px solid #ddd;padding: 2px;width:70px;text-align:center;font-size:14px;}
+
+ .text_facture{font-size:120px;
+ writing-mode: rl-bt;
+ color:#F0EFEF;} .prin{position:fixed;left:65%;top:350px;width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;}
+ .dz{color:red;font-size:18px;} #recher,#rechers{width:25%;height:40px;
+ color:black;
+    padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e6f0;} .btn{display:block;}
+ .btn{display:none} #annul{background:white;color:black;} .mobiles{display:none;} #rechers{display:none;} #date{width:20%;}
+ .but_recher{width:110px;height:30px;border-radius:15px;background:#09AB15;
+ border:2px solid #09AB15;color:white;} #recher_date{padding-left: .100rem;
+    margin: .175rem .175rem .175em;
+    font-size: .95rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 3px solid white;
+	width:20%;height:200px;
+	position:absolute;
+	z-index:4;
+	left:40%;
+	top:100px;
+	display:none;
+	color:black;
+	padding:2%;
+ }
+ h3{color:black;font-family:arial;font-size:18px;text-align:center;}
+ #search_date{width:90%;color:black;font-size:18px;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -211,7 +282,46 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .delete{position:absolute;top:120px;left:60%;color:white;background:#F83127;border:2px solid #F83127}
 }
 
+/*------------------------------------------------------------------
+[ impression ]*/
+@media print{
+	
+body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
+  background-color :#fff;
+  font-family :Serif;
+  font-size:50pt;
+  color:black;
+}
 
+.content2{width:100%;height:200px;border:1px solid #eee;} 
+.conten1{font-size:25pt;} 
+ .cont1,.conten1{float:left;} #logos{width:140px;height:140px;border-radius:100px;background:white;border:2px solid #eee;} 
+.cont1{position:absolute;top:100px;left:60%;background:#eee;width:300px;height:380px;border:1px solid #eee;padding-left:30px;padding-top:20px;}
+.con3{margin-top:230pt;width:100%;font-size:20pt;} .cont1{font-size:25pt;}
+	
+	.fact {color:#4e73df;font-weight:bold;font-size: 25pt;}
+	.number{font-family:arial;font-size:30pt;text-transform:uppercase;}
+	.dr{font-family:arial;font-size:15pt;padding-left:3%;}
+    .dv{padding-left:7%;} 
+	
+	#ts{font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;
+	margin-top:50pt;}
+	
+	#ts td,th{padding:2%;border:1px solid black;text-align;font-size:20pt;}
+	
+	#tab {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 50%;
+	margin-top:25px;margin-left:40%;}
+	
+	#tab td, #tab th {border: 1px solid #ddd;padding: 2px;width:70px;text-align:center;font-size:20pt;}
+
+ .text_facture{font-size:80pt;
+ writing-mode: rl-bt;
+ color:#F0EFEF;} .prin{width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;display:none;}
+	
+	
+	
+	
+}
 </style>
 
 <script>
@@ -323,6 +433,27 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
             </div>
             <!-- End of Main Content -->
+			
+	<div class="reini" style="display:none">
+   <form method="post" id="form_reini" action="">
+   <h1>Réinitialiser votre caisse journalière<br/>Fixer la date courante</h1>
+   <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
+  <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+   </form>
+ 
+  </div><!--reini---->
+  
+  <div class="annuler" style="display:none">
+   <form method="post" id="form_annul" action="">
+   <h1>Êtes vous sûr d'annuler la facture <span id="id_fact"></span><br/></h1>
+   <div class="action"><button type="button" class="annul">Annuler</button><button type="button" class="annuls">ok</button></div>
+   <input type="hidden" name="ids" id="ids">
+  <input type="hidden" name="token" id="token" value="<?php
+  //Le champ caché a pour valeur le jeton
+   echo $_SESSION['token'];?>">
+   </form>
+ 
+  </div><!--annul---->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -354,7 +485,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="pak" style="display:none"></div>
 <div id="result"></div>
 <div id="panier"></div><!--panier facturation-->
-
+<div id="panier"></div><!--ajax panier facturation-->
+<div id="results_s"></div><!--div pour afficher les facture imprimer-->
+<div id="details"></div><!--details facture-->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -392,6 +525,27 @@ height:2800px;overflow-y:scroll;z-index:5;}
 			}
 
 			lists();
+			
+		$(document).on('click','.prints',function(){
+		  var action ="click";
+		  var id = $(this).data('id6');
+		  $.ajax({
+            type: 'POST',
+            url:'affiche_facture.php',
+            data:{action:action,id:id},
+            success: function(data){
+			$('#pak').css('display','block');
+            $('#results_s').html(data);
+			$('#results_s').css('display','block');
+			
+	        }
+          });
+        })
+		
+		$(document).on('click','.prin',function(){
+			$('#pak').css('display','none');
+			$('#results_s').css('display','none');
+		 });
 			
 	// pagintion
   $(document).on('click','.bout',function(){
