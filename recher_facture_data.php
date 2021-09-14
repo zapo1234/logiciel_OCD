@@ -20,7 +20,7 @@ $smart_from =($page -1)*$record_peage;
 
 	$code=$_GET['data_date'];
 	
-	$q = $_GET['date_data'];
+	$q = $_GET['data_date'];
     // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
@@ -30,8 +30,8 @@ $smart_from =($page -1)*$record_peage;
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
-        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE WHERE search_date LIKE :q  AND email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
-        $req->execute(array(':q'=>':q'=> $q.'%',
+        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE search_date LIKE :q  AND email_ocd= :email_ocd  ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
+        $req->execute(array(':q'=> $q.'%',
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
@@ -40,7 +40,7 @@ $smart_from =($page -1)*$record_peage;
 		$session=$donns['code'];
 		// emttre la requete sur le fonction
        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE search_date LIKE :q AND email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
-       $req->execute(array(':q'=>':q'=> $q.'%',
+       $req->execute(array(':q'=> $q.'%',
 	                       ':code'=>$code,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}	
