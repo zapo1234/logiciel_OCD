@@ -45,14 +45,14 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($donns['permission']=="user:boss"){
 		
-		$puts='<div class="d1"><button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="  filtre par nom ou numéro du client">
+		$puts='<div class="d1"><button type="submit" value="ok" class="delete"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button></div>';
+	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
 		
 	}
 	else{
 	   $puts="";
-		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder=" filtre par nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';
+		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder=" filtre par nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1"><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		
 	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';
@@ -468,7 +468,7 @@ if($_POST['action']=="mail"){
 	
      // entete du tableau
 	 echo'<form method="post" id="formd" action="">
-	 <button type="submit" value="ok" class="delet">suprimer <i class="far fa-trash-alt"></i></button>
+	 <button type="submit" value="ok" class="delet"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button>
 	 <table id="tbs">
      <thead>
      <tr class="tf">

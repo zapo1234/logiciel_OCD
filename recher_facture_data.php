@@ -1,7 +1,8 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-if(isset($_GET['data_id'])){
+if(isset($_GET['data_date'])) {
+	
  $record_peage=20;
 $page="";
   
@@ -16,8 +17,9 @@ $page=1;
 }
 
 $smart_from =($page -1)*$record_peage;
-	
-	$code=$_GET['data_id'];
+
+	$code=$_GET['data_date'];
+	echo$code;
     // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
@@ -44,13 +46,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	if($donns['permission']=="user:boss"){
 		
-		$puts='<button type="submit" value="ok" class="delete">suprimer <i class="far fa-trash-alt"></i></button>
-	<select name="delete_line" id="delete_line">
-	<option value="">Suprimer</option>
-	<option value="10">10 lignes</option>
-	<option value="30">30 lignes</option>
-	<option value="50">50 lignes</option>
-	</select> ';
+		$puts='<button type="submit" value="ok" class="delete"><span class="dh">suprimer </span><i class="far fa-trash-alt"></i></button>';
 	
 	$export='<form method="post" action="excel_site.php?data_id='.$code.'"> <span class="export">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
@@ -220,6 +216,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 	    </tr>';
 		
+		// affichage sur mobile
 		echo'<div class="mobile">
 		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
@@ -261,7 +258,44 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	echo'</div>';
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
 
-}	
-   
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>

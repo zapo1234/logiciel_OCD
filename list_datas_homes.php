@@ -29,18 +29,18 @@ $smart_from =($page -1)*$record_peage;
   
     if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 	if(!isset($_GET['data_id'])){
-	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
 	elseif($_GET['data_id']=="tous"){
-		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
        $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
 	else{
 		
-		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE code= :code AND  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$_GET['data_id'],
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	   }
@@ -48,7 +48,7 @@ $smart_from =($page -1)*$record_peage;
 		
 		else{
 	$session=$donns['code'];
-	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -194,11 +194,18 @@ $smart_from =($page -1)*$record_peage;
 		$color='libre';
 		$status ='le local est disponible';
    }
-
+     if($donnees['society']==""){
+		$map="";
+	 }
+	else{
+	   $map='<img src="img/map.png" alt="map" width="15px" height="15px" />
+	      '.$donnees['society'].' ';
+	 }
 	 echo'<div><a href="view_data_home.php?home='.$donnees['id_chambre'].'"><div class="homes" id="home'.$color.'">
 		      <h3>'.$donnees['type_logement'].'</h3>
 			  <div class="titre">'.$donnees['chambre'].'</div>
-			  <div class="dt">'.$status.'</div>
+			  <div class="dt">'.$status.'</div><br/><br/>
+			  <div style="font-size:14px;"> '.$map.'</div>
 		     </div></a></div>';	
 	
 	}

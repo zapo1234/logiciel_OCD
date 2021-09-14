@@ -26,7 +26,7 @@ $smart_from =($page -1)*$record_peage;
    }
    
    else{
-	 $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd  ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+	 $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,society FROM chambre WHERE email_ocd= :email_ocd  ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
      $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));  
 	 }
 	
