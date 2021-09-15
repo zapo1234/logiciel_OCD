@@ -22,7 +22,7 @@ $smart_from =($page -1)*$record_peage;
 		else{
 		$session=$_SESSION['code'];
 		}
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code AND active= :ac LIMIT 0,80');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND codes= :code AND active= :ac LIMIT 0,80');
     $req->execute(array(':ac'=>$active,
 	                    ':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
