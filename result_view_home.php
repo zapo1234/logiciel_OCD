@@ -477,10 +477,10 @@ if($_POST['action']=="editvalidate"){
 	// inserer dans la table home_occupation
 			  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocds,date,date_french,dates,id_fact,type,code) 
 	   VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $reys->execute(array(':id_chambre'=>$id,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
@@ -508,7 +508,7 @@ if($_POST['action']=="editvalidate"){
 					 ));
 					 
 	// supprimer l'entrée de la chambre
-	$res =$bds->prepare('DELETE FROM home_occupation WHERE id_chambre= :id AND type= :ty AND email_ocd= :email_ocd');
+	$res =$bds->prepare('DELETE FROM home_occupation WHERE id_chambre= :id AND type= :ty AND email_ocds= :email_ocd');
 	$res->execute(array(':id'=>$id,
 	                    ':ty'=>$types,
 						':email_ocd'=>$_SESSION['email_ocd']

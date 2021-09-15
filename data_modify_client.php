@@ -99,12 +99,51 @@ ul a{margin-left:3%;}
    $donnees=$res->fetch();
    $res->closeCursor();
    
-   $dat =$donnees['date'];
+   $dat=$donnees['date'];
    
    $dats = explode('-',$dat);
     $j = $dats[2];
 	$mm = $dats[1];// search_date facture
 	$an = $dats[0];
+	
+	// recupere les mois pour les recherches de facture.
+	if($mm=="01"){
+	 $mms="Janvier";
+	}
+	elseif($mm=="02"){
+	$mms="Février";
+    }
+	elseif($mm=="03"){
+	$mms="Mars";
+	}
+	elseif($mm=="04"){
+	  $mms="Avril";	
+	}
+    elseif($mm=="05"){
+      $mms="Mai";
+    }
+    elseif($mm=="06"){
+	  $mms="Juin";	
+	}
+    elseif($mm=="07"){
+      $mms="Juillet";
+    }
+	elseif($mm=="08"){
+	$mms="Août";
+	}
+	elseif($mm=="09"){
+	$mms="Septembre";
+	}
+	elseif($mm=="10"){
+	  $mms="Octobre";	
+	}
+    elseif($mm=="11"){
+      $mms="Novembre";
+    }
+	else{
+	  $mms="Décembre";	
+	}
+	
 	
 	// trnaformer la chaine de caractère user en tableau
 	$user = str_split($donnees['user']);
@@ -569,10 +608,10 @@ ul a{margin-left:3%;}
                 	
                 // on recupére les date dans la base de donnnées.
 	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
+		 VALUES(:id_chambre,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
@@ -628,7 +667,7 @@ ul a{margin-left:3%;}
 							':id'=>$id,
 							':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd'],
-							':sh'=>$mm
+							':sh'=>$mms
 					 ));
             				  
 			
@@ -696,11 +735,11 @@ ul a{margin-left:3%;}
 					
 					
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocds,date,date_french,dates,id_fact,type,code) 
 		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
@@ -758,7 +797,7 @@ ul a{margin-left:3%;}
 							':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd'],
 							':code'=>$session,
-							':sh'=>$mm
+							':sh'=>$mms
 					 ));
             				
 		 // on modifie les données de la base de données guide

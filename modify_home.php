@@ -551,7 +551,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	// on surprime la data de delete dans la tableau
-    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd');
+    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocds= :email_ocd');
     $rel->execute(array(':code'=>$session,
 	                    ':id'=>$id,
 	                    ':id_fact'=>$id_fact,

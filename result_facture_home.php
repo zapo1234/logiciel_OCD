@@ -52,7 +52,8 @@ $smart_from =($page -1)*$record_peage;
 	}
 	else{
 	   $puts="";
-		$export='Rechercher une facture <input type="text" class="form-control" id="recher" name="recher" placeholder=" filtre par nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1"><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
+		$export='<span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
+	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		
 	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';

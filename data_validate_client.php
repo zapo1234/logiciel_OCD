@@ -136,8 +136,6 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$id_fact=$mt+0.00001;
 	}
 	
-	
-	
 	// definir les varaible au cas de sejour
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
@@ -145,9 +143,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 
 	$dates1 = explode('-',$dates1);
 	$j = $dates1[2];
-	$mm = $dates1[1];
+	$mm = $dates1[1]; // période de recherche des factures.
 	$an = $dates1[0];
-	
+    
 	$dates2 = explode('-',$dates2);
 	
 	$j1 = $dates2[2];
@@ -217,7 +215,44 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	$mms = $dat1[1];// recuperation search_date
 	$ans = $dat1[0];
 	
-   
+	// recupere les mois pour les recherches de facture.
+	if($mms=="01"){
+	 $mm="Janvier";
+	}
+	elseif($mms=="02"){
+	$mm="Février";
+    }
+	elseif($mms=="03"){
+	$mm="Mars";
+	}
+	elseif($mms=="04"){
+	  $mm="Avril";	
+	}
+    elseif($mms=="05"){
+      $mm="Mai";
+    }
+    elseif($mms=="06"){
+	  $mm="Juin";	
+	}
+    elseif($mms=="07"){
+      $mm="Juillet";
+    }
+	elseif($mms=="08"){
+	$mm="Août";
+	}
+	elseif($mms=="09"){
+	$mm="Septembre";
+	}
+	elseif($mms=="10"){
+	  $mm="Octobre";	
+	}
+    elseif($mms=="11"){
+      $mm="Novembre";
+    }
+	else{
+	  $mm="Décembre";	
+	}
+	
    $user_data = '<i class="fas fa-pen"style="color:green;font-size:13px;"></i> edité le  '.$js.'/'.$mms.'/'.$ans.' à '.date('H:i').'  par  '.$_SESSION['user'].'';
    
    $direction = $_POST['to'];
@@ -467,10 +502,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 
                 // on recupére les date dans la base de donnnées.
 	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocd,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
+		 VALUES(:id_chambre,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $dates ="";
 		 $reys->execute(array(':id_chambre'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$datas,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dates,
@@ -496,8 +531,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	                        ));	
 	  
 	   // insertion des données dans la table facture
-		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls,search_date) 
-		VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society,:calls:search_date');
+		$rev=$bds->prepare('INSERT INTO facture (date,civilite,email_ocd,adresse,check_in,check_out,time,time1,nombre,email_client,numero,user,clients,piece_identite,montant,avance,reste,montant_repas,tva,mont_tva,remise,id_fact,type,moyen_paiement,data_montant,types,code,society,calls,search_date) VALUES(:date,:civilite,:email_ocd,:adresse,:check_in,:check_out,:time,:time1,:nombre,:email_client,:numero,:user,:clients,:piece_identite,:montant,:avance,:reste,:montant_repas,:tva,:mont_tva,:remise,
+		:id_fact,:type,:moyen_paiement,:data_montant,:types,:code,:society,
+		:calls,:search_date)');
 	     $rev->execute(array(':date'=>$dat,
 		                     ':civilite'=>$civilite,
 		                    ':email_ocd'=>$email,
@@ -527,7 +563,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':code'=>$session,
 							':society'=>$_SESSION['society'],
 							':calls'=>$calls,
-							':search_date'=>$mms
+							':search_date'=>$mm
 							
 						  ));
             				  
@@ -606,10 +642,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			 
 			// insert dans moyen_tresorie  
 			$res=$bds->prepare('INSERT INTO moyen_tresorie (date,email_ocd,email_user,id_fact,montant,montant1,montant2,montant3,code) 
-		 VALUES(:date,:email_ocd,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
+		 VALUES(:date,:email_ocds,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
 		 
 		 $res->execute(array(':date'=>$dat,
-		                     ':email_ocd'=>$_SESSION['email_ocd'],
+		                     ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':email_user'=>$_SESSION['email_user'],
 							  ':id_fact'=>$id_fact,
 		                      ':montant'=>$num1,
@@ -652,7 +688,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':code'=>$session,
 							':society'=>$_SESSION['society'],
 							':calls'=>$calls,
-							':search_date'=>$mms
+							':search_date'=>$mm
 						  ));
 						  
 						  
