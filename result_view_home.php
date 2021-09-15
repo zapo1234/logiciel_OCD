@@ -2,10 +2,16 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-
+   if($_SESSION['code']==0){
     $reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,society,categories,etat,date,heure,active,logo FROM inscription_client WHERE email_ocd= :email_ocd');
     $reh->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
- 
+   }
+    else{
+		$reh=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,society,categories,etat,date,heure,active,logo FROM inscription_client WHERE code= :cd AND email_ocd= :email_ocd');
+       $reh->execute(array(':cd'=>$_SESSION['code'],
+	                       ':email_ocd'=>$_SESSION['email_ocd']));
+		}
+   
      if($_POST['action']=="fetch"){
 		 
 		 // requete pour aller chercher les valeurs 
@@ -37,7 +43,7 @@ include('inc_session.php');
 	 $id = $_POST['id'];
 	 $num =2;
 	 // on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE chambre SET type= :res WHERE email_ocd= :email_ocd AND id_chambre= :id_chambre');
+         $ret=$bds->prepare('UPDATE chambre SET types= :res WHERE email_ocd= :email_ocd AND id_chambre= :id_chambre');
         $ret->execute(array(':res'=>$num,
 		                    ':id_chambre'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
@@ -51,7 +57,7 @@ include('inc_session.php');
 	 $id = $_POST['id'];
 	 $num =1;
 	 // on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE chambre SET type= :res WHERE email_ocd= :email_ocd AND id_chambre= :id_chambre');
+         $ret=$bds->prepare('UPDATE chambre SET types= :res WHERE email_ocd= :email_ocd AND id_chambre= :id_chambre');
         $ret->execute(array(':res'=>$num,
 		                    ':id_chambre'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
@@ -257,11 +263,7 @@ include('inc_session.php');
 					
 					}
 					echo'</table>';
-		
-		
-		
-					
-	    }
+		}
   
   // suprimer des users comptes
   if($_POST['action']=="delete"){
