@@ -135,7 +135,7 @@ ul.winners li{
 
 .h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
-.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:180px;padding:1%;border:1px solid #eee;
+.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:200px;padding:1%;border:1px solid #eee;
 margin-left:2%;}
 
 h3{font-size:16px;text-transform:capitalize;}
