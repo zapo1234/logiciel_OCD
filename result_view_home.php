@@ -11,7 +11,7 @@ include('inc_session.php');
 		 // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type,active FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,types,active FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
@@ -479,7 +479,7 @@ if($_POST['action']=="editvalidate"){
 					// on recupére les date dans la base de donnnées.
 	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocds,date,date_french,dates,id_fact,type,code) 
 	   VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
-		 $reys->execute(array(':id_chambre'=>$id,
+		 $reys->execute(array(':id_local'=>$id,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
 							  ':date_french'=>$datas_fren,
@@ -508,7 +508,7 @@ if($_POST['action']=="editvalidate"){
 					 ));
 					 
 	// supprimer l'entrée de la chambre
-	$res =$bds->prepare('DELETE FROM home_occupation WHERE id_chambre= :id AND type= :ty AND email_ocds= :email_ocd');
+	$res =$bds->prepare('DELETE FROM home_occupation WHERE id_local= :id AND type= :ty AND email_ocds= :email_ocd');
 	$res->execute(array(':id'=>$id,
 	                    ':ty'=>$types,
 						':email_ocd'=>$_SESSION['email_ocd']
@@ -532,8 +532,5 @@ if($_POST['action']=="editvalidate"){
 		echo'<img src="upload_image/'.$donnees['name_upload'].'" width="1150px" height="700px">';
 	   $req->closeCursor();
    }
-
-
-
 
 ?>
