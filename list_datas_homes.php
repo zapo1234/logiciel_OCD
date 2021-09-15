@@ -27,7 +27,7 @@ $smart_from =($page -1)*$record_peage;
 	$donns =$rel->fetch();
   
   
-    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+    if($donns['permission']=="user:boss"){
 	if(!isset($_GET['data_id'])){
 	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -53,20 +53,36 @@ $smart_from =($page -1)*$record_peage;
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
 	$don = $req->fetchAll();
+	$arr = [];
+	
+   // transformez les données en chaine de caractère
+   $id_local = implode(',',$arr);
+  
+      $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates
+      FROM home_occupation
+      INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
+	  chambre.email_ocd= :email');
+	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+	  
+	  $tt=$sql->fetchAll();
+	  foreach($tt as $val){
+		  echo $val['dates'];
+	  }
 	
 	foreach($don as $donnees) {
 	if($_SESSION['code']==0){
-	$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE   id_chambre="'.$donnees['id_chambre'].'"');
+	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
 	}
 	
 	else{
-		$rec=$bds->query('SELECT id_chambre,date,dates,type FROM home_occupation WHERE code="'.$_SESSION['code'].'" AND  id_chambre="'.$donnees['id_chambre'].'"');
+		$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE code="'.$_SESSION['code'].'" AND  id_local="'.$donnees['id_chambre'].'"');
 	}
     $donns = $rec->fetchAll();
 	 $array = [];
 	 $tab = [];
 	 $date =[];
 	 $bloque =[];
+	 $reser =[];
 	foreach($donns as $datas) {
 		
 		if($datas['type']!=0){
@@ -78,6 +94,14 @@ $smart_from =($page -1)*$record_peage;
 		foreach($dat as $value){
 		$array[] = $value;		
 	    }
+		}
+		// recuperer seulement les reservation
+		if($datas['type']==3){
+			$rese = $datas['date'];
+		   $reses = explode(',',$rese);
+		   foreach($reses as $res){
+		     $reser[] = $res;	
+		  }
 		}
 		// pour le pass.
 		if($datas['type']==2){
@@ -115,8 +139,11 @@ $smart_from =($page -1)*$record_peage;
 	$nombres = count($tab);// pour les horaires
 	$nombr = count($date);//
 	$nom = count($bloque);//pour les chambres bloquées
-	
-// pour les séjour et réservation
+	$rest = count($reser);
+	// recuperer les valeurs des données de la table facture correspondant;
+	// recupere les données des valeurs min du tableau
+	// aller recupere le client qui as le checkin min de array reser
+    // pour les séjour et réservation
 	// recupére la date passé en paramètre
 	$date =$_GET['data'];
 	$date = explode('-',$date);
@@ -162,10 +189,8 @@ $smart_from =($page -1)*$record_peage;
 	else{
 		$color='libre';
 		$status ='le local est disponible';
-	
-	}
-   
-    }
+      }
+     }
 	
 	 if($nom!=0){
 		$color='bloque';
