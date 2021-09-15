@@ -151,7 +151,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		$code = $site;
 		$society = trim(strip_tags($_POST['societ']));
-		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,types,active,code,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:types,:active,:code,:society)');
+		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,types,active,codes,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:types,:active,:codes,:society)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
@@ -166,7 +166,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
                           ':icons'=>$icons,
 						  ':types'=>$types,
 						  ':active'=>$active,
-						  ':code'=>$code,
+						  ':codes'=>$code,
 						  ':society'=>$society
 						  ));
 						  
