@@ -53,21 +53,43 @@ $smart_from =($page -1)*$record_peage;
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
 	$don = $req->fetchAll();
-	$arr = [];
 	
-   // transformez les données en chaine de caractère
-   $id_local = implode(',',$arr);
-  
-      $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates
+   // jointure pour recupérer les données entre les tables
+   if($_SESSION['code']==0){
+	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
 	  chambre.email_ocd= :email');
 	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+	  }
+   
+   else{
+	    $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
+      FROM home_occupation
+      INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
+	  chambre.email_ocd= :email');
+	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+   }
 	  
 	  $tt=$sql->fetchAll();
+	  $arr1 =[];
+	  $arr2 = [];
+	  $arr3 =[];
+	  $arr4 = [];
+	  
 	  foreach($tt as $val){
-		  echo $val['dates'];
+		 // lancer les requetes et enregsitre les données dans les different tableau
+		 if($val['type']!=0){
+			if($val['type']==1 OR $val['type']==3){
+               $data1 = $val['date'];
+			   $data2 = explode(',',$data1);
+			   foreach($data2 as $vals){
+				   $arr1[]=$vals;
+			   }
+             }				
+		  }
 	  }
+	  var_dump($arr1);
 	
 	foreach($don as $donnees) {
 	if($_SESSION['code']==0){

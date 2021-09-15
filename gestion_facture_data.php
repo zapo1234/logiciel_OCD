@@ -217,6 +217,8 @@ width:40%;height:750px;overflow-y:scroll;}
  }
  h3{color:black;font-family:arial;font-size:18px;text-align:center;}
  #search_date{width:90%;color:black;font-size:18px;}
+ 
+ h4{position:fixed;top:300px;left:37%;font-size:32px;color:#06308E;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -237,7 +239,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
 h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .btn{display:block;}
-.delete{position:absolute;top:150px;left:55%;color:white;background:#F83127;border:2px solid #F83127} .dh{display:none;}
+.delete{position:absolute;top:150px;left:55%;color:white;background:#F83127;border:2px solid #F83127} .dh{display:none;} h4{position:fixed;top:300px;left:10%;font-size:32px;color:#06308E;}
 }
 
 
@@ -258,7 +260,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;} .btn{display:block;}
-.delete{position:absolute;top:120px;left:64%;color:white;background:#F83127;border:2px solid #F83127} 
+.delete{position:absolute;top:120px;left:64%;color:white;background:#F83127;border:2px solid #F83127} h4{position:fixed;top:300px;left:40%;font-size:28px;color:#06308E;}
 }
 
 
@@ -279,7 +281,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;}
-.delete{position:absolute;top:120px;left:60%;color:white;background:#F83127;border:2px solid #F83127}
+.delete{position:absolute;top:120px;left:60%;color:white;background:#F83127;border:2px solid #F83127} h4{position:fixed;top:300px;left:40%;font-size:28px;color:#06308E;}
 }
 
 /*------------------------------------------------------------------

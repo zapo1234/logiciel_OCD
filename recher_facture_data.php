@@ -265,7 +265,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	else{
-		echo'<h4>Aucune facture n\'a été trouveé</h4>';
+		echo'<h4>Aucune facture n\'a été trouveé !</h4>';
 	}
 }
 ?>

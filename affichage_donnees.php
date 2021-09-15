@@ -7,12 +7,12 @@ include('inc_session.php');
 	$donns =$rel->fetch();
 	
 // requete qui va chercher les montants
-    if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
+    if($donns['permission']=="user:boss"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
-if($donns['permission']=="user:employes"){
+if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
 $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
