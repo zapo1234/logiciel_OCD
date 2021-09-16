@@ -40,7 +40,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	else{
 		
-		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE code= :code AND  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE codes= :code AND  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$_GET['data_id'],
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	   }
@@ -73,10 +73,10 @@ $smart_from =($page -1)*$record_peage;
 	                      ':email'=>$_SESSION['email_ocd']));
    }
 	  
-	  $donns=$sql->fetchAll();
+	  $dns=$sql->fetchAll();
 	  $arr1 =[];// recupérer les id
 	  $arr2 = [];// differentes dates pour reservation et séjour
-	  foreach($donns as $val){
+	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
 			 $datax = $val['type'];
@@ -85,38 +85,76 @@ $smart_from =($page -1)*$record_peage;
 			 $arrax = array(
 			    $data1=>$datax
 			 );
-			 
 			 // créer un tableau association entre les date et id_chambre.
 			 $arrax1= array(
 			  $data1=>$datasx
 			 );
-			 
-			 // créer un tableau assiciative entre les date et type.
+			  // créer un tableau assiciative entre les date et type.
 			 $arrax2= array(
 			  $datax=>$datasx
 			 );
-			
-			   $data2 = explode(',',$data1);
+			 $data2 = explode(',',$data1);
 			   // le tableau des different id_chambre
 			   foreach($data2 as $vals){
 				   $arr1[]=$vals;
 			   }
-             }
-	      
-	foreach($don as $donnees) {
+			   
+			   // recupere les elements dans un tableau.
+		$art = [];// recupere les id_chambre pour le type 1 ou 3   sejour,reservation
+	    $arts =[];// pour les horaire enregsitrer les donnees du type 2 horaire;
+		// traitement pour les séjours 
+		foreach($arrax1 as $key =>$values){
+		foreach($arrax as $keys => $values1){
+		 if($values1 == 1 OR $values1==3){
+		  $day = explode(',',$keys);
+         foreach($day as $vl){
+            $art[]=$vl;
+				}						 
+			}
+		// traitement pour les horaire	
+		if($values1==2){
+		$days = explode(',',$keys);
+         foreach($days as $vls){
+            $arts[]=$vls;
+		  }
+		  }
+			 if(in_array($key,$art)){
+			 $v = $key.','.$values;  
+			$vb = explode('/',$v);
+		    foreach($vb as $vc){
+			$arr2[] = $vc;// renvoi des données dans un tableau
+            }			
+		    }
+	      }
+		}
+		}
+			 
+      
+	  // transmettre les tableau avec les valeurs id_champs et leur date.
+	  
+		 $dev =[];
+		for($i=0; $i<count($arr2);$i++){
+		  $datas = explode(',',$arr2[$i]);
+		    $dev[]=$datas;
+		 }
+		
+         var_dump($dev);
+		
+   foreach($don as $donnees) {
 	$d = $donnees['id_chambre'];
 	// verifier si id_chambre n'est pas dans le tableau des id_local
 	if(!in_array($d,$arr1)){
 	  $color='libre';
-		$status ='le local est disponible';
+		$status ='le local est disponible <br/><br/><br/>';
 	}
 	
 	else{
 		
-		if(array_key_exists($d,$arrax2)){
-			
-		}
-    }
+		// boucle sur le premier tableau associative
+		// tableau pour recuperer les donnees dont id_chambre 1 valeur du tableau
+		
+		 
+	}
 	
 	if($_SESSION['code']==0){
 	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
@@ -239,7 +277,7 @@ $smart_from =($page -1)*$record_peage;
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
+	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span><br/><br/>';
 	}
 
 	else{
@@ -250,7 +288,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	 if($nom!=0){
 		$color='bloque';
-		$status ='le local est bloqué temporairement<br/><span class="drt"><i class="fas fa-minus-circle" style="font-size:16px;padding-left:70%;"></span></i></span>';
+		$status ='le local est bloqué temporairement<br/><br/><span class="drt"><i class="fas fa-minus-circle" style="font-size:16px;padding-left:70%;"></span></i></span>';
 	}
 	
 	if($nombres!=0){
@@ -271,10 +309,7 @@ $smart_from =($page -1)*$record_peage;
   }
   
 	
-     if($nombre==0 AND $nombr==0 AND $nombres==0 AND $nom==0){
-		$color='libre';
-		$status ='le local est disponible';
-   }
+     
      if($donnees['society']==""){
 		$map="";
 	 }
@@ -285,7 +320,7 @@ $smart_from =($page -1)*$record_peage;
 	 echo'<div><a href="view_data_home.php?home='.$donnees['id_chambre'].'"><div class="homes" id="home'.$color.'">
 		      <h3>'.$donnees['type_logement'].'</h3>
 			  <div class="titre">'.$donnees['chambre'].'</div>
-			  <div class="dt">'.$status.'</div><br/><br/>
+			  <div class="dt">'.$status.'</div>
 			  <div style="font-size:14px;"> '.$map.'</div>
 		     </div></a></div>';	
 	
