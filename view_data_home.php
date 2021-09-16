@@ -12,7 +12,7 @@ include('inc_session.php');
   // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,type FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,types FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
@@ -22,7 +22,7 @@ include('inc_session.php');
 
 	
 // emttre la requete sur le fonction
-    $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_local= :id_chambre AND email_ocds= :email_ocd');
     $ret->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));

@@ -29,12 +29,12 @@ $smart_from =($page -1)*$record_peage;
   
     if($donns['permission']=="user:boss"){
 	if(!isset($_GET['data_id'])){
-	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
 	elseif($_GET['data_id']=="tous"){
-		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+		$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,active,society FROM chambre WHERE  email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
        $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
@@ -48,7 +48,7 @@ $smart_from =($page -1)*$record_peage;
 		
 		else{
 	$session=$donns['code'];
-	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE code= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,active,society FROM chambre WHERE codes= :code AND email_ocd= :email_ocd LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -56,7 +56,8 @@ $smart_from =($page -1)*$record_peage;
 	
    // jointure pour recupérer les données entre les tables
    if($_SESSION['code']==0){
-	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
+	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
+      chambre.chambre, home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
 	  chambre.email_ocd= :email');
@@ -67,31 +68,56 @@ $smart_from =($page -1)*$record_peage;
 	    $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
-	  chambre.email_ocd= :email');
-	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+	  chambre.codes= :cd AND chambre.email_ocd= :email');
+	  $sql->execute(array(':cd'=>$_SESSION['code'],
+	                      ':email'=>$_SESSION['email_ocd']));
    }
 	  
-	  $tt=$sql->fetchAll();
-	  $arr1 =[];
-	  $arr2 = [];
-	  $arr3 =[];
-	  $arr4 = [];
-	  
-	  foreach($tt as $val){
+	  $donns=$sql->fetchAll();
+	  $arr1 =[];// recupérer les id
+	  $arr2 = [];// differentes dates pour reservation et séjour
+	  foreach($donns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
-		 if($val['type']!=0){
-			if($val['type']==1 OR $val['type']==3){
-               $data1 = $val['date'];
+		     $data1 = $val['id_chambre'];
+			 $datax = $val['type'];
+			 $datasx =$val['date'];
+			 // tableau associative id_chambre et le type
+			 $arrax = array(
+			    $data1=>$datax
+			 );
+			 
+			 // créer un tableau association entre les date et id_chambre.
+			 $arrax1= array(
+			  $data1=>$datasx
+			 );
+			 
+			 // créer un tableau assiciative entre les date et type.
+			 $arrax2= array(
+			  $datax=>$datasx
+			 );
+			
 			   $data2 = explode(',',$data1);
+			   // le tableau des different id_chambre
 			   foreach($data2 as $vals){
 				   $arr1[]=$vals;
 			   }
-             }				
-		  }
-	  }
-	  var_dump($arr1);
-	
+             }
+	      
 	foreach($don as $donnees) {
+	$d = $donnees['id_chambre'];
+	// verifier si id_chambre n'est pas dans le tableau des id_local
+	if(!in_array($d,$arr1)){
+	  $color='libre';
+		$status ='le local est disponible';
+	}
+	
+	else{
+		
+		if(array_key_exists($d,$arrax2)){
+			
+		}
+    }
+	
 	if($_SESSION['code']==0){
 	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
 	}
@@ -105,6 +131,7 @@ $smart_from =($page -1)*$record_peage;
 	 $date =[];
 	 $bloque =[];
 	 $reser =[];
+	 $arr4 = [];
 	foreach($donns as $datas) {
 		
 		if($datas['type']!=0){
@@ -154,8 +181,15 @@ $smart_from =($page -1)*$record_peage;
         }			
 		  
 	  }
+	  // recupere les id_chambre
+	   $id_local = $datas['id_local'];
+	   $ids = explode(',',$id_local);
+	   foreach($ids as $vf){
+		   $arr4[] = $vf;
+	   }
 	 }
 	}
+	
 	
 	$nombre = count($array);// pour le sejour et réservation
 	$nombres = count($tab);// pour les horaires
