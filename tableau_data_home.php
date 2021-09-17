@@ -628,9 +628,16 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		<div class="users">
 		
 		<?php
+		if($_SESSION['code']==0){
         $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE email_ocd= :email_ocd');
         $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   		
+   		}
+		
+		else{
+			$rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE code= :code AND email_ocd= :email_ocd');
+        $rq->execute(array(':code'=>$_SESSION['code'],
+		                  ':email_ocd'=>$_SESSION['email_ocd']));
+		}
 		  while($dato=$rq->fetch()){
 		    if($dato['society']==""){
 			 $transmi="";  
