@@ -74,73 +74,45 @@ $smart_from =($page -1)*$record_peage;
    }
 	  
 	  $dns=$sql->fetchAll();
-	  $arr1 =[];// recupérer les id
-	  $arr2 = [];// differentes dates pour reservation et séjour
+	 $arr1=[];
+	 $array1 =[];// recupere les valeurs pour les sejours et réservation
+	  $array2 = [];// recupere les valeurs pour horaires
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
 			 $datax = $val['type'];
 			 $datasx =$val['date'];
-			 // tableau associative id_chambre et le type
-			 $arrax = array(
-			    $data1=>$datax
-			 );
-			 // créer un tableau association entre les date et id_chambre.
-			 $arrax1= array(
-			  $data1=>$datasx
-			 );
-			  // créer un tableau assiciative entre les date et type.
-			 $arrax2= array(
-			  $datax=>$datasx
-			 );
-			 $data2 = explode(',',$data1);
-			   // le tableau des different id_chambre
-			   foreach($data2 as $vals){
-				   $arr1[]=$vals;
-			   }
-			   
-			   // recupere les elements dans un tableau.
-		$art = [];// recupere les id_chambre pour le type 1 ou 3   sejour,reservation
-	    $arts =[];// pour les horaire enregsitrer les donnees du type 2 horaire;
-		// traitement pour les séjours 
-		foreach($arrax1 as $key =>$values){
-		foreach($arrax as $keys => $values1){
-		 if($values1 == 1 OR $values1==3){
-		  $day = explode(',',$keys);
-         foreach($day as $vl){
-            $art[]=$vl;
-				}						 
-			}
-		// traitement pour les horaire	
-		if($values1==2){
-		$days = explode(',',$keys);
-         foreach($days as $vls){
-            $arts[]=$vls;
-		  }
-		  }
-			 if(in_array($key,$art)){
-			 $v = $key.','.$values;  
-			$vb = explode('/',$v);
-		    foreach($vb as $vc){
-			$arr2[] = $vc;// renvoi des données dans un tableau
-            }			
-		    }
-	      }
-		}
-		}
 			 
-      
-	  // transmettre les tableau avec les valeurs id_champs et leur date.
+			 // regroupe les id_chambre
+			 $dat = explode(',',$data1);
+			 foreach($dat as $vals){
+				$arr1[] = $vals; 
+				 
+			 }
+			 
+			 
+			 if($val['type'] ==1 OR $val['type']== 3){
+				 $datc = $val['date'];
+				 // tableau associative id_chambre et le type
+			     $arra = array(
+			    $data1=>$datc
+			    );
+				$array1[]=$arra;
+				}
+				
+			if($val['type'] ==2){
+				 $datc1 = $val['date'];
+				 // tableau associative id_chambre et le type
+			     $arra1 = array(
+			    $data1=>$datc1
+			    );
+				$array2[]=$arra1;
+				}
+			 // recupere les elements dans un tableau.
+		      // transmettre les tableau avec les valeurs id_champs et leur date.
+	  }
 	  
-		 $dev =[];
-		for($i=0; $i<count($arr2);$i++){
-		  $datas = explode(',',$arr2[$i]);
-		    $dev[]=$datas;
-		 }
-		
-         var_dump($dev);
-		
-   foreach($don as $donnees) {
+	  foreach($don as $donnees) {
 	$d = $donnees['id_chambre'];
 	// verifier si id_chambre n'est pas dans le tableau des id_local
 	if(!in_array($d,$arr1)){
@@ -151,10 +123,32 @@ $smart_from =($page -1)*$record_peage;
 	else{
 		
 		// boucle sur le premier tableau associative
-		// tableau pour recuperer les donnees dont id_chambre 1 valeur du tableau
-		
-		 
-	}
+		// tableau pour recuperer les donnees dont id_chambre 1 valeur du 
+		$a =[];
+		$b =[];
+		 foreach($array1 as $key =>$values){
+			$data =$values;
+			
+			foreach($values as $keys =>$vals){
+				if($keys == $donnees['id_chambre']){
+				  //$a[] = $vals;
+                   $dt = $vals;
+				   $dts =explode(',',$dt);
+				   foreach($dts as $d){
+					  $a[] =$d; 
+				   }
+			  }
+			}
+		   }
+		   
+		 // dans le cas d'une reservation client
+	     foreach($array2 as $keys =>$valus){
+			if($keys == $donnees['id_chambre']){
+				$datas1 = explode(',',$valus);
+				
+			  }
+			}
+		}  
 	
 	if($_SESSION['code']==0){
 	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
