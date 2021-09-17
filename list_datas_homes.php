@@ -141,14 +141,20 @@ $smart_from =($page -1)*$record_peage;
 			}
 		   }
 		   
-		 // dans le cas d'une reservation client
-	     foreach($array2 as $keys =>$valus){
-			if($keys == $donnees['id_chambre']){
-				$datas1 = explode(',',$valus);
-				
-			  }
+		 // dans le cas d'un passage horaire type 2
+	     foreach($array2 as $clef =>$valus){
+			 $datas1 = $valus;
+			 foreach($valus as $clefs =>$valuess){
+			if($clefs == $donnees['id_chambre']){
+				$dv = $valuess;
+				   $ds =explode(',',$dv);
+				   foreach($ds as $h){
+					  $b[] =$h; 
+				   }
+				}
 			}
-		}  
+		}
+	}		
 	
 	if($_SESSION['code']==0){
 	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
