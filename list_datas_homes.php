@@ -77,6 +77,7 @@ $smart_from =($page -1)*$record_peage;
 	 $arr1=[];
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
+	  $array3 = [];// pour les chambre bloque;
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
@@ -108,6 +109,17 @@ $smart_from =($page -1)*$record_peage;
 			    );
 				$array2[]=$arra1;
 				}
+				
+			   // pour les chambre bloque
+			   if($val['type']==5){
+				 $datc2 = $val['date'];
+				 // tableau associative id_chambre et le type
+			     $arra2 = array(
+			    $data2=>$datc2
+			    );
+				$array3[]=$arra2;
+				}
+			   
 			 // recupere les elements dans un tableau.
 		      // transmettre les tableau avec les valeurs id_champs et leur date.
 	  }
@@ -124,8 +136,9 @@ $smart_from =($page -1)*$record_peage;
 		
 		// boucle sur le premier tableau associative
 		// tableau pour recuperer les donnees dont id_chambre 1 valeur du 
-		$a =[];
-		$b =[];
+		$a =[];// tableau pour les séjour 1 et reservation type 3
+		$b =[];// tableau pour les horaire pass type 2
+		$c = [];// tableau pour les chmabre bloque
 		 foreach($array1 as $key =>$values){
 			$data =$values;
 			
@@ -137,11 +150,10 @@ $smart_from =($page -1)*$record_peage;
 				   foreach($dts as $d){
 					  $a[] =$d; 
 				   }
-			  }
-			}
-		   }
-		   
-		 // dans le cas d'un passage horaire type 2
+			    }
+			   }
+		     }
+		   // dans le cas d'un passage horaire type 2
 	     foreach($array2 as $clef =>$valus){
 			 $datas1 = $valus;
 			 foreach($valus as $clefs =>$valuess){
@@ -149,12 +161,76 @@ $smart_from =($page -1)*$record_peage;
 				$dv = $valuess;
 				   $ds =explode(',',$dv);
 				   foreach($ds as $h){
-					  $b[] =$h; 
+					  $b[]=$h; 
 				   }
 				}
-			}
-		}
-	}		
+			 }
+		  }
+		  
+		  // dans le cas ou un local est bloque de type 5
+	     foreach($array3 as $cle =>$valu){
+			 $datas2 = $valu;
+			 foreach($valu as $cles =>$valss){
+			if($cles == $donnees['id_chambre']){
+				$dvs = $valss;
+				   $dss =explode(',',$dvs);
+				   foreach($dss as $hs){
+					  $c[]=$hs; 
+				   }
+				}
+			 }
+		  }
+		
+         // recupére la date passé en paramètre
+	  $date =$_GET['data'];
+	   $date = explode('-',$date);
+
+	    $j = $date[2];
+	   $mm = $date[1];
+	   $an = $date[0];
+	// recupération des variable $_GET date et jours
+	  $date_english = $j.'-'.$mm.'-'.$an;
+	 $heure =$_GET['home_heure'];
+
+     // recupéré les valeurs max et min des tableau
+	   $debut = min($a);
+	   $sortie = max($a); 
+	   
+	   // on recupére le premier et la dernier date
+    // si le client est facturé sur un séjour ou reservation
+	if($debut <= $date_english AND $date_english <= $sortie AND in_array($date_english,$array)) {
+	$color ='occupe';
+	$status ='un client est présent dans le local,<br/>il sera disponible à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
+	
+	}
+	
+	 // if le local est réserve
+	elseif($date_english < $debut){
+	$color ='reserve';
+	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span><br/><br/>';
+	}
+
+	else{
+		$color='libre';
+		$status ='le local est disponible';
+      }
+     
+	 // recupéré les valeurs max et min des tableau
+	$debuts = min($b);
+	$sorties = max($b);
+	
+	if(in_array($heure,$tab) AND in_array($date_english,$date)){
+		// verification pour le cas des sejours pass
+	    $color='occupe';
+		$status ='le client fait un pass présentement';
+	}
+	if($debuts < $date_english AND $date_english < $sorties AND in_array($date_english,$date)){
+		// verification pour le cas des sejours pass
+	    $color='occupe';
+		$status ='le client fait un pass présentement';
+	}
+	 
+	 }		
 	
 	if($_SESSION['code']==0){
 	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE   id_local="'.$donnees['id_chambre'].'"');
@@ -337,7 +413,7 @@ $smart_from =($page -1)*$record_peage;
    $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));	
    }
 	else{
-	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE code= :code AND email_ocd= :email_ocd');
+	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE codes= :code AND email_ocd= :email_ocd');
 	  $reg->execute(array(':code'=>$_GET['data_id'],
 	                      ':email_ocd'=>$_SESSION['email_ocd']));
 	}
