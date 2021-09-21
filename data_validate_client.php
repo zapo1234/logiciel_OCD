@@ -501,7 +501,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocd,date,date_french,dates,id_fact,type,code) 
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
 		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $dates ="";
 		 $reys->execute(array(':id_local'=>$ids_chambre,
@@ -626,10 +626,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 						  ));
 						  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocd,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_local,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
+		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $reys->execute(array(':id_local'=>$ids_chambre,
-		                      ':email_ocd'=>$_SESSION['email_ocd'],
+		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
 							  ':date_french'=>$datas_fren,
 							  ':dates'=>$dat,
@@ -642,10 +642,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			 
 			// insert dans moyen_tresorie  
 			$res=$bds->prepare('INSERT INTO moyen_tresorie (date,email_ocd,email_user,id_fact,montant,montant1,montant2,montant3,code) 
-		 VALUES(:date,:email_ocds,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
+		 VALUES(:date,:email_ocd,:email_user,:id_fact,:montant,:montant1,:montant2,:montant3,:code)');
 		 
 		 $res->execute(array(':date'=>$dat,
-		                     ':email_ocds'=>$_SESSION['email_ocd'],
+		                     ':email_ocd'=>$_SESSION['email_ocd'],
 		                      ':email_user'=>$_SESSION['email_user'],
 							  ':id_fact'=>$id_fact,
 		                      ':montant'=>$num1,

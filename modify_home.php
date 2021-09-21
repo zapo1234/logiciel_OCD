@@ -7,7 +7,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
  $code =$_GET['code_data'];
  $session = $_GET['code_data'];
 // recupére les données de la base de données si $_GET['id_fact']
-  $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE codes= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+  $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
     $req->execute(array(':code'=>$code,
 	                   ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));

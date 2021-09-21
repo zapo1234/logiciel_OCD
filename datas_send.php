@@ -105,7 +105,7 @@ include('inc_session.php');
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
   
-	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 		
 	}
 	
@@ -116,7 +116,7 @@ include('inc_session.php');
   $indicateurs='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F9AABB;">25</div>
   </div><br>';
-	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
 		
 	}
 	
@@ -161,7 +161,7 @@ include('inc_session.php');
     <div class="w3-container w3 w3-round-large" style="width:70%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
   </div><br>';
   
-	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 		
 	}
 	
@@ -172,7 +172,7 @@ include('inc_session.php');
   $indicateurc='<div class="w3-light-grey w3-round-large" style="width:350px">
     <div class="w3-container w3 w3-round-large" style="width:90%;background:#F9AABB;font-size:16px;color:#F79F76;">25</div>
   </div><br>';
-	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
 		
 	}
 	// indicateur sur les sorties

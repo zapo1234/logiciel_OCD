@@ -124,7 +124,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 #tls{margin-top:10px;color:black;}
 
- #tss td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+ #tss td, #tss th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
 
 #tss tr:nth-child(even){background-color:#f2f2f2;}
 
