@@ -28,64 +28,157 @@ $smart_from =($page -1)*$record_peage;
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
     $don = $req->fetchAll();
-	 //// emttre la requete sur le fonction
-    //$rec=$bds->query('SELECT id_chambre,date FROM home_occupation');
-    //$donns = $rec->fetchAll();
-	//$rec->closeCursor();
+	
 	$rem='<span class="ts"></span>';
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
 	// on boucle sur les les resultats
-      echo'<div class="content_home">';
+	
+	// jointure pour recupérer les données entre les tables
+   if($_SESSION['code']==0){
+	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
+      chambre.chambre, home_occupation.date, home_occupation.dates, home_occupation.type
+      FROM home_occupation
+      INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
+	  chambre.email_ocd= :email');
+	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+	  }
+   
+   else{
+	    $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
+      FROM home_occupation
+      INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
+	  chambre.codes= :cd AND chambre.email_ocd= :email');
+	  $sql->execute(array(':cd'=>$_SESSION['code'],
+	                      ':email'=>$_SESSION['email_ocd']));
+   }
+   
+   $dns=$sql->fetchAll();
+	 $arr1=[];
+	 $array1 =[];// recupere les valeurs pour les sejours et réservation
+	  $array2 = [];// recupere les valeurs pour horaires
+	  $array3 = [];// pour les chambre bloque;
+	  $dones = []; // pour les dates au pour horaire.
+	  foreach($dns as $val){
+		 // lancer les requetes et enregsitre les données dans les different tableau
+		     $data1 = $val['id_chambre'];
+			 $datax = $val['type'];
+			 $datasx =$val['date'];
+			 
+			 // regroupe les id_chambre
+			 $dat = explode(',',$data1);
+			 foreach($dat as $vals){
+				$arr1[] = $vals; 
+				 
+			 }
+			 
+			 if($val['type'] ==1 OR $val['type']== 3){
+				 $datc = $val['date'];
+				 // tableau associative id_chambre et le type
+			     $arra = array(
+			    $data1=>$datc
+			    );
+				$array1[]=$arra;
+				}
+				
+			if($val['type'] ==2){
+				 $datc1 = $val['date'];
+				 $datis =$val['dates'];
+                 $da = explode(',',$datis);
+				 // tableau associative id_chambre et le type
+			     $arra1 = array(
+			    $data1=>$datc1
+			    );
+				$array2[]=$arra1;
+				}
+				
+			   // pour les chambre bloque
+			   if($val['type']==5){
+				 $datc2 = $val['date'];
+				 // tableau associative id_chambre et le type
+			     $arra2 = array(
+			    $data2=>$datc2
+			    );
+				$array3[]=$arra2;
+				}
+			   
+			 // recupere les elements dans un tableau.
+		      // transmettre les tableau avec les valeurs id_champs et leur date.
+	  }
+      
+	 echo'<div class="content_home">';
+	  
 	
 	foreach($don as $donnees) {
-	$rec=$bds->query('SELECT id_local,date,dates,type FROM home_occupation WHERE code="'.$session.'" AND id_local="'.$donnees['id_chambre'].'"');
-    $donns = $rec->fetchAll();
-	 $array = [];
-	 $tabs = [];
-	 $dones=[];
-	foreach($donns as $datas) {
-		
-		if($datas['type']!=0){
-		//pour sejour ou réservation
-		if($datas['type']==1 OR $datas['type']==3){
-		$data = $datas['date'];
-		$dat = explode(',',$data);
-		// pour les sejours et réservation
-		foreach($dat as $value){
-		$array[] = $value;		
-	    }
-		}
-		// pour le pass.
-		if($datas['type']==2){
-		// pour les heures en date
-		$datos =$datas['date'];
-		// pour les jours en date
-		$datis =$datas['dates'];
-		
-		$dats = explode(',',$datos);
-		$da = explode(',',$datis);
-		// pour les dates en heures
-		foreach($dats as $values){
-		$tabs[] = $values;		
-	   }
-	   
-	   // pour les dates en jours
-	   foreach($da as $valus){
-		$dones[] = $valus;		
-	   }
-	   
-	   // pour les dates en jours
-	 }
+	
+	$d = $donnees['id_chambre'];
+	// verifier si id_chambre n'est pas dans le tableau des id_local
+	if(!in_array($d,$arr1)){
+	  $color='libre';
+		$status ='le local est disponible <br/><br/><br/>';
 	}
-	}
-
-     $tab = $array;
-	 // on verifie le nombre d'élement dans le tableau
-	 $nombre = count($array);
-	 $nombr = count($tabs);
-    
-	if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
+	
+	else{
+		
+		// boucle sur le premier tableau associative
+		// tableau pour recuperer les donnees dont id_chambre 1 valeur du 
+		$array =[];// tableau pour les séjour 1 et reservation type 3
+		$b =[];// tableau pour les horaire pass type 2
+		$c = [];// tableau pour les chmabre bloque
+		
+		foreach($array1 as $key =>$values){
+			$data =$values;
+			
+			foreach($values as $keys =>$vals){
+				if($keys == $donnees['id_chambre']){
+				  //$a[] = $vals;
+                   $dt = $vals;
+				   $dts =explode(',',$dt);
+				   foreach($dts as $d){
+					  $array[] =$d; 
+				   }
+			    }
+			   }
+		     }
+		   // dans le cas d'un passage horaire type 2
+	     foreach($array2 as $clef =>$valus){
+			 $datas1 = $valus;
+			 foreach($valus as $clefs =>$valuess){
+			if($clefs == $donnees['id_chambre']){
+				$dv = $valuess;
+				   $ds =explode(',',$dv);
+				   foreach($ds as $h){
+					  $b[]=$h; 
+				   }
+				}
+			 }
+		  }
+		  
+		  // dans le cas ou un local est bloque de type 5
+	     foreach($array3 as $cle =>$valu){
+			 $datas2 = $valu;
+			 foreach($valu as $cles =>$valss){
+			if($cles == $donnees['id_chambre']){
+				$dvs = $valss;
+				   $dss =explode(',',$dvs);
+				   foreach($dss as $hs){
+					  $c[]=$hs; 
+				   }
+				}
+			 }
+		  }
+		  
+		  // recupere les dates d'enregsitrer dans le cas horaire.
+		  foreach($da as $das){
+			 $dones[] = $das;
+		  }
+		
+		// on verifie le nombre d'élement dans le tableau
+	   
+	   $nombre = count($array);
+	   $nombr = count($b);
+	   
+	   if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
 	
 	if($nombre!=0){	
     $debut = min($array);
@@ -170,16 +263,16 @@ $smart_from =($page -1)*$record_peage;
 	}
 	 // si le client est facturé sur une horaire
 	} 
-	
-	if($_POST['to']=="horaire"){
+	   
+	   if($_POST['to']=="horaire"){
 	 if($nombr!=0){
-		 $debuts = min($tabs);
-           $sorties = max($tabs);
+		 $debuts = min($b);
+           $sorties = max($b);
 		   // pour les dates du jours
 		   $sort = max($dones);
 		   $date= date('Y-m-d');
 		   
-		 if(in_array($_POST['tim'],$tabs) AND in_array($_POST['tis'],$tabs)  AND in_array($_POST['dat'],$dones)){
+		 if(in_array($_POST['tim'],$b) AND in_array($_POST['tis'],$b)  AND in_array($_POST['dat'],$dones)){
 
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
@@ -188,8 +281,7 @@ $smart_from =($page -1)*$record_peage;
 	 }
 	 
       if($debuts < $_POST['tim'] AND $_POST['tis']< $sorties  AND in_array($_POST['dat'],$dones)){
-
-        $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi ="";
 		$css="indispo";
@@ -209,16 +301,19 @@ $smart_from =($page -1)*$record_peage;
 		 $css="dispo"; 
 	 }
 	}
-	 
-	if($nombr==0){
+   
+  
+		if($nombr==0){
 		 $name='local disponible de '.$_POST['tim'].' au '.$_POST['tis'].'';
 		 $a="h5";
 		 $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
 		 $css="dispo";
 	  }
 	}
+	}
 	
-	 echo'<div  class="content3">
+	
+	 echo'<div  class="content3" id="'.$css.'">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>

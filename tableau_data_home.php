@@ -126,7 +126,7 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
   </div><br>';
   
-	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 		
 	}
 	
@@ -138,7 +138,7 @@ include('inc_session.php');
   $indicateurs='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
  </div><br>';
-	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
 		
 	}
 	
@@ -181,13 +181,12 @@ include('inc_session.php');
 	elseif(10 < $cb AND $cb <30){
 	$indicateuc='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
   </div><br>';
   $indicateurc='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
   
-	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,trésorerie faible';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 		
 	}
 	
@@ -199,7 +198,7 @@ include('inc_session.php');
   $indicateurc='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
-	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;">  Attention ,Activité fortement déficitaire';
+	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
 		
 	}
 }
@@ -514,6 +513,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
+#collapse{display:none;position:absolute;left:1%;height:1500px;}
 }
 
 
