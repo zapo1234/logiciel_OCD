@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+   $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+   
    $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
@@ -51,9 +55,7 @@ $(document).on('click','.actions',function(){
 	var id = $(this).data('id7');
   // afficher 
   $('#contens'+id).slideToggle();
-  if(id ===3){
- $('.datas').css('height','120px');	
-  }
+  	
 });
 
 // compter les nouveaux message
@@ -135,7 +137,7 @@ $(document).on('click','#dir', function(){
  html += '<td><input type="date" class="date" id="ti" name="ti[]" required></td>';
  html +='<td><input type="text" class="designation" id="designation" name="designation[]" placeholder="Désignation" required></td>';
  html +='<td><input type="text" class="fournisseur" id="fournisseur" name="fournisseur[]" placeholder="fournisseur"/></td>';
- html +='<td><select name="des[]" id="des"><option value="1">dépense effectué</option><option value="2">crédit fournisseur</option></select></td>';
+ html +='<td><select name="des[]" id="des"><option value="1">dépense effectué</option><option value="2">crédit fournisseur</option> <option value="5">Remboursement client</option></select></td>';
  html +='<td><input type="number" class="montant" id="montant'+cont+'" name="montant[]" placeholder="Montant" required></td>';
  html +='<td><button class="remove" name="remove" id="'+cont+'"><i class="material-icons" style="font-size:25px">highlight_off</i></button></td>';
  html +='</tr>';
@@ -349,8 +351,10 @@ calcul();
      $('#data_annuler').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>dépense annulée</div>');
      $('.annuler').css('display','none');
      $('#pak').css('display','none');
+	 $('#result_recher').css('display','block');
 	 load();
 	 loads();
+	 
 	}
 		
 	});
@@ -384,6 +388,7 @@ calcul();
      $('#data_annuler').html('<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i>montant payé</div>');
      $('.annu').css('display','none');
      $('#pak').css('display','none');
+	 $('#result_recher').css('display','block');
 	 load();
 	 loads();
 	}
@@ -419,6 +424,7 @@ calcul();
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#data_modifier').html(data);
      $('#pak').css('display','none');
+	 $('#result_recher').css('display','block');
      loads();
 	 load();
 	}
@@ -499,11 +505,11 @@ calcul();
 	 loads();
 	 var nombre = checkbox.length;
 	 if(nombre==1){
-	   var nbrs ="supression d'une dépense"; 
+	   var nbrs ="une dépense supprimée"; 
 	 }
 	 
 	 else{
-		 var nbrs = 'vous avez suprimez <span class="drt">'+nombre+'</span>factures'; 
+		 var nbrs = 'vous avez suprimez <span class="drt">'+nombre+'</span>dépenses'; 
 	 }
 	 
 	 $('#result').html('<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i>'+nbrs+'</div>');
@@ -556,20 +562,6 @@ calcul();
 
 			panier();
  
- $(document).on('click','.actions',function(){
-	   	var id = $(this).data('id7');	
-      // on affiche la div
-       $('#contens'+id).slideToggle();
-       
-	   for(id-1; id <5000; id++){
-        $('#contens'+id).css('display','none');
-        }
-
-        for(5000; id > 0; id--){
-        $('#contens'+id).css('display','none');
-        }	
-		 			
-		 	
-	 });
+ 
 
 });

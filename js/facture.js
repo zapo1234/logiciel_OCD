@@ -1,5 +1,9 @@
 $(document).ready(function(){
      
+	  $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	 
 	  $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
@@ -32,6 +36,8 @@ $(document).ready(function(){
    $('.annuler').css('display','none');
    $('.detail').css('display','none');
    $('.envoyer').css('display','none');
+   $('#results_s').css('display','none');
+   $('#recher_date').css('display','none');
  });
  
  $('#im').click(function(){
@@ -44,12 +50,10 @@ $(document).ready(function(){
 	var id = $(this).data('id2');
   // affich
   $('#content'+id).slideToggle();
-  
   if(id ===3){
  $('.datas').css('height','120px');	
   }
 });
-
 
  // 
  
@@ -76,12 +80,50 @@ $(document).ready(function(){
 	 $('.modif').css('display','none');
 	 loads();
 	 load();
+	 $('#result_recher').css('display','none');
 	}
 		
 	});
 	
 	setInterval(function(){
 		 $('#data_annuler').html('');
+		 location.reload(true);
+	 },4000);
+
+ });
+ });
+ 
+ // delete home--
+ $(document).on('click','.annulc', function(){
+	 // recupere la variable
+	 var id = $(this).data('id5');
+	 var action = "deleted";
+    // affiche les differentes
+	$('.annuler').css('display','block');
+	$('#id_fact').text(id);
+    $('#pak').css('display','block');
+	$('#ids').val(id);
+	
+	$(document).on('click','.annuls', function(){
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'result_facture_home.php',// on traite par la fichier
+	data:{id:id,action:action},
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#data_annuler').html(data);
+     $('.annuler').css('display','none');
+     $('#pak').css('display','none');
+	 $('.modif').css('display','none');
+	 loads();
+	 load();
+	 $('#result_recher').css('display','none');
+	}
+		
+	});
+	
+	setInterval(function(){
+		 $('#data_annuler').html('');
+		 location.reload(true);
 	 },4000);
 
  });
@@ -174,7 +216,11 @@ $(document).ready(function(){
 	  loads(page);
    });
   
-			
+	// pagintion
+  $(document).on('click','.bouts',function(){
+	  var page =$(this).attr("id");
+	  loads(page);
+   });		
   
   function load() {
 				var action="fetch";
@@ -250,12 +296,37 @@ $(document).ready(function(){
 	data:form_data,
 	success:function(data) { // on traite le fichier recherche apres retour
        $('#result').html(data);
+	   $('#result_recher').css('display','none');
 	  loads();
 	  }
     });
 	
 	setInterval(function(){
 		 $('#result').html('');
+		 location.reload(true);
+	 },4000);
+	  
+	
+	});
+	
+	$(document).on('submit','#formd', function(event) {
+	event.preventDefault();
+	var form_data =$(this).serialize();
+	var action ="delete_check";
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'test.php',// on traite par la fichier
+	data:form_data,
+	success:function(data) { // on traite le fichier recherche apres retour
+       $('#result').html(data);
+	   $('#result_recher').css('display','none');
+	  loads();
+	  }
+    });
+	
+	setInterval(function(){
+		 $('#result').html('');
+		 location.reload(true);
 	 },4000);
 	  
 	
@@ -273,6 +344,27 @@ $(document).ready(function(){
 					data:{id:id,action:action,page:page},
 					success: function(data) {
 						$('#results').css('display','none');
+						$('#resu').html(data);
+						
+					}
+				});
+			}
+
+			recher();
+		
+	});
+	
+	$(document).on('change','#search_date',function(){
+	 function recher(page) {
+				var action="search";
+				var id=$('#search_date').val();
+				$.ajax({
+					url: "recher_facture_home.php",
+					method: "POST",
+					data:{id:id,action:action,page:page},
+					success: function(data) {
+						$('#results').css('display','none');
+						$('#recher_date').css('display','none');
 						$('#resu').html(data);
 						
 					}
