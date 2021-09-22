@@ -90,7 +90,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .data2{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
 .data4{color:green;font-weight;}
 .data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;border-radius:20px;color:black}
-
+.data5{color:#AB040E;font-size:12px;font-weight:bold;font-family:arial;}
 .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 .annu{background-color:white;width:360px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
 
