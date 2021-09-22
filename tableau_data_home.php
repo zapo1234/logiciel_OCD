@@ -514,6 +514,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
+#im{display:none;}
 }
 
 

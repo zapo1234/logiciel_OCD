@@ -10,7 +10,7 @@ if(!isset($_GET['home'])) {
    // requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,society FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
@@ -28,6 +28,7 @@ if(!isset($_GET['home'])) {
 	$infos =$donnees['infos'];
 	$data = $donnees['equipement'];
 	$data1  = $donnees['equipements'];
+	$society = $donnees['society'];
     
 	$req->closeCursor();
 	 
@@ -285,6 +286,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
       <input type="number" class="form-control" id="counts" name="couts" value="<?php echo$cout_pass;?>">
     </div>
     
+	<div class="form-group col-md-6">
+      <label for="inputPassword4">Nom du site </label>
+      <input type="text" class="form-control" id="site" name="site" value="<?php echo$society;?>">
+    </div>
+	
      <div class="form-group col-md-12">
         <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
 
@@ -559,11 +565,13 @@ else{
  var rege = /^[a-zA-Z0-9-]{2,15}(\s[a-zA-Z0-9-]{2,15}){0,3}$/;
  var number = /^[0-9]{1,2}$/;
  var inf = /^[a-zA-Z0-9éàèçé]{0,200}$/;
+ var sites = /^[a-zA-Z0-9éàèçé]{0,80}$/;
 // on ecrits les variable
 var ids =$('#ids').val();
 var num =$('#num').val();
 var nums =$('#nums').val();
 var infos = $('#infos').val();
+var site = $('#society').val();
 
 
  if(ids.length> 50) {
@@ -581,6 +589,11 @@ var infos = $('#infos').val();
 	
 	else if (!number.test(nums)){
       $('#error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntax sur le nombre compris entre 1et 9');
+      $('#nums').css('border-color','red');
+	}
+	
+	else if (!sites.test(site)){
+      $('#error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de symtaxe sur le nom du site(moins de 80 caractères');
       $('#nums').css('border-color','red');
 	}
 	
