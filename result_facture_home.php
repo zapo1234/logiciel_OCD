@@ -167,6 +167,17 @@ $smart_from =($page -1)*$record_peage;
 		$monts="";
 	}
 	
+	if($donnees['type']==2){
+	  $time1 ='Horaire d\'entreé '.$donnees['time'];
+	  $time2= 'Horaire de sortie '.$donnees['time1'];
+	}
+	
+	else{
+	$time1="";
+	$time2="";
+		
+	}
+	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -206,8 +217,8 @@ $smart_from =($page -1)*$record_peage;
 		 <i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span></td>
 		 <td><span class="mont">'.$montant.' xof</span></td>
 		 <td><span class="mont">'.$mont_tva.' xof</span></td>
-		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
-		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
+		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span><br/>'.$time1.'</td>
+		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span><br/>'.$time2.'</td>
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
 		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.''.$donnees['code'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.''.$donnees['code'].'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
@@ -295,6 +306,7 @@ $smart_from =($page -1)*$record_peage;
 	$rt=",";
   	$montant = number_format($donnees['montant'], 2, '.', '');
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
+	$montants = $montant - floatval($donnees['avance']);
 	
 	 echo'<div class="detail">
 	      <h4>Détails de la facture</h4>
@@ -332,7 +344,7 @@ $smart_from =($page -1)*$record_peage;
 		  <td>'.$montant.'xof</td>
 		  <td>'.$mont_tva.'xof</td>
 		  <td>'.$donnees['avance'].'xof</td>
-		  <td>'.$donnees['reste'].'xof</td>
+		  <td>'.$montants.'xof</td>
 		  <td>'.str_replace($rt,$rem,$donnees['moyen_paiement']).'</td>
 		  </tr>
 		  </table>
@@ -574,6 +586,18 @@ if($_POST['action']=="mail"){
 		$monts="";
 	}
 	
+	
+	if($donnees['type']==2){
+	  $time1 ='Horaire d\'entreé '.$donnees['time'];
+	  $time2= 'Horaire de sortie '.$donnees['time1'];
+	}
+	
+	else{
+	$time1="";
+	$time2="";
+		
+	}
+	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -613,8 +637,8 @@ if($_POST['action']=="mail"){
 		 <i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client :'.$donnees['clients'].'</span></td>
 		 <td><span class="mont">'.$montant.' xof</span></td>
 		 <td><span class="mont">'.$mont_tva.' xof</span></td>
-		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span></td>
-		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span></td>
+		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span><br/>'.$time2.'</td>
+		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span><br/>'.$time2.'</td>
 		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
 		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/>
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>

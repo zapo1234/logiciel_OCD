@@ -371,11 +371,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
       <div class="input-group">
 	  <label for="inputPassword4">Civilité client *<br/></label>
      <select id="civil" class="civil" name="civil">
-     <option value="sans">type</option><option value="couple">couple</option>
 	 <option value="monsieur">Monsieur</option>
 	 <option value="madame">Madame</option>    
       <option value="famille">famille</option>
-	  <option value="sans">sans précision</option>
+	
     </select>	  
    </div>
 

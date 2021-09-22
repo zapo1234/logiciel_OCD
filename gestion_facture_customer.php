@@ -90,7 +90,7 @@ include('inc_session.php');
 
 #tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tbs{margin-top:10px;}
+#tbs{margin-top:10px;color:black;font-size:16px;}
 
 
 
