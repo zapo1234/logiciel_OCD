@@ -103,6 +103,13 @@ if($_POST['action']=="fetchs") {
 	 $modif='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'><i class="fab fa-telegram"></i> Modifier</a><br/>';
 	}
 	
+	elseif($donnes['status']==5){
+	 $name="Remboursement client";
+	 $mettre='';
+	 $annul='';
+	 $modif='<a href="#" class="modifier" title="modifier" data-id3='.$donnes['id'].'><i class="fab fa-telegram"></i> Modifier</a><br/>';
+	}
+	
 	elseif($donnes['status']==4){
 	 $name="remboursement effectué";
 	 $mettre='';

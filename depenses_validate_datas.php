@@ -68,6 +68,11 @@ $natu='dépense effectué';
 	$natu='crédit fournisseur'; 
  }
  
+ if($nat==5){
+	 
+	$natu ="Remboursement client";
+ }
+ 
  // insertions des données dans la base de données depense
  $req=$bds->prepare('INSERT INTO depense(email_ocd,numero_facture,date,designation,fournisseur,user,nature,montant,status,code,society,calls) VALUES(:email_ocd,:numero_facture,:date,:designation,:fournisseur,:user,:nature,:montant,:status,:code,:society,:calls)');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
