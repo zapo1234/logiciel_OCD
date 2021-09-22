@@ -136,13 +136,13 @@ margin-left:-10px;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
 .btn{display:none;}
-
+#collap{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:800px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:80%;height:800px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
@@ -173,6 +173,11 @@ border-radius:25px;}
     padding: 0.8%;
     border-radius: 50%;
 }
+.resultats_messages{display:none;}
+
+.bg{border:1px solid #eee;margin-left:-70%;background:white;width:300px;height:300px;padding:4%;margin-top:0px;}
+    .bs{margin-left:-70%;width:300px;height:300px;border:1px solid #eee;background:white;}
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -193,13 +198,15 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}  
 .btn{display:none;} #searchDropdown{display:none;} .btn{display:block;}
-}
+.bg{border:1px solid #eee;margin-left:-30%;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
+    .bs{margin-left:-30%;width:340px;height:300px;border:1px solid #eee;background:white;}
 
+}
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:95%;margin:0;padding:0;height:800px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -213,6 +220,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
+.bg{border:1px solid #eee;margin-left:-30%;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
+    .bs{margin-left:-30%;width:340px;height:300px;border:1px solid #eee;background:white;}
+
 }
 
 </style>
@@ -255,6 +265,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 				}
 					?>
                 </div>
+				
+		
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -266,7 +278,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -378,13 +390,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	 });
 	
 	$('#news_data').click(function(){
-	$('#collapse').slideToggle();
-	$('.drop').css('display','none');
+	$('.bs').slideToggle();
+	$('.bg').slideToggle();
   });
 	
-	$('#sms').click(function(){
-	$('.drop').slideToggle();
-	});
+	
 	
 	// compter les nouveaux message
 	function view() {

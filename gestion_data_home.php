@@ -191,7 +191,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .h4{font-size:18px;color:black;text-align:center;} #resul{width:95%;}
 .center{height:2500px;} .homes{margin-left:15%;}
-.btn{display:block;} .form-select{display:none;}
+.btn{display:block;} .form-select{display:none;} h1{display:none;}
+#searchDropdown{display:none;} 
 }
 
 

@@ -34,7 +34,7 @@ include('inc_session.php');
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
-    .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;}
+    .bs{background:#eee;width:250px;height:270px;border:1px solid #eee;background:#eee;text-align:center;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -88,7 +88,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 .datas{border:2px solid white;box-shadow:2px 2px 1px 1px;font-size:12px;background-color:white;} .action{cursor:pointer;}
 .data1{color:black;font-size:16px;font-weight:none;background:#7BFC83;border:2px solid #7BFC83;border-radius:20px;} .datas1{}
 .data2{background:#1E90FF;font-size:16px;font-weight:none;color:white;border:2px solid #1E90FF;border-radius:20px;} .datas3{}
-.data4{color:green;font-weight;}
+.data4{color:green;font-weight;font-size:12px;font-weight:bold;}
 .data3{background:#AB040E;font-weight:none;font-size:16px;color:white;border:2px solid #AB040E;border-radius:20px;color:black}
 .data5{color:#AB040E;font-size:12px;font-weight:bold;font-family:arial;}
 .annuler{background-color:white;width:350px;height:200px;border:3px solid #eee;padding:3%;position:absolute;z-index:4;top:200px;margin-left:20%;}
@@ -114,7 +114,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 .td{margin-left:10%;}
 .delete{margin-left:10%;margin-bottom:10px;color:white;background:#F83127;border:2px solid #F83127}
  
- #tls td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+ #tls td, #tls th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
 
 #tls tr:nth-child(even){background-color:#f2f2f2;}
 
@@ -122,9 +122,9 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 #tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tls{margin-top:10px;color:black;}
+#tls{margin-top:10px;color:black;font-size:15px;}
 
- #tss td, #tss th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
+ #tss td, #tss th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
 
 #tss tr:nth-child(even){background-color:#f2f2f2;}
 
@@ -132,7 +132,7 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 #tss th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tss{margin-top:10px;color:black;}
+#tss{margin-top:10px;color:black;font-size:15px;}
 
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}

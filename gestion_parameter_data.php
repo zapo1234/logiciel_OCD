@@ -120,7 +120,7 @@ height:2800px;overflow-y:scroll}  h2{margin-top:20px;border-top:1px solid #eee;c
 #form3{width:330px;height:700px;margin-left:-20%;} input{display:block;}
 #modifier, #modipass {
 margin-left:5%;} h2{margin-left:-50%;font-size:16px;border:0px;} #nums,#emais{width:300px;}
-#role,#roles{width:200px;}
+#role,#roles{width:200px;} .navbar-nav{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
