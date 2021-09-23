@@ -153,7 +153,7 @@ include('inc_session.php');
 	$indicateurc='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 5%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
-	$names= 'Activité en forte croissance';
+	$names= '<i class="fas fa-arrow-circle-down"  style="font-size:15px;color:#04850C;"> </i> Activité en forte croissance';
 	}
 	
 	elseif(50< $cb  AND $cb <80){
@@ -175,7 +175,7 @@ include('inc_session.php');
   $indicateurc='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
-	  $names= 'trésorerie moyenne';
+	  $names= ' <i class="fas fa-exclamation-circle" style="font-size:15px;color:#AB040E;"></i> trésorerie moyennement faible';
 	}
 	
 	elseif(10 < $cb AND $cb <30){
@@ -514,7 +514,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
-#im{display:none;}
+#im{display:none;} 
 }
 
 

@@ -177,6 +177,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 input{display:block;} .form-select{display:none;} #panier{display:none;}
 #examp{width:80%;margin-left:-15%;height:1100px;} .buttons{margin-left:2%;}
+.btn{display:block;} #searchDropdown{display:none;}
+.navbar-nav{display:none;}
 }
 
 
@@ -319,7 +321,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 

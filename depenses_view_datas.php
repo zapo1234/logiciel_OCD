@@ -318,11 +318,15 @@ if($_POST['action']=="fetchs") {
 	$monts =$_POST['monts'];
 	
 	if($status==1){
-    $nature='dépense effectuée'; 
+    $nature='Dépense effectuée'; 
 	}
  
     if($status==2){
-	$nature='crédit fournisseur'; 
+	$nature='Crédit fournisseur'; 
+   }
+   
+   if($status==5){
+	  $nature ='Remboursement client'; 
    }
 	
 	  $session=$donns['code'];
@@ -340,6 +344,10 @@ if($_POST['action']=="fetchs") {
     
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
+   if($status==5){
+	 $user_data = $donns['user'].',  <i class="fas fa-exclamation-circle" style="font-size:13px;color:#AB040E;"></i>'.$_SESSION['user'].' à remboursé une annulation le  '.date('d-m-Y').'à  '.date('H:i').'<span class="edit"></span>';  
+	}
+   
    $user_data = $donns['user'].',  <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].' à modifié le  '.date('d-m-Y').'à  '.date('H:i').'<span class="edit"></span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
@@ -422,7 +430,7 @@ if($_POST['action']=="fetchs") {
         }
 		
 		if($montant==$donns['montant']){
-		$nature ="remboursement effectué";
+		$nature ="remboursement fournisseur effectué";
         $status=4;		
 			
 		$ret=$bds->prepare('UPDATE depense SET user= :us, montant= :mont, nature= :nat, status= :stat WHERE  id= :ids AND email_ocd= :email_ocd');

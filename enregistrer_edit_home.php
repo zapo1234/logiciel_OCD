@@ -129,7 +129,7 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 		// modifier  les données dans la base de données dans la base de donnes chambres
 		
 		$rey=$bds->prepare('UPDATE chambre SET chambre= :chambr, type_logement= :type_logemen, cout_nuite= :cout_nuit,
-		cout_pass= :cout_pas, occupant= :occupan, nombre_lits= :nombre_lit, equipement= :equipemen, equipements= :equipement, infos= :info, icons= :icon, site= :sit WHERE id_chambre= :id_chambre');
+		cout_pass= :cout_pas, occupant= :occupan, nombre_lits= :nombre_lit, equipement= :equipemen, equipements= :equipement, infos= :info, icons= :icon, society= :sit WHERE id_chambre= :id_chambre');
 		$rey->execute(array(':chambr'=>$ids,
 						  ':type_logemen'=>$type,
 						  ':cout_nuit'=>$price_days,

@@ -255,8 +255,9 @@ include('inc_session.php');
 					</tr>';
 			// pour affichage mobile
             echo'<div id="mobile">';		
-			echo'<div class="mobile">
-		     <div>'.$donnees['user'].' Numéro:'.$donnees['numero'].'<br/>'.$etat.'</div>
+			echo'<div class="mobile" style="font-size:15px">
+		     <div>'.$donnees['user'].' Numéro:'.$donnees['numero'].'<br/>'.$etat.'</div><br/>
+			 <div style="color:#4e73df;">'.$donnees['categories'].'</div>
 		     <div class="df">'.$active.' <a href="gestion_parameter_data.php?user='.$donnees['id'].'"  title="modifier"><i class="fas fa-pencil-alt" font-size:15px;color:#2481CE"></i></a>  '.$sup.'</div>
 		    </div>
 			</div>';
@@ -531,7 +532,7 @@ if($_POST['action']=="editvalidate"){
 					  ));
 		$donnees=$req->fetch();
 		
-		echo'<img src="upload_image/'.$donnees['name_upload'].'" width="1150px" height="700px">';
+		echo'<img src="upload_image/'.$donnees['name_upload'].'" width="1000px" height="600px">';
 	   $req->closeCursor();
    }
 

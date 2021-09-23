@@ -26,7 +26,7 @@ include('inc_session.php');
 <style>
  
   
- #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.7;}
+ #pak{width:200px;position: fixed;top: 0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
 label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
  
  .dep {
@@ -42,6 +42,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 .enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:18px;width:280px;height:200px;padding:2%;text-align:center;background-color:white;
 }
 .dr{font-size:18px;text-align:center;margin-top:10px;}
+
+@media (max-width: 575.98px) { 
+.enre{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:20%;border:2px solid white;font-family:arial;font-size:18px;width:200px;height:150px;padding:2%;text-align:center;background-color:white;
+}
+}
 </style>
 
 </head>
@@ -71,7 +76,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
  $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 
 echo'<div id="pak"></div>
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>vous données sont bien suprimées  <i class="far fa-user" style="color:green;font-size:20px;"></i></div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>vos données sont bien suprimées  <i class="far fa-user" style="color:green;font-size:20px;"></i></div>
 			 <div class="dr"></div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
              <meta http-equiv="Refresh" content="3; url=//localhost/tresorie_ocd/gestion_datas_messanger.php"/>';

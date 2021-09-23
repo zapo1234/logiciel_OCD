@@ -116,6 +116,10 @@ $smart_from =($page -1)*$record_peage;
 	if(!in_array($d,$arr1)){
 	  $color='libre';
 		$status ='le local est disponible <br/><br/><br/>';
+		$css ="dispo";
+		$name="";
+		$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+        $a="h6";
 	}
 	
 	else{
@@ -190,7 +194,8 @@ $smart_from =($page -1)*$record_peage;
      if(in_array($_POST['days'],$array)){
       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
-		$envoi="";
+	     $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
+   
 		$css="indispo";
 	 }
 

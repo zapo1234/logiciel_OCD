@@ -138,8 +138,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .dy{display:none;} .input{display:none;} h2{position:absolute;top:140px;left:-35%;font-size:16px;}
 form{margin-top:100px;} #names,#name{margin-left:2%;} #modipass,#modifier{margin-left:-5%;}
-.tab{display:none}  .mobile{color:black;font-size:14px;width:100%;display:block;margin-left:15%;border-bottom:1px solid #eee;
-padding-bottom:15px;} .df{margin-left:30%;}
+.tab{display:none}  .mobile{color:black;font-size:14px;width:120%;display:block;margin-left:5%;border-bottom:1px solid #eee;
+padding-bottom:15px;border-bottom:2px solid #eee;} .df{margin-left:30%;}
 #resultat{margin-top:100px;}
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:50px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;} .form-search{display:none;}
 }
@@ -159,6 +159,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;} .btn{display:block;}
 #mobile{font-size:14px;} h1{display:none;}
+
 }
 
 
@@ -179,6 +180,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .dy{display:none} #tab{margin-left:-13%;}
+#tab{width:70%;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:100px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;border-radius:15px;}
 }
 
 

@@ -212,7 +212,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1700px;}
+.center{height:1700px;} h1{display:none;} .homes{margin-left:4.5%;}
 }
 
 
@@ -233,7 +233,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1700px;}
-.btn{display:block;}
+.btn{display:block;} h1{display:none;} .homes{margin-left:4%;}
 
 }
 
