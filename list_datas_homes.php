@@ -91,7 +91,6 @@ $smart_from =($page -1)*$record_peage;
 				 
 			 }
 			 
-			 
 			 if($val['type'] ==1 OR $val['type']== 3){
 				 $datc = $val['date'];
 				 // tableau associative id_chambre et le type
