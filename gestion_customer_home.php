@@ -55,18 +55,9 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 
-.conten1,.conten2{float:left;margin-left:2%;background:white;height:600px;}  .conten2{width:20%;} .conten1{width:75%;}
+.conten1,.conten2{float:left;margin-left:2%;background:white;height:700px;}  .conten2{width:20%;} .conten1{width:75%;overflow-y:scroll;}
 
-.enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
-.dep {
-  animation: spin 2s linear infinite;
-  margin-top:10px;
-  }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
@@ -118,7 +109,7 @@ h3{font-size:20px;padding:2%;color:black;border-bottom:1px solid #eee;width:95%;
 
 .btn{display:none;} tr{width:100%;border:1px solid #eee;height:50px;} th,td{text-align:center;color:black;font-size:15px;}
 .alerte{color:white;background:#EC2D3B;padding:1%;border-radius:20px;font-family:arial;}
-.attention{color:white;background:#31C813;padding:1%;border-radius:20px;font-family:arial;}
+.attention{color:white;background:#31C813;padding:1%;border-radius:20px;font-family:arial;} .mobile{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}
@@ -133,7 +124,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 input{display:block;} .form-select{display:none;} #panier{display:none;}
-#examp{width:80%;margin-left:-15%;height:1100px;} .buttons{margin-left:2%;}
+.mobile{display:block;border-bottom:2px solid #eee;color:black;height:100px;padding:3%;} .tbs{display:none;}.conten1{width:95%;padding:3%;} .conten2{display:none;}
+.btn{display:block;} #but{display:none;} 
 }
 
 

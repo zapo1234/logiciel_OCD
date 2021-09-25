@@ -317,6 +317,10 @@ margin-left:-10px;}
     border: 2px solid #ACD6EA;
 }
 
+.montant1,.montant,.dd{display:none;}
+
+.hom{background:white;color:black;font-size:14px;padding:3%;}
+.tot{background:white;height:80px;padding:2%;color:black;font-size:14px;}
 
 // Media query css
 @media (max-width: 575.98px) { 

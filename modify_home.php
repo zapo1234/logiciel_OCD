@@ -113,24 +113,24 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			
 			echo'<div class="montant">
 			<div class="rest">'.$adjout.'</div>
-			<div class="rep">Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['mont_restant'].'"></div>
+			<div class="rep">Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span><input type="hidden" name="mont_ta" value="'.$mont_tva.'">xof</div>
 			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
 			</div>
 			
 			<div class="tot">
 			 <h5>récapitulatif des montants</h5>
-			Montant HT <span class="mont">'.$montants.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
+			<div>Montant HT <span class="mont">'.$montants.'</span>xof</div>
+			<div>Montant TTC <span class="mon">'.$monta.'</span>xof</div>
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'">
 			</div>
 			
 			<div class="montant1">
 			<h3>Moyens de paiment</h3>
-			<div>espèce<br/> <input type="number" id="paie1" name="paie1" value="'.$data[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$data[1].'"><br/>
-			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$data[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$data[3].'"><br/>
-			</div>';
-			echo'<div><input type="submit" id="add_local" value="valider"></div>'
+			<div>espèce<br/> <input type="number" id="paie1" name="paie1" value="'.$datas_user[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$datas_user[1].'"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[3].'"><br/>
+			</div></div>';
+			echo'<div><input type="submit" id="add_local" value="valider"></div>';
 		
 	  
 
@@ -567,8 +567,6 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 }	
 
  ?>
-
-
 
 
 
