@@ -161,7 +161,7 @@ footer.sticky-footer{}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;}
+.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;} .montant1,.montant,.dd{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}

@@ -87,7 +87,7 @@ include('inc_session.php');
 			
 			foreach($_SESSION['add_home'] as $keys => $values){
 		   if($_POST['to']=="réservation") {
-			 $adjout ='<div>Acompte(+):<br/><input type="number" id="account" name="account"><span class="account"></span></div>
+			 $adjout ='<div class="dd">Acompte(+):<br/><input type="number" id="account" name="account"><span class="account"></span></div>
 			<div>Reste à payér:<br/><input type="number" id="rpay" name="rpay"></div>';
 			}
 			if($_POST['to']=="séjour" OR $_POST['to']=="horaire") {
@@ -143,20 +143,27 @@ include('inc_session.php');
 			
 			}
 		
-			
-			echo'<div class="montant"><h5>récapitulatif des montants</h5>
+			echo'<div class="option">Option 1 <span class="ouvrir"><i class="fas   fa-angle-down"></i></span></div>';
+			echo'<div class="montant">
 			<div class="rest">'.$adjout.'</div>
-			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
+			<div class="rep">Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
 			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
-			<div class="tot">Montant HT <span class="mont">'.$total.'</span>xof</div>
+			</div>
+			
+			
+			<div class="tot">
+			 <h5>récapitulatif des montants</h5>
+			Montant HT <span class="mont">'.$total.'</span>xof</div>
 			<div class="tot">Montant TTC <span class="monta">'.$monta.'</span>xof</div>
-			<input type="hidden" name="total" id="total" value="'.$total.'"></span>
+			<input type="hidden" name="total" id="total" value="'.$total.'"></span></div>
+			
+			<div>Option2 <span class="ouvrir1"><i class="fas fa-angle-down"></i></span></div>
+			<div class="montant1">
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="number" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
 			</div>';
-			echo'</div>';
 			echo'<div><input type="submit" id="add_local" value="valider"></div>';
 		
 	  }	
@@ -267,6 +274,9 @@ include('inc_session.php');
 			
 			$tab = [];
 			$array = [];
+			
+			
+			
 			foreach($_SESSION['add_home'] as $keys => $values){
 		
 		    if($values['id']==$_POST['id']){
@@ -322,6 +332,8 @@ include('inc_session.php');
 			$tab[] = $values['montant'];
 		
 			$total = $total +($pays*$_POST['nbjour']);
+			
+			
 			 
 			 if($values['id'] !=$_POST['id']) {
 			echo'<div class="hom"><h5>'.$values['type'].'</h5>
@@ -346,28 +358,39 @@ include('inc_session.php');
 			}
 			$totals = $total -($pays*$_POST['nbjour']);
 			$monta = $totals + floatval($taxe);
+			
+
 		}
-		  
-		  // on recupére la dernière valeur du tableau
+		
+	     // on recupére la dernière valeur du tableau
 		   // on recupére le montant de sortie.
-		  
-		    $arrays = array_diff($tab,$array);
-		    $totals= array_sum($arrays);
-		   
-			echo'<div class="montant"><h5>récapitulatif des montants</h5>
+		   // calculer la some des deux tableau
+		   $arr1 =array_sum($tab);
+		   $arr2 = array_sum($array);
+		   $totals = floatval($arr1)-floatval($arr2);
+		    
+		  echo'<div>Option1 <span class="ouvrir"><i class="fas fa-angle-down"></i></span></div>';
+		   echo'<div class="montant">
 			<div class="rest">'.$adjout.'</div>
-			<div>Repas(+):<br/><input type="number" id="monts" name="monts"></div>
-			<div>TVA(%):<br/><input type="number" id="tva" name="tva"><span class="tva"></span></div>
-			<div>Remise sur facture<br/><input type="number" id="remise" name="remise"></div>
-			<div class="tot">Montant HT <span class="mont">'.$totals.'</span>xof</div>
+			<div class="rep">Repas(+):<br/><input type="number" id="monts" name="monts"></div>
+			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
+			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
+			</div>
+			
+			<div class="tot">
+			 <h5>récapitulatif des montants</h5>
+			
+			<div>Montant HT <span class="mont">'.$totals.'</span>xof</div>
 			<div class="tot">Montant TTC <span class="mont">'.$totals.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
+			</div>
 			
+			<div>Option2 <span class="ouvrir1"><i class="fas fa-angle-down"></i></span></div>
+			<div class="montant1">
 			<h3>Moyens de paiment</h3>
-			<div>espèce<br/> <input type="nuumber" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
+			<div>espèce<br/> <input type="number" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
 			</div>';
-			echo'</div>';
 			echo'<div><input type="submit" id="add_local" value="valider"></div>';
 		
 		  }	

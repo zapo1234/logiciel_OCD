@@ -15,7 +15,7 @@
 	  
 	  else{
 		  $sql=$bds->prepare('SELECT id_fact, clients, 
-      numero,type,check_in, email_client,check_out FROM facture WHERE code = :cd AND email_ocd= :email');
+      numero,type,check_in, email_client,check_out,avance FROM facture WHERE code = :cd AND email_ocd= :email');
 	  
     $sql->execute(array(':cd'=>$_SESSION['code'],
 	                    ':email'=>$_SESSION['email_ocd']));
@@ -23,7 +23,7 @@
 		 }
 		 
 	 // afficher les resultats
-	   echo'<table>
+	   echo'<table class="tbs">
 	    <th width="300px">Client</th>
 		<th>Numéro phone</th>
 	     <th>Email</th>
@@ -53,7 +53,7 @@
 			$result=$diff / 86400;
 			
 			if($result > 10){
-				$status_reservation ='<img src="https://img.icons8.com/ios-filled/48/000000/man-dragging-sack.png" width="28px" height="28px"/> l\'arrivé du client  est en cours';
+				$status_reservation ='<img src="https://img.icons8.com/ios-filled/48/000000/man-dragging-sack.png" width="28px" height="28px"/> l\'arrivée du client  est en cours';
 				$color="arrive";
 		     }
 			 
@@ -63,7 +63,7 @@
 			 }
 			 
 			 if($result==1){
-				 $status_reservation ='<img src="https://img.icons8.com/ios/48/000000/man-dragging-sack.png" width="28px" height="28px"/>  le client est là demain.'; 
+				 $status_reservation ='<img src="https://img.icons8.com/ios/48/000000/man-dragging-sack.png" width="28px" height="28px"/>  le client arrive demain.'; 
 				 $color="alerte";
 			 }
 			 
@@ -71,19 +71,20 @@
 				$status_reservation ='<img src="img/valid.png" alt="valid" width="15px" height="15px"/> le séjour est consommé';
 			}
 			
-			if($value['avance']==0){
-				$acompte ="pas d'acompte versé";
-			}
+			$acompte ="le client à soldé sa facture";
 			
-			else{
-				$acompte ="le client à versé un acompte";
-			}
-			 
-		         echo'<tr><td>'.$value['clients'].'</td>
+			   echo'<tr><td>'.$value['clients'].'</td>
 					<td><img src="https://img.icons8.com/color/48/000000/phone.png" width="18px" height="18px"/> '.$value['numero'].'</td>
 					<td>'.$value['email_client'].'</td>
-					<td>'.$acompte.'</td>;
+					<td>'.$acompte.'</td>
 					<td><div class="'.$color.'">'.$status_reservation.'</div></td></tr>';
+			
+			     echo'<div class="mobile">
+				        <div>Client :'.$value['clients'].' Tel : <img src="https://img.icons8.com/color/48/000000/phone.png"width="18px" height="18px"/> '.$value['numero'].'</div>
+						<div class="'.$color.'">'.$status_reservation.'</div>
+						<div>
+				   
+				       </div>';
 		}
 		}
 		
@@ -100,12 +101,12 @@
 			  
 			$result=$diff / 86400;
 			
-			if($result > 15){
-				$status_reservation ='<img src="https://img.icons8.com/ios-filled/48/000000/man-dragging-sack.png" width="28px" height="28px"/> l\'arrivé du client  est en cours';
-				$css="";
+			if($result > 10){
+				$status_reservation ='<img src="https://img.icons8.com/ios-filled/48/000000/man-dragging-sack.png" width="28px" height="28px"/> l\'arrivée du client  est en cours';
+				$color="arrive";
 		     }
 			 
-			 if($result <= 15 AND $result >= 2){
+			 if($result <= 10 AND $result >= 2){
 			$status_reservation ='<img src="https://img.icons8.com/ios/48/000000/man-dragging-sack.png" width="28px" height="28px"/> le client arrive  dans'.$result.'jours';
 			$color ="attention";
 			 }
@@ -119,7 +120,7 @@
 				$status_reservation ='<img src="img/valid.png" alt="valid" width="15px" height="15px"/> le séjour est consommé';
 			}
 			
-			if($value['avance']==0){
+			if($value['avance']==0 OR $value['avance']==""){
 				$acompte ="pas d'acompte versé";
 			}
 			
@@ -130,13 +131,17 @@
 		         echo'<tr><td>'.$value['clients'].'</td>
 					<td><img src="https://img.icons8.com/color/48/000000/phone.png" width="18px" height="18px"/> '.$value['numero'].'</td>
 					<td>'.$value['email_client'].'</td>
-					<td>'.$acompte.'</td>;
-					<td><div class="'.$css.'>'.$status_reservation.'</div></td></tr>';
-			
+					<td>'.$acompte.'</td>
+					<td><div class="'.$color.'">'.$status_reservation.'</div></td></tr>';
+			       
+				   echo'<div class="mobile">
+				        <div>Client :'.$value['clients'].' Tel : <img src="https://img.icons8.com/color/48/000000/phone.png"width="18px" height="18px"/> '.$value['numero'].'</div>
+						<div class="'.$color.'">'.$status_reservation.'</div>
+						<div>
+				        </div>';
+		 }
 		}
-       }
-
-      echo'</table>';
+       echo'</table>';
 
 
 

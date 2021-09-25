@@ -111,19 +111,26 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			$montants = $donns['montant']-floatval($donns['montant_repas'])-floatval($mont_tva);
 			$monta = $donns['montant'];
 			
-			echo'<div class="montant"><h5>récapitulatif des montants</h5>
+			echo'<div class="montant">
 			<div class="rest">'.$adjout.'</div>
-			<div>Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
+			<div class="rep">Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['mont_restant'].'"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span><input type="hidden" name="mont_ta" value="'.$mont_tva.'">xof</div>
 			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
-			<div class="tot">Montant HT <span class="mont">'.$montants.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
-			<input type="hidden" name="mon" id="mon" value="'.$montants.'"></span>
-			<div class="h31" style="cursor:pointer">Moyens de paiment +</div>
-			<div class="moyens">espèce<br/> <input type="nuumber" id="paie1" name="paie1" value="'.$datas_user[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$datas_user[1].'"><br/>
-			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[3].'"><br/>
 			</div>
-		     <div><input type="submit" id="add_local" value="valider"></div>';
+			
+			<div class="tot">
+			 <h5>récapitulatif des montants</h5>
+			Montant HT <span class="mont">'.$montants.'</span>xof</div>
+			<div class="tot">Montant TTC <span class="mon">'.$monta.'</span>xof</div>
+			<input type="hidden" name="mon" id="mon" value="'.$montants.'">
+			</div>
+			
+			<div class="montant1">
+			<h3>Moyens de paiment</h3>
+			<div>espèce<br/> <input type="number" id="paie1" name="paie1" value="'.$data[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$data[1].'"><br/>
+			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$data[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$data[3].'"><br/>
+			</div>';
+			echo'<div><input type="submit" id="add_local" value="valider"></div>'
 		
 	  
 
@@ -458,17 +465,15 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			<span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span>
 			</div>';
 			 }
-			
 			}
-			
 			// on recupére la dernière valeur du tableau
 		   // on recupére le montant de sortie.
-		   
-		   $arrays = array_diff($tab,$array);
-		    $totals= array_sum($arrays);
-			 
-			
-		}
+		   // on recupére la dernière valeur du tableau
+		   // calculer la some des deux tableau
+		   $arr1 =array_sum($tab);
+		   $arr2 = array_sum($array);
+		   $totals = floatval($arr1)-floatval($arr2);
+	    }
 			
 			echo'
 			<div class="montant">
