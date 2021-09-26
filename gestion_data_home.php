@@ -173,7 +173,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
  .btn{display:none;}
-
+.sup{cursor:pointer;color:white;font-size:12px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 

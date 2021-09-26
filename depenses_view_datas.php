@@ -413,7 +413,7 @@ if($_POST['action']=="fetchs") {
 	$monts=$donns['montant']-$montant;
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
-   $user_data = $donns['user'].', <i class="fas fa-user-edit" style="font-size:13px;color:#4e73df;"></i>'.$_SESSION['user'].' à payer la somme de '.$montant.' xof  le  '.date('d-m-Y').'à  '.date('H:i').' par   <span class="edit"></span>';
+   $user_data = $donns['user'].', <i class="far fa-check-circle" style="color:green;font-size:13px"></i> '.$_SESSION['user'].' à solder la somme de '.$montant.' au fournisseur xof  le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
    

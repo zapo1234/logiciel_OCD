@@ -175,6 +175,7 @@ include('inc_session.php');
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
+	#panier{display:none;}
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
@@ -216,8 +217,8 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .hom{text-align:center;border-bottom:1px solid #eee;padding:0.3%;color:black;font-size:14px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
  h5{font-size:13px;} .dg{padding-left:3%;} 
- .montant{padding:1%;background-color:#E5F1FB;text-align:center;margin-top:30px;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
- #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4{width:90px;font-weight:200;border:2px solid white;} .tot{margin-top:10px;font-weight:bold;} #mont{font-weight:bold;padding-left:2%;}
+ .montant{padding:1%;background-color:white;text-align:center;margin-top:30px;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
+ #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4{width:90px;font-weight:200;border:2px solid #eee;} .tot{margin-top:10px;} #mont{padding-left:2%;}
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -317,10 +318,16 @@ margin-left:-10px;}
     border: 2px solid #ACD6EA;
 }
 
-.montant1,.montant,.dd{display:none;}
-
 .hom{background:white;color:black;font-size:14px;padding:3%;}
-.tot{background:white;height:80px;padding:2%;color:black;font-size:14px;}
+
+.montant1,.montant{display:none;}
+.montant1{background:white;color:black;text-align:center;}
+.hom{background:white;color:black;font-size:14px;padding:3%;}
+.tot{font-weight:none;background:white;height:90px;padding:2%;color:black;font-size:14px;} .option{margin-left:3%;color:black;height:30px;background:white;}
+.ouvrir,.ouvrir1{cursor:pointer;}
+.ouvrir11,.ouvrir12{display:none;cusor:pointer;}
+
+h3{color:#06308E;font-size:16px;font-weight:bold;}
 
 // Media query css
 @media (max-width: 575.98px) { 
@@ -689,7 +696,33 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     $('#sms').click(function(){
+     
+	 $(document).on('click','.ouvrir',function(){
+	 $('.montant').css('display','block');
+     $('.ouvrir').css('display','none');
+     $('.ouvrir11').css('display','block');	 
+	});
+	
+	$(document).on('click','.ouvrir11', function(){
+	 $('.montant').css('display','none');
+     	$('.ouvrir').css('display','block');
+       $('.ouvrir11').css('display','none');	  
+	});
+	
+	$(document).on('click','.ouvrir1',function(){
+	 $('.montant1').css('display','block');
+     $('.ouvrir1').css('display','none');
+     $('.ouvrir12').css('display','block');	 
+	});
+	
+	$(document).on('click','.ouvrir12', function(){
+	 $('.montant1').css('display','none');
+     	$('.ouvrir1').css('display','block');
+       $('.ouvrir12').css('display','none');	  
+	});
+	
+	 
+	 $('#sms').click(function(){
 	$('.drop').slideToggle();
 	});
 	

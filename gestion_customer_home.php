@@ -110,6 +110,7 @@ h3{font-size:20px;padding:2%;color:black;border-bottom:1px solid #eee;width:95%;
 .btn{display:none;} tr{width:100%;border:1px solid #eee;height:50px;} th,td{text-align:center;color:black;font-size:15px;}
 .alerte{color:white;background:#EC2D3B;padding:1%;border-radius:20px;font-family:arial;}
 .attention{color:white;background:#31C813;padding:1%;border-radius:20px;font-family:arial;} .mobile{display:none;}
+.sup{cursor:pointer;color:white;font-size:12px;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}

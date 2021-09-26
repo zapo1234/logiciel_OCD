@@ -173,7 +173,7 @@ $smart_from =($page -1)*$record_peage;
 		  }
 		  
 		  // recupere les dates d'enregsitrer dans le cas horaire.
-		  foreach($da as $das){
+		  foreach($dns as $das){
 			 $dones[] = $das;
 		  }
 		

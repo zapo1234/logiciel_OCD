@@ -2,6 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+if($_POST['action']=="panier"){
 if(!empty($_SESSION['add_home']) AND isset($_SESSION['add_home'])){
 		  
 		  $total =0;
@@ -51,17 +52,17 @@ if(!empty($_SESSION['add_home']) AND isset($_SESSION['add_home'])){
 				
 			}
 			
-			
 			$total = $total +($pays*$values['nbjour']);
-			 
-			echo'<div class="panier"><div>'.$values['to'].' client</div>
-			<div><span class="d">'.$values['chambre'].'</span> <span class="d">'.$pays.'x'.$values['nbjour'].' xof</span> <span class="remove" data-id4="'.$values['id'].'"></div></div>';
-		
-		    }
-		
+			$total1 = $pays*$values['nbjour'];
+			echo'<div class="panier"><div></div>
+			<div><span class="d">'.$values['chambre'].'</span> <span class="d">'.$pays.'x'.$values['nbjour'].' xof</span> <span class="remove" data-id4="'.$values['id'].'">
+			 <input type="hidden" name="pay[]" value="'.$total.'"/>
+			 </div>';
+		     }
+		     echo'<div class="sup">Suprimer la selection</div></div>';
 	  }
       else{
         echo'<div class="panie">Aucun local en cours de facturation</div>';
 	  }
- 
+}
  ?>

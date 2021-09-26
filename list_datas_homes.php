@@ -209,7 +209,7 @@ $smart_from =($page -1)*$record_peage;
     // si le client est facturé sur un séjour ou reservation
 	if($debut <= $date_english AND $date_english <= $sortie AND in_array($date_english,$a)) {
 	$color ='occupe';
-	$status ='un client est présent dans le local,<br/>il sera disponible à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-user-friends" style="font-size:18px;"></i></span>';	
+	$status ='un client est présent dans le local,<br/>il sera disponible à partir<br/> du <span class="dt">'.$j1.'/'.$mm1.'/'.$an1.'<br/></span><span class="dry"><i class="fas fa-bed" style="font-size:18px"></i></span>';	
 	
 	}
 	

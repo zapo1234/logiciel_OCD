@@ -213,6 +213,7 @@ width:40%;height:750px;overflow-y:scroll;}
  }
  h3{color:black;font-family:arial;font-size:18px;text-align:center;}
  #search_date{width:90%;color:black;font-size:18px;}
+ .sup{cursor:pointer;color:white;font-size:12px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 

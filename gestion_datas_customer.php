@@ -66,8 +66,8 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .hom{text-align:center;border-bottom:1px solid #eee;padding:0.3%;color:black;font-size:14px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
  h5{font-size:13px;} .dg{padding-left:3%;} 
- .montant{padding:1%;background-color:#E5F1FB;text-align:center;margin-top:30px;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
- #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4,#remise{width:90px;font-weight:200;border:2px solid white;} .tot{margin-top:10px;font-weight:bold;} #mont{font-weight:bold;padding-left:2%;}
+ .montant{padding:1%;background-color:white;text-align:center;margin-top:30px;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
+ #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4,#remise{width:90px;font-weight:200;border:2px solid #eee;} .tot{margin-top:10px;} #mont{padding-left:2%;}
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -161,8 +161,17 @@ footer.sticky-footer{}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;} .montant1,.montant,.dd{display:none;}
+.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;} 
 
+.montant1,.montant{display:none;}
+.montant1{background:white;color:black;text-align:center;margin-top:7px;}
+.hom{background:white;color:black;font-size:14px;padding:3%;}
+.tot{font-weight:none;background:white;height:90px;padding:2%;color:black;font-size:14px;text-align:center;} .option{color:black;height:30px;background:white;width:90%;margin-top:5px;}
+.ouvrir,.ouvrir1{cursor:pointer;}
+.ouvrir11,.ouvrir12{display:none;cusor:pointer;}
+
+h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
+.sup{cursor:pointer;color:white;font-size:12px;}
 @media (max-width: 575.98px) { 
 #panier{display:non;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -546,6 +555,30 @@ echo $_SESSION['token'];?>">
   <script type="text/javascript">
    $(document).ready(function(){
     
+	$(document).on('click','.ouvrir',function(){
+	 $('.montant').css('display','block');
+     $('.ouvrir').css('display','none');
+     $('.ouvrir11').css('display','block');	 
+	});
+	
+	$(document).on('click','.ouvrir11', function(){
+	 $('.montant').css('display','none');
+     	$('.ouvrir').css('display','block');
+       $('.ouvrir11').css('display','none');	  
+	});
+	
+	$(document).on('click','.ouvrir1',function(){
+	 $('.montant1').css('display','block');
+     $('.ouvrir1').css('display','none');
+     $('.ouvrir12').css('display','block');	 
+	});
+	
+	$(document).on('click','.ouvrir12', function(){
+	 $('.montant1').css('display','none');
+     	$('.ouvrir1').css('display','block');
+       $('.ouvrir12').css('display','none');	  
+	});
+	
 	$('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').css('display','block');
 	 });
@@ -1257,20 +1290,7 @@ echo $_SESSION['token'];?>">
 	  });
 	  
 	  
-	  // afficher le pannier
-  function panier() {
-				var action="panier";
-				$.ajax({
-					url: "session_panier.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#panier').html(data);
-					}
-				});
-			}
-
-			panier();
+	  
 
 });
 </script>
