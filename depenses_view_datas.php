@@ -158,8 +158,8 @@ if($_POST['action']=="fetchs") {
 	    </tr>';
 		
 		echo'<div class="mobile">
-		     <div><span class="repas"></span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
-			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
+		     <div><span class="repas"></span><span class="actios" data-id8="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
+			 <div class="datis" style="display:none" id="contes'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
 			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
 		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
@@ -413,7 +413,7 @@ if($_POST['action']=="fetchs") {
 	$monts=$donns['montant']-$montant;
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
-   $user_data = $donns['user'].', <i class="far fa-check-circle" style="color:green;font-size:13px"></i> '.$_SESSION['user'].' à solder la somme de '.$montant.' au fournisseur xof  le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>';
+   $user_data = $donns['user'].', <i class="far fa-check-circle" style="color:green;font-size:13px"></i> '.$_SESSION['user'].' a soldé la somme de '.$montant.' au fournisseur xof  le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>';
    // convertir en chaine de caractère le tableau
    $user = explode(',',$user_data);
    
@@ -555,7 +555,7 @@ if($_POST['action']=="fetchs") {
 	    </tr>';
 		
 		echo'<div class="mobiles">
-		     <div><span class="repas"></span><span class="actions" data-id7="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
+		     <div><span class="repas"></span><span class="actins" data-id9="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
 			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
 			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>

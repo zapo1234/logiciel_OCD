@@ -243,7 +243,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 #recher_date{width:65%;position:absolute;
 	z-index:4;
 	left:10%;
-	top:100px;}
+	top:100px;} #details{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

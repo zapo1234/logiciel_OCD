@@ -108,12 +108,21 @@ width:80%;border-radius:20px;}
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
 	$montants = $montant - floatval($donnees['avance']);
 	
+	if($donnees['type']==1 OR $donnees['type']==3){
+		$client ='Entrée le :'.$donnees['check_in'].' le sortie'.$donnees['check_out'];
+	}
+	
+	if($donnees['type']==2) {
+		$client ='Entrée le:'.$donnees['time'].' le sortie'.$donnees['time2'];
+	}
+	
 	 echo'<div class="detail">
 	      <h4>Détails de la facture</h4>
 	      <div class="h">N° de facture <span class="fact">'.$nombre.'</span><br/><span class="typ">Type de facture :  '.$donnees['types'].'</span></div>
 	      <div class="h"><i class="far fa-user" style="font-size:13px;color:#4e73df"></i>  Client :'.$donnees['clients'].'  <span class="num"><i class="fas fa-phone" style="font-size:13px;color:#4e73df;padding-left:2%;"></i> Numéro tél: '.$donnees['numero'].'</span><br/>
 		  <i class="fas fa-envelope-open" style="font-size:13px; color:#4e73df"></i> Email :'.$donnees['email_client'].'</div>
 		  
+		  <div>'.$client.'</div>
 		  <div class="h">Local facturé</div>
 		  <table class="liste">
 		  <th class="h">Type de logement</th>
