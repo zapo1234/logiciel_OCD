@@ -46,7 +46,7 @@ $smart_from =($page -1)*$record_peage;
 	if($donns['permission']=="user:boss"){
 		
 		$puts='<div class="d1"><button type="submit" value="ok" class="delete"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
+	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou type de séjour">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
 		
 	}
@@ -56,7 +56,7 @@ $smart_from =($page -1)*$record_peage;
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		
-	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou numéro du client" aria-label="Username" aria-describedby="basic-addon1">';
+	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou type de séjour" aria-label="Username" aria-describedby="basic-addon1">';
 		
 	// on boucle sur les les resultats
 	echo'<div class="expor">'.$export.' '.$mobile.'
@@ -75,7 +75,8 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
 	  <th scope="col">Action</th>
-	  <th scope="col">Imprimer/facture client</th>
+	  <th scope="col">facture en pdf</th>
+	  <th scope="col">Imprimer la facture</th>
       </tr>
       </thead>
       <tbody>';
@@ -231,7 +232,7 @@ $smart_from =($page -1)*$record_peage;
 	    </tr>';
 		
 		echo'<div class="mobile" id="mobile">
-		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
+		     <div><a id="detail" href="gestion_details_facture.php?data_id='.$donnees['id_fact'].'&code_id='.$donnees['code'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
@@ -388,13 +389,13 @@ $smart_from =($page -1)*$record_peage;
     // on modifer les montants
 
     	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE code= :code AND email_ocd= :email_ocd');
-        $ret->execute(array(':des'=>$donnees['encaisse']-$donns['montant'],
-							':rs'=>$donnees['reservation']-$donns['avance'],
-							':re'=>$donnees['reste']-$donns['reste'],
-							':code'=>$code,
-                            ':email_ocd'=>$_SESSION['email_ocd']
-					 ));
+         //$ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :rs, reste= :re WHERE code= :code AND email_ocd= :email_ocd');
+        //$ret->execute(array(':des'=>$donnees['encaisse']-$donns['montant'],
+							//':rs'=>$donnees['reservation']-$donns['avance'],
+							//':re'=>$donnees['reste']-$donns['reste'],
+							//':code'=>$code,
+                           // ':email_ocd'=>$_SESSION['email_ocd']
+					// ));
 		$ty="4";
 		$tys="facture annulé";
 		// on modifie le type dans la table facture
@@ -463,7 +464,7 @@ if($_POST['action']=="mail"){
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
-        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) AND email_ocd= :email_ocd LIMIT 0,25');
+        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,society,code,calls FROM facture WHERE (clients LIKE :q OR types LIKE :q) AND email_ocd= :email_ocd LIMIT 0,25');
         $req->execute(array(':q'=> '%'.$q.'%',
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -472,7 +473,7 @@ if($_POST['action']=="mail"){
 		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
 		$session=$donns['code'];
 		//emttre la requete sur le fonction
-       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE (clients LIKE :q OR numero LIKE :q) AND email_ocd= :email_ocd AND code= :code LIMIT 0,25');
+       $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE (clients LIKE :q OR types LIKE :q) AND email_ocd= :email_ocd AND code= :code LIMIT 0,25');
        $req->execute(array(':q'=> '%'.$q.'%',
 	                       ':code'=>$session,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
@@ -651,7 +652,7 @@ if($_POST['action']=="mail"){
 	    </tr>';
 		
 		echo'<div class="mobiles" id="mobiles">
-		     <div><a href="details_facture.php?data_id='.$donnees['id_fact'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
+		     <div><a href="gestion_details_facture.php?data_id='.$donnees['id_fact'].'&code_id='.$donnees['code'].'" class="details" data-id2='.$donnees['id_fact'].''.$donnees['code'].' title="voir le détails">détails facture</a></br/><br/>
 		     <div>'.$put.'  Facture N° '.$nombre.'<br/>édité par'.$data_user.'</div>
 		     <div class="data'.$donnees['type'].'">'.$name.'<br/></div>
 			 <div><i class="far fa-user" style="font-size:16px;color:black;"></i> <span class="der" style="color:black">Client : '.$donnees['clients'].'</span><span class="dp">'.$donnees['montant'].' xof</span><br/>
