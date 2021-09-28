@@ -37,7 +37,7 @@ if(!isset($_GET['data_id']) AND !isset($_GET['code_id'])) {
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
 
-.detail{width:95%;height:900px;background:white;border:2px solid #eee;
+.detail{width:95%;height:1100px;background:white;border:2px solid #eee;
  font-size:17px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;color:black;
  margin-left:5%;}
   h4{text-align:center;margin-top:8px;font-size:18px;border-bottom:1px solid #eee;}
@@ -108,12 +108,24 @@ width:80%;border-radius:20px;}
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
 	$montants = $montant - floatval($donnees['avance']);
 	
+	$date =$donnees['check_in'];
+	$date = explode('-',$date);
+	$yy = $date[0];
+	$mm = $date[1];
+	$jj =$date[2];
+	
+    $date1 =$donnees['check_out'];
+	$date1 = explode('-',$date1);
+	$yy1 = $date1[0];
+	$mm1 = $date1[1];
+	$jj1 =$date1[2];
+	
 	if($donnees['type']==1 OR $donnees['type']==3){
-		$client ='Entrée le :'.$donnees['check_in'].' le sortie'.$donnees['check_out'];
+		$client ='Entrée le :'.$jj.'/'.$mm.'/'.$yy.'   sortie'.$jj1.'/'.$mm1.'/'.$yy1;
 	}
 	
 	if($donnees['type']==2) {
-		$client ='Entrée le:'.$donnees['time'].' le sortie'.$donnees['time2'];
+		$client ='Entrée le:'.$donnees['time'].'   sortie le '.$donnees['time2'];
 	}
 	
 	 echo'<div class="detail">
@@ -122,7 +134,7 @@ width:80%;border-radius:20px;}
 	      <div class="h"><i class="far fa-user" style="font-size:13px;color:#4e73df"></i>  Client :'.$donnees['clients'].'  <span class="num"><i class="fas fa-phone" style="font-size:13px;color:#4e73df;padding-left:2%;"></i> Numéro tél: '.$donnees['numero'].'</span><br/>
 		  <i class="fas fa-envelope-open" style="font-size:13px; color:#4e73df"></i> Email :'.$donnees['email_client'].'</div>
 		  
-		  <div>'.$client.'</div>
+		  <div class="h">'.$client.'</div>
 		  <div class="h">Local facturé</div>
 		  <table class="liste">
 		  <th class="h">Type de logement</th>

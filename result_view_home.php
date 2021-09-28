@@ -162,6 +162,9 @@ include('inc_session.php');
 	}
 	
 	$a=count($tab);
+	
+	if($donnees['email_user']!=$_POST['emails']) {
+	
 	if($a < 12){
    
    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
@@ -195,6 +198,14 @@ include('inc_session.php');
   
 	  
   }
+  }
+  
+  else{
+	  
+	  echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>Changer de mail !</button>
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+    }
+	
   }
   
   // afficher les users comptes

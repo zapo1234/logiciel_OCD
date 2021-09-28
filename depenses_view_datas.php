@@ -30,13 +30,13 @@ if($_POST['action']=="fetchs") {
    	// emttre la requete sur le fonction
    
     if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
-		  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE  email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+		  $req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls,society FROM depense WHERE  email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
 		  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		if($donns['permission']=="user:employes"){
 		$session=$donns['code'];
-		$req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+		$req=$bds->prepare('SELECT id,date,designation,fournisseur,montant,user,status,numero_facture,calls,society FROM depense WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
         $req->execute(array(':code'=>$session,
                      ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -162,9 +162,9 @@ if($_POST['action']=="fetchs") {
 			 <div class="datis" style="display:none" id="contes'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
 			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
-		     <div><span class="der">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
+		     <div><span class="d">N° facture: '.$donnes['numero_facture'].'</span><span class="dp">'.$donnes['montant'].'xof
 			 <div class="data'.$donnes['status'].'">'.$name.'</div></div>
-		     '.$mettre.'   '.$modif.'  '.$annul.'<span class="dg">'.$donnes['calls'].'</span></div>
+		     '.$mettre.'   '.$modif.'  '.$annul.'<span class="dg">'.$donnes['calls'].'</span><br/><img src="img/map.png" width="15px" height="15px"/>Travail à '.$donnes['society'].'</div>
 			 
 	       </div>';
     }

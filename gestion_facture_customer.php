@@ -36,7 +36,7 @@ include('inc_session.php');
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;margin-top:20px;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
-	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
+	#montant td{font-weight:none;} .butt,.buts{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
@@ -47,7 +47,7 @@ include('inc_session.php');
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
 .reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
-.action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
+.action{margin-top:25px;} .annul,.annu{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
 #pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity:0.8;}
@@ -124,7 +124,7 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
   .fact{color:#4e73df;font-weight:bold;font-size:18px;}
   .liste td{width:150px;} .list td{font-size:14px;} .liste{border-top:1px solid #eee;} .hs{padding-left:13%;margin-top:10px;font-size:13px;}
 #form_logo{display:none;} .pied_page{margin-left:60%;margin-top:10px;} .bout{float:left;margin-left:1%;width:30px;height:30px;background:white;background:#0C80E7;color:white;border:2px solid #0C80E7}
-.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.print,.pri{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;margin-left:10%;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;margin-left:10%;}
@@ -217,7 +217,8 @@ width:40%;height:750px;overflow-y:scroll;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
-@media (max-width: 575.98px) { 
+@media (max-width: 575.98px) {
+.print,.butt{display:none;}	
 #panier{display:none;}
 .envoyer{margin-left:-5%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -226,7 +227,7 @@ width:40%;height:750px;overflow-y:scroll;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
-.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
+.drops{z-index:2;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;padding-bottom:5px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
@@ -239,11 +240,12 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 .excel{display:none;}
 .delete,.delet{position:absolute;left:80%;top:130px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} .btn{display:block}
 #searchDropdown{display:none;} .mobiles{color:black;} #recher{display:none;}
-#rechers{display:block;width:70%;} .but_recher{} .dh{display:none;}
+#rechers{display:block;width:90%;} .but_recher{} .dh{display:none;}
 #recher_date{width:65%;position:absolute;
 	z-index:4;
 	left:10%;
-	top:100px;} #details{display:none;}
+	top:100px;} #details{display:none;} .reini{top:50px;left:5%;}
+.ds{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -266,6 +268,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 h2{font-size:14px;} .bout,.bous{float:left;}
 .delete,.delet{position:absolute;left:94%;top:125px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
 #rechers{display:none;}  #recher_date{width:30%;} #search_recher{font-size:18px;} .dh{display:none;}
+.reini{position:absolute;top:250px;left:5%;}
+.print,.butt{display:none;} #pak{z-index:4;} .reini{z-index:5}
 }
 
 
@@ -437,7 +441,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
    <form method="post" id="form_reini" action="">
    <h1>Réinitialiser votre caisse journalière<br/>Fixer la date courante</h1>
    <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
-  <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+  <div class="action"><button type="button" class="annu">Annuler</button><input type="submit" class="ok" value="ok"></div>
    </form>
  
   </div><!--reini---->
@@ -542,6 +546,18 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/facture.js"></script>
   <script type="text/javascript">
+  $('.buts').click(function(){
+   $('.reini').css('display','block');
+   $('#pak').css('display','block');
+   var email = "default@gmail.com";
+   $('#email').val(email);
+ });
+ 
+ $('.annu').click(function(){
+   $('.reini').css('display','none');
+   $('#pak').css('display','none');
+ });
+  
   $(document).on('click','.prints',function(){
 		  var action ="click";
 		  var id = $(this).data('id6');

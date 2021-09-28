@@ -42,7 +42,7 @@
             $dateTimestamp2 = strtotime($date_today);
             $diff= $dateTimestamp1-$dateTimestamp2;
 			
-			if($diff > 0) {
+			if($diff > 0  OR $diff ==0) {
 			// diffference entre les deux dates
 			$tDeb = explode("-", $date_today);
             $tFin = explode("-", $date);
@@ -67,7 +67,7 @@
 				 $color="alerte";
 			 }
 			 
-			 if($result==0){
+			 if($diff==0){
 				$status_reservation ='<img src="img/valid.png" alt="valid" width="15px" height="15px"/> le séjour est consommé';
 			}
 			
@@ -116,7 +116,7 @@
 				 $color="alerte";
 			 }
 			 
-			 if($result==0){
+			 if($diff==0){
 				$status_reservation ='<img src="img/valid.png" alt="valid" width="15px" height="15px"/> le séjour est consommé';
 			}
 			

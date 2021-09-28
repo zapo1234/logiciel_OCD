@@ -108,12 +108,12 @@ $smart_from =($page -1)*$record_peage;
 		</tr>';
 		// pour le mobile
 		echo'<div class="mobile">
-		     <div>'.$put.' <i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].'</span></div>
+		     <div>'.$put.' <span class="der"><img src="img/caisse.png" alt="caisse" width="15px" height="15px"> transmis le '.$j.'/'.$mm.'/'.$an.' par   <i class="far fa-user" style="font-size:16px;color:black;"></i>'.$donnes['user_gestionnaire'].'</span></div>
 		     <div>Recette encaissée<span class="der"><span> '.$donnes['entree'].'xof</div>
 			 <div>Dépense effectuée <span class="der">'.$donnes['sorties'].'xof</span></div>
 		     <div>Acompte réservation <span class="der">'.$donnes['reservation'].'xof</span></div>
-		     <div>Reste à payer<span class="der">'.$donnes['reste'].'xof</span></div>
-			 
+		     <div>Reste à payer<span class="der">'.$donnes['reste'].'xof</span></div><br/>
+			 <div class="user" style="font-size:16px;color:green"><img src="img/map.png" alt="map" width="15px" height="15px"> travail à '.$donnes['society'].'</div>
 			 <div class="pay">
 			 <div id="three'.$donnes['id'].'"><span style="cursor:pointer;color:#0C80E7;padding-left:40%;"  class="moye" data-id2='.$donnes['id'].'>Moyen de paiement <i class="fas fa-angle-down"></i></span></div> 
 		     <div id="four'.$donnes['id'].'"></div>
