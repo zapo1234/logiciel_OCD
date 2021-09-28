@@ -194,7 +194,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tss{display:none;}
+.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tls{display:none;}
 }
 
 
@@ -512,6 +512,8 @@ height:2000px;overflow-y:scroll;z-index:5;}
 		    $('#result_recher').html('');
 		  }
 		 });
+		 
+	
 		 
   </script>
 </body>

@@ -72,7 +72,7 @@ $natu='dépense effectué';
  if($nat==5){
 	 
 	$natu ="Remboursement client";
-	$user = $_SESSION['user'].',  <i class="far fa-check-circle" style="color:red;font-size:13px">  '.$_SESSION['user'].' à remboursé une annulation au client le  '.date('d-m-Y').'à  '.date('H:i').'<span class="edit"></span>';  
+	 $user = $donns['user'].', <i class="far fa-check-circle" style="color:#AB040E;font-size:14px"></i> '.$_SESSION['user'].' a annulé  une réservation client dans l\'intitulé le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>'; 
  }
  
  // insertions des données dans la base de données depense

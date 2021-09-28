@@ -149,8 +149,8 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
 		 <td><span class="repas">'.$donnes['montant'].'xof</td>
 		 <td><span class="dg">'.$donnes['calls'].'</span><br/>voir<span class="actions" data-id7="'.$donnes['id'].'"> <i class="fas fa-plus" style="font-size:10px;"></i></span>
-		 <div class="datis" style="display:none" id="contens'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
-		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$donnes['id'].'">
+		 <div class="datis" style="display:none" id="content'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
+		 <td>gérer <span class="action" data-id2="'.$donnes['id'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="cont'.$donnes['id'].'">
 		 '.$mettre.'<br/>
 		 '.$modif.'<br/>
 		 '.$annul.'
@@ -400,6 +400,7 @@ if($_POST['action']=="fetchs") {
  }
  
   // mise à jour du crédit fournisseur
+  // payer le credi fournisseur solde
   if($_POST['action']=="mettre"){
 	  $id =$_POST['id'];
 	  $ids = $_POST['ids'];
@@ -545,7 +546,7 @@ if($_POST['action']=="fetchs") {
 		 <td><span class="repas">'.$donnes['designation'].'</td>
 		 <td><span class="repas">'.$donnes['fournisseur'].'</td>
 		 <td><span class="repas">'.$donnes['montant'].'xof</td>
-		 <td><span class="dg">'.$donnes['calls'].'</span><br/>voir<span class="actions" data-id7="'.$donnes['id'].'"> <i class="fas fa-plus" style="font-size:10px;"></i></span>
+		 <td><span class="dg">'.$donnes['calls'].'</span><br/>voir<span class="actis" data-id9="'.$donnes['id'].'"> <i class="fas fa-plus" style="font-size:10px;"></i></span>
 		 <div class="datis" style="display:none" id="contens'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div></td>
 		 <td>
 		 '.$mettre.'<br/>
@@ -555,7 +556,7 @@ if($_POST['action']=="fetchs") {
 	    </tr>';
 		
 		echo'<div class="mobiles">
-		     <div><span class="repas"></span><span class="actins" data-id9="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
+		     <div><span class="repas"></span><span class="actins" data-id10="'.$donnes['id'].'" title="voir historique"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> </span></div>
 			 <div class="datis" style="display:none" id="contents'.$donnes['id'].'">'.str_replace($rt,$rem,$donnes['user']).'</div>
 			 <div>'.$put.' <span class="dat'.$donnes['status'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der"> transmis le <br/>'.$j.'/'.$mm.'/'.$an.'<br/>
 			  <i class="fas fa-user-edit" style="font-size:13px;color:black;"></i> par '.$data_user.'</span></div>
