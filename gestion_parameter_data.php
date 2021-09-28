@@ -87,7 +87,7 @@ img {
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
 #role,#roles{width:320px;height:40px;border:1px solid #eee;}
-label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:890px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
+label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:300px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;border-radius:20px;font-family:arial;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 td,th{text-align:center;} th{border:1px solid #eee;height:50px;font-family:arial;color:black}
 #form3{width:45%;height:600px;background:white;border:2px solid white;padding:0.2%;position:absolute;left:25%;top:150px;z-index:4;}

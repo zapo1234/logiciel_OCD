@@ -128,39 +128,25 @@ transition: all 200ms;}
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:950px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
 .drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+height:1100px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{padding-bottom:5px;margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-.dy{display:none;} .input{display:none;} h2{position:absolute;top:140px;left:-35%;font-size:16px;}
+.dy{display:none;} .input{display:none;} h2{position:absolute;top:140px;left:-35%;font-size:18px;border:none;margin-top:20px;}
 form{margin-top:100px;} #names,#name{margin-left:2%;} #modipass,#modifier{margin-left:-5%;}
 .tab{display:none}  .mobile{color:black;font-size:14px;width:120%;display:block;margin-left:5%;border-bottom:1px solid #eee;
 padding-bottom:15px;border-bottom:2px solid #eee;} .df{margin-left:30%;}
 #resultat{margin-top:100px;}
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:50px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;} .form-search{display:none;}
+label,input{display:block;} .col{display:block;}
+#code{width:250px;} .btn{display:block;} #panier{display:none;}
 }
 
-#code{width:250px;} .btn{display:none;}
 
-@media (max-width: 575.98px) { 
-#panier{display:none;}
-#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-.cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
-ul{display:none;}
-.bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
-.drop{position:absolute;left:7%;width:300px;}
-.drops{z-index:4;padding-left:5%;position:absolute;position:absolute;left:1%;width:350px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
-.us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
-#news_data{display:block;} #news{display:none;} .users{display:block;color:black;} .btn{display:block;}
-#mobile{font-size:14px;} h1{display:none;}
-
-}
 
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -335,12 +321,14 @@ height:2800px;overflow-y:scroll;z-index:5;}
       </select>
 					   <span class="code"></span>
                       </div>
+					  
+					<div class="form-row">
                     <div class="col">
                    <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site" required>
                     <br/><span class="socie"></span></div>
-				 <input type="hidden" name="token" id="token" value="<?php echo $_SESSION['token'];?>">
-                 </div>
 				 
+                 </div>
+				 </div>
 				 
 				 <div class="form-row">
                     <div class="col">
@@ -385,10 +373,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
                        <label>Numéro télephone</label><br/><input type="text" id="numero" name="numero" class="form-control" placeholder="Votre numéro"><br/>
 					   <span class="numero"></span>
                       </div>
-                    <div class="col">
-                    <label>Numéro sécondaire(si existe)</label><br/><input type="text" id="numero1" name="numero1" class="form-control" placeholder="Last name"><br/>
-					<span class="numero1"></span>
-                    </div>
 				 
                  </div>
 				 
@@ -397,9 +381,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
                        <label>Adresse</label><br/><input type="text" id="adress" name="adress" class="form-control" placeholder="Votre adresse"><br/>
 					   <span class="adress"></span>
                       </div>
-                    <div class="col">
-                   <label>Adresse suite</label> <input type="text" id="adress1" name="adress1" class="form-control" placeholder="Last name">
-                    </div>
 				 
                  </div>
 				 
