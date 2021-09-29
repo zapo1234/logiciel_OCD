@@ -37,7 +37,7 @@ include('inc_session.php');
     .bg{border:1px solid #eee;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
     .bs{width:340px;height:300px;border:1px solid #eee;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
-	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
+	#montant td{font-weight:none;} .butt,.buts{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:white;width:98%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
@@ -57,11 +57,11 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
+.reini{padding:2%;z-index:4;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.9;}
+#pak{position:absolute;top:0;left:0;width:100%;height:100%;background-color:black;z-index:3;opacity: 0.9;}
 
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:700px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
   
@@ -92,7 +92,7 @@ border-radius:15px;} #idt{border-top:1px solid white;border-left:1px solid white
 h4{font-family:arial;font-size:18px;color:black;color:font-weight:none;}
 .montants{margin-left:15%;font-size:30px;color:#04850C;font-weight:bold;} .montan{margin-left:15%;font-size:30px;color:#D20A22;font-weight:bold;}
 .name{font-size:15px;margin-left:5%;color:black;} .monta{margin-left:15%;font-size:30px;color:#0A68D2;font-weight:bold;}
-.montac{margin-left:15%;font-size:30px;color:#E45416;font-weight:bold;} .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+.montac{margin-left:15%;font-size:30px;color:#E45416;font-weight:bold;} .print,.pri{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:7%;margin-top:5px;font-size:16px;}
 #logo{position:absolute;top:6px;left:1.3%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
@@ -162,7 +162,8 @@ height:2800px;overflow-y:scroll}h2{margin-top:20px;border-top:1px solid #eee;col
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:90px;left:20%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 
 #indicateur{display:none;} .der{padding-left:3%;color:black;font-size:16px;}
-.btn{display:block;}
+.btn{display:block;} #searchDropdown{display:none;}
+.excel{margin-left:120%;}
 }
 
 
@@ -182,7 +183,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:2.5%;}
-#indicateur{display:none;}
+#indicateur{display:none;} .reini{top:120px;left:20%;}
 }
 
 
@@ -375,6 +376,17 @@ height:2800px;overflow-y:scroll;z-index:5;}
   $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').css('display','block');
 	 });
+	 
+	 $('.buts').click(function(){
+   $('.reini').css('display','block');
+   $('#pak').css('display','block');
+   $('.drops').css('display','none');
+   });
+ 
+ $('.annul').click(function(){
+  $('#pak').css('display','none');
+  $('.reini').css('display','none');
+ });
   
     $(document).on('click','.moyen',function(){
 		var id = $(this).data('id2');

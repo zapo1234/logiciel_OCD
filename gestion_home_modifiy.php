@@ -329,7 +329,7 @@ margin-left:-10px;}
 
 h3{color:#06308E;font-size:16px;font-weight:bold;}
 
-// Media query css
+
 @media (max-width: 575.98px) { 
 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -342,6 +342,20 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
+.btn{display:block;} #searchDropdown{display:none;}
+ 
+#examp{width:85%;left:10%;height:900px} .buttons{margin-left:5%;}
+.navbar-nav{display:none;}
+.content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home{width:95%;}
+
+.content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  
+
+.content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
+font-weight:bold;} .rr{display:none;} 
+.datas{display:none;width:90%;z-index:2;position:absolute;top:70px;left:10%;background:white;} h2{border-color:none;color:#224abe;font-weight:bold;}
+.form-select{display:none;} h4{display:none;}  #resul{display:none;} 
+.hom{display:none;}
 }
 
 
@@ -473,7 +487,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -697,6 +711,12 @@ echo $_SESSION['token'];?>">
   <script type="text/javascript">
    $(document).ready(function(){
      
+	 $(document).on('click','.titre',function(){
+	 $('.tot').css('display','block');
+	 $('#resul').css('display','block');
+	 $('.hom').css('display','block');
+	});
+	 
 	 $(document).on('click','.ouvrir',function(){
 	 $('.montant').css('display','block');
      $('.ouvrir').css('display','none');
@@ -742,6 +762,11 @@ echo $_SESSION['token'];?>">
    var email = "default@gmail.com";
    $('#email').val(email);
  });
+ 
+ $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	 
  
  $('#pak').click(function(){
    $('.reini').css('display','none');

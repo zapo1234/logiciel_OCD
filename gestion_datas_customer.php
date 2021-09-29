@@ -58,7 +58,8 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .content_home{width:75%;margin-top:15px;display:none;height:950px;overflow-y:scroll;} 
 .content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 
-.content_home,.content2{float:left;display:none;} .content2{margin-left:0.2%;}
+.content_home,.content2{float
+:left;display:none;} .content2{margin-left:0.2%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:30%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 .df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
@@ -171,7 +172,8 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 .ouvrir11,.ouvrir12{display:none;cusor:pointer;}
 
 h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
-.sup{cursor:pointer;color:white;font-size:12px;}
+.sup{cursor:pointer;color:white;font-size:12px;} #content1{display:none;}
+
 @media (max-width: 575.98px) { 
 #panier{display:non;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -181,14 +183,23 @@ ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
 .drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+height:2800px;} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 input{display:block;} .form-select{display:none;} #panier{display:none;}
 #examp{width:80%;margin-left:-15%;height:1100px;} .buttons{margin-left:2%;}
 .btn{display:block;} #searchDropdown{display:none;}
-.navbar-nav{display:none;}
+.navbar-nav{display:none;} 
+.content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+.content_home{width:95%;}
+
+.content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
+font-weight:bold;} .rr{display:none;} .datas{display:none;}
+.datas{width:90%;z-index:2;position:absolute;top:70px;left:10%;background:white;height:450px;} h2{border-color:none;color:#224abe;font-weight:bold;}
+h4{display:none;} #add_local{margin-top:30px;margin-left:5%;}
+
 }
+
 
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -554,7 +565,10 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-    
+    $(document).on('click','.titre',function(){
+	 $('.datas').slideToggle();
+	});
+	
 	$(document).on('click','.ouvrir',function(){
 	 $('.montant').css('display','block');
      $('.ouvrir').css('display','none');

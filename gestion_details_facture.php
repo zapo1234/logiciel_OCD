@@ -125,7 +125,7 @@ width:80%;border-radius:20px;}
 	}
 	
 	if($donnees['type']==2) {
-		$client ='Entrée le:'.$donnees['time'].'   sortie le '.$donnees['time2'];
+		$client ='Entrée le:'.$donnees['time'].'   sortie le '.$donnees['time1'];
 	}
 	
 	 echo'<div class="detail">

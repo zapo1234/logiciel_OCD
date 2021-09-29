@@ -46,17 +46,17 @@ $smart_from =($page -1)*$record_peage;
 	if($donns['permission']=="user:boss"){
 		
 		$puts='<div class="d1"><button type="submit" value="ok" class="delete"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou type de séjour">
+	  $export='<form method="post" id="f" action="excel.php"> <span class="expor"><span class="ds">Rechercher des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou type de séjour">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
 		
 	}
 	else{
 	   $puts="";
-		$export='<span class="expor">Rechercher des factures <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
+		$export='<span class="expor"><span class="ds">Rechercher des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		
-	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom ou type de séjour" aria-label="Username" aria-describedby="basic-addon1">';
+	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="Recherche par nom ou type de facture" aria-label="Username" aria-describedby="basic-addon1">';
 		
 	// on boucle sur les les resultats
 	echo'<div class="expor">'.$export.' '.$mobile.'
@@ -220,7 +220,7 @@ $smart_from =($page -1)*$record_peage;
 		 <td><span class="mont">'.$mont_tva.' xof</span></td>
 		 <td><span class="der"> entrée le '.$j1.'/'.$mm1.'/'.$an1.'</span><br/>'.$time1.'</td>
 		 <td><span class="der"> Sortie le '.$j2.'/'.$mm2.'/'.$an2.'</span><br/>'.$time2.'</td>
-		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/>'.$calls.'</td>
+		 <td><span class="repas">'.$repas.'<br/>Temps:'.$jour.'<br/><br/><img src="img/map.png" alt="map" width="15px" height="15px"/>'.$calls.'</td>
 		 <td><a href="#" class="details" data-id2="'.$donnees['id_fact'].','.$donnees['code'].'" title="voir le détails">détails facture</a></br/><br/> gérer <span class="action" data-id2="'.$nombre.''.$donnees['code'].'"><i class="fas fa-angle-down"></i></span><div class="datas" style="display:none" id="content'.$nombre.''.$donnees['code'].'">
 		 <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		  <span class="motif">'.$modif.'</span>
@@ -239,7 +239,7 @@ $smart_from =($page -1)*$record_peage;
 		     <span class="modif">'.$modif.'</span>
 			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		     '.$encaiss.'
-			 <br/>'.$annul.'<br/><span class="dg">'.$donnees['calls'].'</span></div>
+			 <br/>'.$annul.'<br/><span class="dg"><img src="img/map.png" alt="map" width="15px" height="15"px"/>'.$donnees['calls'].'</span><br/> travail à '.$donnees['society'].'</div>
 	       </div>';
 	}
 	
@@ -659,7 +659,7 @@ if($_POST['action']=="mail"){
 		     <span class="modif">'.$modif.'</span>
 			  <a href="#" class="envoi" title="envoi par email" data-id3='.$donnees['id_fact'].''.$donnees['code'].'"><i class="fab fa-telegram"></i> Envoyer</a><br/>
 		     '.$encaiss.'
-			 <br/>'.$annul.'<br/><span class="dg">'.$donnees['calls'].'</span></div>
+			 <br/>'.$annul.'<br/><span class="dg"><img src="img/map.png" alt="map" width="15px" height="15"px"/>'.$donnees['calls'].'</span></div>
 	       </div>';
 	}
 	
