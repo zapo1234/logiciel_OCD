@@ -180,7 +180,7 @@ include('inc_session.php');
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bs{width:340px;height:300px;border:1px solid #eee;}
-	.titre{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
+	.titre,.titres{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
@@ -352,10 +352,28 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  
 
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
-font-weight:bold;} .rr{display:none;} 
-.datas{display:none;width:90%;z-index:2;position:absolute;top:70px;left:10%;background:white;} h2{border-color:none;color:#224abe;font-weight:bold;}
-.form-select{display:none;} h4{display:none;}  #resul{display:none;} 
-.hom{display:none;}
+font-weight:bold;} 
+
+.titre{background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
+font-weight:bold;border-color:white;font-size:12px;} 
+
+.titres{background:white;display:block;position:absolute;left:70%;top:30px;cursor:pointer;color:#224abe;
+font-weight:bold;border-color:white;font-size:12px;} 
+
+.rr{display:none;} 
+
+.data{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:70px;left:1%;background:white;height:130px;} 
+
+.datas{display:none;padding:2%;width:97%;z-index:2;position:absolute;top:300px;left:1%;background:white;height:650px;}
+
+.data1{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:90px;left:1%;background:white;height:130px;} 
+
+.datas1{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:100px;left:1%;background:white;height:110px;} 
+
+ h2{border-color:none;color:#224abe;font-weight:bold;}
+.form-select{display:none;} h4{display:none;} 
+ #add_local{margin-top:30px;margin-left:15%;width:75%;}
+
 }
 
 
@@ -593,12 +611,12 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	
 	<div class="form2 col-md-6">
 	  <label for="inputPassword4">Heure d'entrée(check_in) </label>
-      <input type="time" name="tim" id="tim" class="form-control" id="inputPassword4" placeholder="<?php echo$da2;?>">
+      <input type="time" name="tim" id="tim" class="form-control" id="inputPassword4" value="<?php echo$da2;?>">
      </div>
 	
 	 <div class="form2 col-md-6">
       <label for="inputPassword4">Heure du départ(check_out) </label>
-      <input type="time" name="tis" id="tis" class="form-control" id="inputPassword4" placeholder="<?php echo$da3;?>">
+      <input type="time" name="tis" id="tis" class="form-control" id="inputPassword4" value="<?php echo$da3;?>">
     </div>
 	
   </div>
@@ -712,10 +730,18 @@ echo $_SESSION['token'];?>">
    $(document).ready(function(){
      
 	 $(document).on('click','.titre',function(){
-	 $('.tot').css('display','block');
-	 $('#resul').css('display','block');
-	 $('.hom').css('display','block');
+	 $('.data').slideToggle();
+	 $('.datas').slideToggle();
+	 
 	});
+	
+	$(document).on('click','.titres',function(){
+	 $('.data1').slideToggle();
+	 $('.datas1').slideToggle();
+	 $('.data').slideToggle();
+	 $('.datas').slideToggle();
+	 });
+	 
 	 
 	 $(document).on('click','.ouvrir',function(){
 	 $('.montant').css('display','block');
