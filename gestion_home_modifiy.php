@@ -87,8 +87,6 @@ include('inc_session.php');
 	$types="horaire";
 	$da2=$donnees['time'];
 	$da3=$donnees['time1'];
-	$da2 = substr($da2,5);
-	$da3 = substr($da3,5);
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -362,13 +360,13 @@ font-weight:bold;border-color:white;font-size:12px;}
 
 .rr{display:none;} 
 
-.data{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:70px;left:1%;background:white;height:130px;} 
+.data{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:70px;left:1%;background:white;height:130px;} 
 
-.datas{display:none;padding:2%;width:97%;z-index:2;position:absolute;top:300px;left:1%;background:white;height:650px;}
+.datas{font-size:16px;display:none;padding:2%;width:97%;z-index:2;position:absolute;top:300px;left:1%;background:white;height:650px;}
 
-.data1{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:90px;left:1%;background:white;height:130px;} 
+.data1{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:90px;left:1%;background:white;height:130px;} 
 
-.datas1{display:none;padding:1%;width:97%;z-index:2;position:absolute;top:100px;left:1%;background:white;height:110px;} 
+.datas1{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:100px;left:1%;background:white;height:110px;} 
 
  h2{border-color:none;color:#224abe;font-weight:bold;}
 .form-select{display:none;} h4{display:none;} 
@@ -615,6 +613,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
      </div>
 	
 	 <div class="form2 col-md-6">
+	  
       <label for="inputPassword4">Heure du départ(check_out) </label>
       <input type="time" name="tis" id="tis" class="form-control" id="inputPassword4" value="<?php echo$da3;?>">
     </div>
