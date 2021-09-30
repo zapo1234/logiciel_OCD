@@ -352,17 +352,17 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
 font-weight:bold;} 
 
-.titre{background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
+.titre{cursor:pointer;background:white;display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
 font-weight:bold;border-color:white;font-size:12px;} 
 
-.titres{background:white;display:block;position:absolute;left:70%;top:30px;cursor:pointer;color:#224abe;
+.titres{cusor:pointer;background:white;display:block;position:absolute;left:70%;top:35px;cursor:pointer;color:#224abe;
 font-weight:bold;border-color:white;font-size:12px;} 
 
 .rr{display:none;} 
 
 .data{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:70px;left:1%;background:white;height:130px;} 
 
-.datas{font-size:16px;display:none;padding:2%;width:97%;z-index:2;position:absolute;top:300px;left:1%;background:white;height:650px;}
+.datas{font-size:16px;display:none;padding:2%;width:97%;z-index:2;position:absolute;top:200px;left:1%;background:white;height:650px;}
 
 .data1{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:90px;left:1%;background:white;height:130px;} 
 
