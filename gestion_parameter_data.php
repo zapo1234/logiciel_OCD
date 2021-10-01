@@ -140,6 +140,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}
+#form3{width:85%;margin-left:-15%;margin-top:-15px;}
 }
 
 
@@ -313,7 +314,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 
 					 <form method="post" id="form3" action="">
                    		
-                    <h2>Modifier les données de ce utilisateur</h2>
+                    <h2 style="border-color:none">Modifier les données de ce utilisateur</h2>
 					<div class="form-row">
                     <div class="col">
                        <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="<?php echo$users;?>" required>
@@ -497,7 +498,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	data:{action:action,ids:ids,emais:emais,nums:nums,password:password,noms:noms,roles:roles},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#donns').html(data);
-	 $('#pak').css('display','none');	
+	 $('#pak').css('display','none');
+     $('#form3').css('display','none');	 
 	}
 	});
 	

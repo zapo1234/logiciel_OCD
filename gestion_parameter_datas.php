@@ -299,8 +299,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="col">
                        <label>Numéro télephone</label><br/><input type="text" id="num" name="num" class="form-control">
                       <br/><span class="num"></span></div>
-                    <div class="col">
-                    <br/><select id="role" name="role" class="form-control" required>
+                    
+					<div class="col">
+                    
+					<select id="role" name="role" class="form-control" required>
                    <option value="">choisir sa fonction</option>
                  <option value="1">Dirigeant</option>
                   <option value="3">Gestionnaire</option>
@@ -361,6 +363,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
                        <label>Nom de la societé(dénomination)</label><br/><input type="text" id="nam" name="nam" class="form-control" placeholder="First name" required><br/>
 					   <span class="nam"></span>
                       </div>
+					  </div>
+					  <div class="form-row">
                     <div class="col">
                     <label>Email(societé)</label><br/><input type="text" id="email" name="email" class="form-control" placeholder="Email" required><br/>
 					<span class="email"></span>
@@ -595,8 +599,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
  $('#der11').css('display','none');
  $('#der12').css('display','none');
  $('#der13').css('display','none');
- $('#der14').css('display','block');
- $('#der15').css('display','none');
+ $('#der14').css('display','none');
+ $('#der15').css('display','block');
  });
  
  $('.der5').click(function(){

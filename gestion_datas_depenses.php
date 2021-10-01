@@ -194,7 +194,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
-.dir td{display:block;} #examp{width:80%;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tls{display:none;} #searchDropdown{display:none;} .reini{top:20px;left:5%;}
+.dir td{display:block;} #examp{width:80%;margin-top:15px;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tls{display:none;} #searchDropdown{display:none;} .reini{top:20px;left:5%;}
+
 }
 
 
@@ -203,10 +204,10 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
- h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+ h2{margin-top:30px;color:#4e73df;font-size:25px;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
 #news_data{display:block;} #news{display:none;} 
-.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:2%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 .btn{display:block;} 
@@ -214,8 +215,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-70%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1600px;} #examp{width:95%;margin-left:2%;margin-top:10px}
-.result{margin-left:-20%;margin-top:5px;} h2{font-size:14px;}
+.center{height:1600px;} #examp{width:90%;margin-left:-10%;margin-top:30px}
+.result{margin-left:-20%;margin-top:5px;} 
 }
 
 
