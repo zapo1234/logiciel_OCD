@@ -151,10 +151,10 @@ ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
 .drops{padding:2%;position:absolute;left:7%;width:340px;display:block;background:white;
-height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
+height:2800px;overflow-y:scroll} h2{margin-top:30px;border-top:1px solid #eee;color:#06308E;font-size:15px;font-weight:bold;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#searchDropdown{display:none;}
+#searchDropdown{display:none;} #examp{width:90%;height:1700px;margin-top:15px;margin-left:-3%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -222,7 +222,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
