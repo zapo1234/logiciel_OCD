@@ -184,6 +184,21 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:2.5%;}
 #indicateur{display:none;} .reini{top:120px;left:20%;}
+.enre {
+    font-family: arial;
+    font-size: 15px;
+    z-index: 3;
+    background: black;
+    opacity: 0.8;
+    position:absolute;
+    top: 155px;
+    left: 60%;
+    color: white;
+    width: 200px;
+    text-align: center;
+    padding: 0.5%;
+    height: 50px;
+}
 }
 
 

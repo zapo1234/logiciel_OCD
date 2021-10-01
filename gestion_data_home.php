@@ -36,11 +36,11 @@ if(!isset($_GET['data'])){
     <style>
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{width:300px;height:800px;padding:2%;position:absolute;top:60px;left:80%;border-shadow:3px 3px 3px black;z-index:2;}
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
-	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
+	#montant td{font-weight:none;} .butt,.buts{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
 .center{background-color:#eee;width:80%;height:1100px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
@@ -72,9 +72,9 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
  #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4{width:90px;font-weight:200;border:2px solid white;} .tot{margin-top:10px;font-weight:bold;} #mont{font-weight:bold;padding-left:2%;}
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
-.tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
-.action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
+.tot{margin-bottom:10px;} 
+.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;z-index:5}
+.action{margin-top:25px;} .annul,.annu{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
 .enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
@@ -89,7 +89,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
   100% { transform: rotate(360deg); }
 }
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
+ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print,.prin{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
 .td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 .tds{font-size:28px;margin-left:12%;color:#09A81F;}
 .tdv{font-size:28px;margin-left:12%;color:#A80913;}
@@ -192,7 +192,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .h4{font-size:18px;color:black;text-align:center;} #resul{width:95%;}
 .center{height:2500px;} .homes{margin-left:15%;}
 .btn{display:block;} .form-select{display:none;} h1{display:none;}
-#searchDropdown{display:none;} 
+#searchDropdown{display:none;} .reini{position:absolute;top:250px;left:5%;}
+.print,.butt{display:none;} #pak{z-index:4;} .reini{z-index:5}
 }
 
 
@@ -346,7 +347,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		   
 		   <div id="resul"></div><!--afficher le resutat ajax-->
 		   <div id="resu"></div><!--afficher resultat recherche-->
-			
+		   
  
     
 	</div>
@@ -355,7 +356,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
  <form method="post" id="form_reini" action="">
  <h1>Réinitialiser votre caisse journalière</h1>
  <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
- <div class="action"><button type="button" class="annul">Annuler</button><input type="submit" class="ok" value="ok"></div>
+ <div class="action"><button type="button" class="annu">Annuler</button><input type="submit" class="ok" value="ok"></div>
  </form>
  
  </div><!--reini---->
@@ -439,6 +440,18 @@ height:2800px;overflow-y:scroll;z-index:5;}
    $('#pak').css('display','block');
    var email = "default@gmail.com";
    $('#email').val(email);
+ });
+ 
+ $('.buts').click(function(){
+   $('.reini').css('display','block');
+   $('#pak').css('display','block');
+   var email = "default@gmail.com";
+   $('#email').val(email);
+ });
+ 
+ $('.annu').click(function(){
+   $('.reini').css('display','none');
+   $('#pak').css('display','none');
  });
  
  $('#im').click(function(){
@@ -646,6 +659,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
       $('#pak').css('display','none');
 	  $('#result_reini').html(data);
 	  $('.reini').css('display','none');
+	  $('.drops').css('display','none');
 	  load();
 	 
 	}
