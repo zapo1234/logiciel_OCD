@@ -53,21 +53,20 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 		$tab[] = $datas;
 	}
 	
- 
-		     echo'<div class="hom" id="homs'.$dos['id_chambre'].'"><h5>'.$dos['type_logement'].'</h5>
+	      
+	        $total =0;
+	     	
+			 echo'<div class="data"><div class="hom" id="homs'.$dos['id_chambre'].'"><h5>'.$dos['type_logement'].'</h5>
 			<span class="d">'.$dos['chambre'].'</span><span class="dg">'.$dos['montant'].'x'.$donns['nombre'].' xof</span><span><input type="hidden" name="paie[]" value="'.$dos['montant'].'"> 
 			<input type="hidden" name="chambre[]" value="'.$dos['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$dos['type_logement'].'">
 			<input type="hidden" name="pay[]" value="'.$dos['montant'].'">
 			<input type="hidden" name="id_chambre[]" value="'.$dos['id_chambre'].'">
 			<span class="remov"><a href ="#" class="removes" data-id4="'.$dos['id_chambre'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span>
-			</div>';
-			
-			
-			}
-			
-		$total =0;
-	     	$count =count($tab);
+			</div></div>';
+		}
+		
+		$count =count($tab);
 			if($count ==1){
 			  $local ="local";
 			  echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
@@ -75,18 +74,14 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			
 			elseif($count ==0){
 				echo'<div><div class="titre"></div></div><br/><span class="eror"></span>';
-				
 			}
-			
 			else{
 				$local ="locaux";
 				echo'<div><div class="titre">vous avez déja  '.$count.' '.$local.'<br/>sur la facture</div></div><br/><span class="eror"></span>';
 			}
 			
-		 
-		   if($_POST['to']=="réservation") {
-				
-			 $adjout ='<div>Acompte(+):<br/><input type="number" id="acomp" name="acomp" value="'.$donns['avance'].'"><span class="account"></span></div>
+		if($_POST['to']=="réservation") {
+				$adjout ='<div>Acompte(+):<br/><input type="number" id="acomp" name="acomp" value="'.$donns['avance'].'"><span class="account"></span></div>
 			<div>Reste à payér:<br/><input type="number" id="rest" name="rest" value="'.$donns['reste'].'"></div>';
 			 
 			}
@@ -94,24 +89,19 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 				
 			$adjout ='<div class="dd">Acompte(+):<br/><input type="number" id="acomp" name="acomp" value="'.$donns['avance'].'"><span class="account"></span></div>
 			<div class="dd">Reste à payér:<br/><input type="number" id="rest" name="rest" value="'.$donns['reste'].'"></div>';
-			
 			}
-			
-	       
-		    $mont =$donns['montant'];
+			$mont =$donns['montant'];
 			
 			if($mont ==0){
 			$mont_tva=0;
 			}
-			
 			else{
 			$mont_tva = $donns['mont_tva'];
 			}
-			
 			$montants = $donns['montant']-floatval($donns['montant_repas'])-floatval($mont_tva);
 			$monta = $donns['montant'];
-			
-			echo'<div class="montant">
+			$outpout='<div class="datas"><div class="option">Option1 <span class="ouvrir"><i class="fa fa-chevron-down" aria-hidden="true" style="font-size:14px;"></i></span><span class="ouvrir11" style="font-size:14px;"><i class="fa fa-chevron-up" aria-hidden="true"></i></span></div>
+			<div class="montant">
 			<div class="rest">'.$adjout.'</div>
 			<div class="rep">Repas(+):<br/><input type="number" id="rep" name="rep" value="'.$donns['montant_repas'].'"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva" value="'.$donns['tva'].'"> <span class="tva">'.$mont_tva.'</span><input type="hidden" name="mont_ta" value="'.$mont_tva.'">xof</div>
@@ -125,33 +115,29 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			<input type="hidden" name="mon" id="mon" value="'.$montants.'">
 			</div>
 			
-			<div class="montant1">
+			<div class="option">Option2 <span class="ouvrir1"><i class="fa fa-chevron-down" aria-hidden="true" style="font-size="14px"></i></span><span class="ouvrir12"><i class="fa fa-chevron-up" aria-hidden="true" style="font-size:14px"></i></span></div>
+			
+			<div class="montant1"><br/>
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="number" id="paie1" name="paie1" value="'.$datas_user[0].'"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2" value="'.$datas_user[1].'"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3" value="'.$datas_user[2].'"><br/>chéques<br/><input type="number" id="paie4" name="paie4" value="'.$datas_user[3].'"><br/>
 			</div></div>';
-			echo'<div><input type="submit" id="add_local" value="valider"></div>';
-		
+			echo$outpout;
+			echo'<div><br/><input type="submit" id="add_local" value="valider"></div>';
+		    echo'</div>';
 	  
 
 	}
-	
-	 
-	 if($_POST['action']=="add"){
-		 
-		if(!empty($_POST['prix_nuite'])){
+	if($_POST['action']=="add"){
+		 if(!empty($_POST['prix_nuite'])){
 		$pay = $_POST['prix_nuite'];	
       }
-	 
 	 else{
 		 $pay = $_POST['paynuite'];
 	 }
-	 
-	 
-	  if(!empty($_POST['prix_pass'])){
+	 if(!empty($_POST['prix_pass'])){
 		 $pay = $_POST['prix_pass'];		
 	 }
-	 
 	 else{
 		 $pay= $_POST['paypass'];
 	 }
@@ -217,12 +203,14 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	     	$count =count($_SESSION['add_home']);
 			if($count ==1){
 			  $local ="local";
+			  $text ="Adjout d'un";
 			}
 			
 			else{
 				$local ="locaux";
+				$text = "Adjout de";
 			}
-			echo'<div><div class="titre">Nouvelle selection de '.$count.' '.$local.'</div></div>';
+			echo'<div><div class="titres">'.$text.' '.$count.' '.$local.'</div></div>';
 			
 			foreach($_SESSION['add_home'] as $keys => $values){
 		
@@ -274,7 +262,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			
 			$total = $total +($pays*$_POST['nbjour']);
 			 
-			echo'<div class="hom"><h5>'.$values['type'].'</h5>
+			echo'<div class="data1"><div class="hom"><h5>'.$values['type'].'</h5>
 			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
@@ -287,10 +275,10 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			}
 		
 			
-			echo'<div class="montant">
+			echo'<div class="datas1">
 			<div class="tot">Montant Ajoutée <span id="mts" class="montas">'.$total.'</span>xof</div>
 			<input type="hidden" name="mons" id="mons" value="'.$total.'"></span>';
-			echo'</div>';
+			echo'</div></div>';
 		
 	  }	
       
@@ -380,19 +368,19 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			$count = $count -1;
 			if($count ==1){
 			  $local ="local";
-			  echo'<div><div class="titre">Nouvelle selection '.$count.' '.$local.'</div></div>';
+			  echo'<div><div class="titres">a ajouté '.$count.' '.$local.'</div></div>';
 			
 			}
 			
 			if($count >1){
 				$local ="locaux";
-				echo'<div><div class="titre">Nouvelle selection '.$count.' '.$local.'</div></div>';
+				echo'<div><div class="titres">a ajoutés '.$count.' '.$local.'</div></div>';
 			
 			}
 			
 			if($count ==0){
 				
-				echo'<div><div class="titre">Aucun nouvelle selectionnée
+				echo'<div><div class="titres">
 				</div></div>';
 				
 				$total =0;
@@ -456,7 +444,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			$total = $total +($pays*$_POST['nbjour']);
 			 
 			 if($values['id'] !=$_POST['id']) {
-			echo'<div class="hom"><h5>'.$values['type'].'</h5>
+			echo'<div class="data1"><div class="hom"><h5>'.$values['type'].'</h5>
 			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
@@ -476,10 +464,10 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	    }
 			
 			echo'
-			<div class="montant">
+			<div class="datas1">
 			<div class="tot">Montant <span id="mts" class="montas">'.$totals.'</span>xof</div>
 			<input type="hidden" name="mons" id="mons" value="'.$totals.'"></span>
-			</div>';
+			</div></div>';
 		
 		  }	
     
@@ -556,7 +544,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	                    ':id_fact'=>$id_fact,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	// on surprime la data de delete dans la tableau
-    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocds= :email_ocd');
+    $rel=$bds->prepare('DELETE  FROM home_occupation WHERE code= :code AND id_local= :id  AND id_fact= :id_fact AND email_ocds= :email_ocd');
     $rel->execute(array(':code'=>$session,
 	                    ':id'=>$id,
 	                    ':id_fact'=>$id_fact,

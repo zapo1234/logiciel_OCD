@@ -195,8 +195,8 @@ input{display:block;} .form-select{display:none;} #panier{display:none;}
 
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
 font-weight:bold;} .rr{display:none;} .datas{display:none;}
-.datas{width:90%;z-index:2;position:absolute;top:70px;left:10%;background:white;height:550px;} h2{border-color:none;color:#224abe;font-weight:bold;}
-h4{display:none;} #add_local{margin-top:30px;margin-left:5%;}
+.datas{padding:2.5%;width:95%;z-index:2;position:absolute;top:70px;left:2%;background:white;height:750px;} h2{border-color:none;color:#224abe;font-weight:bold;}
+h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
 
 }
 

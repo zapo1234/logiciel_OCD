@@ -176,7 +176,7 @@ border-radius:25px;}
 .resultats_messages{display:none;}
 
 .bg{border:1px solid #eee;margin-left:-70%;background:white;width:300px;height:300px;padding:4%;margin-top:0px;}
-    .bs{margin-left:-70%;width:300px;height:300px;border:1px solid #eee;background:white;}
+    .bs{margin-left:-70%;width:300px;height:300px;border:1px solid #eee;background:white;} #result{height:450px;} .sends{margin-top:-130px;}
 
 }
 

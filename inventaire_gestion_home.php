@@ -22,7 +22,7 @@ $page=1;
    }
    
    else{
-	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd AND code= :code');
+	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd AND codes= :code');
       $reg->execute(array(':code'=>$_SESSION['code'],
 	                      ':email_ocd'=>$_SESSION['email_ocd'])); 
    }
@@ -265,7 +265,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
         $smart_from =($page -1)*$record_peage;
    // emttre la requete sur le fonction
    if($_SESSION['code']!=0) {
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND code= :code ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND codes= :code ORDER BY id DESC LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':code'=>$_SESSION['code'],
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
    }
@@ -326,7 +326,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    }
    
    else{
-	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd AND code= :code');
+	  $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd AND codes= :code');
       $reg->execute(array(':code'=>$_SESSION['code'],
 	                      ':email_ocd'=>$_SESSION['email_ocd'])); 
    }
