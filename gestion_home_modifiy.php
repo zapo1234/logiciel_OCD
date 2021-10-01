@@ -362,7 +362,7 @@ font-weight:bold;border-color:white;font-size:12px;}
 
 .data{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:70px;left:1%;background:white;height:130px;} 
 
-.datas{font-size:16px;display:none;padding:2%;width:97%;z-index:2;position:absolute;top:200px;left:1%;background:white;height:650px;}
+.datas{font-size:16px;display:none;padding:2%;width:97%;z-index:2;position:absolute;top:300px;left:1%;background:white;height:650px;}
 
 .data1{font-size:16px;display:none;padding:1%;width:97%;z-index:2;position:absolute;top:90px;left:1%;background:white;height:130px;} 
 
@@ -1279,6 +1279,7 @@ echo $_SESSION['token'];?>">
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#results').html(data);
+		$('.datas').css('display','none');
 
       },
 	 error: function() {
