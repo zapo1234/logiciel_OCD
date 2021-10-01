@@ -58,7 +58,7 @@ if(isset($_POST['id_ocd'])) {
 		if($donnees['permission']=="user:employes"){
 			
 			echo'<SCRIPT LANGUAGE="JavaScript">
-           document.location.href="gestion_datas_customer.php"
+           document.location.href="gestion_data_home.php"
            </SCRIPT>';	
 		}
 	}
