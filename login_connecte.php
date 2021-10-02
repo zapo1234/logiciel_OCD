@@ -22,8 +22,14 @@ if(isset($_POST['id_ocd'])) {
    $req->execute(array(':email_user'=>$_POST['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
-
+    
 	
+	if($_POST['id_ocd']==$donnees['password'] AND $donnees['email_ocd']=="") {	
+	echo'<SCRIPT LANGUAGE="JavaScript">
+       document.location.href="tableau_create_user.php"
+        </SCRIPT>';	
+		
+	}
 	if($_POST['id_ocd']==$donnees['password']) {
 		
 		$active="off";
@@ -65,7 +71,9 @@ if(isset($_POST['id_ocd'])) {
 		
 	 else{
 	 
-      	echo'<div class="dnn" style="position:absolute">Votre compte est desactivé</div>'; 
+      	echo'<SCRIPT LANGUAGE="JavaScript">
+           document.location.href="gestion_datas_messanger.php"
+           </SCRIPT>';	
 	}
 		
 	}
