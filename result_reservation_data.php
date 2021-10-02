@@ -24,11 +24,12 @@
 		 
 	 // afficher les resultats
 	   echo'<table class="tbs">
+	   <th width="300px">N°facture</th>
 	    <th width="300px">Client</th>
-		<th>Numéro phone</th>
+		<th>Numéro</th>
 	     <th>Email</th>
 		 <th width="300px">Acompte</th>
-		 <th width="400px">Etat de la réservation</th>';
+		 <th width="400px">Etat</th>';
     // on parcoure les requetes
 	$date_today = date('y-m-d');
 
@@ -73,7 +74,9 @@
 			
 			$acompte ="le client à soldé sa facture";
 			
-			   echo'<tr><td>'.$value['clients'].'</td>
+			   echo'<tr>
+			        <td style="color:#06308E;font-size:15px;font-weight:bold">'.substr($value['id_fact'],2).'</td>
+			        <td>'.$value['clients'].'</td>
 					<td><img src="https://img.icons8.com/color/48/000000/phone.png" width="18px" height="18px"/> '.$value['numero'].'</td>
 					<td>'.$value['email_client'].'</td>
 					<td>'.$acompte.'</td>
@@ -88,7 +91,7 @@
 		}
 		}
 		
-		if($value['type']==3){
+		elseif($value['type']==3){
 			
 			$date = $value['check_in'];
 			$date_today = date('y-m-d');
@@ -125,10 +128,12 @@
 			}
 			
 			else{
-				$acompte ="le client à versé un acompte";
+				$acompte ="le client à versé un acompte sur la facture";
 			}
 			 
-		         echo'<tr><td>'.$value['clients'].'</td>
+		         echo'<tr>
+				      <td style="color:#06308E;font-size:15px;font-weight:bold;">'.substr($value['id_fact'],2).'</td>
+				      <td>'.$value['clients'].'</td>
 					<td><img src="https://img.icons8.com/color/48/000000/phone.png" width="18px" height="18px"/> '.$value['numero'].'</td>
 					<td>'.$value['email_client'].'</td>
 					<td>'.$acompte.'</td>
@@ -139,6 +144,11 @@
 						<div class="'.$color.'">'.$status_reservation.'</div>
 						<div>
 				        </div>';
+		 }
+		 
+		 else{
+			 
+			 
 		 }
 		}
        echo'</table>';

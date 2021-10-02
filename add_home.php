@@ -83,7 +83,7 @@ include('inc_session.php');
 			else{
 				$local ="locaux";
 			}
-			echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div>';
+			echo'<div><div class="titre"><span class="rr">vous avez selectionnez</span> '.$count.' '.$local.'</div></div>';
 			
 			foreach($_SESSION['add_home'] as $keys => $values){
 		   if($_POST['to']=="réservation") {
@@ -131,40 +131,40 @@ include('inc_session.php');
 			$totals = $total -($pays*$_POST['nbjour']);
 			$monta = $total + floatval($taxe);
 			 
-			echo'<div class="hom"><h5>'.$values['type'].'</h5>
-			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
+			echo'<div class="datas"><div class="hom"><h5>'.$values['type'].'</h5>
+			<div class="list"><span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span>
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
 			<input type="hidden" name="pay[]" value="'.$pays.'">
 			<input type="hidden" name="id_chambre[]" value="'.$values['id'].'">
 			<span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span>
-			</div>';
+			</div></div>';
 			
 			
 			}
 		
-			echo'<div class="option">Option 1 <span class="ouvrir"><i class="fas   fa-angle-down"></i></span></div>';
-			echo'<div class="montant">
+			$outpout='<div class="option">Option1 <span class="ouvrir"><i class="fa fa-chevron-down" aria-hidden="true" style="font-size:14px;"></i></span><span class="ouvrir11" style="font-size:14px;"><i class="fa fa-chevron-up" aria-hidden="true"></i></span></div>
+		    <div class="montant">
 			<div class="rest">'.$adjout.'</div>
 			<div class="rep">Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
 			<div>Remise(sur TTC)<br/><input type="number" id="remise" name="remise"></div>
 			</div>
 			
-			
-			<div class="tot">
+			<div class="tot"><br/>
 			 <h5>récapitulatif des montants</h5>
-			Montant HT <span class="mont">'.$total.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="monta">'.$monta.'</span>xof</div>
-			<input type="hidden" name="total" id="total" value="'.$total.'"></span></div>
+			<div>Montant HT <span class="mont">'.$total.'</span>xof</div>
+			<div>Montant TTC <span class="monta">'.$monta.'</span>xof</div>
+			<input type="hidden" name="total" id="total" value="'.$total.'"></span></div><br/>
+			<div class="option">Option2 <span class="ouvrir1"><i class="fa fa-chevron-down" aria-hidden="true" style="font-size="14px"></i></span><span class="ouvrir12"><i class="fa fa-chevron-up" aria-hidden="true" style="font-size:14px"></i></span></div>
 			
-			<div>Option2 <span class="ouvrir1"><i class="fas fa-angle-down"></i></span></div>
-			<div class="montant1">
+			<div class="montant1"><br/>
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="number" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
-			</div>';
-			echo'<div><input type="submit" id="add_local" value="valider"></div>';
+			</div></div>';
+			echo$outpout;
+			echo'<div><input type="submit" id="add_local" value="valider"></div></div>';
 		
 	  }	
       
@@ -254,13 +254,13 @@ include('inc_session.php');
 			$count = $count -1;
 			if($count ==1){
 			  $local ="local";
-			  echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
+			  echo'<div><div class="titre"><span class="rr">vous avez selectionnez</span> '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 			
 			}
 			
 			if($count >1){
 				$local ="locaux";
-				echo'<div><div class="titre">vous avez selectionnez '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
+				echo'<div><div class="titre"><span class="rr">vous avez selectionnez</span> '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 			
 			}
 			
@@ -336,7 +336,7 @@ include('inc_session.php');
 			
 			 
 			 if($values['id'] !=$_POST['id']) {
-			echo'<div class="hom"><h5>'.$values['type'].'</h5>
+			echo'<div class="datas"><div class="hom"><h5>'.$values['type'].'</h5>
 			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
@@ -369,8 +369,8 @@ include('inc_session.php');
 		   $arr2 = array_sum($array);
 		   $totals = floatval($arr1)-floatval($arr2);
 		    
-		  echo'<div>Option1 <span class="ouvrir"><i class="fas fa-angle-down"></i></span></div>';
-		   echo'<div class="montant">
+		  $outpout='<div class="option">Option1 <span class="ouvrir"><i class="fa fa-chevron-down" aria-hidden="true" style="font-size:14px"></i></span><span class="ouvrir11"><i class="fa fa-chevron-up" aria-hidden="true" style="font-size:14px"></i></span></div>
+		   <div class="montant">
 			<div class="rest">'.$adjout.'</div>
 			<div class="rep">Repas(+):<br/><input type="number" id="monts" name="monts"></div>
 			<div>TVA(%):<br/><input type="number" id="tva" name="tva"> <span class="tva"></span></div>
@@ -378,20 +378,22 @@ include('inc_session.php');
 			</div>
 			
 			<div class="tot">
+			<br/>
 			 <h5>récapitulatif des montants</h5>
-			
 			<div>Montant HT <span class="mont">'.$totals.'</span>xof</div>
-			<div class="tot">Montant TTC <span class="mont">'.$totals.'</span>xof</div>
+			<div>Montant TTC <span class="mont">'.$totals.'</span>xof</div>
 			<input type="hidden" name="total" id="total" value="'.$totals.'"></span>
 			</div>
 			
-			<div>Option2 <span class="ouvrir1"><i class="fas fa-angle-down"></i></span></div>
-			<div class="montant1">
+			<div class="option">Option2 <span class="ouvrir1"><i class="fa fa-chevron-down" aria-hidden="true" font-size="14px"></i></span><span class="ouvrir12"><i class="fa fa-chevron-up" aria-hidden="true" style="font-size:14px"></i></span></div>
+			
+			<div class="montant1"><br/>
 			<h3>Moyens de paiment</h3>
 			<div>espèce<br/> <input type="number" id="paie1" name="paie1"><br/>Carte Bancaire <br/><input type="number" id="paie2" name="paie2"><br/>
 			 Mobile Monney<br/><input type="number" id="paie3" name="paie3"><br/>chéques<br/><input type="number" id="paie4" name="paie4"><br/>
-			</div>';
-			echo'<div><input type="submit" id="add_local" value="valider"></div>';
+			</div></div>';
+			echo$outpout;
+			echo'<div><input type="submit" id="add_local" value="valider"></div></div>';
 		
 		  }	
 	 

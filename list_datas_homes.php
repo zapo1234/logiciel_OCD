@@ -78,17 +78,23 @@ $smart_from =($page -1)*$record_peage;
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
 	  $array3 = [];// pour les chambre bloque;
+	  $data = []; // recupere les dates pour la partie horaire
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
 			 $datax = $val['type'];
 			 $datasx =$val['date'];
+			 $dats = $val['dates'];
 			 
 			 // regroupe les id_chambre
 			 $dat = explode(',',$data1);
 			 foreach($dat as $vals){
 				$arr1[] = $vals; 
-				 
+			}
+			 // recuperer les dates pour l'horaire
+			 $daty = explode(',',$dats);
+			 foreach($daty as $datetime){
+				$data[] = $datetime;
 			 }
 			 
 			 if($val['type'] ==1 OR $val['type']== 3){
@@ -229,18 +235,19 @@ $smart_from =($page -1)*$record_peage;
 	$debuts = min($b);
 	$sorties = max($b);
 	
-	if(in_array($heure,$b) AND in_array($date_english,$date)){
+	if(in_array($heure,$b) AND  in_array($date_english,$data)){
 		// verification pour le cas des sejours pass
 	    $color='occupe';
 		$status ='le client fait un pass présentement';
 	}
-	if($debuts < $date_english AND $date_english < $sorties AND in_array($date_english,$b)){
+	if(!in_array($date_english,$data)){
 		// verification pour le cas des sejours pass
-	    $color='occupe';
-		$status ='le client fait un pass présentement';
+	    $color='libre';
+		$status ='le local est disponible <br/><br/><br/>';
 	}
 	
 	}
+
 	
 	 
 	 if(count($c)!=0){
