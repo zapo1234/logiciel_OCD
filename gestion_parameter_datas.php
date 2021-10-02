@@ -119,6 +119,7 @@ transition: all 200ms;}
 .navbar-nav{background:#06308E;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+.btn{display:none;}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -246,7 +247,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
