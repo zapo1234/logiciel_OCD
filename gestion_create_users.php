@@ -244,18 +244,25 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
 </style>
 
+<script>
+ function printContent(el) {
+	 var restorepage = document.body.innerHTML;
+	 var printcontent = document.getElementById(el).innerHTML;
+	 document.body.innerHTML = printcontent;
+	 window.print();
+	 document.body.innerHTML = restorepage;
+	}
+ 
+ </script> 
 
 </head>
 
 <body id="page-top">
-
-        <?php include('inc_menu_principale.php');?>
-        <!-- End of Sidebar -->
         
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <h1>Les enregistrements récents</h1>
+                    <h1><a href="deconnexion.php">Déconnexion</a></h1>
                       
                   <div class="container">
  
@@ -263,8 +270,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
                    
 				   <ul class="winners">
 	            
-				   
-				</ul>
 	               
 				  </div><!--livre-infos-->
 	              
@@ -296,24 +301,15 @@ height:2800px;overflow-y:scroll;z-index:5;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Création de compte  <button type="button" class="bts bts-primary" id="but">
+                               Crée des comptes  <button type="button" class="bts bts-primary" id="but">
                               +</button>
                             </div>
 
-                        <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Type de logement</option>
-						  <option value="1">chambre single</option><option value="2">chambre double</option>
-                           <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
-                          <option value="7">studio double</option>
-						  <option value="8">appartement meublé</option>
-                          </select>
-                          </select>
-						  
-                          </div>  
+                        
                         </div>
                     </form>
 
-                    <?php include('inc_menu1.php');?>
+                  
                 </nav>
                 <!-- End of Topbar -->
 
@@ -322,47 +318,73 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_create_user.php">
+  <form method="post" id="form1" action="data_validate_client.php">
  <div  id="examp" style="display:none">
-  <h2> Création de compte utilisateur OCD </h2>
+  <h2> Création de compte utilisateurs OCD </h2>
    
    <div class="form-row">
     <div class="form-group col-md-6">
       <div class="input-group">
-	  <label for="inputPassword4">Date <br/>de création</label>
+	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
     <input type="date" name="dat" id="dat" class="form-control" placeholder="dd/mm/yyyy" required>                                               
   </div>
  </div>
 
-   
+   <div class="form-group col-md-6">
+      <div class="input-group">
+	  <label for="inputPassword4">Civilité client *<br/></label>
+     <select id="civil" class="civil" name="civil">
+	 <option value="monsieur">Monsieur</option>
+	 <option value="madame">Madame</option>    
+      <option value="famille">famille</option>
+	
+    </select>	  
+   </div>
+
+    </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Identifiant OCD</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+      <label for="inputPassword4">Responsable compte *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required>
     </div>
   
 
    <div class="form-group col-md-6">
-      <label for="inputEmail4">Mot de pass *</label>
-      <input type="password" name="pass" id="pass" class="form-control" id="inputEmail4" placeholder="password">
+      <label for="inputEmail4">Numéro phone</label>
+      <input type="number" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">status</label>
+      <label for="inputPassword4">Email*</label>
       <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
     </div>
      <div class="form-group col-md-6">
-      <label for="inputEmail4">Email(responsable)</label>
+      <label for="inputEmail4">Identifiant OCD</label>
       <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Vos site à renseigner(au plus 3)</label>
-      <input type="text" name="site1" class="form-control" id="inputPassword4" placeholder="Nom de votre structure">
-	  <input type="text" name="site2" class="form-control" id="inputPassword4" placeholder="Nom de votre structure">
-	  <input type="text" name="site3" class="form-control" id="inputPassword4" placeholder="Nom de votre structure">
+      <label for="inputPassword4">Mot de pass </label>
+      <input type="password" name="adresse" class="form-control" id="inputPassword4" placeholder="Mot de pass">
     </div>
     
-  </div>
+    <h2>Nommer les sites de votre activité<br/>Pas plus de 3 site</h2>
+	
+	<div class="form-group col-md-12">
+      <label for="inputPassword4">site 1</label>
+	  <input type="text" name="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
+      </div>
+	  
+	  <div class="form-group col-md-12">
+      <label for="inputPassword4">site 2</label>
+	  <input type="password" name="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
+      </div>
+	  
+	  <div class="form-group col-md-12">
+      <label for="inputPassword4">site 3</label>
+	  <input type="text" name="site3" class="form-control" id="inputPassword4" placeholder="Nommer">
+      </div>
+	
+	</div>
   <span class="errors"></span>
-   <button type="button" class="buttons">Valider le compte</button>
+   <button type="button" class="buttons">créer compte</button>
  </div>
  
  <div class="content">
