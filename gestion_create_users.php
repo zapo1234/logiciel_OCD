@@ -42,7 +42,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
-#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
+#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:800px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
@@ -318,7 +318,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_validate_client.php">
+  <form method="post" id="form1" action="data_customer_users.php">
  <div  id="examp" style="display:none">
   <h2> Création de compte utilisateurs OCD </h2>
    
@@ -350,15 +350,15 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
    <div class="form-group col-md-6">
       <label for="inputEmail4">Numéro phone</label>
-      <input type="number" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Email*</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+      <input type="text" name="emails" id="emails" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Identifiant OCD</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
+      <input type="text" name="ocd" id="ocd" class="form-control" id="inputEmail4" placeholder="">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Mot de pass </label>

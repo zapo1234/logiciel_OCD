@@ -177,22 +177,7 @@ $smart_from =($page -1)*$record_peage;
 				}
 			 }
 		  }
-		  
-		  // dans le cas ou un local est bloque de type 5
-	     foreach($array3 as $cle =>$valu){
-			 $datas2 = $valu;
-			 foreach($valu as $cles =>$valss){
-			if($cles == $donnees['id_chambre']){
-				$dvs = $valss;
-				   $dss =explode(',',$dvs);
-				   foreach($dss as $hs){
-					  $c[]=$hs; 
-				   }
-				}
-			 }
-		  }
-		
-       // recupére la date passé en paramètre
+	// recupére la date passé en paramètre
 	  $date =$_GET['data'];
 	   $date = explode('-',$date);
        $j = $date[2];

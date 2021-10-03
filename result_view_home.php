@@ -469,17 +469,16 @@ if($_POST['action']=="editvalidate"){
    $active="off";
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-	
-	 $id_fact=0;
+     $id_fact=0;
      $date="";
      $horaires="";
      $active="off";
      $datas_fren="";
 	 $dates="";
      $activ=5;
-     $code=$_SESSION['code'];	 
+     $code=$_SESSION['code'];	
+
+   echo$code;	 
 		
 	    $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
@@ -491,8 +490,8 @@ if($_POST['action']=="editvalidate"){
 	// inserer dans la table home_occupation
 			  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_chambre,email_ocds,date,date_french,dates,id_fact,type,code) 
-	   VALUES(:id_chambre,:email_ocd,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
+	   VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
 		 $reys->execute(array(':id_local'=>$id,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
@@ -501,7 +500,11 @@ if($_POST['action']=="editvalidate"){
 							  ':id_fact'=>$id_fact,
 							  ':type'=>$activ,
 							  ':code'=>$code
-	                        ));		
+	                        ));	
+
+        echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+							
 	 }
 
 // actionner   les actions sur un local
