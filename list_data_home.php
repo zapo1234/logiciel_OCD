@@ -54,7 +54,7 @@ $smart_from =($page -1)*$record_peage;
    }
    
    $dns=$sql->fetchAll();
-	 $arr1=[];
+	  $arr1=[]; // recupere les id_chambre 
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
 	  $array3 = [];// pour les chambre bloque;
@@ -105,9 +105,7 @@ $smart_from =($page -1)*$record_peage;
       
 	 echo'<div class="content_home">';
 	  
-	
-	foreach($don as $donnees) {
-	
+	 foreach($don as $donnees) {
 	$d = $donnees['id_chambre'];
 	// verifier si id_chambre n'est pas dans le tableau des id_local
 	if(!in_array($d,$arr1)){
@@ -158,20 +156,7 @@ $smart_from =($page -1)*$record_peage;
 				}
 			 }
 		  }
-		  
 		  // dans le cas ou un local est bloque de type 5
-	     foreach($array3 as $cle =>$valu){
-			 $datas2 = $valu;
-			 foreach($valu as $cles =>$valss){
-			if($cles == $donnees['id_chambre']){
-				$dvs = $valss;
-				   $dss =explode(',',$dvs);
-				   foreach($dss as $hs){
-					  $c[]=$hs; 
-				   }
-				}
-			 }
-		  }
 		  
 		  // recupere les dates d'enregsitrer dans le cas horaire.
 		  foreach($dns as $das){
@@ -192,8 +177,7 @@ $smart_from =($page -1)*$record_peage;
       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 	     $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-   
-		$css="indispo";
+        $css="indispo";
 	 }
 	 
 	 if($debut <= $_POST['days'] AND $_POST['das']<= $sortie){

@@ -26,7 +26,7 @@ if(isset($_POST['id_ocd'])) {
 	
 	if($_POST['id_ocd']==$donnees['password'] AND $donnees['email_ocd']=="") {	
 	echo'<SCRIPT LANGUAGE="JavaScript">
-       document.location.href="tableau_create_user.php"
+       document.location.href="gestion_create_users.php"
         </SCRIPT>';	
 		
 	}
