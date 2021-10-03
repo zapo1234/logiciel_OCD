@@ -24,7 +24,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
 	  
    while($donnees =$rej->fetch()){
   
-  echo'<div class="bs"><span class="h1">Caisse '.$donnees['society'].'</span>
+  echo'<div class="bs"><span class="h1"><img src="img/caisse.png" alt="map" width=15px" height="15px"> Caisse '.$donnees['society'].'</span>
 
    <div id="caisse">
  <div class="td"> Facture soldée:</div>

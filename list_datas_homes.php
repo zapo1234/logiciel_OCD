@@ -74,10 +74,10 @@ $smart_from =($page -1)*$record_peage;
    }
 	  
 	  $dns=$sql->fetchAll();
-	 $arr1=[];
+	 $arr1=[]; // table pour recupérer les id des chambre 
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
-	  $array3 = [];// pour les chambre bloque;
+	  $array31 = [];// pour les chambre bloque id de chmabre bloque;
 	  $data = []; // recupere les dates pour la partie horaire
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
@@ -118,11 +118,12 @@ $smart_from =($page -1)*$record_peage;
 			   // pour les chambre bloque
 			   if($val['type']==5){
 				 $datc2 = $val['date'];
-				 // tableau associative id_chambre et le type
-			     $arra2 = array(
-			    $data2=>$datc2
-			    );
-				$array3[]=$arra2;
+				 $dats = $val['id_chambre'];
+				 $dati = explode(',',$dats);
+				 foreach($dati as $da){
+				// recupere les id de chambre  de type 5 bloque
+                  $array31[]=$da;				
+				 }
 				}
 			   
 			 // recupere les elements dans un tableau.
@@ -135,6 +136,11 @@ $smart_from =($page -1)*$record_peage;
 	if(!in_array($d,$arr1)){
 	  $color='libre';
 		$status ='le local est disponible <br/><br/><br/>';
+	}
+	
+	elseif(in_array($d,$array31)){
+		$color='bloque';
+		$status ='le local est bloqué temporairement<br/><br/><span class="drt"><i class="fas fa-minus-circle" style="font-size:16px;padding-left:70%;"></span></i></span>';
 	}
 	
 	else{
@@ -246,13 +252,6 @@ $smart_from =($page -1)*$record_peage;
 		$status ='le local est disponible <br/><br/><br/>';
 	}
 	
-	}
-
-	
-	 
-	 if(count($c)!=0){
-		$color='bloque';
-		$status ='le local est bloqué temporairement<br/><br/><span class="drt"><i class="fas fa-minus-circle" style="font-size:16px;padding-left:70%;"></span></i></span>';
 	}
 	
 	}

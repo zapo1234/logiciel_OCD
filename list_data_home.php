@@ -64,14 +64,11 @@ $smart_from =($page -1)*$record_peage;
 		     $data1 = $val['id_chambre'];
 			 $datax = $val['type'];
 			 $datasx =$val['date'];
-			 
 			 // regroupe les id_chambre
 			 $dat = explode(',',$data1);
 			 foreach($dat as $vals){
 				$arr1[] = $vals; 
-				 
-			 }
-			 
+			}
 			 if($val['type'] ==1 OR $val['type']== 3){
 				 $datc = $val['date'];
 				 // tableau associative id_chambre et le type
@@ -95,13 +92,13 @@ $smart_from =($page -1)*$record_peage;
 			   // pour les chambre bloque
 			   if($val['type']==5){
 				 $datc2 = $val['date'];
-				 // tableau associative id_chambre et le type
-			     $arra2 = array(
-			    $data2=>$datc2
-			    );
-				$array3[]=$arra2;
+				 $dats = $val['id_chambre'];
+				 $dati = explode(',',$dats);
+				 foreach($dati as $da){
+				// recupere les id de chambre  de type 5 bloque
+                  $array3[]=$da;				
+				 }
 				}
-			   
 			 // recupere les elements dans un tableau.
 		      // transmettre les tableau avec les valeurs id_champs et leur date.
 	  }
@@ -122,14 +119,18 @@ $smart_from =($page -1)*$record_peage;
         $a="h6";
 	}
 	
+	elseif(in_array($d,$array3)){
+		$name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
+		$a="h6";
+		$envoi="";
+		$css="indispo";
+	}
 	else{
-		
 		// boucle sur le premier tableau associative
 		// tableau pour recuperer les donnees dont id_chambre 1 valeur du 
 		$array =[];// tableau pour les séjour 1 et reservation type 3
 		$b =[];// tableau pour les horaire pass type 2
 		$c = [];// tableau pour les chmabre bloque
-		
 		foreach($array1 as $key =>$values){
 			$data =$values;
 			
@@ -176,30 +177,26 @@ $smart_from =($page -1)*$record_peage;
 		  foreach($dns as $das){
 			 $dones[] = $das;
 		  }
-		
 		// on verifie le nombre d'élement dans le tableau
-	   
 	   $nombre = count($array);
 	   $nombr = count($b);
 	   
-	   if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
-	
-	if($nombre!=0){	
+	  if($_POST['to']=="séjour" OR $_POST['to']=="réservation") {
+	 if($nombre!=0){	
     $debut = min($array);
     $sortie = max($array);
 	$date =date('Y-m-d');
    // on recupére le premier et la dernier date
     // si le client est facturé sur un séjour ou reservation
-	
-     if(in_array($_POST['days'],$array)){
+	if(in_array($_POST['days'],$array)){
       $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 	     $envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
    
 		$css="indispo";
 	 }
-
-     if($debut <= $_POST['days'] AND $_POST['das']<= $sortie){
+	 
+	 if($debut <= $_POST['days'] AND $_POST['das']<= $sortie){
      $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";
@@ -240,8 +237,7 @@ $smart_from =($page -1)*$record_peage;
 	$an1 = $dates2[0];
 	// la vairable en envoi
 	$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-   
-      $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+   $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5"; 
 		$css="dispo";
 	 }
@@ -260,9 +256,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	// la vairable en envoi
 	$envoi='<a href="#" class="add_home" data-id2="'.$donnees['id_chambre'].'" title="facturé le local">Ajouter le local</a>';
-   
-      
-		$name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
+     $name='local disponible du '.$j.'/'.$mm.'/'.$an.' au '.$j1.'/'.$mm1.'/'.$an1.'';
 		$a="h5";
 		$css="dispo";
 	}
@@ -278,7 +272,6 @@ $smart_from =($page -1)*$record_peage;
 		   $date= date('Y-m-d');
 		   
 		 if(in_array($_POST['tim'],$b) AND in_array($_POST['tis'],$b)  AND in_array($_POST['dat'],$dones)){
-
         $name='<i class="fas fa-exclamation-circle" style="color:red";></i> indisponible';
 		$a="h6";
 		$envoi="";

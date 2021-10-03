@@ -55,8 +55,7 @@ if($_POST['action']=="parameter") {
        'cost' => 12 // the default cost is 10
        ];
 
-    
-	$hash = password_hash($pass, PASSWORD_BCRYPT, $options);
+   $hash = password_hash($pass, PASSWORD_BCRYPT, $options);
    
     $emails = $_SESSION['email_ocd'];
    
