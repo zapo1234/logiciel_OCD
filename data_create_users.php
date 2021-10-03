@@ -1,7 +1,6 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-if($_POST['action']=="parameter") {
 	  
 	 if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token']))
 		
@@ -47,10 +46,8 @@ if($_POST['action']=="parameter") {
    $heure =date('H:i');
    $email =$_POST['emails'];
    $email_ocd = $_POST['ocd'];
-   // 
-   $pass=$_POST['pass'];
-    
-	   //hash sur le mot de pass
+   $pass = $_POST['password'];
+    //hash sur le mot de pass
 	   $options = [
        'cost' => 12 // the default cost is 10
        ];
@@ -59,33 +56,30 @@ if($_POST['action']=="parameter") {
    
     $emails = $_SESSION['email_ocd'];
    
-   $name = trim(strip_tags($_POST['nom']));
-   $prenom = trim(strip_tags($_POST['prenom']));
+   $name = trim(strip_tags($_POST['name']));
    $num="";
-   $role =$_POST['role'];
    $log="";
    $numero_compte ="";
-   $user =$name.' '.$prenom;
+   $user =$name;
    $etat ="";
    $active="off";
    $code =0;
-   $society =$_POST['site'].','.$_POST['site1'].' ,'.$_POST['site2'];
-   
-   
-	 $status=1;
-     $categories="dirigeant";
-     $permission ="user:boss";	 
+   $society =$_POST['site1'].','.$_POST['site2'].' ,'.$_POST['site3'];
+   $id_visitor = $token;
+   $status=1;
+   $categories="dirigeant";
+   $permission ="user:boss";	 
 	
    
    if($donnees['email_user']!=$_POST['emails']) {
 	
-  echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte de l\'utilisateur crée  !</button>
+  echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte users crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo)');
-	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo,id_visitor) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo,:id_visitor)');
+	     $rev->execute(array(':email_ocd'=>$email_ocd,
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
 							':adresse'=>$adresse,
@@ -105,7 +99,8 @@ if($_POST['action']=="parameter") {
 						    ':etat'=>$etat,
 							':status'=>$status,
 							':active'=>$active,
-						    ':logo'=>$log
+						    ':logo'=>$log,
+							':id_visitor'=>$token
 						  ));
 
   }
@@ -115,5 +110,3 @@ if($_POST['action']=="parameter") {
 	  echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>Modfier le mot de pass ! </button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
     }
-	
-  }

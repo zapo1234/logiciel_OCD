@@ -67,15 +67,6 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 .hom{text-align:center;border-bottom:1px solid #eee;padding:0.3%;color:black;font-size:14px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
  h5{font-size:13px;} .dg{padding-left:3%;} 
- .montant{padding:1%;background-color:white;text-align:center;margin-top:30px;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"} 
- #monts,#tva,#account,#rpay,#paie1,#paie2,#paie3,#paie4,#remise{width:90px;font-weight:200;border:2px solid #eee;} .tot{margin-top:10px;} #mont{padding-left:2%;}
-.remov{padding-left:3%;}
-.bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
-.tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
-.action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
-.ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
-
 .enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:green;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
 .dep {
   animation: spin 2s linear infinite;
@@ -86,71 +77,6 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
-ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
-.tds{font-size:28px;margin-left:12%;color:#09A81F;margin-left:10%;}
-.tdv{font-size:28px;margin-left:12%;color:#A80913;margin-left:10%;font-weight:bold;}
-.tdc{font-size:28px;margin-left:12%;color:#0E84D1;margin-left:10%;font-weight:bold;}
-.td{margin-left:10%;}
-
-.reservation,.pass,.sejour{padding:left:2%;}
-.sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
-.pass{color:#650699;font-weight:bold;}
-.annule{color:#C81C31;font-weight:bold}
-
-.live-infos{
-  width: 250px;
-  height: 600px;
-  overflow: hidden;
-  position: relative;
-  background-color:white;
-  
-}
-ul.winners{
-  position: absolute;
-  top: 0;
-  width: 200%;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-ul.winners li{
-  /*height: 50px;*/
-  border-bottom: 1px #eee solid;
-  line-height: 50px;
-  font-size: 1rem;
-  color: black;
-  padding-left: 2rem;
-}
-.mentions{
-  display: block;
-  margin: 10px 0;
-  font-size: 1.2rem;
-  
-}
-
-.pied_page{margin-left:60%;margin-top:10px;}
-.bout{float:left;margin-left:1%;width:30px;height:30px;background:white;color:#0C80E7;border:2px solid white;border-radius:50%;font-weight:bold;}
-#message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
-.drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
-background-color: white;
-border-radius: 20px;
-border-width: 0;
-box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
-color: black;
-cursor: pointer;
-display: inline-block;
-font-family: Arial,sans-serif;
-font-size: 1em;
-padding: 0 25px;
-transition: all 200ms;}
-
-.ss{padding:2%;width:20px;height:20px;border-radius:40%;border:2px solid #eee;background:#e74a3b;color:white;
-margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
-footer.sticky-footer{}
-
-.drops{display:none;}  .users{display:none} #news_data{display:none;}
 
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
@@ -173,6 +99,8 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
 h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
 .sup{cursor:pointer;color:white;font-size:12px;} #content1{display:none;}
+
+.name_error,.email_error,.site1_error,.site2_error,.site3_error{font-size:16px;color:red;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}
@@ -318,7 +246,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-  <form method="post" id="form1" action="data_customer_users.php">
+                    <div class="resultats"></div><!--ajax--affichage-->
+					<div class="resultat"></div><!--retour affichage ajax-->
+  
+  <form method="post" id="form1" action="">
  <div  id="examp" style="display:none">
   <h2> Création de compte utilisateurs OCD </h2>
    
@@ -344,90 +275,69 @@ height:2800px;overflow-y:scroll;z-index:5;}
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Responsable compte *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+	  <span class="name_error"></span>
     </div>
   
 
    <div class="form-group col-md-6">
       <label for="inputEmail4">Numéro phone</label>
       <input type="number" name="numero" id="numero" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
-    </div>
+	  <span class="numero_error"></span>
+       </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Email*</label>
       <input type="text" name="emails" id="emails" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+	  <span class="email_error"></span>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Identifiant OCD</label>
       <input type="text" name="ocd" id="ocd" class="form-control" id="inputEmail4" placeholder="">
+	  <span class="id_error"></span>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Mot de pass </label>
-      <input type="password" name="adresse" class="form-control" id="inputPassword4" placeholder="Mot de pass">
+      <input type="password" name="password" id="password" class="form-control" id="inputPassword4" placeholder="Mot de pass">
+	  <span class="pass_error"></span>
     </div>
     
     <h2>Nommer les sites de votre activité<br/>Pas plus de 3 site</h2>
 	
 	<div class="form-group col-md-12">
       <label for="inputPassword4">site 1</label>
-	  <input type="text" name="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
+	  <input type="text" name="site1" id="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
+	  <span class="site1_error"></span>
       </div>
 	  
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">site 2</label>
-	  <input type="password" name="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <input type="password" name="site2" id="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <span class="site2_error"></span>
       </div>
 	  
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">site 3</label>
-	  <input type="text" name="site3" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <input type="text" name="site3" id="site3" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <span class="site3_error"></span>
       </div>
 	
 	</div>
   <span class="errors"></span>
-   <button type="button" class="buttons">créer compte</button>
+   <input type="submit" class="buttons" value="créer un compte">
  </div>
  
  <div class="content">
  <div class="content1">
- <div class="h3"><span id="h3"></span><span class="nbjour"></span></div>
- <span class="client"></span>
- </div>
-
-
- <input type="hidden" id="nbjour" name="nbjour">
  
 </div><!--content-->
 
-
-
-<div class="contents">
-<div id="resultat_home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
-
- <div class="content2">
-  <h4> Les détails sur le séjour </h4>
-  
-  <div id="results"></div><!--div-affiche data home selectionné-->
-  
- </div>
-<input type="hidden" name="token" id="token" value="<?php
-//Le champ caché a pour valeur le jeton
-echo $_SESSION['token'];?>">
- </div><!--content2--> 
- </form>
+</form>
  
  
     
 	</div>
 
- <div class="reini" style="display:none">
- <form method="post" id="form_reini" action="">
- <h1>Réinitialiser votre caisse journalière</h1>
- <div class="dert"> Date du point :<input type="date" id="reini" name="reini" required></div>
- <div class="action"><button type="button" class="sup">Annuler</button><input type="submit" class="ok" value="ok"></div>
- </form>
- 
- </div><!--reini---->
- <div id="result_reini"></div><!--div result_reini-->
+
  <div id="home_data"></div><!--div home-->
     
 	</div>
@@ -489,42 +399,7 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-    $(document).on('click','.titre',function(){
-	 $('.datas').slideToggle();
-	});
-	
-	$(document).on('click','.ouvrir',function(){
-	 $('.montant').css('display','block');
-     $('.ouvrir').css('display','none');
-     $('.ouvrir11').css('display','block');	 
-	});
-	
-	$(document).on('click','.ouvrir11', function(){
-	 $('.montant').css('display','none');
-     	$('.ouvrir').css('display','block');
-       $('.ouvrir11').css('display','none');	  
-	});
-	
-	$(document).on('click','.ouvrir1',function(){
-	 $('.montant1').css('display','block');
-     $('.ouvrir1').css('display','none');
-     $('.ouvrir12').css('display','block');	 
-	});
-	
-	$(document).on('click','.ouvrir12', function(){
-	 $('.montant1').css('display','none');
-     	$('.ouvrir1').css('display','block');
-       $('.ouvrir12').css('display','none');	  
-	});
-	
-	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
-	 });
-	 
-
-  $('#sms').click(function(){
-	$('.drop').slideToggle();
-	});
+    
 
    $('#but').click(function(){
    $('#examp').css('display','block');
@@ -543,552 +418,66 @@ echo $_SESSION['token'];?>">
    $('#pak').css('display','none');
    $('.reini').css('display','none');
  });
+
  
- $('.sup').click(function(){
-	$('#pak').css('display','none');
-    $('.reini').css('display','none');	
-	 
- });
- 
- $(document).on('change','.to',function(){
-	var selectedOptions = $('#to option:selected').text(); 
-	 
-	 var result = "séjour facturé";
-	 var resuts = "réservation";
-	 var results = "horaire";
-	 
-	 if(selectedOptions == result){
-		 $('.form2').css('display','none');
-		 $('.form1').css('display','block');
-		 
-	 }
-	 
-	 else if(selectedOptions == resuts){
-		 $('.form2').css('display','none');
-		 $('.form1').css('display','block');
-		 
-	 }
-	 else{
-		 
-		$('.form2').css('display','block');
-		 $('.form1').css('display','none'); 
-	 }
- });
- 
- // click sur le bouton 
- $('.buttons').click(function(){
-	 
-	 // on definir
-	 var dat = $('#dat').val();
-	 var name = $('#name').val();
-	 var piece = $('#piece').val();
-	 var to = $('#to').val();
-	 var days = $('#days').val();
-	 var das = $('#das').val();
-	 var tim = $('#tim').val();
-	 var tis =$('#tis').val();
-	 var email = $('#email').val();
-	 var adresse = $('#adresse').val();
+$('#form1').on('submit', function(event) {
+	event.preventDefault();
+
+	 var form = $(this).serialize();
+     var name = $('#name').val();
+	 var email = $('#emails').val()
+	 var site1 = $('#site1').val();
+	 var site2 = $('#site2').val();
+	 var site3 =$('#site3').val();
 	 var numero =$('#numero').val();
-	 
-	 // regex
-	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
-    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
-    var number = /^[0-9]{8,14}$/;
-	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	 
-	 var date1 = new Date($('#days').val());
-	 var date2 =  new Date($('#das').val());
-	 
-	 // convertir les dates en Français
-	 var d = date1.getDate();
-	 var m = date1.getMonth() +1;
-	 var y = date1.getFullYear();
-	 
-	 var ds = date2.getDate();
-	 var ms = date2.getMonth() +1;
-	 var ys = date2.getFullYear();
-	 
-	 var datefrom = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) +'/' + y;
-	 
-	 var datefro = (ds <= 9 ? '0' + ds : ds) + '/' + (ms <= 9 ? '0' + ms : ms) +'/' + ys;
-	 
-	 
-	 // calculer le nom de jour du séjour 
-	  var tmp = new Date(date2-date1);
-	  var s = tmp/1000/60/60/24;
-	 
-	 
-	 var date3 = parseInt($('#tim').val(),10);
-	 var date4 = parseInt($('#tis').val(),10);
-	 
-	 // caclcule d'heure horaire
-	 var tmps = date4-date3;
-	 var r = tmps;
+	 var id_ocd =$('#id_ocd').val();
+	 var regx = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	 
 	 if(name.length==""){
-		$('#name').css('border-color','red');
-		
+	 $('.name_error').html('le nom du responsable est vide'); 
 	}
-	 
-	 else if (name.length > 60){
-      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur le nom du client');
-    }
-	
-	 
-	 else if (!reg.test(email)){
-      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email du client');
-    }
-	
-	 else if (numero.length > 14){
-      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le numéro de télephone ne doit pas depasser 14chiffres');
-    }
-	
-	
-	else if (piece.length > 50){
-      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>le nombre de caractères pour la pièce d\identité ne doit pas depasser 50');
-    }
-	 
-	 else if(dat ==""){
-		 $('#dat').css('border-color','red');
+	 else if(id_ocd.length > 12) {
+	$('.id_error').html('l\'identifiant OCD ne peut pas depasser 12 caractères'); 
+	 }
+	 else if(name.length > 70) {
+		$('.site_error').html('limiter à 70 caractères le nom du responsable'); 
+	 }
+	 else if(site1.length > 70) {
+		$('.site1_error').html('limiter à 70 caractères le nom du site'); 
+	 }
+	  else if(site2.length > 70) {
+		$('.site2_error').html('limiter à 70 caractères le nom du site');  
 	 }
 	 
-	 else if(piece.length ==""){
-		$('#piece').css('border-color','red'); 
-		$('.error').html('fournir les informations sur l\'identité du client');
-	}
-	
-	else if(adresse > 150){
-		$('#adresse').css('border-color','red'); 
-		$('.errors').html('l\'adresse du client peut pas dépasser 150 caractères');
-	}
-	 
-	 else if(to =="sans"){
-		$('#to').css('border-color','red'); 
-	}
-	
-
-	else{
-	 
-	 if(to =="séjour"){
-		 
-		 var client = $('.client').text();
-		 if(client ==""){
-		 
-		 if(days!=""){
-		 
-		 if(das!=""){
-		 
-		 if(date1 < date2) {
-		 $('#h3').append('Séjour facturé');
-		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
-		 
-		 if(s==1){
-		 $('.nbjour').append(' Durée : <span class="det">'+s+'jour</span>');
-		 }
-		 if(s > 1){
-			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
-		 }
-		 $('.content1').css('display','block');
-		 $('.content2').css('display','block');
-		 $('#pak').css('display','none');
-	     $('#examp').css('display','none');
-		 $('.content_home').css('display','block');
-		 $('.text').css('display','block');
-		 $('.tex').css('display','none');
-		 $('#nbjour').val(s);
-		 }
-		 
-		 else{
-			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
-		 }
-		 
-		 }
-		 
-		 else{
-			 $('#das').css('border-color','red'); 
-		 }
-		 
-		 }
-		 
-		 else{
-			$('#days').css('border-color','red');  
-		 }
-		 
-		 }
-		 
-		 else{
-			 
-			 if(date1 < date2){
-			$('#h3').text('Séjour facturé'); 
-			$('.de').text(name);
-			$('.des').text(numero);
-			$('.from').text(datefrom);
-			$('.todate').text(datefro);
-			
-			if(s==1){
-			$('.det').text(s+'jour');
-			
-			}
-			
-			if(s > 1){
-				$('.det').text(s+'jours');
-			}
-			$('.content1').css('display','block');
-			$('.content2').css('display','block');
-			$('#pak').css('display','none');
-	       $('#examp').css('display','none');
-		   $('.content_home').css('display','block');
-		   $('.text').css('display','block');
-		   $('.tex').css('display','none');
-		   $('#nbjour').val(s);
-		 }
-		 else{
-			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé');  
-		 }
-		 
-		 }
-		
+	 else if(site3.length > 70) {
+		$('.site3_error').html('limiter à 70 caractères le nom du site');  
 	 }
 	 
-	 if(to =="horaire"){
-		 var client = $('.client').text();
-		 if(client==""){
-		 if(tim!=""){
-		 if(tis!=""){
-		 if(date3 < date4){
-		 $('#h3').append('Horaire facturé');
-		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+tim+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+tis+'</span> </span>');
-		 
-		 if(r==1){
-		 $('.nbjour').append('Durée : <span class="det">'+r+'heure</span>');
-		 }
-		 if(r > 1){
-			$('.nbjour').append('Durée : <span class="det">'+r+'heures</span>');			  
-		 }
-		 
-		 $('.content1').css('display','block');
-		 $('.content2').css('display','block');
-		    $('#pak').css('display','none');
-	        $('#examp').css('display','none');
-			$('.content_home').css('display','block');
-		    $('.text').css('display','none');
-			$('.tex').css('display','block');
-			$('#nbjour').val(r);
-		 }
-		 
-		 else{
-			 $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>l\'heure de départ ne dois pas etre inférieur à celle de l\'entréé'); 
-	      }
-		 
-		 }
-		 
-		 else{
-			$('#tis').css('border-color','red');  
-		 }
-		 
-		 }
-		 
-		 else{
-			 $('#tim').css('border-color','red'); 
-		 }
-		 
-		 }
-         else{
-			 
-			 if(date3 < date4){
-            $('#h3').text('Horaire facturé'); 
-			$('.de').text(name);
-			$('.des').text(numero);
-			$('.from').text(tim);
-			$('.todate').text(tis);
-			
-			if(r==1){
-			$('.det').text(r+'heure');
-			
-			}
-			
-			if(r > 1){
-				$('.det').text(r+'heures');
-			}
-			
-			$('.content1').css('display','block');
-			$('.content2').css('display','block');
-		    $('#pak').css('display','none');
-	        $('#examp').css('display','none');
-			$('.content_home').css('display','block');
-		    $('.text').css('display','none');
-			$('.tex').css('display','block');
-			$('#nbjour').val(r);
-		}
-		
-		else{
-			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
-		}
-	   }
-	 }
+	  else if (!regx.test(email)){
+      $('.error_email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur l\'email du client');
+    }
 	 
-	 
-	 if(to =="réservation"){
-		 
-		 var client = $('.client').text();
-		 if(client ==""){
-		 
-		 if(days!=""){
-		 
-		 if(das!=""){
-		 
-		 if(date1 < date2) {
-		 $('#h3').append('Réservation');
-		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
-		 
-		 if(s==1){
-		 $('.nbjour').append('Durée : <span class="det">'+s+'jour</span>');
-		 }
-		 if(s > 1){
-			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
-		 }
-		 $('.content1').css('display','block');
-		 $('.content2').css('display','block');
-		 $('#pak').css('display','none');
-	     $('#examp').css('display','none');
-		 $('.content_home').css('display','block');
-		 $('.text').css('display','block');
-		 $('.tex').css('display','none');
-		 $('#nbjour').val(s);
-		 }
-		 
-		 else{
-			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
-		 }
-		 
-		 }
-		 
-		 else{
-			 $('#das').css('border-color','red'); 
-		 }
-		 
-		 }
-		 
-		 else{
-			$('#days').css('border-color','red');  
-		 }
-		 
-		 }
-		 
-		 else{
-			 
-			 if(date1 < date2){
-			$('#h3').text('Réservation'); 
-			$('.de').text(name);
-			$('.des').text(numero);
-			$('.from').text(datefrom);
-			$('.todate').text(datefro);
-			
-			if(s==1){
-			$('.det').text(s+'jour');
-			
-			}
-			
-			if(s > 1){
-				$('.det').text(s+'jours');
-			}
-			$('.content1').css('display','block');
-			$('.content2').css('display','block');
-		    $('#pak').css('display','none');
-	        $('#examp').css('display','none');
-		    $('.content_home').css('display','block');
-			$('.text').css('display','block');
-		    $('.tex').css('display','none');
-		    $('#nbjour').val(s);
-			
-		 }
-		 
-		 else{
-			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
-		 }
-		 
-		}
-	 }
-	 
-     
-	}
-	 
- });
- 
- 
- $('.buttons').click(function(){
-	
-     var days = $('#days').val();
-	 var das = $('#das').val();
-	 var tim = $('#tim').val();
-	 var tis =$('#tis').val();	
-	 var to =$('#to').val();
-	 var dat =$('#dat').val();
-	
-	var dat = $('#dat').val();
-	 var name = $('#name').val();
-	 var piece = $('#piece').val();
-	 
-	 var dat = $('#dat').val();
-	 var name = $('#name').val();
-	 var piece = $('#piece').val();
-	 
-	 if(name.length!="" && name.length!="" && piece.length!=""){
-	
-	$.ajax({
-	type: 'POST', // on envoi les donnes
-	url: 'list_data_home.php',// on traite par la fichier
-	data:{days:days,das:das,tim:tim,tis:tis,to:to,dat:dat},
+	 else{
+	 $.ajax({
+	type: "POST", // on envoi les donnes
+	url: "data_create_users.php",// on traite par la fichier
+	data:form,
 	success:function(data) { // on traite le fichier recherche apres le retour
-		$('#resultat_home').html(data);
-		$('.content_home').css('display','block');
-		
-		if(to=="séjour" || to=="réservation"){
-		$('.text').css('display','block');
-		$('.tex').css('display','none');
-        $('.content1').css('display','block');
-		$('.content2').css('display','block');		
-		}
-		
-		if(to=="horaire"){
-			
-			$('.content1').css('display','block');
-			$('.content2').css('display','block');
-		    $('.text').css('display','none');
-			$('.tex').css('display','block');
-			
-		}
-	
-	 },
-	 
-	}); 
-	 }
-});
+		$('#resultat').html(data);
+	    }
+	   });
+	 }	 
+  });
  
  // on récupére les données pour créer un user recaptitulatif
  
- $(document).on('click','.add_home',function() {
-
-	var id = $(this).data('id2'); // on recupère l'id.
-    var action ="add";
-	// recupération des variable
-	var nbjour = $('#nbjour').val();
-	var chambre = $('#chambre'+id).val();
-	var type = $('#type'+id).val();
-	var prix_nuite = $('#prix'+id).val();
-	var prix_pass = $('#pric'+id).val();
-	var paynuite = $('#cout_nuite'+id).val();
-	var paypass = $('#cout_pass'+id).val();
-	var to = $('#to').val();
-	var days = $('#days').val();
-	 var das = $('#das').val();
-	 var tim = $('#tim').val();
-	 var tis =$('#tis').val();
-	 var dat =$('#dat').val();
-	
-	
-	// on lance l'apel ajax
-	$.ajax({
-	type: 'POST', // on envoi les donnes
-	url: 'add_home.php',// on traite par la fichier
-	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,dat:dat,action:action},
-	success:function(data) { // on traite le fichier recherche apres le retour
-		$('#results').html(data);
-	
-	 },
-	 error: function() {
-    alert('vérifier votre connexion'); }
-	 
-	});
-
-	});
-	
-	// recupération et caclul des montants
-	
-	// fonction remove pour suprimer un local de la liste
-	$(document).on('click','.remove',function(){
-		var action ="remove";
-		var id = $(this).data('id3');
-		var nbjour = $('#nbjour').val();
-	    var chambre = $('#chambre'+id).val();
-	    var type = $('#type'+id).val();
-	    var prix_nuite = $('#prix'+id).val();
-	    var prix_pass = $('#pric'+id).val();
-	    var paynuite = $('#cout_nuite'+id).val();
-	    var paypass = $('#cout_pass'+id).val();
-	    var to = $('#to').val();
-		
-	// on lance l'apel ajax
-	  $.ajax({
-	  type: 'POST', // on envoi les donnes
-	  url: 'add_home.php',// on traite par la fichier
-	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
-	success:function(data) { // on traite le fichier recherche apres le retouy
-		$('#results').html(data);
-
-      },
-	 error: function() {
-    alert('vérifier votre connexion'); }
-	 
-	});
-		
-	});
-	
-	// calculer les sommes automatiquement du récapitualitif
-	
-	$(document).on('keyup','#tva',function(){
-		
-	var tva = $('#tva').val();
-	var totals =$('#total').val();
-	var monta = $('.monta').text();
-	
-	
-	if(tva > 0 && tva.length <3 && tva.length!=""){
-	var result = parseFloat(totals)*parseFloat(tva);
-	var resul = parseFloat(result)/100;
-	var results = resul.toFixed(2);
-	var t = parseFloat(results)+parseFloat(totals);
-	var ts = t.toFixed(2);
-	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
-	$('.monta').text(ts);
-	}
-
-    if(tva.length ==""){
-     var results = 0;
-	$('.tva').html('<span class="taxe">'+results+'</span> xof<input type="hidden" name="taxe" value="'+results+'">');	
-    $('.monta').text(totals);
-	}		
-  });
-  
-  $(document).on('keyup','#account',function(){
-	 var totals =  $('.monta').text();
-     var tota = parseFloat(totals);	 
-	 var account = $('#account').val();
-	 if(account >0){
-	  
-	  if(account < tota){
-		var result = parseFloat(totals) - parseFloat(account);
-        $('#rpay').val(result);
-		
-	  }
-	  else{
-		$('erreur acompte trop grand'); 
-	 }
-	 
-	 }
-	 
-	 if(account.length ==""){
-		$('#rpay').val(0);	
-	}
-	  
-  });
+ 
   
   // afficher les données des encaissements
   function load() {
 				var action="fetch";
 				$.ajax({
-					url: "affichage_donnees.php",
+					url: "data_create_users.php",
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
@@ -1104,132 +493,8 @@ echo $_SESSION['token'];?>">
     $('.reini').css('display','block');
     $('#pak').css('display','block');
     });
-	
-     
+
 	  
-	 $(document).on('click','#add_local', function() {
-	// on traite le fichier recherche apres le retour
-	  var acomp = $('#account').val();
-	  if(acomp==""){
-		 acomp =0; 
-	  }
-	  var montas = $('#total').val();
-	  var result = parseFloat(acomp);
-	  var result1 = parseFloat(montas);
-	  if(result < result1){
-	   $('#form1').submit();
-	   }
-	   else{
-		 // inséré un petit message pour 
-	  $('.eror').html('<div style="color:#AB040E;font-size:13px;"><i class="fas fa-check-circle" style="color:#AB040E;font-size:12px"></i> l\'acompte doit etre <br/>inférieur au montant httc');  
-	   }
-	});
-	 
-	 // envoi du formulaire
-	 
-	 $('#form_reini').on('submit', function(event) {
-	event.preventDefault();
-	
-	var action="dat";
-	var date=$('#reini').val();
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'affichage_donnees.php',// on traite par la fichier
-	data:{action:action,date:date},
-	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#pak').css('display','none');
-	  $('#result_reini').html(data);
-	  $('.reini').css('display','none');
-	  load();
-	 
-	}
-    });
-	
-	setInterval(function(){
-		 $('#result_reini').html('');
-	 },6000);
-	  
-	  
-  });
-  
-  $(function(){
-  var winners_list = $('.winners li');
-  var ul_height = $('.winners').outerHeight();
-  $('.winners').append(winners_list.clone());
-
-  var i = 0;
-  (function displayWinners(i){
-    setTimeout(function(){
-      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
-        $('.winners').css('top', '0');
-      }
-      var li_height = $(winners_list[i]).outerHeight();
-      $('.winners').animate({
-        top: '-=' + li_height + 'px'}, 500);
-      if( i == winners_list.length - 1){
-        i = 0;
-      }else{
-        i++;
-      }
-      displayWinners(i);
-      
-    }, 3500);
-  })(i);
-  
-});
-
- // compter les nouveaux message
-	function views() {
-				var action="fetchs";
-				$.ajax({
-					url: "news_messages.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultats_messages').html(data);
-					}
-				});
-			}
-
-			views();
-
-
-// imprimer sa caisse user 
-// compter les nouveaux message
-	function view() {
-				var action="news";
-				$.ajax({
-					url: "messanger_datas.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#sms').html(data);
-					}
-				});
-			}
-
-			view();
-			
-	// click sur les news message
-	
-	$(document).on('click','#sms',function(){
-		  var action ="click_messsage";
-		  $.ajax({
-            type: 'POST',
-            url:'messanger_datas.php',
-            data:{action:action},
-            async:true,
-            success: function(data){
-            $('#message_datas').html(data);
-	
-		    }
-          });
-		  
-	  });
-	  
-	  
-	  
-
 });
 </script>
 </body>
