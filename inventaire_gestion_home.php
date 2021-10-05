@@ -14,7 +14,35 @@ else {
 $page=1;	
 	
 }
-    //paginition
+     
+	 // recuperation des site different  s'il existe
+	 $req=$bdd->prepare('SELECT societys FROM inscription_client WHERE email_user= :email_user');
+     $req->execute(array(':email_user'=>$_SESSION['email_user']));
+     $donnees=$req->fetch();
+	 $req->closeCursor();
+	 if(!empty($donnes)){
+	
+	
+	 // on recupere les sites
+	 $sites = $donnees['societys'];
+	 // on eclate sous forme de array
+	 $site = explode(',',$sites);
+	 // creation d'un tableau associatives
+	 $sit1 =1;
+	 $sit2 =2;
+	 $si3=3;
+	  $datas = array($sit1=>$site[0],
+	                $sit2=>$site[1],
+					$sit3 =>$site[2]
+				);
+	// on boucle sur le tableau
+	  foreach($datas as $keys => $value){
+      $select='<option value="'.$keys.'">'.$value.'</option>';
+	}
+	
+	 }
+		
+	//paginition
 	// on compte le nombre de ligne de la table
    if($_SESSION['code']==0){
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE email_ocd= :email_ocd');
@@ -434,10 +462,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	<div class="form-group col-md-6">
       <label for="inputPassword4">Localisation(au cas ou vous avez plusieurs site) </label>
      <select id="site" name="site" class="form-control">
-        <option selected>Choisir...</option>
-        <option value="1">site 1</option>
-		<option value="2">site 2</option>
-		<option value="2">site 3</option>
+        <?php echo $select;?>
       </select>
     </div>
 	
