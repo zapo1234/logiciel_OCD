@@ -136,21 +136,25 @@ include('inc_session.php');
 	 
 	 <?php
 // requete qui va chercher les montants
-    if($donnes['permission']=="user:boss" OR $donnes['permission']=="user:gestionnaire"){
+    if($donnes['permission']=="user:boss"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	$button="";
 	}
 	
-if($donnes['permission']=="user:employes"){
+if($donnes['permission']=="user:employes" OR $donnes['permission']=="user:gestionnaire"){
 $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
                        ':email_ocd'=>$_SESSION['email_ocd']));
+					   
+	$button ='<div><button type="button" class="pri" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
+     <div class=""><button type="button" style="margin-top:12px;margin-left:5%;"class="buts"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>';
   }  
   
  while($donnees =$rej->fetch()){
   
-  echo'<span class="h1">Caisse '.$donnees['society'].'</span>
+  echo'<span class="h1"><img src="img/caisse.png" alt="caisse" width="15px" height="15px"> Caisse '.$donnees['society'].'</span>
 
    <div id="caisse">
  <div class="td"> Facture soldée:</div>
@@ -166,7 +170,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
  <div class="tdc">'.$donnees['reste'].' XOF</div>
   
      
- </div><br/><br/>';
+ </div><br/>'.$button;
    }
   
   $rej->closeCursor();

@@ -636,11 +636,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
     }	
 	
-	 
-      });
-		 	
-
-	// afficher le pannier
+	});
+  // afficher le pannier
   function panier() {
 				var action="panier";
 				$.ajax({
