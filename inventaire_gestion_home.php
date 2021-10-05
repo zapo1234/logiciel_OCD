@@ -140,7 +140,7 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-#society{width:40%;} .btn{display:none;}
+#society{width:40%;} 
 
 @media (max-width: 575.98px) { 
 #panier{display:none}
@@ -336,8 +336,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    
    if($totale_page == 0){
 	  $page =1;
-     // rédirection
-	 header('location:inventaire_gestion_home.php?page='.$page.'');	  
+     // rédirection  
    }
    
    echo'<div class="pied_page">';

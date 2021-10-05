@@ -42,11 +42,11 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
-#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:800px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
+#examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:1000px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
-background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
+background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA;position:fixed;left:10%;top:200px;z-index:5}
 .form1,.form2{display:none;}
 
 .content1{display:none;color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
@@ -58,9 +58,6 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .content_home{width:75%;margin-top:15px;display:none;height:950px;overflow-y:scroll;} 
 .content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 
-.content_home,.content2{float
-:left;display:none;} .content2{margin-left:0.2%;}
-.dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:30%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 .df{padding-left:55%;font-size:18px;color:#FF00FF;font-weight:bold;}
 .intervalle{font-size:13px;padding-left:3%;} 
@@ -83,24 +80,11 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 
 #resultats{height:700px;overflow-y:scroll;padding-left:3%;width:270px;}
 
-#caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
-.h1{padding:1%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;} .site{font-size:12px;}
-
-#panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
-opacity:0.7;padding:1%;color:white;border-radius:5px;}
-.btn{display:none;} .bts{background:#4e73df;color:white;font-size:16px;font-weight:bold;border:2px solid #4e73df;} 
-
-.montant1,.montant{display:none;}
-.montant1{background:white;color:black;text-align:center;margin-top:7px;}
-.hom{background:white;color:black;font-size:14px;padding:3%;}
-.tot{font-weight:none;background:white;height:90px;padding:2%;color:black;font-size:14px;text-align:center;} .option{color:black;height:30px;background:white;width:90%;margin-top:5px;}
-.ouvrir,.ouvrir1{cursor:pointer;}
-.ouvrir11,.ouvrir12{display:none;cusor:pointer;}
 
 h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
 .sup{cursor:pointer;color:white;font-size:12px;} #content1{display:none;}
 
-.name_error,.email_error,.site1_error,.site2_error,.site3_error{font-size:16px;color:red;}
+.name_error,.id_ocd,.email_error,.site1_error,.site2_error,.site3_error{font-size:16px;color:red;}
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}
@@ -246,8 +230,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="resultats"></div><!--ajax--affichage-->
-					<div class="resultat"></div><!--retour affichage ajax-->
+ 
+					<div id="resultat"></div><!--retour affichage ajax-->
   
   <form method="post" id="form1" action="">
  <div  id="examp" style="display:none">
@@ -267,7 +251,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
      <select id="civil" class="civil" name="civil">
 	 <option value="monsieur">Monsieur</option>
 	 <option value="madame">Madame</option>    
-      <option value="famille">famille</option>
+      
 	
     </select>	  
    </div>
@@ -292,7 +276,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Identifiant OCD</label>
-      <input type="text" name="ocd" id="ocd" class="form-control" id="inputEmail4" placeholder="">
+      <input type="text" name="ocd" id="ocd" class="form-control" id="inputEmail4" placeholder="identifiant OCD" required>
 	  <span class="id_error"></span>
     </div>
     <div class="form-group col-md-6">
@@ -306,13 +290,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	<div class="form-group col-md-12">
       <label for="inputPassword4">site 1</label>
 	  <input type="text" name="site1" id="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
-	  <span class="site1_error"></span>
+	 
       </div>
 	  
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">site 2</label>
-	  <input type="password" name="site2" id="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
-	  <span class="site2_error"></span>
+	  <input type="text" name="site2" id="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  
       </div>
 	  
 	  <div class="form-group col-md-12">
@@ -322,7 +306,23 @@ height:2800px;overflow-y:scroll;z-index:5;}
       </div>
 	
 	</div>
+	
+	<h2>Type abonnement</h2>
+	
+	<div class="form-group col-md-12">
+      <label for="inputPassword4">Option de soucription</label>
+	  <input type="text" name="option" id="option" class="form-control" id="inputPassword4" placeholder="">
+      </div>
+	  
+	  <div class="form-group col-md-12">
+      <label for="inputPassword4">Montant versé</label>
+	  <input type="number" name="montant" id="site2" class="form-control" id="inputPassword4" placeholder="">
+      </div>
+	
   <span class="errors"></span>
+  <input type="hidden" name="token" id="token" value="<?php
+//Le champ caché a pour valeur le jeton
+echo $_SESSION['token'];?>">
    <input type="submit" class="buttons" value="créer un compte">
  </div>
  
@@ -423,34 +423,49 @@ height:2800px;overflow-y:scroll;z-index:5;}
 $('#form1').on('submit', function(event) {
 	event.preventDefault();
 
-	 var form = $(this).serialize();
+	 var form_data = $(this).serialize();
      var name = $('#name').val();
 	 var email = $('#emails').val()
 	 var site1 = $('#site1').val();
 	 var site2 = $('#site2').val();
 	 var site3 =$('#site3').val();
 	 var numero =$('#numero').val();
-	 var id_ocd =$('#id_ocd').val();
+	 var ocd =$('#ocd').val();
 	 var regx = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	 var names = /^[a-zA-Z0-9éàèçéô@'-]{0,100}$/;
 	 
 	 if(name.length==""){
-	 $('.name_error').html('le nom du responsable est vide'); 
+	 $('.name_error').text('le nom du responsable est vide'); 
 	}
-	 else if(id_ocd.length > 12) {
-	$('.id_error').html('l\'identifiant OCD ne peut pas depasser 12 caractères'); 
+	
+	else if (!names.test(name)){
+      $('.error_name').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur la syntaxe du nom');
+    }
+	
+	else if (!names.test(site1)){
+      $('.error_site').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur le nom du site1');
+    }
+	
+	else if (!names.test(site2)){
+      $('.error_email').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur sur le nom du site2');
+    }
+	
+	
+	 else if(ocd.length > 12) {
+	$('.id_error').html('l\'identifiant OCD ne peut pas dépasser 12 caractères'); 
 	 }
 	 else if(name.length > 70) {
-		$('.site_error').html('limiter à 70 caractères le nom du responsable'); 
+		$('.name_error').html('limiter à 70 caractères le nom du responsable'); 
 	 }
-	 else if(site1.length > 70) {
-		$('.site1_error').html('limiter à 70 caractères le nom du site'); 
+	 else if(site1.length > 100) {
+		$('.site1_error').html('limiter à 70 caractères le nom du site1'); 
 	 }
-	  else if(site2.length > 70) {
-		$('.site2_error').html('limiter à 70 caractères le nom du site');  
+	  else if(site2.length > 100) {
+		$('.site2_error').html('limiter à 70 caractères le nom du site2');  
 	 }
 	 
-	 else if(site3.length > 70) {
-		$('.site3_error').html('limiter à 70 caractères le nom du site');  
+	 else if(site3.length > 100) {
+		$('.site3_error').html('limiter à 70 caractères le nom du site3');  
 	 }
 	 
 	  else if (!regx.test(email)){
@@ -461,11 +476,17 @@ $('#form1').on('submit', function(event) {
 	 $.ajax({
 	type: "POST", // on envoi les donnes
 	url: "data_create_users.php",// on traite par la fichier
-	data:form,
+	data:form_data,
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
+		$('#form1').css('display','none');
+		$('#pak').css('display','none');
 	    }
 	   });
+	   setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },4000);
 	 }	 
   });
  

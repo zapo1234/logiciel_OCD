@@ -54,7 +54,6 @@ include('inc_session.php');
 
    $hash = password_hash($pass, PASSWORD_BCRYPT, $options);
    
-    $emails = $_SESSION['email_ocd'];
    
    $name = trim(strip_tags($_POST['name']));
    $num="";
@@ -62,9 +61,10 @@ include('inc_session.php');
    $numero_compte ="";
    $user =$name;
    $etat ="";
-   $active="off";
+   $active="on";
    $code =0;
-   $society =$_POST['site1'].','.$_POST['site2'].' ,'.$_POST['site3'];
+   $societys =$_POST['site1'].','.$_POST['site2'].' ,'.$_POST['site3'];
+   $society="";
    $id_visitor = $token;
    $status=1;
    $categories="dirigeant";
@@ -73,12 +73,10 @@ include('inc_session.php');
    
    if($donnees['email_user']!=$_POST['emails']) {
 	
-  echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte users crée !</button>
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo,id_visitor) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo,:id_visitor)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -94,6 +92,7 @@ include('inc_session.php');
 						    ':numero_compte'=>$numero_compte,
 							':code'=>$code,
 							':society'=>$society,
+							':societys'=>$societys,
 					        ':date'=>$date,
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,
@@ -102,11 +101,17 @@ include('inc_session.php');
 						    ':logo'=>$log,
 							':id_visitor'=>$token
 						  ));
-
-  }
+						  
+						  
+						  
+		echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>  Le compte user à été crée !
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
+   }
   
   else{
 	  
-	  echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>Modfier le mot de pass ! </button>
+	  echo'<div style="color:red"><div><i class="fas fa-check-circle"    style="color:red;font-size:16px;"></i>échec veuillez changer le mail ! 
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
     }
+	
+  

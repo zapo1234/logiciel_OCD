@@ -167,7 +167,11 @@ include('inc_session.php');
 			 </tr>
 		    </table>
 	        <div><button type="button" class="prin" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'result_s\')">imprimer la facture</button></div>
-			<div class="footers">'.$donnees['denomination'].' '.$donnees['email'].' '.$donnees['id_entreprise'].' </div>
+		
          </div></div></div>';
+        if($donnees['id_entreprise']!=""){
+			echo'<div class="footers"> Entreprise'.$donnees['denomination'].'Email -  '.$donnees['email'].' N°CCI'.$donnees['id_entreprise'].' - Adresse '.$donnees['adresse'].'</div>';
+			
+		}
 
 ?>

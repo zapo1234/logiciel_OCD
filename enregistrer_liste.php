@@ -24,7 +24,7 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
   $donnees= $req->fetch();
   $id_chambre = rand(1,10000000);
   
-  $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
+  $rel=$bdd->prepare('SELECT  permission,society,code,id_visitor FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
  
@@ -151,7 +151,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		$code = $site;
 		$society = trim(strip_tags($_POST['societ']));
-		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,types,active,codes,society) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:types,:active,:codes,:society)');
+		$id_visitor = $donns['id_visitor'];
+		$rey=$bds->prepare('INSERT INTO chambre(id_chambre,chambre,email_ocd,type_logement,cout_nuite,cout_pass,occupant,nombre_lits,equipement,equipements,infos,icons,types,active,codes,society,id_visitor) VALUES(:id_chambre,:chambre,:email_ocd,:type_logement,:cout_nuite,:cout_pass,:occupant,:nombre_lits,:equipement,:equipements,:infos,:icons,:types,:active,:codes,:society,:id_visitor)');
 	     $rey->execute(array(':id_chambre'=>$id_chambre,
 		                   ':chambre'=>$ids,
 					      ':email_ocd'=>$email_ocd,
@@ -167,7 +168,8 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 						  ':types'=>$types,
 						  ':active'=>$active,
 						  ':codes'=>$code,
-						  ':society'=>$society
+						  ':society'=>$society,
+						  ':id_visitor'=>$id_visitor
 						  ));
 						  
 		// enregsitrer les images correspondant à la chambre
