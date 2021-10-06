@@ -357,11 +357,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 </div><!--der12-->
 					 
 					 <div id="der11">
-					 <form method="post" id="form1"  enctype="multipart/form-data">
+					 <form method="post" id="form1"  enctype="multipart/form-data" action="">
 					 <h2>Informations sur votre entreprise</h2>
                      <div class="form-row">
                     <div class="col">
-                       <label>Nom de la societé(dénomination)</label><br/><input type="text" id="nam" name="nam" class="form-control" placeholder="First name" required><br/>
+                       <label>Nom de la societé(dénomination)</label><br/><input type="text" id="nam" name="nam" class="form-control" placeholder="First name"><br/>
 					   <span class="nam"></span>
                       </div>
 					  </div>
@@ -413,9 +413,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
                       </div>
 				  
                  </div>
-				 <div id="datas"></div><!--datas retour ajax -->
+				 
 				 </form>
 					 
+					<div id="datas"></div><!--datas retour ajax --> 
 					 
 					 </div><!--der12-->
 					 
@@ -623,7 +624,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	 var form_data = $(this).serialize();
 	 var nam = $('#nam').val();
 	 var adress = $('#adress').val();
-	 var adress = $('#adress1').val();
 	 var numero = $('#numero').val();
 	 var numero1 = $('#numero1').val();
 	 var compt = $('#compt').val();

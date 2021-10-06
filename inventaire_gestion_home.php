@@ -22,8 +22,7 @@ $page=1;
 	 $req->closeCursor();
 	 if(!empty($donnes)){
 	
-	
-	 // on recupere les sites
+   // on recupere les sites
 	 $sites = $donnees['societys'];
 	 // on eclate sous forme de array
 	 $site = explode(',',$sites);
