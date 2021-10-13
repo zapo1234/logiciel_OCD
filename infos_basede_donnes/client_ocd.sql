@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 13 sep. 2021 à 09:16
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.3.12
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 13 oct. 2021 à 22:23
+-- Version du serveur : 10.4.21-MariaDB
+-- Version de PHP : 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `client_ocd`
+-- Base de données : `client_ocd`
 --
 
 -- --------------------------------------------------------
@@ -28,12 +27,23 @@ SET time_zone = "+00:00";
 -- Structure de la table `activer_compte`
 --
 
-DROP TABLE IF EXISTS `activer_compte`;
-CREATE TABLE IF NOT EXISTS `activer_compte` (
+CREATE TABLE `activer_compte` (
   `id` int(11) NOT NULL,
-  `email_ocd` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_ocd` (`email_ocd`)
+  `email_ocd` varchar(60) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `clients_ocd`
+--
+
+CREATE TABLE `clients_ocd` (
+  `id` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `numero` varchar(15) NOT NULL,
+  `option` varchar(30) NOT NULL,
+  `montant` varchar(18) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -42,46 +52,88 @@ CREATE TABLE IF NOT EXISTS `activer_compte` (
 -- Structure de la table `inscription_client`
 --
 
-DROP TABLE IF EXISTS `inscription_client`;
-CREATE TABLE IF NOT EXISTS `inscription_client` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `inscription_client` (
+  `id` int(11) NOT NULL,
   `email_ocd` varchar(60) NOT NULL,
   `email_user` varchar(60) NOT NULL,
   `denomination` varchar(100) NOT NULL,
-  `adresse` varchar(150) DEFAULT NULL,
-  `numero_cci` varchar(30) DEFAULT NULL,
-  `id_entreprise` varchar(60) DEFAULT NULL,
-  `user` varchar(150) DEFAULT NULL,
+  `adresse` varchar(150) NOT NULL,
+  `numero_cci` varchar(30) NOT NULL,
+  `id_entreprise` varchar(60) NOT NULL,
+  `user` varchar(150) NOT NULL,
   `numero` varchar(20) NOT NULL,
   `numero1` varchar(18) NOT NULL,
   `password` varchar(200) NOT NULL,
   `permission` varchar(50) NOT NULL,
-  `categories` varchar(60) DEFAULT NULL,
+  `categories` varchar(60) NOT NULL,
   `numero_compte` varchar(30) NOT NULL,
-  `code` tinyint(3) NOT NULL,
-  `society` varchar(120) NOT NULL,
+  `code` tinyint(2) NOT NULL,
+  `society` varchar(60) NOT NULL,
+  `societys` varchar(300) NOT NULL,
   `date` varchar(40) NOT NULL,
   `heure` time NOT NULL,
   `etat` varchar(30) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `active` varchar(5) NOT NULL,
   `logo` varchar(150) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_user` (`email_user`),
-  KEY `password` (`password`),
-  KEY `email_ocd` (`email_ocd`) USING BTREE,
-  KEY `permission` (`permission`),
-  KEY `active` (`active`),
-  KEY `code` (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+  `id_visitor` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `inscription_client`
 --
 
-INSERT INTO `inscription_client` (`id`, `email_ocd`, `email_user`, `denomination`, `adresse`, `numero_cci`, `id_entreprise`, `user`, `numero`, `numero1`, `password`, `permission`, `categories`, `numero_compte`, `code`, `society`, `date`, `heure`, `etat`, `status`, `active`, `logo`) VALUES
-(6, 'souame@yahoo.fr', 'souame@yahoo.fr', 'Hotel Assovon', '', '', '', 'zapo martial', '0022597338899', '', 'test', 'user:boss', 'Responsable', '', 0, '', 'Lun 13 Septembre 2021', '09:11:00', '', 2, 'on', '9198224.png'),
-(21, 'zapomartial@yahoo.fr', 'zapomartial@yahoo.fr', 'hotel', '', '', '', 'kouame ange', '0383840399', '', 'test', 'user:boss', NULL, '', 0, '', 'Lun 13 Septembre 2021', '09:11:00', '', 2, 'on', '7563599.jpg');
+INSERT INTO `inscription_client` (`id`, `email_ocd`, `email_user`, `denomination`, `adresse`, `numero_cci`, `id_entreprise`, `user`, `numero`, `numero1`, `password`, `permission`, `categories`, `numero_compte`, `code`, `society`, `societys`, `date`, `heure`, `etat`, `status`, `active`, `logo`, `id_visitor`) VALUES
+(25, 'ocd 22POI', 'koua@yahoo.fr', 'zapo', '36 rue de la pradelle', '', '', 'martial zapo', '038388209', '038388209', '$2y$12$729ipi7g60/voKHoZPh9ROR1I4ae5IDo.z4rAOfKAatWbafc6jDGq', 'user:employes', 'Receptionniste', '', 1, 'Hotel 5 etoils abidjan', '', 'Mercredi 13 Octobre 2021', '22:14:00', '', 4, 'off', '587805.jpg', ''),
+(22, 'ocd 22POI', 'zapomartial@yahoo.fr', 'zapo', '36 rue de la pradelle', '', '', 'zapo', '038388209', '0947373634', 'test', 'user:boss', 'dirigeant', '', 0, '', ',,', 'Mercredi 13 Octobre 2021', '22:13:00', 'connecte', 1, 'on', '587805.jpg', '342b001e757fee0b341f39cc8606468b'),
+(20, '', 'zap@za@soua', '', '', '', '', '', '', '', 'test', '', '', '', 0, '', '', 'Mercredi 13 Octobre 2021', '22:13:00', '', 1, '1', '', ''),
+(23, 'ocd 22POI', 'souame@yahoo.fr', 'zapo', '36 rue de la pradelle', '', '', 'kouame franck', '083473662', '083473662', 'test', 'user:gestionnaire', 'Gestionnaire', '', 0, 'Hotel 5 etoils abidjan', '', 'Mercredi 13 Octobre 2021', '21:59:00', 'connecte', 3, 'on', '587805.jpg', ''),
+(24, '0CD-S03988', 'zapoocd@yahoo.an', '', '', '', '', 'kouame ange', '', '0947373634', '$2y$12$D3UkXfjktRN..jrQlZS.eOwchqoUnjY9412wy3TsfiFA/bmXbHvMy', 'user:boss', 'dirigeant', '', 0, '', ',,', 'Mercredi 13 Octobre 2021', '22:07:00', '', 1, 'on', '', 'e8569af78ab1a25d1a7b2864429d8e66');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `activer_compte`
+--
+ALTER TABLE `activer_compte`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_ocd` (`email_ocd`);
+
+--
+-- Index pour la table `clients_ocd`
+--
+ALTER TABLE `clients_ocd`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `inscription_client`
+--
+ALTER TABLE `inscription_client`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_user` (`email_user`),
+  ADD KEY `password` (`password`),
+  ADD KEY `email_ocd` (`email_ocd`) USING BTREE,
+  ADD KEY `permission` (`permission`),
+  ADD KEY `active` (`active`),
+  ADD KEY `code` (`code`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `clients_ocd`
+--
+ALTER TABLE `clients_ocd`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `inscription_client`
+--
+ALTER TABLE `inscription_client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
