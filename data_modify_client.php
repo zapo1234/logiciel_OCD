@@ -703,7 +703,7 @@ ul a{margin-left:3%;}
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dr">'.$ty.'</div>
 			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		
 		// delete bord_informations 
@@ -824,7 +824,7 @@ ul a{margin-left:3%;}
 	   echo'<div id="pak"></div>
              <div class="enre"><i class="fas fa-check-circle" style="color:red;font-size:20px;"></i>Vous pouvez plus modifier cette facture
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:red;font-size:13px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
    }
    
    

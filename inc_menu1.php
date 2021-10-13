@@ -136,13 +136,13 @@ include('inc_session.php');
 	 
 	 <?php
 // requete qui va chercher les montants
-    if($donnes['permission']=="user:boss"){
+   if($donnes['permission']=="user:boss"){
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	$button="";
 	}
 	
-if($donnes['permission']=="user:employes" OR $donnes['permission']=="user:gestionnaire"){
+ if($donnes['permission']=="user:employes" OR $donnes['permission']=="user:gestionnaire"){
 $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
@@ -208,7 +208,6 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
                                 </div>
                         </li>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">

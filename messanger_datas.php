@@ -8,15 +8,18 @@ include('inc_session.php');
    $req->closeCursor();
    
    if($_SESSION['code']==0){
-		  $session=0;
+		 $res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE email_ocd= :email_ocd ORDER BY id DESC');
+        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		else{
 		$session=$_SESSION['code'];
+		$res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC');
+        $res->execute(array(':code'=>$session,
+		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
    
-   $res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE email_ocd= :email_ocd ORDER BY id DESC');
-   $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   
    $donnes =$res->fetchAll();
 
 

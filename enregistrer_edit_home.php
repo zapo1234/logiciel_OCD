@@ -187,7 +187,7 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
              echo'<div class="enre">les mofications du local: <span class="x">'.$ids.'</span>  ont étés prise en compte.
 		     <div class="dep">...</div></div>';
              
-			 echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/inventaire_gestion_home.php"/>';
+			 echo'<meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/inventaire_gestion_home.php"/>';
   
 	}
   }

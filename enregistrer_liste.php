@@ -24,7 +24,7 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
   $donnees= $req->fetch();
   $id_chambre = rand(1,10000000);
   
-  $rel=$bdd->prepare('SELECT  permission,society,code,id_visitor FROM inscription_client WHERE email_user= :email_user');
+  $rel=$bdd->prepare('SELECT permission,society,code,id_visitor FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
  
@@ -45,6 +45,11 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 
        $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }
+	 
+	 else{
+		 
+		 $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> plus de 3 personnes'; 
+	 }
 
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
@@ -60,10 +65,15 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	$site = $_POST['site'];
 	}
 	
+	if(!isset($typs)){
+	  $typs="";
+	}
+	
 	if(!empty($typs)){
 		$type=$_POST['typs'];
 		
 	}
+
 	
 	
 	 if($types == 1){
@@ -98,8 +108,6 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		$type ="appartement meublé";
 		
 	}
-	
-	
 	
 	else{
 		$types = $typs;

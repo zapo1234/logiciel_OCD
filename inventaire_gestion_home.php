@@ -116,7 +116,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
   100% { transform: rotate(360deg); }
 }
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
-.enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:130px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
+.enre,.up,.ups{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;color:black;z-index:4;position:absolute;top:250px;left:40%;border:2px solid white;font-family:arial;font-size:14px;width:280px;height:150px;padding:2%;text-align:center;background-color:white}
 
 .x{color:#4e73df;font-weight:bold;} .ts{padding-left:4%;} .center{width:90%;margin-left:5%;background-color:white;}
 
@@ -167,7 +167,7 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
-#society{width:40%;} 
+#society{width:40%;} .mobile{display:none;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none}
@@ -182,6 +182,8 @@ height:2800px;overflow-y:scroll} h2{margin-top:30px;border-top:1px solid #eee;co
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #searchDropdown{display:none;} #examp{width:90%;height:1700px;margin-top:15px;margin-left:-3%;}
+.ts{display:none;} .mobile{display:block;}
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -264,7 +266,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Type de logement</option>
+                         <option value="">Type de logement</option>
 						  <option value="1">chambre single</option><option value="2">chambre double</option>
                            <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
                           <option value="7">studio double</option>
@@ -422,7 +424,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <div class="form-group col-md-6">
 	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
       <label for="inputPassword4">type de local *</label>
-      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example" required>
+      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example">
                            <option value="">Type de logement</option>
 						   <option value="1">chambre single</option><option value="2">chambre double</option>
                            <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
@@ -461,7 +463,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	<div class="form-group col-md-6">
       <label for="inputPassword4">Localisation(au cas ou vous avez plusieurs site) </label>
      <select id="site" name="site" class="form-control">
-        <?php echo $select;?>
+        <option value="1">Site 1 </option>
+		<option value="2">Site 2 </option>
+		<option value="3">Site 3 </option>
       </select>
     </div>
 	
@@ -613,8 +617,12 @@ var societ = $('#societ').val();
 	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>nombre max de caractère est de 50 nom du client');
 	}
 	
-	else if(num.length > 3) {
-	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>nombre max de caractère est de 50 nom du client');
+	else if(num.length > 4) {
+	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>le nombre de d\'occupants possible ne dépasse pas 5');
+	}
+	
+	else if(nums.length > 5) {
+	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>le nombre de lits  possible ne dépasse pas 5');
 	}
 	
 	else if(num < 0){

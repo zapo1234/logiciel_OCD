@@ -46,7 +46,7 @@ if(!isset($id) AND empty($id)){
              <span class="sr-only">Loading...</span>
              </div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_site.php?data_id='.$id.'"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_site.php?data_id='.$id.'"/>';
 	 }
 	 
  }
@@ -60,7 +60,7 @@ if(!isset($id) AND empty($id)){
              <span class="sr-only">Loading...</span>
              </div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_data.php?data_date='.$id.'"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_data.php?data_date='.$id.'"/>';
 		 }
 		}
 

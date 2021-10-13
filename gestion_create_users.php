@@ -233,7 +233,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
  
 					<div id="resultat"></div><!--retour affichage ajax-->
   
-  <form method="post" id="form1" action="">
+  <form method="post" id="" action="data_create_users.php">
  <div  id="examp" style="display:none">
   <h2> Création de compte utilisateurs OCD </h2>
    
@@ -289,21 +289,28 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	
 	<div class="form-group col-md-12">
       <label for="inputPassword4">site 1</label>
-	  <input type="text" name="site1" id="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
-	 
+	  <input type="text" name="site[]" id="site1" class="form-control" id="inputPassword4" placeholder="Exemple Hotel 5 étoile d'Abidjan">
+	 <span class="site1_error"></span>
       </div>
 	  
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">site 2</label>
-	  <input type="text" name="site2" id="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
-	  
+	  <input type="text" name="site[]" id="site2" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <span class="site2_error"></span>
       </div>
 	  
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">site 3</label>
-	  <input type="text" name="site3" id="site3" class="form-control" id="inputPassword4" placeholder="Nommer">
+	  <input type="text" name="site[]" id="site3" class="form-control" id="inputPassword4" placeholder="Nommer">
 	  <span class="site3_error"></span>
       </div>
+	  
+	  <div class="form-group col-md-12">
+      <label for="inputPassword4">Gérer vous combien de site </label>
+	  <input type="number" name="sites"  class="form-control" id="inputPassword4" placeholder="exemple 2">
+	  <span class="sites"></span>
+      </div>
+	  
 	
 	</div>
 	
@@ -325,17 +332,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 echo $_SESSION['token'];?>">
    <input type="submit" class="buttons" value="créer un compte">
  </div>
- 
- <div class="content">
- <div class="content1">
- 
-</div><!--content-->
+ <!--content-->
 
 </form>
  
- 
-    
-	</div>
+ </div>
 
 
  <div id="home_data"></div><!--div home-->
@@ -426,13 +427,10 @@ $('#form1').on('submit', function(event) {
 	 var form_data = $(this).serialize();
      var name = $('#name').val();
 	 var email = $('#emails').val()
-	 var site1 = $('#site1').val();
-	 var site2 = $('#site2').val();
-	 var site3 =$('#site3').val();
 	 var numero =$('#numero').val();
 	 var ocd =$('#ocd').val();
 	 var regx = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	 var names = /^[a-zA-Z0-9éàèçéô@'-]{0,100}$/;
+	 
 	 
 	 if(name.length==""){
 	 $('.name_error').text('le nom du responsable est vide'); 

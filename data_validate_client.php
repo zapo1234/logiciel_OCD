@@ -307,16 +307,11 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    }
    
    else{
-	   
 	   $status4 = ' ';
 	   $num4 ="0";
    }
    //
-   
-   
-   
    if(empty($_POST['status'])){
-	   
 	 $_POST['status']=0; 
      $status =0;	 
    }
@@ -333,12 +328,9 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	   $_POST['remise']=0;
    }
    
-   
    if($_POST['to']=="séjour") {
-	   
 	   if($_POST['account']==""){
-		 
-         $avance = 0;
+		 $avance = 0;
          $reste =0;		 
 	   }
 
@@ -474,7 +466,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
 			 <div class="dr">'.$ty.'</div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type,:code)');
@@ -600,7 +592,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
 			 <div class="dr">'.$ty.'</div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type,:code)');

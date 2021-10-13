@@ -17,6 +17,14 @@ if(isset($_POST['id_ocd'])) {
     $dateDuJour = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
     $date=$dateDuJour;
     $heure = date('H:i');
+	$date = date('Y-m-d');
+	
+	$dates1 = explode('-',$date);
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dat = $j.'-'.$mm.'-'.$an;
 	
 	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active,code,society FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_POST['email_ocd']));
@@ -60,11 +68,10 @@ if(isset($_POST['id_ocd'])) {
 			  
 		}
 
-		
 		if($donnees['permission']=="user:employes"){
 			
 			echo'<SCRIPT LANGUAGE="JavaScript">
-           document.location.href="gestion_data_home.php"
+           document.location.href="gestion_data_home.php?data='.$dat.'"
            </SCRIPT>';	
 		}
 	}

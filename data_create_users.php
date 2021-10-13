@@ -56,6 +56,8 @@ include('inc_session.php');
    
    
    $name = trim(strip_tags($_POST['name']));
+   $site = trim(strip_tags($_POST['site']));
+  
    $num="";
    $log="";
    $numero_compte ="";
@@ -63,14 +65,37 @@ include('inc_session.php');
    $etat ="";
    $active="on";
    $code =0;
-   $societys =$_POST['site1'].','.$_POST['site2'].' ,'.$_POST['site3'];
+   $societys = implode(',',$site);
    $society="";
    $id_visitor = $token;
    $status=1;
    $categories="dirigeant";
-   $permission ="user:boss";	 
-	
+   $permission ="user:boss";
    
+   // nombre de site pour les compte tresorie customer
+   $sites = $_POST['sites'];
+   $reservation =0;
+   $reste =0;
+   $depense =0;
+   $montant =0;
+   if(empty($_POST['sites']))
+   {
+	 $session=0;
+	 $society='';
+	 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:date,:email_ocd,reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
+	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+							':reservation'=>$montant,
+							':encaisse'=>$montant,
+							':depense'=>$montant,
+							':montant'=>$montant,
+							':reste'=>$montant,
+							':code'=>$session,
+							':society'=>$society,
+					));
+     
+	 }
+   
+
    if($donnees['email_user']!=$_POST['emails']) {
 	
 
@@ -102,7 +127,8 @@ include('inc_session.php');
 							':id_visitor'=>$token
 						  ));
 						  
-						  
+		// insert dans la tablea table custommer des caisse
+        		
 						  
 		echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>  Le compte user à été crée !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
