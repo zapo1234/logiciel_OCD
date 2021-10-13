@@ -42,21 +42,7 @@ $(document).ready(function(){
    $('.result').css('display','none');
  });
  
- $(document).on('click','.action',function(){
-	var id = $(this).data('id2');
-  // afficher 
-  $('#content'+id).slideToggle();
-  if(id ===3){
- $('.datas').css('height','120px');	
-  }
-});
-
-$(document).on('click','.actions',function(){
-	var id = $(this).data('id7');
-  // afficher 
-  $('#contens'+id).slideToggle();
-  	
-});
+ 
 
 // compter les nouveaux message
 	function view() {
