@@ -78,7 +78,11 @@ include('inc_session.php');
    $reste =0;
    $depense =0;
    $montant =0;
-   if(empty($_POST['sites']))
+   
+
+   if($donnees['email_user']!=$_POST['emails']) {
+	
+    if(empty($_POST['sites']))
    {
 	 $session=0;
 	 $society='';
@@ -94,10 +98,28 @@ include('inc_session.php');
 					));
      
 	 }
+	 
+	 else{
+		$site = $_POST['sites'];
+		$sites = $site+1;
+		
+		for($i=1; $i < $site; $i++){
+		 $code = $i;
+		 
+		 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:date,:email_ocd,reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
+	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+							':reservation'=>$montant,
+							':encaisse'=>$montant,
+							':depense'=>$montant,
+							':montant'=>$montant,
+							':reste'=>$montant,
+							':code'=>$i,
+							':society'=>$society,
+					));
+			
+		}
+	 }
    
-
-   if($donnees['email_user']!=$_POST['emails']) {
-	
 
    // insertion des données pour création des users compte
 		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor) 
