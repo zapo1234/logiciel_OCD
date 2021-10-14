@@ -8,13 +8,13 @@ include('inc_session.php');
    $req->closeCursor();
    
    if($_SESSION['code']==0){
-		 $res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE email_ocd= :email_ocd ORDER BY id DESC');
+		 $res=$bds->prepare('SELECT id,name,permission,message,date,heure,society FROM messanger WHERE email_ocd= :email_ocd ORDER BY id DESC');
         $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 		}
 		
 		else{
 		$session=$_SESSION['code'];
-		$res=$bds->prepare('SELECT id,name,permission,message,date,heure FROM messanger WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC');
+		$res=$bds->prepare('SELECT id,name,permission,message,date,heure,society FROM messanger WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC');
         $res->execute(array(':code'=>$session,
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -84,14 +84,23 @@ foreach($donnes as $datas){
  $hh =$dat2[0];
  $hh1=$dat2[1];
 	
+if($datas['society']==""){
+	$taf="";
+}
+ else{
+	 
+	$taf ='<img src="img/map.png" alt="map" width="15px" height="15px"> travail à'.$datas['society'].'';	
+ }
   // afficher le message
   
   if($datas['permission']=="boss" OR $datas['permission']=="employes" OR $datas['permission']=="gestionnaire"){
+	 
+	
   echo'<div class="datas_messanger" id="datas'.$css.'">
       <div><span class="action" data-id1="'.$datas['id'].'" class="datas'.$datas['id'].'" title="action"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span> <span id="id'.$datas['id'].'" class="divaction" style="display:none"><a href="#" data-id2="'.$datas['id'].'" class="sup_send"><i class="far fa-trash-alt" aria-hidden="true"></i>  suprimer</a></span></div>
 	  <div class="hss"><span class="'.$css.'">'.$datas['name'].' </span><span class="dt">'.$jj.'/'.$mm.'/'.$an.' à '.$hh.':'.$hh1.' </div>
 	   <div class="donnes">'.htmlspecialchars($datas['message']).'</div>
-       <div><span class="status" id="status'.$css.'">'.$names.'</div>
+       <div><span class="status" id="status'.$css.'">'.$names.'<br/>'.$taf.'</div>
 	   </div>';
   
   }
@@ -121,6 +130,7 @@ if($_POST['action']=="send"){
  $message =trim(strip_tags($_POST['message']));
  $date = date('Y-m-d');
  $heure =date('H:i');
+ $society =$_SESSION['society'];
  
    $res=$bds->prepare('SELECT email_ocd FROM new_message WHERE email_ocd= :email_ocd ');
    $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -140,15 +150,17 @@ if($_POST['action']=="send"){
 
  // insert into table
   // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO messanger (email_ocd,name,permission,message,email_user,date,heure) 
-		 VALUES(:email_ocd,:name,:permission,:message,:email_user,:date,:heure)');
+	     $reys=$bds->prepare('INSERT INTO messanger (email_ocd,name,permission,message,email_user,date,heure,code,society) 
+		 VALUES(:email_ocd,:name,:permission,:message,:email_user,:date,:heure,:code,:society)');
 		 $reys->execute(array(':email_ocd'=>$email_ocd,
 		                      ':name'=>$users,
 							  ':permission'=>$permissions,
 		                      ':message'=>$message,
 							  ':email_user'=>$user,
 							  ':date'=>$date,
-							  ':heure'=>$heure
+							  ':heure'=>$heure,
+							  ':code'=>$_SESSION['code'],
+							  ':society'=>$society
 	                        ));
 		
 		// insert by new_message by count new message

@@ -78,7 +78,17 @@ if(isset($_POST['id_ocd'])) {
 		
 	 else{
 	 
-      	echo'<SCRIPT LANGUAGE="JavaScript">
+	    $_SESSION['email_ocd']=$donnees['email_ocd'];
+			$_SESSION['email_user']=$_POST['email_ocd'];
+			$_SESSION['pose']= $_POST['id_ocd'];
+			$_SESSION['user']= $donnees['user'];
+			$_SESSION['permission'] = $donnees['permission'];
+			$_SESSION['code']= $donnees['code'];
+			$_SESSION['society']= $donnees['society'];
+			 $_SESSION['pmd']= sha1(uniqid('',true).'_'.mt_rand());
+	          $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
+			  
+	       echo'<SCRIPT LANGUAGE="JavaScript">
            document.location.href="gestion_datas_messanger.php"
            </SCRIPT>';	
 	}

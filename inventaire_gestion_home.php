@@ -463,7 +463,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	<div class="form-group col-md-6">
       <label for="inputPassword4">Localisation(au cas ou vous avez plusieurs site) </label>
      <select id="site" name="site" class="form-control">
-        <option value="1">Site 1 </option>
+        <option value="0">choisir</option>
+		<option value="1">Site 1 </option>
 		<option value="2">Site 2 </option>
 		<option value="3">Site 3 </option>
       </select>

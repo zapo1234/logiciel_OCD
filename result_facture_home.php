@@ -408,7 +408,7 @@ $smart_from =($page -1)*$record_peage;
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
         // vous suprimer les données dans home_occupation
-        $rey =$bds->prepare('DELETE FROM home_occupation WHERE code= :code AND id_fact= :id AND email_ocd= :email_ocd');
+        $rey =$bds->prepare('DELETE FROM home_occupation WHERE code= :code AND id_fact= :id AND email_ocds= :email_ocd');
 		$rey->execute(array(':code'=>$code,
 		                    ':id'=>$id_fact,
 		                    ':email_ocd'=>$_SESSION['email_ocd']

@@ -36,9 +36,9 @@ $smart_from =($page -1)*$record_peage;
 	
 	// on boucle sur les les resultats
 	// entete du tableau
-	 echo'	<table id="tb">
-     <thead>
-     <tr class="tf">
+	 echo'<table>
+     
+     <tr class="ts">
       <th scope="col"><i class="material-icons" style="font-size:17px;color:#111E7F">home</i>Type de logement</th>
 	  <th scope="col">Local désigné</th>
 	  <th scope="col">équipements</th>
@@ -49,14 +49,12 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Découvrir</th>
 	  <th scope="col">modifier</th>
 	  <th scope="col">suprimer</th>
-      </tr>
-      </thead>
-      <tbody>';
+      </tr>';
        
 	while($donnees = $req->fetch()) {
 	
 	// afficher dans un tableau les données des chambres
-	 echo'<tr>
+	 echo'<tr class="ts">
       <td> <span class="home">'.$donnees['type_logement'].'</span></td>
 	  <td class="color">'.$donnees['chambre'].'</td>
 	  <td><h3>équipements</h3><span class="div">'.str_replace($rt,$rem,$donnees['equipement']).'</span></td>
@@ -69,11 +67,14 @@ $smart_from =($page -1)*$record_peage;
 	  <td><a href="edit_data_home.php?home='.$donnees['id_chambre'].'" title="modifier"><i class="material-icons" style="font-size:13px">create</i></a></td>
 	  <td><a href="#" data-id1='.$donnees['id_chambre'].' class="home"><i class="fas fa-trash"></i></a></td>
 	  </tr>';
+	  
+	  echo'<div class="mobiles">
+	      <h2>'.$donnees['type_logement'].' '.$donnees['chambre'].'</h2>
+	      <div> Tarif/nuité: '.$donnees['cout_nuite'].'<br/></div>
+	      </div>';
 	}
 	
-	echo' 
-      </tbody>
-     </table>';
+	echo'</table>';
     $req->closeCursor();
    // on compte le nombre de ligne de la table
    if($_SESSION['code']==0){
