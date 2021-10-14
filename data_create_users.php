@@ -56,7 +56,6 @@ include('inc_session.php');
    
    
    $name = trim(strip_tags($_POST['name']));
-   $site = trim(strip_tags($_POST['site']));
   
    $num="";
    $log="";
@@ -65,7 +64,7 @@ include('inc_session.php');
    $etat ="";
    $active="on";
    $code =0;
-   $societys = implode(',',$site);
+   $societys ="";
    $society="";
    $id_visitor = $token;
    $status=1;
@@ -84,16 +83,18 @@ include('inc_session.php');
 	
     if(empty($_POST['sites']))
    {
-	 $session=0;
-	 $society='';
-	 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:date,:email_ocd,reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
-	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+	 $code=0;
+	 $society="";
+	 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)
+	 VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,
+	 :society)');
+	     $rev->execute(array(':email_ocd'=>$email_ocd,
 							':reservation'=>$montant,
 							':encaisse'=>$montant,
 							':depense'=>$montant,
 							':montant'=>$montant,
 							':reste'=>$montant,
-							':code'=>$session,
+							':code'=>$code,
 							':society'=>$society,
 					));
      
@@ -101,19 +102,20 @@ include('inc_session.php');
 	 
 	 else{
 		$site = $_POST['sites'];
-		$sites = $site+1;
-		
-		for($i=1; $i < $site; $i++){
-		 $code = $i;
+		$societys = $_POST['site'];
+		$society="";
+		for($i=0; $i < $site; $i++){
+		 $code = $i+1;
 		 
-		 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:date,:email_ocd,reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
-	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+		 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)
+		 VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
+	     $rev->execute(array(':email_ocd'=>$email_ocd,
 							':reservation'=>$montant,
 							':encaisse'=>$montant,
 							':depense'=>$montant,
 							':montant'=>$montant,
 							':reste'=>$montant,
-							':code'=>$i,
+							':code'=>$code,
 							':society'=>$society,
 					));
 			

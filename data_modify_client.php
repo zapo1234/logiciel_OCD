@@ -575,7 +575,7 @@ ul a{margin-left:3%;}
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dr">'.$ty.'</div>
 			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
 		
 	// verifier sur l'id_chambre est deja dans le tableau
 	if(!in_array($ids_chambre,$arrays)){

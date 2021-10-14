@@ -26,9 +26,9 @@ include('inc_session.php');
    $name = trim(strip_tags($_POST['nam']));
    $email =$_POST['email'];
    $adresse = trim(strip_tags($_POST['adress']));
-   $adresse1 =trim(strip_tags($_POST['adress1']));
+   $adresse1 =trim(strip_tags($_POST['adress']));
    $numero =$_POST['numero'];
-   $numero1 =$_POST['numero1'];
+   $numero1 =$_POST['numero'];
    $compt = trim(strip_tags($_POST['compt']));
    $enre = trim(strip_tags($_POST['enre']));
    $active ="off";
@@ -41,13 +41,10 @@ include('inc_session.php');
   if($_FILES['logo']['size']>1000000) {
 	echo'<div class="up">fichier trop lourd</div>';
   }
-
   elseif(!in_array($extension_upload,$type_extension)) {
-	
-	echo'<div class="up">l\'extension du fichier n\'est pas autorisée</div>';
+  echo'<div class="up">l\'extension du fichier n\'est pas autorisée</div>';
   }
-
-   else {
+  else {
 	// on instruis un nom du fichier
 	$nvname = rand(1000,10000000) . '.' . $extension_upload;
     $path= "image_logo/" . $nvname;
@@ -61,43 +58,22 @@ include('inc_session.php');
    }
    
    // on recupere toutes les email 
-   
    // on recupére le nom de l'image dans la base de données
-   $res=$bdd->prepare('SELECT email_ocd,email_user,logo FROM inscription_client WHERE email_ocd= :email_ocd');
-   $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   $donnees=$res->fetchAll();
-   // recupére les email associes
-   $datas =[];
-   $array =[];
-   foreach($donnees as $values){
-	 $data = $values['email_user'];
-	 $logo = $values['logo'];
-	 // insere les valuer dans un tableau
-	 $data =explode(',',$data);
-	 $logo =explode(',',$logo);
-	 foreach( $data as $values){
-		$datas[] = $values;
-	 }
-	 foreach($logo as $valus){
-		$array[]= $valus;
-	 }
-   }
+   $res=$bdd->prepare('SELECT email_ocd,email_user,logo FROM inscription_client WHERE email_user= :email_user');
+   $res->execute(array(':email_user'=>$_SESSION['email_user']));
+   $donnees=$res->fetch();
    
-  if(!empty($array)){
+   if(!empty($donnees)){
    // on suprimer le fichier existant
-	unlink ("image_logo/" .$array[0]);
+	unlink ("image_logo/" .$donnees['logo']);
    }
    echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Prise en compte !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // modifier le meme logo pour les autres users.
-   if(!empty($datas)){
-	 foreach($datas as $das){
-		$ret=$bdd->prepare('UPDATE inscription_client SET  logo= :log WHERE email_ocd= :email_ocd');
-        $ret->execute(array(':log'=>$nvname,
-		                    ':email_ocd'=>$das));
-     }
-	}
+      $ret=$bdd->prepare('UPDATE inscription_client SET  logo= :log WHERE email_ocd= :email_ocd');
+       $ret->execute(array(':log'=>$nvname,
+	                      ':email_ocd'=>$donnees['email_ocd']));
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
          $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');

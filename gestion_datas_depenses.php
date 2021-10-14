@@ -462,6 +462,27 @@ height:2000px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/depense.js"></script>
   <script type="text/javascript">
+  
+  $(document).on('click','.action',function(){
+	var id = $(this).data('id2');
+  // afficher 
+  $('#cont'+id).slideToggle();
+});
+
+$(document).on('click','.actions',function(){
+	var id = $(this).data('id7');
+  // afficher 
+  $('#content'+id).slideToggle();
+  	
+});
+
+$(document).on('click','.actios',function(){
+	var id = $(this).data('id8');
+  // afficher 
+  $('#contes'+id).slideToggle();
+ });
+  
+  
   $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').css('display','block');
 	 });

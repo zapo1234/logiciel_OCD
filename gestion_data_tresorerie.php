@@ -140,6 +140,17 @@ border: 2px solid #F83127;}
 	text-transform:capitalize;
 }
 
+.ss {
+    padding: 2%;
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    border: 2px solid #eee;
+    background: #e74a3b;
+    color: white;
+    margin-left: -10px;
+}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
