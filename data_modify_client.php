@@ -285,11 +285,6 @@ ul a{margin-left:3%;}
 	 $data_status ='espéce :'.$total.',';   
    }
    
-   if($_POST['paie1']=="0" AND $_POST['paie2']=="0"  AND $_POST['paie3']=="" AND $_POST['paie4']=="0"){
-	  $total =$_POST['mon']+$_POST['mont_ta'];	  
-	 $data_status ='espéce :'.$total.',';   
-   }
-   
    if(!empty($_POST['paie1'])) {
 	   
 	  $status1 = 'espéces :'.$_POST['paie1'].'xof';
@@ -833,5 +828,3 @@ ul a{margin-left:3%;}
   {
 die('Erreur : '.$e->getMessage());
  }  
-
-?>

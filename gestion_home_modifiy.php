@@ -1279,7 +1279,6 @@ echo $_SESSION['token'];?>">
 	  data:{id:id,nbjour:nbjour,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retouy
 		$('#results').html(data);
-		$('.datas').css('display','none');
 
       },
 	 error: function() {
