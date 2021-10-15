@@ -91,7 +91,7 @@
          }
          #second{display:none;}
 		 label {text-transform:uppercase;}
-		 #sub{height:50px;} .text{size:11px;text-align:center;}
+		 #sub{height:50px;background:#0769BA;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} .text{size:11px;text-align:center;}
 	</style>
 </head>
 <body>
@@ -116,7 +116,7 @@
                            </div>
                          
                            <div class="col-md-12 text-center ">
-                              <button type="submit" id="sub" class=" btn btn-block mybtn btn-primary tx-tfm">Connectez vous</button><br/><span class="error"></span>
+                              <button type="submit" id="sub" class="tx-tfm">Connectez vous</button><br/><span class="error"></span>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
