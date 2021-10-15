@@ -100,23 +100,21 @@
 				<div class="myform form ">
 					 <div class="logo mb-3">
 						 <div class="col-md-12 text-center">
-							<h1>Login</h1>
+							<div><img src="image/logo.jpg" width="180px" height="100px"></div>
 						 </div>
 					</div>
-                   <form action="" method="post" name="login">
+                   <form action="" id="form1" method="post" name="login">
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email address</label>
-                              <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                              <label for="exampleInputEmail1">EMAIL</label>
+                              <input type="email" name="email_ocd"  class="form-control" id="email_ocd" aria-describedby="emailHelp" placeholder="Entrer votre email!">
                            </div>
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Password</label>
-                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                              <label for="exampleInputEmail1">Votre Mot de pass</label>
+                              <input type="password" name="id_ocd" id="id_ocd"  class="form-control" aria-describedby="emailHelp" placeholder="Entrer votre mot de pass">
                            </div>
-                           <div class="form-group">
-                              <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
-                           </div>
+                         
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Connectez vous</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
@@ -124,15 +122,8 @@
                                  <span class="span-or">or</span>
                               </div>
                            </div>
-                           <div class="col-md-12 mb-3">
-                              <p class="text-center">
-                                 <a href="javascript:void();" class="google btn mybtn"><i class="fa fa-google-plus">
-                                 </i> Signup using Google
-                                 </a>
-                              </p>
-                           </div>
                            <div class="form-group">
-                              <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                              <p class="text-center">Acccès oubliés? <a href="#" id="signup">Recupérer ces accès !</a></p>
                            </div>
                         </form>
                  
@@ -175,7 +166,65 @@
                      </div>
 			</div>
 		</div>
-      </div>   
+      </div>  
+
+  <div id="ass" style="color:red;position:absolute;top:580px;left:68%;"></div>
+    <div id="as" style="color:red;position:absolute;top:580px;left:68%;"></div>
+	<div id="av"></div>
+    <div id="visuel"></div>	  
          
 </body>
 
+<script type="text/javascript">
+ $(document).ready(function() {
+function envoi(){
+$(document).getElementById('user_admin').submit();
+}
+
+$(function() {
+$(document).on('click','#sub',function() {
+	
+// on envoi le formulaire
+// on recupere les deux variale
+ var email_ocd =$('#email_ocd').val();
+  var id_ocd =$('#id_ocd').val();
+ // on defini des varaible
+ if(email_ocd!="" && id_ocd!=""){
+ $.ajax({
+	type:'POST', // on envoi les donnes
+	url:'login_connecte.php',// on traite par la fichier
+	data:{email_ocd:email_ocd,id_ocd:id_ocd},
+	async:true,
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#ass').html(data);
+		$('#as').css('display','none');
+	 },
+	 error: function() {
+    alert('pas de connexion'); }
+	 
+	});
+ }
+ 
+ else {
+  $('#as').append('<div class="cir" style="position:absolute;width:300px;"> Entrer vos identifiants OCD !</div>');
+  $('#email_ocd').css('borderColor','red');
+  $('#id_ocd').css('borderColor','red');
+  
+}
+ });
+});
+
+
+$('.his2').click(function() {
+$('#top_corps').fadeIn(1000);
+$('#visuel').fadeIn(500);
+});
+$('.visa').click(function() {
+$('#top_corps').hide();
+$('.dnn').hide();
+$('#visuel').css('display','none');	
+});
+
+});
+		
+	</script>
