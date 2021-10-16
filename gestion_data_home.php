@@ -133,7 +133,7 @@ ul.winners li{
 
 .h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
-.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:190px;padding:1%;border:1px solid #eee;
+.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:210px;padding:1%;border:1px solid #eee;
 margin-left:2%;}
 
 h3{font-size:16px;text-transform:capitalize;}
@@ -194,6 +194,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .btn{display:block;} .form-select{display:none;} h1{display:none;}
 #searchDropdown{display:none;} .reini{position:absolute;top:250px;left:5%;}
 .print,.butt{display:none;} #pak{z-index:4;} .reini{z-index:5}
+.s{display:block;}
 }
 
 

@@ -214,8 +214,7 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="im" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo$donnes['user'];?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/user.png">
+                                <img src="https://img.icons8.com/ios/50/000000/user--v1.png"/>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div id="data" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

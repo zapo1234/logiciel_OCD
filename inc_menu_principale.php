@@ -28,7 +28,8 @@ include('inc_session.php');
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
             <!--slideBar css --->
              <div class="s">
-              <a href="deconnexion.php"></a>
+              <a href="deconnexion.php">
+			  <img src="img/logout.png" id="logout" alt="logout" width="45px" height="45px">
              </div>			 
             <!-- Sidebar - Brand -->
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -100,7 +101,7 @@ include('inc_session.php');
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" title="séjour/réservation.." href="gestion_homes_data.php" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" title="séjour/réservation.." href="" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="far fa-user"></i>
                     <span>clients</span>
