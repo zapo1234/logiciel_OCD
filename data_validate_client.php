@@ -493,8 +493,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,codeid_visitor) 
+		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $dates ="";
 		 $reys->execute(array(':id_local'=>$ids_chambre,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
@@ -503,7 +503,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id_fact,
 							  ':type'=>$mode,
-							  ':code'=>$session
+							  ':code'=>$session,
+							  ':id_visitor'=>$_SESSION['id_visitor']
 	                        ));				
 			}
 			
@@ -618,8 +619,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 						  ));
 						  
 					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
+		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $reys->execute(array(':id_local'=>$ids_chambre,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
@@ -628,6 +629,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							  ':id_fact'=>$id_fact,
 							  ':type'=>$mode,
 							  ':code'=>$session,
+							  ':id_visitor'=>$_SESSION['id_visitor']
 	                        ));		
 		
 	         }

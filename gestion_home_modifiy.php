@@ -1498,6 +1498,9 @@ echo $_SESSION['token'];?>">
 	  var montas = $('.montas').text();
 	  var mts = parseFloat(montas);
 	  var results = parseFloat(monta);
+	  var paie1 =$('#paie1').val();
+	  var paie2 = $('#paie2').val();
+	  var paie3 = $('#paie3').val();
 	  
 	  if($('#mts').hasClass('montas')) {
 		 var results = parseFloat(monta)+parseFloat(montas); 

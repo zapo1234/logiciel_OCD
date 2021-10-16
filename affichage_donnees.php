@@ -2,17 +2,19 @@
 include('connecte_db.php');
 include('inc_session.php');
 
- $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE   email_user= :email_user');
+ $rel=$bdd->prepare('SELECT user,permission,code FROM inscription_client WHERE   email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
 	
 // requete qui va chercher les montants
     if($donns['permission']=="user:boss"){
+	$user='';
    $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
     $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	}
 	
-if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
+ if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
+$user=$donns['user'];
 $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],

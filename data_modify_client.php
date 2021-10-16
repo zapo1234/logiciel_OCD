@@ -602,8 +602,8 @@ ul a{margin-left:3%;}
 	           
                 	
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
+		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $dates ="";
 		 $reys->execute(array(':id_local'=>$ids_chambre,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
@@ -612,7 +612,8 @@ ul a{margin-left:3%;}
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id,
 							  ':type'=>$mode,
-							  ':code'=>$session
+							  ':code'=>$session,
+							  ':id_visitor'=>$_SESSION['id_visitor']
 	                        ));				
 		}
        }
@@ -731,8 +732,8 @@ ul a{margin-left:3%;}
 					
 					
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
-		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
+		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $dates ="";
 		 $reys->execute(array(':id_local'=>$ids_chambre,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],

@@ -52,12 +52,10 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 		// recupération dans un array
 		$tab[] = $datas;
 	}
-	
-	      
-	        $total =0;
-	     	
+	       $total =0;
+	     	$montant = $dos['montant']*$donns['nombre'];
 			 echo'<div class="data"><div class="hom" id="homs'.$dos['id_chambre'].'"><h5>'.$dos['type_logement'].'</h5>
-			<span class="d">'.$dos['chambre'].'</span><span class="dg">'.$dos['montant'].'x'.$donns['nombre'].' xof</span><span><input type="hidden" name="paie[]" value="'.$dos['montant'].'"> 
+			<span class="d">'.$dos['chambre'].'</span><span class="dg">'.$dos['montant'].' xof</span><span><input type="hidden" name="paie[]" value="'.$dos['montant'].'"> 
 			<input type="hidden" name="chambre[]" value="'.$dos['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$dos['type_logement'].'">
 			<input type="hidden" name="pay[]" value="'.$dos['montant'].'">
@@ -259,11 +257,11 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 				
 			}
 			
-			
-			$total = $total +($pays*$_POST['nbjour']);
+		    $total = $total +($pays*$_POST['nbjour']);
+			$som =$pays*$_POST['nbjour'];
 			 
 			echo'<div class="data1"><div class="hom"><h5>'.$values['type'].'</h5>
-			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
+			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
 			<input type="hidden" name="pay[]" value="'.$pays.'">
@@ -445,7 +443,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			 
 			 if($values['id'] !=$_POST['id']) {
 			echo'<div class="data1"><div class="hom"><h5>'.$values['type'].'</h5>
-			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
+			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
 			<input type="hidden" name="pay[]" value="'.$pays.'">
@@ -481,7 +479,8 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	$total1 = $_POST['mon'];
 	$account1= $_POST['acomp'];
 	$reste1 = $_POST['rest'];
-	//
+	//recupere le motant total des sommes pour le calcule
+	
 	
 	$req=$bds->prepare('SELECT montant,mont_restant FROM bord_informations WHERE  code= :code AND id_chambre= :id  AND id_fact= :id_fact AND email_ocd= :email_ocd ');
     $req->execute(array(':code'=>$session,
@@ -500,7 +499,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	$monta =$total1-$montan+ floatval($_POST['rep']);
 	$taxe = $monta*$_POST['taxe']/100;
 	
-	$monts =$monta+$taxe;
+	$monts = $monta+$taxe;
 	
 	// remplacer les montant dans la table tabletable_customer
 	$montant = $donnes['encaisse']-$montan;
@@ -512,6 +511,27 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	else{
 		
 	$mont =0;
+	}
+	
+	if($total1==$montan){
+	// remise à zéro de toute les entrées
+	$result = 0;	
+	 $_POST['acomp']=0;
+	 $_POST['rep']=0;
+	 $num=0;
+	 
+	 // on modifie les données de la base de données guide
+        $rev=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+        $rev->execute(array(':ds'=>$dat,
+		                    ':mont'=>$num,
+					        ':mont1'=>$num,
+							':mont2'=>$num,
+							':mont3'=>$num,
+							':code'=>$session,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	 
 	}
 	
 	// on compte le nombre d'element dans le tableau.

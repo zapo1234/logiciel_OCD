@@ -91,7 +91,22 @@
          }
          #second{display:none;}
 		 label {text-transform:uppercase;}
-		 #sub{height:50px;background:#0769BA;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} .text{size:11px;text-align:center;}
+		 #sub{height:50px;background:#057ABD;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} .text{size:11px;text-align:center;}
+			 #as,#ass{position:absolute;color:red;top:300px;z-index:3;left:25%;width:300px;}
+			.contact{color:#CE6C0A;font-weight:bold;}
+			 
+	   @media (max-width: 575.98px) { 
+	   #sub{height:50px;background:#0769BA;width:300px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} 
+	   }
+	   
+	   @media (min-width: 768px) and (max-width: 991px) {
+		 .myform{width:400px;margin-left:-15%;}  
+	   }
+	   
+	   @media (min-width: 992px) and (max-width: 1200px) {
+		   
+		   #sub{height:50px;background:#0769BA;width:300px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} 
+	   }
 	</style>
 </head>
 <body>
@@ -105,18 +120,20 @@
 							<div><img src="image/logo.jpg" width="180px" height="100px"></div>
 						 </div>
 					</div>
-                   <form action="" id="form1" method="post" name="login">
+                   <form action="" id="form1" method="post" id="user_admin" >
                            <div class="form-group">
                               <label for="exampleInputEmail1">Entrez votre EMAIL</label>
                               <input type="email" name="email_ocd"  class="form-control" id="email_ocd" aria-describedby="emailHelp" placeholder="e-mail">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">Votre Mot de pass</label>
-                              <input type="password" name="id_ocd" id="id_ocd"  class="form-control" aria-describedby="emailHelp" placeholder="Password"><br/><span class="error"></span>
+                              <input type="password" name="id_ocd" id="id_ocd"  class="form-control" aria-describedby="emailHelp" placeholder="Password"><br/><span id="as"></span><span id="ass"></span><!--retour ajax-->
                            </div>
-                         
+                            
                            <div class="col-md-12 text-center ">
-                              <button type="submit" id="sub" class="tx-tfm">Connectez vous</button><br/><span class="error"></span>
+                              <button class="login100-form-btn" id="sub" onKeyPress="if(event.keyCode == 13)envoi()">
+							Connectez vous
+						</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
@@ -125,7 +142,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <p class="text-center">Acccès oubliés? <a href="#" id="signup">Recupérer ces accès !</a><br/>Contactez nous ici</p>
+                              <p class="text-center">Acccès oubliés? <a href="#" id="signup">Recupérer ces accès !</a><br/><span class="contact">Contactez nous ici</span></p>
                            </div>
 						   <div class="form-group">
                               <p class="text">Optimisation de comptabilité à distance,<br/> Tous droits  réservés  2021-2022</p>
@@ -141,9 +158,7 @@
 			</div>
 		</div>
       </div>  
-
-  <div id="ass" style="color:red;position:absolute;top:580px;left:68%;"></div>
-    <div id="as" style="color:red;position:absolute;top:580px;left:68%;"></div>
+    <div id="as"></div>
 	<div id="av"></div>
     <div id="visuel"></div>	  
          
@@ -171,7 +186,6 @@ $(document).on('click','#sub',function() {
 	async:true,
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#ass').html(data);
-		$('#as').css('display','none');
 	 },
 	 error: function() {
     alert('pas de connexion'); }
@@ -180,7 +194,7 @@ $(document).on('click','#sub',function() {
  }
  
  else {
-  $('#as').append('<div class="cir" style="position:absolute;width:300px;"> Entrer vos identifiants OCD !</div>');
+  $('#as').text(' Entrer vos identifiants OCD !');
   $('#email_ocd').css('borderColor','red');
   $('#id_ocd').css('borderColor','red');
   
@@ -188,16 +202,6 @@ $(document).on('click','#sub',function() {
  });
 });
 
-
-$('.his2').click(function() {
-$('#top_corps').fadeIn(1000);
-$('#visuel').fadeIn(500);
-});
-$('.visa').click(function() {
-$('#top_corps').hide();
-$('.dnn').hide();
-$('#visuel').css('display','none');	
-});
 
 });
 		
