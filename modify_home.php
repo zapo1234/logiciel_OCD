@@ -15,7 +15,9 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	$req->closeCursor();
 	
 	// recupére les données de la facture
-	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva,data_montant FROM facture WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
+	$res=$bds->prepare('SELECT nombre,montant,avance,reste,montant_repas,tva,mont_tva,data_montant,
+	moyen_paiement
+	FROM facture WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
     $res->execute(array(':code'=>$code,
 	                    ':id_fact'=>$id_fact,
 	                   ':email_ocd'=>$_SESSION['email_ocd']));
@@ -479,6 +481,8 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	$total1 = $_POST['mon'];
 	$account1= $_POST['acomp'];
 	$reste1 = $_POST['rest'];
+	$data = $donns['data_montant'];
+	$moyen_paiement = $donns['moyen_paiement'];
 	//recupere le motant total des sommes pour le calcule
 	
 	
@@ -513,12 +517,14 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	$mont =0;
 	}
 	
-	if($total1==$montan){
+	if($monts==0){
 	// remise à zéro de toute les entrées
 	$result = 0;	
 	 $_POST['acomp']=0;
 	 $_POST['rep']=0;
 	 $num=0;
+	 $data =$num.','.$num.','.$num.','.$num;
+	 $moyen_paiement = 'espéces:'.$num.',Carte bancaire:'.$num.', Mobile Monney:'.$num.',Chéques:'.$num.'';
 	 
 	 // on modifie les données de la base de données guide
         $rev=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
@@ -528,7 +534,7 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 							':mont2'=>$num,
 							':mont3'=>$num,
 							':code'=>$session,
-							':id'=>$id,
+							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	 
@@ -539,12 +545,14 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 	
 	// modifie les données
 	// on modifie les données de la base de données guide
-         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
+         $ret=$bds->prepare('UPDATE facture SET montant= :des, avance= :ds, reste= :rs,montant_repas= :rps, mont_tva= :tva,moyen_paiement= :moyens, data_montant= :data WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
         $ret->execute(array(':des'=>$monts,
 		                    ':ds'=>$_POST['acomp'],
 							':rs'=>$monts-$_POST['acomp'],
 							':rps'=>$_POST['rep'],
 							':tva'=>$taxe,
+							':moyen'=>$moyen_paiement,
+							':data'=>$data,
 							':code'=>$session,
 							':id'=>$id_fact,
                             ':email_ocd'=>$_SESSION['email_ocd']
