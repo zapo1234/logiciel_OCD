@@ -2,11 +2,10 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories FROM inscription_client WHERE email_ocd= :email_ocd');
+  $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,id_visitor FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-   
-
-?>
+   $donns = $req->fetch();
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +74,7 @@ img {
 
 .form-row{margin-top:25px;} input{height:35px;}
 #name,#names{color:white;border:2px solid #0661BC;background:#0661BC;width:230px;margin-left:32%;height:45px;text-align:center;border-radius:25px;}
-#role,#roles{width:320px;height:40px;border:1px solid #eee;}
+#role,#roles{width:450px;height:40px;border:1px solid #eee;}
 label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:690px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 .up{color:black;} .num,.emails,.pass,.prenom,.nom{color:black;}
 
@@ -120,7 +119,8 @@ transition: all 200ms;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
 .btn{display:none;}
-
+#searchDropdown{display:none;}
+.blog{color:black;padding:3%;fontsize:18px;} .lien{color:#0661BC;font-size:25px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -144,7 +144,8 @@ padding-bottom:15px;border-bottom:2px solid #eee;} .df{margin-left:30%;}
 #resultat{margin-top:100px;}
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:50px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;} .form-search{display:none;}
 label,input{display:block;} .col{display:block;}
-#code{width:250px;} .btn{display:block;} #panier{display:none;}
+#code{width:250px;} .btn{display:block;} #panier,#sms{display:none;}
+.blog{margin-top:110px;} #collapse{display:none;} .bs{display:none;}
 }
 
 
@@ -158,7 +159,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
 #news_data{display:block;} #news{display:none;} 
-.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
+.users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:1%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 .btn{display:block;} 
@@ -279,7 +280,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="center">
 					
                     <div class="content1"><div class="der1"><span class="dy">Votre entreprise</span> <i class="fas fa-building"></i></div><div class="der2"><span class="dy">Ajouter des comptes</span>  <i class="fas fa-users"></i></div>
-					 <div class="der3"><span class="dy"> Lister des utilisateurs</span>  <i class="fas fa-table"></i></div> <div class="der4"><span class="dy">Attribuer des horaires</span>  <i class="fas fa-calendar-alt"></i></div> <div class="der5"><span class="dy">Gérér les accès</span>  <i class="fas fa-key"></i></div></div>
+					 <div class="der3"><span class="dy"> Lister des utilisateurs</span>  <i class="fas fa-table"></i></div> <div class="der4"><span class="dy">Blog réservation</span> <i class="fas fa-house-user"></i> </div> <div class="der5"><span class="dy">Gérér les accès</span>  <i class="fas fa-key"></i></div></div>
                      
 					 <div class="content2">
 					 
@@ -290,6 +291,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="col">
                        <label>Nom </label><br/><input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
                       <br/><span class="nom"></span></div>
+					  </div>
+					 <div class="form-row">
                     <div class="col">
                     <label>Prénom</label><br/><input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
                     <br/><span class="prenom"></span></div>
@@ -300,10 +303,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="col">
                        <label>Numéro télephone</label><br/><input type="text" id="num" name="num" class="form-control">
                       <br/><span class="num"></span></div>
-                    
+                    </div>
+					<div class="form-row">
 					<div class="col">
-                    
-					<select id="role" name="role" class="form-control" required>
+                    <select id="role" name="role" class="form-control" required>
                    <option value="">choisir sa fonction</option>
                  <option value="1">Dirigeant</option>
                   <option value="3">Gestionnaire</option>
@@ -324,13 +327,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
       </select>
 					   <span class="code"></span>
                       </div>
+					  </div>
 					  
 					<div class="form-row">
                     <div class="col">
                    <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site" required>
                     <br/><span class="socie"></span></div>
 				 
-                 </div>
 				 </div>
 				 
 				 <div class="form-row">
@@ -338,6 +341,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
                        <label>Email(utilisé)</label><br/><input type="text" id="emails" name="emails" class="form-control"  required><br/>
 					   <span class="emails"></span>
                       </div>
+					  </div>
+					  <div class="form-row">
                     <div class="col">
                    <label>Mot de pass</label> <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
                     <br/><span class="pass"></span></div>
@@ -429,7 +434,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 </div><!--der13-->
 					 
 					  <div id="der14">
-					     
+					    <h2>Partager le lien de votre blog réservation</h2>
+						<div class="blog">Intéréagir avec les clients sur partout dans le monde,mutilplier les chances des réservation en temps réels
+						Lien  <span class="lien">https://reservation.ocdgestion.com/reservation_home.php?home_user=<?php echo $donns['id_visitor'];?></span></div>
 					    </div><!--der15-->
 				  
 				  
@@ -601,8 +608,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
  $('#der11').css('display','none');
  $('#der12').css('display','none');
  $('#der13').css('display','none');
- $('#der14').css('display','none');
- $('#der15').css('display','block');
+ $('#der14').css('display','block');
+ $('#der15').css('display','none');
+ 
  });
  
  $('.der5').click(function(){
@@ -879,8 +887,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	 },5000);
     	 
 	});
-	
-	
 	
 	$(document).on('click','#modipass', function() {
 	var action= "modipass";

@@ -56,7 +56,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
 .content_home{width:75%;margin-top:15px;display:none;height:950px;overflow-y:scroll;} 
-.content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+#content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 
 .content_home,.content2{float
 :left;display:none;} .content2{margin-left:0.2%;}
@@ -173,6 +173,9 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
 h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
 .sup{cursor:pointer;color:white;font-size:12px;} #content1{display:none;}
+.indispo{display:none;} #return{ position:fixed;top:300px;left: 20%;font-size:32px;color: #06308E;
+}
+
 
 @media (max-width: 575.98px) { 
 #panier{display:non;}
@@ -190,7 +193,7 @@ input{display:block;} .form-select{display:none;} #panier{display:none;}
 #examp{width:80%;margin-left:-15%;height:1100px;} .buttons{margin-left:2%;}
 .btn{display:block;} #searchDropdown{display:none;}
 .navbar-nav{display:none;} 
-.content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+#content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 .content_home{width:95%;}
 
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  .titre{display:block;position:absolute;left:70%;top:14px;cursor:pointer;color:#224abe;
@@ -218,7 +221,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
-.content3 {width:40%;}
+#content3 {width:40%;}
 }
 
 
@@ -480,6 +483,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="resultat_home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
 
  <div class="content2">
+ <div id="return"></div>
   <h4> Les détails sur le séjour </h4>
   
   <div id="results"></div><!--div-affiche data home selectionné-->
@@ -1017,6 +1021,14 @@ echo $_SESSION['token'];?>">
 	url: 'list_data_home.php',// on traite par la fichier
 	data:{days:days,das:das,tim:tim,tis:tis,to:to,dat:dat},
 	success:function(data) { // on traite le fichier recherche apres le retour
+	
+	var dispo = $('.dispo').length;
+	if(dispo==""){
+		$('#return').text('Aucun local disponible pour ces dates');
+	}
+	 if(dispo> 1 || dispo==1){
+		$('#return').text('');
+	}
 		$('#resultat_home').html(data);
 		$('.content_home').css('display','block');
 		

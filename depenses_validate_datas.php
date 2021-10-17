@@ -66,13 +66,8 @@ $natu='dépense effectué';
 	 $user = $donns['user'].', <i class="far fa-check-circle" style="color:#AB040E;font-size:14px"></i> '.$_SESSION['user'].' a annulé  une réservation client dans l\'intitulé le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>'; 
  }
  
- if($dep_tresorie==4){
   $session = $_SESSION['code'];
-  }
-  if($dep_tresorie==5){
-	  $session=5;
-}
- // insertions des données dans la base de données depense
+  // insertions des données dans la base de données depense
  $req=$bds->prepare('INSERT INTO depense(email_ocd,numero_facture,date,designation,fournisseur,user,nature,montant,status,code,society,calls) VALUES(:email_ocd,:numero_facture,:date,:designation,:fournisseur,:user,:nature,:montant,:status,:code,:society,:calls)');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
                      ':numero_facture'=>$numero_facture,
@@ -89,7 +84,40 @@ $natu='dépense effectué';
 					  ));
 	                
 					// confirmation 
-				}
+				
+ }		
+	
+	if($dep_tresorie==5){
+		$session=5;
+		$data="";
+		
+		if($donns['permission']=="user:gestionnaire"){
+		$paiment ="dépense tiré de la trésorerie, effectué par le gestionnaire";
+		$calls='transmis par '.$_SESSION['user'].'travail à'.$_SESSION['society'];
+		}
+		
+		if($donns['permission']=="user:boss"){
+		$paiment ="dépense tiré de la trésorerie, effectué par le dirigeant";
+		$calls='transmis par '.$_SESSION['user'].'le dirigeant';
+		}
+		
+		// insertion des données dans la table facture
+		$rev=$bds->prepare('INSERT INTO tresorie_user (date,email_ocd,user_gestionnaire,entree,sorties,reservation,reste,code,society,calls,moyen_paiement)VALUES(:date,:email_ocd,:user_gestionnaire,:entree,:sorties,:reservation,:reste,:code,:society,:calls,:moyen_paiement)');
+	     $rev->execute(array(':date'=>$dates,
+		                    ':email_ocd'=>$_SESSION['email_ocd'],
+							':user_gestionnaire'=>$_SESSION['user'],
+							':entree'=>$data,
+							':sorties'=>$monts,
+							':reservation'=>$data,
+							':reste'=>$data,
+							':code'=>$session,
+							':society'=>$_SESSION['society'],
+							':calls'=>$calls,
+							':moyen_paiement'=>$paiment
+					));
+		
+		
+	}
 // on modifie les données de la base de données guide
   if($_SESSION['code']==0){
 		  $session=0;

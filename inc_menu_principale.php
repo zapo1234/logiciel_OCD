@@ -111,7 +111,9 @@ include('inc_session.php');
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">facturer des chambres</h6>
                         <a class="collapse-item" href="gestion_datas_customer.php">gérer des encaissements</a>
-                        <a class="collapse-item" href="gestion_customer_home.php">Agenda des données</a>
+                        <a class="collapse-item" href="gestion_customer_home.php">Agenda des réservation</a>
+						
+						<a class="collapse-item" href="externe_customer_home.php" title="intéréagir avec vos clients">Demande client</a>
                        
                     </div>
                 </div>
