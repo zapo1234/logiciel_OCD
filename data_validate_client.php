@@ -493,7 +493,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 				
 
                 // on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,codeid_visitor) 
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
 		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $dates ="";
 		 $reys->execute(array(':id_local'=>$ids_chambre,

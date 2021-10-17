@@ -7,30 +7,22 @@ include('inc_session.php');
     $rel=$bdd->prepare('SELECT  permission,code,society FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
-	
-	
 	if($donns['code']==0){
 		  $session=0;
 		}
-		
 		else{
 		$session=$donns['code'];
 		}
-		
 		if($donns['permission']=="user:boss"){
-			
 			$calls="";
 		}
-		
 		if($donns['permission']=="user:gestionnaire"){
 			$calls="transmis par le gestionnaire";
-		}
-		
+	    }
 		if($donns['permission']=="user:employes"){
 			if($donns['code']==0){
 			$calls='transmis par le réceptionniste';
 			}
-			
 			else{
 				$calls='transmis par '.$donns['society'].'';
 			}
@@ -50,6 +42,7 @@ include('inc_session.php');
  $monts=$_POST['idy'];
  $user =$_SESSION['user'];
  $numero_facture= $_POST['fact'];
+ $dep_tresorie =$_POST['dep_tresorie'];
 
  for($count=0;  $count<count($_POST['ti']); $count++){
 	
@@ -63,18 +56,22 @@ include('inc_session.php');
 $natu='dépense effectué'; 
 	$user =$_SESSION['user']; 
  }
- 
  if($nat==2){
 	$natu='crédit fournisseur'; 
 	$user =$_SESSION['user'];
- }
+}
  
  if($nat==5){
-	 
-	$natu ="Remboursement client";
+	 $natu ="Remboursement client";
 	 $user = $donns['user'].', <i class="far fa-check-circle" style="color:#AB040E;font-size:14px"></i> '.$_SESSION['user'].' a annulé  une réservation client dans l\'intitulé le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>'; 
  }
  
+ if($dep_tresorie==4){
+  $session = $_SESSION['code'];
+  }
+  if($dep_tresorie==5){
+	  $session=5;
+}
  // insertions des données dans la base de données depense
  $req=$bds->prepare('INSERT INTO depense(email_ocd,numero_facture,date,designation,fournisseur,user,nature,montant,status,code,society,calls) VALUES(:email_ocd,:numero_facture,:date,:designation,:fournisseur,:user,:nature,:montant,:status,:code,:society,:calls)');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
@@ -86,11 +83,10 @@ $natu='dépense effectué';
 					  ':nature'=>$natu,
 					  ':montant'=>$mont,
 					  ':status'=>$nat,
-					  ':code'=>$_SESSION['code'],
+					  ':code'=>$session,
 					  ':society'=>$_SESSION['society'],
 					  ':calls'=>$calls
-					  
-					 ));
+					  ));
 	                
 					// confirmation 
 				}
@@ -98,17 +94,16 @@ $natu='dépense effectué';
   if($_SESSION['code']==0){
 		  $session=0;
 		}
-		
 		else{
 		$session=$_SESSION['code'];
 		}
+	if($dep_tresorie==4){
   $ret=$bds->prepare('UPDATE tresorie_customer SET depense= :des WHERE code= :code AND email_ocd= :email_ocd');
   $ret->execute(array(':des'=>$donnes['depense']+$monts,
                       ':code'=>$_SESSION['code'],
                        ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
- 	 
-  
+ 	}
   
 
 ?>

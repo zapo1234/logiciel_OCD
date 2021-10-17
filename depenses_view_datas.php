@@ -46,7 +46,7 @@ if($_POST['action']=="fetchs") {
   if($donns['permission']=="user:boss"){
 		
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>';
-	
+	$depense='<button type="button" class="dep_tresorie">éditer des dépenses</button>';
 	$action='<form method="post" action="excels.php">
     Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur de numéro facture">
 	<span class="expo">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
@@ -54,7 +54,11 @@ if($_POST['action']=="fetchs") {
 	}
 	else{
 		
-		$puts='Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur ou numéro de facture">';
+		if($donns['permission']=="user:gestionnaire"){
+		 $depense='<button type="button" class="dep_tresorie">éditer des dépenses</button>';
+		}
+		
+		$puts='<input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur ou numéro de facture">'.$depense;
 		$action="";
 	}
 	

@@ -21,7 +21,7 @@ include('inc_session.php');
    
    // on recupére les données de la table 
    
-   $req=$bdd->prepare('SELECT email_ocd,email_user FROM inscription_client WHERE email_user= :email_user');
+   $req=$bdd->prepare('SELECT email_ocd,email_user,token_pass FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
@@ -70,6 +70,10 @@ include('inc_session.php');
    $status=1;
    $categories="dirigeant";
    $permission ="user:boss";
+   // token _password
+   $token = openssl_random_pseudo_bytes(16);
+ //Convert the binary data into hexadecimal representation.
+    $token_pass = bin2hex($token);
    
    // nombre de site pour les compte tresorie customer
    $sites = $_POST['sites'];
@@ -77,12 +81,9 @@ include('inc_session.php');
    $reste =0;
    $depense =0;
    $montant =0;
-   
-
-   if($donnees['email_user']!=$_POST['emails']) {
-	
-    if(empty($_POST['sites']))
-   {
+   if($donnees['email_user']!=$_POST['emails'] AND $donnees['token_pass']!=$token_pass) {
+	 if(empty($_POST['sites']))
+     {
 	 $code=0;
 	 $society="";
 	 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)
@@ -106,9 +107,7 @@ include('inc_session.php');
 		$society="";
 		for($i=0; $i < $site; $i++){
 		 $code = $i+1;
-		 
-		 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)
-		 VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
+	$rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 							':reservation'=>$montant,
 							':encaisse'=>$montant,
@@ -122,10 +121,9 @@ include('inc_session.php');
 		}
 	 }
    
-
-   // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor)');
+    // insertion des données pour création des users compte
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -148,7 +146,8 @@ include('inc_session.php');
 							':status'=>$status,
 							':active'=>$active,
 						    ':logo'=>$log,
-							':id_visitor'=>$token
+							':id_visitor'=>$token,
+							':token_pass'=>$token_pass
 						  ));
 						  
 		// insert dans la tablea table custommer des caisse

@@ -170,6 +170,14 @@ transition: all 200ms;}
     background-clip: padding-box;
     border: 1px solid #e3e6f0;}
 .mobiles{display:none;} #rechers{display:none;}
+.dep_tresorie{color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
+	width:230px;
+	height:35px;
+	border-radius:15px;
+	margin-left:3%;
+}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -195,7 +203,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
 .dir td{display:block;} #examp{width:80%;margin-top:15px;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tls{display:none;} #searchDropdown{display:none;} .reini{top:20px;left:5%;}
-
+ .s{display:block;}
 }
 
 
@@ -291,7 +299,7 @@ height:2000px;overflow-y:scroll;z-index:5;}
 
                            <div class="inputs">
                              <button type="button" class="btn-primary" id="but">
-                              Ajouter +</button>
+                              En caisse -</button>
                             </div>
 
                         <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="liste" name="liste">
@@ -345,7 +353,7 @@ height:2000px;overflow-y:scroll;z-index:5;}
   <div  id="examp" style="display:none">
   
 <form method="post" id="form_depense" action="">
-   <div class="donnes2">Ajouter des dépenses<button type="button" id="dir" title="ajouter des entrées">+</button> <span class="der">N° facture<input type="text" name="fact" id="fact"></div>
+   <div class="donnes2">Ajouter des dépenses<button type="button" id="dir" title="ajouter des entrées">+</button> <span class="der">N° facture<input type="text" name="fact" id="fact"><input type="hidden" name="dep_tresorie" id="dep_tresorie"></div>
 
    
    <table  id="affiche">
@@ -468,6 +476,23 @@ height:2000px;overflow-y:scroll;z-index:5;}
   // afficher 
   $('#cont'+id).slideToggle();
 });
+
+$('#but').click(function(){
+	   var num =4;
+   $('#examp').css('display','block');
+   $('#pak').css('display','block');
+   var email = "default@gmail.com";
+   $('#email').val(email);
+   $('#dep_tresorie').val(num);
+ });
+
+$(document).on('click','.dep_tresorie',function(){
+	var num =5;
+   $('#examp').css('display','block');
+   $('#pak').css('display','block');
+   $('#dep_tresorie').val(num);
+
+ });
 
 $(document).on('click','.actions',function(){
 	var id = $(this).data('id7');

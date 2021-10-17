@@ -18,6 +18,8 @@ if(isset($_POST['id_ocd'])) {
     $date=$dateDuJour;
     $heure = date('H:i');
 	$date = date('Y-m-d');
+	// token reset password
+	
 	
 	$dates1 = explode('-',$date);
 	$j = $dates1[2];
@@ -26,23 +28,19 @@ if(isset($_POST['id_ocd'])) {
 	
 	$dat = $j.'-'.$mm.'-'.$an;
 	
-	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active,code,society FROM inscription_client WHERE email_user= :email_user');
+	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active,code,society, id_visitor FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_POST['email_ocd']));
    $donnees=$req->fetch();
 	$req->closeCursor();
     
-	
 	if($_POST['id_ocd']==$donnees['password'] AND $donnees['email_ocd']=="") {	
 	echo'<SCRIPT LANGUAGE="JavaScript">
        document.location.href="gestion_create_users.php"
         </SCRIPT>';	
-		
 	}
 	if($_POST['id_ocd']==$donnees['password']) {
-		
 		$active="off";
 		if($donnees['active']!=$active) {
-			
 			$_SESSION['email_ocd']=$donnees['email_ocd'];
 			$_SESSION['email_user']=$_POST['email_ocd'];
 			$_SESSION['pose']= $_POST['id_ocd'];
@@ -50,6 +48,7 @@ if(isset($_POST['id_ocd'])) {
 			$_SESSION['permission'] = $donnees['permission'];
 			$_SESSION['code']= $donnees['code'];
 			$_SESSION['society']= $donnees['society'];
+			$_SESSION['id_visitor'] = $donnees['id_visitor'];
 			 $_SESSION['pmd']= sha1(uniqid('',true).'_'.mt_rand());
 	          $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
 			  
@@ -97,7 +96,7 @@ if(isset($_POST['id_ocd'])) {
 	
 	else{
 	 
-      	echo'<div class="dnn" style="position:absolute">Vos identifiants OCD sont incorrectes...</div>'; 
+      	echo'<div class="dnn" style="position:absolute">Identifiants OCD incorrectes...</div>'; 
 	}
 	
 }

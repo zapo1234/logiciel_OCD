@@ -197,7 +197,7 @@ input{display:block;} .form-select{display:none;} #panier{display:none;}
 font-weight:bold;} .rr{display:none;} .datas{display:none;}
 .datas{padding:2.5%;width:95%;z-index:2;position:absolute;top:70px;left:2%;background:white;height:750px;} h2{border-color:none;color:#224abe;font-weight:bold;}
 h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
-
+.s{display:block;}
 }
 
 
