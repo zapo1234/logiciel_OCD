@@ -185,7 +185,7 @@ include('inc_session.php');
 .center{background-color:#eee;width:80%;height:950px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color:white;z-index:2;opacity: 0.6;}
+#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color:black;z-index:2;opacity: 0.6;}
 #examp{display:block;border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
 h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
@@ -201,7 +201,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
 .de,.des{padding-left:0.3%;color:#ACD6EA} .nbjour{color:black;font-weight:300;padding-left:10%;font-size:18px;}
 .content_home{width:75%;margin-top:15px;display:none;height:950px;overflow-y:scroll;} 
-.content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+#content3{margin-left:2%;background:white;margin-top:5px;float:left;margin-left:2.5%;width:30%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 
 .content_home,.content2{float:left;display:none;} .content2{margin-left:0.2%;}
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
@@ -224,7 +224,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+#pak{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.9;}
 
 .h6{font-family:arial;font-size:14px;text-align:center;color:black;margin-top:10px;}
 .enre{font-size:12px;z-index:4;position:absolute;top:83px;left:70%;color:red;font-weight:bold;font-size:16px;padding:1%;text-align:center;}
@@ -313,7 +313,7 @@ margin-left:-10px;}
 .navbar-nav{background:#06308E;}
 
 .butto{margin-left: 2%; margin-top: 20px; width: 250px;height: 40px;color: white;background: #ACD6EA;border-radius: 15px;text-transform: capitalize;
-    border: 2px solid #ACD6EA;
+    border: 2px solid #ACD6EA;margin-top:150px;
 }
 
 .hom{background:white;color:black;font-size:14px;padding:3%;}
@@ -325,7 +325,8 @@ margin-left:-10px;}
 .ouvrir,.ouvrir1{cursor:pointer;}
 .ouvrir11,.ouvrir12{display:none;cusor:pointer;}
 
-h3{color:#06308E;font-size:16px;font-weight:bold;}
+h3{color:#06308E;font-size:16px;font-weight:bold;} 
+.indispo{display:none;}
 
 
 @media (max-width: 575.98px) { 
@@ -344,7 +345,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
  
 #examp{width:85%;left:10%;height:900px} .buttons{margin-left:5%;}
 .navbar-nav{display:none;}
-.content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
+#content3{display:block;margin-left:2%;background:white;margin-top:5px;margin-left:3%;width:90%;height:240px;border:2px solid #eee;padding:1%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";color:black;}
 .content_home{width:95%;}
 
 .content_home{width:95%;margin-top:15px;display:none;height:950px;overflow-y:scroll;}  
@@ -545,31 +546,20 @@ height:2800px;overflow-y:scroll;z-index:5;}
    <div class="form-row">
     <div class="form-group col-md-6">
       <div class="input-group">
-	  <label for="inputPassword4">Date <br/>d'enregistrement *</label>
+	  <label for="inputPassword4">Date <br/></label>
     <input type="date" name="dat" id="dat" class="form-control"  required value="<?php echo$date;?>">                                               
   </div>
  </div>
 
-   <div class="form-group col-md-6">
-      <div class="input-group">
-	  <label for="inputPassword4">Civilité client *<br/></label>
-     <select id="civil" class="civil" name="civil">
-     <option value="sans">type</option><option value="couple">couple</option>
-	 <option value="monsieur">Monsieur</option>
-	 <option value="madame">Madame</option>    
-      <option value="famille">famille</option>
-	  <option value="sans">sans précision</option>
-    </select>	  
-   </div>
-
-    </div>
+   
     <div class="form-group col-md-6">
+	<div class="input-group">
       <label for="inputPassword4">Client *</label>
       <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" value="<?php echo$clients;?>">
     </div>
-  
-
-   <div class="form-group col-md-6">
+   </div>
+     
+	 <div class="form-group col-md-6">
       <label for="inputEmail4">piéce d'identité *</label>
       <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro" value="<?php echo$piece;?>">
     </div>
@@ -642,6 +632,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="resultat_home"><?php include('list_data_home.php');?></div><!--affiche les homme-->
 
  <div class="content2">
+ <div id="result"></div>
   <h4> Les détails sur le séjour </h4>
   <div id="resul"></div>
   <div id="results"></div><!--div-affiche data home selectionné-->
@@ -907,11 +898,6 @@ echo $_SESSION['token'];?>">
 		 $('#dat').css('border-color','red');
 	 }
 	 
-	 else if(piece.length ==""){
-		$('#piece').css('border-color','red'); 
-		$('.error').html('fournir les informations sur l\'identité du client');
-	}
-	
 	else if(adresse > 150){
 		$('#adresse').css('border-color','red'); 
 		$('.errors').html('l\'adresse du client peut pas dépasser 150 caractères');
@@ -1191,6 +1177,14 @@ echo $_SESSION['token'];?>">
 	url: 'list_data_home.php',// on traite par la fichier
 	data:{days:days,das:das,tim:tim,tis:tis,to:to,dat:dat},
 	success:function(data) { // on traite le fichier recherche apres le retour
+	 var dispo = $('.dispo').length;
+	if(dispo==""){
+		$('#return').text('Aucun local disponible pour ces dates');
+	}
+	 if(dispo> 1 || dispo==1){
+		$('#return').text('');
+	}
+	
 		$('#resultat_home').html(data);
 		$('.content_home').css('display','block');
 		

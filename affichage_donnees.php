@@ -160,7 +160,6 @@ if($_POST['action']=="dat"){
 	// variable 
 	$payments = $paiement.','.$paiement1.','.$paiement2.','.$paiement3;
 	 
-	 if($donnees['montant']==0 AND $donnees['depense'] AND $donnees['avance']==0){
 	 if(in_array($_POST['date'],$data)){
    // on redirige vers la page
           echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green"></i> Opération réussie</button>
@@ -229,8 +228,7 @@ if($_POST['action']=="dat"){
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';	 
 			 
 		 }
-		 
-		 }
+		
 		
 		}
 

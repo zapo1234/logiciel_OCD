@@ -39,95 +39,77 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 
        $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }
+	 
+	 else{
+		 
+		 $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>plus..';
+	 }
 
 	
 	$infos=html_entity_decode(trim($_POST['infos']));
 	$site = html_entity_decode(trim($_POST['site']));
 	// type de logement
-	$type = $_POST['type'];
+	$types = $_POST['type'];
 	$typs = $_POST['typs'];
+	$second_type =html_entity_decode($_POST['typs']);
 	
 	if(!empty($typs)){
 		$type=$_POST['typs'];
-		
 	}
 	
-	 if($type == 1){
+	if($types==1){
 		$type ="chambre single";
 	}
-	elseif($type == 2){
-		
-		$type="chambre double";
+	elseif($types==2){
+	$type="chambre double";
 	}
-	
-	elseif($type == 3){
-		$type="chambre triple";
+	elseif($types==3){
+    $type="chambre triple";
 	}
-	
-	elseif($type == 4) {
+	elseif($types==4) {
 		$type ="chambre twin";
 	}
-	elseif($type == 5){
+	elseif($types==5){
 		$type ="chambre standard";
 	}
-	
-	elseif($type == 6){
+	elseif($types==6){
 		$type ="studio double";
 	}
-	
-	elseif($type == 7){
-		
-		$type ="sutdio double";
+	elseif($types==7){
+	$type ="sutdio double";
 	}
-	
-	elseif($type == 8){
-		$type ="appartement meublé";
-		
+	elseif($types==8){
+	$type ="appartement meublé";
 	}
-	
-	
 	else{
-		$type = $typs;
+		$type = $second_type;
 	}
-	
-	$second_type =html_entity_decode($_POST['typs']);
-	
 	// cout du locale
 	$price_days  = $_POST['cout'];
 	$prices_time = $_POST['couts'];
-	
 	$email_ocd = $_SESSION['email_ocd'];
-	
-	
 	// fichier à upload
 	$files=$_FILES['fil']['name'];	
-
-    if(!empty($_POST['ch']) AND !empty($_POST['choix'])){
+if(!empty($_POST['ch']) AND !empty($_POST['choix'])){
     $equipement = implode(", ", $_POST['ch']);
 	}
 	else{
 		$equipement="";
 	}
-	
 	if(!empty($_POST['choix'])) {
 	$equipements = implode(", ", $_POST['choix']);	
 	}
 	else {
 		$equipements="";
 	}
-	
-	  if($_POST['num'] <0) {
+	if($_POST['num'] <0) {
 		echo'un nombre positif requis';
 	}
-	
 	elseif($_POST['nums']<0) {
 		echo' un nombre positif requis';
 	}
-	
 	else {
-		
 		// modifier  les données dans la base de données dans la base de donnes chambres
-		
 		$rey=$bds->prepare('UPDATE chambre SET chambre= :chambr, type_logement= :type_logemen, cout_nuite= :cout_nuit,
 		cout_pass= :cout_pas, occupant= :occupan, nombre_lits= :nombre_lit, equipement= :equipemen, equipements= :equipement, infos= :info, icons= :icon, society= :sit WHERE id_chambre= :id_chambre');
 		$rey->execute(array(':chambr'=>$ids,
@@ -145,13 +127,10 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 						  ));
 						  
 		// enregsitrer les images correspondant à la chambre
-		
 		// traitement des fichier en boucles pour la grille 
-		
 		for($count =0; $count < 3; $count++) {
     if(!empty($_FILES['fil']['name'][$count]) AND $_FILES['fil']['error'][$count]==0){
-	 
-		$infosfichier=pathinfo($_FILES['fil']['name'][$count]);
+	 $infosfichier=pathinfo($_FILES['fil']['name'][$count]);
          $extension_upload= $infosfichier['extension'];
         $type_extension = array('png', 'gif', 'jpg', 'jpeg','PNG','JPG');
 		if($_FILES['fil']['size'][$count]>2000000) {
@@ -166,32 +145,24 @@ if(isset($_GET['home']) AND !empty($_GET['home'])) {
 		 // on instruis un nom du fichier
 	    $nvname = rand(1000,10000000) . '.' . $extension_upload;
        $path= "upload_image/" . $nvname;
-    
-	// on enregitre dans la fonction
-	move_uploaded_file($_FILES['fil']['tmp_name'][$count], $path);	
-		 
-		 // inséré les données dans la base de donnnées
+    // on enregitre dans la fonction
+	  move_uploaded_file($_FILES['fil']['tmp_name'][$count], $path);	
+		// inséré les données dans la base de donnnées
 		 $ret=$bds->prepare('INSERT INTO photo_chambre (id_chambre,email_ocd,name_upload) VALUES(:id_chambre,:email_ocd,:name_upload)');
 	     $ret->execute(array(':id_chambre'=>$_GET['home'],
 					      ':email_ocd'=>$email_ocd,
 						  ':name_upload'=>$nvname
 						  ));
-						  
+		}
 	   }
-
-	  }
 	 }	// on affiche
 				echo'<div id="pak"></div>';
-				
-				  // on redirige vers la page
+				// on redirige vers la page
              echo'<div class="enre">les mofications du local: <span class="x">'.$ids.'</span>  ont étés prise en compte.
 		     <div class="dep">...</div></div>';
-             
-			 echo'<meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/inventaire_gestion_home.php"/>';
-  
-	}
-  }
-  
+             echo'<meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/inventaire_gestion_home.php"/>';
+        }
+      }
   else{
 	  echo'valider à nouveau le local';
   }

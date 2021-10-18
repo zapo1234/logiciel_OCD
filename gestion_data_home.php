@@ -174,6 +174,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
+#indispo{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -562,6 +563,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	url: 'add_home.php',// on traite par la fichier
 	data:{id:id,nbjour:nbjour,days:days,das:das,tim:tim,tis:tis,to:to,chambre:chambre,type:type,prix_nuite:prix_nuite,prix_pass:prix_pass,paynuite:paynuite,paypass:paypass,dat:dat,action:action},
 	success:function(data) { // on traite le fichier recherche apres le retour
+	// on compte le nombre de homes trouvé
 		$('#results').html(data);
 	
 	 },
