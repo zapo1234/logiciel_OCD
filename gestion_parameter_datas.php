@@ -436,7 +436,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					  <div id="der14">
 					    <h2>Partager le lien de votre blog réservation</h2>
 						<div class="blog">Intéréagir avec les clients sur partout dans le monde,mutilplier les chances des réservation en temps réels
-						Lien  <span class="lien">https://reservation.ocdgestion.com/reservation_home.php?home_user=<?php echo $donns['id_visitor'];?></span></div>
+						Lien  <span class="lien">https://reservation.ocdgestion.com/reservation/reservation_home.php?home_user=<?php echo $donns['id_visitor'];?></span></div>
 					    </div><!--der15-->
 				  
 				  

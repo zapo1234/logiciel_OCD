@@ -198,14 +198,16 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	   echo'<div class="ups">l\'extension du fichier n\'est pas autorisée(format png,jpeg,jpg)</div>';
      }
 	 else{
-		 
 		 // on instruis un nom du fichier
 	    $nvname = rand(1000,10000000) . '.' . $extension_upload;
+        $paths= "reservation/upload_image/".$nvname;
+		// copiez le fichier vers paths
+		copy($_FILES['fil']['tmp_name'][$count],$paths);
+		// enregsitrer l'image dans le chemin souhaiter
        $path= "upload_image/" . $nvname;
-    
-	// on enregitre dans la fonction
-	move_uploaded_file($_FILES['fil']['tmp_name'][$count], $path);	
-		 
+	   move_uploaded_file($_FILES['fil']['tmp_name'][$count],$path);	
+	  // on enregistre
+	
 		 // inséré les données dans la base de donnnées
 		 $ret=$bds->prepare('INSERT INTO photo_chambre (id_chambre,email_ocd,name_upload) VALUES(:id_chambre,:email_ocd,:name_upload)');
 	     $ret->execute(array(':id_chambre'=>$id_chambre,
@@ -217,7 +219,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 
 	  }
 	 }	// on affiche
-				echo'<div id="pak"></div>';
+				
 				
 				  // on redirige vers la page
              echo'<div class="enre">Votre local: <span class="x">'.$ids.'</span>  à été bien enregsitrée.

@@ -223,7 +223,7 @@ ul a{margin-left:3%;}
 	}
 	// on recupére les variable fixe
    $dat =$_POST['dat']; // date d'enregistrement.
-   $civilite = $_POST['civil']; // civilité
+   $civilite="";
    $name = html_entity_decode(trim($_POST['name']));
    $client = html_entity_decode(trim($_POST['piece']));
    $adresse = html_entity_decode(trim($_POST['adresse']));

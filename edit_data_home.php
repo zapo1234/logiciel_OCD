@@ -19,7 +19,6 @@ if(!isset($_GET['home'])) {
 	$donnees = $req->fetch();
 	// recupére les images existant
 	// on recupére les equipement checkbox
-	$type =$donnees['type_logement'];
 	$occupant =$donnees['occupant'];
 	$chambre =$donnees['chambre'];
 	$nbrs_lits = $donnees['nombre_lits'];
@@ -29,6 +28,7 @@ if(!isset($_GET['home'])) {
 	$data = $donnees['equipement'];
 	$data1  = $donnees['equipements'];
 	$society = $donnees['society'];
+	$type =$donnees['type_logement'];
     
 	$req->closeCursor();
 	 
@@ -110,7 +110,7 @@ th{text-align:center;background:#4c76b2;color:white;font-size:13px;border-color:
  .text_img{padding:1.5%;border:4px solid #eee;width:355px;}
  
  .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:105px;}
-ul a{margin-left:3%;} #form_logo{display:none;} #logo{position:absolute;top:30px;left:1.7%;border-radius:50%;}
+ul a{margin-left:3%;} #form_logo{display:none;} #logo{position:absolute;top:12px;left:1.7%;border-radius:50%;}
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:350px;background:white;border:2px solid white;margin-left:-5px;
@@ -136,7 +136,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .mobile{display:none}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
-.btn{display:none;}
+.btn,.s{display:none;} 
 
 
 @media (max-width: 575.98px) { 
@@ -260,7 +260,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Autre type</label>
-      <input type="text" class="form-control" name="typs" id="inputEmail4" value="<?php echo$type;?>">
+      <input type="text" class="form-control" name="typs" id="typs" value="<?php echo$donnees['type_logement'];?>">
     </div>
   
 

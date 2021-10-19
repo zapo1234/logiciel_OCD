@@ -142,7 +142,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <p class="text-center">Acccès oubliés? <a href="#" id="signup">Recupérer ces accès !</a><br/><span class="contact">Contactez nous ici</span></p>
+                              <p class="text-center">Acccès oubliés? <a href="reset_password_ocd.php" id="signup">Recupérer ces accès !</a><br/><span class="contact">Contactez nous ici</span></p>
                            </div>
 						   <div class="form-group">
                               <p class="text">Optimisation de comptabilité à distance,<br/> Tous droits  réservés  2021-2022</p>
@@ -159,8 +159,7 @@
 		</div>
       </div>  
     <div id="as"></div>
-	<div id="av"></div>
-    <div id="visuel"></div>	  
+	<div id="av"></div>  
          
 </body>
 
@@ -178,7 +177,7 @@ $(document).on('click','#sub',function() {
  var email_ocd =$('#email_ocd').val();
   var id_ocd =$('#id_ocd').val();
  // on defini des varaible
- if(email_ocd!="" && id_ocd!=""){
+ if(email_ocd!="" || id_ocd!=""){
  $.ajax({
 	type:'POST', // on envoi les donnes
 	url:'login_connecte.php',// on traite par la fichier
@@ -188,7 +187,7 @@ $(document).on('click','#sub',function() {
 		$('#ass').html(data);
 	 },
 	 error: function() {
-    alert('pas de connexion'); }
+    $('#ass').text('verifiez la connexion internet'); }
 	 
 	});
  }
