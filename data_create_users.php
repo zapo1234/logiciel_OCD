@@ -53,10 +53,7 @@ include('inc_session.php');
        ];
 
    $hash = password_hash($pass, PASSWORD_BCRYPT, $options);
-   
-   
    $name = trim(strip_tags($_POST['name']));
-  
    $num="";
    $log="";
    $numero_compte ="";
@@ -71,9 +68,9 @@ include('inc_session.php');
    $categories="dirigeant";
    $permission ="user:boss";
    // token _password
-   $token = openssl_random_pseudo_bytes(16);
+   $tokens = openssl_random_pseudo_bytes(16);
  //Convert the binary data into hexadecimal representation.
-    $token_pass = bin2hex($token);
+    $token_pass = bin2hex($tokens);
    
    // nombre de site pour les compte tresorie customer
    $sites = $_POST['sites'];
@@ -107,6 +104,7 @@ include('inc_session.php');
 		$society="";
 		for($i=0; $i < $site; $i++){
 		 $code = $i+1;
+		 $soci_data = $societys[$i];
 	$rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,:society)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 							':reservation'=>$montant,
@@ -115,12 +113,13 @@ include('inc_session.php');
 							':montant'=>$montant,
 							':reste'=>$montant,
 							':code'=>$code,
-							':society'=>$society,
+							':society'=>$soci_data
 					));
 			
 		}
 	 }
-   
+      $societ="";
+	  $code=0;
     // insertion des données pour création des users compte
 		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
 		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
@@ -137,9 +136,9 @@ include('inc_session.php');
 							':password'=>$hash,
 							':categories'=>$categories,
 						    ':numero_compte'=>$numero_compte,
-							':code'=>$code,
+							':code'=>$codes,
 							':society'=>$society,
-							':societys'=>$societys,
+							':societys'=>$societ,
 					        ':date'=>$date,
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,

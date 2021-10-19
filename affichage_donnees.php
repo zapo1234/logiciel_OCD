@@ -141,14 +141,14 @@ if($_POST['action']=="dat"){
 		$paiement1=""; 
 	 }
 	 else{
-		 $paiement1='<img src="img/check_p.png" width="18px" height="18px"> carte bancaire :'.$b;
+		 $paiement1='<img src="img/check_p.png" width="20px" height="20px"> carte bancaire :'.$b;
 	}
 	
 	if(empty($c)){
 		$paiement2=""; 
 	 }
 	 else{
-		 $paiement2='<img src="img/check_n.png" width="18px" height="18px"> Mobile monney :'.$c;
+		 $paiement2='<img src="img/check_n.png" width="20px" height="20px"> Mobile monney :'.$c;
 	}
 	
 	if(empty($d)){

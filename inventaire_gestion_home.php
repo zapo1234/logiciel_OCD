@@ -424,7 +424,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <div class="form-group col-md-6">
 	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
       <label for="inputPassword4">type de local *</label>
-      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example">
+      <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example" required>
                            <option value="">Type de logement</option>
 						   <option value="1">chambre single</option><option value="2">chambre double</option>
                            <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>

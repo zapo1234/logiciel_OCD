@@ -56,7 +56,7 @@ include('inc_session.php');
 #der11{width:60%;margin-left:15%;} td{width:500px;color:black;padding-top:20px;}
 #der12{width:60%;margin-left:15%;display:none;}
 #der13{width:75%;margin-left:10%;display:none;}
-#der14{}
+#der14{width:75%;display:none;}
 #der15{width:60%;margin-left:15%;display:none;}
 .der1{border-bottom:4px solid #0661BC;color:#0661BC;}
 .def{color:black;}

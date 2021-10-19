@@ -25,22 +25,18 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
 		 // recupére les image pour les supprimer
 		 $req=$bds->prepare('SELECT name_upload FROM photo_chambre WHERE id_chambre = :id_chambre');
          $req->execute(array(':id_chambre'=>$id));
-		 
 		 $donnes = $req->fetchAll();
          
 		   if(!empty($req)){
-			 
 			 foreach($donnes as $row){
-				 
-			    $array = $row['name_upload'].',';
-				
-				$array_name = explode(',', $array);
-				
+			$array = $row['name_upload'].',';
+			$array_name = explode(',', $array);
 				foreach($array_name as $result) {
-					  
-					// suprimer 
-					// on suprimer le fichier existant
+				// suprimer 
+				// on suprimer le fichier existant
 			     unlink ("upload_image/" .$result);
+				 //on suprime l'image dans reservation
+				 unlink ("reservation/upload_image/". $result);
 			     
 				}
 			  }

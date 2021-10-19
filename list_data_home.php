@@ -295,7 +295,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	
-	 echo'<div class="content3" id="'.$css.'">
+	 echo'<div id="content3" class="'.$css.'">
 		     <span class="dc">Type de local :'.$donnees['type_logement'].'</span><br/><span class="df">'.$donnees['chambre'].'</span><br/>
 			 <span class="dt">'.str_replace($rt,$rem,$donnees['equipement']).'</span><br/><span class="text"></span>
 			 <div class="'.$a.'">'.$name.'</div>
