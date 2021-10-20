@@ -483,6 +483,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> ventilateur"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> ventilateur
 	 <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision"> <i style="font-size:13px" class="fa">&#xf108;</i> télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style="font-size:14px" class="fa">&#xf1eb;</i> wiffi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> salle de bains
      <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Déjeuner"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Déjeuner
+	 <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Frigo/réfrigerateur"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Frigo/réfrigérateur 
+	 <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Four/chauffage"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Four/chauffage
 	 </div>
 	 
 	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements secondaires du local</h2>

@@ -826,10 +826,8 @@ echo $_SESSION['token'];?>">
 		 else{
 			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé');  
 		 }
-		 
-		 }
-		
-	 }
+		}
+	   }
 	 
 	 if(to =="horaire"){
 		 var client = $('.client').text();
@@ -856,27 +854,20 @@ echo $_SESSION['token'];?>">
 			$('.tex').css('display','block');
 			$('#nbjour').val(r);
 		 }
-		 
 		 else{
 			 $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>l\'heure de départ ne dois pas etre inférieur à celle de l\'entréé'); 
 	      }
-		 
 		 }
-		 
 		 else{
 			$('#tis').css('border-color','red');  
 		 }
-		 
-		 }
-		 
+		}
 		 else{
 			 $('#tim').css('border-color','red'); 
 		 }
-		 
-		 }
+		}
          else{
-			 
-			 if(date3 < date4){
+			if(date3 < date4){
             $('#h3').text('Horaire facturé'); 
 			$('.de').text(name);
 			$('.des').text(numero);
@@ -913,11 +904,8 @@ echo $_SESSION['token'];?>">
 		 
 		 var client = $('.client').text();
 		 if(client ==""){
-		 
 		 if(days!=""){
-		 
 		 if(das!=""){
-		 
 		 if(date1 < date2) {
 		 $('#h3').append('Réservation');
 		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
@@ -941,23 +929,18 @@ echo $_SESSION['token'];?>">
 		 else{
 			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
 		 }
-		 
-		 }
+		}
 		 
 		 else{
 			 $('#das').css('border-color','red'); 
 		 }
-		 
 		 }
-		 
 		 else{
 			$('#days').css('border-color','red');  
 		 }
-		 
 		 }
 		 
 		 else{
-			 
 			 if(date1 < date2){
 			$('#h3').text('Réservation'); 
 			$('.de').text(name);
@@ -983,7 +966,6 @@ echo $_SESSION['token'];?>">
 		    $('#nbjour').val(s);
 			
 		 }
-		 
 		 else{
 			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé'); 
 		 }
@@ -1005,11 +987,9 @@ echo $_SESSION['token'];?>">
 	 var tis =$('#tis').val();	
 	 var to =$('#to').val();
 	 var dat =$('#dat').val();
-	
-	var dat = $('#dat').val();
+	 var dat = $('#dat').val();
 	 var name = $('#name').val();
 	 var piece = $('#piece').val();
-	 
 	 var dat = $('#dat').val();
 	 var name = $('#name').val();
 	 var piece = $('#piece').val();

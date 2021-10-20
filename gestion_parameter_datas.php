@@ -501,7 +501,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="donns"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
-<div id="panier"></div><!--retour panier facturation-->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -925,22 +924,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		
 	}
 	});
-	
-	
-	// afficher le pannier
-  function panier() {
-				var action="panier";
-				$.ajax({
-					url: "session_panier.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#panier').html(data);
-					}
-				});
-			}
-
-			panier();
 	
 	// click sur les news message
 	
