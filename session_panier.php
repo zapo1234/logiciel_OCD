@@ -59,10 +59,19 @@ if(!empty($_SESSION['add_home']) AND isset($_SESSION['add_home'])){
 			 <input type="hidden" name="pay[]" value="'.$total.'"/>
 			 </div>';
 		     }
-		     echo'<div class="sup">Suprimer la selection</div></div>';
+		     echo'<div class="sups">Suprimer la selection</div></div>';
 	  }
       else{
         echo'<div class="panie">Aucun local en cours de facturation</div>';
 	  }
+}
+
+//vider les selection
+if($_POST['action']=="delete"){
+ if(!empty($_SESSION['add_home'])){
+  unset($_SESSION['add_home']);
+}	 
+	
+	
 }
  ?>

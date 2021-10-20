@@ -694,6 +694,22 @@ height:2800px;overflow-y:scroll;z-index:5;}
 			recher();
 		
 	});
+	
+	// afficher la div pour réinitailiser les chiffres	
+	$(document).on('click','.sups',function(){
+     var action ="delete";
+	 $.ajax({
+            type: 'POST',
+            url:'session_panier.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#panier').html(data);
+	         panier();
+		    }
+          });
+	 
+    });
   
   $(function(){
   var winners_list = $('.winners li');

@@ -3,13 +3,10 @@ include('connecte_db.php');
 include('inc_session.php');
 
 // recupére les utilisateur connecté et leur status
-  
-
  $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
  $datas=$req->fetchAll();
- 
- // créer 4 tableau vide
+  // créer 4 tableau vide
 	$datac =[];
 	$datac1 =[];
 	$datac2 =[];
@@ -45,15 +42,12 @@ include('inc_session.php');
 	}
 	
   }
-  
-
- // calcule des pourcentage entre entrées et sorties chiffre
+  // calcule des pourcentage entre entrées et sorties chiffre
 	$number1 =array_sum($datac);
 	$number2 =array_sum($datac1);
 	$number3 =array_sum($datac2);
 	$number4 = array_sum($datac3);
- 
-   	$num_data = $number1+$number3+$number4;
+    $num_data = $number1+$number3+$number4;
 	
 	if($num_data==0){
 		
@@ -252,12 +246,12 @@ $name="";
   }
   elseif($a==0 OR empty($array)){
 	  
-	$reserve ='0 local'; 
+	$reserve ='pas de clients'; 
   }
   
   else{
 	  
-	 $reserve=' '.$a.' locaux'; 
+	 $reserve=' '.$a.' clients'; 
   }
   
   // le nombre d'elements dans le tab
@@ -497,6 +491,7 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;
 opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
+.sups{cursor:pointer;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -736,7 +731,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					 
 					echo'<div class="conte2">';
 					echo'<div class="cont2">
-					     <div class="titre"><i class="fas fa-house-user" style="color:#04850C"></i>  Nombre(s) de locaux réservés</div>
+					     <div class="titre"><i class="fas fa-house-user" style="color:#04850C"></i>  Nombre(s) de  réservation en cours</div>
 					     <div class="dtx">'.$reserve.'</div>
 						 </div>
 						
@@ -942,15 +937,27 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
    $('.reini').css('display','none');
  });
  
-
-	
     // afficher la div pour réinitailiser les chiffres	
 	$(document).on('click','.butt',function(){
     $('.reini').css('display','block');
     $('#pak').css('display','block');
     });
 	
-   
+   // afficher la div pour réinitailiser les chiffres	
+	$(document).on('click','.sups',function(){
+     var action ="delete";
+	 $.ajax({
+            type: 'POST',
+            url:'session_panier.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#panier').html(data);
+	         panier();
+		    }
+          });
+	 
+    });
   
   $(function(){
   var winners_list = $('.winners li');

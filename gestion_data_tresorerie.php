@@ -462,6 +462,22 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		
 			});
 			
+			// afficher la div pour réinitailiser les chiffres	
+	$(document).on('click','.sups',function(){
+     var action ="delete";
+	 $.ajax({
+            type: 'POST',
+            url:'session_panier.php',
+            data:{action:action},
+            async:true,
+            success: function(data){
+            $('#panier').html(data);
+	         panier();
+		    }
+          });
+	 
+    });
+			
 			$(document).on('click','.moyes',function(){
 		    var id = $(this).data('id3');
 			  $('#three'+id).css('display','block');
