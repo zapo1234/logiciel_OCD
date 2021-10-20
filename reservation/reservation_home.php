@@ -97,7 +97,8 @@ ul.winners li{
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
 h1{margin-top:18px;} .resul a{padding:3%;color:black;width:15%;} .resul{padding:2%;border-bottom:1px solid black;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
-.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;}
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
+#examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:25%;top:100px;padding:2%;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -284,6 +285,30 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div><button type="button" class="but">commencer <i class="fas fa-arrow-right"></i></button></div>
 </div>
 
+<div id="examp" style="display:none">
+<form method="post" id="form1" action="data_time_user.php">
+ 
+  <h2> check_in et check_out </h2>
+   
+   <div class="row mb-3">
+                    <div class="col">
+					  <label>Date d'arrivée</label>
+                      <input type="date" id="days" name="days" class="form-control" placeholder="" min="<?php echo date('Y-m-d');?>" required>
+                    </div>
+                    <div class="col">
+					<label>Date de départ</label>
+                      <input type="date" id="das" name="das" class="form-control" placeholder="" min="<?php echo date('Y-m-d');?>" required>
+                    </div>
+                </div>
+  <span class="errors"></span>
+   <button type="submit" class="buttons">rechercher</button>
+ 
+<input type="hidden" name="token" id="token" value="<?php
+//Le champ caché a pour valeur le jeton
+echo $_SESSION['token'];?>">
+
+ </form>
+ </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -351,6 +376,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
    $('.but').click(function(){
    $('#pak').hide(2000);
    $('#block').hide(1000);
+ });
+ 
+ $('.button').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 
  });
  
   $(function(){
