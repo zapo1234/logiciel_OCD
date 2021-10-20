@@ -10,17 +10,11 @@ include('../inc_session.php');
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!--slideBar css --->
-
-                
-			
-			
-			
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-        </ul>
+        <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
+         
+		  <div id="result"><!--retour ajax list home-->
+          
+		  </div>
+        </div>
 		
 		
