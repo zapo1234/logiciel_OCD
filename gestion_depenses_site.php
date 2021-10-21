@@ -435,9 +435,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 		
 	});		
 			
-			
-			
-   });
+ });
   
  </script>
   

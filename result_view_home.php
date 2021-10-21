@@ -131,6 +131,10 @@ include('inc_session.php');
    $active="off";
    $code =$_POST['code'];
    $society =$_POST['society'];
+   // token _password
+   $tokens = openssl_random_pseudo_bytes(16);
+ //Convert the binary data into hexadecimal representation.
+    $token_pass = bin2hex($tokens);
    
    if($role==1){
 	 $status=1;
@@ -171,8 +175,8 @@ include('inc_session.php');
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 
    // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 		                    ':denomination'=>$denomination,
@@ -193,25 +197,20 @@ include('inc_session.php');
 						    ':etat'=>$etat,
 							':status'=>$status,
 							':active'=>$active,
-						    ':logo'=>$log
+						    ':logo'=>$log,
+							':id_visitor'=>$_SESSION['id_visitor'],
+							':token_pass'=>$tokens
 						  ));
-  
-	  
-  }
-  }
-  
-  else{
-	  
+          }
+         }
+     else{
 	  echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>Changer de mail !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-    }
-	
-  }
-  
-  // afficher les users comptes
+	}
+   }
+    // afficher les users comptes
   if($_POST['action']=="add_user"){
-	  
-	        echo'<table id="tab">
+	         echo'<table id="tab">
 					<tr class="tab">
 					<th></th>
 					<th>Nom && prénom</th>
@@ -228,28 +227,21 @@ include('inc_session.php');
 					if($donnees['active']=="off"){
 					$active='<button type="button" class="bl" data-id3="'.$donnees['id'].'" title="activer le user">bloqué</button>';
 					}
-					
 					else{
 						$active='<button type="button" class="acs" data-id4="'.$donnees['id'].'" title="désactiver le user">ouvert</button>';
 				   }
-				   
 				   if($donnees['etat']=="connecte"){
 					   
 					  $etat ='<i class="fas fa-circle" style="font-size:12px;color:#3DEA29"></i>  en ligne';
 				   }
-				   
 				   else{
-					   
 					   $etat ='<span class="dert">connecté depuis le'.$donnees['date'].', à '.$donnees['heure'].'</span>';
 				   }
-				   
 				   if($donnees['permission']=="user:boss"){
 					  $sup=""; 
 				   }
-				   
 				   else{
-					   
-					 $sup= '<a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>';
+					   $sup= '<a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>';
 				   }
 				   
 					echo'<tr class="tab">

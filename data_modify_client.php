@@ -519,6 +519,18 @@ ul a{margin-left:3%;}
 	                        ));				
 		}
        }
+	   
+	   // modifier les donnees dans home_occupation
+	   $rev=$bds->prepare('UPDATE home_occupation SET date= :ds, date_french= :data, dates= :datas, type= :ty WHERE code= :code AND email_ocds= :email_ocd AND id_fact= :id');
+        $rev->execute(array(':ds'=>$datas,
+		                    ':data'=>$datas_fren,
+					        ':datas'=>$dates,
+							':ty'=>$mode,
+							':code'=>$session,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
+	   
 	  
 	   // update sur moyen paiment
 	    // modifie les moyens de paiment si possible
@@ -629,12 +641,23 @@ ul a{margin-left:3%;}
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id,
 							  ':type'=>$mode,
-							  ':code'=>$session
+							  ':code'=>$session,
+							  ':id_visitor'=>$_SESSION['id_visitor']
 	                        ));		
 			 }    				
 		
 	  }
 	  
+	  // modifier les donnees dans home_occupation
+	   $rev=$bds->prepare('UPDATE home_occupation SET date= :ds, date_french= :data, dates= :datas, type= :ty WHERE code= :code AND email_ocds= :email_ocd AND id_fact= :id');
+        $rev->execute(array(':ds'=>$datas,
+		                    ':data'=>$datas_fren,
+					        ':datas'=>$dates,
+							':ty'=>$mode,
+							':code'=>$session,
+							':id'=>$id,
+                            ':email_ocd'=>$_SESSION['email_ocd']
+					 ));
 	   // modifie les moyens de paiment si possible
 	   // on modifie les données de la base de données guide
        $res=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 
@@ -693,14 +716,9 @@ ul a{margin-left:3%;}
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
            
-         		   
-					 
-			// on detruire le tableau de session des données
+         		 // on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
-
-
-             		 
-   }
+	}
    }
    else{
 	   
