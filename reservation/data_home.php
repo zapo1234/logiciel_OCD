@@ -2,17 +2,44 @@
 include('../connecte_db.php');
 include('../inc_session.php');
 
+if(!isset($_GET['id_home']) AND !isset($_GET['home_user'])) {
+  header('location:home_none.php');
+}	
+
+// recupére les variable
+$id_home =$_GET['id_home'];
+$home_user =$_GET['home_user'];
 $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscription_client WHERE id_visitor= :id');
    $req->execute(array(':id'=>$_GET['home_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
-
-if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
+	
+	if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
 	header('location:home_none.php');
 }
 
-
-
+  // recupere les données des chambre 
+   $reg=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,nombre_lits FROM chambre WHERE id_chambre= :id_home AND  id_visitor= :home_user');
+    $reg->execute(array(':id_home'=>$id_home,
+	                    ':home_user'=>$home_user));
+						
+	$donns = $reg->fetch();
+	
+	if($donns['nombre_lits']==1){
+	$lits = '<i class="fas fa-bed"></i>';
+	}
+	elseif($donns['nombre_lits']==2){
+	 $lits ='<i class="fas fa-bed"></i> <i class="fas fa-bed"></i>';	
+	}
+	else{
+		$lits='<i class="fas fa-bed"></i> <i class="fas fa-bed"></i>
+		       <i class="fas fa-bed"></i> plus...';
+		}
+	
+	$reg->closeCursor();
+     $rem='<span class="ts"></span>';
+	$rt=",";
+	$rs='<span class="ts"><i style="font-size:12px;font-weight:200px" class="fa">&#xf00c;</i></span>';
 ?>
 
 <!DOCTYPE html>
@@ -62,9 +89,7 @@ if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
 .center{background:#eee;} 
 
-#block{padding:2%;background:white;width:36%;height:330px;position:absolute;top:100px;left:25%;z-index:3;} .h1{text-transform:uppercase;color:#0769BA;}
- 
- .navbar-nav{background:#eee;}
+.navbar-nav{background:#eee;}
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
@@ -74,6 +99,11 @@ h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 label{color:black;font-size:13px;}
+table{background:white;} th,td{color:black;font-weight:200}
+.vert{font-size:13px;color:green;}
+.trs{font-size:25px;color:black;font-weight:bold;}
+.df{padding-left:2%;color:black;font-family:arial;font-size:13px;}
+h3{margin-left:25%;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -144,6 +174,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <h1>Liste des chambres disponible</h1>
+		 <div class="df">à l'instant
+		 Ajourd'huit à <?php echo date('H:i');?></div>
 		  <div id="result"><!--retour ajax list home-->
           
 		  </div>
@@ -171,7 +203,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	
 		<div class="bc">
-		
+		<div>Récapitulatif de réservation</div>
 		</div>
                       
                     </div>
@@ -213,10 +245,39 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-					
-  
- 
+					<div class="equipement">
+                    <table class="table">
+       <thead>
+    <tr>
+      <th scope="col">Type de local</th>
+      <th scope="col">Equipements</th>
+	  <th scope="col">Occupants</th>
+	  <th scope="col">Tarif</th>
+      <th scope="col">Divers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php echo$donns['type_logement'];?><br/>
+	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></th>
+      <td>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></span><br/><br/>
+	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
+      <td>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
+	      Nombre de lits au sein de la chambre<br/>
+		  <?php echo$lits;?>
+	  </td>
+      <td>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span></td>
+    </tr>
     
+  </tbody>
+</table>
+
+<div class="content">
+<h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>
+
+</div>
+ 
+                     </div>
 	                 </div><!--center-->
 
 	
@@ -251,14 +312,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
   
 
 <!--div black-->
-<div id="pak"></div>
-<div id="block">
-<div class="h1"><img src="img/home.png" alt="home" width="80px" height="80px"> <?php echo $donnees['denomination'];?></div>
-<h1>Réservation et disponibilité des chambres en temps réel<br></h1>
-<h2>Numéro de tel :<?php echo$donnees['numero'];?></h2>
-<h2>Email :<?php echo$donnees['email_user'];?></h2>
-<div><button type="button" class="but">commencer <i class="fas fa-arrow-right"></i></button></div>
-</div>
+<div id="pak" style="display:none"></div>
 
 <div id="examp" style="display:none">
 <form method="post" id="form1" action="">
