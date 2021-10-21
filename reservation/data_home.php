@@ -22,10 +22,21 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $reg=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,nombre_lits FROM chambre WHERE id_chambre= :id_home AND  id_visitor= :home_user');
     $reg->execute(array(':id_home'=>$id_home,
 	                    ':home_user'=>$home_user));
-						
-	$donns = $reg->fetch();
-	
-	if($donns['nombre_lits']==1){
+   $donns = $reg->fetch();
+   $reg->closeCursor();
+   
+    // recupere les données des chambre 
+    $ret=$bds->prepare('SELECT id,name_upload FROM chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
+    $ret->execute(array(':id_home'=>$id_home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	// creéation et recuperation des valeur dans un tableau
+	$donnes =$ret->fetchAll();
+	$data =[];
+	foreach($donnes as $datas){
+	$data[] = $datas['name_upload'];
+	}
+
+   if($donns['nombre_lits']==1){
 	$lits = '<i class="fas fa-bed"></i>';
 	}
 	elseif($donns['nombre_lits']==2){
@@ -103,7 +114,7 @@ table{background:white;} th,td{color:black;font-weight:200}
 .vert{font-size:13px;color:green;}
 .trs{font-size:25px;color:black;font-weight:bold;}
 .df{padding-left:2%;color:black;font-family:arial;font-size:13px;}
-h3{margin-left:25%;}
+h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -203,7 +214,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	
 		<div class="bc">
-		<div>Récapitulatif de réservation</div>
+		<div class="recap">Récapitulatif de réservation</div>
 		</div>
                       
                     </div>
@@ -274,7 +285,26 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
 <div class="content">
 <h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>
+<div class="container">
+<div class="row d-flex justify-content-center mt-5">
+<div class="col-md-6">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" align="center">
+<div class="carousel-inner">
+<div class="carousel-item active"></div>
+<div class="carousel-item"></div>
+<div class="carousel-item"></div>
 
+</div>
+<ol class="carousel-indicators list-inline">
+<li class="list-inline-item active"><a id="carousel-selector-0" class="selected" data-slide="0" data-target="#myCarousel"></a></li>
+<li class="list-inline-item"><a id="carousel-selector-1" class="selected" data-slide="1" data-target="#myCarousel"></a></li>
+<li class="list-inline-item"><a id="carousel-selector-2" class="selected" data-slide="2" data-target="#myCarousel"></a></li>
+
+
+</ol>
+</div>
+</div>
+</div>
 </div>
  
                      </div>
