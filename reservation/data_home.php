@@ -25,6 +25,10 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $donns = $reg->fetch();
    $reg->closeCursor();
    
+   // variable
+   $button ='<button class="buts" data-id2="'.$donns['id_chambre'].'">Ajouter à votre réservation</button>';
+   $prix ='<input type="hidden" id="prix_nuite'.$donns['id_chambre'].'" value="'.$donns['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donns['id_chambre'].'" value="'.$donns['cout_pass'].'">';
+   
     // recupere les données des chambre 
     $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
     $ret->execute(array(':id_home'=>$id_home,
@@ -33,8 +37,13 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 	$donnes =$ret->fetchAll();
 	$data =[];
 	foreach($donnes as $datas){
-	$data[] = $datas['name_upload'];
+	$da = $datas['name_upload'];
+	$datac = explode(',',$da);
+	foreach($datac as $values){
+	 $data[]=$values;
 	}
+	}
+	 
 
    if($donns['nombre_lits']==1){
 	$lits = '<i class="fas fa-bed"></i>';
@@ -115,6 +124,9 @@ table{background:white;} th,td{color:black;font-weight:200}
 .trs{font-size:25px;color:black;font-weight:bold;}
 .df{padding-left:2%;color:black;font-family:arial;font-size:13px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
+.rows{background:white;width:100%;height:500px;}
+.der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
+.buts{margin-top:260px;margin-left:30%;width:200px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -215,10 +227,15 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	
 		<div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		
+		<form method="post" action="">
+		<div id="resultat"></div><!--requete ajax-->
+		  
+       </div>
+       </form>
 		</div>
-                      
-                    </div>
+		
+        <div><?php echo$button.' '.$prix;?></div>              
+                    
                 </div>
 
         <!-- Content Wrapper -->
@@ -287,27 +304,18 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div class="content">
 <h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>
 <div class="container">
-<div class="row d-flex justify-content-center mt-5">
-<div class="col-md-6">
-<div id="myCarousel" class="carousel slide" data-ride="carousel" align="center">
+<div class="rows">
 <?php
 
-$count=count($data);
+$count= count($data);
 
+if($count>0){
 for($i=0; $i<=$count; $i++){
-echo'<div class="carousel-inner">
-<div class="carousel-item active"></div>
-<div class="carousel-item"></div>
-<div class="carousel-item"></div>
-
-</div>
-<ol class="carousel-indicators list-inline">
-<li class="list-inline-item active"><a id="carousel-selector-'.$i.'" class="selected" data-slide="'.$i.'" data-target="#myCarousel"></a></li>
-</ol>';
+ echo'<div class="der" data-id1="'.$i.'"><img src="upload_image/'.$data[$i].'" width="250px" height=250px"></div>';
 }
+}
+
 ?>
-</div>
-</div>
 </div>
 </div>
  
@@ -349,7 +357,7 @@ echo'<div class="carousel-inner">
 <div id="pak" style="display:none"></div>
 
 <div id="examp" style="display:none">
-<form method="post" id="form1" action="">
+<form method="post" id="" action="data_home_user.php">
  
   <h3> check_in et check_out </h3>
    
@@ -365,7 +373,7 @@ echo'<div class="carousel-inner">
                     </div>
                 </div>
   <span class="errors"></span>
-   <button type="submit" class="buttons">rechercher</button>
+   <input type="submit" class="buttons" value="rechercher">
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
@@ -434,9 +442,7 @@ echo $_SESSION['token'];?>">
    
  });
  
- 
-	
-	 $('#news_data').click(function(){
+$('#news_data').click(function(){
 	$('#collapse').slideToggle();
 	$('.drop').css('display','none');
 	
@@ -453,7 +459,8 @@ echo $_SESSION['token'];?>">
 	type:'POST', // on envoi les donnes
 	url:'data_user_home.php',// on traite par la fichier
 	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#pak').css('display','none');
+      $('#pak').css('display','block');
+	  $('#examp').css('display','none');
 	  $('results').html(data);
 	 }
     });
