@@ -9,23 +9,12 @@ include('inc_session.php');
 
     if($_POST['action']=="add"){
 	 
-	 if(!empty($_POST['prix_nuite'])){
-		$pay = $_POST['prix_nuite'];	
-      }
-	 
-	 else{
-		 $pay = $_POST['paynuite'];
+	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
+	   $pay=$_POST['paynuite'];
 	 }
-	 
-	 
-	  if(!empty($_POST['prix_pass'])){
-		 $pay = $_POST['prix_pass'];		
+	 if($_POST['to']=="horaire"){
+		 
 	 }
-	 
-	 else{
-		 $pay = $_POST['paypass'];
-	 }
-	 
 	// créer un tableau de session 
 	if(isset($_SESSION['add_home'])){
 	
@@ -120,7 +109,7 @@ include('inc_session.php');
 			}
 			
 			
-			$total = $total +($pays*$_POST['nbjour']);
+			$total = $total +floatval($pays*$_POST['nbjour']);
 			if(!isset($_POST['taxe'])){
 				$taxe =0;
 			}
