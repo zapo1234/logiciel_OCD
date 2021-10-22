@@ -26,7 +26,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $reg->closeCursor();
    
     // recupere les données des chambre 
-    $ret=$bds->prepare('SELECT id,name_upload FROM chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
+    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
     $ret->execute(array(':id_home'=>$id_home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	// creéation et recuperation des valeur dans un tableau
@@ -187,9 +187,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
          <h1>Liste des chambres disponible</h1>
 		 <div class="df">à l'instant
 		 Ajourd'huit à <?php echo date('H:i');?></div>
-		  <div id="result"><!--retour ajax list home-->
-          
-		  </div>
+		  <div id="result"></div><!--retour ajax list home-->
+          <div id="results"></div>
+		  
         </div>
 		
         <!-- End of Sidebar -->
@@ -215,6 +215,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	
 		<div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
+		
 		</div>
                       
                     </div>
@@ -277,7 +278,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	      Nombre de lits au sein de la chambre<br/>
 		  <?php echo$lits;?>
 	  </td>
-      <td>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span></td>
+      <td>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></td>
     </tr>
     
   </tbody>
@@ -289,19 +290,22 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div class="row d-flex justify-content-center mt-5">
 <div class="col-md-6">
 <div id="myCarousel" class="carousel slide" data-ride="carousel" align="center">
-<div class="carousel-inner">
+<?php
+
+$count=count($data);
+
+for($i=0; $i<=$count; $i++){
+echo'<div class="carousel-inner">
 <div class="carousel-item active"></div>
 <div class="carousel-item"></div>
 <div class="carousel-item"></div>
 
 </div>
 <ol class="carousel-indicators list-inline">
-<li class="list-inline-item active"><a id="carousel-selector-0" class="selected" data-slide="0" data-target="#myCarousel"></a></li>
-<li class="list-inline-item"><a id="carousel-selector-1" class="selected" data-slide="1" data-target="#myCarousel"></a></li>
-<li class="list-inline-item"><a id="carousel-selector-2" class="selected" data-slide="2" data-target="#myCarousel"></a></li>
-
-
-</ol>
+<li class="list-inline-item active"><a id="carousel-selector-'.$i.'" class="selected" data-slide="'.$i.'" data-target="#myCarousel"></a></li>
+</ol>';
+}
+?>
 </div>
 </div>
 </div>
@@ -362,7 +366,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                 </div>
   <span class="errors"></span>
    <button type="submit" class="buttons">rechercher</button>
- 
+ <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
+ <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
@@ -405,6 +410,32 @@ echo $_SESSION['token'];?>">
 
 	});
 	
+	$('.but').click(function(){
+   $('#pak').hide(2000);
+   $('#block').hide(1000);
+ });
+ 
+ $('.button').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+ });
+ 
+ $('.x').click(function(){
+	$('#pak').css('display','none');
+   $('#examp').css('display','none');	
+	 $('.x').css('display','none');
+ });
+ 
+ 
+ $('#pak').click(function(){
+	$('#pak').css('display','none');
+   $('#examp').css('display','none');	
+   
+ });
+ 
+ 
+	
 	 $('#news_data').click(function(){
 	$('#collapse').slideToggle();
 	$('.drop').css('display','none');
@@ -416,6 +447,17 @@ echo $_SESSION['token'];?>">
 	});
 			
 	// click sur les news message
+	$('#form1').on('submit', function(event) {
+	event.preventDefault();
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'data_user_home.php',// on traite par la fichier
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#pak').css('display','none');
+	  $('results').html(data);
+	 }
+    });
+  });
 	
 	// pagintion
   $(document).on('click','.bout',function(){
@@ -439,29 +481,7 @@ echo $_SESSION['token'];?>">
 			list();
 			
 	
-   $('.but').click(function(){
-   $('#pak').hide(2000);
-   $('#block').hide(1000);
- });
- 
- $('.button').click(function(){
-	$('#pak').css('display','block');
-   $('#examp').css('display','block');	
-	 $('.x').css('display','block');
- });
- 
- $('.x').click(function(){
-	$('#pak').css('display','none');
-   $('#examp').css('display','none');	
-	 $('.x').css('display','none');
- });
- 
- 
- $('#pak').click(function(){
-	$('#pak').css('display','none');
-   $('#examp').css('display','none');	
    
- });
  
   $(function(){
   var winners_list = $('.winners li');

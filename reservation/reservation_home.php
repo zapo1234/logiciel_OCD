@@ -68,7 +68,7 @@ if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:110px;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;} .homesbloque{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -144,9 +144,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <h1>Liste des chambres disponible</h1>
-		  <div id="result"><!--retour ajax list home-->
-          
-		  </div>
+		  <div id="result"></div><!--retour ajax list home-->
+          <div id="results"></div><!--retour ajax-->
         </div>
 		
         <!-- End of Sidebar -->
@@ -332,30 +331,7 @@ echo $_SESSION['token'];?>">
 	});
 			
 	// click sur les news message
-	
-	// pagintion
-  $(document).on('click','.bout',function(){
-	  var page =$(this).attr("id");
-	  list(page);
-   });
-	
-	// compter les nouveaux message
-	function list(page) {
-				var action="list";
-				$.ajax({
-					url: "list_datas_homes.php?home_user=<?php echo$_GET['home_user'];?>",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#result').html(data);
-					}
-				});
-			}
-
-			list();
-			
-	
-   $('.but').click(function(){
+	 $('.but').click(function(){
    $('#pak').hide(2000);
    $('#block').hide(1000);
  });
@@ -378,6 +354,43 @@ echo $_SESSION['token'];?>">
    $('#examp').css('display','none');	
    
  });
+	// pagintion
+  $(document).on('click','.bout',function(){
+	  var page =$(this).attr("id");
+	  list(page);
+   });
+	
+	// compter les nouveaux message
+	function list(page) {
+				var action="list";
+				$.ajax({
+					url: "list_datas_homes.php?home_user=<?php echo$_GET['home_user'];?>",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+			}
+
+			list();
+			
+	// click sur les news message
+	$('#form1').on('submit', function(event) {
+	event.preventDefault();
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'data_user_home.php',// on traite par la fichier
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#pak').css('display','none');
+	  $('#results').html(data);
+	 }
+    });
+	setInterval(function(){
+		 $('#results').html('');
+	 },3000);
+  });
+  
  
   $(function(){
   var winners_list = $('.winners li');
