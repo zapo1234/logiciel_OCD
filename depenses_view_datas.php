@@ -57,6 +57,9 @@ if($_POST['action']=="fetchs") {
 		if($donns['permission']=="user:gestionnaire"){
 		 $depense='<button type="button" class="dep_tresorie">éditer des dépenses</button>';
 		}
+		if($donns['permission']=="user:employes"){
+		$depense="";
+		}
 		
 		$puts='<input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur ou numéro de facture">'.$depense;
 		$action="";
