@@ -13,7 +13,7 @@ include('inc_session.php');
 	   $pay=$_POST['paynuite'];
 	 }
 	 if($_POST['to']=="horaire"){
-		 
+		 $pay = $_POST['paypass'];
 	 }
 	// créer un tableau de session 
 	if(isset($_SESSION['add_home'])){
@@ -121,7 +121,7 @@ include('inc_session.php');
 			$monta = $total + floatval($taxe);
 			 
 			echo'<div class="datas"><div class="hom"><h5>'.$values['type'].'</h5>
-			<div class="list"><span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span>
+			<div class="list"><span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'xof</span>
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
 			<input type="hidden" name="pay[]" value="'.$pays.'">
@@ -326,7 +326,7 @@ include('inc_session.php');
 			 
 			 if($values['id'] !=$_POST['id']) {
 			echo'<div class="datas"><div class="hom"><h5>'.$values['type'].'</h5>
-			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'x'.$_POST['nbjour'].' xof</span> 
+			<span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.' xof</span> 
 			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
 			<input type="hidden" name="typ[]" value="'.$values['type'].'">
 			<input type="hidden" name="pay[]" value="'.$pays.'">

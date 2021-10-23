@@ -442,7 +442,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
      </div>
 	
      <div class="form1 col-md-6">
-	  <label for="inputPassword4">Date d'entrée(check_in) </label>
+	  <label for="inputPassword4">Date d'arrivée(check_in) </label>
       <input type="date" name="days" id="days" class="form-control"  placeholder="">
      </div>
 	
@@ -495,9 +495,7 @@ echo $_SESSION['token'];?>">
  </div><!--content2--> 
  </form>
  
- 
-    
-	</div>
+ </div>
 
  <div class="reini" style="display:none">
  <form method="post" id="form_reini" action="">
