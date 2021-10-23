@@ -27,7 +27,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    
    // variable
    $button ='<button class="buts" data-id2="'.$donns['id_chambre'].'">Ajouter à votre réservation</button>';
-   $prix ='<input type="hidden" id="prix_nuite'.$donns['id_chambre'].'" value="'.$donns['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donns['id_chambre'].'" value="'.$donns['cout_pass'].'">';
+   $prix ='<input type="hidden" id="prix_nuite'.$donns['id_chambre'].'" value="'.$donns['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donns['id_chambre'].'" value="'.$donns['cout_pass'].'"><input type="hidden" id="chambre'.$donns['id_chambre'].'" value="'.$donns['chambre'].'"><input type="hidden" id="id_chambre'.$donns['id_chambre'].'" value="'.$donns['id_chambre'].'">';
    
     // recupere les données des chambre 
     $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
@@ -43,9 +43,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 	 $data[]=$values;
 	}
 	}
-	 
-
-   if($donns['nombre_lits']==1){
+	 if($donns['nombre_lits']==1){
 	$lits = '<i class="fas fa-bed"></i>';
 	}
 	elseif($donns['nombre_lits']==2){
@@ -127,6 +125,8 @@ h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
 .rows{background:white;width:100%;height:500px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
 .buts{margin-top:260px;margin-left:30%;width:200px;}
+label{width:200px;}#nbjour{width:150px;}
+#error{color:red;font-size:13px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -205,8 +205,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         </div>
 		
         <!-- End of Sidebar -->
-        
-         <div id="collapse" class="collapse show" aria-labelledby="headingPages"
+        <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bn">
                       
@@ -221,13 +220,22 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<div class="bd">
 		
 		<div class="users">
-		
-		
 		</div>
-	
-		<div class="bc">
+	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
 		<form method="post" action="">
+		<div class="forms">
+       <label for="inputPassword4">Numéro de jours*</label>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
+       </div>
+	   <div class="form-group col-md-6">
+      <label for="inputPassword4">Option</label>
+      <select id="tr" class="tr" name="tr" required>
+	 <option value="choix">choix</option>
+	 <option value="horaire">horaire</option>
+	 <option value="réservation">réservation</option>
+	 </select></div>
+	   
 		<div id="resultat"></div><!--requete ajax-->
 		  
        </div>
@@ -306,9 +314,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div class="container">
 <div class="rows">
 <?php
-
 $count= count($data);
-
 if($count>0){
 for($i=0; $i<=$count; $i++){
  echo'<div class="der" data-id1="'.$i.'"><img src="upload_image/'.$data[$i].'" width="250px" height=250px"></div>';
@@ -465,6 +471,42 @@ $('#news_data').click(function(){
 	 }
     });
   });
+	
+	$(document).on('click','.buts',function() {
+
+	var id = $(this).data('id2'); // on recupère l'id.
+    var action ="add";
+	// recupération des variable
+	var tr =$('#tr').val();
+	var id_chambre = $('#id_chambre'+id).val();
+	var prix_nuite = $('#cout_nuite'+id).val();
+	var prix_pass = $('#cout_pass'+id).val();
+	var chambre =$('#chambre'+id).val();
+	var nbjour = $('#nbjour').val();
+	
+	if(nbjour.length!="" || nbjour.length!=0){
+	if(tr=="choix"){
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	}
+	else{
+	  $('#error').text('choisir une option');
+	}
+	}
+	else{
+	  $('#error').text('fournir le nombre de jours/horaire séjour');
+	}
+	 });
 	
 	// pagintion
   $(document).on('click','.bout',function(){

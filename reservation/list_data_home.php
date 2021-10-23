@@ -2,7 +2,7 @@
 include('connecte_db.php');
 include('inc_session.php');
 
-$record_peage=9;
+$record_peage=20;
 $page="";
 
 if(isset($_POST['page'])){
@@ -16,15 +16,9 @@ $page=1;
 $smart_from =($page -1)*$record_peage;
     // emttre la requete sur le fonction
 	$active="on";
-	if($_SESSION['code']==0){
-		  $session=0;
-		}
-		else{
-		$session=$_SESSION['code'];
-		}
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND codes= :code AND active= :ac LIMIT 0,80');
+	
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT 0,80');
     $req->execute(array(':ac'=>$active,
-	                    ':code'=>$session,
 	                    ':email_ocd'=>$_SESSION['email_ocd']));
 	
     $don = $req->fetchAll();
@@ -33,25 +27,13 @@ $smart_from =($page -1)*$record_peage;
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
 	// on boucle sur les les resultats
-	
-	// jointure pour recupérer les données entre les tables
-   if($_SESSION['code']==0){
-	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
-      chambre.chambre, home_occupation.date, home_occupation.dates, home_occupation.type
-      FROM home_occupation
-      INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
-	  chambre.email_ocd= :email');
-	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
-	  }
-   
-   else{
-	    $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
+     $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
 	  chambre.codes= :cd AND chambre.email_ocd= :email');
 	  $sql->execute(array(':cd'=>$_SESSION['code'],
 	                      ':email'=>$_SESSION['email_ocd']));
-   }
+ 
    
    $dns=$sql->fetchAll();
 	  $arr1=[]; // recupere les id_chambre 
