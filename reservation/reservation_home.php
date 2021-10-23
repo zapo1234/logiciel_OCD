@@ -73,7 +73,11 @@ h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
-label{color:black;font-size:13px;}
+label{color:black;font-size:13px;} 
+.butt{height:45px;position:absolute;top:2px;left:270%;width:250px;border-radius:20px;
+background:#0769BA;border:2px solid #0769BA;}#error{color:red;font-size:13px;} tr{border-bottom:1px solid #eee;padding:2%;width:200px;} 
+.rows{background:white;width:100%;}
+.der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -86,7 +90,7 @@ label{color:black;font-size:13px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
-#im{display:none;} 
+#im{display:none;} #accordionSidebar{display:none;width:300px;}
 }
 
 
@@ -196,7 +200,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button>
+                               <button type="button" class="button">choix de disponibilité</button> <button type="butt" class="buttons">Lancer la réservation</button>
                             </div>
  
                         </div>

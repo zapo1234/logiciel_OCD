@@ -92,8 +92,8 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 	 .x{display:none;position:absolute;top:50px;left:80%;z-index:5;cursor:pointer;}
     #collapse{background:white;width:200px;height:800px;position:fixed;top:60px;left:82%;border-shadow:3px 3px 3px black;}
     
-    .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:white;}
-	.bc{background:white;width:250px;height:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;}
+    .bs{background:#eee;width:250px;border:1px solid #eee;background:white;}
+	.bc{background:white;width:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;overflow-y:scroll;height:400px;}
 	
 	.bd{margin-top:10px;margin-left:3%;} .users{width:250px;background:white;color:black;padding:2.5%;margin-left:4%;}
 		
@@ -120,13 +120,14 @@ label{color:black;font-size:13px;}
 table{background:white;} th,td{color:black;font-weight:200}
 .vert{font-size:13px;color:green;}
 .trs{font-size:25px;color:black;font-weight:bold;}
-.df{padding-left:2%;color:black;font-family:arial;font-size:13px;}
+.df{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
-.rows{background:white;width:100%;height:500px;}
+.rows{background:white;width:100%;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
-.buts{margin-top:260px;margin-left:30%;width:200px;}
+.buts{margin-top:150px;margin-left:30%;width:200px;border-radius:20px;}
 label{width:200px;}#nbjour{width:150px;}
-#error{color:red;font-size:13px;}
+#error{color:red;font-size:13px;} tr{border-bottom:1px solid #eee;padding:2%;width:200px;} .butt{height:45px;position:absolute;top:2px;left:270%;width:250px;border-radius:20px;
+background:#0769BA;border:2px solid #0769BA;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -139,10 +140,8 @@ label{width:200px;}#nbjour{width:150px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
-#im{display:none;} 
+#im{display:none;} #accordionSidebar{display:none;}
 }
-
-
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -266,7 +265,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button>
+                               <button type="button" class="button">choix de disponibilité</button><button type="button" class="butt">finaliser la réservation</button>
                             </div>
  
                         </div>
@@ -479,18 +478,19 @@ $('#news_data').click(function(){
 	// recupération des variable
 	var tr =$('#tr').val();
 	var id_chambre = $('#id_chambre'+id).val();
-	var prix_nuite = $('#cout_nuite'+id).val();
-	var prix_pass = $('#cout_pass'+id).val();
+	var prix_nuite = $('#prix_nuite'+id).val();
+	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
 	var nbjour = $('#nbjour').val();
+	var taxe =$('#taxe').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
-	if(tr=="choix"){
+	if(tr!="choix"){
 	// on lance l'apel ajax
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,taxe:taxe},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
