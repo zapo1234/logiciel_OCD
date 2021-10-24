@@ -78,6 +78,21 @@ label{color:black;font-size:13px;}
 background:#0769BA;border:2px solid #0769BA;}#error{color:red;font-size:13px;} tr{border-bottom:1px solid #eee;padding:2%;width:200px;} 
 .rows{background:white;width:100%;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
+table{background:white;} th,td{color:black;font-weight:200}
+.vert{font-size:13px;color:green;}
+.trs{font-size:25px;color:black;font-weight:bold;}
+.df{padding-left:2%;color:black;font-family:arial;font-size:23px;}
+h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
+.rows{background:white;width:100%;height:500px;}
+.der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
+.bu{margin-top:200px;margin-left:30%;width:200px;border-radius:20px;border-radius:20px;
+background:green;border:2px solid green;color:white;font-weight:bold;}
+label{width:200px;}#nbjour{width:150px;}
+#error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
+.forms{margin-left:10%;} .resultat{margin-left:5%;}
+.add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
+#div_user{position:absolute;top:100px;left:40%;width:30%;background:white;height:300px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -174,10 +189,53 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	
 		<div class="bc">
-		
+		<div class="recap">Récapitulatif de réservation</div>
+		<form method="post" action="">
+		<div class="forms">
+       <label for="inputPassword4">Numéro de jours*</label>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
+       </div>
+	   <div class="forms">
+      <label for="inputPassword4">Option</label>
+      <select id="tr" class="tr" name="tr" required>
+	 <option value="choix">choix</option>
+	 <option value="horaire">horaire</option>
+	 <option value="réservation">réservation</option>
+	 </select></div>
+	 
+	 <div id="div_user" style="display:none">
+	 
+	 <div class="form-group col-md-6">
+      <label for="inputPassword4">Client *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+    </div>
+ 
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Numéro de phone *</label>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Adresse </label>
+      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
+    </div>
+	 <div class="form-group col-md-6">
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
+    </div>
+	 
+	 </div><!-- information user pour la reservation-->
+	   
+		<div id="resultat"></div><!--requete ajax-->
+		  
+       </div>
+	   </form>
 		</div>
-                      
-                    </div>
+           <div><button class="bu">confirmer votre réservation</button></div>            
+                    
                 </div>
 
         <!-- Content Wrapper -->
@@ -193,20 +251,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
                         <i class="fa fa-bars" style="color:blue"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="navbar-search">
-                        <div class="input-group">
-                            
-                           <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button> <button type="butt" class="buttons">Lancer la réservation</button>
-                            </div>
- 
-                        </div>
-                    </form>
-
-                    <?php include('inc_menu1.php');?>
+                   <!-- Topbar Search -->
+                              <div class="inputs">
+                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span><span class="numero"><?php echo$donnees['numero'];?></span><span class="email"><?php echo $donnees['email_user'];?></span>
+                           </div>
+                  
+                 <?php include('inc_menu1.php');?>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -350,6 +400,7 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
 	 $('.x').css('display','none');
+	 $('#div_user').css('display','none');
  });
  
  
@@ -375,10 +426,90 @@ echo $_SESSION['token'];?>">
 						$('#result').html(data);
 					}
 				});
-			}
+			 }
 
 			list();
 			
+	$(document).on('click','.add',function() {
+
+	var id = $(this).data('id2'); // on recupère l'id.
+    var action ="add";
+	// recupération des variable
+	var tr =$('#tr').val();
+	var id_chambre = $('#id_chambre'+id).val();
+	var prix_nuite = $('#prix_nuite'+id).val();
+	var prix_pass = $('#prix_pass'+id).val();
+	var chambre =$('#chambre'+id).val();
+	var nbjour = $('#nbjour').val();
+	
+	if(nbjour.length!="" || nbjour.length!=0){
+	if(tr!="choix"){
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	}
+	else{
+	  $('#error').text('choisir une option');
+	}
+	}
+	else{
+	  $('#error').text('fournir le nombre de jours/horaire séjour');
+	}
+	 });
+	 
+	$(document).on('click','.remove',function() {
+	 var id = $(this).data('id3'); // on recupère l'id.
+	 var action="remove";
+	 var tr =$('#tr').val();
+	 var id_chambre = $('#id_chambre'+id).val();
+	 var prix_nuite = $('#prix_nuite'+id).val();
+	 var prix_pass = $('#prix_pass'+id).val();
+	 var chambre =$('#chambre'+id).val();
+	 var nbjour = $('#nbjour').val();
+	 
+	 $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 
+	 });
+	 
+	 $('.bu').click(function(){
+	 var count =$('.dfc').length;
+	    if(count!=0){
+	 	$('#div_user').css('display','block'); 
+        $('#pak').css('display','block');		
+		}
+		else{
+			$('#error').text('*vous n\'avez pas choisir un local'); 
+		}
+       });
+	 
+	$('#nbjour').keyup(function(){
+	var nbjour =$('#nbjour').val();
+	var total = $('#tota').val();
+	var s = parseFloat(nbjour)*parseFloat(total);
+		
+	});
+	
+	
+	
 	// click sur les news message
 	$('#form1').on('submit', function(event) {
 	event.preventDefault();

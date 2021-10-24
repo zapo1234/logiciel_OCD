@@ -16,13 +16,14 @@ $page=1;
 }
 
 $smart_from =($page -1)*$record_peage;
-
-    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,active,society FROM chambre WHERE  id_visitor= :id LIMIT '.$smart_from.','.$record_peage.'');
-    $req->execute(array(':id'=>$home_user));
+    $active ="on";
+    $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,cout_nuite,cout_pass,active,society FROM chambre WHERE active= :ac AND id_visitor= :id LIMIT '.$smart_from.','.$record_peage.'');
+    $req->execute(array(':ac'=>$active,
+	                    ':id'=>$home_user));
 	$don = $req->fetchAll();
   // jointure pour recupérer les données entre les tables
 	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
-      chambre.chambre, home_occupation.date, home_occupation.dates, home_occupation.type
+      chambre.chambre,chambre.cout_nuite, chambre.cout_pass, home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
 	  chambre.id_visitor= :id');
@@ -187,8 +188,14 @@ $smart_from =($page -1)*$record_peage;
 		      <a href="data_home.php?id_home='.$donnees['id_chambre'].'&home_user='.$home_user.'" title="decouvrir">'.$donnees['type_logement'].'
 			  <div class="titre">'.$homes.' '.$donnees['chambre'].'</div>
 			  <div style="font-size:14px;"> '.$map.'<br/>
-			  <div class="'.$color.'">'.$status.'</div></div>
-		     </a></div></div>';	
+			  <div class="'.$color.'">'.$status.'</div>
+			  </div>
+		     </a>
+			 <button class="add" data-id2="'.$donnees['id_chambre'].'" title="réservez le local">Ajouter</button>
+			 </div>
+			 <input type="hidden" id="prix_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donnees['id_chambre'].'" value="'.$donnees['cout_pass'].'"><input type="hidden" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'"><input type="hidden" id="id_chambre'.$donnees['id_chambre'].'" value="'.$donnees['id_chambre'].'">
+			 
+			 </div>';	
 		}
 
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE  id_visitor= :id');

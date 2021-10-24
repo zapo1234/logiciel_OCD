@@ -26,8 +26,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $reg->closeCursor();
    
    // variable
-   $button ='<button class="buts" data-id2="'.$donns['id_chambre'].'">Ajouter à votre réservation</button>';
-   $prix ='<input type="hidden" id="prix_nuite'.$donns['id_chambre'].'" value="'.$donns['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donns['id_chambre'].'" value="'.$donns['cout_pass'].'"><input type="hidden" id="chambre'.$donns['id_chambre'].'" value="'.$donns['chambre'].'"><input type="hidden" id="id_chambre'.$donns['id_chambre'].'" value="'.$donns['id_chambre'].'">';
+   $button ='<button class="bu">Confirmer votre réservation</button>';
    
     // recupere les données des chambre 
     $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
@@ -111,7 +110,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:110px;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:135px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -122,12 +121,14 @@ table{background:white;} th,td{color:black;font-weight:200}
 .trs{font-size:25px;color:black;font-weight:bold;}
 .df{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
-.rows{background:white;width:100%;}
+.rows{background:white;width:100%;height:500px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
-.buts{margin-top:150px;margin-left:30%;width:200px;border-radius:20px;}
+.bu{margin-top:200px;margin-left:30%;width:200px;border-radius:20px;border-radius:20px;
+background:green;border:2px solid green;color:white;font-weight:bold;}
 label{width:200px;}#nbjour{width:150px;}
-#error{color:red;font-size:13px;} tr{border-bottom:1px solid #eee;padding:2%;width:200px;} .butt{height:45px;position:absolute;top:2px;left:270%;width:250px;border-radius:20px;
-background:#0769BA;border:2px solid #0769BA;}
+#error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
+.forms{margin-left:10%;} .resultat{margin-left:5%;}
+#div_user{z-index:4;position:absolute;top:100px;left:40%;width:30%;background:white;height:300px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -140,12 +141,14 @@ background:#0769BA;border:2px solid #0769BA;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
-#im{display:none;} #accordionSidebar{display:none;}
+#im{display:none;} #accordionSidebar{display:none;width:70%;}
+.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 }
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
- .center{width:100%;margin:0;padding:0;height:1000px;}
+ .center{width:100%;margin:0;padding:0;height:2000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -166,7 +169,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1700px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -227,13 +230,39 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
        </div>
-	   <div class="form-group col-md-6">
+	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
 	 <option value="choix">choix</option>
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
+	 
+	 <div id="div_user" style="display:none">
+	 
+	 <div class="form-group col-md-6">
+      <label for="inputPassword4">Client *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+    </div>
+ 
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Numéro de phone *</label>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Adresse </label>
+      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
+    </div>
+	 <div class="form-group col-md-6">
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
+    </div>
+	 
+	 </div><!-- information user pour la reservation-->
 	   
 		<div id="resultat"></div><!--requete ajax-->
 		  
@@ -241,7 +270,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
        </form>
 		</div>
 		
-        <div><?php echo$button.' '.$prix;?></div>              
+        <div><?php echo$button;?></div>              
                     
                 </div>
 
@@ -258,20 +287,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
                         <i class="fa fa-bars" style="color:blue"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="navbar-search">
-                        <div class="input-group">
-                            
-                           <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button><button type="button" class="butt">finaliser la réservation</button>
-                            </div>
- 
-                        </div>
-                    </form>
-
-                    <?php include('inc_menu1.php');?>
+                     <!-- Topbar Search -->
+                              <div class="inputs">
+                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span><span class="numero"><?php echo$donnees['numero'];?></span><span class="email"><?php echo $donnees['email_user'];?></span>
+                           </div>
+                        
+                     <?php include('inc_menu1.php');?>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -356,15 +377,12 @@ for($i=0; $i<=$count; $i++){
 
     <!-- Logout Modal-->
     <!-- Modal -->
-  
-
-<!--div black-->
+  <!--div black-->
 <div id="pak" style="display:none"></div>
 
 <div id="examp" style="display:none">
 <form method="post" id="" action="data_home_user.php">
- 
-  <h3> check_in et check_out </h3>
+ <h3> check_in et check_out </h3>
    
    <div class="row mb-3">
                     <div class="col">
@@ -471,7 +489,7 @@ $('#news_data').click(function(){
     });
   });
 	
-	$(document).on('click','.buts',function() {
+	$(document).on('click','.add',function() {
 
 	var id = $(this).data('id2'); // on recupère l'id.
     var action ="add";
@@ -482,7 +500,6 @@ $('#news_data').click(function(){
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
 	var nbjour = $('#nbjour').val();
-	var taxe =$('#taxe').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
 	if(tr!="choix"){
@@ -490,7 +507,7 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,taxe:taxe},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -507,6 +524,48 @@ $('#news_data').click(function(){
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
 	 });
+	 
+	$(document).on('click','.remove',function() {
+	 var id = $(this).data('id3'); // on recupère l'id.
+	 var action="remove";
+	 var tr =$('#tr').val();
+	 var id_chambre = $('#id_chambre'+id).val();
+	 var prix_nuite = $('#prix_nuite'+id).val();
+	 var prix_pass = $('#prix_pass'+id).val();
+	 var chambre =$('#chambre'+id).val();
+	 var nbjour = $('#nbjour').val();
+	 
+	 $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 
+	 });
+	 
+	 $('.bu').click(function(){
+	 var count =$('.dfc').length;
+	    if(count!=0){
+	 	$('#div_user').css('display','block');
+        $('#pak').css('display','block');		
+		}
+		else{
+			$('#error').text('*vous n\'avez pas choisir un local'); 
+		}
+       });
+	 
+	$('#nbjour').keyup(function(){
+	var nbjour =$('#nbjour').val();
+	var total = $('#tota').val();
+	var s = parseFloat(nbjour)*parseFloat(total);
+		
+	});
 	
 	// pagintion
   $(document).on('click','.bout',function(){
