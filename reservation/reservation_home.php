@@ -81,7 +81,7 @@ background:#0769BA;border:2px solid #0769BA;}#error{color:red;font-size:13px;} t
 table{background:white;} th,td{color:black;font-weight:200}
 .vert{font-size:13px;color:green;}
 .trs{font-size:25px;color:black;font-weight:bold;}
-.df{padding-left:2%;color:black;font-family:arial;font-size:23px;}
+.df,.data_total{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
 .rows{background:white;width:100%;height:500px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
@@ -92,7 +92,9 @@ label{width:200px;}#nbjour{width:150px;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
 .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
-#div_user{position:absolute;top:100px;left:40%;width:30%;background:white;height:300px;}
+.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
+.hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
+.numero{margin-left:3%;} .email{margin-left:3%;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -223,7 +225,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
       <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
     </div>
 	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <label for="inputEmail4">Payer vous un acompte? *</label>
       <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
     </div>
 	 
@@ -252,8 +254,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                         <i class="fa fa-bars" style="color:blue"></i>
                     </button>
                    <!-- Topbar Search -->
-                              <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span><span class="numero"><?php echo$donnees['numero'];?></span><span class="email"><?php echo $donnees['email_user'];?></span>
+                              <div class="hotes">
+                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
                   
                  <?php include('inc_menu1.php');?>
@@ -400,7 +403,7 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
 	 $('.x').css('display','none');
-	 $('#div_user').css('display','none');
+	 $('.user_home').css('display','none');
  });
  
  
@@ -493,8 +496,9 @@ echo $_SESSION['token'];?>">
 	 $('.bu').click(function(){
 	 var count =$('.dfc').length;
 	    if(count!=0){
-	 	$('#div_user').css('display','block'); 
-        $('#pak').css('display','block');		
+	 	$('.user_home').css('display','block'); 
+        $('#pak').css('display','block');
+        $('.x').css('display','block');		
 		}
 		else{
 			$('#error').text('*vous n\'avez pas choisir un local'); 
@@ -503,12 +507,13 @@ echo $_SESSION['token'];?>">
 	 
 	$('#nbjour').keyup(function(){
 	var nbjour =$('#nbjour').val();
+	if(nbjour==""){
+		nbjour=1;
+	}
 	var total = $('#tota').val();
 	var s = parseFloat(nbjour)*parseFloat(total);
-		
+	$('.data_total').text(s);
 	});
-	
-	
 	
 	// click sur les news message
 	$('#form1').on('submit', function(event) {

@@ -89,7 +89,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
 	 .x{display:none;position:absolute;top:50px;left:80%;z-index:5;cursor:pointer;}
-    #collapse{background:white;width:200px;height:800px;position:fixed;top:60px;left:82%;border-shadow:3px 3px 3px black;}
+    #collapse{background:white;width:200px;height:800px;position:absolute;top:60px;left:82%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;border:1px solid #eee;background:white;}
 	.bc{background:white;width:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;overflow-y:scroll;height:400px;}
@@ -103,7 +103,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
+#pak{position: absolute;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
 .center{background:#eee;} 
 
 .navbar-nav{background:#eee;}
@@ -119,7 +119,7 @@ label{color:black;font-size:13px;}
 table{background:white;} th,td{color:black;font-weight:200}
 .vert{font-size:13px;color:green;}
 .trs{font-size:25px;color:black;font-weight:bold;}
-.df{padding-left:2%;color:black;font-family:arial;font-size:23px;}
+.df,.data_total{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
 .rows{background:white;width:100%;height:500px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
@@ -128,7 +128,10 @@ background:green;border:2px solid green;color:white;font-weight:bold;}
 label{width:200px;}#nbjour{width:150px;}
 #error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
-#div_user{z-index:4;position:absolute;top:100px;left:40%;width:30%;background:white;height:300px;}
+.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
+#envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
+.hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
+.numero{margin-left:3%;} .email{margin-left:3%;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -237,33 +240,6 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
-	 
-	 <div id="div_user" style="display:none">
-	 
-	 <div class="form-group col-md-6">
-      <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
-    </div>
- 
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
-    </div>
-     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
-    </div>
-	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
-    </div>
-	 
-	 </div><!-- information user pour la reservation-->
-	   
 		<div id="resultat"></div><!--requete ajax-->
 		  
        </div>
@@ -288,8 +264,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                         <i class="fa fa-bars" style="color:blue"></i>
                     </button>
                      <!-- Topbar Search -->
-                              <div class="inputs">
-                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span><span class="numero"><?php echo$donnees['numero'];?></span><span class="email"><?php echo $donnees['email_user'];?></span>
+                               <div class="hotes">
+                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -336,8 +313,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <?php
 $count= count($data);
 if($count>0){
-for($i=0; $i<=$count; $i++){
- echo'<div class="der" data-id1="'.$i.'"><img src="upload_image/'.$data[$i].'" width="250px" height=250px"></div>';
+for($i=0; $i<$count; $i++){
+ echo'<div class="der" data-id1="'.$i.'"><img src="upload_image/'.$data[$i].'" width="270px" height=250px"></div>';
 }
 }
 
@@ -353,7 +330,37 @@ for($i=0; $i<=$count; $i++){
 
             </div>
             <!-- End of Main Content -->
-
+<div class="user_home" style="display:none">
+	 
+	 <div class="form-group col-md-6">
+      <label for="inputPassword4">Client *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+    </div>
+ 
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Numéro de phone *</label>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Adresse </label>
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
+    </div>
+	 <div class="form-group col-md-6">
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+    </div>
+	
+	<div class="form-group col-md-6">
+      <label for="inputEmail4">Confirmer la réservation</label>
+      <button type="button" id="envoi" name="envoi">Valider</button>
+    </div>
+	 
+	 </div><!-- information user pour la reservation-->
+	   
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -455,7 +462,8 @@ echo $_SESSION['token'];?>">
  $('.x').click(function(){
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
-	 $('.x').css('display','none');
+	$('.x').css('display','none');
+	$('.user_home').css('display','none');
  });
  
  
@@ -552,8 +560,9 @@ $('#news_data').click(function(){
 	 $('.bu').click(function(){
 	 var count =$('.dfc').length;
 	    if(count!=0){
-	 	$('#div_user').css('display','block');
-        $('#pak').css('display','block');		
+	 	$('.user_home').css('display','block');
+        $('#pak').css('display','block');
+        $('.x').css('display','block');		
 		}
 		else{
 			$('#error').text('*vous n\'avez pas choisir un local'); 
@@ -562,9 +571,12 @@ $('#news_data').click(function(){
 	 
 	$('#nbjour').keyup(function(){
 	var nbjour =$('#nbjour').val();
+	if(nbjour==""){
+		nbjour=1;
+	}
 	var total = $('#tota').val();
 	var s = parseFloat(nbjour)*parseFloat(total);
-		
+	$('.data_total').text(s);
 	});
 	
 	// pagintion
