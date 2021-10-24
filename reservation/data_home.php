@@ -121,7 +121,7 @@ table{background:white;} th,td{color:black;font-weight:200}
 .trs{font-size:25px;color:black;font-weight:bold;}
 .df,.data_total{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
-.rows{background:white;width:100%;height:500px;}
+.rows{background:white;width:100%;height:650px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
 .bu{margin-top:200px;margin-left:30%;width:200px;border-radius:20px;border-radius:20px;
 background:green;border:2px solid green;color:white;font-weight:bold;}
@@ -132,6 +132,7 @@ label{width:200px;}#nbjour{width:150px;}
 #envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
+.der{border:6px solid #eee;cursor:pointer}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 

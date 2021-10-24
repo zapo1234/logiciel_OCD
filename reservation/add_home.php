@@ -191,7 +191,6 @@ include('inc_session.php');
 		    echo'<table>
 			<tr>
 			<td>Prix(HT):<span class="data_total">'.$totals.'</span>xof</td>
-			<td><input type="hidden" id="tota" value="'.$totals.'"></td>
 			</tr>
 			</table>';
 		}	
