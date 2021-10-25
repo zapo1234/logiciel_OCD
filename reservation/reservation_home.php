@@ -6,12 +6,15 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $req->execute(array(':id'=>$_GET['home_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
+ // recupere les données des chambre 
+   $reg=$bds->prepare('SELECT id,id_chambre,id_visitor FROM chambre WHERE  id_visitor= :home_user');
+    $reg->execute(array(':home_user'=>$_GET['home_user']));
+    $donns = $reg->fetch();
+    $reg->closeCursor();
 
-if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
+ if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
 	header('location:home_none.php');
 }
-
-
 
 ?>
 
@@ -95,6 +98,7 @@ label{width:200px;}#nbjour{width:150px;}
 .user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
+.error_date{color:red;font-size:12px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -317,7 +321,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 </div>
 
 <div id="examp" style="display:none">
-<form method="post" id="form1" action="data_home_user.php">
+<form method="post" id="formA" action="data_home_user.php">
  
   <h3> check_in et check_out </h3>
    
@@ -331,8 +335,11 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                       <input type="date" id="das" name="das" class="form-control" placeholder="" min="<?php echo date('Y-m-d');?>" required
 					  >
                     </div>
+					<div class="error_date"></div>
                 </div>
   <span class="errors"></span>
+  <input type="hidden" name="id_visitor" value="<?php echo$donns['id_visitor'];?>">
+  <input type="hiden" name="id_home" value="<?php echo$donns['id_chambre'];?>">
    <button type="submit" class="buttons">rechercher</button>
  
 <input type="hidden" name="token" id="token" value="<?php
@@ -492,6 +499,26 @@ echo $_SESSION['token'];?>">
 	 });
 	 
 	 });
+	 
+	 $('.buttons').click(function(){
+		 event.preventDefault();
+		 var dat1 =$('#days').val();
+		 var dat2 = $('#das').val();
+	     var date1 = new Date($('#days').val());
+	     var date2 =  new Date($('#das').val());
+		 if(dat1.length!="" && dat2.length!=""){
+		 if(date1 > date2){
+		  $('.error_date').text(' *la date de départ doit etre supérieur à la date d\'arrivée'); 
+		}
+		else{
+		$('#formA').submit();
+		}
+		 }
+		else{
+			$('.error_date').text(' * remplir les champs de date'); 
+		}
+	  });
+	 
 	 
 	 $('.bu').click(function(){
 	 var count =$('.dfc').length;

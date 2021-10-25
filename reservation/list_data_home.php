@@ -208,7 +208,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	echo'<div class="homes.'.$css.'" id="homes'.$css.'">
 	      <div class="resul">
-		      <a href="data_home.php?id_home='.$donnees['id_chambre'].'&home_user='.$home_user.' title="decouvrir">'.$donnees['type_logement'].'
+		      <a href="data_home.php?id_home='.$donnees['id_chambre'].'&home_user='.$home_user.'" title="decouvrir">'.$donnees['type_logement'].'
 			  <div class="titre">'.$homes.' '.$donnees['chambre'].'</div>
 			  <div style="font-size:14px;"> '.$map.'<br/>
 			  </div>

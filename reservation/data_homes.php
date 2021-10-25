@@ -135,6 +135,7 @@ label{width:200px;}#nbjour{width:150px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .der{border:6px solid #eee;cursor:pointer}
+.error_date{color:red;font-size:12px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -390,7 +391,7 @@ for($i=0; $i<$count; $i++){
 <div id="pak" style="display:none"></div>
 
 <div id="examp" style="display:none">
-<form method="post" id="" action="data_home_user.php">
+<form method="post" id="formA" action="data_home_user.php">
  <h3> check_in et check_out </h3>
    
    <div class="row mb-3">
@@ -403,9 +404,10 @@ for($i=0; $i<$count; $i++){
                       <input type="date" id="das" name="das" class="form-control" placeholder="" min="<?php echo date('Y-m-d');?>" required
 					  >
                     </div>
+					<div class="error_date"></div>
                 </div>
   <span class="errors"></span>
-   <input type="submit" class="buttons" value="rechercher">
+   <button type="button" class="buttons">Rechercher</button>
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
@@ -602,9 +604,25 @@ $('#news_data').click(function(){
 
 			list();
 			
-	
+	$('.buttons').click(function(){
+		 event.preventDefault();
+		 var dat1 =$('#days').val();
+		 var dat2 = $('#das').val();
+	     var date1 = new Date($('#days').val());
+	     var date2 =  new Date($('#das').val());
+		 if(dat1.length!="" && dat2.length!=""){
+		 if(date1 > date2){
+		  $('.error_date').text(' *la date de départ doit etre supérieur à la date d\'arrivée'); 
+		}
+		else{
+		$('#formA').submit();
+		}
+		 }
+		else{
+			$('.error_date').text(' * remplir les champs de date'); 
+		}
+	  });
    
- 
   $(function(){
   var winners_list = $('.winners li');
   var ul_height = $('.winners').outerHeight();
