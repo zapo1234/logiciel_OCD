@@ -206,7 +206,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		 <div class="df">à l'instant
 		 Ajourd'huit à <?php echo date('H:i');?></div>
 		  <div id="result"></div><!--retour ajax list home-->
-          <div id="results"></div>
+          
 		  
         </div>
 		
@@ -306,6 +306,21 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
     
   </tbody>
 </table>
+
+<div id="mobile" style="display:none">
+
+<div><?php echo$donns['type_logement'];?><br/>
+	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
+      <div>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
+	  Equipements secondaires<?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
+      <div>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
+	      Nombre de lits au sein de la chambre<br/>
+		  <?php echo$lits;?>
+	  </div>
+      <div>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></div>
+    
+
+</div>
 
 <div class="content">
 <h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>

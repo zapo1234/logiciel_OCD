@@ -51,7 +51,7 @@ $data_end =$_POST['das'];
              <div class="enre"><h1>Locaux disponible</h1><br/>
 			  <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:23px;"></i></div></div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/reservation/data_homes.php?id_home='.$id_home.'&home_user='.$home_user.'&data_start='.$data_start.'&data_end='.$data_end.'"/>';
+             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/reservation/data_homes.php?id_home='.$id_home.'&home_user='.$home_user.'&date_start='.$data_start.'&date_end='.$data_end.'"/>';
 	 }
 ?>
 

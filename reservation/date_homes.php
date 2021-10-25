@@ -2,17 +2,63 @@
 include('../connecte_db.php');
 include('../inc_session.php');
 
-$req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscription_client WHERE id_visitor= :id');
+if(!isset($_GET['date_end']) AND !isset($_GET['date_start'])) {
+  header('location:home_none.php');
+}	
+
+// recupére les variable
+$id_home =$_GET['id_home'];
+$home_user =$_GET['home_user'];
+$date_end =$_GET['date_end'];
+$date_start =$_GET['date_start'];
+$req=$bdd->prepare('SELECT id_visitor FROM inscription_client WHERE id_visitor= :id');
    $req->execute(array(':id'=>$_GET['home_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
-
-if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
+	
+	if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
 	header('location:home_none.php');
 }
 
-
-
+  // recupere les données des chambre 
+   $reg=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,nombre_lits FROM chambre WHERE id_chambre= :id_home AND  id_visitor= :home_user');
+    $reg->execute(array(':id_home'=>$id_home,
+	                    ':home_user'=>$home_user));
+   $donns = $reg->fetch();
+   $reg->closeCursor();
+   
+   // variable
+   $button ='<button class="bu">Confirmer votre réservation</button>';
+   
+    // recupere les données des chambre 
+    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
+    $ret->execute(array(':id_home'=>$id_home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	// creéation et recuperation des valeur dans un tableau
+	$donnes =$ret->fetchAll();
+	$data =[];
+	foreach($donnes as $datas){
+	$da = $datas['name_upload'];
+	$datac = explode(',',$da);
+	foreach($datac as $values){
+	 $data[]=$values;
+	}
+	}
+	 if($donns['nombre_lits']==1){
+	$lits = '<i class="fas fa-bed"></i>';
+	}
+	elseif($donns['nombre_lits']==2){
+	 $lits ='<i class="fas fa-bed"></i> <i class="fas fa-bed"></i>';	
+	}
+	else{
+		$lits='<i class="fas fa-bed"></i> <i class="fas fa-bed"></i>
+		       <i class="fas fa-bed"></i> plus...';
+		}
+	
+	$reg->closeCursor();
+     $rem='<span class="ts"></span>';
+	$rt=",";
+	$rs='<span class="ts"><i style="font-size:12px;font-weight:200px" class="fa">&#xf00c;</i></span>';
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +91,10 @@ if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
 	 .x{display:none;position:absolute;top:50px;left:80%;z-index:5;cursor:pointer;}
-    #collapse{background:white;width:200px;height:800px;position:fixed;top:60px;left:82%;border-shadow:3px 3px 3px black;}
+    #collapse{background:white;width:200px;height:800px;position:absolute;top:60px;left:82%;border-shadow:3px 3px 3px black;}
     
-    .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:white;}
-	.bc{background:white;width:250px;height:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;}
+    .bs{background:#eee;width:250px;border:1px solid #eee;background:white;}
+	.bc{background:white;width:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;overflow-y:scroll;height:400px;}
 	
 	.bd{margin-top:10px;margin-left:3%;} .users{width:250px;background:white;color:black;padding:2.5%;margin-left:4%;}
 		
@@ -59,42 +105,36 @@ if(!isset($_GET['home_user']) OR $_GET['home_user']!=$donnees['id_visitor']){
 .dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
+#pak{position: absolute;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
 .center{background:#eee;} 
 
-#block{padding:2%;background:white;width:36%;height:330px;position:absolute;top:100px;left:25%;z-index:3;} .h1{text-transform:uppercase;color:#0769BA;}
- 
- .navbar-nav{background:#eee;}
+.navbar-nav{background:#eee;}
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;} .homesbloque{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:135px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
-label{color:black;font-size:13px;} 
-.butt{height:45px;position:absolute;top:2px;left:270%;width:250px;border-radius:20px;
-background:#0769BA;border:2px solid #0769BA;}#error{color:red;font-size:13px;} tr{border-bottom:1px solid #eee;padding:2%;width:200px;} 
-.rows{background:white;width:100%;}
-.der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
+label{color:black;font-size:13px;}
 table{background:white;} th,td{color:black;font-weight:200}
 .vert{font-size:13px;color:green;}
 .trs{font-size:25px;color:black;font-weight:bold;}
 .df,.data_total{padding-left:2%;color:black;font-family:arial;font-size:23px;}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
-.rows{background:white;width:100%;height:500px;}
+.rows{background:white;width:100%;height:650px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
 .bu{margin-top:200px;margin-left:30%;width:200px;border-radius:20px;border-radius:20px;
 background:green;border:2px solid green;color:white;font-weight:bold;}
 label{width:200px;}#nbjour{width:150px;}
 #error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
-.add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
-.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 .user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
+#envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
+.der{border:6px solid #eee;cursor:pointer}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -107,14 +147,14 @@ label{width:200px;}#nbjour{width:150px;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
-#im{display:none;} #accordionSidebar{display:none;width:300px;}
+#im{display:none;} #accordionSidebar{display:none;width:70%;}
+.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 }
-
-
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
- .center{width:100%;margin:0;padding:0;height:1000px;}
+ .center{width:100%;margin:0;padding:0;height:2000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -135,7 +175,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1700px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -165,13 +205,15 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <h1>Liste des chambres disponible</h1>
+		 <div class="df">à l'instant
+		 Ajourd'huit à <?php echo date('H:i');?></div>
 		  <div id="result"></div><!--retour ajax list home-->
-          <div id="results"></div><!--retour ajax-->
+          <div id="results"></div>
+		  
         </div>
 		
         <!-- End of Sidebar -->
-        
-         <div id="collapse" class="collapse show" aria-labelledby="headingPages"
+        <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bn">
                       
@@ -186,11 +228,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<div class="bd">
 		
 		<div class="users">
-		
-		
 		</div>
-	
-		<div class="bc">
+	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
 		<form method="post" action="">
 		<div class="forms">
@@ -204,39 +243,13 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
-	 
-	 <div id="div_user" style="display:none">
-	 
-	 <div class="form-group col-md-6">
-      <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
-    </div>
- 
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
-    </div>
-     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
-    </div>
-	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Payer vous un acompte? *</label>
-      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
-    </div>
-	 
-	 </div><!-- information user pour la reservation-->
-	   
 		<div id="resultat"></div><!--requete ajax-->
 		  
        </div>
-	   </form>
+       </form>
 		</div>
-           <div><button class="bu">confirmer votre réservation</button></div>            
+		
+        <div><?php echo$button;?></div>              
                     
                 </div>
 
@@ -253,13 +266,13 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
                         <i class="fa fa-bars" style="color:blue"></i>
                     </button>
-                   <!-- Topbar Search -->
-                              <div class="hotes">
+                     <!-- Topbar Search -->
+                               <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
 							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
-                  
-                 <?php include('inc_menu1.php');?>
+                        
+                     <?php include('inc_menu1.php');?>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -269,10 +282,50 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-					
-  
- 
+					<div class="equipement">
+                    <table class="table">
+       <thead>
+    <tr>
+      <th scope="col">Type de local</th>
+      <th scope="col">Equipements</th>
+	  <th scope="col">Occupants</th>
+	  <th scope="col">Tarif</th>
+      <th scope="col">Divers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php echo$donns['type_logement'];?><br/>
+	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></th>
+      <td>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></span><br/><br/>
+	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
+      <td>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
+	      Nombre de lits au sein de la chambre<br/>
+		  <?php echo$lits;?>
+	  </td>
+      <td>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></td>
+    </tr>
     
+  </tbody>
+</table>
+
+<div class="content">
+<h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>
+<div class="container">
+<div class="rows">
+<?php
+$count= count($data);
+if($count>0){
+for($i=0; $i<$count; $i++){
+ echo'<div class="der" data-id1="'.$i.'"><img src="upload_image/'.$data[$i].'" width="270px" height=250px"></div>';
+}
+}
+
+?>
+</div>
+</div>
+ 
+                     </div>
 	                 </div><!--center-->
 
 	
@@ -280,7 +333,37 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
             </div>
             <!-- End of Main Content -->
-
+<div class="user_home" style="display:none">
+	 
+	 <div class="form-group col-md-6">
+      <label for="inputPassword4">Client *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+    </div>
+ 
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Numéro de phone *</label>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Adresse </label>
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
+    </div>
+	 <div class="form-group col-md-6">
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+    </div>
+	
+	<div class="form-group col-md-6">
+      <label for="inputEmail4">Confirmer la réservation</label>
+      <button type="button" id="envoi" name="envoi">Valider</button>
+    </div>
+	 
+	 </div><!-- information user pour la reservation-->
+	   
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -304,22 +387,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
     <!-- Logout Modal-->
     <!-- Modal -->
-  
-
-<!--div black-->
-<div id="pak"></div>
-<div id="block">
-<div class="h1"><img src="img/home.png" alt="home" width="80px" height="80px"> <?php echo $donnees['denomination'];?></div>
-<h1>Réservation et disponibilité des chambres en temps réel<br></h1>
-<h2>Numéro de tel :<?php echo$donnees['numero'];?></h2>
-<h2>Email :<?php echo$donnees['email_user'];?></h2>
-<div><button type="button" class="but">commencer <i class="fas fa-arrow-right"></i></button></div>
-</div>
+  <!--div black-->
+<div id="pak" style="display:none"></div>
 
 <div id="examp" style="display:none">
-<form method="post" id="form1" action="data_home_user.php">
- 
-  <h3> check_in et check_out </h3>
+<form method="post" id="" action="data_home_user.php">
+ <h3> check_in et check_out </h3>
    
    <div class="row mb-3">
                     <div class="col">
@@ -333,8 +406,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     </div>
                 </div>
   <span class="errors"></span>
-   <button type="submit" class="buttons">rechercher</button>
- 
+   <input type="submit" class="buttons" value="rechercher">
+ <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
+ <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
@@ -377,18 +451,7 @@ echo $_SESSION['token'];?>">
 
 	});
 	
-	 $('#news_data').click(function(){
-	$('#collapse').slideToggle();
-	$('.drop').css('display','none');
-	
-	});
-	
-	 $('#news').click(function(){
-	$('.users').slideToggle();
-	});
-			
-	// click sur les news message
-	 $('.but').click(function(){
+	$('.but').click(function(){
    $('#pak').hide(2000);
    $('#block').hide(1000);
  });
@@ -402,8 +465,8 @@ echo $_SESSION['token'];?>">
  $('.x').click(function(){
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
-	 $('.x').css('display','none');
-	 $('.user_home').css('display','none');
+	$('.x').css('display','none');
+	$('.user_home').css('display','none');
  });
  
  
@@ -412,27 +475,31 @@ echo $_SESSION['token'];?>">
    $('#examp').css('display','none');	
    
  });
-	// pagintion
-  $(document).on('click','.bout',function(){
-	  var page =$(this).attr("id");
-	  list(page);
-   });
+ 
+$('#news_data').click(function(){
+	$('#collapse').slideToggle();
+	$('.drop').css('display','none');
 	
-	// compter les nouveaux message
-	function list(page) {
-				var action="list";
-				$.ajax({
-					url: "list_datas_homes.php?home_user=<?php echo$_GET['home_user'];?>",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#result').html(data);
-					}
-				});
-			 }
-
-			list();
+	});
+	
+	 $('#news').click(function(){
+	$('.users').slideToggle();
+	});
 			
+	// click sur les news message
+	$('#form1').on('submit', function(event) {
+	event.preventDefault();
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:'data_user_home.php',// on traite par la fichier
+	success:function(data) { // on traite le fichier recherche apres le retour
+      $('#pak').css('display','block');
+	  $('#examp').css('display','none');
+	  $('results').html(data);
+	 }
+    });
+  });
+	
 	$(document).on('click','.add',function() {
 
 	var id = $(this).data('id2'); // on recupère l'id.
@@ -496,7 +563,7 @@ echo $_SESSION['token'];?>">
 	 $('.bu').click(function(){
 	 var count =$('.dfc').length;
 	    if(count!=0){
-	 	$('.user_home').css('display','block'); 
+	 	$('.user_home').css('display','block');
         $('#pak').css('display','block');
         $('.x').css('display','block');		
 		}
@@ -515,7 +582,30 @@ echo $_SESSION['token'];?>">
 	$('.data_total').text(s);
 	});
 	
-  
+	// pagintion
+  $(document).on('click','.bout',function(){
+	  var page =$(this).attr("id");
+	  list(page);
+   });
+	
+	// compter les nouveaux message
+	function list(page) {
+				var action="list";
+				$.ajax({
+					url: "",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+			}
+
+			list();
+			
+	
+   
+ 
   $(function(){
   var winners_list = $('.winners li');
   var ul_height = $('.winners').outerHeight();

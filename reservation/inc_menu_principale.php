@@ -2,9 +2,7 @@
 include('../connecte_db.php');
 include('../inc_session.php');
 
-   
-
-?>
+ ?>
 
 <!-- Page Wrapper -->
     <div id="wrapper">
