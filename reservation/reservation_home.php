@@ -339,7 +339,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                 </div>
   <span class="errors"></span>
   <input type="hidden" name="id_visitor" value="<?php echo$donns['id_visitor'];?>">
-  <input type="hiden" name="id_home" value="<?php echo$donns['id_chambre'];?>">
+  <input type="hidden" name="id_home" value="<?php echo$donns['id_chambre'];?>">
    <button type="submit" class="buttons">rechercher</button>
  
 <input type="hidden" name="token" id="token" value="<?php
@@ -515,7 +515,7 @@ echo $_SESSION['token'];?>">
 		}
 		 }
 		else{
-			$('.error_date').text(' * remplir les champs de date'); 
+			$('.error_date').text(' *remplir les champs de date'); 
 		}
 	  });
 	 

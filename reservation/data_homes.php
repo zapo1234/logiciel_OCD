@@ -136,6 +136,7 @@ label{width:200px;}#nbjour{width:150px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .der{border:6px solid #eee;cursor:pointer}
 .error_date{color:red;font-size:12px;}
+.homesindispo{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
