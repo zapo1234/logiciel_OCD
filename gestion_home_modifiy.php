@@ -7,6 +7,12 @@ include('inc_session.php');
 	 header('location:index.php');
  }
  
+ // recuperer id_visitor 
+// recupere les données des chambre 
+   $reg=$bdd->prepare('SELECT id_visitor FROM inscription_client WHERE email_user= :email');
+    $reg->execute(array(':email'=>$_SESSION['email_user']));
+    $dons = $reg->fetch();
+	$reg->closeCursor();
  // on envoi la requete
     $id_fact =$_GET['id_fact'];
 	$code =$_GET['code_data'];
@@ -638,6 +644,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <div id="results"></div><!--div-affiche data home selectionné-->
   
  </div>
+<?php echo'<input type="hidden" id="home_user" value="'.$dons['id_visitor'].'">';?>
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
@@ -1483,7 +1490,17 @@ echo $_SESSION['token'];?>">
     $('#pak').css('display','block');
     });
 	
-     
+     // delcencher la fonction
+	function list() {
+				var home_user =$('#home_user').val();
+				var action = "list";
+				$.ajax({
+					url: 'reservation/list_datas_homes.php?home_user='+home_user+'',
+					data:{action:action},
+					success: function(data) {
+			}
+		});
+	}
 	  
 	 $(document).on('click','#add_local', function() {
 	// on traite le fichier recherche apres le retour

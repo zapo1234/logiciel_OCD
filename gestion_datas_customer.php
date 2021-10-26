@@ -1,8 +1,13 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-
+// recuperer id_visitor 
+// recupere les données des chambre 
+   $reg=$bdd->prepare('SELECT id_visitor FROM inscription_client WHERE email_user= :email');
+    $reg->execute(array(':email'=>$_SESSION['email_user']));
+    $dons = $reg->fetch();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -275,52 +280,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                   <div class="live-infos">
                    
 				   <ul class="winners">
-	            <?php
-		// afficher les dernières enregistrements
-		// aller chercher les auteurs en écriture sur une facture
-	    $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
-        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
-	    $donns =$rel->fetch();
-		if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
-        $res=$bds->prepare('SELECT date,numero,clients,montant,type,types,society FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,10');
-        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-        }
-		
-		// afficher les facture.
-		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
-		$session=$donns['code'];
-		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types,society FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
-        $res->execute(array(':code'=>$session,
-		                    ':email_ocd'=>$_SESSION['email_ocd']));
-		}
-		
-		 while($donnes=$res->fetch()){
-			
-          if($donnes['type']==1){
-            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
-		    $type ='<span class="sejour">'.$donnes['types'].'</span>';
-			
-		  }
-        	
-          if($donnes['type']==2){
-             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
-			 $type ='<span class="pass">'.$donnes['types'].'</span>';
-		  }
-
-          if($donnes['type']==3){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="reservation">'.$donnes['types'].'</span>';
-		  }
-          
-		  if($donnes['type']==4){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="annule">'.$donnes['types'].'</span>';
-		  }	
-			 
-		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
-		       '.$type.' '.$donnes['montant'].' xof de <br/><span class="site">'.$donnes['society'].'</span></li>';
-		}
-		       ?>
+	          
 				   
 				</ul>
 	               
@@ -489,6 +449,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <div id="results"></div><!--div-affiche data home selectionné-->
   
  </div>
+ <?php echo'<input type="hidden" id="home_user" value="'.$dons['id_visitor'].'">';?>
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
@@ -695,7 +656,6 @@ echo $_SESSION['token'];?>">
 	 // calculer le nom de jour du séjour 
 	  var tmp = new Date(date2-date1);
 	  var s = tmp/1000/60/60/24;
-	 
 	 
 	 var date3 = parseInt($('#tim').val(),10);
 	 var date4 = parseInt($('#tis').val(),10);
@@ -1164,6 +1124,18 @@ echo $_SESSION['token'];?>">
 			}
 
 			load();
+			
+	// compter les nouveaux message
+	function list() {
+				var home_user=$('#home_user').val();
+				var action = "list";
+				$.ajax({
+					url: 'reservation/list_datas_homes.php?home_user='+home_user+'',
+					data:{action:action},
+					success: function(data) {
+			}
+		});
+	}
 	
     // afficher la div pour réinitailiser les chiffres	
 	$(document).on('click','.butt',function(){
@@ -1171,9 +1143,7 @@ echo $_SESSION['token'];?>">
     $('#pak').css('display','block');
     });
 	
-     
-	  
-	 $(document).on('click','#add_local', function() {
+    $(document).on('click','#add_local', function() {
 	// on traite le fichier recherche apres le retour
 	  var acomp = $('#account').val();
 	  if(acomp==""){
@@ -1217,6 +1187,7 @@ echo $_SESSION['token'];?>">
 	  
 	  
   });
+  
   
   $(function(){
   var winners_list = $('.winners li');
