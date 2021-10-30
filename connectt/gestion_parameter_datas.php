@@ -320,7 +320,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="col">
                        <label>Choisir un site<br/>NB:!important si vous souhaitez gérer au moins 2 site</label>
       <select id="code" name="code" class="form-control">
-        <option selected value="0">Choose...</option>
+        <option selected>Choose...</option>
         <option value="1">site 1</option>
 		<option value="2">site 2</option>
 		<option value="3">site 3</option>
@@ -331,7 +331,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					  
 					<div class="form-row">
                     <div class="col">
-                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site">
+                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site" required>
                     <br/><span class="socie"></span></div>
 				 
 				 </div>
@@ -497,7 +497,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
 <!-- retour ajax edit user-->
 <div id="datos"></div>
-<div id="data"></div>
+
 <div id="donns"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
@@ -706,6 +706,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	  event.preventDefault();
 	  
 	  var action="parameter";
+	 var form_data = $(this).serialize();
 	 var nom = $('#nom').val();
 	 var role = $('#role').val();
 	 var prenom = $('#prenom').val();
@@ -758,14 +759,16 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	url:'result_view_home.php',// on traite par la fichier
 	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role,code:code,society:society},
 	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#datos').html(data);
+     $('#data').html(data);
 	 
 	}
     });
-		setInterval(function(){
-		 $('#datos').html('');
+	
+	setInterval(function(){
+		 $('#data').html('');
 		 location.reload(true);
 	 },3000);
+		
 	}
 	 
 	  
@@ -817,7 +820,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	setInterval(function(){
 		 $('#data').html('');
 		 location.reload(true);
-	 },3000);
+	 },5000);
     	 
 	});
 	
