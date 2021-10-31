@@ -168,10 +168,14 @@ label{width:200px;}#nbjour{width:150px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+#examp{background:white;width:75%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
+.dat{margin-top:3px;border-bottom:2px solid #eee;}
+.buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
+color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -336,13 +340,13 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
 <div><?php echo$donns['type_logement'];?><br/>
 	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
-      <div>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
-	  Equipements secondaires<?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
-      <div>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
+      <div class="dat">Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
+	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
+      <div class="dat">Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
 	      Nombre de lits au sein de la chambre<br/>
 		  <?php echo$lits;?>
 	  </div>
-      <div>Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></div>
+      <div class="dat">Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></div>
     
 
 </div>

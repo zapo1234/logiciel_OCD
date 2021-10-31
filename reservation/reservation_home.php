@@ -136,6 +136,12 @@ label{width:200px;}#nbjour{width:150px;}
 #examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
+#examp{background:white;width:75%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
+margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
+.dat{margin-top:3px;border-bottom:2px solid #eee;}
+.buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
+color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 }
 
 
