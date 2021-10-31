@@ -99,6 +99,26 @@ label{width:200px;}#nbjour{width:150px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .error_date{color:red;font-size:12px;}
+#mobile{display:none;} #envoi{display:block;} .users{display:none;}
+
+.ml2 {
+  font-weight: 500;
+  font-size: 1.5em;
+  color:green;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ter {
+  font-weight: 900;
+  font-size: 1em;
+}
+
+#test{color:green}
+/*------------------
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -112,6 +132,10 @@ label{width:200px;}#nbjour{width:150px;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:300px;}
+#mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
+#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
+margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 }
 
 
@@ -168,9 +192,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-         <h1>Liste des chambres disponible</h1>
+         <div class="df"> <?php echo date('H:i');?> en Direct</div>
+		 <span class="ml2">ZAPO</span>
 		  <div id="result"></div><!--retour ajax list home-->
-          <div id="results"></div><!--retour ajax-->
         </div>
 		
         <!-- End of Sidebar -->
@@ -320,6 +344,39 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div><button type="button" class="but">commencer <i class="fas fa-arrow-right"></i></button></div>
 </div>
 
+ <!-- End of Main Content -->
+<div class="user_home" style="display:none">
+	 
+	 <div class="form-group col-md-6">
+      <label for="inputPassword4">Client *</label>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+    </div>
+ 
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Numéro de phone *</label>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Adresse </label>
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
+    </div>
+	 <div class="form-group col-md-6">
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+    </div>
+	
+	<div class="form-group col-md-6">
+      <label for="inputEmail4">Confirmer la réservation</label>
+      <button type="button" id="envoi" name="envoi">Valider</button>
+    </div>
+	 
+	 </div><!-- information user pour la reservation-->
+
+
 <div id="examp" style="display:none">
 <form method="post" id="formA" action="data_home_user.php">
  
@@ -370,6 +427,7 @@ echo $_SESSION['token'];?>">
 <script src="@@path/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
@@ -434,6 +492,14 @@ echo $_SESSION['token'];?>">
 					data:{action:action},
 					success: function(data) {
 						$('#result').html(data);
+						var data = $('#test').val();
+						var datas = $('#tests').val();
+						if(data!=""){
+                        $('.ml2').html(data);
+						}
+						if(datas!=""){
+						 $('.ter').html(datas);
+						}
 					}
 				});
 			 }
@@ -543,31 +609,26 @@ echo $_SESSION['token'];?>">
 	});
 	
   
-  $(function(){
-  var winners_list = $('.winners li');
-  var ul_height = $('.winners').outerHeight();
-  $('.winners').append(winners_list.clone());
+  // Wrap every letter in a span
+var textWrapper = document.querySelector('.ml2');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-  var i = 0;
-  (function displayWinners(i){
-    setTimeout(function(){
-      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
-        $('.winners').css('top', '0');
-      }
-      var li_height = $(winners_list[i]).outerHeight();
-      $('.winners').animate({
-        top: '-=' + li_height + 'px'}, 500);
-      if( i == winners_list.length - 1){
-        i = 0;
-      }else{
-        i++;
-      }
-      displayWinners(i);
-      
-    }, 5500);
-  })(i);
-  
-});
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml2 .letter',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 950,
+    delay: (el, i) => 70*i
+  }).add({
+    targets: '.ml2',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 2500
+  });
 
 
 });

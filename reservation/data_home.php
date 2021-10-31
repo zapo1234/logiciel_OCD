@@ -133,6 +133,25 @@ label{width:200px;}#nbjour{width:150px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .der{border:6px solid #eee;cursor:pointer} .error_date{color:red;font-size:12px;}
+#mobile{display:none;} #envoi{display:block;} .users{display:none;}
+.carous{z-index:4;width:55%;height:400px;position:absolute;left:20%;top:50px;background:white;}
+
+.ml2 {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ter {
+  font-weight: 900;
+  font-size: 1em;
+}
+
+#test{color:green} 
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -147,7 +166,10 @@ label{width:200px;}#nbjour{width:150px;}
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
-.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
+#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
+margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 }
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
@@ -202,9 +224,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-         <h1>Liste des chambres disponible</h1>
-		 <div class="df">à l'instant
-		 Ajourd'huit à <?php echo date('H:i');?></div>
+		 <div class="df"> <?php echo date('H:i');?> en Direct</div>
+		 <span class="ml2"></span>
+		 <span class="ter"></span>
 		  <div id="result"></div><!--retour ajax list home-->
           
 		  
@@ -226,6 +248,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<div class="bd">
 		
 		<div class="users">
+		<span class="hote"><?php echo $donnees['denomination'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
@@ -307,7 +331,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
   </tbody>
 </table>
 
-<div id="mobile" style="display:none">
+<div id="mobile">
 
 <div><?php echo$donns['type_logement'];?><br/>
 	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
@@ -337,6 +361,40 @@ for($i=0; $i<$count; $i++){
 ?>
 </div>
 </div>
+
+<div class="carous" style="display:none">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <?php
+	$count= count($data);
+	echo'<div class="carousel-item active">
+      <img class="d-block w-100" src="upload_image/'.$data[0].'" alt="'.$data[0].'"
+	  width="600px" height:500px">
+    </div>';
+	for($i=1;$i < $count; $i++){
+	echo'<div class="carousel-item">
+      <img class="d-block w-100" src="upload_image/'.$data[$i].'" alt="'.$data[$i].'"
+	  width="500px" height:450px">
+    </div>';
+	}
+    ?>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+</div><!--caroussel--!>
  
                      </div>
 	                 </div><!--center-->
@@ -420,7 +478,7 @@ for($i=0; $i<$count; $i++){
                     </div>
                 </div>
   <span class="errors"></span>
-   <button type="button" class="buttons">Rechercher</button>
+   <button type="button" class="buttons">Rechercher
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
@@ -451,12 +509,13 @@ echo $_SESSION['token'];?>">
 <script src="@@path/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
      
 	 $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+		$('#accordionSidebar').slideToggle();
 	 });
 	 
 	$('#sms').click(function(){
@@ -476,17 +535,25 @@ echo $_SESSION['token'];?>">
 	 $('.x').css('display','block');
  });
  
+ $('.der').click(function(){
+ $('.carous').css('display','block');
+ $('#pak').css('display','block');
+ $('.x').css('display','block');
+});
+ 
  $('.x').click(function(){
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
 	$('.x').css('display','none');
 	$('.user_home').css('display','none');
+	$('.carous').css('display','none');
  });
  
  
  $('#pak').click(function(){
 	$('#pak').css('display','none');
-   $('#examp').css('display','none');	
+   $('#examp').css('display','none');
+   $('.carous').css('display','none');  
    
  });
  
@@ -610,47 +677,51 @@ $('#news_data').click(function(){
 	// compter les nouveaux message
 	function list(page) {
 				var action="list";
+				var  home = $('.homeslibre').length;
+				var homes =$('.homesreserve').length;
+				var nbr = home+homes;
+			
 				$.ajax({
 					url: "list_datas_homes.php?home_user=<?php echo$_GET['home_user'];?>",
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
 						$('#result').html(data);
-					}
+						var data = $('#test').val();
+						var datas = $('#tests').val();
+						if(data!=""){
+                        $('.ml2').html(data);
+						}
+						if(datas!=""){
+						 $('.ter').html(datas);
+						}
+					  }
 				});
 			}
 
 			list();
 			
-	
-   
- 
-  $(function(){
-  var winners_list = $('.winners li');
-  var ul_height = $('.winners').outerHeight();
-  $('.winners').append(winners_list.clone());
+			
+  // Wrap every letter in a span
+var textWrapper = document.querySelector('.ml2');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-  var i = 0;
-  (function displayWinners(i){
-    setTimeout(function(){
-      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
-        $('.winners').css('top', '0');
-      }
-      var li_height = $(winners_list[i]).outerHeight();
-      $('.winners').animate({
-        top: '-=' + li_height + 'px'}, 500);
-      if( i == winners_list.length - 1){
-        i = 0;
-      }else{
-        i++;
-      }
-      displayWinners(i);
-      
-    }, 5500);
-  })(i);
-  
-});
-
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml2 .letter',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 950,
+    delay: (el, i) => 70*i
+  }).add({
+    targets: '.ml2',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 2500
+  });
 
 });
 </script>

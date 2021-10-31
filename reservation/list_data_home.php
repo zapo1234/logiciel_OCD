@@ -39,6 +39,7 @@ $smart_from =($page -1)*$record_peage;
 	  $array2 = [];// recupere les valeurs pour horaires
 	  $array3 = [];// pour les chambre bloque;
 	  $dones = []; // pour les dates au pour horaire.
+	  $color = [];// compter les locaux disponible
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
@@ -90,6 +91,10 @@ $smart_from =($page -1)*$record_peage;
 	// verifier si id_chambre n'est pas dans le tableau des id_local
 	if(!in_array($d,$arr1)){
 		$css ="dispo";
+	  $data = explode(',',$d);
+	  foreach($data as $val){
+		 $color1[]=$val; 
+	  }
 	}
 	elseif(in_array($d,$array3)){
 		$css="indispo";
@@ -218,9 +223,7 @@ $smart_from =($page -1)*$record_peage;
 			 <input type="hidden" id="prix_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donnees['id_chambre'].'" value="'.$donnees['cout_pass'].'"><input type="hidden" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'"><input type="hidden" id="id_chambre'.$donnees['id_chambre'].'" value="'.$donnees['id_chambre'].'">
 			 
 			 </div>';	
-	
-	 
-      }
+	     }
 	echo'</div>';
    
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE  id_visitor= :id');
