@@ -33,8 +33,7 @@ $smart_from =($page -1)*$record_peage;
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
 	  $array31 = [];// pour les chambre bloque id de chmabre bloque;
-	  $data = []; // recupere les dates pour la partie horaie
-	  $color1 = [];// compter les chambre disponible;
+	  $data = []; // recupere les dates pour la partie horaire
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
@@ -87,12 +86,8 @@ $smart_from =($page -1)*$record_peage;
 	$d = $donnees['id_chambre'];
 	// verifier si id_chambre n'est pas dans le tableau des id_local
 	if(!in_array($d,$arr1)){
-	$data = explode(',',$d);
-	  foreach($data as $val){
-		 $color1[]=$val; 
-	    $color='libre';
+	  $color='libre';
 		$status ='le local est disponible <br/><br/><br/>';
-	}
 	}
 	elseif(in_array($d,$array31)){
 		$color='bloque';
@@ -202,17 +197,6 @@ $smart_from =($page -1)*$record_peage;
 			 
 			 </div>';	
 		}
-		$total =count($color1);
-	
-      if($total==1){
-		echo'<input type="hidden" id="test">Reste qu\'une chambre libre">'; 
-	  }
-	  elseif($total==0){
-		echo'<input type="hidden" id="tests">toutes nos chambres sont occupées">';
-	  }
-	  else{
-		  echo'<input type="hidden" id="test" class="er" value="'.$total.' chambres disponibles">';
-	  }
 
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE  id_visitor= :id');
 	  $reg->execute(array(':id'=>$home_user));

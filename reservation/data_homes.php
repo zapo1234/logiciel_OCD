@@ -136,7 +136,7 @@ label{width:200px;}#nbjour{width:150px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .der{border:6px solid #eee;cursor:pointer}
 .error_date{color:red;font-size:12px;}
-.homesindispo{display:none;} #mobile{display:none;} #envoi{display:block;} .users{display:none;}
+.homesindispo{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -152,10 +152,6 @@ label{width:200px;}#nbjour{width:150px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
-#mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
-.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
-margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 }
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
@@ -210,10 +206,11 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-         <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2"></span>
-		  <div id="results"></div><!--retour ajax list home-->
-          
+         <h1>Liste des chambres disponible</h1>
+		 <div class="df">à l'instant
+		 Ajourd'huit à <?php echo date('H:i');?></div>
+          <div id="results"></div><!--retour ajax list-->
+		  
         </div>
 		
         <!-- End of Sidebar -->
@@ -461,12 +458,6 @@ echo $_SESSION['token'];?>">
    $('#block').hide(1000);
  });
  
- $('.der').click(function(){
- $('.carous').css('display','block');
- $('#pak').css('display','block');
- $('.x').css('display','block');
-});
- 
  $('.button').click(function(){
 	$('#pak').css('display','block');
    $('#examp').css('display','block');	
@@ -608,7 +599,6 @@ $('#news_data').click(function(){
 					data:{action:action},
 					success: function(data) {
 						$('#results').html(data);
-						
 					}
 				});
 			}
@@ -634,26 +624,31 @@ $('#news_data').click(function(){
 		}
 	  });
    
-   // Wrap every letter in a span
-var textWrapper = document.querySelector('.ml2');
-textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+  $(function(){
+  var winners_list = $('.winners li');
+  var ul_height = $('.winners').outerHeight();
+  $('.winners').append(winners_list.clone());
 
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml2 .letter',
-    scale: [4,1],
-    opacity: [0,1],
-    translateZ: 0,
-    easing: "easeOutExpo",
-    duration: 950,
-    delay: (el, i) => 70*i
-  }).add({
-    targets: '.ml2',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 2500
-  });
+  var i = 0;
+  (function displayWinners(i){
+    setTimeout(function(){
+      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
+        $('.winners').css('top', '0');
+      }
+      var li_height = $(winners_list[i]).outerHeight();
+      $('.winners').animate({
+        top: '-=' + li_height + 'px'}, 500);
+      if( i == winners_list.length - 1){
+        i = 0;
+      }else{
+        i++;
+      }
+      displayWinners(i);
+      
+    }, 5500);
+  })(i);
+  
+});
 
 
 });
