@@ -169,6 +169,28 @@ transition: all 200ms;}
 opacity:0.7;padding:1%;color:white;border-radius:5px;}
 #society{width:40%;} .mobile{display:none;}
 
+.parent-div {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.parent-div input[type=file] {
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  font-size: 50px;
+}
+.btn-upload {
+  background-color: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 @media (max-width: 575.98px) { 
 #panier{display:none}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -492,8 +514,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <input type="checkbox" name="choix[]"  value="armoie ou penderie"> armoie ou penderie  
    <input type="checkbox" name="choix[]" value="chaines satellite"> chaines satellite
    <input type="checkbox" name="choix[]"  value="prise près de lit"> prise près de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
-   <input type="checkbox" name="choix[]"  value="portant"> portant<br/>
-    <input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche
+   <input type="checkbox" name="choix[]"  value="portant"> portant
+    <input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche 
+	<input type="checkbox" name="choix[]"  value="fer à repasser"> article de toilletes 
+	<input type="checkbox" name="choix[]"  value="radio"> radio
+	<input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche
    <input type="checkbox" name="choix[]"  value="télephone"> télephone
    <input type="checkbox" name="choix[]"  value="microonde"> microonde
    <input type="checkbox" name="choix[]"  value="réfrigérateur"> réfrigerateur
@@ -512,9 +537,35 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <textarea class="form-control" name="infos" id="infos" rows="3"></textarea>
    </div>
 	
-  <h2><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)</h2>
-  <input type="file" class="test" name="fil[]" id="file1"><input type="file" class="test" name="fil[]" id="file2"><input class="test" type="file" name="fil[]" id="file3">
-  <input type="file" class="test" name="fil[]" id="file4">
+  <h2><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 6images)</h2>
+  <div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file1" />
+    </div>
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file2" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file3" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file4" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file5" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file6" />
+    </div>
   
   <div><input type="submit" value="enregistrer le local" id="his"/></div>
 <input type="hidden" name="token" id="token" value="<?php
