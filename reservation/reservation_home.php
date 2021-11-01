@@ -133,15 +133,16 @@ label{width:200px;}#nbjour{width:150px;}
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:300px;}
 #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 #examp{background:white;width:75%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 .dat{margin-top:3px;border-bottom:2px solid #eee;}
-.buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
+.buttons{margin-left:5%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
+#days,#das{width:250px;}
 }
 
 
@@ -226,7 +227,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	
 		<div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" id="formB" action="">
+		<form method="post" id="formB" action="data_user_reservation.php">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
@@ -355,16 +356,19 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 
 	 <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom"><br/>
+	  <span class="error"></span>
     </div>
  
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
+	  <span class="error"></span>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
       <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+	  <span class="error"></span>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
@@ -372,7 +376,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
     </div>
 	 <div class="form-group col-md-6">
       <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+      <input type="checkbox" id="oui" class="oui" name="oui">Oui <input type="checkbox" id="non" class="nom" name="Non">Non
     </div>
 	
 	<div class="form-group col-md-6">
@@ -511,6 +515,34 @@ echo $_SESSION['token'];?>">
 			 }
 
 			list();
+			
+  $("#envoi").click(function(){
+	 var name =$('#name').val();
+     var number=$('#number').val();	
+    var email = $('#email').val();
+    var tota= $('#tota').val();	
+	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
+    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
+    var number = /^[+0-9]{8,14}$/;
+	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	
+	if(name.length==""){
+		$('#name').css('border-color','red');
+	}
+	 else if (name.length > 80){
+      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nom doit pas dépasser plus de 80 caractères');
+    }
+	else if (!reg.test(number)){
+      $('.error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur le numéro de phone');
+    }
+	else if (!reg.test(email)){
+      $('.error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe du mail');
+    }
+	else{
+		$('#formB').submit();
+	}
+	  
+  });
 			
 	$(document).on('click','.add',function() {
 

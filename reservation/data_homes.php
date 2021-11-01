@@ -59,6 +59,28 @@ $req=$bdd->prepare('SELECT id_visitor,denomination,numero,email_user FROM inscri
      $rem='<span class="ts"></span>';
 	$rt=",";
 	$rs='<span class="ts"><i style="font-size:12px;font-weight:200px" class="fa">&#xf00c;</i></span>';
+
+  $date1 =$_GET['date_start'];
+  $date2= $_GET['date_end'];
+  
+  //calculer la difference de jour
+  $firtDate =new DateTime($date1);
+  $secondDate = new DateTime($date2);
+  $intvl = $firtDate->diff($secondDate);
+  $nombre = $intvl->days;
+  
+  $data1 = explode('-',$date1);
+  $data2 = explode('-',$date2);
+   $j = $data1[2];
+	$mm = $data1[1];
+	$an = $data1[0];
+    // data2
+	$j1 = $data2[2];
+	$mm1 = $data2[1];
+	$an1 = $data2[0];
+	
+$dates1 = $j.'/'.$mm.'/'.$an;
+$dates2 = $j1.'/'.$mm1.'/'.$an;
 ?>
 
 <!DOCTYPE html>
@@ -153,6 +175,8 @@ label{width:200px;}#nbjour{width:150px;}
   font-size: 1em;
 }
 
+#nbjour{width:50px;margin-left:20%;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -169,9 +193,16 @@ label{width:200px;}#nbjour{width:150px;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:55%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
+#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
+margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
+.dat{margin-top:3px;border-bottom:2px solid #eee;}
+.buttons{margin-left:5%;width:250px;height:40px;background:#0769BA;
+color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
+
 }
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
@@ -251,10 +282,11 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
+		<div class="forms">Arrivée le : <?php echo $dates1;?> <br/>Départ le <?php echo $dates2;?></div> 
 		<form method="post" action="">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
-      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="<?php echo$nombre;?>" required readonly><br/><span id="error"></span>
        </div>
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
@@ -264,7 +296,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 <option value="réservation">réservation</option>
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
-		  
+	<input type="hidden" name="date_start" value="<?php echo $_GET['date_start'];?>">
+	<input type="hidden" name="date_end" value="<?php echo $_GET['date_end'];?>">
        </div>
        </form>
 		</div>
@@ -513,7 +546,9 @@ $('#news_data').click(function(){
 	 $('#news').click(function(){
 	$('.users').slideToggle();
 	});
-			
+	
+	 
+	 
 	// click sur les news message
 	$('#form1').on('submit', function(event) {
 	event.preventDefault();

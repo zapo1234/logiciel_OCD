@@ -110,7 +110,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:135px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -168,12 +168,13 @@ label{width:200px;}#nbjour{width:150px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:75%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
+#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 .dat{margin-top:3px;border-bottom:2px solid #eee;}
 .buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
+#days,#das{width:250px;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

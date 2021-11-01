@@ -35,6 +35,7 @@ $smart_from =($page -1)*$record_peage;
 	  $array31 = [];// pour les chambre bloque id de chmabre bloque;
 	  $data = []; // recupere les dates pour la partie horaie
 	  $color1 = [];// compter les chambre disponible;
+	  $color2 =[];// chambre disponibilite mais réservé
 	  foreach($dns as $val){
 		 // lancer les requetes et enregsitre les données dans les different tableau
 		     $data1 = $val['id_chambre'];
@@ -156,7 +157,8 @@ $smart_from =($page -1)*$record_peage;
 	// if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='réservée à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span>';
+	$color2[]='reserve';
+	$status ='réservée à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.' probale disponibilité à compter du '.$j1.'/'.$mm1.'/'.$an1.'</span>';
 	}
 	else{
 		$color='libre';
@@ -202,13 +204,15 @@ $smart_from =($page -1)*$record_peage;
 			 
 			 </div>';	
 		}
-		$total =count($color1);
+		$total1 =count($color1);
+		$total2 =count($color2);
+		$total =$total1+$total2;
 	
       if($total==1){
 		echo'<input type="hidden" id="test">Reste qu\'une chambre libre">'; 
 	  }
 	  elseif($total==0){
-		echo'<input type="hidden" id="tests">toutes nos chambres sont occupées">';
+		echo'<input type="hidden" id="tests" value="toutes nos chambres sont occupées">';
 	  }
 	  else{
 		  echo'<input type="hidden" id="test" class="er" value="'.$total.' chambres disponibles">';
