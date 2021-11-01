@@ -175,8 +175,9 @@ label{width:200px;}#nbjour{width:150px;}
   font-size: 1em;
 }
 
-#nbjour{width:50px;margin-left:20%;}
-
+#nbjour{width:50px;margin-left:20%;} #mobile{display:none;}
+.data{display:none;} .img{display:none;}
+.calenda{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -202,6 +203,11 @@ margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 .dat{margin-top:3px;border-bottom:2px solid #eee;}
 .buttons{margin-left:5%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
+.resul a{padding:2%;color:black;width:300px;}
+.resul{width:250px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
+.resul a{padding:1%;color:black;width:350px;}
+.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} #display:block;}
+.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;margin-left:5%;}
 
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -321,7 +327,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     </button>
                      <!-- Topbar Search -->
                                <div class="hotes">
-                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
+                               <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
 							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
                         
@@ -361,6 +367,21 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
     
   </tbody>
 </table>
+
+<div id="mobile">
+
+<div><?php echo$donns['type_logement'];?><br/>
+	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
+      <div class="dat">Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
+	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
+      <div class="dat">Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
+	      Nombre de lits au sein de la chambre<br/>
+		  <?php echo$lits;?>
+	  </div>
+      <div class="dat">Prix nuité<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Prix horaire<br/><span class="trs"><?php echo$donns['cout_nuite'];?>xof</span><br/>Description<br/><?php echo $donns['infos'];?></div>
+    
+
+</div>
 
 <div class="content">
 <h3><i class="fas fa-camera"></i> Visualisez le local en images  </h3>
@@ -497,7 +518,7 @@ echo $_SESSION['token'];?>">
    $(document).ready(function(){
      
 	 $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+		$('#accordionSidebar').slideToggle();
 	 });
 	 
 	$('#sms').click(function(){
@@ -662,11 +683,14 @@ $('#news_data').click(function(){
 						$('#results').html(data);
 						var data = $('#test').val();
 						var datas = $('#tests').val();
+						var dat =$('#datas').val();
 						if(data!=""){
                         $('.ml2').html(data);
+						$('.data').html(data);
 						}
 						if(datas!=""){
 						 $('.ter').html(datas);
+						 $('.data').html(data);
 						}
 					  }
 				   });
@@ -681,7 +705,7 @@ $('#news_data').click(function(){
 	     var date1 = new Date($('#days').val());
 	     var date2 =  new Date($('#das').val());
 		 if(dat1.length!="" && dat2.length!=""){
-		 if(date1 > date2){
+		 if(date1 > date2 || date1==date2){
 		  $('.error_date').text(' *la date de départ doit etre supérieur à la date d\'arrivée'); 
 		}
 		else{
