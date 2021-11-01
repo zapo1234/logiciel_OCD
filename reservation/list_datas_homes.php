@@ -158,7 +158,7 @@ $smart_from =($page -1)*$record_peage;
 	elseif($date_english < $debut){
 	$color ='reserve';
 	$color2[]='reserve';
-	$status ='réservée à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.' probale disponibilité à compter du '.$j1.'/'.$mm1.'/'.$an1.'</span>';
+	$status ='réservée à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.' <br/>probale disponibilité à compter du '.$j1.'/'.$mm1.'/'.$an1.'</span>';
 	}
 	else{
 		$color='libre';
@@ -209,13 +209,14 @@ $smart_from =($page -1)*$record_peage;
 		$total =$total1+$total2;
 	
       if($total==1){
-		echo'<input type="hidden" id="test">Reste qu\'une chambre libre">'; 
+		echo'<input type="hidden" id="test">Reste qu\'une chambre libre">
+		<input type="hidden" class="datas" id="datas" value="'.$total.'>"'; 
 	  }
 	  elseif($total==0){
-		echo'<input type="hidden" id="tests" value="toutes nos chambres sont occupées">';
+		echo'<input type="hidden" id="tests" value="toutes nos chambres sont occupées"><input type="hidden" id="datas" class="datas" value="'.$total.'>"';
 	  }
 	  else{
-		  echo'<input type="hidden" id="test" class="er" value="'.$total.' chambres disponibles">';
+		  echo'<input type="hidden" id="test" class="er" value="'.$total.' chambres disponibles"><input type="hidden" id="datas" class="datas" value="'.$total.'">';
 	  }
 
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE  id_visitor= :id');

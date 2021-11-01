@@ -152,7 +152,8 @@ label{width:200px;}#nbjour{width:150px;}
   font-size: 1em;
 }
 
-#test{color:green} 
+#test{color:green}  .data{display:none;} .img{display:none;}
+.calenda{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -175,6 +176,9 @@ margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 .buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 #days,#das{width:250px;}
+.resul a{padding:1%;color:black;width:50px;}
+.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:55%;}
+.img{margin-left:10%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -296,7 +300,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     </button>
                      <!-- Topbar Search -->
                                <div class="hotes">
-                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
+                               <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
 							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
                         
@@ -695,11 +699,14 @@ $('#news_data').click(function(){
 						$('#result').html(data);
 						var data = $('#test').val();
 						var datas = $('#tests').val();
+						var dat =$('#datas').val();
 						if(data!=""){
                         $('.ml2').html(data);
+						$('.data').html(data);
 						}
 						if(datas!=""){
 						 $('.ter').html(datas);
+						 $('.data').html(data);
 						}
 					  }
 				});
