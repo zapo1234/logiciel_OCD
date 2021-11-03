@@ -207,7 +207,8 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .resul{width:250px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
 .resul a{padding:1%;color:black;width:350px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} #display:block;}
-.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;margin-left:5%;}
+.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
+.table{display:none;} .img{margin-left:10%;}
 
 }
 @media (min-width: 768px) and (max-width: 991px) {

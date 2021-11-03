@@ -113,8 +113,9 @@ label{width:200px;}#nbjour{width:150px;}
 }
 
 .ter {
-  font-weight: 900;
+  font-weight: 600;
   font-size: 1em;
+  color:#C10D23;
 }
 
 #test{color:green} .data{display:none;} .img{display:none;}
@@ -207,7 +208,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2">ZAPO</span>
+		 <span class="ml2"></span><span class="ter"></span>
 		  <div id="result"></div><!--retour ajax list home-->
         </div>
 		
@@ -517,7 +518,7 @@ echo $_SESSION['token'];?>">
 						$('.data').html(data);
 						}
 						if(datas!=""){
-						 $('.ter').html(datas);
+						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
 					}

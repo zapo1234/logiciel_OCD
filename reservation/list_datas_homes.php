@@ -204,6 +204,7 @@ $smart_from =($page -1)*$record_peage;
 			 
 			 </div>';	
 		}
+		
 		$total1 =count($color1);
 		$total2 =count($color2);
 		$total =$total1+$total2;
@@ -213,7 +214,7 @@ $smart_from =($page -1)*$record_peage;
 		<input type="hidden" class="datas" id="datas" value="'.$total.'>"'; 
 	  }
 	  elseif($total==0){
-		echo'<input type="hidden" id="tests" value="toutes nos chambres sont occupées"><input type="hidden" id="datas" class="datas" value="'.$total.'>"';
+		echo'<input type="hidden" id="tests" value="Plus de disponibilités"><input type="hidden" id="datas" class="datas" value="'.$total.'>"';
 	  }
 	  else{
 		  echo'<input type="hidden" id="test" class="er" value="'.$total.' disponibilités"><input type="hidden" id="datas" class="datas" value="'.$total.'">';
