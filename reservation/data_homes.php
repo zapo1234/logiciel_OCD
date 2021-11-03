@@ -173,6 +173,7 @@ label{width:200px;}#nbjour{width:150px;}
 .ter {
   font-weight: 900;
   font-size: 1em;
+  color:#C10D23;
 }
 
 #nbjour{width:50px;margin-left:20%;} #mobile{display:none;}
@@ -265,7 +266,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2"></span>
+		 <span class="ml2"></span><span class="ter"></span>
 		  <div id="results"></div><!--retour ajax list home-->
           
         </div>
@@ -690,7 +691,7 @@ $('#news_data').click(function(){
 						$('.data').html(data);
 						}
 						if(datas!=""){
-						 $('.ter').html(datas);
+						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
 					  }

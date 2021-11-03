@@ -150,7 +150,8 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
 .calenda{margin-left:5%;} .dt{font-size:13px;}
 .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
-.img{margin-left:10%;} 
+.img{margin-left:10%;} #block{margin-left:-12%;width:90%;height:400px;}
+.ter{padding-left:2%;}
 }
 
 
@@ -172,6 +173,12 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
 #collapse{position:absolute;display:none;left:62%;height:1200px;}
+#block{margin-left:-12%;width:60%;height:400px;}
+.ter{padding-left:2%;} 
+.data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
+.calenda{margin-left:5%;} .dt{font-size:13px;}
+.data,.img,.calenda{float:left;} .calenda{margin-left:45%;}
+.hote{display:none;}.numero,.email{display:none;} .img{margin-left:20%;}
 }
 
 
@@ -192,6 +199,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
+.hote{margin-left:25%;}
 }
 
 
