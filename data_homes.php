@@ -173,6 +173,7 @@ label{width:200px;}#nbjour{width:150px;}
 .ter {
   font-weight: 900;
   font-size: 1em;
+  color:#C10D23;
 }
 
 #nbjour{width:50px;margin-left:20%;} #mobile{display:none;}
@@ -207,7 +208,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .resul{width:250px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
 .resul a{padding:1%;color:black;width:350px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} #display:block;}
-.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:55%;}
+.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
 .table{display:none;} .img{margin-left:10%;}
 
 }
@@ -265,7 +266,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
          <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2"></span>
+		 <span class="ml2"></span><span class="ter"></span>
 		  <div id="results"></div><!--retour ajax list home-->
           
         </div>
@@ -690,7 +691,7 @@ $('#news_data').click(function(){
 						$('.data').html(data);
 						}
 						if(datas!=""){
-						 $('.ter').html(datas);
+						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
 					  }
