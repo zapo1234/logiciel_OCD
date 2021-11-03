@@ -150,6 +150,7 @@ label{width:200px;}#nbjour{width:150px;}
 .ter {
   font-weight: 900;
   font-size: 1em;
+  color:#C10D23;
 }
 
 #test{color:green}  .data{display:none;} .img{display:none;}
@@ -705,7 +706,7 @@ $('#news_data').click(function(){
 						$('.data').html(data);
 						}
 						if(datas!=""){
-						 $('.ter').html(datas);
+						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
 					  }

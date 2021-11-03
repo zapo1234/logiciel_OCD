@@ -1,7 +1,7 @@
  <?php
  
    //ini_set('session.use_cookies', 1);       // Use cookies to store session.
-   //ini_set('session.use_only_cookies', 1);  // Force cookies for session (phpsessionID forbidden in URL)
+   //ini_set('session.use_only_cookies', 1); // (phpsessionID forbidden in URL)
    // on defini une variable
    // creation de tokens sécruity
    $token = openssl_random_pseudo_bytes(16);
@@ -32,10 +32,6 @@
   $_SESSION['last_time'] = time();
   
   
-	
-	
-	
-     
 if(!isset($_SESSION['pose']) OR !$_SESSION['pmd']){
 	
 // on detruire les variable
