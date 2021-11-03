@@ -59,7 +59,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 .nav-search{width:70%;} 
 
 .content2{margin-left:0.2%;}
-.dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
+.dt{font-size:13px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -147,7 +147,9 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .resul a{padding:1%;color:black;width:350px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
 .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
-.calenda{margin-left:25%;}
+.calenda{margin-left:5%;} .dt{font-size:13px;}
+.data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
+.img{margin-left:10%;} 
 }
 
 

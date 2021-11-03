@@ -216,7 +216,7 @@ $smart_from =($page -1)*$record_peage;
 		echo'<input type="hidden" id="tests" value="toutes nos chambres sont occupées"><input type="hidden" id="datas" class="datas" value="'.$total.'>"';
 	  }
 	  else{
-		  echo'<input type="hidden" id="test" class="er" value="'.$total.' chambres disponibles"><input type="hidden" id="datas" class="datas" value="'.$total.'">';
+		  echo'<input type="hidden" id="test" class="er" value="'.$total.' disponibilités"><input type="hidden" id="datas" class="datas" value="'.$total.'">';
 	  }
 
    $reg=$bds->prepare('SELECT count(*) AS nbrs FROM chambre WHERE  id_visitor= :id');
