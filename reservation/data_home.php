@@ -701,11 +701,11 @@ $('#news_data').click(function(){
 						var data = $('#test').val();
 						var datas = $('#tests').val();
 						var dat =$('#datas').val();
-						if(data!=""){
+						if(data.length!=""){
                         $('.ml2').html(data);
 						$('.data').html(data);
 						}
-						if(datas!=""){
+						if(datas.length!=""){
 						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
