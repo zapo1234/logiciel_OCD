@@ -124,7 +124,7 @@ $dates2 = $j1.'/'.$mm1.'/'.$an;
 .nav-search{width:70%;} 
 
 .content2{margin-left:0.2%;}
-.dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
+.dt{font-size:12.3px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
 #pak{position: absolute;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -134,7 +134,7 @@ $dates2 = $j1.'/'.$mm1.'/'.$an;
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;height:135px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -156,11 +156,12 @@ label{width:200px;}#nbjour{width:150px;}
 #envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
-.der{border:6px solid #eee;cursor:pointer}
-.error_date{color:red;font-size:12px;}
-.homesindispo{display:none;} #mobile{display:none;} #envoi{display:block;} .users{display:none;}
+.der{border:6px solid #eee;cursor:pointer} .error_date{color:red;font-size:12px;}
+#mobile{display:none;} #envoi{display:block;} .users{display:none;}
+.carous{z-index:4;width:55%;height:400px;position:absolute;left:20%;top:50px;background:white;}
+
 .ml2 {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1.5em;
   color:green;
 }
@@ -176,9 +177,8 @@ label{width:200px;}#nbjour{width:150px;}
   color:#C10D23;
 }
 
-#nbjour{width:50px;margin-left:20%;} #mobile{display:none;}
-.data{display:none;} .img{display:none;}
-.calenda{display:none;}
+#test{color:green}  .data{display:none;} .img{display:none;}
+.calenda{display:none;} #panier_mobile{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -193,25 +193,21 @@ label{width:200px;}#nbjour{width:150px;}
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
 .resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
-.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
-#mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
+.button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
 #examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
 margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
-#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
-.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
-margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 .dat{margin-top:3px;border-bottom:2px solid #eee;}
-.buttons{margin-left:5%;width:250px;height:40px;background:#0769BA;
+.buttons{margin-left:10%;width:250px;height:40px;background:#0769BA;
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
-.resul a{padding:2%;color:black;width:300px;}
-.resul{width:250px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
-.resul a{padding:1%;color:black;width:350px;}
-.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} #display:block;}
-.data{display:none;}  .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
-.table{display:none;} .img{margin-left:10%;}
-
+#days,#das{width:250px;}
+.resul a{padding:1%;color:black;width:50px;}
+.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:15%;}
+.img{margin-left:10%;} #panier_mobile{display:block;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-10%;} .bc{width:330px;}
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -265,10 +261,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-         <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2"></span><span class="ter"></span>
-		  <div id="results"></div><!--retour ajax list home-->
+		 <div class="df"> <?php echo date('H:i');?> en Direct</div>
+		 <span class="ml2"></span>
+		 <span class="ter"></span>
+		  <div id="result"></div><!--retour ajax list home-->
           
+		  
         </div>
 		
         <!-- End of Sidebar -->
@@ -287,6 +285,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<div class="bd">
 		
 		<div class="users">
+		
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
@@ -299,13 +298,10 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
-	 <option value="choix">choix</option>
-	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
-	<input type="hidden" name="date_start" value="<?php echo $_GET['date_start'];?>">
-	<input type="hidden" name="date_end" value="<?php echo $_GET['date_end'];?>">
+		 <div id="resultats"></div><!--requete ajax-->
        </div>
        </form>
 		</div>
@@ -400,6 +396,40 @@ for($i=0; $i<$count; $i++){
 ?>
 </div>
 </div>
+
+<div class="carous" style="display:none">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <?php
+	$count= count($data);
+	echo'<div class="carousel-item active">
+      <img class="d-block w-100" src="upload_image/'.$data[0].'" alt="'.$data[0].'"
+	  width="600px" height:500px">
+    </div>';
+	for($i=1;$i < $count; $i++){
+	echo'<div class="carousel-item">
+      <img class="d-block w-100" src="upload_image/'.$data[$i].'" alt="'.$data[$i].'"
+	  width="500px" height:450px">
+    </div>';
+	}
+    ?>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+</div><!--caroussel--!>
  
                      </div>
 	                 </div><!--center-->
@@ -479,11 +509,11 @@ for($i=0; $i<$count; $i++){
 					<label>Date de départ</label>
                       <input type="date" id="das" name="das" class="form-control" placeholder="" min="<?php echo date('Y-m-d');?>" required
 					  >
+					  <div class="error_date"></div>
                     </div>
-					<div class="error_date"></div>
                 </div>
   <span class="errors"></span>
-   <button type="button" class="buttons">Rechercher</button>
+   <button type="button" class="buttons">Rechercher
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
 <input type="hidden" name="token" id="token" value="<?php
@@ -518,8 +548,10 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     
-	 $('#sidebarToggleTop').click(function(){
+    
+	
+	
+    $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
 	 });
 	 
@@ -534,29 +566,38 @@ echo $_SESSION['token'];?>">
    $('#block').hide(1000);
  });
  
- $('.der').click(function(){
- $('.carous').css('display','block');
- $('#pak').css('display','block');
- $('.x').css('display','block');
-});
- 
  $('.button').click(function(){
 	$('#pak').css('display','block');
    $('#examp').css('display','block');	
 	 $('.x').css('display','block');
  });
  
+ $('.calenda').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+	 
+ });
+ 
+ $('.der').click(function(){
+ $('.carous').css('display','block');
+ $('#pak').css('display','block');
+ $('.x').css('display','block');
+});
+ 
  $('.x').click(function(){
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
 	$('.x').css('display','none');
 	$('.user_home').css('display','none');
+	$('.carous').css('display','none');
  });
  
  
  $('#pak').click(function(){
 	$('#pak').css('display','none');
-   $('#examp').css('display','none');	
+   $('#examp').css('display','none');
+   $('.carous').css('display','none');  
    
  });
  
@@ -569,22 +610,25 @@ $('#news_data').click(function(){
 	 $('#news').click(function(){
 	$('.users').slideToggle();
 	});
-	
-	 
-	 
-	// click sur les news message
-	$('#form1').on('submit', function(event) {
-	event.preventDefault();
-	$.ajax({
-	type:'POST', // on envoi les donnes
-	url:'data_user_home.php',// on traite par la fichier
-	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#pak').css('display','block');
-	  $('#examp').css('display','none');
-	  $('results').html(data);
-	 }
-    });
-  });
+		
+   $('.buttons').click(function(){
+		 event.preventDefault();
+		 var dat1 =$('#days').val();
+		 var dat2 = $('#das').val();
+	     var date1 = new Date($('#days').val());
+	     var date2 =  new Date($('#das').val());
+		 if(dat1.length!="" && dat2.length!=""){
+		 if(date1 > date2){
+		  $('.error_date').text(' *la date de départ doit etre supérieur à la date d\'arrivée'); 
+		}
+		else{
+		$('#formA').submit();
+		}
+		 }
+		else{
+			$('.error_date').text(' *remplir les champs de date'); 
+		}
+	  });
 	
 	$(document).on('click','.add',function() {
 
@@ -657,16 +701,7 @@ $('#news_data').click(function(){
 			$('#error').text('*vous n\'avez pas choisir un local'); 
 		}
        });
-	 
-	$('#nbjour').keyup(function(){
-	var nbjour =$('#nbjour').val();
-	if(nbjour==""){
-		nbjour=1;
-	}
-	var total = $('#tota').val();
-	var s = parseFloat(nbjour)*parseFloat(total);
-	$('.data_total').text(s);
-	});
+	
 	
 	// pagintion
   $(document).on('click','.bout',function(){
@@ -677,49 +712,56 @@ $('#news_data').click(function(){
 	// compter les nouveaux message
 	function list(page) {
 				var action="list";
+				var  home = $('.homeslibre').length;
+				var homes =$('.homesreserve').length;
+				var nbr = home+homes;
+			
 				$.ajax({
 					url: "list_data_home.php?date_start=<?php echo$_GET['date_start'];?>&date_end=<?php echo$_GET['date_end'];?>&home_user=<?php echo$_GET['home_user'];?>",
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#results').html(data);
+						$('#result').html(data);
 						var data = $('#test').val();
 						var datas = $('#tests').val();
 						var dat =$('#datas').val();
-						if(data!=""){
+						if(data.length!=""){
                         $('.ml2').html(data);
 						$('.data').html(data);
+						$('.ter').html('');
 						}
-						if(datas!=""){
+						if(datas.length!=""){
 						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
 					  }
-				   });
-			    }
+				});
+			}
 
 			list();
 			
-	$('.buttons').click(function(){
-		 event.preventDefault();
-		 var dat1 =$('#days').val();
-		 var dat2 = $('#das').val();
-	     var date1 = new Date($('#days').val());
-	     var date2 =  new Date($('#das').val());
-		 if(dat1.length!="" && dat2.length!=""){
-		 if(date1 > date2 || date1==date2){
-		  $('.error_date').text(' *la date de départ doit etre supérieur à la date d\'arrivée'); 
-		}
-		else{
-		$('#formA').submit();
-		}
-		 }
-		else{
-			$('.error_date').text(' * remplir les champs de date'); 
-		}
-	  });
-   
-   // Wrap every letter in a span
+		function session_add(){
+		      var action="adds";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats').html(data);
+						var nbjour =$('#nbjour').val();
+	                      if(nbjour==""){
+		                   nbjour=1;
+	                      }
+	                    var total = $('#tota').val();
+	                    var s = parseFloat(nbjour)*parseFloat(total);
+	                   $('.data_total').text(s);
+	                  }
+					});
+		           }
+           session_add();
+			
+			
+  // Wrap every letter in a span
 var textWrapper = document.querySelector('.ml2');
 textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
@@ -739,7 +781,6 @@ anime.timeline({loop: true})
     easing: "easeOutExpo",
     delay: 2500
   });
-
 
 });
 </script>

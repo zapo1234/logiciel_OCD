@@ -119,7 +119,7 @@ label{width:200px;}#nbjour{width:150px;}
 }
 
 #test{color:green} .data{display:none;} .img{display:none;}
-.calenda{display:none;}
+.calenda{display:none;} #panier_mobile{display:none;}
 /*------------------
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -151,7 +151,9 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .calenda{margin-left:5%;} .dt{font-size:13px;}
 .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
 .img{margin-left:10%;} #block{margin-left:-12%;width:90%;height:400px;}
-.ter{padding-left:2%;}
+.ter{padding-left:2%;} #panier_mobile{display:block;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
 }
 
 
@@ -283,7 +285,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 </div><!-- information user pour la reservation-->
 	   
 		<div id="resultat"></div><!--requete ajax-->
-		  
+		<div id="resultats"></div><!-- requete ajax-->
        </div>
 	   </form>
 		</div>
@@ -462,6 +464,13 @@ echo $_SESSION['token'];?>">
 		$('#accordionSidebar').slideToggle();
 	 });
 	 
+	 $('.calenda').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+	 
+ });
+	 
 	$('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
@@ -521,11 +530,11 @@ echo $_SESSION['token'];?>">
 						var data = $('#test').val();
 						var datas = $('#tests').val();
 						var dat =$('#datas').val();
-						if(data!=""){
+						if(data.length!=""){
                         $('.ml2').html(data);
 						$('.data').html(data);
 						}
-						if(datas!=""){
+						if(datas.length!=""){
 						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
 						 $('.data').html(data);
 						}
@@ -598,6 +607,22 @@ echo $_SESSION['token'];?>">
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
 	 });
+	 
+	       function session_add(){
+		      var action="adds";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats').html(data);
+					}
+				});
+			}
+
+			session_add();
+	 
+	 
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
