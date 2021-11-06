@@ -119,7 +119,7 @@ label{width:200px;}#nbjour{width:150px;}
 }
 
 #test{color:green} .data{display:none;} .img{display:none;}
-.calenda{display:none;}
+.calenda{display:none;} #panier_mobile{display:none;}
 /*------------------
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -151,7 +151,9 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .calenda{margin-left:5%;} .dt{font-size:13px;}
 .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
 .img{margin-left:10%;} #block{margin-left:-12%;width:90%;height:400px;}
-.ter{padding-left:2%;}
+.ter{padding-left:2%;} #panier_mobile{display:block;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
 }
 
 
@@ -461,6 +463,13 @@ echo $_SESSION['token'];?>">
 	 $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
 	 });
+	 
+	 $('.calenda').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+	 
+ });
 	 
 	$('#sms').click(function(){
 	$('.drop').slideToggle();

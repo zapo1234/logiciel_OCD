@@ -178,7 +178,7 @@ label{width:200px;}#nbjour{width:150px;}
 }
 
 #test{color:green}  .data{display:none;} .img{display:none;}
-.calenda{display:none;}
+.calenda{display:none;} #panier_mobile{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -203,7 +203,9 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 #days,#das{width:250px;}
 .resul a{padding:1%;color:black;width:50px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:15%;}
-.img{margin-left:10%;} 
+.img{margin-left:10%;} #panier_mobile{display:block;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-10%;} .bc{width:330px;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -296,8 +298,6 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
-	 <option value="choix">choix</option>
-	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
@@ -548,8 +548,10 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     
-	 $('#sidebarToggleTop').click(function(){
+    
+	
+	
+    $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
 	 });
 	 
@@ -568,6 +570,13 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','block');
    $('#examp').css('display','block');	
 	 $('.x').css('display','block');
+ });
+ 
+ $('.calenda').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+	 
  });
  
  $('.der').click(function(){
@@ -692,16 +701,7 @@ $('#news_data').click(function(){
 			$('#error').text('*vous n\'avez pas choisir un local'); 
 		}
        });
-	 
-	$('#nbjour').keyup(function(){
-	var nbjour =$('#nbjour').val();
-	if(nbjour==""){
-		nbjour=1;
-	}
-	var total = $('#tota').val();
-	var s = parseFloat(nbjour)*parseFloat(total);
-	$('.data_total').text(s);
-	});
+	
 	
 	// pagintion
   $(document).on('click','.bout',function(){
@@ -748,9 +748,16 @@ $('#news_data').click(function(){
 					data:{action:action},
 					success: function(data) {
 						$('#resultats').html(data);
-					}
-				});
-			}
+						var nbjour =$('#nbjour').val();
+	                      if(nbjour==""){
+		                   nbjour=1;
+	                      }
+	                    var total = $('#tota').val();
+	                    var s = parseFloat(nbjour)*parseFloat(total);
+	                   $('.data_total').text(s);
+	                  }
+					});
+		           }
            session_add();
 			
 			

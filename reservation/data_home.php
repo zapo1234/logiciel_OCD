@@ -154,7 +154,7 @@ label{width:200px;}#nbjour{width:150px;}
 }
 
 #test{color:green}  .data{display:none;} .img{display:none;}
-.calenda{display:none;}
+.calenda{display:none;} #panier_mobile{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -179,7 +179,9 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 #days,#das{width:250px;}
 .resul a{padding:1%;color:black;width:50px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
-.img{margin-left:10%;} 
+.img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -528,6 +530,8 @@ echo $_SESSION['token'];?>">
 		$('#accordionSidebar').slideToggle();
 	 });
 	 
+	 
+	 
 	$('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
@@ -544,6 +548,17 @@ echo $_SESSION['token'];?>">
    $('#examp').css('display','block');	
 	 $('.x').css('display','block');
  });
+ 
+ $('.calenda').click(function(){
+	$('#pak').css('display','block');
+   $('#examp').css('display','block');	
+	 $('.x').css('display','block');
+	 
+ });
+ 
+ $('.img').click(function(){
+	$('#collapse').slideToggle();
+  });
  
  $('.der').click(function(){
  $('.carous').css('display','block');
@@ -618,6 +633,7 @@ $('#news_data').click(function(){
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
+		$('.titre').css('display','block');
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
