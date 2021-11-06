@@ -283,7 +283,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 </div><!-- information user pour la reservation-->
 	   
 		<div id="resultat"></div><!--requete ajax-->
-		  
+		<div id="resultats"></div><!-- requete ajax-->
        </div>
 	   </form>
 		</div>
@@ -598,6 +598,22 @@ echo $_SESSION['token'];?>">
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
 	 });
+	 
+	       function session_add(){
+		      var action="adds";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats').html(data);
+					}
+				});
+			}
+
+			session_add();
+	 
+	 
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.

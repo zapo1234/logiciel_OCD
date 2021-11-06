@@ -259,8 +259,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<div class="bd">
 		
 		<div class="users">
-		<span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
+		
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
@@ -277,7 +276,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 <option value="réservation">réservation</option>
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
-		  
+		 <div id="resultats"></div><!--requete ajax-->
        </div>
        </form>
 		</div>
@@ -704,6 +703,7 @@ $('#news_data').click(function(){
 						if(data.length!=""){
                         $('.ml2').html(data);
 						$('.data').html(data);
+						$('.ter').html('');
 						}
 						if(datas.length!=""){
 						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
@@ -714,6 +714,19 @@ $('#news_data').click(function(){
 			}
 
 			list();
+			
+		function session_add(){
+		      var action="adds";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#resultats').html(data);
+					}
+				});
+			}
+           session_add();
 			
 			
   // Wrap every letter in a span
