@@ -648,6 +648,10 @@ echo $_SESSION['token'];?>">
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
 	 
 	 });
 	 

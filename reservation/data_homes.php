@@ -697,7 +697,10 @@ $('#news_data').click(function(){
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
-	 
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
 	 });
 	 
 	 $('.bu').click(function(){

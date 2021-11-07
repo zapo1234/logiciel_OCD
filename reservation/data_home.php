@@ -501,6 +501,7 @@ for($i=0; $i<$count; $i++){
    <button type="button" class="buttons">Rechercher
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
+ <input type="hidden" name="data_days" id="data_days" value="<?php echo date('y-m-d');?>">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
@@ -678,6 +679,10 @@ $('#news_data').click(function(){
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
 	 
 	 });
 	 
