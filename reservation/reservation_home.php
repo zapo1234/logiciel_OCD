@@ -154,6 +154,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .ter{padding-left:2%;} #panier_mobile{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
+.carous{margin-top:170px;width:400px;margin-left:-12%;}
 }
 
 
@@ -174,13 +175,16 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{position:absolute;display:none;left:62%;height:1200px;}
 #block{margin-left:-12%;width:60%;height:400px;}
 .ter{padding-left:2%;} 
 .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
 .calenda{margin-left:5%;} .dt{font-size:13px;}
 .data,.img,.calenda{float:left;} .calenda{margin-left:45%;}
-.hote{display:none;}.numero,.email{display:none;} .img{margin-left:20%;}
+#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:50%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
+.hote{display:none;}.button{display:none;} .numero{display:none;}
+.email{display:none;} .calenda{margin-left:65%;}
+.carous{margin-top:150px;width:550px;margin-left:-12%;}
 }
 
 
@@ -224,8 +228,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		
         <!-- End of Sidebar -->
         
-         <div id="collapse" class="collapse show" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
+         <div id="collapse" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bn">
                       
                   <div class="container">

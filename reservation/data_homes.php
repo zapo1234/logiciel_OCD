@@ -206,6 +206,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .img{margin-left:10%;} #panier_mobile{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-10%;} .bc{width:330px;}
+.carous{margin-top:150px;width:550px;margin-left:-12%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -225,7 +226,12 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{position:absolute;display:none;left:62%;height:1200px;}
+#collapse{display:none;background:white;width:400px;height:800px;position:absolute;top:60px;left:50%;border-shadow:3px 3px 3px black;}
+.img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
+.hote{display:none;}.button{display:none;} .numero{display:none;}
+.email{display:none;} 
+.img{display:block;} .calenda{display:block;margin-left:65%;} .data,.img,.calenda{float:left;} 
 }
 
 
@@ -246,6 +252,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
+.hote{margin-left:20%;}
 }
 
 
@@ -270,8 +277,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         </div>
 		
         <!-- End of Sidebar -->
-        <div id="collapse" class="collapse show" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
+        <div id="collapse" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bn">
                       
                   <div class="container">
@@ -553,6 +559,7 @@ echo $_SESSION['token'];?>">
 	
     $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
+		$('#collapse').css('display','none');
 	 });
 	 
 	$('#sms').click(function(){
@@ -576,8 +583,11 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','block');
    $('#examp').css('display','block');	
 	 $('.x').css('display','block');
-	 
- });
+  });
+ 
+ $('.img').click(function(){
+	$('#collapse').slideToggle();
+  });
  
  $('.der').click(function(){
  $('.carous').css('display','block');
