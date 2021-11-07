@@ -608,7 +608,7 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','none');
    $('#examp').css('display','none');
    $('.carous').css('display','none');  
-   
+   $('.user_home').css('display','none');
  });
  
 $('#news_data').click(function(){
