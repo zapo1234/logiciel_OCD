@@ -760,7 +760,7 @@ $('#news_data').click(function(){
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#resultats').html(data);
+						$('#resultat').html(data);
 						var nbjour =$('#nbjour').val();
 	                      if(nbjour==""){
 		                   nbjour=1;

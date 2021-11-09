@@ -755,7 +755,7 @@ $('#news_data').click(function(){
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#resultats').html(data);
+						$('#resultat').html(data);
 					}
 				});
 			}

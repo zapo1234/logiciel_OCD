@@ -618,7 +618,7 @@ echo $_SESSION['token'];?>">
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#resultats').html(data);
+						$('#resultat').html(data);
 					}
 				});
 			}
