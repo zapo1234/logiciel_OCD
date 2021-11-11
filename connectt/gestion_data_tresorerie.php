@@ -175,14 +175,14 @@ height:2800px;overflow-y:scroll}h2{margin-top:20px;border-top:1px solid #eee;col
 #indicateur{display:none;} .der{padding-left:3%;color:black;font-size:16px;}
 .btn{display:block;} #searchDropdown{display:none;}
 .excel{margin-left:120%;}
-.s{display:block;} #accordionSidebar{width:120px;margin-top:-150px;}
+.s{display:block;}
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -214,10 +214,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1500px) {
+@media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -401,7 +401,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <script src="js/tresorerie.js"></script>
   <script type="text/javascript">
   $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
 	 
 	 $('.buts').click(function(){
