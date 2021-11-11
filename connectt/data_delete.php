@@ -52,9 +52,9 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
 		  
 		  
           // on redirige vers la page
-             echo'<div class="enr"> le local <span class="x"></span> à été bien suprimé</div>';
+             echo'<div class="enre"> le local <span class="x"></span> à été bien suprimé</div>';
   
-            echo'<meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/inventaire_gestion_home.php"/>';
+            echo'<meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/inventaire_gestion_home.php"/>';
 		 }
   
        if($_POST['action']== "delete_img"){
