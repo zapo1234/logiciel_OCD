@@ -142,7 +142,7 @@ margin-left:-10px;}
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:80%;height:650px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:80%;height:800px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
@@ -177,13 +177,13 @@ border-radius:25px;}
 
 .bg{border:1px solid #eee;margin-left:-70%;background:white;width:300px;height:300px;padding:4%;margin-top:0px;}
     .bs{margin-left:-70%;width:300px;height:300px;border:1px solid #eee;background:white;} #result{height:450px;} .sends{margin-top:-130px;}
- .s{display:block;}
+ .s{display:block;} #accordionSidebar{width:100px;margin-top:-100px;}
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:900px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:900px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -204,10 +204,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
   .sends{margin-left:5%;margin-top:-90px;} 
 }
 
-@media (min-width: 1024px) and (max-width: 1500px) {
+@media (min-width: 1024px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:95%;margin:0;padding:0;height:800px;}
+#accordionSidebar{display:none;} .center{width:95%;margin:0;padding:0;height:800px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -289,7 +289,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Echanges
+                               Echanges  <button type="button" class="btn btn-primary" id="but">
+                              +</button>
                             </div>
                         </div>
                     </form>
@@ -305,10 +306,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <!-- 404 Error Text -->
                     <div class="center">
                     
-					<div id="result">
-					<div id="resu"></div>
-					</div><!--retour ajax-->
-					
+					<div id="result"></div>
 					
 					<div class="message">
 					<span id="message_datas"></span><!--reponse--><br/>
@@ -389,7 +387,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     
 	 
 	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
 	
 	$('#news_data').click(function(){
@@ -455,15 +453,15 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					data:{action:action},
 					success: function(data) {
 						$('#result').html(data);
-					},
-					
+					}
 				});
 			}
-        load();
-   
 
+			load();
+	 
 	$('.sends').click(function(){
-	var action="send";
+	 
+	 var action="send";
     // on récupére la variable
     var message = $('#message').val();
 
@@ -477,51 +475,44 @@ height:2800px;overflow-y:scroll;z-index:5;}
    }
    
    else{
-	 $.ajax({
+	   
+	  $.ajax({
 	type:'POST', // on envoi les donnes
 	url:'messanger_datas.php',// on traite par la fichier
 	data:{action:action,message:message},
 	success:function(data) { // on traite le fichier recherche apres le retour
-      $('#resu').html(data);
-	  $('#message').val('');
-	  loads();
+      $('#result').html(data);
 	  load();
+	  loads();
+	  $('#message').val('');
 	 }
-	 });
-    
-	}
-   });
-   
-    setInterval(function () {
-    $.ajax({
-        type: "post",
-        url: "autosave.php",
-        data: $('#ajaxForm').serialize(),
-        success: function(data) {
-            console.log('success!');
-        }
     });
-   }, 3000);
+	  
+   }
+		
+  });
   
-  $(document).on('click','#im',function(){
+  $('#im').click(function(){
  $('#data').css('display','block');
  });
  
  $(document).on('click','.sup_send',function(){
 	 var id =$(this).data('id2');
 	 var action="sup";
-	   $.ajax({
+	 
+	 $.ajax({
             type: 'POST',
             url:'messanger_datas.php',
             data:{action:action,id:id},
             async:true,
             success: function(data){
             $('#result').html(data);
-			loads();
 			load();
+			loads();
 			}
           });
-	   });
+	 
+ });
   
   //Fonction valide formulaire appui entrée
       $(document).keypress(function(e){
@@ -541,8 +532,21 @@ height:2800px;overflow-y:scroll;z-index:5;}
    } 
    
     else{
-          $('.sends').click();
-		}
+          
+          $.ajax({
+            type: 'POST',
+            url:'messanger_datas.php',
+            data:"action=envoi&message="+message+'&action='+action,
+            async:true,
+            success: function(data){
+            $('#result').html(data);
+			load();
+			loads();
+			$('#message').val('');
+         
+            }
+          });
+         }
 		}
 		});
       function envoi() {
@@ -661,9 +665,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	         panier();
 		    }
           });
-	 setInterval(function(){
-	 load();
-	 },2000);
+	 
     });		 
 
     });	
