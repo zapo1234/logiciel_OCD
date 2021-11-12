@@ -27,7 +27,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    
    // variable
    $button ='<button class="bu">Confirmer votre réservation</button>';
-   
+   $button1 ='<button class="retour"><a href="reservation_start.php?user_home='.$donnees['id_visitor'].'">Retour</a></button>';
     // recupere les données des chambre 
     $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
     $ret->execute(array(':id_home'=>$id_home,
@@ -123,8 +123,11 @@ table{background:white;} th,td{color:black;font-weight:200}
 h3{margin-left:25%;} .recap{text-align:center;margin-left:2%;}
 .rows{background:white;width:100%;height:650px;}
 .der{float:left;margin-left:2%;margin-top:2%;} #days,#das{width:180px;}
-.bu{margin-top:200px;margin-left:30%;width:200px;border-radius:20px;border-radius:20px;
+.bu{margin-top:130px;margin-left:26%;width:200px;border-radius:20px;border-radius:20px;
+background:#0769BA;border:2px solid #0769BA;color:white;font-weight:bold;}
+.retour{color:white;margin-top:20px;margin-left:26%;width:200px;border-radius:20px;border-radius:20px;padding:3%;
 background:green;border:2px solid green;color:white;font-weight:bold;}
+.retour a{color:white;}
 label{width:200px;}#nbjour{width:150px;}
 #error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
@@ -182,6 +185,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
+.carous{margin-top:170px;width:300px;margin-left:-12%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -201,7 +205,16 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{position:absolute;display:none;left:62%;height:1200px;}
+#collapse{displayposition:absolute;display:none;left:62%;height:1200px;}
+.img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
+.img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
+#collapse{background:white;width:250px;height:800px;position:absolute;top:60px;left:65%;border-shadow:3px 3px 3px black;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
+.hote{display:none;}.button{display:none;} .numero{display:none;}
+.email{display:none;} .calenda{margin-left:75%;}
+.carous{margin-top:150px;width:550px;margin-left:-12%;}
+#examp{background:white;width:70%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;border:3px solid white;}
+.data{display;block;}
 }
 
 
@@ -222,6 +235,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
+.hote{margin-left:14%;} 
+.user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
+.bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
 }
 
 
@@ -246,8 +262,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
         </div>
 		
         <!-- End of Sidebar -->
-        <div id="collapse" class="collapse show" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
+        <div id="collapse" class="collapse show" aria-labelledby="headingPages"  data-parent="#accordionSidebar">
                     <div class="bn">
                       
                   <div class="container">
@@ -284,9 +299,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 		
         <div><?php echo$button;?></div>              
-                    
+        <div><?php echo$button1;?></div>             
                 </div>
-
+               
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -303,7 +318,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                      <!-- Topbar Search -->
                                <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -493,13 +508,16 @@ for($i=0; $i<$count; $i++){
    <button type="button" class="buttons">Rechercher
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
  <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
+ <input type="hidden" name="data_days" id="data_days" value="<?php echo date('y-m-d');?>">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
 
  </form>
  </div>
-
+</div>
+</div>
+</div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -528,11 +546,10 @@ echo $_SESSION['token'];?>">
      
 	 $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
+		$('#collapse').css('display','none');
 	 });
 	 
-	 
-	 
-	$('#sms').click(function(){
+	 $('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
 
@@ -579,7 +596,7 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','none');
    $('#examp').css('display','none');
    $('.carous').css('display','none');  
-   
+   $('.user_home').css('display','none');
  });
  
 $('#news_data').click(function(){
@@ -669,6 +686,10 @@ $('#news_data').click(function(){
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
 	 
 	 });
 	 
@@ -738,7 +759,7 @@ $('#news_data').click(function(){
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#resultats').html(data);
+						$('#resultat').html(data);
 					}
 				});
 			}
