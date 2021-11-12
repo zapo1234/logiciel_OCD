@@ -116,17 +116,11 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 		    echo'</div>';
 	  }
 	if($_POST['action']=="add"){
-		 if(!empty($_POST['prix_nuite'])){
-		$pay = $_POST['prix_nuite'];	
-      }
-	 else{
-		 $pay = $_POST['paynuite'];
+		 if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
+	   $pay=$_POST['paynuite'];
 	 }
-	 if(!empty($_POST['prix_pass'])){
-		 $pay = $_POST['prix_pass'];		
-	 }
-	 else{
-		 $pay= $_POST['paypass'];
+	 if($_POST['to']=="horaire"){
+		 $pay = $_POST['paypass'];
 	 }
 	 // créer un tableau de session 
 	if(isset($_SESSION['add_home'])){
@@ -284,19 +278,14 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 			  $local ="local";
 			  echo'<div><div class="titres">a ajouté '.$count.' '.$local.'</div></div>';
 			}
-			
 			if($count >1){
 				$local ="locaux";
 				echo'<div><div class="titres">a ajoutés '.$count.' '.$local.'</div></div>';
-			
 			}
-			
 			if($count ==0){
-				
 				echo'<div><div class="titres">
 				</div></div>';
-				
-				$total =0;
+			   $total =0;
 			}
 			
 			$tab = [];
@@ -319,31 +308,19 @@ if(isset($_GET['id_fact']) AND isset($_GET['code_data'])){
 				
 			$adjout ='<div class="dd">Acompte(+):<br/><input type="number" id="account" name="account"><span class="account"></span></div>
 			<div class="dd">Reste à payér:<br/><input type="number" id="rpay" name="rpay"></div>';
-			
 			}
 			
-			
 			if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
-				
 				if(!empty($_POST['prix_nuite'])){
-		
-             $pays = $values['prix_nuite'];	
-        		
-	          }
-	 
+		      $pays = $values['prix_nuite'];	
+        	}
 	        else{
-		 
-		     $pays = $values['paynuite'];
+		   $pays = $values['paynuite'];
 	          }
-	 
 	        }
-				
-		
 			if($_POST['to']=="horaire"){
-				
-				if(!empty($_POST['prix_pass'])){
-		
-             $pays = $values['prix_pass'];		
+			if(!empty($_POST['prix_pass'])){
+		    $pays = $values['prix_pass'];		
 	       }
 	 
 	       else{

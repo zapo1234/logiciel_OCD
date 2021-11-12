@@ -16,11 +16,8 @@ $page=1;
 }
 
 $smart_from =($page -1)*$record_peage;
-	
-
-   if($_POST['action']=="fetch") {
-	
-    // recuperer la permission pour afficher le checkout
+	if($_POST['action']=="fetch") {
+	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
@@ -63,7 +60,7 @@ $smart_from =($page -1)*$record_peage;
 	</form></div>';
 	// entete du tableau
 	 echo'<form method="post" id="formc" action="">
-	 '.$puts.'<table id="tb">
+	 '.$puts.'<table id="tb" class="table">
      <thead>
      <tr class="tf">
 	 <th></th>
@@ -143,7 +140,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
-	 $name ="Réservation";
+	 $name ="Réservation en cours";
 	 $encaiss="";
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';

@@ -12,45 +12,36 @@ include('inc_session.php');
 	$datac2 =[];
 	$datac3 =[];
   foreach($datas as $donnes){
-
-  // recupére les montant et les mettre dans un tableau
+// recupére les montant et les mettre dans un tableau
 	$data1 =$donnes['entree'].',';
 	$data2= $donnes['sorties'].',';
 	$data3 =$donnes['reservation'].',';
 	$data4 =$donnes['reste'].',';
-	
 	// on créer un tableaux pour mettre les valeurs
 	$datas1 = explode(',',$data1);
 	$datas2 = explode(',',$data2);
 	$datas3 = explode(',',$data3);
 	$datas4 = explode(',',$data4);
-	
 	foreach($datas1 as $values) {
 	$datac[] =$values;
 	}
-	
 	foreach($datas2 as $values1) {
 	$datac1[] =$values1;
 	}
-	
 	foreach($datas3 as $values2) {
 	$datac2[] =$values2;
 	}
-	
 	foreach($datas4 as $values3) {
 	$datac3[] =$values3;
 	}
-	
-  }
+	}
   // calcule des pourcentage entre entrées et sorties chiffre
 	$number1 =array_sum($datac);
 	$number2 =array_sum($datac1);
 	$number3 =array_sum($datac2);
 	$number4 = array_sum($datac3);
     $num_data = $number1+$number3+$number4;
-	
 	if($num_data==0){
-		
 	$ac =0;
 	$b=0;
 	$d=0;
@@ -63,20 +54,15 @@ include('inc_session.php');
 	
 	if($number1!=0 OR $number4!=0 OR $number2!=0 OR $number3!=0){
 	$data_number =$number1+$number2;
-	
 	$data_numbers =$num_data +$number2;
-	
 	// prévision net 
 	$ac = $number1*100/$data_number;
 	$b = $number2*100/$data_number;
-	
 	// prévision sous réservation
 	$cb = $num_data*100/$data_numbers;
 	$d = $number2*100/$data_numbers;
-	
 	$ac =substr($ac,0,4);
 	$cb =substr($cb,0,4);
-	
 	// prévison net
 	if($ac > 80) {
 		$indicateur='<div class="progress">
@@ -88,7 +74,6 @@ include('inc_session.php');
   </div><br>';
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en forte croissance';
 	}
-	
 	elseif(50< $ac  AND $ac <80){
 	$indicateur='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -99,7 +84,6 @@ include('inc_session.php');
 </div><br>';
 	$name= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"></i> Activité en  croissance';
 	}
-	
 	elseif(30<$ac  AND $ac < 50) {
 	$indicateur='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -110,7 +94,6 @@ include('inc_session.php');
 </div><br>';
 	  $name= 'trésorerie moyenne';
 	}
-	
 	elseif(10 < $ac AND $ac <30){
 	$indicateur='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -119,11 +102,8 @@ include('inc_session.php');
   $indicateurs='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
   </div><br>';
-  
-	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
-		
+  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 	}
-	
 	else{
 	$indicateur='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:5%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -133,12 +113,8 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
  </div><br>';
 	  $name= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
-		
 	}
-	
-	
 	// prevision sous réserve de réservation
-	
 	if($cb > 80) {
 		$indicateuc='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -179,11 +155,8 @@ include('inc_session.php');
   $indicateurc='<div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
-  
-	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
-		
+  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,trésorerie faible';
 	}
-	
 	else{
 	$indicateuc='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 7%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -193,22 +166,17 @@ include('inc_session.php');
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 </div><br>';
 	  $names= '<i class="fas fa-exclamation-triangle" style="font-size:15px;color:#BD0423;"></i>  Attention ,Activité fortement déficitaire';
-		
 	}
 }
-
 else{
 $names="";
 $name="";
 }
  $req->closeCursor();
- 
  // recupérer les donnees sur la facture
- 
-  $rev=$bds->prepare('SELECT type FROM facture WHERE email_ocd= :email_ocd');
+ $rev=$bds->prepare('SELECT type FROM facture WHERE email_ocd= :email_ocd');
   $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
   $datos=$rev->fetchAll();
-  
   $tab=[];
   $tabs=[];
   $array=[];
@@ -237,56 +205,39 @@ $name="";
 		 $array[]=$valu;
 	  }
 	}
-
-  }
-  
+   }
   $a =count($array);
   if($a==1){
 	 $reserve ='1 local';
   }
   elseif($a==0 OR empty($array)){
-	  
 	$reserve ='pas de clients'; 
   }
-  
   else{
-	  
-	 $reserve=' '.$a.' clients'; 
+	$reserve=' '.$a.' clients'; 
   }
-  
   // le nombre d'elements dans le tab
   $b=count($tab);
-  
-  if($b==0 OR empty($b)){
+   if($b==0 OR empty($b)){
 	$clients ='Zéro client facturé';
   }
-  
   elseif($b==1){
 	 $clients ='un client facturé'; 
   }
-  
   else{
-	  
-	 $clients = ' '.$b.' clients facturés'; 
+	  $clients = ' '.$b.' clients facturés'; 
   }
-  
   // le nombre d'elements dans le tabs
   $c=count($tabs);
-  
   if($c==0){
 	$cl='aucune facture annulée';
   }
-  
-  elseif($b==1){
+  elseif($c==1){
 	 $cl='une facture annulée'; 
   }
-  
-  else{
-	  
+   else{
 	 $cl = ' '.$c.' factures annulées'; 
   } 
-
-
  // recupére les depense du crédit fournisseur dans ta table depense
  $rev=$bds->prepare('SELECT montant,status FROM depense WHERE email_ocd= :email_ocd');
  $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
@@ -308,7 +259,7 @@ $name="";
 // la somme des valeur du tableau pour les crédit fournisseur
  $sum = array_sum($data);   
 	 
- 
+ include('statistique_occupation.php');
 
 ?>
 
@@ -410,8 +361,8 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .pass{color:#650699;font-weight:bold;}
 .annule{color:#C81C31;font-weight:bold}
 .live-infos{
-  width: 250px;
-  height: 200px;
+  width: 245px;
+  height:250px;
   overflow: hidden;
   position: relative;
   background-color:white;
@@ -492,10 +443,18 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .sups{cursor:pointer;}
+.a,.c,.b,.d{color:black;font-size:15px;margin-top:4px;} .t{color:white;background:green;border:3px solid green;border-radius:50%;width:32px;height:32px;font-weight:bold;}
+.t3{width:32px;height:32px;background-color:#F83127;border-radius:50%;border:3px solid #F83127;color:white;font-weight:bold;}
+.t1{width:32px;height:32px;background-color:#C10D23;border-radius:50%;border:3px solid #C10D23;color:white;font-weight:bold;}
+    .t2{width: 32px;height: 32px;background-color: #7BCCF8;border-radius:50%;
+    border: 3px solid #7BCCF8;
+    color: white;
+    font-weight: bold;
+	}
 /*------------------------------------------------------------------
 [ Responsive ]*/
-@media (max-width: 575.98px) { 
-.s{display:block;}
+@media (max-width: 750.98px) { 
+.s{display:block;margin-top:-15px;margin-left:3%}
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
@@ -507,16 +466,16 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
+#accordionSidebar{width:120px;margin-top:-150px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} 
 }
 
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 1024px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -530,14 +489,15 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{position:absolute;display:none;left:62%;height:1200px;}
+#collapse{position:absolute;display:none;left:70%;height:1200px;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1500px) {
 #panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;margin-top:-150px;} 
+.center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -550,7 +510,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
-#collapse{position:absolute;display:none;left:70%;height:1200px;}
+
 }
 
 
@@ -567,7 +527,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bn">
-                    <h1>Les enregistrements récents</h1>
+                    <h1>Caisse Journalières</h1>
                       
                   <div class="container">
  
@@ -747,8 +707,12 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					
 					     <div class="cont2">
 						 <div class="titre"><i class="fas fa-sync"></i>
-						 Locaux indisponible
+						 Statistiques locaux
 						 </div>
+						 <div class="a">'.$vh.'</div>
+						 <div class="b">'.$vb.'</div>
+						 <div class="c">'.$vc.'</div>
+						 <div class="d">'.$vd.'</div>
 					     </div>
 						 
 						 </div>
@@ -851,7 +815,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
    $(document).ready(function(){
      
 	 $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+		$('#accordionSidebar').slideToggle();
 	 });
 	 
 	$('#sms').click(function(){

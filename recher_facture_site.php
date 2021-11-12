@@ -82,15 +82,11 @@ $smart_from =($page -1)*$record_peage;
 	$nombre =substr($nombre,2);
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss"){
-		
 		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].','.$donnees['code'].',">';
-		
-	
-	}
+		}
 	else{
 		$put="";
 	}
-	
 	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
@@ -100,25 +96,18 @@ $smart_from =($page -1)*$record_peage;
  if($donns['code']==0){
 		  $session=0;
 		}
-		
 		else{
 		$session=$donns['code'];
 		}
-		
 		if($donns['permission']=="user:boss"){
-			
 			$calls='<span class="boss">'.$donnees['calls'].'</span>';
 		}
-		
 		if($donns['permission']=="user:gestionnaire"){
 			$calls='<span class="gestionnaire">'.$donnees['calls'].'</span>';
 		}
-		
 		if($donns['permission']=="user:employes"){
-			$calls='<span class="employes">'.$donnees['calls'].'</span>';
+		$calls='<span class="employes">'.$donnees['calls'].'</span>';
 		}
-	
-	
 	if($donnees['type']==1){
 	$name =" Séjour facturé";
 	$jour = $donnees['nombre'].'jours';
@@ -134,7 +123,6 @@ $smart_from =($page -1)*$record_peage;
 	$modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	$annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
-	
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
 	 $name ="Réservation";
@@ -142,26 +130,21 @@ $smart_from =($page -1)*$record_peage;
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
-	
 	else{
-		
 		$name=" séjour Annulé";
 		$jour ="";
 		$encaiss="";
 		$modif="";
 		$annul="";
 	}
-	
 	if($donnees['montant_repas']!=0){
 	$repas ="+repas dejeuner";
 	$monts = $donnees['montant_repas'];
 	}
-	
 	else{
 		$repas ="";
 		$monts="";
 	}
-	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];

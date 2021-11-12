@@ -42,20 +42,18 @@ if(!isset($id) AND empty($id)){
 	$id =$_POST['id'];
 	$date=date('Y-m-d');
    $dates =explode('-',$date);
-   
     $j = $dates[2];
 	$mm = $dates[1];
 	$an = $dates[0];
-	
 	$dats = $j.'-'.$mm.'-'.$an;
     $dat=date('H:i');
 	echo'<div id="pak"></div>
-             <div class="enre"><div></i>Afficher les disponibilités des locaux<br/> 
+             <div class="enre"><div>Afficher les disponibilités des locaux<br/> 
 		     <div class="spinner-border text-primary" role="status">
              <span class="sr-only">Loading...</span>
              </div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_etat_home.php?data='.$dats.'&home_heure='.$dat.'&data_id='.$id.'"/>';
+             <meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/gestion_etat_home.php?data='.$dats.'&home_heure='.$dat.'&data_id='.$id.'"/>';
 	 }
 
 

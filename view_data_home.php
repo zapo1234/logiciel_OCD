@@ -155,14 +155,14 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .form-select{display:none;} .es{display:none;}
 #der11,#der12,#der13,#der14{width:95%;margin-left:2%;}
-#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;}
+#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;} 
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -176,14 +176,16 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}
-#searchDropdown{display:none;} 
+#searchDropdown{display:none;} .der3{display:none;}
+.der2,.der5{width:210px;}
+
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -197,6 +199,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
+.der3{display:none;}
+.der2,.der5{width:270px;}
 }
 
 </style>
@@ -439,7 +443,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    $(document).ready(function(){
 
    $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+		$('#accordionSidebar').slideToggle();
 	 });
 
    $('#but').click(function(){

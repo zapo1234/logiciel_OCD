@@ -1,3 +1,6 @@
+<?php
+include('connecte_db.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,16 +95,23 @@
          }
          #second{display:none;}
 		 label {text-transform:uppercase;}
-		 #sub{height:50px;background:#057ABD;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} .text{size:11px;text-align:center;}
+		 #sub{height:50px;background:#057ABD;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;margin-bottom:20px;margin-top:20px;} .text{size:11px;text-align:center;}
+			 .myform{height:420px;} 
+			 .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
 			 #as,#ass{position:absolute;color:red;top:300px;z-index:3;left:25%;width:300px;}
 			.contact{color:#CE6C0A;font-weight:bold;}
+			.dnn{position:absolute;top:250px;left:30%;color:red;font-size:14px;}
 			 
 	   @media (max-width: 575.98px) { 
-	   #sub{height:50px;background:#0769BA;width:300px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} 
+	   #sub{height:50px;background:#0769BA;width:250px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;margin-top:10px;}
+        .myform{height:420px;} .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
 	   }
 	   
 	   @media (min-width: 768px) and (max-width: 991px) {
-		 .myform{width:400px;margin-left:-15%;}  
+		 .myform{width:400px;margin-left:-15%;} 
+        .myform{height:420px;} 
+			 .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
+			 
 	   }
 	   
 	   @media (min-width: 992px) and (max-width: 1200px) {
@@ -121,23 +131,43 @@
 							<div><img src="image/logo.jpg" width="180px" height="100px"></div>
 						 </div>
 					</div>
-                   <form action="" id="form1" method="post" id="user_admin" >
-                        <div>Récupérez vous accès</div>   
+                   <form action="reset_password_ocd.php" id="form1" method="post" id="" >
+                        <div class="h">Récupérez vos accès</div>   
 						   <div class="form-group">
                               <label for="exampleInputEmail1">Entrez votre EMAIL</label>
                               <input type="email" name="email_ocd"  class="form-control" id="email_ocd" aria-describedby="emailHelp" placeholder="e-mail">
                            </div>
                            
 						   <div class="col-md-12 text-center ">
-                              <button class="login100-form-btn" id="sub" onKeyPress="if(event.keyCode == 13)envoi()">
+                              <button type="submit" class="login100-form-btn" id="sub">
 							Envoyer
 						</button>
+						</form>
                            </div>
+						   <?php
+						   // traiter le formulaire de verification au mail
+						   $req=$bdd->prepare('SELECT email_ocd,email_user,token_pass FROM inscription_client WHERE email_user= :email_user');
+                          $req->execute(array(':email_user'=>$_POST['email_ocd']));
+                           $donnees=$req->fetch();
+						   if(!empty($_POST['email_ocd'])){
+							   if($donnees['email_user']!=$_POST['email_ocd']){
+								  echo'<div class="dnn">l\'utilisateur n\'existe pas</div>'; 
+							   }
+							   else{
+								  // envoi du mail phpmailler
+								  include('inc_send_email.php');
+							   }
+							}
+						   else{
+							  echo'<div class="dnn">Entrez votre e-mail</div>';  
+						   }
+						   
+						   ?>
                             <div class="form-group">
                               <p class="text">Optimisation de comptabilité à distance,<br/> Tous droits  réservés  2021-2022</p>
                            </div>
 						   
-                        </form>
+                        
                  
 				</div>
 			</div>

@@ -34,9 +34,9 @@ if(!isset($_GET['data_date'])){
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-	.s{display:none;}
+	.s{display:none;} .btn{display:none;}
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{display:none;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
@@ -83,7 +83,7 @@ if(!isset($_GET['data_date'])){
 
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tb{margin-top:10px;color:black;font-size:16px;}
+#tb{margin-top:10px;color:black;font-size:16px;width:125%;}
 
 
 #tbs td, #tbs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
@@ -94,7 +94,7 @@ if(!isset($_GET['data_date'])){
 
 #tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tbs{margin-top:10px;}
+#tbs{margin-top:10px;width:125%;}
 
 
 
@@ -221,8 +221,9 @@ width:40%;height:750px;overflow-y:scroll;}
  h4{position:fixed;top:300px;left:37%;font-size:32px;color:#06308E;}
 
 @media (max-width: 575.98px) { 
-#panier{display:none;}
+#panier{display:none;} .s{display:block;}
 .envoyer{margin-left:-5%;}
+#accordionSidebar{display:none;margin-top:-150px;} 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -247,7 +248,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -268,7 +269,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -283,6 +284,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;}
 .delete{position:absolute;top:95px;left:60%;color:white;background:#F83127;border:2px solid #F83127} h4{position:fixed;top:300px;left:25%;font-size:28px;color:#06308E;}
+.btn{display:block;}
 }
 
 /*------------------------------------------------------------------
@@ -369,7 +371,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -516,7 +518,12 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
   <script src="js/facture.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    function lists(page) {
+   
+   $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+   
+   function lists(page) {
 		$.ajax({
 		url: "recher_facture_data.php?data_date=<?php echo$_GET['data_date'];?>",
 		method: "POST",

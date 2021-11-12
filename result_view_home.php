@@ -28,16 +28,12 @@ include('inc_session.php');
 					 echo'<h4>Bloquer toutes actions sur ce local</h4>
 					 <div><button class="acces" data-id1="'.$_GET['home'].'">Bloquer l\'accès</button></div>';
 					}
-					
 					else{
 						echo'<h4>Activez l\'accès du local</h4>
 					  <div><button class="access" data-id2="'.$_GET['home'].'">Activer l\'accès</button></div>';
 					}
 					echo'</div>'; 
-
 		}
- 
- 
  // modifie le type de la chambre dans la base de données table chambre
  if($_POST['action']=="acess"){
 	 $id = $_POST['id'];
@@ -51,9 +47,7 @@ include('inc_session.php');
 							));
 	    }
 		
-		
-  if($_POST['action']=="access"){
-	  
+   if($_POST['action']=="access"){
 	 $id = $_POST['id'];
 	 $num =1;
 	 // on modifie les données de la base de données guide
@@ -63,10 +57,7 @@ include('inc_session.php');
                             ':email_ocd'=>$_SESSION['email_ocd']
 							
 							)); 
-	  
-	  
-  }
-  
+	  }
   
   if($_POST['action']=="parameter") {
 	  
@@ -88,19 +79,17 @@ include('inc_session.php');
    }
    
    // on recupére les données de la table 
-   
-   $req=$bdd->prepare('SELECT DISTINCT email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,logo FROM inscription_client WHERE email_user= :email_user');
+   // on recupére les données de la table 
+   $req=$bdd->prepare('SELECT email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,logo FROM inscription_client WHERE email_user= :email_user');
    $req->execute(array(':email_user'=>$_SESSION['email_user']));
    $donnees=$req->fetch();
 	$req->closeCursor();
-	
-	$jour = array("Dim","Lun","Mar","Mercredi","Jeu","Vendr","Sam");
+   $jour = array("Dim","Lun","Mar","Mercredi","Jeu","Vendr","Sam");
    $mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
     $dateDuJour = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
     $date=$dateDuJour;
     $heure = date('H:i');
-   
-   // on recupére les variable transmise
+    // on recupére les variable transmise
    $denomination =$donnees['denomination'];
    $adresse =$donnees['adresse'];
    $numero_cci =$donnees['numero_cci'];
@@ -108,19 +97,14 @@ include('inc_session.php');
    $date = $dateDuJour;
    $heure =date('H:i');
    $email =$_POST['emails'];
-   // 
    $pass=$_POST['pass'];
     
 	   //hash sur le mot de pass
 	   $options = [
        'cost' => 12 // the default cost is 10
        ];
-
-    
-	$hash = password_hash($pass, PASSWORD_BCRYPT, $options);
-   
+    $hash = password_hash($pass, PASSWORD_BCRYPT, $options);
     $emails = $_SESSION['email_ocd'];
-   
    $name = trim(strip_tags($_POST['nom']));
    $prenom = trim(strip_tags($_POST['prenom']));
    $role =$_POST['role'];
@@ -129,56 +113,41 @@ include('inc_session.php');
    $user =$name.' '.$prenom;
    $etat ="";
    $active="off";
-   $code =$_POST['code'];
-   $society =$_POST['society'];
-   // token _password
-   $tokens = openssl_random_pseudo_bytes(16);
- //Convert the binary data into hexadecimal representation.
-    $token_pass = bin2hex($tokens);
+   $length =78;
+   $email_society=$donnees['email_society'];
+  $token_pass = bin2hex(random_bytes($length));
    
+   if(empty($_POST['code'])){
+	  $code=0; 
+   }
+   else{
+	  $code=$_POST['code']; 
+   }
+    $society =$_POST['society'];
+    $societ="";
    if($role==1){
 	 $status=1;
      $categories="dirigeant";
      $permission ="user:boss";	 
 	}
-   
-   elseif($role==3){
+    elseif($role==3){
 	 $status=3;
-     $categories="Gestionnaire";
+     $categories="gestionnaire";
      $permission ="user:gestionnaire";  
 	}
-   
    else{
 	 $status=4;
-     $categories="Receptionniste";
+     $categories="receptionniste";
      $permission ="user:employes";  
    }
    $stat="";
    
-   // initialisation d'un tableau
-   $tab =[];
-   foreach($reh as $datas){
-	 $dat = $datas['email_ocd'];
-	 $dat = explode(',',$dat);
-     foreach($dat as $values){
-     $tab[] = $values;
-    }		 
-	}
-	
-	$a=count($tab);
-	
-	if($donnees['email_user']!=$_POST['emails']) {
-	
-	if($a < 12){
-   
-   echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
-		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-
-   // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,date,heure,etat,status,active,logo,id_visitor,token_pass) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
+  if($donnees['email_user']!=$_POST['emails']) {
+	   $rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:email_society,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
+							':email_society'=>$email_society,
 		                    ':denomination'=>$denomination,
 							':adresse'=>$adresse,
 							':numero_cci'=>$numero_cci,
@@ -192,6 +161,7 @@ include('inc_session.php');
 						    ':numero_compte'=>$numero_compte,
 							':code'=>$code,
 							':society'=>$society,
+							':societys'=>$societ,
 					        ':date'=>$date,
 						    ':heure'=>$heure,
 						    ':etat'=>$etat,
@@ -199,15 +169,16 @@ include('inc_session.php');
 							':active'=>$active,
 						    ':logo'=>$log,
 							':id_visitor'=>$_SESSION['id_visitor'],
-							':token_pass'=>$tokens
+							':token_pass'=>$token_pass
 						  ));
+			echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
+		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
           }
-         }
      else{
 	  echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>Changer de mail !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-	}
    }
+  }
     // afficher les users comptes
   if($_POST['action']=="add_user"){
 	         echo'<table id="tab">
@@ -223,7 +194,6 @@ include('inc_session.php');
 					<th>Online(user)</th>
 					</tr>';
 					while($donnees=$reh->fetch()){
-					
 					if($donnees['active']=="off"){
 					$active='<button type="button" class="bl" data-id3="'.$donnees['id'].'" title="activer le user">bloqué</button>';
 					}
@@ -231,8 +201,7 @@ include('inc_session.php');
 						$active='<button type="button" class="acs" data-id4="'.$donnees['id'].'" title="désactiver le user">ouvert</button>';
 				   }
 				   if($donnees['etat']=="connecte"){
-					   
-					  $etat ='<i class="fas fa-circle" style="font-size:12px;color:#3DEA29"></i>  en ligne';
+					 $etat ='<i class="fas fa-circle" style="font-size:12px;color:#3DEA29"></i>  en ligne';
 				   }
 				   else{
 					   $etat ='<span class="dert">connecté depuis le'.$donnees['date'].', à '.$donnees['heure'].'</span>';
@@ -243,8 +212,7 @@ include('inc_session.php');
 				   else{
 					   $sup= '<a href="#" data-id2='.$donnees['id'].' class="delete" title="suprimer"><i class="fas fa-trash" style="font-size:15px;color:#DC440F"></i></a></td>';
 				   }
-				   
-					echo'<tr class="tab">
+				   echo'<tr class="tab">
 					<td><i class="far fa-user" style="font-size:15px;color:#4e73df"></i></td>
 					<td>'.$donnees['user'].' </td>
 					<td>'.$donnees['email_user'].' </td>
@@ -280,11 +248,8 @@ include('inc_session.php');
      $res->execute(array(':id'=>$id,':email_ocd'=>$_SESSION['email_ocd'])); 
       
    }
-   
    // modifier des users compte
-
   if($_POST['action']=="edit"){
-	
 	// supprimer 
    $id=$_POST['id'];
    $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,numero,status FROM inscription_client WHERE email_ocd= :email_ocd AND id= :id');
@@ -293,18 +258,14 @@ include('inc_session.php');
 					  ));
   $donnees = $req->fetch();
   $user = $donnees['user'];
-  
-					  
-         echo'<form method="post" id="form3" action="">
-                   		
-                    <h2>Modifier les données de ce utilisateur</h2>
+  echo'<form method="post" id="form3" action="">
+           <h2>Modifier les données de ce utilisateur</h2>
 					<div class="form-row">
                     <div class="col">
                        <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="'.$donnees['user'].'" required>
                       <br/><span class="noms"></span></div>
                     </div>
-				 
-				 <div class="form-row">
+				    <div class="form-row">
                     <div class="col">
                        <label>Numéro télephone</label><br/><input type="text" id="nums" name="nums" class="form-control" value="'.$donnees['numero'].'" placeholder="numero">
                       <br/><span class="nums"></span></div>
@@ -338,10 +299,8 @@ include('inc_session.php');
 				 </form>';
 		}
 	 
-	 
 	if($_POST['action']=="modipass") {
-	
-    // Actualiser des données les données dans la base de données inscription_client
+	// Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Mot de pass crée !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
@@ -351,27 +310,21 @@ include('inc_session.php');
 	  $options = [
       'cost' => 12 // the default cost is 10
      ];
-
-    $hash = password_hash($password, PASSWORD_BCRYPT, $options);
-	
-         $ret=$bdd->prepare('UPDATE inscription_client SET  password= :pass  WHERE  email_user= :email_user');
+   $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+	$ret=$bdd->prepare('UPDATE inscription_client SET  password= :pass  WHERE  email_user= :email_user');
         $ret->execute(array(':pass'=>$hash,
                             ':email_user'=>$_SESSION['email_user']
 					 ));	
-		
 		}
-
-if($_POST['action']=="editvalidate"){
+  if($_POST['action']=="editvalidate"){
 	  $ids = $_POST['ids'];
      	$password =$_POST['password'];  
 	  // hash sur le mot de pass
 	  $options = [
       'cost' => 12 // the default cost is 10
    ];
-
   $hash = password_hash($password, PASSWORD_DEFAULT, $options);
-	
-	 // recupére les variables
+   // recupére les variables
 	  $noms =$_POST['noms'];
 	  $nums =$_POST['nums'];
 	  $roles =$_POST['roles'];
@@ -393,19 +346,16 @@ if($_POST['action']=="editvalidate"){
      $categories="Gestionnaire";
      $permission ="user:gestionnaire";  
 	}
-   
    else{
 	 $status=4;
      $categories="Receptionniste";
      $permission ="user:employes";  
    }
-	  
 	  // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Vos données sont bien modifiées !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-	  
-	  $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
+	 $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
        $ret->execute(array(':email'=>$email,
 	                       ':us'=>$noms,
 						   ':num'=>$nums,
@@ -417,12 +367,9 @@ if($_POST['action']=="editvalidate"){
                            ':email_ocd'=>$_SESSION['email_ocd']
 					 ));	
 	  
- 
-    echo'<meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_parameter_datas.php"/>';
+ echo'<meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/gestion_parameter_datas.php"/>';
  }
-
-
-  if($_POST['action']=="bloquer"){
+ if($_POST['action']=="bloquer"){
 	 $active="off";
 	 $id=$_POST['id'];
     //modifier la permission	 
@@ -430,14 +377,10 @@ if($_POST['action']=="editvalidate"){
         $ret->execute(array(':act'=>$active,
 		                    ':ids'=>$id
 					 ));
-					 
-	// on modifie les données de la base de données guide
+	    // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez bloqué l\'accès !</div>';
-		  
-	  
-	 }
-  
-  if($_POST['action']=="acces"){
+	}
+   if($_POST['action']=="acces"){
 	 $active="on";
 	 $id=$_POST['id'];
     //modifier la permission	 
@@ -447,14 +390,10 @@ if($_POST['action']=="editvalidate"){
         $ret->execute(array(':act'=>$active,
 		                    ':ids'=>$id
 					 )); 
-					 
-	  // on modifie les données de la base de données guide
+	// on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>vous avez activé l\'accès du local !</div>';
-		     
 	}
-
-
- // activer l'active sur un local
+// activer l'active sur un local
  if($_POST['action']=="accs"){
 	
    $id =$_POST['id'];
@@ -468,22 +407,17 @@ if($_POST['action']=="editvalidate"){
      $datas_fren="";
 	 $dates="";
      $activ=5;
-     $code=$_SESSION['code'];	
-
-   echo$code;	 
+     $code=$_SESSION['code'];		 
 		
-	    $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
+	  $ret=$bds->prepare('UPDATE chambre SET  active= :act  WHERE id_chambre= :id AND email_ocd= :email_ocd');
         $ret->execute(array(':act'=>$active,
 		                    ':id'=>$id,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-					 
-		 
-	// inserer dans la table home_occupation
-			  
-					// on recupére les date dans la base de donnnées.
-	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code) 
-	   VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code)');
+		// inserer dans la table home_occupation
+		// on recupére les date dans la base de donnnées.
+	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
+	   VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $reys->execute(array(':id_local'=>$id,
 		                      ':email_ocds'=>$_SESSION['email_ocd'],
 		                      ':date'=>$horaires,
@@ -491,18 +425,16 @@ if($_POST['action']=="editvalidate"){
 							  ':dates'=>$dates,
 							  ':id_fact'=>$id_fact,
 							  ':type'=>$activ,
-							  ':code'=>$code
+							  ':code'=>$code,
+							  ':id_visitor'=>$_SESSION['id_visitor']
 	                        ));	
 
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> le local à été bloqué !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
-							
-	 }
-
+	}
 // actionner   les actions sur un local
  if($_POST['action']=="acss"){
-	
-   $id =$_POST['id'];
+  $id =$_POST['id'];
    $active ="on";
   $types =5;
 	// Actualiser des données les données dans la base de données inscription_client
@@ -524,10 +456,7 @@ if($_POST['action']=="editvalidate"){
 						));
 	
 	}
-
-
-   if($_POST['action']=="zoom"){
-	   
+	if($_POST['action']=="zoom"){
 	   $id=$_POST['id'];
 	   $home =$_GET['home'];
 	   // afficher l'image en cours
@@ -537,7 +466,6 @@ if($_POST['action']=="editvalidate"){
 					   ':ids'=>$home
 					  ));
 		$donnees=$req->fetch();
-		
 		echo'<img src="upload_image/'.$donnees['name_upload'].'" width="1000px" height="600px">';
 	   $req->closeCursor();
    }
