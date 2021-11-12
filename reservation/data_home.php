@@ -185,7 +185,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
-.carous{margin-top:170px;width:400px;margin-left:-12%;}
+.carous{margin-top:170px;width:300px;margin-left:-12%;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -208,11 +208,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
 #collapse{displayposition:absolute;display:none;left:62%;height:1200px;}
 .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
 .img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
-#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:50%;border-shadow:3px 3px 3px black;}
+#collapse{background:white;width:250px;height:800px;position:absolute;top:60px;left:65%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
 .hote{display:none;}.button{display:none;} .numero{display:none;}
-.email{display:none;} .calenda{margin-left:65%;}
+.email{display:none;} .calenda{margin-left:75%;}
 .carous{margin-top:150px;width:550px;margin-left:-12%;}
+#examp{background:white;width:70%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;border:3px solid white;}
+.data{display;block;}
 }
 
 

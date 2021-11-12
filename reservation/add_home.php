@@ -105,7 +105,7 @@ include('inc_session.php');
 	$item_array_id = array_column($_SESSION['add_homes'], 'id');	
 		if(!in_array($_POST['id_chambre'], $item_array_id))
 		{
-		  $count = count($_SESSION['add_home']);
+		  $count = count($_SESSION['add_homes']);
 		  $item_array = array(
          'id'          =>   $_POST['id_chambre'],
 		 'tr'           =>  $_POST['tr'],
@@ -166,6 +166,9 @@ include('inc_session.php');
 	            $pays = $values['prix_pass'];		
 	       }
 		   $tab[] = $values['montant'];
+		    if(empty($_POST['nbjour'])){
+			 $_POST['nbjour']==1;
+			}
 		    $total = $total +($pays*$_POST['nbjour']);
 			if($values['id']!=$_POST['id_chambre']) {
 			echo'<table class="dfc">
@@ -193,7 +196,73 @@ include('inc_session.php');
 			<td>Prix(HT):<span class="data_total">'.$totals.'</span>xof</td>
 			</tr>
 			</table>';
-		}	
+		}
+
+  if($_POST['action']=="adds"){
+if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
+   $item_array_id = array_column($_SESSION['add_homes'], 'id');	
+		  
+		  $total =0;
+	     	$count =count($_SESSION['add_homes']);
+			if($count ==1){
+			  $local ="local";
+			  $select ="selectionné";
+			  $phrase ="Facturation d'un";
+			}
+			
+			else{
+				$local ="locaux";
+				$select ="selectionnées";
+				$phrase ="Facturation de";
+			}
+			
+			echo'<div class="panier"><i class="fas fa-check-circle" style="color:green;font-size:13px;"></i>  '.$phrase.' '.$count.' '.$local.' en cours'.'</div>';
+			echo'<div id="panier_mobile">'.$count.'</div>';
+			
+			foreach($_SESSION['add_homes'] as $keys => $values){
+		    if($values['tr']=="séjour" OR $values['tr']=="réservation"){
+			if(!empty($values['prix_nuite'])){
+		      $pays = $values['prix_nuite'];	
+        	 }
+	         else{
+		      $pays = $values['paynuite'];
+	          }
+	         }
+			 if($values['tr']=="horaire"){
+			  if(!empty($values['prix_pass'])){
+		      $pays = $values['prix_pass'];		
+	       }
+	       else{
+		    $pays= $values['paypass'];
+	        }
+		    }
+			
+			$total = $total +$pays;
+			$totals = $total -($pays);
+			$totas = $pays;
+			echo'<table class="dfc">
+			<tr><td class="list"><span class="d">'.$values['chambre'].'</span>
+			</td></tr>
+			<tr><td><span class="dg">'.$pays.'</span>xof</td>
+			<td><input type="hidden" name="chambre[]" value="'.$values['chambre'].'"></td>
+			</tr>
+			<tr><td><span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span></td>
+			<td><input type="hidden" name="pay[]" value="'.$pays.'"></td>
+			<td><input type="hidden" name="id_chambre[]" value="'.$values['id'].'"></td>
+			</tr></table>';
+		     }
+			 
+			 echo'<table>
+			<tr>
+			<td>Prix(HT):<span class="data_total">'.$total.'</span>xof</td>
+			<td><input type="hidden" id="tota" value="'.$total.'"></td>
+			</tr>
+			</table>';
+	  }
+      else{
+        echo'<div class="panier">Aucun local selectionné</div>';
+	  }
+}		
  ?>
 
 

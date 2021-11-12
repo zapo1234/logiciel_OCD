@@ -155,6 +155,7 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
 .carous{margin-top:170px;width:400px;margin-left:-12%;}
+#block{width;350px;}
 }
 
 
@@ -462,7 +463,10 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     
+     $('.img').click(function(){
+	$('#collapse').slideToggle();
+  });
+	 
 	 $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
 	 });
@@ -511,7 +515,6 @@ echo $_SESSION['token'];?>">
  
  
  $('#pak').click(function(){
-	$('#pak').css('display','none');
    $('#examp').css('display','none');	
    
  });

@@ -179,6 +179,7 @@ label{width:200px;}#nbjour{width:150px;}
 
 #test{color:green}  .data{display:none;} .img{display:none;}
 .calenda{display:none;} #panier_mobile{display:none;}
+.imgs{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -206,7 +207,8 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 .img{margin-left:10%;} #panier_mobile{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-10%;} .bc{width:330px;}
-.carous{margin-top:150px;width:550px;margin-left:-12%;}
+.carous{margin-top:170px;width:300px;margin-left:-12%;}
+.imgs{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -226,12 +228,14 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{display:none;background:white;width:400px;height:800px;position:absolute;top:60px;left:50%;border-shadow:3px 3px 3px black;}
+#collapse{display:none;background:white;width:250px;height:800px;position:absolute;top:60px;left:65%;border-shadow:3px 3px 3px black;}
 .img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
 .hote{display:none;}.button{display:none;} .numero{display:none;}
 .email{display:none;} 
-.img{display:block;} .calenda{display:block;margin-left:65%;} .data,.img,.calenda{float:left;} 
+.img{display:block;} .calenda{display:block;margin-left:75%;} .data,.img,.calenda{float:left;} 
+#examp{background:white;width:70%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;border:3px solid white;}
+
 }
 
 
@@ -252,7 +256,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
-.hote{margin-left:20%;}
+.hote{margin-left:5%;text-transform:capitalize;font-size:18px;} .imgs{display:block;position:absolute;left:90%;top:20px;} .hotes{width:90%;}
 }
 
 
@@ -332,7 +336,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                      <!-- Topbar Search -->
                                <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -586,6 +590,10 @@ echo $_SESSION['token'];?>">
   });
  
  $('.img').click(function(){
+	$('#collapse').slideToggle();
+  });
+  
+  $('.imgs').click(function(){
 	$('#collapse').slideToggle();
   });
  
