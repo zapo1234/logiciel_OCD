@@ -207,6 +207,8 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
 .hote{margin-left:25%;}
+.user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
+.bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
 }
 
 
@@ -313,7 +315,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                    <!-- Topbar Search -->
                               <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button> <span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span><span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span></span>
+							   <span id="panier"></span><!--retour ajax nombre de reservation-->
                            </div>
                   
                  <?php include('inc_menu1.php');?>
@@ -628,7 +631,20 @@ echo $_SESSION['token'];?>">
 
 			session_add();
 	 
-	 
+	 // afficher le pannier
+           function panier() {
+				var action="count";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();	
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.

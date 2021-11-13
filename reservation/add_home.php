@@ -262,7 +262,16 @@ if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
       else{
         echo'<div class="panier">Aucun local selectionné</div>';
 	  }
-}		
+}
+
+  if($_POST['action']=="count"){
+     
+	 if(!empty($_SESSION['add_homes'])){
+		$count = count($_SESSION['add_homes']);
+		echo$count;
+	 }
+
+  }	  
  ?>
 
 

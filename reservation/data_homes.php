@@ -184,7 +184,6 @@ label{width:200px;}#nbjour{width:150px;}
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
 .s{display:block;}
-#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2400px;}
@@ -212,7 +211,6 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
  .center{width:100%;margin:0;padding:0;height:2000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
@@ -255,8 +253,10 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
-#collapse{position:absolute;display:none;left:70%;height:1200px;}
+#collapse{position:absolute;display:none;left:75%;height:1200px;width:300px;}
 .hote{margin-left:5%;text-transform:capitalize;font-size:18px;} .imgs{display:block;position:absolute;left:90%;top:20px;} .hotes{width:90%;}
+.user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
+.bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
 }
 
 
@@ -337,6 +337,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                                <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
 							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
+							   <span id="panier"></span><!--retour ajax nombre de reservation-->
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -670,6 +671,7 @@ $('#news_data').click(function(){
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
+		panier();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
@@ -701,6 +703,7 @@ $('#news_data').click(function(){
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
+		panier();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
@@ -780,6 +783,21 @@ $('#news_data').click(function(){
 					});
 		           }
            session_add();
+		   
+		   // afficher le pannier
+           function panier() {
+				var action="count";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();	
 			
 			
   // Wrap every letter in a span
