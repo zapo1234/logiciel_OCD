@@ -134,7 +134,7 @@ $dates2 = $j1.'/'.$mm1.'/'.$an;
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;font-size:20px;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -177,9 +177,10 @@ label{width:200px;}#nbjour{width:150px;}
   color:#C10D23;
 }
 
-#test{color:green}  .data{display:none;} .img{display:none;}
+#test{color:green}  .data{display:none;} .img,.imgs{display:none;}
 .calenda{display:none;} #panier_mobile{display:none;}
-.imgs{display:none;}
+.imgs,{display:none;} .panier{background:red;color:white;border-radius:50%;border-color:red;}
+.adds{display:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -192,7 +193,7 @@ label{width:200px;}#nbjour{width:150px;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
-.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add,.adds{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
 #examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
@@ -202,12 +203,13 @@ margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 #days,#das{width:250px;}
 .resul a{padding:1%;color:black;width:50px;}
-.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:15%;}
+.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:10%;}
 .img{margin-left:10%;} #panier_mobile{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
-.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-10%;} .bc{width:330px;}
-.carous{margin-top:170px;width:300px;margin-left:-12%;}
-.imgs{display:none;}
+.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-14%;} .bc{width:330px;}
+.carous{margin-top:200px;width:330px;margin-left:-12%;}
+.imgs{display:none;} #imgs{display:block;}  .panier{background:red;color:white;border-radius:50%;border-color:red;}
+.adds{display:block;} .add{display:none;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -231,8 +233,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
 .hote{display:none;}.button{display:none;} .numero{display:none;}
 .email{display:none;} 
-.img{display:block;} .calenda{display:block;margin-left:75%;} .data,.img,.calenda{float:left;} 
+.img{display:block;} .calenda{display:block;margin-left:75%;} .data,.img,.calenda{float:left;} .data{display:block;}
 #examp{background:white;width:70%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;border:3px solid white;}
+.panier{background:red;color:white;border-radius:50%;border-color:red;}
 
 }
 
@@ -240,7 +243,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1700px;}
+#accordionSidebar{} .center{width:100%;margin:0;padding:0;height:1700px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -257,6 +260,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 .hote{margin-left:5%;text-transform:capitalize;font-size:18px;} .imgs{display:block;position:absolute;left:90%;top:20px;} .hotes{width:90%;}
 .user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
 .bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
+.panier{position:absolute;left:92%;border-radius:50%;background:red;border-color:red;color:white;}
 }
 
 
@@ -299,7 +303,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<div class="forms">Arrivée le : <?php echo $dates1;?> <br/>Départ le <?php echo $dates2;?></div> 
+		<div class="forms">Arrivée le : <?php echo $dates1;?> <br/>    Départ  le : <?php echo $dates2;?></div> 
 		<form method="post" action="">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
@@ -336,8 +340,11 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                      <!-- Topbar Search -->
                                <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
-							   <span id="panier"></span><!--retour ajax nombre de reservation-->
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span  class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
+							   <span id="panier"></span><!--retour ajax
+							   nombre de reservation-->
+							   <input type="hidden" id="imgs" class="devs" value="1">
+							   <input type="hidden" id="imgs" class="dev" value="2">
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -598,6 +605,10 @@ echo $_SESSION['token'];?>">
 	$('#collapse').slideToggle();
   });
  
+  $(document).on('click','.panier',function() {
+	$('#collapse').slideToggle();
+  });
+ 
  $('.der').click(function(){
  $('.carous').css('display','block');
  $('#pak').css('display','block');
@@ -686,6 +697,45 @@ $('#news_data').click(function(){
 	}
 	 });
 	 
+	 
+	 $(document).on('click','.adds',function() {
+		 var id = $(this).data('id2'); // on recupère l'id.
+    var action ="add";
+	// recupération des variable
+	var tr =$('#tr').val();
+	var id_chambre = $('#id_chambre'+id).val();
+	var prix_nuite = $('#prix_nuite'+id).val();
+	var prix_pass = $('#prix_pass'+id).val();
+	var chambre =$('#chambre'+id).val();
+	var nbjour = $('#nbjour').val();
+	
+	if(nbjour.length!="" || nbjour.length!=0){
+	if(tr!="choix"){
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+		panier();
+		$('#accordionSidebar').css('display','none');
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	}
+	else{
+	  $('#error').text('choisir une option');
+	}
+	}
+	else{
+	  $('#error').text('fournir le nombre de jours/horaire séjour');
+	}
+		
+	 });
+	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
 	 var action="remove";
@@ -695,6 +745,7 @@ $('#news_data').click(function(){
 	 var prix_pass = $('#prix_pass'+id).val();
 	 var chambre =$('#chambre'+id).val();
 	 var nbjour = $('#nbjour').val();
+	 
 	 
 	 $.ajax({
 	type: 'POST', // on envoi les donnes
