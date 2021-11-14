@@ -245,7 +245,9 @@ $smart_from =($page -1)*$record_peage;
 			  </div>
 		     </a>
 			 <button class="add" data-id2="'.$donnees['id_chambre'].'" title="réservez le local">Ajouter</button>
+			 <button class="adds" data-id2="'.$donnees['id_chambre'].'" title="réservez le local">Ajouter</button>
 			 </div>
+
 			 <input type="hidden" id="prix_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donnees['id_chambre'].'" value="'.$donnees['cout_pass'].'"><input type="hidden" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'"><input type="hidden" id="id_chambre'.$donnees['id_chambre'].'" value="'.$donnees['id_chambre'].'">
 			 
 			 </div>';	

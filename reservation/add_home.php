@@ -216,7 +216,7 @@ if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
 				$phrase ="Facturation de";
 			}
 			
-			echo'<div class="panier"><i class="fas fa-check-circle" style="color:green;font-size:13px;"></i>  '.$phrase.' '.$count.' '.$local.' en cours'.'</div>';
+			echo'<div class="panie"><i class="fas fa-check-circle" style="color:green;font-size:13px;"></i>  '.$phrase.' '.$count.' '.$local.' en cours'.'</div>';
 			echo'<div id="panier_mobile">'.$count.'</div>';
 			
 			foreach($_SESSION['add_homes'] as $keys => $values){
@@ -260,7 +260,7 @@ if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
 			</table>';
 	  }
       else{
-        echo'<div class="panier">Aucun local selectionné</div>';
+        echo'<div class="panie">Aucun local selectionné</div>';
 	  }
 }
 
@@ -268,7 +268,11 @@ if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
      
 	 if(!empty($_SESSION['add_homes'])){
 		$count = count($_SESSION['add_homes']);
-		echo$count;
+		echo'<button class="panier">'.$count.'</button>';
+	 }
+	 
+	 else{
+		echo''; 
 	 }
 
   }	  
