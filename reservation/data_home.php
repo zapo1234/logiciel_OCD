@@ -459,7 +459,7 @@ for($i=0; $i<$count; $i++){
     </div>
 	 <div class="form-group col-md-6">
       <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+      <input type="checkbox" id="oui" class="oui" name="oui">Oui <input type="checkbox" class="non" id="non" name="Non">Non
     </div>
 	
 	<div class="form-group col-md-6">
@@ -591,6 +591,10 @@ echo $_SESSION['token'];?>">
   $(document).on('click','.panier',function() {
 	$('#collapse').slideToggle();
   });
+  
+  $(".oui").click(function(){
+	$("#non").prop('checked',false);		   
+   });
  
  $('.der').click(function(){
  $('.carous').css('display','block');

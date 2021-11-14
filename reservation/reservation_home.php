@@ -286,7 +286,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
     </div>
 	 <div class="form-group col-md-6">
       <label for="inputEmail4">Payer vous un acompte? *</label>
-      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
+      <input type="checkout" id="oui" class="oui" name="oui">Oui <input type="checkout" id="non" class="non" name="Non">Non
     </div>
 	 
 	 </div><!-- information user pour la reservation-->
@@ -497,6 +497,10 @@ echo $_SESSION['token'];?>">
 	$('.drop').css('display','none');
 	
 	});
+	
+	$(".oui").click(function(){
+	$("#non").prop('checked',false);		   
+   });
 	
 	 $('#news').click(function(){
 	$('.users').slideToggle();
