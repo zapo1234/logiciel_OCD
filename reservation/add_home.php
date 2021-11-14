@@ -95,7 +95,10 @@ include('inc_session.php');
       }
 	  
 	  if($_POST['action']=="remove") {
-      if($_POST['tr']=="réservation"){
+      if(empty($_POST['nbjour'])) {
+		 $_POST['nbjour']=1; 
+	  }
+	  if($_POST['tr']=="réservation"){
 	   $pay=$_POST['prix_nuite'];
 	 }
 	 if($_POST['tr']=="horaire"){
