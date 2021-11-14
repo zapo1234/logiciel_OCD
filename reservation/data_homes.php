@@ -776,8 +776,8 @@ $('#news_data').click(function(){
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: 'reservation_add_home.php',// on traite par la fichier
-	data:{name:name,numero:numero,email:email,adresse:adresse},
+	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
 		//envoi du formulaire add_reservation
@@ -906,7 +906,16 @@ $('#news_data').click(function(){
 			}
 
 			panier();	
-			
+	
+	$('#nbjour').keyup(function(){
+	var nbjour =$('#nbjour').val();
+	if(nbjour==""){
+		nbjour=1;
+	}
+	var total = $('#tota').val();
+	var s = parseFloat(nbjour)*parseFloat(total);
+	$('.data_total').text(s);
+	});		
 			
   // Wrap every letter in a span
 var textWrapper = document.querySelector('.ml2');

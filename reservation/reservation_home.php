@@ -697,9 +697,51 @@ echo $_SESSION['token'];?>">
 	  var name =$('#name').val();
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
-		 
-		 
-	});
+	  var adresse =$('#adresse').val();
+	  var date = new Date();
+	  var nbjour =$('#nbjour').val();
+	   if(name.length==""){
+		 $('.error_name').html('entrez votre nom et prénom');  
+		}
+	  
+	    else if(name > 80) {
+		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
+	   }
+	  else if(numero.length==""){
+	  $('.error_numero').html('entrez obligatoirement un contact');
+	  }
+	  else if(numero.length > 15){
+	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
+	  }
+	  else if(email.length > 80){
+		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
+	  }
+	  
+	  else if(email.length > 120){
+		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
+	  }
+	  
+	  else{
+		 // executer requete Ajax 
+		  $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
+	success:function(data) { // on traite le fichier recherche apres le reto
+        $('#resultat').html(data)
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
+	 }
+		  
+	 });
 	 
 	       function session_add(){
 		      var action="adds";
