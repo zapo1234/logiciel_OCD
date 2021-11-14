@@ -120,6 +120,7 @@ label{width:200px;}#nbjour{width:150px;}
 
 #test{color:green} .data{display:none;} .img{display:none;}
 .calenda{display:none;} #panier_mobile{display:none;} .imgs{display:none;}
+.error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:350px;} .adds{display:none;}
 /*------------------
 /*------------------------------------------------------------------
 [ Responsive ]*/
@@ -252,42 +253,48 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	
 		<div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" id="formB" action="data_user_reservation.php">
+		<form method="post" id="form_reservation" action="reservation_adds_home.php">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
-      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="1" required><br/><span id="error"></span>
        </div>
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
-	 <option value="choix">choix</option>
+	 <option value="réservation">réservation</option>
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
 	 
 	 <div id="div_user" style="display:none">
-	 
-	 <div class="form-group col-md-6">
+	  <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required><br/><span class="error_name"></span>
     </div>
  
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
+	  <span class="error_numero"></span>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
+      <input type="email" name="email" id="email" class="form-control" placeholder="email par défaut"><br/><span class="email_error"></span>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif"><span class="error_adresse"></span>
     </div>
 	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Payer vous un acompte? *</label>
-      <input type="checkout" id="oui" class="oui" name="oui">Oui <input type="checkout" id="non" class="non" name="Non">Non
+      <label for="inputEmail4">Solder vous un acompte? *</label>
+      <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
     </div>
+	
+	<div class="form-group col-md-6">
+      <label for="inputEmail4">Confirmer la réservation</label>
+      <button type="button" id="envoi" name="envoi">Valider</button>
+    </div>
+	 
 	 
 	 </div><!-- information user pour la reservation-->
 	   
@@ -562,33 +569,55 @@ echo $_SESSION['token'];?>">
 
 			list();
 			
-  $("#envoi").click(function(){
-	 var name =$('#name').val();
-     var number=$('#number').val();	
-    var email = $('#email').val();
-    var tota= $('#tota').val();	
-	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
-    var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
-    var number = /^[+0-9]{8,14}$/;
-	var reg = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	
-	if(name.length==""){
-		$('#name').css('border-color','red');
-	}
-	 else if (name.length > 80){
-      $('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le nom doit pas dépasser plus de 80 caractères');
-    }
-	else if (!reg.test(number)){
-      $('.error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe sur le numéro de phone');
-    }
-	else if (!reg.test(email)){
-      $('.error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntaxe du mail');
-    }
-	else{
-		$('#formB').submit();
-	}
+    $('#envoi').click(function(){
+	  var name =$('#name').val();
+	  var email = $('#email').val();
+	  var numero = $('#numero').val();
+	  var adresse =$('#adresse').val();
 	  
-  });
+	   if(name.length==""){
+		 $('.error_name').html('entrez votre nom et prénom');  
+		}
+	  
+	    else if(name > 80) {
+		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
+	   }
+	  else if(numero.length==""){
+	  $('.error_numero').html('entrez obligatoirement un contact');
+	  }
+	  else if(numero.length > 15){
+	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
+	  }
+	  else if(email.length > 80){
+		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
+	  }
+	  
+	  else if(email.length > 120){
+		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
+	  }
+	  
+	  else{
+		 // executer requete Ajax 
+		 // executer requete Ajax 
+		  $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'reservation_add_home.php',// on traite par la fichier
+	data:{name:name,numero:numero,email:email,adresse:adresse},
+	success:function(data) { // on traite le fichier recherche apres le reto
+        $('#resultat').html(data)
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
+	 }
+		  
+	});
 			
 	$(document).on('click','.add',function() {
 
@@ -663,6 +692,14 @@ echo $_SESSION['token'];?>">
 	}
 		
 	 });
+	 
+	 $('#envoi').click(function(){
+	  var name =$('#name').val();
+	  var email = $('#email').val();
+	  var numero = $('#numero').val();
+		 
+		 
+	});
 	 
 	       function session_add(){
 		      var action="adds";

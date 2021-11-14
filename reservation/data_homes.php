@@ -152,7 +152,7 @@ background:green;border:2px solid green;color:white;font-weight:bold;}
 label{width:200px;}#nbjour{width:150px;}
 #error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
-.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
+.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:650px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
 #envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
@@ -180,7 +180,7 @@ label{width:200px;}#nbjour{width:150px;}
 #test{color:green}  .data{display:none;} .img,.imgs{display:none;}
 .calenda{display:none;} #panier_mobile{display:none;}
 .imgs,{display:none;} .panier{background:red;color:white;border-radius:50%;border-color:red;}
-.adds{display:none;}
+.adds{display:none;} .error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:400px;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -304,7 +304,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
 		<div class="forms">Arrivée le : <?php echo $dates1;?> <br/>    Départ  le : <?php echo $dates2;?></div> 
-		<form method="post" action="">
+		<form method="post" id="form_reservation" action="reservation_adds_home.php">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="<?php echo$nombre;?>" required readonly><br/><span id="error"></span>
@@ -461,24 +461,25 @@ for($i=0; $i<$count; $i++){
 	 
 	 <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required><br/><span class="error_name"></span>
     </div>
  
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
+	  <span class="error_numero"></span>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+      <input type="email" name="email" id="email" class="form-control" placeholder="email par défaut"><br/><span class="email_error"></span>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif"><span class="error_adresse"></span>
     </div>
 	 <div class="form-group col-md-6">
       <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" class="oui" name="oui">Oui <input type="checkbox" id="non" class="non" name="Non">Non 
+      <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
     </div>
 	
 	<div class="form-group col-md-6">
@@ -743,6 +744,54 @@ $('#news_data').click(function(){
 	}
 		
 	 });
+	 
+	 $('#envoi').click(function(){
+	  var name =$('#name').val();
+	  var email = $('#email').val();
+	  var numero = $('#numero').val();
+	  var adresse =$('#adresse').val();
+	  
+	   if(name.length==""){
+		 $('.error_name').html('entrez votre nom et prénom');  
+		}
+	    
+	    else if(name > 80) {
+		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
+	   }
+	  else if(numero.length==""){
+	  $('.error_numero').html('entrez obligatoirement un contact');
+	  }
+	  else if(numero.length > 15){
+	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
+	  }
+	  else if(email.length > 80){
+		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
+	  }
+	  
+	  else if(email.length > 120){
+		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
+	  }
+	  
+	  else{
+		 // executer requete Ajax 
+		  $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'reservation_add_home.php',// on traite par la fichier
+	data:{name:name,numero:numero,email:email,adresse:adresse},
+	success:function(data) { // on traite le fichier recherche apres le reto
+        $('#resultat').html(data)
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 setInterval(function(){
+		 $('#resultat').html('');
+		 location.reload(true);
+	 },3000);
+	 }
+	});
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
