@@ -605,15 +605,16 @@ echo $_SESSION['token'];?>">
 	data:{name:name,numero:numero,email:email,adresse:adresse},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
-		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
+		$('.user_home').css('display','none');
+		$('#pak').css('display','none');
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
 		 $('#resultat').html('');
-		 location.reload(true);
+		 //envoi du formulaire add_reservation
+		$('#form_reservation').submit();
 	 },3000);
 	 }
 		  
@@ -629,6 +630,7 @@ echo $_SESSION['token'];?>">
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -637,7 +639,7 @@ echo $_SESSION['token'];?>">
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -664,6 +666,7 @@ echo $_SESSION['token'];?>">
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -672,7 +675,7 @@ echo $_SESSION['token'];?>">
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -703,7 +706,6 @@ echo $_SESSION['token'];?>">
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
-	  
 	    else if(name > 80) {
 		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
 	   }

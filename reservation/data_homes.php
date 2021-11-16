@@ -304,7 +304,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
 		<div class="forms">Arrivée le : <?php echo $dates1;?> <br/>    Départ  le : <?php echo $dates2;?></div> 
-		<form method="post" id="form_reservation" action="reservation_adds_home.php">
+		<form method="post" id="form_reservation" action="reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="<?php echo$nombre;?>" required readonly><br/><span id="error"></span>
@@ -316,6 +316,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
 		 <div id="resultats"></div><!--requete ajax-->
+		 <input type="hidden" name="date_start" value="<?php echo$dates1;?>">
+		 <input type="hidden" name="date_end" value="<?php echo$dates2;?>">
        </div>
        </form>
 		</div>
@@ -481,7 +483,9 @@ for($i=0; $i<$count; $i++){
       <label for="inputEmail4">Solder vous un acompte? *</label>
       <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
     </div>
-	
+	<input type="hidden" name="token" id="token" value="<?php
+//Le champ caché a pour valeur le jeton
+   echo $_SESSION['token'];?>">
 	<div class="form-group col-md-6">
       <label for="inputEmail4">Confirmer la réservation</label>
       <button type="button" id="envoi" name="envoi">Valider</button>
@@ -679,6 +683,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -687,7 +692,7 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -716,6 +721,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -724,7 +730,7 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -780,15 +786,15 @@ $('#news_data').click(function(){
 	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
-		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
+		
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
 		 $('#resultat').html('');
-		 location.reload(true);
+		 //envoi du formulaire add_reservation
+		$('#form_reservation').submit();
 	 },3000);
 	 }
 	});
@@ -801,13 +807,14 @@ $('#news_data').click(function(){
 	 var prix_nuite = $('#prix_nuite'+id).val();
 	 var prix_pass = $('#prix_pass'+id).val();
 	 var chambre =$('#chambre'+id).val();
+	 var type =$('#type_logement'+id).val();
 	 var nbjour = $('#nbjour').val();
 	 
 	 
 	 $.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');

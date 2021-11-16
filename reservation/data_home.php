@@ -288,7 +288,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" id="form_reservation" action="reservation_adds_home.php">
+		<form method="post" id="form_reservation" action="reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="1" required><br/><span id="error"></span>
@@ -463,6 +463,10 @@ for($i=0; $i<$count; $i++){
       <label for="inputEmail4">Solder vous un acompte? *</label>
       <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
     </div>
+	
+	<input type="hidden" name="token" id="token" value="<?php
+    //Le champ caché a pour valeur le jeton
+    echo $_SESSION['token'];?>">
 	
 	<div class="form-group col-md-6">
       <label for="inputEmail4">Confirmer la réservation</label>
@@ -660,6 +664,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type= $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -668,7 +673,7 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -699,6 +704,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -707,7 +713,7 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -733,7 +739,8 @@ $('#news_data').click(function(){
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
-	  
+	  var date = new Date();
+	  var nbjour =$('#nbjour').val();
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
@@ -757,22 +764,21 @@ $('#news_data').click(function(){
 	  
 	  else{
 		 // executer requete Ajax 
-		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: 'reservation_add_home.php',// on traite par la fichier
-	data:{name:name,numero:numero,email:email,adresse:adresse},
+	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
-		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
+		$('.user_home').css('display','none');
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
 		 $('#resultat').html('');
-		 location.reload(true);
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
 	 },3000);
 	 }
 		  
