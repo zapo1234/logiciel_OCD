@@ -51,29 +51,20 @@ foreach($donnes as $datas){
  }
  
  if($datas['permission']=="supboss"){
-	 
 	$css="supboss"; 
 	$names="";
 	$csss = substr($datas['permission'],5);
-	 
- }
- 
+}
  if($datas['permission']=="supgestionnaire"){
-	 
 	$css="supgestionnaire"; 
 	$names="";
 	$csss = substr($datas['permission'],5);
-	 
  }
- 
  if($datas['permission']=="supemployes"){
-	 
 	$css="supemployes"; 
 	$names="";
 	$csss = substr($datas['permission'],5);
-	 
- }
- 
+}
  $dat1 = explode('-',$datas['date']);
 	
 	$jj = $dat1[2];
@@ -88,15 +79,12 @@ if($datas['society']==""){
 	$taf="";
 }
  else{
-	 
-	$taf ='<img src="img/map.png" alt="map" width="15px" height="15px"> travail à'.$datas['society'].'';	
+	 $taf ='<img src="img/map.png" alt="map" width="15px" height="15px"> travail à'.$datas['society'].'';	
  }
   // afficher le message
   
   if($datas['permission']=="boss" OR $datas['permission']=="employes" OR $datas['permission']=="gestionnaire"){
-	 
-	
-  echo'<div class="datas_messanger" id="datas'.$css.'">
+	echo'<div class="datas_messanger" id="datas'.$css.'">
       <div><span class="action" data-id1="'.$datas['id'].'" class="datas'.$datas['id'].'" title="action"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span> <span id="id'.$datas['id'].'" class="divaction" style="display:none"><a href="#" data-id2="'.$datas['id'].'" class="sup_send"><i class="far fa-trash-alt" aria-hidden="true"></i>  suprimer</a></span></div>
 	  <div class="hss"><span class="'.$css.'">'.$datas['name'].' </span><span class="dt">'.$jj.'/'.$mm.'/'.$an.' à '.$hh.':'.$hh1.' </div>
 	   <div class="donnes">'.htmlspecialchars($datas['message']).'</div>
@@ -116,10 +104,7 @@ if($datas['society']==""){
  $res->closeCursor();
 }
 
- 
-
-
-if($_POST['action']=="send"){
+ if($_POST['action']=="send"){
 	
  // definition des variable
  $email_ocd =$_SESSION['email_ocd'];
@@ -176,10 +161,8 @@ if($_POST['action']=="send"){
 		 $date = date('Y-m-d');
          $heure = date('H:i');
 		 $id=$_POST['id'];
-		 
 		 $message=$_SESSION['user']. ' a suprimé son message';
-		 
-		 // on recupere la permission du user connecté
+	// on recupere la permission du user connecté
    $res=$bds->prepare('SELECT id,message,permission FROM messanger WHERE id= :ids AND  email_user= :email_user');
    $res->execute(array(':ids'=>$id,
                        ':email_user'=>$_SESSION['email_user']
@@ -189,14 +172,11 @@ if($_POST['action']=="send"){
 	if($donnees['permission']=="boss"){
 		$permission ="supboss";
 	}
-	
 	if($donnees['permission']=="gestionnaire"){
 		$permission ="supgestionnaire";
 	}
-	
 	if($donnees['permission']=="employes"){
 		$permission ="supemployes";
-		
 	}
 	 if($donnees['id']==$id){
      // modifié le message
@@ -213,13 +193,11 @@ if($_POST['action']=="send"){
 	 }
 		 
 		if($_POST['action']=="count_message"){
-		
 		// compte le nom de message dans la table
 		$reg=$bds->prepare('SELECT count(*) AS nbrs FROM messanger WHERE email_ocd= :email_ocd');
         $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
         $dns=$reg->fetch();
-		
-         echo'<div class="count">votre compte a emis plus de <br/><span class="dr">'.$dns['nbrs'].'</span></div>';		
+		 echo'<div class="count">votre compte a emis plus de <br/><span class="dr">'.$dns['nbrs'].'</span></div>';		
 		 $reg->closeCursor();
 		}
 		

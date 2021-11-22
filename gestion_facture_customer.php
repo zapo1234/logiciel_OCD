@@ -1,6 +1,8 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +15,7 @@ include('inc_session.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="refresh" content="5;url=https://connect.ocdgestion.com/gestion_facture_customer.php" />
+
     <title>logiciel innovant</title>
 
     <!-- Custom fonts for this template-->
@@ -30,7 +32,7 @@ include('inc_session.php');
     <style>
 	.s{display:none;}
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{display:none;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;margin-top:20px;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
@@ -40,7 +42,7 @@ include('inc_session.php');
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 .expor{padding-left:2%;}
-.delete,.delet{position:absolute;left:67%;top:170px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
+.delete,.delet{position:absolute;left:67%;top:130px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -75,9 +77,9 @@ include('inc_session.php');
 
 #tb tr:hover {background-color: #ddd;}
 
-#tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+#tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;border:2px solid #D2EDF9}
 
-#tb{margin-top:10px;color:black;font-size:16px;}
+#tb{margin-top:10px;color:black;font-size:16px;width:125%;}
 
 
 #tbs td, #tbs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:14px;}
@@ -86,9 +88,9 @@ include('inc_session.php');
 
 #tbs tr:hover {background-color: #ddd;}
 
-#tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+#tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;border:2px solid #D2EDF9}
 
-#tbs{margin-top:10px;color:black;font-size:16px;}
+#tbs{margin-top:10px;color:black;font-size:16px;width:125%;}
 
 
 
@@ -212,11 +214,17 @@ width:40%;height:750px;overflow-y:scroll;}
  h3{color:black;font-family:arial;font-size:18px;text-align:center;}
  #search_date{width:90%;color:black;font-size:18px;}
  .sup{cursor:pointer;color:white;font-size:12px;}
+ #menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
 @media (max-width: 575.98px) {
 .print,.butt{display:none;}	
+.s{display:none}
 #panier{display:none;}
 .envoyer{margin-left:-5%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -243,13 +251,16 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 	z-index:4;
 	left:10%;
 	top:100px;} #details{display:none;} .reini{top:50px;left:5%;}
-.ds{display:none;}
+.ds{display:none;} #accordionSidebar{display:none;}
+.menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:120%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:120%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -268,13 +279,19 @@ h2{font-size:14px;} .bout,.bous{float:left;}
 #rechers{display:none;}  #recher_date{width:30%;} #search_recher{font-size:18px;} .dh{display:none;}
 .reini{position:absolute;top:250px;left:5%;}
 .print,.butt{display:none;} #pak{z-index:4;} .reini{z-index:5}
+.menu_mobile{padding:1%;color:black;width:35%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+#result_s{padding:2%;color:black;z-index:5;position:absolute;top:50px;left:30%;background:white;
+width:60%;height:750px;overflow-y:scroll;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1400px;}
+#accordionSidebar{display:none;margin-top:-150px;width:120px;} .center{width:100%;margin:0;padding:0;height:1600px;}
+#results,#result_recher{width:80%;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -283,14 +300,22 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 .btn{display:block;} 
-
+.delete{position:absolute;left:94%;top:125px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;}
+.delet{left:75%;top:125px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1300px;} .detail{margin-left:12.5%;}
 h2{font-size:14px;} .bout,.bous{float:left;}
-.delete{position:absolute;left:74%;top:120px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
+.delete{position:absolute;left:78%;top:115px;color:white;background:#F83127;border:2px solid #F83127;border-radius:20px;} #recher{30%;}
 #rechers{display:none;} #recher_date{width:30%;} #search_recher{font-size:18px;}
+ .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+
+#result_s{padding:2%;color:black;z-index:5;position:absolute;top:50px;left:40%;background:white;
+width:60%;height:750px;overflow-y:scroll;}
+
 }
 
 /*------------------------------------------------------------------
@@ -329,8 +354,9 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
  writing-mode: rl-bt;
  color:#F0EFEF;} .prin{width:250px;height:55px;color:white;background:#06308E;border-radius:15px;border:2px solid #06308E;font-size:16px;display:none;}
 	
-	
-	
+.menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}	
 	
 }
  
@@ -371,9 +397,9 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -428,7 +454,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <h2>Suivi des factures de vos clients</h2>
+                    <h2></h2>
                     <div id="results"></div><!--afficher les données-->
 					<div id="result_recher"></div><!--afficher des -->
 					<div id="resu"></div><!--afficher des données-->
@@ -543,6 +569,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
     <script src="js/sb-admin-2.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/facture.js"></script>
+  <?php include('inc_menu.php');?>
   <script type="text/javascript">
   $('.buts').click(function(){
    $('.reini').css('display','block');
@@ -551,10 +578,35 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
    $('#email').val(email);
  });
  
+ $('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 });
+	 
+	 $('#pak').click(function(){
+	$('#examp').css('display','none');
+   $('#pak').css('display','none');
+   $('.reini').css('display','none');
+   $('.menu_mobile').css('display','none');
+ });
+ 
+ 
  $('.annu').click(function(){
    $('.reini').css('display','none');
    $('#pak').css('display','none');
  });
+
   
   $(document).on('click','.prints',function(){
 		  var action ="click";

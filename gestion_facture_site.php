@@ -34,15 +34,15 @@ if(!isset($_GET['data_id'])){
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-	.s{display:none;}
+	.s{display:none;} .btn{display:none;}
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{display:none;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:95%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 
@@ -82,7 +82,7 @@ if(!isset($_GET['data_id'])){
 
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tb{margin-top:10px;}
+#tb{margin-top:10px;color:black;font-size:14px;width:100%;}
 #results{overflow-y:scroll;height:1000px;} 
  
  
@@ -146,6 +146,7 @@ margin-left:-10px;}
 #caisse{font-size:18px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 #panier{position:fixed;left:50%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+.delete{position:absolute;top:110px;left:65%;color:white;background:#F83127;border:2px solid #F83127;border-radius:15px;}
 
 @media (max-width: 575.98px) { 
 .envoyer{margin-left:-5%;}
@@ -164,14 +165,14 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #results{width:110%;overflow-y:none;margin-top:10px;} .pied_page{margin-left:3%;}
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
-h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .delete{position:absolute;top:150px;left:55%;color:white;background:#F83127;border:2px solid #F83127} .dh{display:none;}
+h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .delete{position:absolute;top:150px;left:60%;color:white;background:#F83127;border:2px solid #F83127;border-radius:15px;} .dh{display:none;}
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;margin-top:-150px;width:120px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -192,7 +193,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -206,7 +207,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;}
-.delete{position:absolute;top:120px;left:64%;color:white;background:#F83127;border:2px solid #F83127} 
+.delete{position:absolute;top:100px;left:64%;color:white;background:#F83127;border:2px solid #F83127} 
 }
 
 /*------------------------------------------------------------------
@@ -293,7 +294,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -447,7 +448,11 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
   <script src="js/facture.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    function lists(page) {
+    $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').css('display','block');
+	 });
+	
+	function lists(page) {
 		var id = <?php echo $_GET['data_id'];?>;
 		$.ajax({
 		url: "recher_facture_site.php?data_id=<?php echo$_GET['data_id'];?>",
