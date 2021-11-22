@@ -3,19 +3,16 @@ include('connecte_db.php');
 include('inc_session.php');
 
 if(!isset($_GET['home'])) {
-	
-	header('location:index.php');
+header('location:index.php');
 } 
-
-   // requete pour aller chercher les valeurs 
+// requete pour aller chercher les valeurs 
    $home = $_GET['home'];
   // emttre la requete sur le fonction
     $req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,occupant,nombre_lits,equipements,equipement,cout_nuite,cout_pass,icons,infos,society FROM chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $req->execute(array(':id_chambre'=>$home,
 	                    ':email_ocd'=>$_SESSION['email_ocd']
 						));
-
-    // on recupère les données
+   // on recupère les données
 	$donnees = $req->fetch();
 	// recupére les images existant
 	// on recupére les equipement checkbox
@@ -29,15 +26,12 @@ if(!isset($_GET['home'])) {
 	$data1  = $donnees['equipements'];
 	$society = $donnees['society'];
 	$type =$donnees['type_logement'];
-    
-	$req->closeCursor();
-	 
+    $req->closeCursor();
 	$res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
     $res->execute(array(':id_chambre'=>$home,
 	                     ':email_ocd'=>$_SESSION['email_ocd']
 	                     
 						 ));
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,7 +131,27 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;} .dg{padding-left:2%;color:black;font-size:13px;}
 .btn,.s{display:none;} 
-
+.parent-div {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.parent-div input[type=file] {
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  font-size: 50px;
+}
+.btn-upload {
+  background-color: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -155,7 +169,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -172,10 +186,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1500px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -327,8 +341,34 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
   <div class="d"><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)
   <span class="der"><a href="#" class="der">visualiser les images existant</a></span></div>
-  <input type="file" class="test" name="fil[]" id="file1"><input type="file" class="test" name="fil[]" id="file2"><input class="test" type="file" name="fil[]" id="file3">
-  <input type="file" class="test" name="fil[]" id="file4">
+  <div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file1" />
+    </div>
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file2" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file3" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file4" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file5" />
+    </div>
+	
+	<div class="parent-div">
+      <button class="btn-upload">Ajouter une image</button>
+      <input type="file" name="fil[]" id="file6" />
+    </div>
   
   <div><input type="submit" value="Modifier les données" id="his"/></div>
 <input type="hidden" name="token" id="token" value="<?php
@@ -415,6 +455,9 @@ echo$_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
+     $('#sidebarToggleTop').click(function(){
+		$('#accordionSidebar').slideToggle();
+	 });
 
     $('#sms').click(function(){
 	$('.drop').slideToggle();
@@ -430,17 +473,13 @@ echo$_SESSION['token'];?>">
    $('#pak').css('display','block');
  });
  
- 
- 
- $('#pak').click(function(){
+$('#pak').click(function(){
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('#block_delete').hide(); 
    $('.homes').css('display','none');   
  });
- 
- 
-  $('.der').click(function(){ 
+ $('.der').click(function(){ 
 	// recupére la variable
 	var text = $('.homes').text();
 	if(text.length !=""){
@@ -457,20 +496,17 @@ echo$_SESSION['token'];?>">
 	$('#file2').hide();
 	$('#file3').hide();
 	$('#file4').hide();
-	  
-  }
+   }
   
   else if(thecount > 1) {
 	 $('#file3').hide();
 	$('#file4').hide(); 
-	  
-  }
-  
+   }
   else if(thecount == 1){
 	$('#file1').hide();	 
 }
 
-else if(thecount ==4){
+else if(thecount ==8){
 	$('#file1').hide();
 	$('#file2').hide();
 	$('#file3').hide();

@@ -160,7 +160,7 @@ if(!empty($_POST['ch']) AND !empty($_POST['choix'])){
 				// on redirige vers la page
              echo'<div class="enre">les mofications du local: <span class="x">'.$ids.'</span>  ont étés prise en compte.
 		     <div class="dep">...</div></div>';
-             echo'<meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/inventaire_gestion_home.php"/>';
+             echo'<meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/inventaire_gestion_home.php"/>';
         }
       }
   else{

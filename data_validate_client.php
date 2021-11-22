@@ -102,93 +102,72 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 			if($donns['code']==0){
 			$calls='réceptionniste';
 			}
-			
 			else{
 				$calls='Récéptionniste de '.$donns['society'].'';
 			}
 		}
-		
-	
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation,code FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+	$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reste,reservation,code FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
    $rej->execute(array(':code'=>$session,
                        ':email_ocd'=>$_SESSION['email_ocd']));
    $donns=$rej->fetch();
 	$rej->closeCursor();
 	
-	
-	
 	// fixer les numero de facture
-	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC');
+	$reb=$bds->prepare('SELECT id_fact FROM facture WHERE code= :code AND email_ocd= :email_ocd ORDER BY id DESC LIMIT 0,1');
    $reb->execute(array(':code'=>$session,
                        ':email_ocd'=>$_SESSION['email_ocd']));
    $donnes=$reb->fetch();
 	$reb->closeCursor();
-	
 	if(empty($donnes)) {
-	 
-     $id_fact=0.00001;	 
-		
+	 $id_fact=0.00001;	 
 	}
-	
 	else{
 	$mt = $donnes['id_fact'];
 	$mt = floatval($mt);
 	$id_fact=$mt+0.00001;
 	}
-	
 	// definir les varaible au cas de sejour
 	if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	$dates1 =$_POST['days'];
 	$dates2 =$_POST['das'];
-
-	$dates1 = explode('-',$dates1);
+   $dates1 = explode('-',$dates1);
 	$j = $dates1[2];
 	$mm = $dates1[1]; // période de recherche des factures.
 	$an = $dates1[0];
-    
-	$dates2 = explode('-',$dates2);
+    $dates2 = explode('-',$dates2);
 	
 	$j1 = $dates2[2];
 	$mm1 = $dates2[1];
 	$an1 = $dates2[0];
 	
-	$debut_date = mktime(0, 0, 0, $mm, $j, $an);
+	 $debut_date = mktime(0, 0, 0, $mm, $j, $an);
      $fin_date = mktime(0, 0, 0, $mm1, $j1, $an);
-	 
 	 $tab = [];
 	 $french = [];
 	  for($i = $debut_date; $i <= $fin_date; $i+=86400)
      {
        $dates =  date("Y-m-d",$i);
-	   
 	   // date en francais
 	   $data_french = date("d-m-Y",$i);
 	   $data_fren = explode(' ', $data_french);
 	   $dates = explode(' ',$dates);
-	   
 	   foreach($dates as $dats){
 		   $tab[] = $dats;  
 		 }
-	   
 	   foreach($data_fren as $das){
 		   $french[] = $das;  
 		 }
 	  }
-	 
 	 $datas = implode(',',$tab);// format en anglais recupère avec Mysql
 	 $datas_fren = implode(',',$french);// date en francais recupéré
-	 
 	} 
-	
 	// on defini le séjour au cas de variable horaire
 	if($_POST['to']=="horaire") {
-	 
 	 $dates3 =$_POST['tim'];
 	 $dates4 =$_POST['tis'];
 	  $array = [];
 	  $dats = $dates3.'.'.$dates4;
 	  $dats = explode('.',$dats);
-	   
 	   foreach($dats as $horaire){
 		  $array[] = $horaire;  
 	}
@@ -197,7 +176,6 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 	}
 	
    // on recupére les variable fixe
-   
    $dat =$_POST['dat']; // date d'enregistrement.
    $civilite = $_POST['civil']; // civilité
    $name = html_entity_decode(trim($_POST['name']));
@@ -208,13 +186,10 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $email1 =$_POST['email'];
    $session = $donns['code'];
    
-   
     $dat1 = explode('-',$_POST['dat']);
-	
 	$js = $dat1[2];
 	$mms = $dat1[1];// recuperation search_date
 	$ans = $dat1[0];
-	
 	// recupere les mois pour les recherches de facture.
 	if($mms=="01"){
 	 $mm="Janvier";
@@ -372,9 +347,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
          $avance = 0;
          $reste =0;		 
 	   }
-	   
-	   
-	   // date check in et check out
+	  // date check in et check out
       $dat1= $_POST['days'];
       $dat2= $_POST['das'];
 	 
@@ -409,15 +382,12 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
          $avance = 0;
          $reste =0;		 
 	   }
-	   
 	   // date check in et check out
       $dat1= $_POST['days'];
       $dat2= $_POST['das'];
-	  
-	   $dat3 = $_POST['tim'];
+	  $dat3 = $_POST['tim'];
        $dat4 = $_POST['tis'];
-	   
-	   $avance=$_POST['account'];
+	 $avance=$_POST['account'];
      $reste=$_POST['rpay'];
 	   
      $mode =2;	 
@@ -448,25 +418,19 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
    $montant =$_POST['pay'];
    $id_chambre = $_POST['id_chambre'];
    $type = $_POST['typ'];
-
-   
-   // boucler sur les valeurs pour entrer les données dans la bdd
-
-   if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
-
-   for($count=0;  $count<count($_POST['chambre']); $count++){ 
-   
+ // boucler sur les valeurs pour entrer les données dans la bdd
+  if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
+  for($count=0;  $count<count($_POST['chambre']); $count++){ 
      $name_chambre = $chambre[$count];
 	 $montants = $montant[$count];
 	 $ids_chambre = $id_chambre[$count];
 	 $types = $type[$count];
-	 
-		// on redirige vers la page
+	  // on redirige vers la page
 		 echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
 			 <div class="dr">'.$ty.'</div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=https://connect.ocdgestion.com/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type,:code)');
@@ -491,8 +455,7 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':code'=>$session
 						  ));
 				
-
-                // on recupére les date dans la base de donnnées.
+         // on recupére les date dans la base de donnnées.
 	     $reys=$bds->prepare('INSERT INTO home_occupation (id_local,email_ocds,date,date_french,dates,id_fact,type,code,id_visitor) 
 		 VALUES(:id_local,:email_ocds,:date,:date_french,:dates,:id_fact,:type,:code,:id_visitor)');
 		 $dates ="";
@@ -559,11 +522,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':search_date'=>$mm
 							
 						  ));
-            				  
-						  
-			// on modifie les données de la base de données guide
-        
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
+          // on modifie les données de la base de données guide
+        $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,
@@ -571,29 +531,23 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 		                   ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 					 
-					 
-			// on detruire le tableau de session des données
+				// on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
 
        }
    
-   
    else{
-	   
-	   
 	   for($count=0;  $count<count($_POST['chambre']); $count++){ 
-   
-     $name_chambre = $chambre[$count];
+      $name_chambre = $chambre[$count];
 	 $montants = $montant[$count];
 	 $ids_chambre = $id_chambre[$count];
 	 $types = $type[$count];
 	    //
-			
-		  echo'<div id="pak"></div>
+		   echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien effectué<br/></div>
 			 <div class="dr">'.$ty.'</div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=https://connect.ocdgestion.com/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		$rey=$bds->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code) 
 		VALUES(:email_ocd,:id_chambre,:type_logement,:dat,:chambre,:check_in,:check_out,:time1,:time2,:date1,:date2,:montant,:mode,:mont_restant,:encaisser,:rete_payer,:id_fact,:type,:code)');
@@ -684,11 +638,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
 							':calls'=>$calls,
 							':search_date'=>$mm
 						  ));
-						  
-						  
-			// on modifie les données de la base de données guide
-		 
-         $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
+		// on modifie les données de la base de données guide
+		 $ret=$bds->prepare('UPDATE tresorie_customer SET encaisse= :des, reservation= :reser, reste= :res WHERE code= :code AND email_ocd= :email_ocd');
         $ret->execute(array(':des'=>$donns['encaisse']+$monts,
 		                    ':res'=>$donns['reste']+$reste,
 					        ':reser'=>$donns['reservation']+$avance,

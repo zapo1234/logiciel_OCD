@@ -117,10 +117,10 @@ include('inc_session.php');
 			 
 			echo'<div class="datas"><div class="hom"><h5>'.$values['type'].'</h5>
 			<div class="list"><span class="d">'.$values['chambre'].'</span><span class="dg">'.$pays.'xof</span>
-			<input type="hidden" name="chambre[]" value="'.$values['chambre'].'">
-			<input type="hidden" name="typ[]" value="'.$values['type'].'">
-			<input type="hidden" name="pay[]" value="'.$pays.'">
-			<input type="hidden" name="id_chambre[]" value="'.$values['id'].'">
+			<input type="hidden" name="chambre[]" class="chambre" value="'.$values['chambre'].'">
+			<input type="hidden" name="typ[]" class="type" value="'.$values['type'].'">
+			<input type="hidden" name="pay[]" class="somme" value="'.$pays.'">
+			<input type="hidden" name="id_chambre[]" class="id_chambre" value="'.$values['id'].'">
 			<span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span>
 			</div></div>';
 			

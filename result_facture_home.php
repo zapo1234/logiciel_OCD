@@ -67,12 +67,11 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">Date</th>
       <th scope="col">Informations</th>
 	  <th scope="col">Montant(TTC)</th>
-	  <th scope="col">Tva sur HT ajoutée</th>
+	  <th scope="col">Tva ajoutée</th>
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
-	  <th scope="col">Action</th>
-	  <th scope="col">facture en pdf</th>
+	  <th scope="col">Actions sur facture</th>
 	  <th scope="col">Imprimer la facture</th>
       </tr>
       </thead>
@@ -140,7 +139,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	elseif($donnees['type']==3){
 	$jour = $donnees['nombre'].'jours';
-	 $name ="Réservation en cours";
+	 $name ="Réservation";
 	 $encaiss="";
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
@@ -224,7 +223,6 @@ $smart_from =($page -1)*$record_peage;
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
@@ -644,7 +642,6 @@ if($_POST['action']=="mail"){
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		

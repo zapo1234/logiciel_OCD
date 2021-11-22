@@ -6,12 +6,9 @@ if(!isset($_GET['id_fact']) AND !isset($_GET['code_data'])) {
 	
   header('location: index.php');
 }
-
  $id =$_GET['id_fact'];
  $session =$_GET['code_data'];
- 
-
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -477,7 +474,7 @@ ul a{margin-left:3%;}
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dr">'.$ty.'</div>
 			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/gestion_facture_customer.php"/>';
 		
 	// verifier sur l'id_chambre est deja dans le tableau
 	if(!in_array($ids_chambre,$arrays)){
@@ -531,8 +528,7 @@ ul a{margin-left:3%;}
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
 	   
-	  
-	   // update sur moyen paiment
+	  // update sur moyen paiment
 	    // modifie les moyens de paiment si possible
 	   // on modifie les données de la base de données guide
         $rev=$bds->prepare('UPDATE moyen_tresorie SET date= :ds, montant= :mont, montant1= :mont1, montant2= :mont2, montant3= :mont3 WHERE code= :code AND email_ocd= :email_ocd AND id_fact= :id');
@@ -601,7 +597,7 @@ ul a{margin-left:3%;}
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>Le séjour du client  <i class="far fa-user" style="color:green;font-size:20px;"></i>  <span class="nam">'.$name.'</span> à été bien modifié </div>
 		     <div class="dr">'.$ty.'</div>
 			 <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/gestion_facture_customer.php"/>';
 		// on insere les données dans la bds-
 		
 		// delete bord_informations 
@@ -715,21 +711,17 @@ ul a{margin-left:3%;}
 							':code'=>$session,
                             ':email_ocd'=>$_SESSION['email_ocd']
 					 ));
-           
-         		 // on detruire le tableau de session des données
+               // on detruire le tableau de session des données
 				unset($_SESSION['add_home']);
 	}
    }
    else{
-	   
-	   echo'<div id="pak"></div>
+	     echo'<div id="pak"></div>
              <div class="enre"><i class="fas fa-check-circle" style="color:red;font-size:20px;"></i>Vous pouvez plus modifier cette facture
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:red;font-size:13px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+             <meta http-equiv="Refresh" content="3; url=https://connect.ocdgestion.com/gestion_facture_customer.php"/>';
    }
-   
-   
-  }
+   }
    catch(Exception $e)
   {
 die('Erreur : '.$e->getMessage());

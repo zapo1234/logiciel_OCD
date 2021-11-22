@@ -38,25 +38,17 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
     }
     elseif($num==2){
      $icons='<i class="far fa-user"></i> <i class="far fa-user"></i>';
-
     }
-	
-	elseif($num==3){
-
-       $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
+    elseif($num==3){
+	$icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i>';
      }
-	 
 	 else{
-		 
-		 $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> plus de 3 personnes'; 
+	  $icons='<i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> plus de 3 personnes'; 
 	 }
-
-	
-	$infos=html_entity_decode(trim($_POST['infos']));
+    $infos=html_entity_decode(trim($_POST['infos']));
 	// type de logement
 	$types = $_POST['type'];
 	$typs = $_POST['typs'];
-	
 	$site = $_POST['site'];
 	if(empty($site)){
 	$site =0;
@@ -64,51 +56,36 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	else{
 	$site = $_POST['site'];
 	}
-	
 	if(!isset($typs)){
 	  $typs="";
 	}
-	
 	if(!empty($typs)){
 		$type=$_POST['typs'];
-		
 	}
-
-	
-	
-	 if($types == 1){
+  if($types == 1){
 		$type ="chambre single";
 	}
 	elseif($types == 2){
-		
-		$type="chambre double";
+	 $type="chambre double";
 	}
-	
 	elseif($types == 3){
 		$type="chambre triple";
 	}
-	
 	elseif($types == 4) {
 		$type ="chambre twin";
 	}
 	elseif($types == 5){
 		$type ="chambre standard";
 	}
-	
 	elseif($types == 6){
 		$type ="studio double";
 	}
-	
 	elseif($types == 7){
-		
-		$type ="sutdio double";
+	$type ="sutdio double";
 	}
-	
 	elseif($types == 8){
 		$type ="appartement meublé";
-		
 	}
-	
 	else{
 		$types = $typs;
 	}
@@ -120,43 +97,34 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	if(empty($prices_time)){
 		$prices_time = 0;
 	}
-	
 	else{
 	$prices_time;
 	}
 	$email_ocd = $_SESSION['email_ocd'];
-	
-	
 	// fichier à upload
 	$files=$_FILES['fil']['name'];	
-
-    if(!empty($_POST['ch']) AND !empty($_POST['choix'])){
+   if(!empty($_POST['ch']) AND !empty($_POST['choix'])){
     $equipement = implode(", ", $_POST['ch']);
 	}
 	else{
 		$equipement="";
 	}
-	
-	if(!empty($_POST['choix'])) {
+   if(!empty($_POST['choix'])) {
 	$equipements = implode(", ", $_POST['choix']);	
 	}
 	else {
 		$equipements="";
 	}
-	
-	  if($_POST['num'] <0) {
+	if($_POST['num'] <0) {
 		echo'un nombre positif requis';
 	}
-	
 	elseif($_POST['nums']<0) {
 		echo' un nombre positif requis';
 	}
 	
 	else {
-		
 		$active ="on";
 		// insere les données dans la base de données dans la base de donnes chambres
-		
 		$code = $site;
 		$society = trim(strip_tags($_POST['societ']));
 		$id_visitor = $donns['id_visitor'];
@@ -184,7 +152,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		// traitement des fichier en boucles pour la grille 
 		
-		for($count =0; $count < 7; $count++) {
+		for($count =0; $count < 8; $count++) {
     if(!empty($_FILES['fil']['name'][$count]) AND $_FILES['fil']['error'][$count]==0){
 	 
 		$infosfichier=pathinfo($_FILES['fil']['name'][$count]);
@@ -207,23 +175,19 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
        $path= "upload_image/" . $nvname;
 	   move_uploaded_file($_FILES['fil']['tmp_name'][$count],$path);	
 	  // on enregistre
-	
-		 // inséré les données dans la base de donnnées
+	   // inséré les données dans la base de donnnées
 		 $ret=$bds->prepare('INSERT INTO photo_chambre (id_chambre,email_ocd,name_upload) VALUES(:id_chambre,:email_ocd,:name_upload)');
 	     $ret->execute(array(':id_chambre'=>$id_chambre,
 					      ':email_ocd'=>$email_ocd,
 						  ':name_upload'=>$nvname
 						  ));
-						  
-	   }
-
-	  }
-	 }	// on affiche
-		 // on redirige vers la page
+			}
+		  }
+	    }	// on affiche
+			// on redirige vers la page
              echo'<div class="enre">Votre local: <span class="x">'.$ids.'</span>  à été bien enregsitrée.
 		     <div class="dep">...</div></div>';
-  
-	}
+     }
   }
   
   else{

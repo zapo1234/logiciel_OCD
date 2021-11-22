@@ -79,7 +79,7 @@ echo'<div id="pak"></div>
              <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>vos données sont bien suprimées  <i class="far fa-user" style="color:green;font-size:20px;"></i></div>
 			 <div class="dr"></div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>
-             <meta http-equiv="Refresh" content="3; url=//localhost/logiciel_OCD/gestion_datas_messanger.php"/>';
+             <meta http-equiv="Refresh" content="3; url=https://connect.ocdgestion.com/gestion_datas_messanger.php"/>';
 
 
 

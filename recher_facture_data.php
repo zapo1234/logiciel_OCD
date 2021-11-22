@@ -74,8 +74,8 @@ $smart_from =($page -1)*$record_peage;
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
-	  <th scope="col">Action</th>
-	  <th scope="col">Imprimer/facture client</th>
+	  <th scope="col">Actions/facture</th>
+	  <th scope="col">Imprimer/facture</th>
       </tr>
       </thead>
       <tbody>';
@@ -163,12 +163,10 @@ $smart_from =($page -1)*$record_peage;
 	$repas ="+repas dejeuner";
 	$monts = $donnees['montant_repas'];
 	}
-	
 	else{
 		$repas ="";
 		$monts="";
 	}
-	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -217,7 +215,6 @@ $smart_from =($page -1)*$record_peage;
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
