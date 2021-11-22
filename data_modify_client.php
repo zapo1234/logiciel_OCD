@@ -521,10 +521,10 @@ ul a{margin-left:3%;}
        }
 	   
 	   // modifier les donnees dans home_occupation
-	   $rev=$bds->prepare('UPDATE home_occupation SET date= :ds, date_french= :data, dates= :datas, type= :ty WHERE code= :code AND email_ocds= :email_ocd AND id_fact= :id');
+	   $rev=$bds->prepare('UPDATE home_occupation SET date= :ds, date_french= :da, dates= :dats, type= :ty WHERE code= :code AND email_ocds= :email_ocd AND id_fact= :id');
         $rev->execute(array(':ds'=>$datas,
-		                    ':data'=>$datas_fren,
-					        ':datas'=>$dates,
+		                    ':da'=>$datas_fren,
+					        ':dats'=>$dates,
 							':ty'=>$mode,
 							':code'=>$session,
 							':id'=>$id,

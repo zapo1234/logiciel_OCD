@@ -1,14 +1,9 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-
-
 // recupére les données de la base de données
-   
-	//créer un tableau vide 
-
+   //créer un tableau vide 
     if($_POST['action']=="add"){
-	 
 	 if($_POST['to']=="séjour" OR $_POST['to']=="réservation"){
 	   $pay=$_POST['paynuite'];
 	 }
@@ -386,6 +381,7 @@ include('inc_session.php');
 		
 		  }	
 	 
+	  
     
       
 

@@ -67,6 +67,7 @@ include('inc_session.php');
    $status=1;
    $categories="dirigeant";
    $permission ="user:boss";
+   $email1="";
    // token _password
    $tokens = openssl_random_pseudo_bytes(16);
  //Convert the binary data into hexadecimal representation.
@@ -81,7 +82,7 @@ include('inc_session.php');
    if($donnees['email_user']!=$_POST['emails'] AND $donnees['token_pass']!=$token_pass) {
 	 if(empty($_POST['sites']))
      {
-	 $code=0;
+	 $codes=0;
 	 $society="";
 	 $rev=$bds->prepare('INSERT INTO tresorie_customer (email_ocd,reservation,encaisse,depense,montant,reste,code,society)
 	 VALUES(:email_ocd,:reservation,:encaisse,:depense,:montant,:reste,:code,
@@ -92,7 +93,7 @@ include('inc_session.php');
 							':depense'=>$montant,
 							':montant'=>$montant,
 							':reste'=>$montant,
-							':code'=>$code,
+							':code'=>$codes,
 							':society'=>$society,
 					));
      
@@ -102,6 +103,7 @@ include('inc_session.php');
 		$site = $_POST['sites'];
 		$societys = $_POST['site'];
 		$society="";
+		$codes = $site;
 		for($i=0; $i < $site; $i++){
 		 $code = $i+1;
 		 $soci_data = $societys[$i];
@@ -119,12 +121,12 @@ include('inc_session.php');
 		}
 	 }
       $societ="";
-	  $code=0;
     // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
-		VALUES(:email_ocd,:email_user,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_societe,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:email_societe,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 		                     ':email_user'=>$email,
+							 ':email_societe'=>$email1;
 		                    ':denomination'=>$denomination,
 							':adresse'=>$adresse,
 							':numero_cci'=>$numero_cci,
@@ -150,9 +152,7 @@ include('inc_session.php');
 						  ));
 						  
 		// insert dans la tablea table custommer des caisse
-        		
-						  
-		echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>  Le compte user à été crée !
+        echo'<div class="enre"><div><i class="fas fa-check-circle"    style="color:green;font-size:16px;"></i>  Le compte user à été crée !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
    }
   
