@@ -124,8 +124,8 @@ label{color:black;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI"
  h3{color:black;padding-top:5%;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:16px;text-align:center;}
  #button_annuler{width:120px;margin-left:6%;height:40px;color:white;background:red;margin-top:20px;border:2px solid red;text-align:center;border-radius:15px;}
  #button_delete{width:50px;height:40px;background:#4e73df;color:white;border-radius:50%;margin-left:10%;margin-top:20px;border:2px solid #4e73df;}
- .enr{color:white;padding:2%;font family:arial;background:red;width:150px;height:35px;}
- #data_delete{position:absolute;top:300px;left:25%;} #forms {color:black;}
+ .enr{color:white;padding:2%;font family:arial;background:red;width:150px;height:25px;}
+ #data_delete{position:absolute;top:200px;left:15%;} #forms {color:black;}
  .color{background:#E0F1FA;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
@@ -192,7 +192,7 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 }
 
 @media (max-width: 575.98px) { 
-#panier{display:none} .s{display:block;}
+#panier{display:none}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -205,13 +205,13 @@ height:2800px;overflow-y:scroll} h2{margin-top:30px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 #searchDropdown{display:none;} #examp{width:90%;height:1700px;margin-top:15px;margin-left:-3%;}
 .ts{display:none;} .mobile{display:block;}
-#accordionSidebar{display:none;margin-top:-150px;width:120px;} 
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;margin-top:-150px;width:120px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -231,7 +231,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 @media (min-width: 992px) and (max-width: 1200px) {
  #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -537,7 +537,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <textarea class="form-control" name="infos" id="infos" rows="3"></textarea>
    </div>
 	
-  <h2><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)</h2>
+  <h2><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 6images)</h2>
   <div class="parent-div">
       <button class="btn-upload">Ajouter une image</button>
       <input type="file" name="fil[]" id="file1" />
@@ -629,7 +629,7 @@ echo $_SESSION['token'];?>">
   <script type="text/javascript">
    $(document).ready(function(){
    $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
 	 
    $('#sms').click(function(){
@@ -680,9 +680,12 @@ var societ = $('#societ').val();
 	}
 	
 	else if(num < 0){
+		
 	}
 	
 	else if(nums < 0) {
+		
+		
 	}
 	
 	else if (!number.test(num)){

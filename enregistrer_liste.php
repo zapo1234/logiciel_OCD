@@ -184,7 +184,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 		
 		// traitement des fichier en boucles pour la grille 
 		
-		for($count =0; $count < 3; $count++) {
+		for($count =0; $count < 7; $count++) {
     if(!empty($_FILES['fil']['name'][$count]) AND $_FILES['fil']['error'][$count]==0){
 	 
 		$infosfichier=pathinfo($_FILES['fil']['name'][$count]);
@@ -219,9 +219,7 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 
 	  }
 	 }	// on affiche
-				
-				
-				  // on redirige vers la page
+		 // on redirige vers la page
              echo'<div class="enre">Votre local: <span class="x">'.$ids.'</span>  à été bien enregsitrée.
 		     <div class="dep">...</div></div>';
   

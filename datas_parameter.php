@@ -50,7 +50,6 @@ include('inc_session.php');
   }
   
   else {
-	  
 	  if(!empty($donnees)){
      // on suprimer le fichier existant
 	  unlink ("image_logo/" .$donnees['logo']);
@@ -62,12 +61,10 @@ include('inc_session.php');
 	move_uploaded_file($_FILES['logo']['tmp_name'], $path);
 	}
    }
-   
-  else{
+   else{
 	  $nvname="zapo";  
    }
-  
-     if(isset($nvname)){
+    if(isset($nvname)){
     echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i> vos données sont bien prises en compte !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 	
@@ -78,7 +75,7 @@ include('inc_session.php');
    // Actualiser des données les données dans la base de données inscription_client
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');
+         $ret=$bdd->prepare('UPDATE inscription_client SET email_societe= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');
         $ret->execute(array(':email'=>$email,
 		                    ':des'=>$name,
 					        ':reser'=>$adresse,
