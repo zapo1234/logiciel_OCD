@@ -151,6 +151,11 @@ border: 2px solid #F83127;}
     margin-left: -10px;
 }
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -175,7 +180,10 @@ height:2800px;overflow-y:scroll}h2{margin-top:20px;border-top:1px solid #eee;col
 #indicateur{display:none;} .der{padding-left:3%;color:black;font-size:16px;}
 .btn{display:block;} #searchDropdown{display:none;}
 .excel{margin-left:120%;}
-.s{display:block;}
+.s{display:block;} #accordionSidebar{display:none;}
+.menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -211,13 +219,17 @@ height:2800px;overflow-y:scroll;z-index:5;}
     padding: 0.5%;
     height: 50px;
 }
+
+.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1500px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -233,6 +245,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:12.5%;}
 .btn{display:block;} #indicateur{font-weight:15px;margin-left:10%;}
 #indicateur{display:none;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+
 }
 
 
@@ -270,9 +286,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -374,7 +390,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="panier"></div>
 <div id="pak" style="display:none"></div>
 <div id="result"></div><!--div-->
-
+<?php include('inc_menu.php');?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -400,8 +416,16 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/tresorerie.js"></script>
   <script type="text/javascript">
-  $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+  $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
 	 });
 	 
 	 $('.buts').click(function(){

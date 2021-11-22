@@ -181,6 +181,10 @@ h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
 .indispo{display:none;} #return{ position:fixed;top:300px;left: 20%;font-size:32px;color: #06308E;
 }
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;} .s{display:block;}
@@ -206,6 +210,9 @@ font-weight:bold;} .rr{display:none;} .datas{display:none;}
 .datas{padding:2.5%;width:95%;z-index:2;position:absolute;top:70px;left:2%;background:white;height:750px;} h2{border-color:none;color:#224abe;font-weight:bold;}
 h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
 .s{display:block;}#accordionSidebar{width:120px;margin-top:-150px;}
+.menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -227,13 +234,16 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 #content3 {width:40%;} .content_home{width:70%;}
+.menu_mobile{padding:1%;color:black;width:35%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1500px) {
 #panier{margin-left:-20%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -247,6 +257,10 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .input{display:none;} #examp{width:60%;margin-left:-5%;}
+.menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+
 }
 
 
@@ -304,9 +318,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -503,7 +517,7 @@ echo $_SESSION['token'];?>">
 <!--div black-->
 <div id="pak" style="display:none"></div>
 <div id="panier"></div>
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -528,13 +542,25 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-    $(document).on('click','.titre',function(){
+    $('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 });
+	
+	$(document).on('click','.titre',function(){
 	 $('.datas').slideToggle();
 	});
-	
-	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
-	 });
 	
 	$(document).on('click','.ouvrir',function(){
 	 $('.montant').css('display','block');
@@ -559,10 +585,7 @@ echo $_SESSION['token'];?>">
      	$('.ouvrir1').css('display','block');
        $('.ouvrir12').css('display','none');	  
 	});
-	
-	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
-	 });
+
 	 
 
   $('#sms').click(function(){
@@ -585,6 +608,7 @@ echo $_SESSION['token'];?>">
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+   $('.menu_mobile').css('display','none');
  });
  
  $('.sup').click(function(){

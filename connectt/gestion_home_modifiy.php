@@ -334,6 +334,11 @@ margin-left:-10px;}
 h3{color:#06308E;font-size:16px;font-weight:bold;} 
 .indispo{display:none;}
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
 
 @media (max-width: 575.98px) { 
 
@@ -379,6 +384,9 @@ font-weight:bold;border-color:white;font-size:12px;}
 .form-select{display:none;} h4{display:none;} 
  #add_local{margin-top:30px;margin-left:15%;width:75%;}
 
+.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -426,6 +434,10 @@ font-weight:bold;border-color:white;font-size:12px;}
 .form-select{display:none;} h4{display:none;} 
  #add_local{margin-top:30px;margin-left:15%;width:75%;}
  .center{background-color:#eee;width:100%;height:1200px;padding:1.5%;margin-top:5px;}
+ .menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+ 
 }
 
 
@@ -446,6 +458,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 </style>
@@ -537,9 +552,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn">
+                    <span id="sidebarToggleTop" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -752,9 +767,23 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+     
+	 $('#navs').click(function(){
+	$('.collapse').slideToggle();
 	 });
+   
+ $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 }); 
+
 	 
 	 $(document).on('click','.titre',function(){
 	 $('.data').slideToggle();

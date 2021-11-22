@@ -41,7 +41,7 @@ include('inc_session.php');
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:white;width:80%;height:1200px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
@@ -121,15 +121,20 @@ transition: all 200ms;}
 .btn{display:none;}
 #searchDropdown{display:none;}
 .blog{color:black;padding:3%;fontsize:18px;} .lien{color:#0661BC;font-size:25px;}
+
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
 
 @media (max-width: 575.98px) { 
-
+#accordionSidebar{display:none;} 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
-.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:1150px;}
+.cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:1350px;}
 ul{display:none;}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:300px;}
@@ -146,6 +151,9 @@ padding-bottom:15px;border-bottom:2px solid #eee;} .df{margin-left:30%;}
 label,input{display:block;} .col{display:block;}
 #code{width:250px;} .btn{display:block;} #panier,#sms{display:none;}
 .blog{margin-top:110px;} #collapse{display:none;} .bs{display:none;}
+.menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -154,7 +162,7 @@ label,input{display:block;} .col{display:block;}
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1600px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1550px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -166,17 +174,19 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
-height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1200px;} .dy{display:none} #tab{margin-left:-13%;}
+height:2800px;overflow-y:scroll;z-index:5;} .dy{display:none} #tab{margin-left:-13%;}
 #tab{width:70%;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:100px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;border-radius:15px;}
 #tab{width:60%;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1300px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1700px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -189,8 +199,11 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
-.center{height:1400px;} .detail{margin-left:12.5%;}
+.detail{margin-left:12.5%;}
 #tab{margin-left:-5%;} 
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 </style>
@@ -249,9 +262,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -502,7 +515,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <div id="donns"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -527,10 +540,21 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-
-  $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+   $('#navs').click(function(){
+	$('.collapse').slideToggle();
 	 });
+   
+ $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 }); 
 
   $('#sms').click(function(){
 	$('.drop').slideToggle();
@@ -558,6 +582,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    $('#pak').css('display','none');
    $('.reini').css('display','none');
    $('#form3').css('display','none');
+   $('.menu_s').css('display','none');
  });
  
     $('.der1').click(function(){

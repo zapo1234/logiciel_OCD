@@ -25,12 +25,9 @@ include('inc_session.php');
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar" class="accordionSidebar">
             <!--slideBar css --->
-             <div class="s">
-              <a href="deconnexion.php">
-			  <img src="img/logout.png" id="logout" alt="logout" width="45px" height="45px">
-             </div>			 
+             		 
             <!-- Sidebar - Brand -->
             <a href="#"  title="importer votre logo" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -43,7 +40,9 @@ include('inc_session.php');
 				</div><!--affichage ajax log-->
 				</div>
             </a><br/><br/><br/><br/>
-
+              
+			  <div class="s"><li><a href="deconnexion.php">
+			  <img src="img/logout.png" id="logout" alt="logout" width="45px" height="45px"></li></div>
             <!-- Nav Item - Dashboard -->
             <?php
 			
@@ -211,4 +210,7 @@ include('inc_session.php');
 
         </ul>
 		
-		
+	
+
+
+ 

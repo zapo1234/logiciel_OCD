@@ -87,8 +87,8 @@ ul a{margin-left:3%;} .annuler{background-color:white;width:350px;height:200px;b
 .print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
  #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
 
-#result{width:100%;height:580px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:90%;border:2px solid #eee;height:90px;border-radius:30px;}
-.sends{cursor:pointer;position:absolute;left:77%;top:800px;background:white;padding:0.8%;border-radius:50%;}
+#result{width:100%;height:580px;overflow-y:scroll;}.message{} #message{padding:1%;margin-left:2%;width:83%;border:2px solid #eee;height:90px;border-radius:30px;}
+.sends{cursor:pointer;position:absolute;left:72%;top:710px;padding:0.8%;border-radius:50%;} .envoi{border-radius:30px;width:150px;height:40px;background:green;border:2px solid green;color:white;}
 
 .datas_messanger{color:black;margin-top:8px;width:40%;background:white;margin-left:1%;padding:2%;
 border-radius:25px;}
@@ -138,6 +138,11 @@ margin-left:-10px;}
 .btn{display:none;}
 #collap{display:none;}
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
 @media (max-width: 575.98px) { 
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -177,13 +182,17 @@ border-radius:25px;}
 
 .bg{border:1px solid #eee;margin-left:-70%;background:white;width:300px;height:300px;padding:4%;margin-top:0px;}
     .bs{margin-left:-70%;width:300px;height:300px;border:1px solid #eee;background:white;} #result{height:450px;} .sends{margin-top:-130px;}
- .s{display:block;}
+ .s{display:block;} .envoi{display:none;}
+ #accordionSidebar{display:none;} 
+ .menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:900px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:700px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -200,14 +209,18 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .btn{display:none;} #searchDropdown{display:none;} .btn{display:block;}
 .bg{border:1px solid #eee;margin-left:-30%;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
     .bs{margin-left:-30%;width:340px;height:300px;border:1px solid #eee;background:white;} 
-  .sends{margin-left:5%;margin-top:-60px;} #message{width:70%;} .action{padding-left:50%;}
+  .sends{margin-left:5%;margin-top:-60px;} #message{width:78%;} .action{padding-left:50%;}
   .sends{margin-left:5%;margin-top:-90px;} 
+  #result{width:100%;height:480px;overflow-y:scroll;}
+  .menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
-@media (min-width: 1024px) and (max-width: 1500px) {
+@media (min-width: 1024px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:95%;margin:0;padding:0;height:800px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:95%;margin:0;padding:0;height:400px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -223,7 +236,12 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
 .bg{border:1px solid #eee;margin-left:-30%;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
     .bs{margin-left:-30%;width:340px;height:300px;border:1px solid #eee;background:white;}
-
+	#result{width:100%;height:480px;overflow-y:scroll;}
+    #message{width:80%;} 
+	
+	.menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 </style>
@@ -279,9 +297,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -315,7 +333,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					<form method="post" action="" id="form-sendm">
 					<span id="error"></span><!--message d'erreur'-->
 					<textarea name="message" id="message" rows="3" placeholder="Taper votre message"></textarea>
-					<div class="sends"><i class="fa fa-paper-plane" aria-hidden="true" style="color:green"></i></div>
+					<div class="sends"><button type="button" class="envoi">envoyer</button>
 					</div>
                     </form>
                    </div><!--content-->
@@ -360,7 +378,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <!--div black-->
 <div id="pak" style="display:none"></div>
 <div id="panier"></div><!--div ajax retour facturation-->
-
+<?php include('inc_menu.php');?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -386,11 +404,22 @@ height:2800px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-    
-	 
-	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+    $('#navs').click(function(){
+	$('.collapse').slideToggle();
 	 });
+	
+	$('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 }); 
+	
 	
 	$('#news_data').click(function(){
 	$('.bs').slideToggle();

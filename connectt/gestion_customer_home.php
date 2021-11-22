@@ -55,7 +55,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 
-.conten1,.conten2{float:left;margin-left:2%;background:white;height:700px;}  .conten2{width:20%;} .conten1{width:75%;overflow-y:scroll;}
+.conten1,.conten2{float:left;margin-left:2%;background:white;height:700px;}  .conten2{width:20%;} .conten1{width:95%;overflow-y:scroll;}
 
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
@@ -97,9 +97,6 @@ ul.winners li{
   
 }
 
-
-
-
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
@@ -112,8 +109,14 @@ h3{font-size:20px;padding:2%;color:black;border-bottom:1px solid #eee;width:95%;
 .attention{color:white;background:#31C813;padding:1%;border-radius:20px;font-family:arial;} .mobile{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
+
 @media (max-width: 575.98px) { 
-#panier{display:non;}
+#panier{display:non;} #accordionSidebar{display:none;} #searchDropdown{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -126,7 +129,10 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 input{display:block;} .form-select{display:none;} #panier{display:none;}
 .mobile{display:block;border-bottom:2px solid #eee;color:black;height:100px;padding:3%;} .tbs{display:none;}.conten1{width:95%;padding:3%;} .conten2{display:none;}
-.btn{display:block;} #but{display:none;} 
+ #but{display:none;} 
+ .menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -147,6 +153,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 .content3 {width:40%;}
+.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -167,6 +176,9 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .input{display:none;} #examp{width:60%;margin-left:-5%;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
@@ -269,9 +281,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -279,8 +291,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                         <div class="input-group">
                             
                            <div class="inputs">
-                               Agenda mémoire  <button type="button" class="btn btn-primary" id="but">
-                              +</button>
+                              Réservation en cours
                             </div>
 
                         
@@ -300,11 +311,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					<h3>Suivi des arrivées clients en temps réel en cas de réservation</h3>
 					<div id="result"></div><!--retour ajax -->
 					</div><!--conten1-->
-
-                    <div class="conten2">
-					<h3>Envoyer des liens de visite de locaux à des clients</h3>
-					
-					</div>
  
     
 	                  </div>
@@ -343,7 +349,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <!--div black-->
 <div id="pak" style="display:none"></div>
 <div id="panier"></div>
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -369,8 +375,20 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <script type="text/javascript">
    $(document).ready(function(){
     
-	$('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+	$('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
 	 });
 	 
 

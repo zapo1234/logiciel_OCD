@@ -215,9 +215,9 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <span id="sidebar" class="btns" rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -395,7 +395,25 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
   <script src="js/depense.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    function lists(page) {
+    $('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 });
+	 
+	
+	
+	function lists(page) {
 		var id = <?php echo $_GET['data_id'];?>;
 		$.ajax({
 		url: "recher_depense_site.php?data_id=<?php echo$_GET['data_id'];?>",

@@ -32,7 +32,7 @@ include('inc_session.php');
     <style>
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{display:none;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;height:270px;border:1px solid #eee;background:#eee;text-align:center;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
@@ -120,9 +120,9 @@ border-radius: 15px;} .error3,.error4,.error6{color:#AB040E;font-size:13px;}
 
 #tls tr:hover {background-color: #ddd;}
 
-#tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
+#tls th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;border:2px solid #D2EDF9}
 
-#tls{margin-top:10px;color:black;font-size:15px;}
+#tls{margin-top:10px;color:black;font-size:15px;width:125%;}
 
  #tss td, #tss th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
 
@@ -158,6 +158,8 @@ transition: all 200ms;}
 .h1{padding:1.5%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;}
 
 #panier{position:fixed;left:60%;top:15px;color:black;font-size:14px;background:black;opacity:0.7;padding:1%;color:white;border-radius:5px;}
+.but_recher{width:110px;height:30px;border-radius:15px;background:#09AB15;
+ border:2px solid #09AB15;color:white;}
 
 .btn{display:none;} #recher,#rechers{width:25%;height:40px;
  color:black;
@@ -178,6 +180,18 @@ transition: all 200ms;}
 	border-radius:15px;
 	margin-left:3%;
 }
+
+#recher_date{width:20%;height:150px;position:absolute;
+	z-index:4;
+	left:40%;
+	top:100px;background:white;padding:2%;}  #search_date{width:90%;color:black;font-size:18px;}
+	h3{color: black;font-family: arial;font-size: 18px;text-align: center;
+	}
+	
+	#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -203,7 +217,11 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
 .dir td{display:block;} #examp{width:80%;margin-top:15px;} #but{width:70px;height:25px;padding:2%;} .btn{display:block} #rechers{display:block;width:80%;} .mobiles{display:block;color:black;font-size:15px;} #recher{display:none;} #tls{display:none;} #searchDropdown{display:none;} .reini{top:20px;left:5%;}
- .s{display:block;}
+ .s{display:block;} #accordionSidebar{display:none;}
+.menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+#recher_date{width:30%;height:150px;}
 }
 
 
@@ -225,14 +243,17 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} #examp{width:90%;margin-left:-10%;margin-top:30px}
 .result{margin-left:-20%;margin-top:5px;} 
-
+#tls{margin-top:10px;color:black;font-size:15px;width:95%;}
+#recher_date{width:30%;}
+.menu_mobile{padding:1%;color:black;width:33%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1500px) {
 #panier{margin-left:-20%;display:none;}
-#logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+ .side{display:none;} .bs{display:none;}.bg{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -247,6 +268,11 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2000px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} #examp{width:95%;margin-left:-12%;margin-top:10px;}
 .result{margin-left:-20%;margin-top:5px;} h2{font-size:14px;}
+#tls{margin-top:10px;color:black;font-size:15px;width:100%;}
+#recher_date{width:30%;}
+.menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
  
@@ -288,9 +314,9 @@ height:2000px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -405,6 +431,25 @@ height:2000px;overflow-y:scroll;z-index:5;}
 
  </div><!--reini---->
  
+ <div id="recher_date" style="display:none">
+<h3>Sélectionnez une période</h3>
+<select id="search_date" name="search_date" class="form-control">
+        <option selected>Choisir...</option>
+        <option value="Jan">Janvier</option>
+		<option value="f">Février</option>
+		<option value="Mar">Mars</option>
+		<option value="Avr">Avril</option>
+		<option value="Mai">Mai</option>
+		<option value="Juin">Juin</option>
+		<option value="Juil">Juillet</option>
+		<option value="Ao">Août</option>
+		<option value="Sept">Septembre</option>
+		<option value="octo">Octobre</option>
+		<option value="Nov">Novembre</option>
+		<option value="Décem">Décembre</option>
+      </select>
+</div>
+ 
  <div id="data_modifier"></div><!--données modifier depense-->
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
@@ -445,7 +490,7 @@ height:2000px;overflow-y:scroll;z-index:5;}
 <div id="paks" style="display:none"></div>
 <div id="result"></div><!--retour ajax-->
 <div id="panier"></div><!--retour --ajax-->
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -470,6 +515,27 @@ height:2000px;overflow-y:scroll;z-index:5;}
     <?php include('inc_foot_scriptjs.php');?>
   <script src="js/depense.js"></script>
   <script type="text/javascript">
+  $('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 });
+	 
+  $(document).on('click','.but_recher',function(){
+			$('#recher_date').css('display','block');
+			$('#pak').css('display','block');
+			
+		});
   
   $(document).on('click','.action',function(){
 	var id = $(this).data('id2');
@@ -507,10 +573,6 @@ $(document).on('click','.actios',function(){
   $('#contes'+id).slideToggle();
  });
   
-  
-  $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
-	 });
 	 
 	 $('.buts').click(function(){
    $('.reini').css('display','block');
@@ -586,6 +648,7 @@ $(document).on('click','.actios',function(){
 	         panier();
 		    }
           });
+		  
 	 
     }); 
   </script>

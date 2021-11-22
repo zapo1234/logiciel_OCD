@@ -34,9 +34,9 @@ if(!isset($_GET['data_date'])){
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-	.s{display:none;}
+	.s{display:none;} .btn{display:none;}
     h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
+    #collapse{display:none;width:300px;height:800px;padding:2%;position:fixed;top:60px;left:80%;border-shadow:3px 3px 3px black;}
     
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:#eee;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
@@ -83,7 +83,7 @@ if(!isset($_GET['data_date'])){
 
 #tb th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tb{margin-top:10px;color:black;font-size:16px;}
+#tb{margin-top:10px;color:black;font-size:16px;width:125%;}
 
 
 #tbs td, #tbs th {border: 1px solid #ddd;padding: 8px;width:150px;text-align:center;font-size:15px;}
@@ -94,7 +94,7 @@ if(!isset($_GET['data_date'])){
 
 #tbs th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tbs{margin-top:10px;}
+#tbs{margin-top:10px;width:125%;}
 
 
 
@@ -219,10 +219,17 @@ width:40%;height:750px;overflow-y:scroll;}
  #search_date{width:90%;color:black;font-size:18px;}
  
  h4{position:fixed;top:300px;left:37%;font-size:32px;color:#06308E;}
+ 
+ #menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+
 
 @media (max-width: 575.98px) { 
-#panier{display:none;}
+#panier{display:none;} .s{display:block;}
 .envoyer{margin-left:-5%;}
+#accordionSidebar{display:none;} 
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2100px;}
@@ -239,15 +246,18 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 .bg-gradient-primary{display:none;} .data1,.data2,.data3,.data4{height:40px;width:40%;padding:2%;text-align:center;}
 .annuler{margin-left:3%;} .dp{padding-left:3%;font-size:20px;color:black;font-weight:bold;}
 h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{padding-left:50%;} .btn{display:block;}
-.delete{position:absolute;top:150px;left:55%;color:white;background:#F83127;border:2px solid #F83127} .dh{display:none;} h4{position:fixed;top:300px;left:10%;font-size:32px;color:#06308E;}
+.delete{position:absolute;top:100px;left:55%;color:white;background:#F83127;border:2px solid #F83127} .dh{display:none;} h4{position:fixed;top:300px;left:10%;font-size:32px;color:#06308E;}
 .navbar-nav{display:none;} .dert{font-size:15px;}
+.menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -262,13 +272,16 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;} .btn{display:block;}
 .delete{position:absolute;top:100px;left:64%;color:white;background:#F83127;border:2px solid #F83127} h4{position:fixed;top:300px;left:20%;font-size:28px;color:#06308E;}
+.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -283,6 +296,17 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;}
 .delete{position:absolute;top:95px;left:60%;color:white;background:#F83127;border:2px solid #F83127} h4{position:fixed;top:300px;left:25%;font-size:28px;color:#06308E;}
+.btn{display:block;} #tb{width:75%;}
+    #result_s {padding: 2%;color: black;z-index: 5;position: absolute;top:50px;left: 30%;
+    background: white;
+    width: 60%;
+    height: 750px;
+    overflow-y: scroll;
+	}
+	
+  .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 /*------------------------------------------------------------------
@@ -369,9 +393,9 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn mr-3">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -382,34 +406,8 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
                                Lister des factures  
                             </div>
 
-                        <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="recher" name="recher">
-                         <option selected>lister sur un site</option>
-						 <?php
-			
-			// lister les les site pour afficher des facture
-			// recupére les permission 
-			// recuperer la permission pour afficher le checkout
-   	// emttre la requete sur le fonction
-        $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
-        $rel->execute(array(':email_user'=>$_SESSION['email_user']));
-	     $donns =$rel->fetch();
-		 
-		 if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
-		 
-          $rel=$bds->prepare('SELECT code,society FROM tresorie_customer WHERE email_ocd= :email_ocd');
-         $rel->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-		 }
-		 if($donns['permission']=="user:employes"){
-			$rel=$bds->prepare('SELECT code,society FROM tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
-         $rel->execute(array(':code'=>$donns['code'],
-		                     ':email_ocd'=>$_SESSION['email_ocd'])); 
-			}
-         $donnees = $rel->fetchAll();
-			foreach($donnees as $value){
-	        echo'<option value="'.$value['code'].'">'.$value['society'].'</option>';
-              }
-					?>	  
-                          </select>
+                        <div class="input">
+						 
 						  
                           </div>  
                         </div>
@@ -491,6 +489,7 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 <div id="panier"></div><!--ajax panier facturation-->
 <div id="results_s"></div><!--div pour afficher les facture imprimer-->
 <div id="details"></div><!--details facture-->
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -516,7 +515,24 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
   <script src="js/facture.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    function lists(page) {
+   
+   $('#navs').click(function(){
+	$('.collapse').slideToggle();
+	 });
+
+    $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 });
+   
+   function lists(page) {
 		$.ajax({
 		url: "recher_facture_data.php?data_date=<?php echo$_GET['data_date'];?>",
 		method: "POST",
