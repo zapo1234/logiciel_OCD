@@ -303,6 +303,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		<div id="resultat"></div><!--requete ajax-->
 		 <div id="resultats"></div><!--requete ajax-->
        </div>
+	   <input type="submit" id="butto" value="">
        </form>
 		</div>
 		
@@ -776,7 +777,7 @@ $('#news_data').click(function(){
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
-		 $('#resultat').html('');
+		 //envoi du formulaire add_reservation
 		//envoi du formulaire add_reservation
 		$('#form_reservation').submit();
 	 },3000);

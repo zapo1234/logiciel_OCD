@@ -792,8 +792,6 @@ $('#news_data').click(function(){
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
-		 $('#resultat').html('');
-		 //envoi du formulaire add_reservation
 		$('#form_reservation').submit();
 	 },3000);
 	 }
@@ -810,8 +808,7 @@ $('#news_data').click(function(){
 	 var type =$('#type_logement'+id).val();
 	 var nbjour = $('#nbjour').val();
 	 
-	 
-	 $.ajax({
+	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
 	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
