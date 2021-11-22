@@ -154,7 +154,7 @@ label,input{display:block;} .col{display:block;}
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1600px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -169,14 +169,13 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .dy{display:none} #tab{margin-left:-13%;}
 #tab{width:70%;} .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:100px;left:12%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;border-radius:15px;}
-#tab{width:60%;}
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1300px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -321,7 +320,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="col">
                        <label>Choisir un site<br/>NB:!important si vous souhaitez gérer au moins 2 site</label>
       <select id="code" name="code" class="form-control">
-        <option selected value="0">Choose...</option>
+        <option selected>Choose...</option>
         <option value="1">site 1</option>
 		<option value="2">site 2</option>
 		<option value="3">site 3</option>
@@ -332,7 +331,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					  
 					<div class="form-row">
                     <div class="col">
-                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site">
+                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site" required>
                     <br/><span class="socie"></span></div>
 				 
 				 </div>
@@ -498,7 +497,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
 <!-- retour ajax edit user-->
 <div id="datos"></div>
-<div id="data"></div>
+
 <div id="donns"></div>
 <!--div black-->
 <div id="pak" style="display:none"></div>
@@ -529,7 +528,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    $(document).ready(function(){
 
   $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
 
   $('#sms').click(function(){
@@ -707,6 +706,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	  event.preventDefault();
 	  
 	  var action="parameter";
+	 var form_data = $(this).serialize();
 	 var nom = $('#nom').val();
 	 var role = $('#role').val();
 	 var prenom = $('#prenom').val();
@@ -759,14 +759,16 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	url:'result_view_home.php',// on traite par la fichier
 	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role,code:code,society:society},
 	success:function(data) { // on traite le fichier recherche apres le retour
-     $('#datos').html(data);
+     $('#data').html(data);
 	 
 	}
     });
-		setInterval(function(){
-		 $('#datos').html('');
+	
+	setInterval(function(){
+		 $('#data').html('');
 		 location.reload(true);
 	 },3000);
+		
 	}
 	 
 	  
@@ -818,7 +820,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	setInterval(function(){
 		 $('#data').html('');
 		 location.reload(true);
-	 },3000);
+	 },5000);
     	 
 	});
 	

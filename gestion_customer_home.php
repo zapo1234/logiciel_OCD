@@ -55,7 +55,7 @@ background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid
 .h6{color:red;font-weight-bold;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 
 
-.conten1,.conten2{float:left;margin-left:2%;background:white;height:700px;}  .conten2{width:20%;} .conten1{width:95%;overflow-y:scroll;}
+.conten1,.conten2{float:left;margin-left:2%;background:white;height:700px;}  .conten2{width:20%;} .conten1{width:75%;overflow-y:scroll;}
 
 
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
@@ -150,7 +150,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1350px) {
 #panier{margin-left:-20%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;width:100px;} .center{width:100%;margin:0;padding:0;height:1000px;}
@@ -300,6 +300,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					<h3>Suivi des arrivées clients en temps réel en cas de réservation</h3>
 					<div id="result"></div><!--retour ajax -->
 					</div><!--conten1-->
+
+                    <div class="conten2">
+					<h3>Envoyer des liens de visite de locaux à des clients</h3>
+					
+					</div>
  
     
 	                  </div>
