@@ -42,7 +42,7 @@ if(!isset($id) AND empty($id)){
              <span class="sr-only">Loading...</span>
              </div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/gestion_facture_site.php?data_id='.$id.'"/>';
+             <meta http-equiv="Refresh" content="4; url=https://connect.ocdgestion.com/gestion_facture_site.php?data_id='.$id.'"/>';
 	 }
 	 
  }

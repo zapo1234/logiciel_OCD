@@ -361,8 +361,8 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .pass{color:#650699;font-weight:bold;}
 .annule{color:#C81C31;font-weight:bold}
 .live-infos{
-  width: 250px;
-  height: 200px;
+  width: 245px;
+  height:250px;
   overflow: hidden;
   position: relative;
   background-color:white;
@@ -446,10 +446,18 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 .a,.c,.b,.d{color:black;font-size:15px;margin-top:4px;} .t{color:white;background:green;border:3px solid green;border-radius:50%;width:32px;height:32px;font-weight:bold;}
 .t3{width:32px;height:32px;background-color:#F83127;border-radius:50%;border:3px solid #F83127;color:white;font-weight:bold;}
 .t1{width:32px;height:32px;background-color:#C10D23;border-radius:50%;border:3px solid #C10D23;color:white;font-weight:bold;}
+    .t2{width: 32px;height: 32px;background-color: #7BCCF8;border-radius:50%;
+    border: 3px solid #7BCCF8;
+    color: white;
+    font-weight: bold;
+	}
+.btns{display:none;} .menu_mobile{display:none;}
+#menu_s{margin-left:5%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
-@media (max-width: 575.98px) { 
-.s{display:block;margin-top:5px;}
+@media (max-width: 750.98px) { 
+.s{display:block;margin-top:-15px;margin-left:3%}
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
@@ -461,16 +469,19 @@ ul{display:none;}
 height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;}
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
-#accordionSidebar{width:120px;} .btn{display:block;}#searchDropdown{display:none;} 
+#accordionSidebar{display:none;} .btns{display:block;background:white;border-color:white;color:#7BCCF8;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} 
+.menu_mobile{padding:1%;color:black;width:75%;height:900px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
 
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 1024px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -478,20 +489,23 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
-.btn{display:block;} 
-
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#collapse{position:absolute;display:none;left:62%;height:1200px;}
+#collapse{position:absolute;display:none;left:70%;height:1200px;}
+.menu_mobile{padding:1%;color:black;width:35%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:10px;left:5%;z-index:4;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1500px) {
 #panier{margin-left:-30%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;margin-top:-150px;} 
+.center{width:100%;margin:0;padding:0;height:1400px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -499,12 +513,12 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .users{display:block;color:black;font-family:arial;font-size:13px;} h2{margin-left:3%;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
-.btn{display:block;} 
-
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
-#collapse{position:absolute;display:none;left:70%;height:1200px;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 }
 
 
@@ -521,7 +535,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bn">
-                    <h1>Les enregistrements récents</h1>
+                    <h1>Caisse Journalières</h1>
                       
                   <div class="container">
  
@@ -632,9 +646,9 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn rounded-circle mr-3">
-                        <i class="fa fa-bars" style="color:blue"></i>
-                    </button>
+                    <span id="sidebar" class="btns">
+                        <i class="fa fa-bars"></i>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -701,7 +715,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					
 					     <div class="cont2">
 						 <div class="titre"><i class="fas fa-sync"></i>
-						 Locaux indisponible
+						 Statistiques locaux
 						 </div>
 						 <div class="a">'.$vh.'</div>
 						 <div class="b">'.$vb.'</div>
@@ -782,7 +796,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <!--div black-->
 <div id="pak" style="display:none"></div>
 <div id="panier"></div><!--ajax panier  facturation-->
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -808,8 +822,25 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
   <script type="text/javascript">
    $(document).ready(function(){
      
-	 $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').css('display','block');
+	 $('#navs').click(function(){
+	$('.collapse').slideToggle(); 
+	 });
+	 
+	 $('#sidebar').click(function(){
+	 $('#pak').css('display','block');
+	 $('.menu_mobile').css('display','block');
+	 });
+	 
+	 $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
 	 });
 	 
 	$('#sms').click(function(){
@@ -893,6 +924,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	$('#examp').css('display','none');
    $('#pak').css('display','none');
    $('.reini').css('display','none');
+   $('.menu_mobile').css('display','none');
  });
  
     // afficher la div pour réinitailiser les chiffres	

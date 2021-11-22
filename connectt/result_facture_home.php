@@ -16,11 +16,8 @@ $page=1;
 }
 
 $smart_from =($page -1)*$record_peage;
-	
-
-   if($_POST['action']=="fetch") {
-	
-    // recuperer la permission pour afficher le checkout
+	if($_POST['action']=="fetch") {
+	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
@@ -34,7 +31,7 @@ $smart_from =($page -1)*$record_peage;
 		}
 		
 		// afficher les facture.
-		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
+		if($donns['permission']=="user:employes"){
 		$session=$donns['code'];
 		// emttre la requete sur le fonction
        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
@@ -63,19 +60,18 @@ $smart_from =($page -1)*$record_peage;
 	</form></div>';
 	// entete du tableau
 	 echo'<form method="post" id="formc" action="">
-	 '.$puts.'<table id="tb">
+	 '.$puts.'<table id="tb" class="table">
      <thead>
      <tr class="tf">
 	 <th></th>
 	  <th scope="col">Date</th>
       <th scope="col">Informations</th>
 	  <th scope="col">Montant(TTC)</th>
-	  <th scope="col">Tva sur HT ajoutée</th>
+	  <th scope="col">Tva ajoutée</th>
 	  <th scope="col">check_in</th>
 	  <th scope="col">check_out</th>
 	  <th scope="col">Compléments</th>
-	  <th scope="col">Action</th>
-	  <th scope="col">facture en pdf</th>
+	  <th scope="col">Actions sur facture</th>
 	  <th scope="col">Imprimer la facture</th>
       </tr>
       </thead>
@@ -227,7 +223,6 @@ $smart_from =($page -1)*$record_peage;
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		
@@ -647,7 +642,6 @@ if($_POST['action']=="mail"){
 		  '.$encaiss.'
 		  '.$annul.'
 		  </div></td>
-		 <td><a href="generate_data_pdf.php?id_fact='.$nombre.'&code_data='.$donnees['code'].'" target="_blank"><i class="far fa-file-pdf" style="color:red;font-size:16px;"></i></a></td>
 		 <td><a href="#" class="prints" data-id6='.$nombre.','.$donnees['code'].'><i class="fa fa-print" aria-hidden="true" style="color:#06308E";></i></a></td>
 	    </tr>';
 		

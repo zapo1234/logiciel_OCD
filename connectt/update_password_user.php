@@ -1,5 +1,7 @@
 <?php
-include('connecte_db.php');
+if(!isset($_GET['user_data'])){
+ header('location:index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +52,6 @@ include('connecte_db.php');
 		border-radius: 1.1rem;
 		outline: 0;
 		max-width: 500px;
-		height:350px;
 		 }
          .tx-tfm{
          text-transform:uppercase;
@@ -95,23 +96,18 @@ include('connecte_db.php');
          }
          #second{display:none;}
 		 label {text-transform:uppercase;}
-		 #sub{height:50px;background:#057ABD;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;margin-bottom:20px;margin-top:20px;} .text{size:11px;text-align:center;}
-			 .myform{height:420px;} 
-			 .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
+		 #sub{height:50px;background:#057ABD;width:350px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} .text{size:11px;text-align:center;}
 			 #as,#ass{position:absolute;color:red;top:300px;z-index:3;left:25%;width:300px;}
 			.contact{color:#CE6C0A;font-weight:bold;}
-			.dnn{position:absolute;top:250px;left:30%;color:red;font-size:14px;}
+			.dnn{width:300px;margin-left:3%;margin-top:5px;margin-bottom:10px;color:red;font-size:16px;}
 			 
 	   @media (max-width: 575.98px) { 
-	   #sub{height:50px;background:#0769BA;width:250px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;margin-top:10px;}
-        .myform{height:420px;} .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
+	   #sub{height:50px;background:#0769BA;width:250px;border:2px solid #0769BA;color:white;border-radius:10px;cursor:pointer;} 
+	   .myform{margin-top:-30px;}  
 	   }
 	   
 	   @media (min-width: 768px) and (max-width: 991px) {
-		 .myform{width:400px;margin-left:-15%;} 
-        .myform{height:420px;} 
-			 .h{text-align:center;font-size:20px;margin-bottom:15px;}	   
-			 
+		 .myform{width:400px;margin-left:-15%;}  
 	   }
 	   
 	   @media (min-width: 992px) and (max-width: 1200px) {
@@ -131,43 +127,35 @@ include('connecte_db.php');
 							<div><img src="image/logo.jpg" width="180px" height="100px"></div>
 						 </div>
 					</div>
-                   <form action="reset_password_ocd.php" id="form1" method="post" id="" >
-                        <div class="h">Récupérez vos accès</div>   
+                   <form action=""  method="post" id="user_admin" >
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Entrez nouveau mot de pass </label>
+                              <input type="password" name="pass1"  class="form-control" id="pass1" aria-describedby="emailHelp" placeholder="Nouveau mot de pass" required><br/><span class="pass"></span>
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Confirmez le mot de pass</label>
+                              <input type="password" name="pass2" id="pass2"  class="form-control" aria-describedby="emailHelp" placeholder="" required><br/><span class="pass1"></span><!--retour ajax-->
+                           </div>
+                            
+                           <div class="col-md-12 text-center ">
+                              <button  type="button" id="sub" class="button">
+							valider
+						</button>					
+						<div id="result"></div><!--resutat ajax de la requete-->
+                           <div class="col-md-12 ">
+                              <div class="login-or"><br/>
+                                 <hr class="hr-or">
+                                
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              
+                           </div>
 						   <div class="form-group">
-                              <label for="exampleInputEmail1">Entrez votre EMAIL</label>
-                              <input type="email" name="email_ocd"  class="form-control" id="email_ocd" aria-describedby="emailHelp" placeholder="e-mail">
-                           </div>
-                           
-						   <div class="col-md-12 text-center ">
-                              <button type="submit" class="login100-form-btn" id="sub">
-							Envoyer
-						</button>
-						</form>
-                           </div>
-						   <?php
-						   // traiter le formulaire de verification au mail
-						   $req=$bdd->prepare('SELECT email_ocd,email_user,token_pass FROM inscription_client WHERE email_user= :email_user');
-                          $req->execute(array(':email_user'=>$_POST['email_ocd']));
-                           $donnees=$req->fetch();
-						   if(!empty($_POST['email_ocd'])){
-							   if($donnees['email_user']!=$_POST['email_ocd']){
-								  echo'<div class="dnn">l\'utilisateur n\'existe pas</div>'; 
-							   }
-							   else{
-								  // envoi du mail phpmailler
-								  include('inc_send_email.php');
-							   }
-							}
-						   else{
-							  echo'<div class="dnn">Entrez votre e-mail</div>';  
-						   }
-						   
-						   ?>
-                            <div class="form-group">
                               <p class="text">Optimisation de comptabilité à distance,<br/> Tous droits  réservés  2021-2022</p>
                            </div>
 						   
-                        
+                        </form>
                  
 				</div>
 			</div>
@@ -176,51 +164,60 @@ include('connecte_db.php');
                      </div>
 			</div>
 		</div>
-      </div>  
-    <div id="as"></div>
-	<div id="av"></div>  
-         
-</body>
+      
+   <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script type="text/javascript">
- $(document).ready(function() {
-function envoi(){
-$(document).getElementById('user_admin').submit();
-}
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-$(function() {
-$(document).on('click','#sub',function() {
-	
-// on envoi le formulaire
-// on recupere les deux variale
- var email_ocd =$('#email_ocd').val();
-  var id_ocd =$('#id_ocd').val();
- // on defini des varaible
- if(email_ocd!="" || id_ocd!=""){
- $.ajax({
-	type:'POST', // on envoi les donnes
-	url:'login_connecte.php',// on traite par la fichier
-	data:{email_ocd:email_ocd,id_ocd:id_ocd},
-	async:true,
-	success:function(data) { // on traite le fichier recherche apres le retour
-		$('#ass').html(data);
-	 },
-	 error: function() {
-    $('#ass').text('verifiez la connexion internet'); }
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+<script src="@@path/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <?php include('inc_foot_scriptjs.php');?>
+  <script type="text/javascript">
+  $(document).ready(function(){
+	$('#sub').click(function(){
+ var pass1= $('#pass1').val();
+ var pass2=$('#pass2').val();
+ var pass = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,12}$/;
+     
+	 if(pass1.length=="") {
+		$('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> Entrer un mot de pass');
+	 }
 	 
+	 else if(!pass.test(pass1)){
+      $('.pass').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> le mot de pass doit contenir une lettre majuscule et miniscule,<br/>un chiffre et un caractère sépcial(!$@#)<br/> et doit etre entre de 8 et 12 caractères');
+    }
+	
+	else if(pass1!=pass2){
+		$('.pass1').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>vos mots de pass ne sont pas identiques');
+	}
+	
+	else{
+	$.ajax({
+	type:'POST', // on envoi les donnes
+	url:"reset_password_change.php?user_data=<?php echo$_GET['user_data'];?>",// on traite par la fichier
+	success:function(data) { // on traite le fichier recherche apres le retour
+     $('#result').html(data);
+	}
 	});
- }
- 
- else {
-  $('#as').text(' Entrer vos identifiants OCD !');
-  $('#email_ocd').css('borderColor','red');
-  $('#id_ocd').css('borderColor','red');
-  
-}
- });
-});
-
-
-});
-		
-	</script>
+    	
+	}
+	});
+  });
+   </script>  
+  </body>
+</html>
