@@ -37,13 +37,13 @@ include('inc_session.php');
     <style>
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{display:none;width:width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
+    #collapse{width:width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bg{border:;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
     .bs{width:340px;height:300px;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:#eee;width:95%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:#eee;width:85%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -183,8 +183,13 @@ h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
 
 #menu_s{margin-left:4%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
-.menu_mobile{display:none;}
-.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+.btns{cusor:pointer;display:block;background:white;border-color:white;color:#7BCCF8;}
+.menu_mobile{display:none;padding:1%;color:black;width:20%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{cursor:pointer;position:absolute;top:5px;left:3%;z-index:4;}
+
+#accordionSidebar{display:none;}
+
 
 @media (max-width: 575.98px) { 
 #panier{display:none;} .s{display:block;}
@@ -213,6 +218,7 @@ h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
 .menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -237,13 +243,14 @@ height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 .menu_mobile{padding:1%;color:black;width:35%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1500px) {
+@media (min-width: 992px) and (max-width: 1200px) {
 #panier{margin-left:-20%;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:90%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -260,7 +267,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
-
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -287,8 +294,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <h1>Les enregistrements récents</h1>
-                      
+                    <h1>Caisses journalières poste</h1>
+                     <div id="resultats"></div><!--afficher Ajax-->
                   <div class="container">
  
                   <div class="live-infos">
@@ -657,7 +664,12 @@ echo $_SESSION['token'];?>">
 	 var email = $('#email').val();
 	 var adresse = $('#adresse').val();
 	 var numero =$('#numero').val();
-	 
+	 var mont =$('.mont').text();
+	 var total = $('#total').val();
+	 var mont = $('.mont').text();
+	 var monta =$('.monta').text();
+	 var tva = $('#tva').val();
+	 var nbjou =$('#nbjou').val();
 	 // regex
 	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
     var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
@@ -750,10 +762,10 @@ echo $_SESSION['token'];?>">
 		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
 		 
 		 if(s==1){
-		 $('.nbjour').append(' Durée : <span class="det">'+s+'jour</span>');
+		 $('.nbjour').append(' Durée : <span class="det">'+s+'jour</span><span><input type="hidden" id="nbjou"></span>');
 		 }
 		 if(s > 1){
-			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
+			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span><span><input type="hidden" id="nbjou"></span>');			  
 		 }
 		 $('.content1').css('display','block');
 		 $('.content2').css('display','block');
@@ -763,6 +775,7 @@ echo $_SESSION['token'];?>">
 		 $('.text').css('display','block');
 		 $('.tex').css('display','none');
 		 $('#nbjour').val(s);
+		 $('#nbjou').val(s);
 		 }
 		 
 		 else{
@@ -808,6 +821,7 @@ echo $_SESSION['token'];?>">
 		   $('.text').css('display','block');
 		   $('.tex').css('display','none');
 		   $('#nbjour').val(s);
+		   $('#nbjou').val(s);
 		 }
 		 else{
 			$('.errors').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>la date de départ ne dois pas etre inférieur à celle de l\'entréé');  
@@ -825,10 +839,10 @@ echo $_SESSION['token'];?>">
 		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+tim+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+tis+'</span> </span>');
 		 
 		 if(r==1){
-		 $('.nbjour').append('Durée : <span class="det">'+r+'heure</span>');
+		 $('.nbjour').append('Durée : <span class="det">'+r+'heure</span><span><input type="hidden" id="nbjou"></span>');
 		 }
 		 if(r > 1){
-			$('.nbjour').append('Durée : <span class="det">'+r+'heures</span>');			  
+			$('.nbjour').append('Durée : <span class="det">'+r+'heures</span><span><input type="hidden" id="nbjou"></span>');			  
 		 }
 		 
 		 $('.content1').css('display','block');
@@ -877,6 +891,7 @@ echo $_SESSION['token'];?>">
 		    $('.text').css('display','none');
 			$('.tex').css('display','block');
 			$('#nbjour').val(r);
+			$('#nbjou').val(r);
 		}
 		
 		else{
@@ -897,10 +912,10 @@ echo $_SESSION['token'];?>">
 		 $('.client').append('Réference client : <i class="far fa-user" style="font-size:13px;color:green;"></i><span class="de">'+name+'</span> <i class="fas fa-phone" style="padding-left:4%;color:green;font-size:13px;"></i> contact :<span class="des"> '+numero+'</span><span class="intervalle"> <span class="intervalle"> <i class="fas fa-calendar-minus" style:"font-size:13px;color:green;"></i> Arrivée le  <span class="from">'+datefrom+'</span> ,  <i class="fas fa-calendar-minus" style="font-size:13px;color:green;"></i> Départ le  <span class="todate">'+datefro+' </span></span>');
 		 
 		 if(s==1){
-		 $('.nbjour').append('Durée : <span class="det">'+s+'jour</span>');
+		 $('.nbjour').append('Durée : <span class="det">'+s+'jour</span><span><input type="hidden" id="nbjou">');
 		 }
 		 if(s > 1){
-			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span>');			  
+			$('.nbjour').append('Durée : <span class="det">'+s+'jours</span><span><input type="hidden" id="nbjou"></span>');			  
 		 }
 		 $('.content1').css('display','block');
 		 $('.content2').css('display','block');
@@ -910,6 +925,7 @@ echo $_SESSION['token'];?>">
 		 $('.text').css('display','block');
 		 $('.tex').css('display','none');
 		 $('#nbjour').val(s);
+		 $('#nbjou').val(s);
 		 }
 		 
 		 else{
@@ -950,6 +966,7 @@ echo $_SESSION['token'];?>">
 			$('.text').css('display','block');
 		    $('.tex').css('display','none');
 		    $('#nbjour').val(s);
+			$('#nbjou').val(s);
 			
 		 }
 		 else{
@@ -987,7 +1004,6 @@ echo $_SESSION['token'];?>">
 	url: 'list_data_home.php',// on traite par la fichier
 	data:{days:days,das:das,tim:tim,tis:tis,to:to,dat:dat},
 	success:function(data) { // on traite le fichier recherche apres le retour
-	
 	var dispo = $('.dispo').length;
 	if(dispo==""){
 		$('#return').text('Aucun local disponible pour ces dates');
@@ -1129,14 +1145,11 @@ echo $_SESSION['token'];?>">
 	  else{
 		$('erreur acompte trop grand'); 
 	 }
-	 
 	 }
-	 
 	 if(account.length ==""){
 		$('#rpay').val(0);	
 	}
-	  
-  });
+ });
   
   // afficher les données des encaissements
   function load() {

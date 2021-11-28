@@ -169,6 +169,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #designatio,#fournisseu{height:100px;width:280px;}
 #designation,#description,#fournisseur,#ti{display:block;}
 .dg{padding-left:20%;color:black;} .datis{width:300px;}.repas{padding-left:70%;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 

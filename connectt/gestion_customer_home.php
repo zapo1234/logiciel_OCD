@@ -112,7 +112,7 @@ h3{font-size:20px;padding:2%;color:black;border-bottom:1px solid #eee;width:95%;
 #menu_s{margin-left:4%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
 .menu_mobile{display:none;}
-.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+.btns{display:none;background:white;border-color:white;color:#7BCCF8;}
 
 
 @media (max-width: 575.98px) { 
@@ -133,6 +133,7 @@ input{display:block;} .form-select{display:none;} #panier{display:none;}
  .menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -156,6 +157,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 .menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -179,6 +181,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -224,8 +227,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
         }
 		
 		// afficher les facture.
-		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
-		$session=$donns['code'];
+		if($donns['permission']=="user:employes"){
+		$session=$_SESSION['code'];
 		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types,society FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':code'=>$session,
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
