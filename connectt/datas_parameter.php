@@ -1,4 +1,4 @@
- ;<?php
+<?php
 include('connecte_db.php');
 include('inc_session.php');
 
@@ -78,7 +78,7 @@ include('inc_session.php');
    // Actualiser des données les données dans la base de données inscription_client
    // Actualiser des données les données dans la base de données inscription_client
    // on modifie les données de la base de données guide
-         $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');
+         $ret=$bdd->prepare('UPDATE inscription_client SET email_society= :email, denomination= :des, adresse= :reser, numero_cci= :cci, id_entreprise= :id_en, numero= :res, active= :ac, logo= :log WHERE email_user= :email_user');
         $ret->execute(array(':email'=>$email,
 		                    ':des'=>$name,
 					        ':reser'=>$adresse,

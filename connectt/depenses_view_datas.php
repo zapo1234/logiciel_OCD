@@ -48,14 +48,14 @@ if($_POST['action']=="fetchs") {
 		$puts='<button type="button" class="delete">suprimer <i class="far fa-trash-alt"></i></button>';
 	$depense='<button type="button" class="dep_tresorie">éditer des dépenses</button>';
 	$action='<form method="post" action="excels.php">
-    Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur de numéro facture">
+    Rechercher des fournisseurs <input type="text" class="form" id="recher" name="recher" aria-describedby="emailHelp" placeholder="fournisseur de numéro facture"><span><button  type="button" class="but_recher">Date +</button></span>
 	<span class="expo">Export  <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button>';
 		
 	}
 	else{
 		
 		if($donns['permission']=="user:gestionnaire"){
-		 $depense='<button type="button" class="dep_tresorie">éditer des dépenses</button>';
+		 $depense='<button type="button" class="dep_tresorie">éditer des dépenses</button><span><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		if($donns['permission']=="user:employes"){
 		$depense="";
@@ -69,7 +69,7 @@ if($_POST['action']=="fetchs") {
   // on boucle sur les les resultats
 	// on boucle sur les les resultats
 	
-	echo'<div class="expor"><h2>Gérez les dépenses de l \'entreprise</h2>'. ' '.$mobile.' ' .$action.'
+	echo'<div class="expor">'. ' '.$mobile.' ' .$action.'
 	<span>'.$puts.'</form></div>';
   echo'	<table id="tls">
      <thead>
@@ -410,7 +410,6 @@ if($_POST['action']=="fetchs") {
   // payer le credi fournisseur solde
   if($_POST['action']=="mettre"){
 	  $id =$_POST['id'];
-	  $ids = $_POST['ids'];
 	  $montant = $_POST['mont'];
 	 // aller chercher les auteurs en écriture sur une facture
 	 $res=$bds->prepare('SELECT user,montant FROM depense WHERE id= :ids AND email_ocd= :email_ocd');
@@ -419,6 +418,7 @@ if($_POST['action']=="fetchs") {
    $donns=$res->fetch();
     
 	$monts=$donns['montant']-$montant;
+	echo$monts;
 	// on ajoute le user qui as annulé la facture
 	// création d'un tableau pour recupérer les users
    $user_data = $donns['user'].', <i class="far fa-check-circle" style="color:green;font-size:13px"></i> '.$_SESSION['user'].' a soldé la somme de '.$montant.' au fournisseur xof  le  '.date('d-m-Y').'à  '.date('H:i').'   <span class="edit"></span>';
