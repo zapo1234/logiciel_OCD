@@ -703,6 +703,12 @@ echo $_SESSION['token'];?>">
 	  var adresse =$('#adresse').val();
 	  var date = new Date();
 	  var nbjour =$('#nbjour').val();
+	  var list =  [];
+	  var list1 = [];
+	  var list2 = [];
+	  var choix = $('.choix');
+	  var choix1 =$('.choix1');
+	  var choix2 = $('.choix2');
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
