@@ -372,8 +372,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
   </thead>
   <tbody>
     <tr>
-      <th scope="row"><?php echo$donns['type_logement'];?><br/>
-	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></th>
+      <th scope="row"><i class="fas fa-home" style="font-size:12px"> </i> <?php echo$donns['type_logement'];?><br/></th>
       <td>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></span><br/><br/>
 	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
       <td>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
@@ -389,7 +388,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div id="mobile">
 
 <div><?php echo$donns['type_logement'];?><br/>
-	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
+	  <i class="fas fa-home" style="font-size:12px"> </i></div>
       <div class="dat">Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
 	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
       <div class="dat">Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
@@ -756,7 +755,38 @@ $('#news_data').click(function(){
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
+	  var list =  [];
+	  var list1 = [];
+	  var list2 = [];
+	  var choix = $('.choix');
+	  var choix1 =$('.choix1');
+	  var choix2 = $('.choix2');
+	  var choix_id =$('.choix_id');
+	 
+	  if(choix.length > 0) {
+		  
+		var list = [];
+	   var list1 =[];
+	   var list2 = [];
+	   var choix_id = [];
+	   $(choix).each(function() {
+	    list.push($(this).val());
+		alert(list);
+      });
 	  
+	  $(choix1).each(function() {
+	    list1.push($(this).val());
+		alert(list1);
+      });
+	  
+	  $(choix2).each(function() {
+	    list2.push($(this).val());
+      });
+	   
+       $(choix_id).each(function() {
+	    choix_id.push($(this).val());
+      });	   
+	
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
@@ -783,7 +813,8 @@ $('#news_data').click(function(){
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
 	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
-	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
+	list:list,list1:list1,list2:list2,choix_id:choix_id},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
 		
@@ -794,6 +825,7 @@ $('#news_data').click(function(){
 	 setInterval(function(){
 		$('#form_reservation').submit();
 	 },3000);
+	 }
 	 }
 	});
 	 

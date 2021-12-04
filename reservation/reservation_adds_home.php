@@ -37,10 +37,12 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
    }
     $time1 =date('H:i');
 	$time2=date('H:i');
+	// variable boucle
    $chambre = $_POST['chambre'];
    $montant =$_POST['pay'];
    $id_chambre = $_POST['id_chambre'];
    $type = $_POST['typ'];
+   //variable boucle
    $session=0;
    $dat =date('y-m-d');
    $reste="";
@@ -51,11 +53,11 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
    $mode=3;
    $time=date('H:i');
  // boucler sur les valeurs pour entrer les données dans la bdd
-  for($count=0;  $count<count($_POST['chambre']); $count++){ 
-     $name_chambre = $chambre[$count];
-	 $montants = $montant[$count];
-	 $ids_chambre = $id_chambre[$count];
-	 $types = $type[$count];
+  for($count=0;  $count<count($_POST['list']); $count++){ 
+     $name_chambre = $list[$count];
+	 $montants = $list1[$count];
+	 $ids_chambre = $choix_id[$count];
+	 $types = $list2[$count];
 	  // on redirige vers la page
 		// on insere les données dans la bds-
 		$rey=$db->prepare('INSERT INTO bord_informations (email_ocd,id_chambre,type_logement,dat,chambre,check_in,check_out,time1,time2,date1,date2,montant,mode,mont_restant,encaisser,rete_payer,id_fact,type,code) 

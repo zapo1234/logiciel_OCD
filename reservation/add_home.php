@@ -80,12 +80,12 @@ include('inc_session.php');
 			<tr><td class="list"><span class="d">'.$values['chambre'].'</span>
 			</td></tr>
 			<tr><td><span class="dg">'.$pays.'</span>xof</td>
-			<td><input type="hidden" name="chambre[]" value="'.$values['chambre'].'"></td>
+			<td><input type="hidden" name="chambre[]" class="choix" value="'.$values['chambre'].'"></td>
 			</tr>
 			<tr><td><span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span></td>
-			<td><input type="hidden" name="pay[]" value="'.$pays.'"></td>
-			<td><input type="hidden" name="id_chambre[]" value="'.$values['id'].'">
-			<td><input type="hidden" name="typ[]" value="'.$values['type'].'"></td>
+			<td><input type="hidden" name="pay[]" class="choix1" value="'.$pays.'"></td>
+			<td><input type="hidden" name="id_chambre[]" class="choix_id" value="'.$values['id'].'">
+			<td><input type="hidden" name="typ[]" class="choix2" value="'.$values['type'].'"></td>
 			</tr></table>';
 		}
 		echo'<table>
@@ -183,12 +183,12 @@ include('inc_session.php');
 			<tr><td class="list"><span class="d">'.$values['chambre'].'</span>
 			</td></tr>
 			<tr><td><span class="dg">'.$pays.'</span>xof</td>
-			<td><input type="hidden" name="chambre[]" value="'.$values['chambre'].'"></td>
+			<td><input type="hidden" name="chambre[]" class="choix" value="'.$values['chambre'].'"></td>
 			</tr>
 			<tr><td><span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span></td>
-			<td><input type="hidden" name="pay[]" value="'.$pays.'"></td>
+			<td><input type="hidden" name="pay[]" class="choix1" value="'.$pays.'"></td>
 			<td><input type="hidden" name="id_chambre[]" value="'.$values['id'].'"></td>
-			<td><input type="hidden" name="typ[]" value="'.$values['type'].'"></td>
+			<td><input type="hidden" name="typ[]" class="choix2" value="'.$values['type'].'"></td>
 			</tr></table>';
 			 }
 			}
@@ -253,12 +253,12 @@ if(!empty($_SESSION['add_homes']) AND isset($_SESSION['add_homes'])){
 			<tr><td class="list"><span class="d">'.$values['chambre'].'</span>
 			</td></tr>
 			<tr><td><span class="dg">'.$pays.'</span>xof</td>
-			<td><input type="hidden" name="chambre[]" value="'.$values['chambre'].'"></td>
+			<td><input type="hidden" name="chambre[]" class="choix" value="'.$values['chambre'].'"></td>
 			</tr>
 			<tr><td><span class="remov"><a href ="#" class="remove" data-id3="'.$values['id'].'" class="remove" title="annuler la prise"><i class="fas fa-minus-circle" style="color:#F7890E;font-size:14px;"></i></a></span></td>
-			<td><input type="hidden" name="pay[]" value="'.$pays.'"></td>
-			<td><input type="hidden" name="id_chambre[]" value="'.$values['id'].'"></td>
-			<td><input type="hidden" name="typ[]" value="'.$values['type'].'"></td>
+			<td><input type="hidden" name="pay[]" class="choix1" value="'.$pays.'"></td>
+			<td><input type="hidden" name="id_chambre[]" class="choix_id" value="'.$values['id'].'"></td>
+			<td><input type="hidden" name="typ[]" class="choix2" value="'.$values['type'].'"></td>
 			</tr></table>';
 		     }
 			 
