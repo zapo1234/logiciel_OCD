@@ -235,7 +235,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 }
 
 
-@media (min-width: 992px) and (max-width: 1500px) {
+@media (min-width: 992px) and (max-width: 1300px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}

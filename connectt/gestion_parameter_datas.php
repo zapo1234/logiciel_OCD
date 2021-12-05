@@ -5,6 +5,18 @@ include('inc_session.php');
   $req=$bdd->prepare('SELECT id,email_ocd,email_user,denomination,password,user,numero,permission,user,categories,id_visitor FROM inscription_client WHERE email_ocd= :email_ocd');
    $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    $donns = $req->fetch();
+   
+   // recupere les données 
+  $req=$bds->prepare('SELECT society,code FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnes = $req->fetchAll();
+   $data =[];
+   foreach($donnes as $values){
+	  $datas =  explode(',',$values['society']);
+      foreach($datas as $val){
+         $data[]= $val;
+	  }		  
+   }
  ?>
 
 <!DOCTYPE html>
@@ -94,7 +106,7 @@ label{font-family:arial;color:black;} .enre{font-family:arial;font-size:15px;z-i
 
 #tab th {padding-top: 12px;padding-bottom: 12px;text-align: left;color: black;text-align:center;background:#D2EDF9;border:2px solid #D2EDF9}
 
-#tab{width:90%;}
+#tab{width:90%;margin-left:-8%;}
 
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
 .drop{position:absolute;top:50px;width:240px;height:200px;background:white;border:2px solid white;margin-left:-5px;
@@ -125,7 +137,7 @@ transition: all 200ms;}
 #menu_s{margin-left:4%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
 .menu_mobile{display:none;}
-.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+.btns{display:none;background:white;border-color:white;color:#7BCCF8;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
@@ -154,6 +166,7 @@ label,input{display:block;} .col{display:block;}
 .menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -180,6 +193,7 @@ height:2800px;overflow-y:scroll;z-index:5;} .dy{display:none} #tab{margin-left:-
 .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -200,10 +214,11 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .detail{margin-left:12.5%;}
-#tab{margin-left:-5%;} 
+#tab{margin-left:-13%;} 
 .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 </style>
@@ -332,21 +347,25 @@ height:2800px;overflow-y:scroll;z-index:5;}
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Choisir un site<br/>NB:!important si vous souhaitez gérer au moins 2 site</label>
-      <select id="code" name="code" class="form-control">
-        <option selected value="0">Choose...</option>
-        <option value="1">site 1</option>
-		<option value="2">site 2</option>
-		<option value="3">site 3</option>
-      </select>
+                       
+          <?php
+		  if(count($data)==2 OR count($data)==3){
+		$number =count($data)+1;
+	       echo'<label>Choisir le site pour votre employé<br/></label>
+		   <select id="code" name="code" class="form-control" required>
+		   <option selected value="0">Choisir un site </option>';
+			for($i=0; $i< $number; $i++){
+			$r = $i+1;
+             echo'<option value="'.$r.'">'.$data[$i].'</option>';
+			}
+            echo'</select>';			
+		  }
+		?>
 					   <span class="code"></span>
                       </div>
 					  </div>
 					  
 					<div class="form-row">
-                    <div class="col">
-                   <label>filiale(dénomination)</label> <input type="text" id="society" name="society" class="form-control" placeholder="nom du site">
-                    <br/><span class="socie"></span></div>
 				 
 				 </div>
 				 
@@ -739,8 +758,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	 var num =$('#num').val();
 	 var emails = $('#emails').val();
 	 var code =$('#code').val();
-	 var society = $('#society').val();
-	 
+	 var society = $('#code option:selected').text();
 	 // regex //
 	var regex = /^[a-zA-Z0-9éèàç]{2,25}(\s[a-zA-Z0-9éèàçà]{2,25}){0,4}$/;
     var rege = /^[a-zA-Z0-9-çéèàèç°]{1,25}(\s[a-zA-Z0-9-°]{1,25}){0,2}$/;
@@ -781,7 +799,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		
 	$.ajax({
 	type:'POST', // on envoi les donnes
-	url:'result_view_home.php',// on traite par la fichier
+	url:'test_visuel.php',// on traite par la fichier
 	data:{action:action,emails:emails,num:num,prenom:prenom,password:password,nom:nom,role:role,code:code,society:society},
 	success:function(data) { // on traite le fichier recherche apres le retour
      $('#datos').html(data);

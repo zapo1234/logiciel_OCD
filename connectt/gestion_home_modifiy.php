@@ -182,13 +182,13 @@ include('inc_session.php');
 	#panier{display:none;}
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{display:none;width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
+    #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
     .bs{width:340px;height:300px;border:1px solid #eee;}
 	.titre,.titres{text-align:center;font-family:arial;color:white;background:#224abe;border:2px solid #224abe;}
 	.en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:#eee;width:95%;height:1100px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:#eee;width:85%;height:1100px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color:black;z-index:2;opacity: 0.6;}
@@ -338,7 +338,12 @@ h3{color:#06308E;font-size:16px;font-weight:bold;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
 .menu_mobile{display:none;}
 .btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+#accordionSidebar{display:none;}
+.menu_mobile{display:none;padding:1%;color:black;width:20%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{cursor:pointer;position:absolute;top:5px;left:3%;z-index:4;}
 
+#accordionSidebar{display:none;}
 
 @media (max-width: 575.98px) { 
 
@@ -384,7 +389,7 @@ font-weight:bold;border-color:white;font-size:12px;}
 .form-select{display:none;} h4{display:none;} 
  #add_local{margin-top:30px;margin-left:15%;width:75%;}
 
-.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile{padding:1%;color:black;width:35%;height:900px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
 }
@@ -461,6 +466,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+#examp{width:65%;left:15%;height:800px}
 }
 
 </style>
@@ -492,8 +498,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
         }
 		
 		// afficher les facture.
-		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
-		$session=$donns['code'];
+		if($donns['permission']=="user:employes"){
+		$session=$_SESSION['code'];
 		$res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE code= :code AND  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
         $res->execute(array(':code'=>$session,
 		                    ':email_ocd'=>$_SESSION['email_ocd']));
@@ -552,7 +558,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <span id="sidebarToggleTop" class="btns">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
                     </span>
 
@@ -742,7 +748,7 @@ echo $_SESSION['token'];?>">
 <!--div black-->
 <div id="pak"></div>
 <div id="resul"></div>
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -782,6 +788,7 @@ echo $_SESSION['token'];?>">
 	 $('.menu_mobile').css('display','none');
 	 $('#pak').css('display','none');
 	 $('.xs').css('display','none');
+	 $('#examp').css('display','none');
 	 }); 
 
 	 

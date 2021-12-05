@@ -37,19 +37,19 @@ include('inc_session.php');
     <style>
      .s{display:none;}
 	 h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
-    #collapse{width:width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
+    #collapse{width:width:400px;height:1200px;overflow-y:scroll;padding:2%;position:fixed;top:60px;left:79%;border-shadow:3px 3px 3px black;}
     .bg{border:;background:white;width:340px;height:500px;padding:4%;margin-top:0px;}
     .bs{width:340px;height:300px;}
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
 	.t_monts{color:#42FC72;} .t_mont{color:#FA2367;} .t_mon{color:#14B5FA;}
-.center{background-color:#eee;width:85%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
+.center{background-color:#eee;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
 #examp{border:2px solid #eee;padding:3%;position:absolute;width:40%;height:700px;z-index:3;left:28%;top:20px;background-color:white;border-radius:10px;}
 .forms{width:200px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:black}
-h2,h1{width:500px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
+h2,h1{width:300px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;text-transform:uppercase;color:black;border-bottom:1px solid #eee;margin-bottom:15px;}
 label {color:black;} .buttons{margin-left:55%;margin-top:20px;width:250px;height:40px;color:white;
 background:#ACD6EA;border-radius:15px;text-transform:capitalize;border:2px solid #ACD6EA}
 .form1,.form2{display:none;}
@@ -77,7 +77,7 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 .remov{padding-left:3%;}
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
-.reini{padding:2%;z-index:3;position:absolute;top:300px;left:40%;background-color:white;width:350px;height:220px;border-radius:10px;border:3px solid white;}
+.reini{padding:2%;z-index:3;position:absolute;top:200px;left:40%;background-color:white;width:370px;height:220px;border-radius:10px;border:3px solid white;}
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
@@ -177,7 +177,7 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 .ouvrir11,.ouvrir12{display:none;cusor:pointer;}
 
 h3{color:#06308E;font-size:16px;margin-top:5px;font-weight:bold;}
-.sup{cursor:pointer;color:white;font-size:12px;} #content1{display:none;}
+.sup{margin-left:3%;width:120px;height:30px;background-color:cursor:pointer;color:white;font-size:12px;background:#F83127;border:2px solid #F83127;border-radius:20px;color:white;font-size:13px;} #content1{display:none;}
 .indispo{display:none;} #return{ position:fixed;top:300px;left: 20%;font-size:32px;color: #06308E;
 }
 
@@ -215,7 +215,7 @@ font-weight:bold;} .rr{display:none;} .datas{display:none;}
 .datas{padding:2.5%;width:95%;z-index:2;position:absolute;top:70px;left:2%;background:white;height:750px;} h2{border-color:none;color:#224abe;font-weight:bold;}
 h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
 .s{display:block;}#accordionSidebar{width:120px;margin-top:-150px;}
-.menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile{padding:1%;color:black;width:75%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
 .btns{display:block;background:white;border-color:white;color:#7BCCF8;}
@@ -223,7 +223,7 @@ h4{display:none;} #add_local{margin-top:30px;margin-left:15%;}
 
 
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 992px) {
 #panier{display:none;}
 #logo{display:none;width:100px;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;margin-top:-150px;width:120px;} .center{width:100%;margin:0;padding:0;height:1000px;}
@@ -240,7 +240,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #examp{width:80%;margin-left:-15%;}
 #content3 {width:40%;} .content_home{width:70%;}
-.menu_mobile{padding:1%;color:black;width:35%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile{padding:1%;color:black;width:35%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
 .btns{display:block;background:white;border-color:white;color:#7BCCF8;}
@@ -264,7 +264,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .input{display:none;} #examp{width:60%;margin-left:-5%;}
-.menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
 .btns{display:block;background:white;border-color:white;color:#7BCCF8;}
@@ -552,11 +552,16 @@ echo $_SESSION['token'];?>">
     $('#navs').click(function(){
 	$('.collapse').slideToggle();
 	 });
+	 
+	 $('#news_data').click(function(){
+	$('#collapse').slideToggle();
+	 });
 
     $('#sidebar').click(function(){
 		$('#pak').css('display','block');
 		$('.menu_mobile').css('display','block');
 		$('.xs').css('display','block');
+		
 	 });
 	 
 	 $('.xs').click(function(){

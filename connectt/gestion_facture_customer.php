@@ -258,7 +258,7 @@ h1{margin-top:10px;} .employes{display:none;} .dg{padding-left:5%;} .details{pad
 .btns{display:none;background:white;border-color:white;color:#7BCCF8;}
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 992px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 #accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:120%;margin:0;padding:0;height:1000px;}
