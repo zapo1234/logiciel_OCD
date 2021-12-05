@@ -36,7 +36,7 @@ $smart_from =($page -1)*$record_peage;
 		}
 		
 		// afficher les facture.
-		if($donns['code']==1 OR $donns['code']==2 OR $donns['code']==3){
+		if($donns['permission']=="user:employes"){
 		$session=$donns['code'];
 		// emttre la requete sur le fonction
        $req=$bds->prepare('SELECT  date,adresse,check_in,check_out,time,time1,clients,user,montant,montant_repas,mont_tva,types,id_fact,nombre,type,code,society,code,calls FROM facture WHERE search_date LIKE :q AND email_ocd= :email_ocd AND code= :code ORDER BY id_fact DESC LIMIT '.$smart_from.','.$record_peage.'');
