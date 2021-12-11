@@ -1,7 +1,7 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-
+try{
 if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token']))
 		
 {
@@ -83,8 +83,11 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
 							':code'=>$session
 						  ));
 						  
-		// header location redirigé
-		header('location:reservation_home.php?home_user='.$_GET['home_user'].'');
 				
 }
+
+catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
+} 
 ?>

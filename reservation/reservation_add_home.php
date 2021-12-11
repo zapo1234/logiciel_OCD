@@ -1,7 +1,7 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-
+ try{
 $req=$bdd->prepare('SELECT denomination,email_ocd,email_user,numero,id_visitor FROM inscription_client WHERE id_visitor= :id');
    $req->execute(array(':id'=>$_GET['home_user']));
    $donnees=$req->fetch();
@@ -93,7 +93,13 @@ $req=$bdd->prepare('SELECT denomination,email_ocd,email_user,numero,id_visitor F
 						  ));
 			// on envoi une repose positif
 			echo'
-             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>réservation prise en compte,patientez..<br/></div>
+             <div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:20px;"></i>réservation prise en compte,l\'etablissement reviens vers vous ..<br/></div>
 		     <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:15px;"></i></div></div>';
-
+ }
+ 
+  catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
+} 
+ 
 ?>

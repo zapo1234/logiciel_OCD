@@ -739,6 +739,7 @@ $('#news_data').click(function(){
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
+	  var nbjour =$('#nbjour').val();
 	  var date = new Date();
 	  var nbjour =$('#nbjour').val();
 	  var choix = $('.choix');
@@ -766,7 +767,6 @@ $('#news_data').click(function(){
 	    choix_id.push($(this).val());
       });
 	   
-	   alert(list);
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
@@ -792,20 +792,17 @@ $('#news_data').click(function(){
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
+	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
 	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,list:list,list1:list1,list2:list2,choix_id:choix_id},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('#resultat').html(data)
 		$('.user_home').css('display','none');
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
-	 setInterval(function(){
-		 //envoi du formulaire add_reservation
-		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
-	 },3000);
 	 }
 	  }  
 	 });

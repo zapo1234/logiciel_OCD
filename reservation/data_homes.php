@@ -544,7 +544,7 @@ echo $_SESSION['token'];?>">
 
  </form>
  </div>
-
+     
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -755,9 +755,7 @@ $('#news_data').click(function(){
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
-	  var list =  [];
-	  var list1 = [];
-	  var list2 = [];
+	  var nbjour =$('#nbjour').val();
 	  var choix = $('.choix');
 	  var choix1 =$('.choix1');
 	  var choix2 = $('.choix2');
@@ -771,12 +769,11 @@ $('#news_data').click(function(){
 	   var choix_id = [];
 	   $(choix).each(function() {
 	    list.push($(this).val());
-		alert(list);
+		
       });
 	  
 	  $(choix1).each(function() {
 	    list1.push($(this).val());
-		alert(list1);
       });
 	  
 	  $(choix2).each(function() {
@@ -785,8 +782,8 @@ $('#news_data').click(function(){
 	   
        $(choix_id).each(function() {
 	    choix_id.push($(this).val());
-      });	   
-	
+      });		  
+	  
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
@@ -809,21 +806,23 @@ $('#news_data').click(function(){
 	  }
 	  
 	  else{
+		  
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
+	url: "reservation_add_home.php",// on traite par la fichier
 	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
 	list:list,list1:list1,list2:list2,choix_id:choix_id},
 	success:function(data) { // on traite le fichier recherche apres le reto
-        $('#resultat').html(data)
-		
+        $('.user_home').css('display','none');
+		$('#resultat').html(data)
+		//envoi du formulaire add_reservation
+		$('#form_reservation').submit();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
-		$('#form_reservation').submit();
 	 },3000);
 	 }
 	 }
