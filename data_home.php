@@ -110,7 +110,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;font-size:20px;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .add,.adds{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -131,7 +131,7 @@ background:green;border:2px solid green;color:white;font-weight:bold;}
 label{width:200px;}#nbjour{width:150px;}
 #error{color:red;font-size:13px;} #tab{border-bottom:1px solid #eee;padding:2%;width:200px;} .recap{font-size:20px;color:black;}
 .forms{margin-left:10%;} .resultat{margin-left:5%;}
-.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:570px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
+.user_home{position:absolute;top:100px;left:25%;width:30%;background:white;height:650px;z-index:4;padding:5%;} #name,#adresse,#numero,#email{width:250px;}
 #envoi{margin-left:25%;width:200px;height:40px;border-radius:20px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
@@ -156,13 +156,17 @@ label{width:200px;}#nbjour{width:150px;}
   color:#C10D23;
 }
 
-#test{color:green}  .data{display:none;} .img{display:none;}
+#test{color:green}  .data{display:none;} .img,.imgs{display:none;}
 .calenda{display:none;} #panier_mobile{display:none;}
+.adds{display:none;} .error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:350px;}
+.panier{background:red;color:white;border-radius:50%;border-color:red;}
+.resu{position:absolute;background:white;border:3px solid white;width:20%;
+height:300px;left:25%;top:100px;padding:2%;font-size:18px;text-align:center;color:black;z-index:4;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:20px;margin-left:8%;color:black}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
 .s{display:block;}
-#panier{display:none;}
+
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2400px;}
@@ -171,7 +175,7 @@ label{width:200px;}#nbjour{width:150px;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:70%;}
-.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
+.resul{padding:2%;border-bottom:2px solid white;height:145px;border-top:2px solid white;} .add,.adds{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} .table{display:none;} #mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
 #examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
 .rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
@@ -181,17 +185,19 @@ margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
 color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
 #days,#das{width:250px;}
 .resul a{padding:1%;color:black;width:50px;}
-.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
+.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:30%;}
 .img{margin-left:10%;} #panier_mobile{display:block;} .titre{display:block;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
-.carous{margin-top:170px;width:300px;margin-left:-12%;}
+.carous{margin-top:150px;width:330px;margin-left:-12%;}
+.panier{background:red;color:white;border-radius:50%;border-color:red;}
+.add{display:none;} .adds{display:block;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-#panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
  .center{width:100%;margin:0;padding:0;height:2000px;}
+ .add,.adds{margin-top:5px;margin-left:10%;background:#0769BA;border:2px solid #0769BA;color:white;border-radius:15px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -214,7 +220,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .email{display:none;} .calenda{margin-left:75%;}
 .carous{margin-top:150px;width:550px;margin-left:-12%;}
 #examp{background:white;width:70%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;border:3px solid white;}
-.data{display;block;}
+.data{display;block;} .panier{border-radius:50%;background:red;border-color:red;color:white;}
+.adds{display:block;} .add{display:none;}
 }
 
 
@@ -234,10 +241,12 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
-#collapse{position:absolute;display:none;left:70%;height:1200px;}
+#collapse{position:absolute;display:none;width:300px;left:75%;height:800px;}
 .hote{margin-left:14%;} 
 .user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
 .bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
+.imgs{display:block;position:absolute;left:90%;top:20px;}
+.panier{position:absolute;left:92%;border-radius:50%;background:red;border-color:red;color:white;}
 }
 
 
@@ -250,7 +259,6 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
  <div class="x"><i class="fas fa-times" style="color:white;font-size:20px;"></i></div>
         <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 		 <div class="df"> <?php echo date('H:i');?> en Direct</div>
@@ -280,21 +288,22 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" action="">
+		<form method="post" id="form_reservation" action="reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
-      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="1" required><br/><span id="error"></span>
        </div>
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
-	 <option value="choix">choix</option>
+	 <option value="réservation">réservation</option>
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
 		<div id="resultat"></div><!--requete ajax-->
 		 <div id="resultats"></div><!--requete ajax-->
        </div>
+	   <input type="submit" id="butto" value="">
        </form>
 		</div>
 		
@@ -319,6 +328,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                                <div class="hotes">
                                <button type="button" class="button">choix de disponibilité</button><span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span> <span class="hote"><?php echo $donnees['denomination'];?></span>
 							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span>
+							   <span id="panier"></span><!--retour ajax nombre de reservation-->
                            </div>
                         
                      <?php include('inc_menu1.php');?>
@@ -344,8 +354,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
   </thead>
   <tbody>
     <tr>
-      <th scope="row"><?php echo$donns['type_logement'];?><br/>
-	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></th>
+      <th scope="row"><i class="fas fa-home" style="font-size:12px"> </i>   <?php echo$donns['type_logement'];?><br/>
       <td>Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></span><br/><br/>
 	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
       <td>Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
@@ -360,8 +369,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
 <div id="mobile">
 
-<div><?php echo$donns['type_logement'];?><br/>
-	  <i class="fas fa-home" style="font-size:12px"> </i><?php echo $donns['chambre'];?></div>
+<div><i class="fas fa-home" style="font-size:12px"> </i> <?php echo$donns['type_logement'];?><br/>
+	  </div>
       <div class="dat">Equipements principaux<br/><span class="vert"><?php echo$donns['equipement'];?></div><br/>
 	  Equipements secondaires<br/><?php echo str_replace($rt,$rs,$donns['equipements']);?></td>
       <div class="dat">Nombre de personnes autorisés<br/><?php echo$donns['icons'];?><br/>
@@ -432,28 +441,32 @@ for($i=0; $i<$count; $i++){
             </div>
             <!-- End of Main Content -->
 <div class="user_home" style="display:none">
-	 
-	 <div class="form-group col-md-6">
+	  <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required><br/><span class="error_name"></span>
     </div>
  
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
+	  <span class="error_numero"></span>
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
+      <input type="email" name="email" id="email" class="form-control" placeholder="email par défaut"><br/><span class="email_error"></span>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
+      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif"><span class="error_adresse"></span>
     </div>
 	 <div class="form-group col-md-6">
       <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" name="oui">Oui <input type="checkbox" id="oui" name="Non">Non
+      <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
     </div>
+	
+	<input type="hidden" name="token" id="token" value="<?php
+    //Le champ caché a pour valeur le jeton
+    echo $_SESSION['token'];?>">
 	
 	<div class="form-group col-md-6">
       <label for="inputEmail4">Confirmer la réservation</label>
@@ -518,6 +531,7 @@ echo $_SESSION['token'];?>">
 </div>
 </div>
 </div>
+<div id="result"></div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -576,6 +590,18 @@ echo $_SESSION['token'];?>">
  $('.img').click(function(){
 	$('#collapse').slideToggle();
   });
+  
+  $('.imgs').click(function(){
+	$('#collapse').slideToggle();
+  });
+  
+  $(document).on('click','.panier',function() {
+	$('#collapse').slideToggle();
+  });
+  
+  $(".oui").click(function(){
+	$("#non").prop('checked',false);		   
+   });
  
  $('.der').click(function(){
  $('.carous').css('display','block');
@@ -590,6 +616,7 @@ echo $_SESSION['token'];?>">
 	$('.user_home').css('display','none');
 	$('.carous').css('display','none');
  });
+ 
  
  
  $('#pak').click(function(){
@@ -638,6 +665,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
+	var type= $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -646,11 +674,52 @@ $('#news_data').click(function(){
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
 		$('.titre').css('display','block');
+		panier();
+	 },
+	 error: function() {
+    $('#resultat').text('vérifier votre connexion'); }
+	 });
+	 
+	 
+	}
+	else{
+	  $('#error').text('choisir une option');
+	}
+	}
+	else{
+	  $('#error').text('fournir le nombre de jours/horaire séjour');
+	}
+	 });
+	 
+	 $(document).on('click','.adds',function() {
+		 var id = $(this).data('id2'); // on recupère l'id.
+    var action ="add";
+	// recupération des variable
+	var tr =$('#tr').val();
+	var id_chambre = $('#id_chambre'+id).val();
+	var prix_nuite = $('#prix_nuite'+id).val();
+	var prix_pass = $('#prix_pass'+id).val();
+	var chambre =$('#chambre'+id).val();
+	var type = $('#type_logement'+id).val();
+	var nbjour = $('#nbjour').val();
+	
+	if(nbjour.length!="" || nbjour.length!=0){
+	if(tr!="choix"){
+	// on lance l'apel ajax
+	$.ajax({
+	type: 'POST', // on envoi les donnes
+	url: 'add_home.php',// on traite par la fichier
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
+	success:function(data) { // on traite le fichier recherche apres le retour
+		$('#resultat').html(data);
+		$('#error').text('');
+		panier();
+		$('#accordionSidebar').css('display','none');
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
@@ -663,7 +732,82 @@ $('#news_data').click(function(){
 	else{
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
+		
 	 });
+	 
+	 
+	 $('#envoi').click(function(){
+	  var name =$('#name').val();
+	  var email = $('#email').val();
+	  var numero = $('#numero').val();
+	  var adresse =$('#adresse').val();
+	  var nbjour =$('#nbjour').val();
+	  var choix = $('.choix');
+	  var choix1 =$('.choix1');
+	  var choix2 = $('.choix2');
+	  var choix3 =$('.choix3');
+	 
+	  if(choix.length > 0) {
+		  
+		var list = [];
+	   var list1 =[];
+	   var list2 = [];
+	   var list3 = [];
+	   $(choix).each(function() {
+	    list.push($(this).val());
+		});
+	  $(choix1).each(function() {
+	    list1.push($(this).val());
+      });
+	  $(choix2).each(function() {
+	    list2.push($(this).val());
+      });
+	   $(choix3).each(function() {
+	    list3.push($(this).val());
+      });		  
+	  
+	   if(name.length==""){
+		 $('.error_name').html('entrez votre nom et prénom');  
+		}
+	 else if(name > 80) {
+	  $('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
+	 }
+	  else if(numero.length==""){
+	  $('.error_numero').html('entrez obligatoirement un contact');
+	  }
+	  else if(numero.length > 15){
+	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
+	  }
+	  else if(email.length > 80){
+		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
+	  }
+	  
+	  else if(email.length > 120){
+		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
+	  }
+	  
+	  else{
+		  
+		 // executer requete Ajax 
+		  $.ajax({
+	type: 'POST', // on envoi les donnes
+	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
+	list:list,list1:list1,list2:list2,list3:list3},
+	success:function(data) { // on traite le fichier recherche apres le reto
+        $('.user_home').css('display','none');
+		$('#pak').css('display','none');
+		$('#result').html(data)
+		//envoi du formulaire add_reservation
+	 },
+	 error: function() {
+    $('#result').text('vérifier votre connexion'); }
+	 });
+	 setInterval(function(){
+	 },3000);
+	 }
+	 }
+	});
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
@@ -682,14 +826,11 @@ $('#news_data').click(function(){
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
+		panier();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
-	 setInterval(function(){
-		 $('#resultat').html('');
-		 location.reload(true);
-	 },3000);
 	 
 	 });
 	 
@@ -765,6 +906,20 @@ $('#news_data').click(function(){
 			}
            session_add();
 			
+			// afficher le pannier
+           function panier() {
+				var action="count";
+				$.ajax({
+					url: "add_home.php",
+					method: "POST",
+					data:{action:action},
+					success: function(data) {
+						$('#panier').html(data);
+					}
+				});
+			}
+
+			panier();	
 			
   // Wrap every letter in a span
 var textWrapper = document.querySelector('.ml2');
