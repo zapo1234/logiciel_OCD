@@ -192,16 +192,17 @@ $smart_from =($page -1)*$record_peage;
 	 
 	 echo'<div class="homes'.$color.'" id="homes'.$color.'">
 	      <div class="resul">
-		      <a href="data_home.php?id_home='.$donnees['id_chambre'].'&home_user='.$home_user.'" title="decouvrir">'.$donnees['type_logement'].'
-			  <div class="titre">'.$homes.' '.$donnees['chambre'].'</div>
+		      <a href="data_home.php?id_home='.$donnees['id_chambre'].'&home_user='.$home_user.'" title="decouvrir">
+			  <div class="titre">'.$homes.' '.$donnees['type_logement'].'</div>
 			  <div style="font-size:14px;"> '.$map.'<br/>
 			  <div class="'.$color.'">'.$status.'</div>
 			  </div>
 		     </a>
 			 <button class="add" data-id2="'.$donnees['id_chambre'].'" title="réservez le local">Ajouter</button>
+			 <button class="adds" data-id2="'.$donnees['id_chambre'].'" title="réservez le local">Ajouter</button>
 			 </div>
 			 <input type="hidden" id="prix_nuite'.$donnees['id_chambre'].'" value="'.$donnees['cout_nuite'].'"><input type="hidden" id="prix_pass'.$donnees['id_chambre'].'" value="'.$donnees['cout_pass'].'"><input type="hidden" id="chambre'.$donnees['id_chambre'].'" value="'.$donnees['chambre'].'"><input type="hidden" id="id_chambre'.$donnees['id_chambre'].'" value="'.$donnees['id_chambre'].'">
-			 
+			 <input type="hidden" id="type_logement'.$donnees['id_chambre'].'" value="'.$donnees['type_logement'].'">
 			 </div>';	
 		}
 		
