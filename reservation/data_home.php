@@ -258,7 +258,6 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
  <div class="x"><i class="fas fa-times" style="color:white;font-size:20px;"></i></div>
         <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 		 <div class="df"> <?php echo date('H:i');?> en Direct</div>
@@ -288,7 +287,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		</div>
 	    <div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" id="form_reservation" action="reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>">
+		<form method="post" id="form_reservation" action="reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
       <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="1" required><br/><span id="error"></span>
@@ -531,6 +530,7 @@ echo $_SESSION['token'];?>">
 </div>
 </div>
 </div>
+<div id="result"></div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -734,46 +734,43 @@ $('#news_data').click(function(){
 		
 	 });
 	 
+	 
 	 $('#envoi').click(function(){
 	  var name =$('#name').val();
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
 	  var nbjour =$('#nbjour').val();
-	  var date = new Date();
-	  var nbjour =$('#nbjour').val();
 	  var choix = $('.choix');
 	  var choix1 =$('.choix1');
 	  var choix2 = $('.choix2');
-	  var choix_id =$('.choix_id');
-	  if(choix > 0) {
-	   var list = [];
+	  var choix3 =$('.choix3');
+	 
+	  if(choix.length > 0) {
+		  
+		var list = [];
 	   var list1 =[];
 	   var list2 = [];
-	   var choix_id = [];
+	   var list3 = [];
 	   $(choix).each(function() {
 	    list.push($(this).val());
-      });
-	  
+		});
 	  $(choix1).each(function() {
 	    list1.push($(this).val());
       });
-	  
 	  $(choix2).each(function() {
 	    list2.push($(this).val());
       });
+	   $(choix3).each(function() {
+	    list3.push($(this).val());
+      });		  
 	  
-	  $(choix_id).each(function() {
-	    choix_id.push($(this).val());
-      });
-	   
 	   if(name.length==""){
 		 $('.error_name').html('entrez votre nom et prénom');  
 		}
-	  
-	    else if(name > 80) {
-		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
-	   }
+	 else if(name > 80) {
+	  $('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
+	 }
 	  else if(numero.length==""){
 	  $('.error_numero').html('entrez obligatoirement un contact');
 	  }
@@ -789,23 +786,27 @@ $('#news_data').click(function(){
 	  }
 	  
 	  else{
+		  
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
-	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,list:list,list1:list1,list2:list2,choix_id:choix_id},
+	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
+	list:list,list1:list1,list2:list2,list3:list3},
 	success:function(data) { // on traite le fichier recherche apres le reto
-        $('#resultat').html(data)
-		$('.user_home').css('display','none');
+        $('.user_home').css('display','none');
+		$('#pak').css('display','none');
+		$('#result').html(data)
 		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
 	 },
 	 error: function() {
-    $('#resultat').text('vérifier votre connexion'); }
+    $('#result').text('vérifier votre connexion'); }
 	 });
+	 setInterval(function(){
+	 },3000);
 	 }
-	  }  
-	 });
+	 }
+	});
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
