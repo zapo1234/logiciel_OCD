@@ -120,31 +120,33 @@ include('inc_session.php');
    if(empty($_POST['code'])){
 	  $code=0; 
    }
-   else{
-	  $code=$_POST['code']; 
-   }
-    $society =$_POST['society'];
+  
+   $code=$_POST['code']; 
+   $society =$_POST['society'];
     $societ="";
    if($role==1){
 	 $status=1;
      $categories="dirigeant";
-     $permission ="user:boss";	 
+     $permission ="user:boss";	
+     $role =1;	 
 	}
     elseif($role==3){
 	 $status=3;
      $categories="gestionnaire";
-     $permission ="user:gestionnaire";  
+     $permission ="user:gestionnaire"; 
+     $role = 3;	 
 	}
    else{
 	 $status=4;
      $categories="receptionniste";
-     $permission ="user:employes";  
+     $permission ="user:employes";
+     $role =4;	 
    }
    $stat="";
    
   if($donnees['email_user']!=$_POST['emails']) {
-	   $rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
-		VALUES(:email_ocd,:email_user,:email_society,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
+	   $rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,role,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:email_society,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:role,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
 		                     ':email_user'=>$email,
 							':email_society'=>$email_society,
@@ -156,6 +158,7 @@ include('inc_session.php');
 							':numero'=>$_POST['num'],
 							':numero1'=>$_POST['num'],
 							':permission'=>$permission,
+							':role'=>$role,
 							':password'=>$hash,
 							':categories'=>$categories,
 						    ':numero_compte'=>$numero_compte,
@@ -171,6 +174,7 @@ include('inc_session.php');
 							':id_visitor'=>$_SESSION['id_visitor'],
 							':token_pass'=>$token_pass
 						  ));
+			echo$society;
 			echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>  Le compte à été crée !</button>
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
           }
@@ -333,34 +337,33 @@ include('inc_session.php');
 	  if($roles==1){
 	 $status=1;
      $categories="dirigeant";
-     $permission ="user:boss";	 
+     $permission ="user:boss";
+     $roles=1;	 
 	}
-   elseif($roles==2){
-	  $status=2;
-     $categories="Responsable";
-     $permission ="user:boss";	 
-   }
    
    elseif($roles==3){
 	 $status=3;
-     $categories="Gestionnaire";
-     $permission ="user:gestionnaire";  
+     $categories="gestionnaire";
+     $permission ="user:gestionnaire";
+     $roles =3;	 
 	}
    else{
 	 $status=4;
-     $categories="Receptionniste";
-     $permission ="user:employes";  
+     $categories="receptionniste";
+     $permission ="user:employes";
+     $roles =4;	 
    }
 	  // on modifie les données de la base de données guide
         echo'<div class="enre"><div><i class="fas fa-check-circle" style="color:green;font-size:16px;"></i>Vos données sont bien modifiées !
 		     <div class="dep"><i style="font-size:40px;color:white" class="fa">&#xf250;</i></div></div>';
 		
-	 $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
+	 $ret=$bdd->prepare('UPDATE inscription_client SET email_user= :email, user= :us, numero1= :num, password= :pass, permission= :perm, role= :rol, categories= :cat, status= :stat   WHERE id= :id AND email_ocd= :email_ocd');
        $ret->execute(array(':email'=>$email,
 	                       ':us'=>$noms,
 						   ':num'=>$nums,
 						   ':pass'=>$hash,
 						   ':perm'=>$permission,
+						   ':rol'=>$roles,
 						   ':cat'=>$categories,
 						   ':stat'=>$status,
 						   ':id'=>$ids,

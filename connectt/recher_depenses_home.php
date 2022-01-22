@@ -46,7 +46,7 @@ if(!isset($id) AND empty($id)){
              <span class="sr-only">Loading...</span>
              </div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/tresorie_ocd/gestion_depenses_site.php?data_id='.$id.'"/>';
+             <meta http-equiv="Refresh" content="3; url=https://connect.ocdgestion.com/gestion_depenses_site.php?data_id='.$id.'"/>';
 	 }
 ?>
 

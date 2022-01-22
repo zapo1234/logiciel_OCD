@@ -10,11 +10,8 @@ $page = (int) strip_tags($_POST['page']);
 }
 
 else {
-
 $page=1;	
-	
 }
-
 $smart_from =($page -1)*$record_peage;
 	if($_POST['action']=="fetch") {
 	// recuperer la permission pour afficher le checkout
@@ -38,22 +35,20 @@ $smart_from =($page -1)*$record_peage;
        $req->execute(array(':code'=>$session,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}	
-	
-	
-	if($donns['permission']=="user:boss"){
+	  if($donns['permission']=="user:boss"){
 		
 		$puts='<div class="d1"><button type="submit" value="ok" class="delete"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button></div>';
-	  $export='<form method="post" id="f" action="excel.php"> <span class="expor"><span class="ds">Rechercher des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou type de séjour">
+	  $export='<form method="post" id="f" action="excel.php"> <span class="expor"><span class="ds">Filtrer des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="nom client,index chambre,type">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span><span class="expor">Export <button type="submit" class="excel">Excel<i class="far fa-file-excel"></i></button></span>';
 		
 	}
 	else{
 	   $puts="";
-		$export='<span class="expor"><span class="ds">Rechercher des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder=" filtre par nom ou numéro du client">
+		$export='<span class="expor"><span class="ds">filtrer des factures</span> <input type="text" class="form" id="recher" name="recher"  aria-describedby="emailHelp" placeholder="nom client index chambre">
 	  </span><span class="but_recher"><button  type="button" class="but_recher">Date +</button></span>';
 		}
 		
-	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="Recherche par nom ou type de facture" aria-label="Username" aria-describedby="basic-addon1">';
+	$mobile='<input type="text" class="form-control" id="rechers" name="rechers" placeholder="nom client,index chambre,type" aria-label="Username" aria-describedby="basic-addon1">';
 		
 	// on boucle sur les les resultats
 	echo'<div class="expor">'.$export.' '.$mobile.'
@@ -84,22 +79,17 @@ $smart_from =($page -1)*$record_peage;
 	$nombre =substr($nombre,2);
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss"){
-		
 		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].','.$donnees['code'].',">';
-		
-	
-	}
+		}
 	else{
 		$put="";
 	}
-	
 	// recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
-	
- if($donns['code']==0){
+	if($donns['code']==0){
 		  $session=0;
 		}
 		
@@ -144,16 +134,13 @@ $smart_from =($page -1)*$record_peage;
 	 $modif='<a href="gestion_home_modifiy.php?id_fact='.$donnees['id_fact'].'&code_data='.$donnees['code'].'" class="modify" title="envoi par email" data-id4='.$nombre.'"><i class="fas fa-pen" style="color:blue;font-size:13px;"></i> Modifier</a><br/>';
 	 $annul=' <a href="#"  title="Annuler" class="annul" data-id5="'.$donnees['id_fact'].','.$donnees['code'].'"><i class="fas fa-minus-circle" style="color:red" font-size:13px;></i> Annuler</a><br/>';
 	}
-	
 	else{
-		
 		$name=" séjour Annulé";
 		$jour ="";
 		$encaiss="";
 		$modif="";
 		$annul="";
 	}
-	
 	if($donnees['montant_repas']!=0){
 	$repas ="+repas dejeuner";
 	$monts = $donnees['montant_repas'];
@@ -168,13 +155,10 @@ $smart_from =($page -1)*$record_peage;
 	  $time1 ='Horaire d\'entreé '.$donnees['time'];
 	  $time2= 'Horaire de sortie '.$donnees['time1'];
 	}
-	
 	else{
 	$time1="";
 	$time2="";
-		
 	}
-	
 	$date1=$donnees['date'];
 	$date1 = explode('-',$date1);
 	$j = $date1[2];
@@ -191,21 +175,14 @@ $smart_from =($page -1)*$record_peage;
 	$j2 = $date3[2];
 	$mm2 = $date3[1];
 	$an2 = $date3[0];
-	
-	
-    
 	// récupérer le user editor
-	
-	$data =$donnees['user'];
+    $data =$donnees['user'];
 	$users = explode(',',$data);
-	
 	$data_user = $users[0];
-	
 	// réecrire les montants 2 chiffres après la virgule
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
 	$montant = number_format($donnees['montant'], 2, '.', '');
-	
-    // afficher dans un tableau les données des chambres
+	// afficher dans un tableau les données des chambres
 	echo'<tr class="datas'.$donnees['type'].'" id="tf">
 	     <td>'.$put.'</td>
 	     <td><span class="dat'.$donnees['type'].'"><i class="fas fa-circle" style="font-size:10px;"></i></span><span class="der">facture<br/>
@@ -245,26 +222,23 @@ $smart_from =($page -1)*$record_peage;
 	 $reg=$bds->prepare('SELECT count(*) AS nbrs FROM facture WHERE email_ocd= :email_ocd');
      $reg->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
     $dns=$reg->fetch();
-	
 	// on compte
 	$totale_page=$dns['nbrs']/$record_peage;
 	$totale_page = ceil($totale_page);
-	
-	 echo'<div class="pied_page">';
+	//afficher les données de la pagination
+	echo'<div class="pied_page">';
    if($page > 1){
 	  $page =$page-1;
 	  echo'<button type="button" class="bous"><a href="gestion_facture_customer.php?page='.$page.'"><i class="fa fa-angle-left" aria-hidden="true" style="font-size=33px;color:black"></i></a></button>'; 
    }
    for($i=1; $i<=$totale_page; $i++) {
-	   
 	   if($page!= $i){
 	   echo'<button class="bout" id="'.$i.'">'.$i.'</button>';
 	   }
 	   else{
 		   echo'<button class="bout" id="'.$i.'">'.$i.'</button>';
 	   }
-	   
-    }
+	   }
 	
 	if($i > $page){
 		$page =$page+1;
@@ -272,8 +246,7 @@ $smart_from =($page -1)*$record_peage;
 	}
 	
 	echo'</div>';
-	
-   }
+	}
    
    if($_POST['action']=="details"){
 	   // recupérer le chiffre
@@ -287,8 +260,6 @@ $smart_from =($page -1)*$record_peage;
                        ':id'=>$id_fact,
                       ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees=$res->fetch();
-   
-   // requete 
    // recupére les données de la base de données si $_GET['id_fact']
    $req=$bds->prepare('SELECT type_logement,chambre,id_chambre,montant,mont_restant FROM bord_informations WHERE code= :code AND id_fact= :id_fact AND email_ocd= :email_ocd ');
     $req->execute(array(':code'=>$code,
@@ -355,7 +326,6 @@ $smart_from =($page -1)*$record_peage;
    }
    
    if($_POST['action']=="deleted"){
-	   
 	 $id=$_POST['id']; 
 	 $data =explode(',',$id);
 	 $id_fact =$data[0];
@@ -410,12 +380,9 @@ $smart_from =($page -1)*$record_peage;
 							));
        		
            echo'<div class="enre"><span class="d" style="color:#AB040E;"><i class="fas fa-exclamation-circle" style="font-size:16px;color:#AB040E;"></i> vous avez annulé la facture</span></div>';
-	   
-   }
+	  }
    
-   
-
-if($_POST['action']=="mail"){
+   if($_POST['action']=="mail"){
 	
 	if($_SESSION['code']==0){
 	 $session=0;
@@ -435,9 +402,10 @@ if($_POST['action']=="mail"){
    <form method="post" id="form_envoi" action="">
    <h1>Envoyer la facture <br/> à l\'adresse mail</h1>
    <div>Client:<span id="nam"></span></div>
-   <div><input type="email" id="emails" name="emails" value="'.$donns['email_client'].'"></div>
-   <div class="action"><button type="button" class="envoi">Annuler</button> <button type="button" class="env">envoyer</button></div>
+   <div><input type="email" id="email" name="email" value="'.$donns['email_client'].'"></div>
+   <div class="action"><button type="button" class="envoi_fact">Annuler</button> <button type="button" class="env">envoyer</button></div>
    <input type="hidden" name="value" id="'.$id.'">
+   <input type="hidden" name="emails" id="emails" value="'.$_SESSION['email_ocd'].'">
   <input type="hidden" name="token" id="token" value="<?php
   //Le champ caché a pour valeur le jeton
    '.$_SESSION['token'].'">
@@ -448,14 +416,12 @@ if($_POST['action']=="mail"){
 }
 
  if($_POST['action']=="recher"){
-	 
-	$q = trim(strip_tags($_POST['recher']));
+	 $q = trim(strip_tags($_POST['recher']));
 // recuperer la permission pour afficher le checkout
    	// emttre la requete sur le fonction
     $rel=$bdd->prepare('SELECT  permission,society,code FROM inscription_client WHERE email_user= :email_user');
     $rel->execute(array(':email_user'=>$_SESSION['email_user']));
 	$donns =$rel->fetch();
-	 
 	 //gérer les permission de vues des factures
 	if($donns['permission']=="user:boss" OR $donns['permission']=="user:gestionnaire"){
 		  // emttre la requete sur le fonction
@@ -473,8 +439,6 @@ if($_POST['action']=="mail"){
 	                       ':code'=>$session,
 	                       ':email_ocd'=>$_SESSION['email_ocd']));
 		}
-   
-	
      // entete du tableau
 	 echo'<form method="post" id="formd" action="">
 	 <button type="submit" value="ok" class="delet"><span class="dh">suprimer</span> <i class="far fa-trash-alt"></i></button>
@@ -502,11 +466,8 @@ if($_POST['action']=="mail"){
 	$nombre =substr($nombre,2);
 	// afficher la le checkout en fonction de la permission
 	if($donns['permission']=="user:boss"){
-		
-		$put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].','.$donnees['code'].',">';
-		
-	
-	}
+	 $put=' <input class="form-check-input" type="checkbox" name="check[]" id="inlineCheckbox1" value="'.$donnees['id_fact'].','.$donnees['code'].',">';
+	 }
 	else{
 		$put="";
 	}
@@ -610,16 +571,10 @@ if($_POST['action']=="mail"){
 	$j2 = $date3[2];
 	$mm2 = $date3[1];
 	$an2 = $date3[0];
-	
-	
-    
-	// récupérer le user editor
-	
+    // récupérer le user editor
 	$data =$donnees['user'];
 	$users = explode(',',$data);
-	
 	$data_user = $users[0];
-	
 	// réecrire les montants 2 chiffres après la virgule
 	$mont_tva = number_format($donnees['mont_tva'], 2, '.', '');
 	$montant = number_format($donnees['montant'], 2, '.', '');
