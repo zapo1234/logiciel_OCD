@@ -163,7 +163,7 @@ include('inc_session.php');
              
 			<!-- Nav Item - Tables -->
             <div class="link">
-                <a class="nav" href="reservation/reservation_home.php?home_user=<?php echo$donnees['id_visitor'];?>">
+                <a class="nav" href="https://reservation.ocdgestion.com/index.php?home_user=<?php echo$donnees['id_visitor'];?>">
                     <i class="fas fa-comment-alt"></i>
                     <span class="nv">Blog réservation</span><!--retour ajax--></a>
             </div> 

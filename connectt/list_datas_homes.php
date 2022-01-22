@@ -213,7 +213,7 @@ $smart_from =($page -1)*$record_peage;
 	 // if le local est réserve
 	elseif($date_english < $debut){
 	$color ='reserve';
-	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.'</span><br/><br/>';
+	$status ='le local est réservé, et sera occupé <br/> à partir du <span class="dt">'.$j.'/'.$mm.'/'.$an.',sera problement libre le '.$j1.'/'.$mm1.'/'.$an1.'</span><br/>';
 	}
 
 	else{

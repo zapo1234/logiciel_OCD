@@ -2,6 +2,28 @@
 include('connecte_db.php');
 include('inc_session.php');
 
+if(isset($_GET['data-messager'])) {
+$code = $_GET['data-messager'];
+}
+
+else{
+  $code =$_SESSION['code'];
+}
+// recupérer les permission
+$req=$bdd->prepare('SELECT permission FROM inscription_client WHERE   email_user= :email_user');
+   $req->execute(array(':email_user'=>$_SESSION['email_user']));
+   $donnees =$req->fetch();
+
+// recupere les données sur les site existant
+  $rev=$bds->prepare('SELECT society,code FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnes = $rev->fetchAll();
+   $array =[];
+   
+   foreach($donnes as $val){
+    $array[]= $val['society'];
+   }
+
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +129,7 @@ border-radius:25px;}
 h2{text-align:center;font-size:16px;color:black} .bs,.bg{padding:2%;}
 #form_sup{margin-left:20%;margin-top:10px;} #sends{margin-left:6%;margin-top:30px;width:150px;height:30px;color:#F7361C;color:white;border:2px solid #F7361C;
 background:#F7361C;}
-.mot{color:black;margin-left:15%;margin-top:60px;} .count{margin-left:15%;margin-top:50px;}
+.mot{color:black;margin-left:15%;margin-top:30px;} .count{margin-left:15%;margin-top:20px;}
 .dr{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;color:#3589E3;}
 .mots{padding-left:30%;font-size:25px;padding-top:10px;font-weight:bold;}
 #message_datas{padding-left:2%;padding-bottom:8px;position:absolute;}
@@ -261,6 +283,22 @@ height:2800px;overflow-y:scroll;z-index:5;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
+					<div class="group_message">
+					<h2>Site de messages group</h2>
+					<?php
+					if($donnees['permission']=="user:boss"){
+				   if(count($array)> 1){
+					for($i=0; $i < count($array);$i++){
+					$r =$i+1;
+				    echo'<div><a href="gestion_datas_messanger.php?data-messager='.$r.'&data-site='.$array[$i].'">'.$array[$i].'<span id="mess-data'.$r.'"></span></a></div>';
+						
+					}
+					}
+					}
+					
+					?>
+					
+					</div><!--group_message-->
                      <h2>Evaluer le compteur</h2>
 					 <div id="results"></div><!--ajax--result-->
                       <div class="mot">Messages maximum à émmetre<br/><span class="mots">2500</span></div>
@@ -327,12 +365,13 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="center">
                     
 					<div id="result">
-					
+					<?php include('inc_message_datas.php');?>
 					<div id="resu"></div>
 					</div><!--retour ajax-->
-					
+					<div id="results"></div>
 					
 					<div class="message">
+					
 					<span id="message_datas"></span><!--reponse--><br/>
 					<form method="post" action="" id="form-sendm">
 					<span id="error"></span><!--message d'erreur'-->
@@ -483,11 +522,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 	function load() {
 				var action="fetch";
 				$.ajax({
-					url: "messanger_datas.php",
+					url: "messanger_datas.php?data-messager=<?php echo$code;?>",
 					method: "POST",
 					data:{action:action},
 					success: function(data) {
-						$('#result').html(data);
+					$('#results').html(data);
 					},
 					
 				});
@@ -512,7 +551,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
    else{
 	 $.ajax({
 	type:'POST', // on envoi les donnes
-	url:'messanger_datas.php',// on traite par la fichier
+	url:'messanger_datas.php?data-messager=<?php echo$code;?>',// on traite par la fichier
 	data:{action:action,message:message},
 	success:function(data) { // on traite le fichier recherche apres le retour
       $('#resu').html(data);

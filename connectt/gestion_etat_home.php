@@ -134,7 +134,7 @@ ul.winners li{
 
 .h4{width:90%;border-bottom:1px solid #eee;font-size:28px;}
 .dir{font-size:13px;padding-left:2%;color:black;}
-.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:200px;padding:1%;border:1px solid #eee;
+.di{font-size:13px;color:black;} .homes{float:left;width:200px;margin-top:10px;height:230px;padding:1%;border:1px solid #eee;
 margin-left:2%;}
 
 h3{font-size:16px;text-transform:capitalize;}
@@ -341,9 +341,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-            <div class="h4">Suivi en temps réel de l'etat d'occupation de vos locaux <br/>
-			<span class="di"> le local est libre</span> <i class="fas fa-square" style="font-size:13px;color:#039E0F;"></i> <span class="dir">le local est occupé par le client</span> <i class="fas fa-square" style="font-size:13px;color:#BC0820"></i> <span class="dir">le local est réservé </span> 
-			 <i class="fas fa-square" style="font-size:13px;color:#1369E5;"></i>  <span class="dir" style="font-size:13px">le local est bloqué</span> <i class="fas fa-square" style="font-size:13px;color:#E55C13;"></i>
+            <div class="h4">Suivi d'occupation en temps réel des locaux <br/>
+			<span class="di">  Local libre</span> <i class="fas fa-square" style="font-size:13px;color:#039E0F;"></i> <span class="dir"> Local par un client</span> <i class="fas fa-square" style="font-size:13px;color:#BC0820"></i> <span class="dir"> Local  réservé </span> 
+			 <i class="fas fa-square" style="font-size:13px;color:#1369E5;"></i>  <span class="dir" style="font-size:13px">Local bloqué pour travaux </span> <i class="fas fa-square" style="font-size:13px;color:#E55C13;"></i>
 			</div>
 		   
 		   <div id="resul"></div><!--afficher le resutat ajax-->

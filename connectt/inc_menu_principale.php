@@ -109,8 +109,8 @@ include('inc_session.php');
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">facturer des chambres</h6>
-                        <a class="collapse-item" href="gestion_datas_customer.php">gérer des encaissements</a>
-                        <a class="collapse-item" href="gestion_customer_home.php">Agenda des réservation</a>
+                        <a class="collapse-item" href="gestion_datas_customer.php">Gérer des encaissements</a>
+                        <a class="collapse-item" href="gestion_customer_home.php">Agenda des réservations</a>
 						
 						<a class="collapse-item" href="externe_customer_home.php" title="intéréagir avec vos clients">Demande client</a>
                        
@@ -200,7 +200,7 @@ include('inc_session.php');
              
 			<!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="reservation/reservation_home.php?home_user=<?php echo$donnees['id_visitor'];?>">
+                <a class="nav-link" href="https://reservation.ocdgestion.com/index.php?home_user=<?php echo$donnees['id_visitor'];?>">
                     <i class="fas fa-comment-alt"></i>
                     <span>Blog réservation</span><!--retour ajax--></a>
             </li> 

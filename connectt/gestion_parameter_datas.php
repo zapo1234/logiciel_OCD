@@ -809,7 +809,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 		setInterval(function(){
 		 $('#datos').html('');
 		 location.reload(true);
-	 },3000);
+	 },30000);
 	}
 	 
 	  

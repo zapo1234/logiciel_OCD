@@ -10,8 +10,10 @@ use PHPMailer\PHPMailer\Exception;
  require 'PHPMailer/src/SMTP.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$email =$_POST['email_ocd'];
-$lien ='<a href="https://connect.ocdgestion.com/update_password_user.php?user_data='.$donnees['token_pass'].'">Demander un nouveau mot de pass</a>';
+$email =$_POST['email'];
+$emails = $_POST['emails'];
+$id_fact = $_POST['id'];
+$lien ='<a href="https://connect.ocdgestion.com/generate_data_pdf.php?user_data='.$emails.'&id_fact='.$id_fact.'">votre facture</a>';
 
 try {
 	
@@ -23,9 +25,7 @@ try {
 	//SMTP password
 	$mail->SMTPSecure = 'ssl';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;
-    $mail->CharSet = 'UTF-8';
-	//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     //Recipients (expediteur or destinataire)
     $mail->setFrom("ne-reply@ocdgestion.com");
     $mail->addAddress($email);     //Add a recipient
@@ -35,11 +35,12 @@ try {
 
     //Content
       $mail->isHTML(true);                                  //Set email format to HTML
-      $mail->Subject = 'Demander un nouveau mot de pass';
-      $mail->Body    = 'Pour obtenir la réinitalisation de votre mot de pass <br/> cliquer sur le lien ci-desous pour modifier et obtenir un nouveau mot de pass!<br/><div class="button"><strong>'.$lien.'</strong></b>';
+      $mail->Subject = 'Votre facture de séjour';
+      $mail->Body    = ' Bonjour'.$email.' Vous trouverez votre facture <br/> en cliquant sur le lien ci-desous!<br/><div class="button">'.$lien.'</b>';
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
     $mail->send();
-    echo '<div class="ddn">Vous avez reçu un lien dans votre adresse email</div>';
+    echo '<div class="ddn">La facture à été bien transmise !</div>';
 } catch (Exception $e) {
    
 }

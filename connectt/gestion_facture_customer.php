@@ -7,7 +7,6 @@ include('inc_session.php');
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -16,7 +15,7 @@ include('inc_session.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>logiciel innovant</title>
+    <title>Optimisation de comptabilité à distance</title>
 
     <!-- Custom fonts for this template-->
     <!-- Custom fonts for this template -->

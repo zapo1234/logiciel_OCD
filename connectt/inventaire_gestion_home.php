@@ -58,6 +58,17 @@ $page=1;
    $totale_page = ceil($totale_page);
    $reg->closeCursor();
   
+  // recupere les données sur les site existant
+  $req=$bds->prepare('SELECT society,code FROM tresorie_customer WHERE email_ocd= :email_ocd');
+   $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+   $donnes = $req->fetchAll();
+   $data =[];
+   foreach($donnes as $values){
+	  $datas =  explode(',',$values['society']);
+      foreach($datas as $val){
+         $data[]= $val;
+	  }	  
+   }
 
 ?>
 <!DOCTYPE html>
@@ -194,7 +205,8 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 #menu_s{margin-left:4%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
 .menu_mobile{display:none;}
-.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
+.btns{display:none;background:white;border-color:white;color:#7BCCF8;}
+.error{color:red;font-weight:bold;font-size:12px;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none} .s{display:block;}
@@ -214,6 +226,7 @@ height:2800px;overflow-y:scroll} h2{margin-top:30px;border-top:1px solid #eee;co
 .menu_mobile{padding:1%;color:black;width:75%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -237,6 +250,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .menu_mobile{padding:1%;color:black;width:35%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -261,6 +275,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .menu_mobile{padding:1%;color:black;width:30%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -351,14 +366,14 @@ height:2800px;overflow-y:scroll;z-index:5;}
      <tr class="tf">
       <th scope="col"><i class="material-icons" style="font-size:17px;color:#111E7F">home</i>Type de logement</th>
 	  <th scope="col">Local désigné</th>
-	  <th scope="col">équipements</th>
-	   <th scope="col">équipements(S)</th>
-	   <th scope="col">Nbrs(occupant)</th>
+	  <th scope="col">Equipements primaires</th>
+	   <th scope="col">Equipements secondaires</th>
+	   <th scope="col">Nbrs occupants</th>
 	  <th scope="col">Tarif</th>
 	  <th scope="col">Description</th>
 	  <th scope="col">Découvrir</th>
-	  <th scope="col">modifier</th>
-	  <th scope="col">suprimer</th>
+	  <th scope="col">Modifier</th>
+	  <th scope="col">Supprimer</th>
       </tr>
       </thead>
       <tbody>';
@@ -456,12 +471,12 @@ height:2800px;overflow-y:scroll;z-index:5;}
  <div id="error"></div><!--affichage erreur-->
 
   <form method="post" id="forms"  enctype="multipart/form-data">
-  <h1><i class='fas fa-house-user'></i> Formualire pour l'enregsitrement d'un local,une chambre ou un appartement de votre espace Hotelier</h1>
+  <h1><i class='fas fa-house-user'></i> Formulaire d'enregistrements des locaux</h1>
    
    <div class="form-row">
     <div class="form-group col-md-6">
-	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
-      <label for="inputPassword4">type de local *</label>
+	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations des locaux</h2>
+      <label for="inputPassword4">Type de local *</label>
       <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example" required>
                            <option value="">Type de logement</option>
 						   <option value="1">chambre single</option><option value="2">chambre double</option>
@@ -477,11 +492,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
 
    <div class="form-group col-md-6">
-      <label for="inputEmail4">identifier votre local *</label>
+      <label for="inputEmail4">Identifier votre local *</label>
       <input type="text" class="form-control" name="ids" id="ids" required placeholder="Ex: chambre A-01, chambre 2...">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">occupants possible *</label>
+      <label for="inputPassword4">Occupants possible *</label>
       <input type="number" class="form-control" id="num" name="num" placeholder="Ex 3">
     </div>
      <div class="form-group col-md-6">
@@ -489,17 +504,17 @@ height:2800px;overflow-y:scroll;z-index:5;}
       <input type="number" class="form-control" id="nums" name="nums" placeholder="">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">cout nuité *</label>
+      <label for="inputPassword4">Cout nuitée *</label>
       <input type="number" class="form-control" id="count" name="cout" placeholder="" required>
     </div>
     
 	<div class="form-group col-md-6">
-      <label for="inputPassword4">cout pass </label>
+      <label for="inputPassword4">Cout pass </label>
       <input type="number" class="form-control" id="counts" name="couts" placeholder="">
     </div>
 	
 	<div class="form-group col-md-6">
-      <label for="inputPassword4">Localisation(au cas ou vous avez plusieurs site) </label>
+      <label for="inputPassword4">Choix des sites </label>
      <select id="site" name="site" class="form-control">
         <option value="0">choisir</option>
 		<option value="1">Site 1 </option>
@@ -509,51 +524,61 @@ height:2800px;overflow-y:scroll;z-index:5;}
     </div>
 	
 	<div class="form-group col-md-6">
-      <label for="inputPassword4">Nommer vos sites </label>
-      <input type="text" class="form-control" id="societ" name="societ" placeholder="">
+      <label for="inputPassword4">Identification des sites </label>
+      <?php
+		  if(count($data)==2 OR count($data)==3){
+		$number =count($data)+1;
+	       echo'<label><br/></label>
+		   <select id="societ" name="societ" class="form-control" required>
+		   <option selected value="0">Choisir un site </option>';
+			for($i=0; $i< $number; $i++){
+			$r = $i+1;
+             echo'<option value="'.$data[$i].'">'.$data[$i].'</option>';
+			}
+            echo'</select>';			
+		  }
+		?>
     </div>
     
      <div class="form-group col-md-12">
-        <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
+        <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations des équipements principaux du local</h2>
 
       <div class="custom-checkbox">
-      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation
-     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> ventilateur"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> ventilateur
-	 <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision"> <i style="font-size:13px" class="fa">&#xf108;</i> télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style="font-size:14px" class="fa">&#xf1eb;</i> wiffi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> salle de bains
+      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> Climatisation
+     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> ventilateur"> <i style='font-size:13px' class='fa'>&#xf2dc;</i> Ventilateur
+	 <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision"> <i style="font-size:13px" class="fa">&#xf108;</i> Télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style="font-size:14px" class="fa">&#xf1eb;</i> wifi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> Salle de bains
      <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Déjeuner"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Déjeuner
 	 <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Frigo/réfrigerateur"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Frigo/réfrigérateur 
 	 <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Four/chauffage"> <i style='font-size:14px' class='fas'>&#xf0f4;</i> Four/chauffage
 	 </div>
 	 
-	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements secondaires du local</h2>
-    <input type="checkbox" name="choix[]"  value="toilletes"> toilletes
-    <input type="checkbox" name="choix[]"  value="armoie ou penderie"> armoie ou penderie  
-   <input type="checkbox" name="choix[]" value="chaines satellite"> chaines satellite
-   <input type="checkbox" name="choix[]"  value="prise près de lit"> prise près de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
-   <input type="checkbox" name="choix[]"  value="portant"> portant
+	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations des équipements secondaires du local</h2>
+    <input type="checkbox" name="choix[]"  value="toilletes"> Toillete
+    <input type="checkbox" name="choix[]"  value="armoie ou penderie"> Armoire ou penderie  
+   <input type="checkbox" name="choix[]" value="chaines satellite"> Chaines satellite
+   <input type="checkbox" name="choix[]"  value="prise près de lit"> Prise  de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
     <input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche 
-	<input type="checkbox" name="choix[]"  value="fer à repasser"> article de toilletes 
-	<input type="checkbox" name="choix[]"  value="radio"> radio
-	<input type="checkbox" name="choix[]"  value="baignoire ou douche"> Baignoire ou douche
-   <input type="checkbox" name="choix[]"  value="télephone"> télephone
-   <input type="checkbox" name="choix[]"  value="microonde"> microonde
-   <input type="checkbox" name="choix[]"  value="réfrigérateur"> réfrigerateur
-    <input type="checkbox" name="choix[]"  value="machine à laver"> machine à laver<br/>
-     <input type="checkbox" name="choix[]"  value="papier toillete"> papier toillete
-    <input type="checkbox" name="choix[]"  value="séche cheveux"> séche cheveux
-   <input type="checkbox" name="choix[]"  value="petit café">  petit café
-   <input type="checkbox" name="choix[]" value="déjeuner"> déjeuner
+	<input type="checkbox" name="choix[]"  value="fer à repasser"> Article de toilletes 
+	<input type="checkbox" name="choix[]"  value="radio"> Radio
+   <input type="checkbox" name="choix[]"  value="télephone"> Télephone
+   <input type="checkbox" name="choix[]"  value="microonde"> Microonde
+   <input type="checkbox" name="choix[]"  value="réfrigérateur"> Réfrigerateur
+    <input type="checkbox" name="choix[]"  value="machine à laver"> Machine à laver<br/>
+     <input type="checkbox" name="choix[]"  value="papier toillete"> Papier toillete
+    <input type="checkbox" name="choix[]"  value="séche cheveux"> Séche cheveux
+   <input type="checkbox" name="choix[]"  value="petit café">  Petit café
+   <input type="checkbox" name="choix[]" value="déjeuner"> Déjeuner
 	</div>
       
     </div>
 	
-	<h2>Informations facultatives</h2>
+	<h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations complémentaires (facultatives)</h2>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">informations complementaire</label>
+    <label for="exampleFormControlTextarea1"></label>
     <textarea class="form-control" name="infos" id="infos" rows="3"></textarea>
    </div>
 	
-  <h2><i class="fas fa-camera"></i> Prise de photo de votre local(au moins 4images)</h2>
+  <h2><i class="fas fa-camera"></i>Photos des locaux (6 photos maximum)</h2>
   <div class="parent-div">
       <button class="btn-upload">Ajouter une image</button>
       <input type="file" name="fil[]" id="file1" />
@@ -695,6 +720,7 @@ echo $_SESSION['token'];?>">
  var number = /^[0-9]{1,2}$/;
  var inf = /^[a-zA-Z0-9éàèçé]{0,130}$/;
  var info = /^[a-zA-Z0-9éàèçé]{0,130}$/;
+ var expres = /^[ChambreAppartement]{1,30}(\s[0-9ABCDEA-B-C-]{1,4})$/;
 // on ecrits les variable
 var ids =$('#ids').val();
 var num =$('#num').val();
@@ -702,7 +728,7 @@ var nums =$('#nums').val();
 var infos = $('#infos').val();
 var societ = $('#societ').val();
 
- if(ids.length> 60) {
+ if(ids.length> 50) {
 	$('#error').html('<i class="material-icons" style="font-size:22px;color:red;padding-left:-2%;font-weight:bold;">help_outline</i>nombre max de caractère est de 50 nom du client');
 	}
 	
@@ -728,6 +754,11 @@ var societ = $('#societ').val();
 	else if (!number.test(nums)){
       $('#error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i> erreur de syntax sur le nombre compris entre 1et 9');
       $('#nums').css('border-color','red');
+	}
+	
+	else if (!expres.test(ids)){
+      $('#error').html('<i style="font-size:15px;color:red;" class="fa">&#xf05e;</i>vos locaux est sous forme de chambre 1 ou appartement 1 ou chambre 10, appartement 10 , chambre B-01, appartement B-01');
+      $('#ids').css('border-color','red');
 	}
 	
 	else if (infos.length >200){

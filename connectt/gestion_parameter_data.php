@@ -7,7 +7,7 @@ include('inc_session.php');
    header('location:index.php');	
  }
  $user =$_GET['user'];
-  $req=$bdd->prepare('SELECT id,email_ocd,email_user,password,numero,numero1,user,categories FROM inscription_client WHERE id= :id AND email_ocd= :email_ocd');
+  $req=$bdd->prepare('SELECT id,email_ocd,email_user,password,numero,numero1,user,categories,role FROM inscription_client WHERE id= :id AND email_ocd= :email_ocd');
    $req->execute(array(':id'=>$user,
                        ':email_ocd'=>$_SESSION['email_ocd']));
    $donnees =$req->fetch();
@@ -16,6 +16,7 @@ include('inc_session.php');
    $users =$donnees['user'];
    $numero =$donnees['numero1'];
    $categories =$donnees['categories'];
+   $role = $donnees['role'];
    $ids=$user;
 
 ?>
@@ -317,19 +318,18 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <h2 style="border-color:none">Modifier les données de ce utilisateur</h2>
 					<div class="form-row">
                     <div class="col">
-                       <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="<?php echo$users;?>" required>
+                       <label>Nom </label><br/><input type="text" class="form-control" id="noms" name="noms" value="<?php echo htmlentities($users);?>" required>
                       <br/><span class="noms"></span></div>
                     </div>
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Numéro télephone</label><br/><input type="number" id="nums" name="nums" class="form-control" value="<?php echo$numero;?>" placeholder="numero">
+                       <label>Numéro télephone</label><br/><input type="number" id="nums" name="nums" class="form-control" value="<?php echo htmlentities($numero);?>" placeholder="numero">
                       <br/><span class="nums"></span></div>
                     <div class="col">
                     <br/><select id="roles" name="roles" required>
-                   <option value="<?phpecho$categories;?>"><?php echo$categories;?></option>
+                   <option value="<?php echo htmlentities($role);?>"><?php echo$categories;?></option>
                  <option value="1">Dirigeant</option>
-				 <option value="2">Responsable</option>
                   <option value="3">Gestionnaire</option>
                   <option value="4">Réceptionniste(caisse)</option>
                </select>
@@ -339,11 +339,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 				 
 				 <div class="form-row">
                     <div class="col">
-                       <label>Email(utilisé)</label><br/><input type="text" id="emais" name="emais" class="form-control" value="<?php echo$email;?>" required><br/>
+                       <label>Email(utilisé)</label><br/><input type="text" id="emais" name="emais" class="form-control" value="<?php echo htmlentities($email);?>" required><br/>
 					   <span class="emais"></span>
                       </div>
                     <div class="col">
-                   <label>Nouveau mot de pass</label> <input type="password" id="pas" name="pas" class="form-control">
+                   <label>Actualiser le  mot de pass</label> <input type="password" id="pas" name="pas" class="form-control">
                     <br/><span class="pas"></span></div>
 				   <input type="hidden" name="ids" id="ids" value="<?php echo$ids;?>">
                   </div>

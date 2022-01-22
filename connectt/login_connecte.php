@@ -1,0 +1,86 @@
+<?php
+
+include('connecte_db.php');
+
+if(isset($_POST['id_ocd'])) {
+  $jour = array("Dim","Lun","Mar","Mercredi","Jeu","Vendr","Sam");
+   $mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
+    $dateDuJour = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
+    $date=$dateDuJour;
+    $heure = date('H:i');
+	$date = date('Y-m-d');
+	// token reset password
+	$dates1 = explode('-',$date);
+	$j = $dates1[2];
+	$mm = $dates1[1];
+	$an = $dates1[0];
+	
+	$dat = $j.'-'.$mm.'-'.$an;
+	
+	$req=$bdd->prepare('SELECT email_ocd,email_user,password,user,permission,active,code,society, id_visitor FROM inscription_client WHERE email_user= :email_user');
+   $req->execute(array(':email_user'=>$_POST['email_ocd']));
+   $donnees=$req->fetch();
+	$req->closeCursor();
+    
+	if(password_verify($_POST['id_ocd'],$donnees['password']) AND $donnees['email_ocd']=="") {	
+	echo'<SCRIPT LANGUAGE="JavaScript">
+       document.location.href="gestion_create_users.php"
+        </SCRIPT>';	
+	}
+	if(password_verify($_POST['id_ocd'],$donnees['password'])) {
+		$active="off";
+		if($donnees['active']!=$active) {
+			$_SESSION['email_ocd']=$donnees['email_ocd'];
+			$_SESSION['email_user']=$_POST['email_ocd'];
+			$_SESSION['pose']= $_POST['id_ocd'];
+			$_SESSION['user']= $donnees['user'];
+			$_SESSION['permission'] = $donnees['permission'];
+			$_SESSION['code']= $donnees['code'];
+			$_SESSION['society']= $donnees['society'];
+			$_SESSION['id_visitor'] = $donnees['id_visitor'];
+			 $_SESSION['pmd']= sha1(uniqid('',true).'_'.mt_rand());
+	          $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
+			  
+			  //On modifie les donnees
+	           $reks=$bdd->prepare('UPDATE inscription_client SET etat=\'connecte\', date= :nvte, heure = :nvh WHERE email_user= :email_user');
+			   $reks->execute(array( ':nvte'=>$date,
+									':nvh'=>$heure,
+		
+		':email_user'=>$_POST['email_ocd']));
+	 // on renvoi la page
+	  if($donnees['permission']=="user:boss" OR $donnees['permission']=="user:gestionnaire"){
+       echo'<SCRIPT LANGUAGE="JavaScript">
+       document.location.href="tableau_data_home.php"
+        </SCRIPT>';	
+		}
+         if($donnees['permission']=="user:employes"){
+			echo'<SCRIPT LANGUAGE="JavaScript">
+           document.location.href="gestion_data_home.php?data='.$dat.'"
+           </SCRIPT>';	
+		}
+	}
+		
+	 else{
+	 
+	    $_SESSION['email_ocd']=$donnees['email_ocd'];
+			$_SESSION['email_user']=$_POST['email_ocd'];
+			$_SESSION['pose']= $_POST['id_ocd'];
+			$_SESSION['user']= $donnees['user'];
+			$_SESSION['permission'] = $donnees['permission'];
+			$_SESSION['code']= $donnees['code'];
+			$_SESSION['society']= $donnees['society'];
+			 $_SESSION['pmd']= sha1(uniqid('',true).'_'.mt_rand());
+	          $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
+			  
+	       echo'<SCRIPT LANGUAGE="JavaScript">
+           document.location.href="gestion_datas_messanger.php"
+           </SCRIPT>';	
+	}
+	}
+	else{
+	 echo'<div class="dnn" style="position:absolute">Identifiants OCD incorrectes...</div>'; 
+	}
+	
+}
+
+?>
