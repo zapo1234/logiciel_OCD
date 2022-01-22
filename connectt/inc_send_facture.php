@@ -25,7 +25,9 @@ try {
 	//SMTP password
 	$mail->SMTPSecure = 'ssl';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = 465;
+	$mail->CharSet = 'UTF-8';
+	//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     //Recipients (expediteur or destinataire)
     $mail->setFrom("ne-reply@ocdgestion.com");
     $mail->addAddress($email);     //Add a recipient
@@ -36,7 +38,7 @@ try {
     //Content
       $mail->isHTML(true);                                  //Set email format to HTML
       $mail->Subject = 'Votre facture de séjour';
-      $mail->Body    = ' Bonjour'.$email.' Vous trouverez votre facture <br/> en cliquant sur le lien ci-desous!<br/><div class="button">'.$lien.'</b>';
+      $mail->Body    = ' Bonjour '.$email.' Vous trouverez votre facture <br/><strong> en cliquant sur le lien ci-desous!</strong><br/><div class="button">'.$lien.'</b>';
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
