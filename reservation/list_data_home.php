@@ -1,7 +1,5 @@
 <?php
 include('connecte_db.php');
-include('inc_session.php');
-
 $record_peage=20;
 $page="";
 
@@ -19,9 +17,9 @@ $page=1;
 $smart_from =($page -1)*$record_peage;
     // emttre la requete sur le fonction
 	$active="on";
-	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,society FROM chambre WHERE email_ocd= :email_ocd AND active= :ac LIMIT '.$smart_from.','.$record_peage.'');
+	$req=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,society FROM chambre WHERE id_visitor= :id AND active= :ac LIMIT '.$smart_from.','.$record_peage.'');
     $req->execute(array(':ac'=>$active,
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	                    ':id'=>$home_user));
 	$don = $req->fetchAll();
 	
 	$rem='<span class="ts"></span>';
@@ -31,8 +29,8 @@ $smart_from =($page -1)*$record_peage;
      $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement,  home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
-	  chambre.email_ocd= :email');
-	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
+	  chambre.id_visitor= :id');
+	  $sql->execute(array(':id'=>$home_user));
       $dns=$sql->fetchAll();
 	  $arr1=[]; // recupere les id_chambre 
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
@@ -269,7 +267,7 @@ $smart_from =($page -1)*$record_peage;
 	
 	$total = $total1+$total2;
 	 if($total==1){
-		echo'<input type="hidden" id="test" value="Reste qu\'une chambre libre">'; 
+		echo'<input type="hidden" id="test" value="une seul chambre libre">'; 
 	  }
 	  elseif($total==0){
 		echo'<input type="hidden" id="tests">toutes nos chambres sont occupées">';

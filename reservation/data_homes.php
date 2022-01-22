@@ -1,13 +1,12 @@
 <?php
-include('../connecte_db.php');
-include('../inc_session.php');
+include('connecte_db.php');
 
-if(!isset($_GET['id_home']) AND !isset($_GET['date_end']) AND !isset($_GET['date_start'])) {
+if(!isset($_GET['date_end']) AND !isset($_GET['date_start'])) {
   header('location:home_none.php');
 }	
 
 // recupére les variable
-$id_home =$_GET['id_home'];
+
 $home_user =$_GET['home_user'];
 $date_end =$_GET['date_end'];
 $date_start =$_GET['date_start'];
@@ -21,9 +20,8 @@ $req=$bdd->prepare('SELECT id_visitor,denomination,numero,email_user FROM inscri
 }
 
   // recupere les données des chambre 
-   $reg=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,nombre_lits FROM chambre WHERE id_chambre= :id_home AND  id_visitor= :home_user');
-    $reg->execute(array(':id_home'=>$id_home,
-	                    ':home_user'=>$home_user));
+   $reg=$bds->prepare('SELECT id,id_chambre,chambre,type_logement,equipements,equipement,cout_nuite,cout_pass,icons,infos,nombre_lits FROM chambre WHERE id_visitor= :home_user');
+    $reg->execute(array(':home_user'=>$home_user));
    $donns = $reg->fetch();
    $reg->closeCursor();
    
@@ -31,9 +29,8 @@ $req=$bdd->prepare('SELECT id_visitor,denomination,numero,email_user FROM inscri
    $button ='<button class="bu">Confirmer votre réservation</button>';
    
     // recupere les données des chambre 
-    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
-    $ret->execute(array(':id_home'=>$id_home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
+    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE  email_ocd= :email_ocd');
+    $ret->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
 	// creéation et recuperation des valeur dans un tableau
 	$donnes =$ret->fetchAll();
 	$data =[];
@@ -127,7 +124,7 @@ $dates2 = $j1.'/'.$mm1.'/'.$an;
 .dt{font-size:12.3px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
-#pak{position: absolute;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
+#pak{position: absolute;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.5;}
 .center{background:#eee;} 
 
 .navbar-nav{background:#eee;}
@@ -181,6 +178,8 @@ label{width:200px;}#nbjour{width:150px;}
 .calenda{display:none;} #panier_mobile{display:none;}
 .imgs,{display:none;} .panier{background:red;color:white;border-radius:50%;border-color:red;}
 .adds{display:none;} .error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:400px;}
+.resu{position:absolute;background:white;border:3px solid white;width:20%;
+height:300px;left:20%;top:50px;padding:2%;font-size:18px;text-align:center;color:white;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:20px;margin-left:8%;color:black}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -204,11 +203,11 @@ color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-rad
 #days,#das{width:250px;}
 .resul a{padding:1%;color:black;width:50px;}
 .resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;} .data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;} .calenda{margin-left:10%;}
-.img{margin-left:10%;} #panier_mobile{display:block;}
+.img{margin-left:10%;} #panier_mobile{display:block;position:absolute;left:60%;}
 #collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
 .bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:300px;margin-left:-14%;} .bc{width:330px;}
 .carous{margin-top:200px;width:330px;margin-left:-12%;}
-.imgs{display:none;} #imgs{display:block;}  .panier{background:red;color:white;border-radius:50%;border-color:red;}
+.imgs{display:none;} #imgs{display:block;}  .panier{background:red;color:white;border-radius:50%;border-color:red;margin-left:90%;}
 .adds{display:block;} .add{display:none;}
 }
 
@@ -258,7 +257,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:75%;height:1200px;width:300px;}
 .hote{margin-left:5%;text-transform:capitalize;font-size:18px;} .imgs{display:block;position:absolute;left:90%;top:20px;} .hotes{width:90%;}
-.user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
+.user_home{position:absolute;top:20px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
 .bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
 .panier{position:absolute;left:92%;border-radius:50%;background:red;border-color:red;color:white;}
 }
@@ -273,7 +272,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
  <div class="x"><i class="fas fa-times" style="color:white;font-size:20px;"></i></div>
         <!-- Page Wrapper -->
     <div id="wrapper">
-      <div id="result"></div><!--retour Ajax-->
+      
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 		 <div class="df"> <?php echo date('H:i');?> en Direct</div>
@@ -538,14 +537,15 @@ for($i=0; $i<$count; $i++){
   <span class="errors"></span>
    <button type="button" class="buttons">Rechercher
  <input type="hidden" name="id_visitor" value="<?php echo$home_user;?>">
- <input type="hidden" name="id_chambre" value="<?php echo$id_home;?>">
+ <input type="hidden" name="date_start" id="date_start" value="<?php echo$date_start;?>">
+ <input type="hidden" name="date_end" id="date_end" value="<?php echo$date_end;?>">
 <input type="hidden" name="token" id="token" value="<?php
 //Le champ caché a pour valeur le jeton
 echo $_SESSION['token'];?>">
 
  </form>
  </div>
-     
+     <div id="result"></div><!--retour Ajax-->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -571,15 +571,13 @@ echo $_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-    
-	
-	
-    $('#sidebarToggleTop').click(function(){
+     
+	 $('#sidebarToggleTop').click(function(){
 		$('#accordionSidebar').slideToggle();
 		$('#collapse').css('display','none');
 	 });
 	 
-	$('#sms').click(function(){
+	 $('#sms').click(function(){
 	$('.drop').slideToggle();
 	$('.drops').css('display','none');
 
@@ -600,7 +598,8 @@ echo $_SESSION['token'];?>">
 	$('#pak').css('display','block');
    $('#examp').css('display','block');	
 	 $('.x').css('display','block');
-  });
+	 
+ });
  
  $('.img').click(function(){
 	$('#collapse').slideToggle();
@@ -609,32 +608,29 @@ echo $_SESSION['token'];?>">
   $('.imgs').click(function(){
 	$('#collapse').slideToggle();
   });
- 
+  
   $(document).on('click','.panier',function() {
 	$('#collapse').slideToggle();
   });
+  
+  $(".oui").click(function(){
+	$("#non").prop('checked',false);		   
+   });
  
  $('.der').click(function(){
  $('.carous').css('display','block');
  $('#pak').css('display','block');
  $('.x').css('display','block');
 });
-
-    $(".oui").click(function(){
-	$("#non").prop('checked',false);		   
-   });
-	  
-	  $(".non").click(function(){
-	  $(".oui").prop('checked',false);	
-     });
  
-     $('.x').click(function(){
+ $('.x').click(function(){
 	$('#pak').css('display','none');
    $('#examp').css('display','none');	
 	$('.x').css('display','none');
 	$('.user_home').css('display','none');
 	$('.carous').css('display','none');
  });
+ 
  
  
  $('#pak').click(function(){
@@ -683,7 +679,7 @@ $('#news_data').click(function(){
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
-	var type = $('#type_logement'+id).val();
+	var type= $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -696,11 +692,14 @@ $('#news_data').click(function(){
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
+		$('.titre').css('display','block');
 		panier();
 	 },
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
+	 
+	 
 	}
 	else{
 	  $('#error').text('choisir une option');
@@ -710,7 +709,6 @@ $('#news_data').click(function(){
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
 	 });
-	 
 	 
 	 $(document).on('click','.adds',function() {
 		 var id = $(this).data('id2'); // on recupère l'id.
@@ -751,11 +749,14 @@ $('#news_data').click(function(){
 		
 	 });
 	 
+	 
 	 $('#envoi').click(function(){
 	  var name =$('#name').val();
 	  var email = $('#email').val();
 	  var numero = $('#numero').val();
 	  var adresse =$('#adresse').val();
+	  var date_end = $('#date_end').val();
+	  var date_start = $('#date_start');
 	  var nbjour =$('#nbjour').val();
 	  var choix = $('.choix');
 	  var choix1 =$('.choix1');
@@ -806,17 +807,14 @@ $('#news_data').click(function(){
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier
-	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
-	list:list,list1:list1,list2:list2,list3:list3},
+	url: "reservation_adds_home.php?date_start=<?php echo$_GET['date_start'];?>&date_end=<?php echo$_GET['date_end'];?>&home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier
+	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,date_start:date_start,list:list,list1:list1,list2:list2,list3:list3},
 	success:function(data) { // on traite le fichier recherche apres le reto
         $('.user_home').css('display','none');
 		$('#pak').css('display','none');
 		$('#result').html(data)
 		//envoi du formulaire add_reservation
 	 },
-	 error: function() {
-    $('#result').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
 	 },3000);
@@ -832,13 +830,12 @@ $('#news_data').click(function(){
 	 var prix_nuite = $('#prix_nuite'+id).val();
 	 var prix_pass = $('#prix_pass'+id).val();
 	 var chambre =$('#chambre'+id).val();
-	 var type =$('#type_logement'+id).val();
 	 var nbjour = $('#nbjour').val();
 	 
-	$.ajax({
+	 $.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -847,10 +844,7 @@ $('#news_data').click(function(){
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
-	 setInterval(function(){
-		 $('#resultat').html('');
-		 location.reload(true);
-	 },3000);
+	 
 	 });
 	 
 	 $('.bu').click(function(){
@@ -864,7 +858,16 @@ $('#news_data').click(function(){
 			$('#error').text('*vous n\'avez pas choisir un local'); 
 		}
        });
-	
+	 
+	$('#nbjour').keyup(function(){
+	var nbjour =$('#nbjour').val();
+	if(nbjour==""){
+		nbjour=1;
+	}
+	var total = $('#tota').val();
+	var s = parseFloat(nbjour)*parseFloat(total);
+	$('.data_total').text(s);
+	});
 	
 	// pagintion
   $(document).on('click','.bout',function(){
@@ -911,19 +914,12 @@ $('#news_data').click(function(){
 					data:{action:action},
 					success: function(data) {
 						$('#resultat').html(data);
-						var nbjour =$('#nbjour').val();
-	                      if(nbjour==""){
-		                   nbjour=1;
-	                      }
-	                    var total = $('#tota').val();
-	                    var s = parseFloat(nbjour)*parseFloat(total);
-	                   $('.data_total').text(s);
-	                  }
-					});
-		           }
+					}
+				});
+			}
            session_add();
-		   
-		   // afficher le pannier
+			
+			// afficher le pannier
            function panier() {
 				var action="count";
 				$.ajax({
@@ -937,16 +933,6 @@ $('#news_data').click(function(){
 			}
 
 			panier();	
-	
-	$('#nbjour').keyup(function(){
-	var nbjour =$('#nbjour').val();
-	if(nbjour==""){
-		nbjour=1;
-	}
-	var total = $('#tota').val();
-	var s = parseFloat(nbjour)*parseFloat(total);
-	$('.data_total').text(s);
-	});		
 			
   // Wrap every letter in a span
 var textWrapper = document.querySelector('.ml2');

@@ -1,6 +1,6 @@
 <?php
-include('../connecte_db.php');
-include('inc_session.php');
+include('connecte_db.php');
+
 $id =$_POST['days'];
 
 if(!isset($id) AND empty($id)){
@@ -42,7 +42,6 @@ header('location: index.php');
  
 <?php
 
-$id_home=$_POST['id_chambre'];
 $home_user =$_POST['id_visitor'];
 $data_start =$_POST['days'];
 $data_end =$_POST['das'];
@@ -51,7 +50,7 @@ $data_end =$_POST['das'];
              <div class="enre"><h1>Locaux disponible</h1><br/>
 			  <div class="dep"><i class="fa fa-hourglass-end" aria-hidden="true" style="color:green;font-size:23px;"></i></div></div>
                </div>
-             <meta http-equiv="Refresh" content="4; url=//localhost/logiciel_OCD/reservation/data_homes.php?id_home='.$id_home.'&home_user='.$home_user.'&date_start='.$data_start.'&date_end='.$data_end.'"/>';
+             <meta http-equiv="Refresh" content="4; url=https://reservation.ocdgestion.com/data_homes.php?home_user='.$home_user.'&date_start='.$data_start.'&date_end='.$data_end.'"/>';
 	 }
 ?>
 

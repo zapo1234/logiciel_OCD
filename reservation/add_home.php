@@ -1,6 +1,5 @@
 <?php
 include('connecte_db.php');
-include('inc_session.php');
 // recupére les données de la base de données
    //créer un tableau vide 
   if($_POST['action']=="add"){

@@ -1,6 +1,5 @@
 <?php
 include('connecte_db.php');
-include('inc_session.php');
 try{
 if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token']))
 		
@@ -52,7 +51,8 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
    
    if(!isset($_GET['date_start'])){
 	$date1 = date('y-m-d');
-    $date2 = date('y-m-d');	
+	$jour =$_POST['nbjour'];
+	$date2 = date("Y-m-d", strtotime($date1.'+ '.$jour.' days'));
    }
    else{
    $date1=$_GET['date_start'];
@@ -171,13 +171,12 @@ if(isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['
 			unset($_SESSION['add_homes']);
 			// on envoi une repose positif
 			echo'
-             <div class="enre"><div>
-			 <div><i class="far fa-check-circle" style="color:green;font-size:50px"></i></div>
-			 <div>Félicitation  <i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i> '.$clients.'</div>
-			 <div> Un instant votre  réservation est  prise en compte<br/> , l\'etablissement reviens vers vous ..<br/>Prioriser un acompte pour vos réservations</div>
+			 <div class="resu"><i class="far fa-check-circle" style="color:green;font-size:50px"></i><br/>
+			 Félicitation  <i class="far fa-user" style="font-size:15px"></i><strong>'.$clients.'</strong>
+			 <br/>Un instant votre réservation est  prise en compte<br/>, l\'etablissement reviens vers vous ..<br/>Prioriser un acompte pour vos réservations</div>
 		     </div><div id="pak"></div>';
 			 
-			 echo'<meta http-equiv="Refresh" content="5; url=//localhost/logiciel_OCD/gestion_facture_customer.php"/>';
+			 echo'<meta http-equiv="Refresh" content="10; url=https://ocdgestion.com.php"/>';
 
 }
 

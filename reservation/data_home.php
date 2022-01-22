@@ -1,6 +1,5 @@
 <?php
-include('../connecte_db.php');
-include('../inc_session.php');
+include('connecte_db.php');
 
 if(!isset($_GET['id_home']) AND !isset($_GET['home_user'])) {
   header('location:home_none.php');
@@ -29,9 +28,9 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
    $button ='<button class="bu">Confirmer votre réservation</button>';
    $button1 ='<button class="retour"><a href="reservation_start.php?user_home='.$donnees['id_visitor'].'">Retour</a></button>';
     // recupere les données des chambre 
-    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND email_ocd= :email_ocd');
+    $ret=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_home AND id_visitor= :id');
     $ret->execute(array(':id_home'=>$id_home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']));
+	                    ':id'=>$home_user));
 	// creéation et recuperation des valeur dans un tableau
 	$donnes =$ret->fetchAll();
 	$data =[];
@@ -160,7 +159,8 @@ label{width:200px;}#nbjour{width:150px;}
 .calenda{display:none;} #panier_mobile{display:none;}
 .adds{display:none;} .error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:350px;}
 .panier{background:red;color:white;border-radius:50%;border-color:red;}
-
+.resu{position:absolute;background:white;border:3px solid white;width:20%;
+height:300px;left:25%;top:100px;padding:2%;font-size:18px;text-align:center;color:black;z-index:4;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:20px;margin-left:8%;color:black}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -734,7 +734,7 @@ $('#news_data').click(function(){
 		
 	 });
 	 
-	 
+	 //envoyer le local désire
 	 $('#envoi').click(function(){
 	  var name =$('#name').val();
 	  var email = $('#email').val();
@@ -790,7 +790,7 @@ $('#news_data').click(function(){
 		 // executer requete Ajax 
 		  $.ajax({
 	type: 'POST', // on envoi les donnes
-	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier
+	url: "reservation_adds_home.php?home_user=<?php echo$_GET['home_user'];?>",// on traite par la fichier// on traite par la fichier
 	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse,
 	list:list,list1:list1,list2:list2,list3:list3},
 	success:function(data) { // on traite le fichier recherche apres le reto
@@ -799,15 +799,13 @@ $('#news_data').click(function(){
 		$('#result').html(data)
 		//envoi du formulaire add_reservation
 	 },
-	 error: function() {
-    $('#result').text('vérifier votre connexion'); }
 	 });
 	 setInterval(function(){
 	 },3000);
 	 }
 	 }
 	});
-	 
+	 // suprimer le local dans le panier
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
 	 var action="remove";

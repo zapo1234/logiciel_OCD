@@ -1,6 +1,6 @@
 <?php
-include('../connecte_db.php');
-include('../inc_session.php');
+include('connecte_db.php');
+include('inc_session.php');
 
 $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscription_client WHERE id_visitor= :id');
    $req->execute(array(':id'=>$_GET['home_user']));
@@ -59,7 +59,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
 .nav-search{width:70%;} 
 
 .content2{margin-left:0.2%;}
-.dt{font-size:13px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
+.dt{font-size:11px;color:green;} .prix,.pric{border:1px solid #eee;width:30%;margin-left:2%;}
 .dc{padding-bottom: 5px;font-size:14px;font-weight: bold;color: #ACD6EA;} .but2 a{font-size:11px;padding:0.8%;margin-left:50%;background:#111E7F;color:white;text-decoration:none;border:2px solid #111E7F;border-radius:15px;} .but1{margin-left:3%;}
 
 #pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.8;}
@@ -71,7 +71,7 @@ $req=$bdd->prepare('SELECT denomination,email_user,numero,id_visitor FROM inscri
  .btn{display:none;}
 .sup{cursor:pointer;color:white;font-size:12px;}
 .but{margin-left:60%;width:200px;height:38px;margin-top:20px;margin-bottom:20px;border: 2px solid #0769BA;background:#0769BA;color:white;}
-h1{margin-top:18px;} .resul a{padding:2%;font-size:20px;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;} .homesbloque{display:none;}
+h1{margin-top:18px;} .resul a{padding:2%;color:black;width:15%;} .resul{padding:2%;border-bottom:2px solid white;border-top:2px solid white;} .resul a:hover{text-decoration:none;} .homesoccupe{display:none;} .homesbloque{display:none;}
 .button{width:200px;height:35px;background:green;color:white;border:2px solid green;font-weight:bold;} 
 #examp{background:white;width:35%;height:250px;position:absolute;z-index:4;left:30%;top:100px;padding:2%;} .libre{display:none;}
 h3{text-center:center;color:#0769BA;} .buttons{margin-left:50%;width:250px;height:40px;background:#0769BA;
@@ -99,29 +99,6 @@ label{width:200px;}#nbjour{width:150px;}
 .hotes{width:95%;color:black;} .hote{margin-left:40%;text-transform:capitalize;font-size:18px;}
 .numero{margin-left:3%;} .email{margin-left:3%;}
 .error_date{color:red;font-size:12px;}
-#mobile{display:none;} #envoi{display:block;} .users{display:none;}
-
-.ml2 {
-  font-weight: 500;
-  font-size: 1.5em;
-  color:green;
-}
-
-.ml2 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ter {
-  font-weight: 600;
-  font-size: 1em;
-  color:#C10D23;
-}
-
-#test{color:green} .data{display:none;} .img{display:none;}
-.calenda{display:none;} #panier_mobile{display:none;} .imgs{display:none;}
-.error_email,.error_name,.error_adresse,.error_numero{color:red;font-size:1em;width:350px;} .adds{display:none;}
-/*------------------
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 575.98px) { 
@@ -135,28 +112,6 @@ label{width:200px;}#nbjour{width:150px;}
 #accordionSidebar{width:100px;} .btn{display:block;}#searchDropdown{display:none;} 
 #collapse{display:none;position:absolute;left:1%;height:1500px;}
 #im{display:none;} #accordionSidebar{display:none;width:300px;}
-#mobile{display:block;background:white;color:black;padding-left:4%;font-size:16px;}
-#examp{background:white;width:90%;height:300px;position:absolute;z-index:4;left:5%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
-.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
-margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
-#examp{background:white;width:75%;height:300px;position:absolute;z-index:4;left:10%;top:100px;padding:2%;}.hote,.numero,.email{display:none;} 
-.rows{background:white;width:120%;height:650px;margin-left:-3%;} .der{margin-left:-3%;
-margin-top:5px;} h3{font-size:20px;margin-left:3Px;margin-top:5px;}
-.dat{margin-top:3px;border-bottom:2px solid #eee;}
-.buttons{margin-left:5%;width:250px;height:40px;background:#0769BA;
-color:white;border:2px solid #0769BA;margin-top:20px;font-weight:bold;border-radius:20px;}
-#days,#das{width:250px;}
-.resul a{padding:1%;color:black;width:350px;}
-.resul{width:500px;padding:1%;border-bottom:2px solid white;border-top:2px solid white;}
-.data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
-.calenda{margin-left:5%;} .dt{font-size:13px;}
-.data,.img,.calenda{float:left;} .calenda{margin-left:35%;}
-.img{margin-left:10%;} #block{margin-left:-12%;width:90%;height:400px;}
-.ter{padding-left:2%;} #panier_mobile{display:block;}
-#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:4%;border-shadow:3px 3px 3px black;}
-.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .bc{width:330px;} .user_home{width:300px;margin-left:-10%;}
-.carous{margin-top:170px;width:400px;margin-left:-12%;}
-#block{width;350px;}
 }
 
 
@@ -177,16 +132,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 #searchDropdown{display:none;} 
-#block{margin-left:-12%;width:60%;height:400px;}
-.ter{padding-left:2%;} 
-.data{display:block;} .button{display:none;} .img{display:block;} .calenda{display:block;} .data,.img,.calenda{float:left;}
-.calenda{margin-left:5%;} .dt{font-size:13px;}
-.data,.img,.calenda{float:left;} .calenda{margin-left:45%;}
-#collapse{background:white;width:400px;height:800px;position:absolute;top:60px;left:50%;border-shadow:3px 3px 3px black;}
-.bu{margin-top:100px;margin-left:20%;width:200px;border-radius:20px;border-radius:20px;} .user_home{width:400px;margin-left:-10%;}
-.hote{display:none;}.button{display:none;} .numero{display:none;}
-.email{display:none;} .calenda{margin-left:65%;}
-.carous{margin-top:150px;width:550px;margin-left:-12%;}
+#collapse{position:absolute;display:none;left:62%;height:1200px;}
 }
 
 
@@ -207,10 +153,6 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 #collapse{position:absolute;display:none;left:70%;height:1200px;}
-.hote{margin-left:25%;}
-.user_home{position:absolute;top:80px;left:21%;width:48%;background:white;height:570px;z-index:4;padding:5%;}
-.bu{margin-top:100px;margin-left:25%;width:200px;border-radius:20px;border-radius:20px;background:green;border:2px solid green;color:white;font-weight:bold;}
-.panier{position:absolute;left:92%;border-radius:50%;background:red;border-color:red;color:white;}
 }
 
 
@@ -226,14 +168,15 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 
         <!-- Sidebar -->
         <div class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
-         <div class="df"> <?php echo date('H:i');?> en Direct</div>
-		 <span class="ml2"></span><span class="ter"></span>
+         <h1>Liste des chambres disponible</h1>
 		  <div id="result"></div><!--retour ajax list home-->
+          <div id="results"></div><!--retour ajax-->
         </div>
 		
         <!-- End of Sidebar -->
         
-         <div id="collapse" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div id="collapse" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
                     <div class="bn">
                       
                   <div class="container">
@@ -253,53 +196,47 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 	
 		<div class="bc">
 		<div class="recap">Récapitulatif de réservation</div>
-		<form method="post" id="form_reservation" action="reservation_adds_home.php">
+		<form method="post" action="">
 		<div class="forms">
        <label for="inputPassword4">Numéro de jours*</label>
-      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" value="1" required><br/><span id="error"></span>
+      <input type="number" name="nbjour" id="nbjour" class="form-control" id="inputPassword4" placeholder="" required><br/><span id="error"></span>
        </div>
 	   <div class="forms">
       <label for="inputPassword4">Option</label>
       <select id="tr" class="tr" name="tr" required>
-	 <option value="réservation">réservation</option>
+	 <option value="choix">choix</option>
 	 <option value="horaire">horaire</option>
 	 <option value="réservation">réservation</option>
 	 </select></div>
 	 
 	 <div id="div_user" style="display:none">
-	  <div class="form-group col-md-6">
+	 
+	 <div class="form-group col-md-6">
       <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom" required><br/><span class="error_name"></span>
+      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom">
     </div>
  
     <div class="form-group col-md-6">
       <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
-	  <span class="error_numero"></span>
+      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
     </div>
      <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" name="email" id="email" class="form-control" placeholder="email par défaut"><br/><span class="email_error"></span>
+      <input type="text" name="email" id="email" class="form-control" id="inputEmail4" placeholder="email par défaut">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif"><span class="error_adresse"></span>
+      <input type="adresse" name="adresse" class="form-control" id="inputPassword4" placeholder="facultatif">
     </div>
 	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" class="oui" name="oui">Oui<input type="checkbox" id="non" class="non" name="Non">Non 
+      <label for="inputEmail4">Payer vous un acompte? *</label>
+      <input type="checkout" id="oui" name="oui">Oui <input type="checkout" id="oui" name="Non">Non
     </div>
-	
-	<div class="form-group col-md-6">
-      <label for="inputEmail4">Confirmer la réservation</label>
-      <button type="button" id="envoi" name="envoi">Valider</button>
-    </div>
-	 
 	 
 	 </div><!-- information user pour la reservation-->
 	   
 		<div id="resultat"></div><!--requete ajax-->
-		<div id="resultats"></div><!-- requete ajax-->
+		  
        </div>
 	   </form>
 		</div>
@@ -322,9 +259,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
                     </button>
                    <!-- Topbar Search -->
                               <div class="hotes">
-                               <button type="button" class="button">choix de disponibilité</button> <span class="data"></span><span class="calenda"><i class="fas fa-calendar-alt"></i></span><span class="img"><i class="fas fa-cart-arrow-down"></i></span><span class="hote"><?php echo $donnees['denomination'];?></span>
-							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?><span class="imgs"><i class="fas fa-cart-arrow-down"></i></span></span>
-							   <span id="panier"></span><!--retour ajax nombre de reservation-->
+                               <button type="button" class="button">choix de disponibilité</button> <span class="hote"><?php echo $donnees['denomination'];?></span>
+							   <span class="numero"><i class="fas fa-phone" style="font-size:14px;"></i> <?php echo$donnees['numero'];?></span><span class="email"><i class="fas fa-envelope"style="font-size:14px"></i> <?php echo $donnees['email_user'];?></span>
                            </div>
                   
                  <?php include('inc_menu1.php');?>
@@ -384,42 +320,6 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 <div><button type="button" class="but">commencer <i class="fas fa-arrow-right"></i></button></div>
 </div>
 
- <!-- End of Main Content -->
-<div class="user_home" style="display:none">
-	 
-	 <div class="form-group col-md-6">
-      <label for="inputPassword4">Client *</label>
-      <input type="text" name="name" id="name" class="form-control" id="inputPassword4" placeholder="Nom & prénom"><br/>
-	  <span class="error"></span>
-    </div>
- 
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Numéro de phone *</label>
-      <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre"><br/>
-	  <span class="error"></span>
-    </div>
-     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="text" name="email" id="email" class="form-control" placeholder="email par défaut">
-	  <span class="error"></span>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Adresse </label>
-      <input type="adresse" name="adresse" id="adresse" class="form-control" placeholder="facultatif">
-    </div>
-	 <div class="form-group col-md-6">
-      <label for="inputEmail4">Solder vous un acompte? *</label>
-      <input type="checkbox" id="oui" class="oui" name="oui">Oui <input type="checkbox" id="non" class="nom" name="Non">Non
-    </div>
-	
-	<div class="form-group col-md-6">
-      <label for="inputEmail4">Confirmer la réservation</label>
-      <button type="button" id="envoi" name="envoi">Valider</button>
-    </div>
-	 
-	 </div><!-- information user pour la reservation-->
-
-
 <div id="examp" style="display:none">
 <form method="post" id="formA" action="data_home_user.php">
  
@@ -470,28 +370,13 @@ echo $_SESSION['token'];?>">
 <script src="@@path/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     $('.img').click(function(){
-	$('#collapse').slideToggle();
-  });
-  
-  $(document).on('click','.panier',function() {
-	$('#collapse').slideToggle();
-  });
-	 
+     
 	 $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
-	 
-	 $('.calenda').click(function(){
-	$('#pak').css('display','block');
-   $('#examp').css('display','block');	
-	 $('.x').css('display','block');
-	 
- });
 	 
 	$('#sms').click(function(){
 	$('.drop').slideToggle();
@@ -504,10 +389,6 @@ echo $_SESSION['token'];?>">
 	$('.drop').css('display','none');
 	
 	});
-	
-	$(".oui").click(function(){
-	$("#non").prop('checked',false);		   
-   });
 	
 	 $('#news').click(function(){
 	$('.users').slideToggle();
@@ -534,6 +415,7 @@ echo $_SESSION['token'];?>">
  
  
  $('#pak').click(function(){
+	$('#pak').css('display','none');
    $('#examp').css('display','none');	
    
  });
@@ -552,73 +434,11 @@ echo $_SESSION['token'];?>">
 					data:{action:action},
 					success: function(data) {
 						$('#result').html(data);
-						var data = $('#test').val();
-						var datas = $('#tests').val();
-						var dat =$('#datas').val();
-						if(data.length!=""){
-                        $('.ml2').html(data);
-						$('.data').html(data);
-						}
-						if(datas.length!=""){
-						 $('.ter').html('<i class="fas fa-dot-circle"></i>'+datas);
-						 $('.data').html(data);
-						}
 					}
 				});
 			 }
 
 			list();
-			
-    $('#envoi').click(function(){
-	  var name =$('#name').val();
-	  var email = $('#email').val();
-	  var numero = $('#numero').val();
-	  var adresse =$('#adresse').val();
-	  
-	   if(name.length==""){
-		 $('.error_name').html('entrez votre nom et prénom');  
-		}
-	  
-	    else if(name > 80) {
-		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
-	   }
-	  else if(numero.length==""){
-	  $('.error_numero').html('entrez obligatoirement un contact');
-	  }
-	  else if(numero.length > 15){
-	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
-	  }
-	  else if(email.length > 80){
-		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
-	  }
-	  
-	  else if(email.length > 120){
-		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
-	  }
-	  
-	  else{
-		 // executer requete Ajax 
-		 // executer requete Ajax 
-		  $.ajax({
-	type: 'POST', // on envoi les donnes
-	url: 'reservation_add_home.php',// on traite par la fichier
-	data:{name:name,numero:numero,email:email,adresse:adresse},
-	success:function(data) { // on traite le fichier recherche apres le reto
-        $('#resultat').html(data)
-		$('.user_home').css('display','none');
-		$('#pak').css('display','none');
-	 },
-	 error: function() {
-    $('#resultat').text('vérifier votre connexion'); }
-	 });
-	 setInterval(function(){
-		 $('#resultat').html('');
-		 //envoi du formulaire add_reservation
-		$('#form_reservation').submit();
-	 },3000);
-	 }
-		  
-	});
 			
 	$(document).on('click','.add',function() {
 
@@ -630,7 +450,6 @@ echo $_SESSION['token'];?>">
 	var prix_nuite = $('#prix_nuite'+id).val();
 	var prix_pass = $('#prix_pass'+id).val();
 	var chambre =$('#chambre'+id).val();
-	var type = $('#type_logement'+id).val();
 	var nbjour = $('#nbjour').val();
 	
 	if(nbjour.length!="" || nbjour.length!=0){
@@ -639,7 +458,7 @@ echo $_SESSION['token'];?>">
 	$.ajax({
 	type: 'POST', // on envoi les donnes
 	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
+	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour},
 	success:function(data) { // on traite le fichier recherche apres le retour
 		$('#resultat').html(data);
 		$('#error').text('');
@@ -656,129 +475,6 @@ echo $_SESSION['token'];?>">
 	  $('#error').text('fournir le nombre de jours/horaire séjour');
 	}
 	 });
-	 
-	 $(document).on('click','.adds',function() {
-		 var id = $(this).data('id2'); // on recupère l'id.
-    var action ="add";
-	// recupération des variable
-	var tr =$('#tr').val();
-	var id_chambre = $('#id_chambre'+id).val();
-	var prix_nuite = $('#prix_nuite'+id).val();
-	var prix_pass = $('#prix_pass'+id).val();
-	var chambre =$('#chambre'+id).val();
-	var type = $('#type_logement'+id).val();
-	var nbjour = $('#nbjour').val();
-	
-	if(nbjour.length!="" || nbjour.length!=0){
-	if(tr!="choix"){
-	// on lance l'apel ajax
-	$.ajax({
-	type: 'POST', // on envoi les donnes
-	url: 'add_home.php',// on traite par la fichier
-	data:{action:action,tr:tr,id_chambre:id_chambre,prix_nuite:prix_nuite,prix_pass:prix_pass,chambre:chambre,nbjour:nbjour,type:type},
-	success:function(data) { // on traite le fichier recherche apres le retour
-		$('#resultat').html(data);
-		$('#error').text('');
-		panier();
-		$('#accordionSidebar').css('display','none');
-	 },
-	 error: function() {
-    $('#resultat').text('vérifier votre connexion'); }
-	 });
-	}
-	else{
-	  $('#error').text('choisir une option');
-	}
-	}
-	else{
-	  $('#error').text('fournir le nombre de jours/horaire séjour');
-	}
-		
-	 });
-	 
-	 $('#envoi').click(function(){
-	  var name =$('#name').val();
-	  var email = $('#email').val();
-	  var numero = $('#numero').val();
-	  var adresse =$('#adresse').val();
-	  var date = new Date();
-	  var nbjour =$('#nbjour').val();
-	  var list =  [];
-	  var list1 = [];
-	  var list2 = [];
-	  var choix = $('.choix');
-	  var choix1 =$('.choix1');
-	  var choix2 = $('.choix2');
-	   if(name.length==""){
-		 $('.error_name').html('entrez votre nom et prénom');  
-		}
-	    else if(name > 80) {
-		$('.error_name').html('la longueur du nom doit pas dépasser 80 caractères');
-	   }
-	  else if(numero.length==""){
-	  $('.error_numero').html('entrez obligatoirement un contact');
-	  }
-	  else if(numero.length > 15){
-	 $('.error_numero').html('le contact ne doit pas dépasser 15 caractères'); 
-	  }
-	  else if(email.length > 80){
-		 $('.error_email').html('votre e-mail ne doit pas dépasser 80 caractères');   
-	  }
-	  
-	  else if(email.length > 120){
-		 $('.error_email').append('votre adresse ne doit pas dépasser 120 caractères');   
-	  }
-	  
-	  else{
-		 // executer requete Ajax 
-		  $.ajax({
-	type: 'POST', // on envoi les donnes
-	url: "reservation_add_home.php?home_user=<?php echo$_GET['home_user'];?>&date_start="+date+"& date_end="+date+"",// on traite par la fichier
-	data:{name:name,numero:numero,nbjour:nbjour,email:email,adresse:adresse},
-	success:function(data) { // on traite le fichier recherche apres le reto
-        $('#resultat').html(data)
-		//envoi du formulaire add_reservation
-		$('#form_reservation').submit();
-	 },
-	 error: function() {
-    $('#resultat').text('vérifier votre connexion'); }
-	 });
-	 setInterval(function(){
-		 $('#resultat').html('');
-		 location.reload(true);
-	 },3000);
-	 }
-		  
-	 });
-	 
-	       function session_add(){
-		      var action="adds";
-				$.ajax({
-					url: "add_home.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#resultat').html(data);
-					}
-				});
-			}
-
-			session_add();
-	 
-	 // afficher le pannier
-           function panier() {
-				var action="count";
-				$.ajax({
-					url: "add_home.php",
-					method: "POST",
-					data:{action:action},
-					success: function(data) {
-						$('#panier').html(data);
-					}
-				});
-			}
-
-			panier();	
 	 
 	$(document).on('click','.remove',function() {
 	 var id = $(this).data('id3'); // on recupère l'id.
@@ -801,10 +497,6 @@ echo $_SESSION['token'];?>">
 	 error: function() {
     $('#resultat').text('vérifier votre connexion'); }
 	 });
-	 setInterval(function(){
-		 $('#resultat').html('');
-		 location.reload(true);
-	 },3000);
 	 
 	 });
 	 
@@ -851,26 +543,31 @@ echo $_SESSION['token'];?>">
 	});
 	
   
-  // Wrap every letter in a span
-var textWrapper = document.querySelector('.ml2');
-textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+  $(function(){
+  var winners_list = $('.winners li');
+  var ul_height = $('.winners').outerHeight();
+  $('.winners').append(winners_list.clone());
 
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml2 .letter',
-    scale: [4,1],
-    opacity: [0,1],
-    translateZ: 0,
-    easing: "easeOutExpo",
-    duration: 950,
-    delay: (el, i) => 70*i
-  }).add({
-    targets: '.ml2',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 2500
-  });
+  var i = 0;
+  (function displayWinners(i){
+    setTimeout(function(){
+      if( $('.winners').css('top') == (-1 * ul_height) + 'px'){
+        $('.winners').css('top', '0');
+      }
+      var li_height = $(winners_list[i]).outerHeight();
+      $('.winners').animate({
+        top: '-=' + li_height + 'px'}, 500);
+      if( i == winners_list.length - 1){
+        i = 0;
+      }else{
+        i++;
+      }
+      displayWinners(i);
+      
+    }, 5500);
+  })(i);
+  
+});
 
 
 });
