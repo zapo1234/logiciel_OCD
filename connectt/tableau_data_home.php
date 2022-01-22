@@ -1,10 +1,21 @@
 <?php
 include('connecte_db.php');
 include('inc_session.php');
-
-// recupére les utilisateur connecté et leur status
+ // gerer les permission entre patrons-gestionnaire
+ // recuperation des site different  s'il existe
+	 $ren=$bdd->prepare('SELECT permission FROM inscription_client WHERE email_user= :email_user');
+     $ren->execute(array(':email_user'=>$_SESSION['email_user']));
+     $donnees=$ren->fetch();
+ // recupére les utilisateur connecté et leur status
+if($donnees['permission']=="user:boss"){
  $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste FROM tresorie_user WHERE email_ocd= :email_ocd');
  $req->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+ }
+
+if($donnees['permission']=="user:gestionnaire"){
+ $req=$bds->prepare('SELECT entree,sorties,user_gestionnaire,reservation,reste,code FROM tresorie_user WHERE email_ocd= :email_ocd AND code= :code');
+ $req->execute(array(':email_ocd'=>$_SESSION['email_ocd'],'code'=>$_SESSION['code']));
+}
  $datas=$req->fetchAll();
   // créer 4 tableau vide
 	$datac =[];
@@ -51,7 +62,6 @@ include('inc_session.php');
 	$indicateurc="";
 	$cb=0;
 	}
-	
 	if($number1!=0 OR $number4!=0 OR $number2!=0 OR $number3!=0){
 	$data_number =$number1+$number2;
 	$data_numbers =$num_data +$number2;
@@ -125,7 +135,6 @@ include('inc_session.php');
 </div><br>';
 	$names= '<i class="fas fa-arrow-circle-down"  style="font-size:15px;color:#04850C;"> </i> Activité en forte croissance';
 	}
-	
 	elseif(50< $cb  AND $cb <80){
 	$indicateuc='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -136,7 +145,6 @@ include('inc_session.php');
 </div><br>';
 	$names= '<i class="fas fa-arrow-circle-down" style="font-size:15px;color:#04850C;"> </i> Activité en  croissance';
 	}
-	
 	elseif(30<$cb  AND $cb < 50) {
 	$indicateuc='<div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -194,9 +202,7 @@ $name="";
     foreach($types as $ty){
      $tabs[]=$ty;
     }  
-	   
    }
-   
    if($dataf['type']==3){
 	 $dat=$dataf['type'];
 	   // on le met dans un tableau
@@ -211,7 +217,7 @@ $name="";
 	 $reserve ='1 local';
   }
   elseif($a==0 OR empty($array)){
-	$reserve ='pas de clients'; 
+	$reserve ='Aucune facture'; 
   }
   else{
 	$reserve=' '.$a.' clients'; 
@@ -219,10 +225,10 @@ $name="";
   // le nombre d'elements dans le tab
   $b=count($tab);
    if($b==0 OR empty($b)){
-	$clients ='Zéro client facturé';
+	$clients ='Aucun client ';
   }
   elseif($b==1){
-	 $clients ='un client facturé'; 
+	 $clients ='Un client facturé'; 
   }
   else{
 	  $clients = ' '.$b.' clients facturés'; 
@@ -230,10 +236,10 @@ $name="";
   // le nombre d'elements dans le tabs
   $c=count($tabs);
   if($c==0){
-	$cl='aucune facture annulée';
+	$cl='Aucune facture ';
   }
   elseif($c==1){
-	 $cl='une facture annulée'; 
+	 $cl='Une facture annulée'; 
   }
    else{
 	 $cl = ' '.$c.' factures annulées'; 
@@ -244,22 +250,19 @@ $name="";
  $datac=$rev->fetchAll();
  // creer un tableau
  $data =[];
- 
  foreach($datac as $dats){
 	 if($dats['status']==2){
     $dat= $dats['montant'];
 	// créer un tableau
 	$dat = explode(',',$dat);
-	
-	foreach($dat as $value){
+    foreach($dat as $value){
 	 $data[]=$value;
 	}
    }
  }
 // la somme des valeur du tableau pour les crédit fournisseur
  $sum = array_sum($data);   
-	 
- include('statistique_occupation.php');
+include('statistique_occupation.php');
 
 ?>
 
@@ -297,7 +300,7 @@ $name="";
     .bs{background:#eee;width:250px;height:250px;border:1px solid #eee;background:white;}
 	.bc{background:white;width:250px;height:250px;border:1px solid #eee;margin-top:30px;margin-left:3%;color:black;padding:2%;}
 	
-	.bd{margin-top:10px;margin-left:3%;} .users{width:250px;background:white;color:black;padding:2.5%;margin-left:4%;}
+	.bd{margin-top:10px;margin-left:3%;} .users{width:250px;background:white;color:black;padding:2.5%;margin-left:4%;overflow-y:scroll;height:300px;}
 		
     .en{height:50px;border-bottom:1px solid #eee;} .h1{font-size:24px; text-align:center;} .encaiss{font-size:16px;font-weight:none;} .h2{margin-top:70px;margin-left:10%;} .t_monts,.t_mont,.t_mon{font-size:18px;margin-left:-20px;}
 	#montant td{font-weight:none;} .butt{height:35px;border-radius:15px;padding:1.5%;width:180px;font-weight:200;background:#F026FA;color:white;font-size:20px;border:2px solid #F026FA;}
@@ -351,10 +354,10 @@ h4,h5{text-align:center;font-weight:bold;color:black;font-size:13px;font-family:
 }
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border-radius:20px;width:150px;height:35px;background:#85C9F8;border:2px solid #85C9F8;color:white;text-align:center;color:white;margin-left:12%;margin-top:80px;}
-.td{margin-left:10%;margin-top:5px;font-size:16px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
-.tds{font-size:28px;margin-left:12%;color:#09A81F;}
-.tdv{font-size:28px;margin-left:12%;color:#A80913;}
-.tdc{font-size:28px;margin-left:12%;color:#0E84D1;}
+.td{margin-left:5%;margin-top:-25px;font-size:14px;} #logo{position:absolute;top:6px;left:1.7%;border-radius:50%;}
+.tds{font-size:28px;margin-left:6%;color:#09A81F;margin-top:-6px;}
+.tdv{font-size:28px;margin-left:6%;color:#A80913;margin-top:-6px;}
+.tdc{font-size:28px;margin-left:6%;color:#0E84D1;margin-top:-6px;}
 
 .reservation,.pass,.sejour{padding:left:2%;}
 .sejour{color:#42A50A;font-weight:bold;} .reservation{color:#063999;font-weight:bold;}
@@ -362,7 +365,7 @@ ul a{margin-left:3%;} #form_logo{display:none;} h3{font-size:16px;}.print{border
 .annule{color:#C81C31;font-weight:bold}
 .live-infos{
   width: 245px;
-  height:250px;
+  height:270px;
   overflow: hidden;
   position: relative;
   background-color:white;
@@ -375,6 +378,7 @@ ul.winners{
   list-style-type: none;
   padding: 0;
   margin: 0;
+  overflow-y:scroll;
 }
 ul.winners li{
   /*height: 50px;*/
@@ -454,6 +458,7 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 .btns{display:none;} .menu_mobile{display:none;}
 #menu_s{margin-left:5%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.dir{color:green;font-weight:bold;} .ger{color:#C10D23;font-weight:bold;}
 /*------------------------------------------------------------------
 [ Responsive ]*/
 @media (max-width: 750.98px) { 
@@ -462,7 +467,7 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;} .btn{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
 .cont1,.cont12,.cont13,.cont14{display:block;width:250px;margin-top:8px;margin-left:7%;}
 .cont2{display:block;width:250px;margin-top:10px;margin-left:8%;} .center{width:95%;height:2400px;}
-ul{display:none;}
+ul{}
 .bg-gradient-primary{display:none;} .contens,.contens1{display:block;width:250px;margin-top:10px;margin-left:8%;}
 .drop{position:absolute;left:7%;width:100%;background:white;}
 .drops{padding:2%;position:absolute;left:7%;width:100%;display:block;background:white;
@@ -535,48 +540,51 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bn">
-                    <h1>Caisse Journalières</h1>
+                    <h1>Caisse Journalières à l'instant</h1>
                       
                   <div class="container">
  
                   <div class="live-infos">
                    
 				   <ul class="winners">
-	            <?php
-		// afficher les dernières enregistrements
-		// aller chercher les auteurs en écriture sur une facture
-	    $res=$bds->prepare('SELECT date,numero,clients,montant,type,types FROM facture WHERE  email_ocd= :email_ocd  ORDER BY id DESC LIMIT 0,5');
-        $res->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-        
-		 while($donnes=$res->fetch()){
-			
-          if($donnes['type']==1){
-            $icons='<i class="fas fa-coins" style="font-size:15px;color:#42A50A"></i>';
-		    $type ='<span class="sejour">'.$donnes['types'].'</span>';
-			
-		  }
-        	
-          if($donnes['type']==2){
-             $icons='<i class="fas fa-coins" style="font-size:15px;color:#650699"></i>';
-			 $type ='<span class="pass">'.$donnes['types'].'</span>';
-		  }
-
-          if($donnes['type']==3){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="reservation">'.$donnes['types'].'</span>';
-		  }
-
-		  if($donnes['type']==4){
-            $icons='<i class="fas fa-wheelchair" style="font-size:15px;color:#063999"></i>';
-			$type ='<span class="annule">'.$donnes['types'].'</span>';
-		  }
-			 
-		 echo'<li>'.$icons.'  <i class="far fa-user" style="font-size:15px;padding-left:3px;"></i>  '.$donnes['clients'].'<br/>
-		       '.$type.' '.$donnes['montant'].' xof</li>';
-		}
-		       ?>
+	                <?php
+					$rel=$bdd->prepare('SELECT user,permission,code FROM inscription_client WHERE   email_user= :email_user');
+    $rel->execute(array(':email_user'=>$_SESSION['email_user']));
+	$donns =$rel->fetch();
+	
+// requete qui va chercher les montants
+    if($donns['permission']=="user:boss"){
+	$user='';
+   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
+    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
+	}
+	
+ if($donns['permission']=="user:gestionnaire"){
+$user=$donns['user'];
+$rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
+     society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
+     $rej->execute(array(':code'=>$_SESSION['code'],
+                       ':email_ocd'=>$_SESSION['email_ocd']));
+  }  
+  
+	while($donnees =$rej->fetch()){
+  
+  echo'<li><span class="h1" style="font-size:14px";padding-left:-20%;><img src="img/caisse.png" alt="map" width=15px" height="15px">'.$donnees['society'].'</span>
+  <div class="td"> Facture soldée:</div>
+ <div class="tds">'.$donnees['encaisse'].' XOF</div>
+ <div class="td"> Dépense </div>
+ <div class="tdv">'.$donnees['depense'].' XOF</div>
+ <div class="td"> Acompte réservation</div>
+ <div class="tdc">'.$donnees['reservation'].' XOF</div>
+ <div class="td">Reste à payer réservation</div>
+ <div class="tdc">'.$donnees['reste'].' XOF</div>
+ </li>';
+  
+ }					
+ $rej->closeCursor();					
+?>
 				   
-				</ul>
+				   </ul>
 	               
 				  </div><!--livre-infos-->
 	              
@@ -587,18 +595,18 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					
 					<div class="bd">
           
-              <h1> utilisateurs(en ligne)</h1>
+              <h1> utilisateurs en ligne</h1>
 		
 		<div class="users">
 		
 		<?php
 		if($_SESSION['code']==0){
-        $rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE email_ocd= :email_ocd');
+        $rq=$bdd->prepare('SELECT user,permission,categories,date,heure,active,society FROM inscription_client WHERE email_ocd= :email_ocd');
         $rq->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
    		}
 		
 		else{
-			$rq=$bdd->prepare('SELECT user,permission,numero,date,heure,active,society FROM inscription_client WHERE code= :code AND email_ocd= :email_ocd');
+			$rq=$bdd->prepare('SELECT user,permission,categories,date,heure,active,society FROM inscription_client WHERE code= :code AND email_ocd= :email_ocd');
         $rq->execute(array(':code'=>$_SESSION['code'],
 		                  ':email_ocd'=>$_SESSION['email_ocd']));
 		}
@@ -606,20 +614,26 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		    if($dato['society']==""){
 			 $transmi="";  
 		   }
-		   
 		   else{
-			   
-			  $transmi ='travail à '.$dato['society'].''; 
-		   } 
-			
-	     if($dato['active']=="on"){
+			   $transmi ='<img src="img/map.png" alt="map" width="15px" height="15px"> travail à '.$dato['society'].''; 
+		   }
+
+           if($dato['categories']=="dirigeant"){
+             $position='<span class="dir">Dirigeant</span>';
+		   }
+           if($dato['categories']=="gestionnaire"){
+             $position='<span class="ger">Gérant</span>';
+		   }
+           if($dato['categories']=="receptionniste"){
+             $position="";
+		   }
+           if($dato['active']=="on"){
 	       $action='<i class="fas fa-circle" style="font-size:12px;color:green;"></i>  en ligne';
 	      }
           if($dato['active']=="off"){
           $action=' connecté depuis '.$dato['date'].' à '.$dato['heure'].' ';
 	     }
-
-         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/>'.$transmi.'</div> ';	 
+         echo'<div class="user"><i class="far fa-user"></i> '.$dato['user'].' '.$action.'<br/>'.$transmi.' '.$position.'</div> ';	 
        }
      ?>
 						
@@ -675,7 +689,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					<?php
 					echo'<div class="conte1">';
 					echo'<div class="cont1">
-					     <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:green"></i>  Encaissement séjour&pass</div>
+					     <div class="titre"><i class="fas fa-coins" style="font-size:18px;color:green"></i>  Encaissement séjour</div>
 					     <div class="montant1">'.$number1.'<br/><span class="monai">xof</span></div>
 						 </div>
 						 
@@ -699,7 +713,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 					 
 					echo'<div class="conte2">';
 					echo'<div class="cont2">
-					     <div class="titre"><i class="fas fa-house-user" style="color:#04850C"></i>  Nombre(s) de  réservation en cours</div>
+					     <div class="titre"><i class="fas fa-house-user" style="color:#04850C"></i>  Nombre de réservation en cours</div>
 					     <div class="dtx">'.$reserve.'</div>
 						 </div>
 						
@@ -727,7 +741,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 						 
 						 <div class="tresor">
 						 <div class="contens">
-						 <h3>Prévisionnel NET Trésorie(Sans acompte réservation)</h3>
+						 <h3>Prévision NET de Trésorerie (Sans acompte réservation)</h3>
 						 <h4>Indicateur</h4>
 		                <div class="montants">+'.$ac.'%</div>
 		                <div>'.$indicateur.'</div>
@@ -735,7 +749,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 		                </div>
 						 
 						 <div class="contens1">
-						 <h3>Prévisionnel BRUT Trésorie(Acompte réservation)</h3>
+						 <h3>Prévision BRUT Trésorerie (Acompte réservation)</h3>
 						 <h4>Indicateur</h4>
 						 <div class="monta">+'.$cb.'%</div>
 		                  <div>'.$indicateuc.'</div>
@@ -762,8 +776,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
  <div id="result_reini"></div><!--div result_reini-->
  <div id="home_data"></div><!--div home-->
   <div id="message_datas"></div><!--div home-->  
-	
-                <!-- /.container-fluid -->
+	      <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -893,6 +906,8 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
 			
 	// click sur les news message
 	
+	
+	
 	$(document).on('click','#sms',function(){
 		  var action ="click";
 		  $.ajax({
@@ -970,7 +985,7 @@ height:2800px;overflow-y:scroll;z-index:5;} #searchDropdown{display:none;}
       }
       displayWinners(i);
       
-    }, 3500);
+    }, 5000);
   })(i);
   
 });

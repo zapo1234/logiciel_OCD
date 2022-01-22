@@ -1,8 +1,22 @@
 <?php
+
+try{ 
+  
+ if($donnees['permission']=="user:boss"){
 // recupére les depense du crédit fournisseur dans ta table depense
  $rev=$bds->prepare('SELECT montant,status FROM depense WHERE email_ocd= :email_ocd');
  $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
- $datac=$rev->fetchAll();
+ }
+ 
+ if($donnees['permission']=="user:gestionnaire"){
+// recupére les depense du crédit fournisseur dans ta table depense
+ $rev=$bds->prepare('SELECT montant,status FROM depense WHERE email_ocd= :email_ocd AND code= :code');
+ $rev->execute(array(':email_ocd'=>$_SESSION['email_ocd'],
+                     ':code'=> $_SESSION['code']
+                    ));
+ }
+ 
+  $datac=$rev->fetchAll();
  // creer un tableau
  $data =[];
  
@@ -19,19 +33,29 @@
  }
 // la somme des valeur du tableau pour les crédit fournisseur
  $sum = array_sum($data);   
-	 
- // statistique locaux 
+
+// statistique locaux 
+if($donnees['permission']=="user:boss"){
  $req=$bds->prepare('SELECT id,id_chambre,chambre FROM chambre WHERE email_ocd= :email');
-    $req->execute(array(':email'=>$_SESSION['email_ocd']));
-	$don = $req->fetchAll();
-// jointure pour recupérer les données entre les tables
-	  $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
+ $req->execute(array(':email'=>$_SESSION['email_ocd']));
+}
+
+else{
+	$req=$bds->prepare('SELECT id,id_chambre,chambre FROM chambre WHERE email_ocd= :email AND codes= :code');
+ $req->execute(array(':email'=>$_SESSION['email_ocd'],':code'=>$_SESSION['code']));
+}
+ // jointure pour recuperer les données des chambres
+ $sql=$bds->prepare('SELECT chambre.id_chambre, chambre.type_logement, 
       chambre.chambre,chambre.cout_nuite, chambre.cout_pass, home_occupation.date, home_occupation.dates, home_occupation.type
       FROM home_occupation
       INNER JOIN chambre ON chambre.id_chambre = home_occupation.id_local WHERE
 	  chambre.email_ocd= :email');
 	  $sql->execute(array(':email'=>$_SESSION['email_ocd']));
-	 $dns=$sql->fetchAll();
+ 
+     // recupération des données de toute les données.
+	$don = $req->fetchAll();
+    $dns=$sql->fetchAll();
+	 
 	 $arr1=[]; // table pour recupérer les id des chambre 
 	 $array1 =[];// recupere les valeurs pour les sejours et réservation
 	  $array2 = [];// recupere les valeurs pour horaires
@@ -176,6 +200,7 @@
 	else{
 		$color='libre';
 		$status ='disponible';
+		$color1[]='libre';
 		}
        } 
 	 // recupéré les valeurs max et min des tableau
@@ -192,6 +217,7 @@
 		// verification pour le cas des sejours pass
 	    $color='libre';
 		$status ='disponible';
+		$color1[]='libre';
 	}
 	}
 	}
@@ -240,4 +266,8 @@
 		else{
 		$vd ='<button class="t3">'.$local4.'</button> chambres indisponibles';
 		}
-	
+	} 
+  catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
+}  

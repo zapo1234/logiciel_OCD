@@ -32,6 +32,13 @@ include('inc_session.php');
 	$rs='<span class="ts"><i style="font-size:12px" class="fa">&#xf00c;</i></span>';
 	$re ='<span class="re">.</span>';
  }
+ 
+ // recupére les images existant
+			$home=$_GET['home'];
+          $res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+          $res->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']));
+			$donns=$res->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +78,7 @@ include('inc_session.php');
 .center{background-color:white;width:80%;height:1050px;padding:1.5%;margin-top:5px;} .inputs,.input{margin-left:5%;float:left;}
 .nav-search{width:70%;} .form-select{margin-left:40%;width:200px;height:43px;}
 .inputs{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:14px;font-weight:bold;color:green;}
-#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.6;}
+#pak{position: fixed;top: 0;left: 0;width:100%;height: 100%;background-color: black;z-index:2;opacity: 0.7;}
 
 .bg{font-weight:bold;color:black;font-size:13px;font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
 .tot{margin-bottom:10px;} #add_local{height:35px;margin-left:4%;border:2px solid #E5F1FB;#font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";margin-left:15px;margin-top:10px;width:150px;color:black;background:#E5F1FB;padding:1%;}
@@ -79,7 +86,7 @@ include('inc_session.php');
 .action{margin-top:25px;} .annul{border-radius:15px;width:120px;height:30px;background-color:#FF4500;color:white;border:2px solid #FF4500;}
 .ok{width:45px;height:45px;border-radius:50%;margin-left:30%;background-color:#1E90FF;border:2px solid #1E90FF} #reini{margin-left:2%;height:40px;width:130px;font-family:arial;}
 
-#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:2;opacity: 0.9;}
+#pak{position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:2;opacity: 0.9;}
 .der1,.der2,.der3,.der4,.der5,.der6{color:black;cursor:pointer;width:20%;float:left;text-align:center;border:1px solid #eee;padding:1%;height:45px;} .color{background:#ACD6EA;font-weight:bold;} .home{color:#111E7F;font-size:18px;font-weight:bold;}
 .side{color:#A9D3F2;padding:35%;text-align:center;margin-left:-8%;width:160px;height:160px;border-radius:50%;background:white;border:2px solid white;margin-top:95px;}
 
@@ -100,7 +107,7 @@ ul a{margin-left:3%;} #form_logo{display:none;}
 }
 
 img {
-  image-rendering: auto;
+  
 }
 
 
@@ -142,6 +149,11 @@ opacity:0.7;padding:1%;color:white;border-radius:5px;}
 
 .btn{display:none;}
 
+#menu_s{margin-left:4%;}
+#menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
+.menu_mobile{display:none;}
+.btns{display:none;background:white;border-color:white;color:#7BCCF8;}
+
 @media (max-width: 575.98px) { 
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
@@ -155,7 +167,12 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .form-select{display:none;} .es{display:none;}
 #der11,#der12,#der13,#der14{width:95%;margin-left:2%;}
-#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;} 
+#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;} .img_iamges{display:block;}
+
+.menu_mobile{padding:1%;color:black;width:35%;height:700px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 
@@ -177,7 +194,11 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}
 #searchDropdown{display:none;} .der3{display:none;}
-.der2,.der5{width:210px;}
+.der2,.der5{width:210px;} .view_image{display:block;}
+.menu_mobile{padding:1%;color:black;width:33%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 
 }
 
@@ -201,6 +222,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
 .der3{display:none;}
 .der2,.der5{width:270px;}
+.view_image{display:block;}
+.menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{position:absolute;top:5px;left:3%;z-index:4;}
+.btns{display:block;background:white;border-color:white;color:#7BCCF8;}
 }
 
 </style>
@@ -216,15 +242,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     data-parent="#accordionSidebar">
                    
 				   <?php
-					// recupére les images existant
-			$home=$_GET['home'];
-          $res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
-          $res->execute(array(':id_chambre'=>$home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']
-					   ));
-			$donns=$res->fetchAll();
-            
-            foreach($donns as $donnes){			
+		foreach($donns as $donnes){			
 	      echo'<div class="bs">
 		    <img  data-id="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_image" width="250" height="240" alt="'.$donnes['name_upload'].'">
 			</div><br/>';	
@@ -244,9 +262,9 @@ height:2800px;overflow-y:scroll;z-index:5;}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
+                    <span id="sidebar" class="btns">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </span>
 
                     <!-- Topbar Search -->
                     <form
@@ -275,8 +293,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> <span class="es">Type de local</span></div><div class="der2"><i class="fas fa-info-circle"></i><span class="es"> information du local</span></i></div>
-					 <div class="der3"><i class="fas fa-table"></i> <span class="es">Disponibilité</span></div> <div class="der4"><i class="fas fa-laptop-house"></i><span class="es"> Statistiques </span></div> <div class="der5"><i class="fas fa-key"></i><span class="es">Accès au local</span></div></div>
+                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> <span class="es">Type de local</span></div><div class="der2"><i class="fas fa-info-circle"></i><span class="es"> Informations du local</span></i></div>
+					 <div class="der3"><i class="fas fa-table"></i> <span class="es">Disponibilité</span></div> <div class="der4"><i class="fas fa-laptop-house"></i><span class="es"> Statistiques </span></div> <div class="der5"><i class="fas fa-key"></i><span class="es"> Contrôle d'accès</span></div></div>
                      
 					 <div class="content2">
 					 
@@ -284,7 +302,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 <table>
 					 <tr>
 					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Type </span> <br/><?php echo $datas['type_logement'];?></td>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Local désignée :</span> <br/> <?php echo $datas['chambre'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Local désigné :</span> <br/> <?php echo $datas['chambre'];?></td>
 					 </tr>
 					 <tr>
 					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Description :</span> <br/><?php echo $datas['infos'];?></td>
@@ -298,16 +316,16 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 <div id="der12">
 					 <table>
 					 <tr>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre d'occupant(s)(min)</span> : <br/><?php echo $datas['occupant'];?></td>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre de lit(s) :</span> <br/> <?php echo $datas['nombre_lits'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre d'occupants</span> : <br/><?php echo $datas['occupant'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Nombre de lits :</span> <br/> <?php echo $datas['nombre_lits'];?></td>
 					 </tr>
 					 <tr>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Prix/nuité :</span> <br/><?php echo $datas['cout_nuite'];?>xof</td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Prix/nuitée :</span> <br/><?php echo $datas['cout_nuite'];?>xof</td>
 					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Prix/horaire :</span> <br/><?php echo $datas['cout_pass'];?>xof</td>
 					</tr>
 					<tr>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipements principales : </span><br/><?php echo $datas['equipement'];?></td>
-					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipement sécondaires : </span><br/><?php  echo str_replace($rt,$rs,$datas['equipements']);?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipements principaux : </span><br/><?php echo $datas['equipement'];?></td>
+					 <td><i class="far fa-circle" style="font-size:14px"></i><span class="t_name"> Equipements sécondaires : </span><br/><?php  echo str_replace($rt,$rs,$datas['equipements']);?></td>
 					</tr>
 					 </table>
 					 </div><!--der12-->
@@ -316,12 +334,12 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 <?php
 					 
 					 echo'<div id="der13">
-					 <h3><i class="fas fa-minus-circle"></i> Ce local est indisponible aux dates suivantes</h3>
-					 <div class="def">Motif(pour cas de réservation,présence clients au sein du local,travaux ou divers)</div>
+					 <h3><i class="fas fa-minus-circle"></i> local indisponible</h3>
+					 <div class="def"></div>
 					 ';
 					 
 					 if(!empty($ret)){
-						$donnes =$ret->fetchAll(); 
+					 $donnes =$ret->fetchAll(); 
 					 $tab =[]; // pour les séjour facturé
 					 $array =[];// pour les réservation
 					 $ses =[]; // pour les horaire facturé
@@ -360,10 +378,10 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					// afficher la div 14
 					
 					echo'<div id="der14">
-					     <h4>Visualiser les cas d\'utilisation du local par les clients à ce jour</h4>
-						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$a.' séjour(s) consommés</div><br/>
-						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$b.' réservation(s) </div><br/>
-						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$c.' passage(s) horaire</div>
+					     <h4>Visualiser les statistiques des locaux</h4>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$a.' Séjour consommé</div><br/>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$b.' Réservation </div><br/>
+						 <div class="tar"><i class="fas fa-check-circle" style="font-size:18px"></i> '.$c.' Passage horaire</div>
 					    </div>';
 				  }
 				  
@@ -374,7 +392,20 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 </div>
 					 
 					<div class="content3">
-					<h2><i class="fas fa-camera"></i> Les images du local</h2>
+					<h2><i class="fas fa-camera"></i> Images du local</h2>
+					
+					<div class="view_image">
+					<?php
+			
+            foreach($donns as $donnes){			
+	         echo'
+		    <img data-id1="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_images" width="300" height="260" alt="'.$donnes['name_upload'].'">';	
+			}
+				?>
+					
+				</div>
+					
+					
 					<div id="zoom"></div><!--afficher les images en zoom-->
                    
 				   </div>
@@ -416,7 +447,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
 <!--div black-->
 <div id="pak" style="display:none"></div>
 <div id="panier"></div><!--afficher les facturation en cours-->
-
+<?php include('inc_menu.php');?>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -442,9 +473,21 @@ height:2800px;overflow-y:scroll;z-index:5;}
   <script type="text/javascript">
    $(document).ready(function(){
 
-   $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+   $('#navs').click(function(){
+	$('.collapse').slideToggle();
 	 });
+	
+	$('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
+	 }); 
 
    $('#but').click(function(){
    $('#examp').css('display','block');
