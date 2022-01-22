@@ -64,9 +64,14 @@ $(document).ready(function(){
 	 var action = "deleted";
     // affiche les differentes
 	$('.annuler').css('display','block');
-	$('#id_fact').text(id);
-    $('#pak').css('display','block');
+	$('#pak').css('display','block');
 	$('#ids').val(id);
+	var str = $('#ids').val();
+	var s = str.split('.');
+	var s1 = s[1];
+	var s2 = s1.split(',');
+	var s3 = s2[0];
+	$('#id_fact').text(s3);
 	
 	$(document).on('click','.annuls', function(){
 	$.ajax({
@@ -236,16 +241,18 @@ $(document).ready(function(){
 
 			load();
 			
-	$(document).on('click','.pdf',function(){
-	var id = $(this).data('id4');
+	$(document).on('click','.env',function(){
+	 var email =$('#email').val();
+	 var emails =$('#emails').val();
 	var action = "generate";
 	               $.ajax({
-					url: "generate_data_pdf.php",
+					url: "inc_send_facture.php",
 					method: "POST",
-					data:{id:id,action:action},
+					data:{id:id,action:action,email:email,emails:emails},
 					success: function(data) {
-						$('#pak').css('display','block');
+						$('#pak').css('display','display','none');
 						$('#resultats').html(data);
+						$('#form_envoi').css('display','none');
 					}
 				});
           });

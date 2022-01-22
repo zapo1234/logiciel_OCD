@@ -4,8 +4,7 @@ $(document).ready(function(){
 	});
 	
 	 $('#news_data').click(function(){
-	$('.drops').slideToggle();
-	$('.drop').css('display','none');
+	$('#indicateur').slideToggle();
 	 });
   
    $('#but').click(function(){

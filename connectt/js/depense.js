@@ -34,6 +34,7 @@ $(document).ready(function(){
    $('.detail').css('display','none');
    $('.datas').css('display','none');
    $('.result').css('display','none');
+   $('#recher_date').css('display','none');
  });
  
  
@@ -117,7 +118,7 @@ $(document).on('click','#dir', function(){
  html += '<td><input type="date" class="date" id="ti" name="ti[]" required></td>';
  html +='<td><input type="text" class="designation" id="designation" name="designation[]" placeholder="Désignation" required></td>';
  html +='<td><input type="text" class="fournisseur" id="fournisseur" name="fournisseur[]" placeholder="fournisseur"/></td>';
- html +='<td><select name="des[]" id="des"><option value="1">dépense effectué</option><option value="2">crédit fournisseur</option> <option value="5">Remboursement client</option></select></td>';
+ html +='<td><select name="des[]" id="des'+cont+'"><option value="1">dépense effectué</option><option value="2">crédit fournisseur</option> <option value="5">Remboursement client</option></select></td>';
  html +='<td><input type="number" class="montant" id="montant'+cont+'" name="montant[]" placeholder="Montant" required></td>';
  html +='<td><button class="remove" name="remove" id="'+cont+'"><i class="material-icons" style="font-size:25px">highlight_off</i></button></td>';
  html +='</tr>';
@@ -143,36 +144,20 @@ $('#add').html('<button type="submit" class="clic">Enregistrer</button>');
   calcul();
   });
 
-  // fonction
-  function calcul() {
-
- var totale = 0;
- var total_items=0;
- for(j=1; j<500; j++) {
- var mont = 0;
-  mont = $('#montant'+j).val();
- if(mont > 0) {
-
- totale = parseFloat(totale)+ parseFloat(mont);
-
-  }
- }
-
-  $('#idt').val(totale);
- $('#idy').val(totale);
-}
-
  function calcul() {
-
- var totale = 0;
+var totale = 0;
  var total_items=0;
  for(j=1; j<500; j++) {
  var mont = 0;
+ var des = $('#des'+j).val();
+  if(des!=2){
   mont = $('#montant'+j).val();
+  }
+  else{
+	mont =0; 
+  }
  if(mont > 0) {
-
-totale = parseFloat(totale)+ parseFloat(mont);
-
+ totale = parseFloat(totale)+ parseFloat(mont);
   }
  }
 
@@ -216,10 +201,7 @@ calcul();
 	});
  });
  
- 
- 
-	
-   // formulaire d'envoi et enregsitrement des dépenses
+  // formulaire d'envoi et enregsitrement des dépenses
    $('#form_depense').on('submit', function(event) {
 	  var action ="insert";
 	  var fact =$('#fact').val();
@@ -519,6 +501,27 @@ calcul();
 					success: function(data) {
 						$('#resul_depense').css('display','none');
 						$('#resu').html(data);
+					}
+				});
+			}
+
+			recher();
+		
+	});
+	
+	$(document).on('change','#search_date',function(){
+	 function recher(page) {
+				var action="search";
+				var id=$('#search_date').val();
+				$.ajax({
+					url: "recher_depenses_home.php",
+					method: "POST",
+					data:{id:id,action:action,page:page},
+					success: function(data) {
+						$('#resul_depense').css('display','none');
+						$('#recher_date').css('display','none');
+						$('#resu').html(data);
+						
 					}
 				});
 			}
