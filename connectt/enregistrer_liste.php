@@ -176,10 +176,11 @@ if(isset($_POST['ids']) AND isset($_POST['nums']) AND isset($_POST['num']) AND $
 	   move_uploaded_file($_FILES['fil']['tmp_name'][$count],$path);	
 	  // on enregistre
 	   // inséré les données dans la base de donnnées
-		 $ret=$bds->prepare('INSERT INTO photo_chambre (id_chambre,email_ocd,name_upload) VALUES(:id_chambre,:email_ocd,:name_upload)');
+		 $ret=$bds->prepare('INSERT INTO photo_chambre (id_chambre,email_ocd,name_upload,id_visitor) VALUES(:id_chambre,:email_ocd,:name_upload,:id_visitor)');
 	     $ret->execute(array(':id_chambre'=>$id_chambre,
 					      ':email_ocd'=>$email_ocd,
-						  ':name_upload'=>$nvname
+						  ':name_upload'=>$nvname,
+						  ':id_visitor'=>$donns['id_visitor']
 						  ));
 			}
 		  }

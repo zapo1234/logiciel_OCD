@@ -67,6 +67,7 @@ include('inc_session.php');
    $status=1;
    $categories="dirigeant";
    $permission ="user:boss";
+   $role =1;
    // token _password
    $tokens = openssl_random_pseudo_bytes(16);
  //Convert the binary data into hexadecimal representation.
@@ -121,8 +122,8 @@ include('inc_session.php');
 	 }
       $societ="";
     // insertion des données pour création des users compte
-		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
-		VALUES(:email_ocd,:email_user,:email_society,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
+		$rev=$bdd->prepare('INSERT INTO inscription_client(email_ocd,email_user,email_society,denomination,adresse,numero_cci,id_entreprise,user,numero,numero1,permission,role,password,categories,numero_compte,code,society,societys,date,heure,etat,status,active,logo,id_visitor,token_pass) 
+		VALUES(:email_ocd,:email_user,:email_society,:denomination,:adresse,:numero_cci,:id_entreprise,:user,:numero,:numero1,:permission,:role,:password,:categories,:numero_compte,:code,:society,:societys,:date,:heure,:etat,:status,:active,:logo,:id_visitor,:token_pass)');
 	     $rev->execute(array(':email_ocd'=>$email_ocd,
 		                     ':email_user'=>$email,
 							 'email_society'=>$email1,
@@ -134,6 +135,7 @@ include('inc_session.php');
 							':numero'=>$num,
 							':numero1'=>$_POST['numero'],
 							':permission'=>$permission,
+							':role'=>$role,
 							':password'=>$hash,
 							':categories'=>$categories,
 						    ':numero_compte'=>$numero_compte,

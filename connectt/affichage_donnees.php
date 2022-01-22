@@ -7,11 +7,6 @@ include('inc_session.php');
 	$donns =$rel->fetch();
 	
 // requete qui va chercher les montants
-    if($donns['permission']=="user:boss"){
-	$user='';
-   $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,society  FROM tresorie_customer WHERE email_ocd= :email_ocd');
-    $rej->execute(array(':email_ocd'=>$_SESSION['email_ocd']));
-	}
 	
  if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
 $user=$donns['user'];
@@ -19,16 +14,16 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
      society FROM  tresorie_customer WHERE code= :code AND email_ocd= :email_ocd');
      $rej->execute(array(':code'=>$_SESSION['code'],
                        ':email_ocd'=>$_SESSION['email_ocd']));
-  }  
   
   if($_POST['action']=="fetch") {
 	 
 	  
    while($donnees =$rej->fetch()){
   
-  echo'<div class="bs"><span class="h1"><img src="img/caisse.png" alt="map" width=15px" height="15px"> Caisse '.$donnees['society'].'</span>
+  echo'<li><div class="bs"><span class="h1"><img src="img/caisse.png" alt="map" width=15px" height="15px"> Caisse '.$donnees['society'].'</span>
 
    <div id="caisse">
+ <h1>Caisse Journalière</h1>
  <div class="td"> Facture soldée:</div>
  <div class="tds">'.$donnees['encaisse'].' XOF</div>
 
@@ -41,16 +36,14 @@ $rej=$bds->prepare('SELECT email_ocd,montant,encaisse,reservation,depense,reste,
  <div class="td">Reste à payer réservation</div>
  <div class="tdc">'.$donnees['reste'].' XOF</div>
   
-     
- </div></div><br/><br/>';
+  </div></div></li><br/><br/>';
  }
  
-  if($donns['permission']=="user:gestionnaire" OR $donns['permission']=="user:employes"){
     echo'<div><button type="button" class="print" style="margin-top:1px;" title="imprimer sa caisse journalière" onclick="printContent(\'caisse\')">imprimer</button></div>
      <div class=""><button type="button" style="margin-top:12px;margin-left:5%;"class="butt"><i style="font-size:13px" class="fa">&#xf0e2;</i>cloture de caisse</button></div>';
-  }
+
 	 
- 
+  }
   $rej->closeCursor();
 }
 

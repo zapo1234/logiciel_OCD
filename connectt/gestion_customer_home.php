@@ -208,7 +208,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <h1>Les enregistrements récents</h1>
+                    <h1> Enregistrements récents</h1>
                       
                   <div class="container">
  
@@ -311,7 +311,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <!-- 404 Error Text -->
                     <div class="center">
                     <div class="conten1">
-					<h3>Suivi des arrivées clients en temps réel en cas de réservation</h3>
+					<h3>Suivi des réservations des locaux en temps réel</h3>
 					<div id="result"></div><!--retour ajax -->
 					</div><!--conten1-->
  

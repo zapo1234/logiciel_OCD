@@ -214,7 +214,7 @@ include('inc_session.php');
 			}
 			if($count >1){
 				$local ="locaux";
-				echo'<div><div class="titre"><span class="rr">vous avez selectionnez</span> '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
+				echo'<div><div class="titre"><span class="rr">vous avez selectionné</span> '.$count.' '.$local.'</div></div><br/><span class="eror"></span>';
 		    }
 			if($count ==0){
 				echo'<div><div class="titre">Aucun local selectionné

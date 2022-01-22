@@ -15,7 +15,7 @@ include('inc_session.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>logiciel innovant</title>
+    <title>Optimisation de comptabilité à distance</title>
 
     <!-- Custom fonts for this template-->
     <!-- Custom fonts for this template -->
@@ -184,7 +184,7 @@ height:2800px;overflow-y:scroll}h2{margin-top:20px;border-top:1px solid #eee;col
 #tf,.tf{display:none;} h2{font-size:23px;width:350px;} .delete{margin-left:3%;}
 .enre{font-family:arial;font-size:15px;z-index:3;background:black;opacity:0.8;position:absolute;top:90px;left:20%;color:white;width:200px;text-align:center;padding:0.5%;height:50px;}
 
-#indicateur{display:none;} .der{padding-left:3%;color:black;font-size:16px;}
+#indicateur{display:none;background:white;margin-left:-1%;position:absolute;width:400px;top:100px;left:1%;padding:1%;} .der{padding-left:3%;color:black;font-size:16px;}
 .btn{display:block;} #searchDropdown{display:none;}
 .excel{margin-left:120%;}
 .s{display:block;} #accordionSidebar{display:none;}
@@ -211,7 +211,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:2.5%;}
-#indicateur{display:none;} .reini{top:120px;left:20%;}
+#indicateur{display:none;background:white;margin-left:-10%;width:350px;} .reini{top:120px;left:20%;}
 .enre {
     font-family: arial;
     font-size: 15px;
@@ -253,7 +253,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1600px;} .detail{margin-left:12.5%;}
 .btn{display:block;} #indicateur{font-weight:15px;margin-left:10%;}
-#indicateur{display:none;}
+#indicateur{display:none;background:white;width:350px;margin-left:2%;padding:1%;}
 .menu_mobile{padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
 .menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
 .xs{position:absolute;top:5px;left:3%;z-index:4;}

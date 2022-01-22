@@ -20,7 +20,7 @@ include('inc_session.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>logiciel innovant</title>
+    <title>Optimisation de comptabilité à distance</title>
 
     <!-- Custom fonts for this template-->
     <!-- Custom fonts for this template -->
@@ -160,7 +160,7 @@ footer.sticky-footer{}
 .sidebar .nav-item .nav-link span{font-size:14px;font-weight:bold;text-transform:capitalize;}
 .navbar-nav{background:#06308E;}
 
-#resultats{height:700px;overflow-y:scroll;padding-left:3%;width:270px;}
+#resultats{height:500px;padding-left:3%;width:270px;}
 
 #caisse{font-size:20px;color:black;font-family:arial;} .tds,.tdv,.tdc{font-size:17px;font-weight:bold;}
 .h1{padding:1%;font-size:14px;color:black;border:1px solid #eee;text-align:center;width:340px;} .site{font-size:12px;}
@@ -259,7 +259,7 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 #caisse{font-size:14px;} .tds,.tdv,.tdc{font-size:22px;font-weight:bold;}
 .user{padding-left:7%;} .dtt,.dts{font-size:20px;} .h1{font-size:14px;}
 .btn{display:block;} 
-
+#content3 {width:40%;} .content_home{width:70%;}
 .drop{position:absolute;width:300px;left:-20%;top:100px;background:white;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
@@ -294,7 +294,6 @@ height:2800px;overflow-y:scroll;z-index:5;}
          <div id="collapse" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bs">
-                    <h1>Caisses journalières poste</h1>
                      <div id="resultats"></div><!--afficher Ajax-->
                   <div class="container">
  
@@ -363,7 +362,7 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="center">
   <form method="post" id="form1" action="data_validate_client.php">
  <div  id="examp" style="display:none">
-  <h2> Les informations du client </h2>
+  <h2> Informations du client </h2>
    
    <div class="form-row">
     <div class="form-group col-md-6">
@@ -392,11 +391,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
 
    <div class="form-group col-md-6">
-      <label for="inputEmail4">piéce d'identité *</label>
+      <label for="inputEmail4">Piéce d'identité *</label>
       <input type="email" name="piece" id="piece" class="form-control" id="inputEmail4" placeholder="Nature/numéro">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Numéro de phone *</label>
+      <label for="inputPassword4">Numéro de télephone *</label>
       <input type="number" name="numero" id="numero" class="form-control" id="inputPassword4" placeholder="entre 8 et 14 chiffre">
     </div>
      <div class="form-group col-md-6">

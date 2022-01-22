@@ -153,10 +153,13 @@ margin-left:-10px;} .datas_messanger{border-bottom:1px solid #eee;}
   font-weight: bold;
 }
 
+.menu_mobile{display:none;}
 #menu_s{margin-left:4%;}
 #menu_s a {padding:3%;font-size:14px;color:black;font-weight:none;}
-.menu_mobile{display:none;}
-.btns{display:none;background:white;border-color:white;color:#7BCCF8;}
+.btns{cusor:pointer;display:block;background:white;border-color:white;color:#7BCCF8;}
+.menu_mobile{display:none;padding:1%;color:black;width:30%;height:800px;background:white;position:absolute;top:60px;left:0px;z-index:4;padding:3%} 
+.menu_mobile a {color:black;font-size:18px;font-size:18px;border-bottom:1px solid #eee;font-family:arial;padding:1%;} .nav{margin-top:30px;margin-left:7%;} .nv{padding-left:3%;font-size:16px;}
+.xs{cursor:pointer;position:absolute;top:5px;left:3%;z-index:4;}
 
 @media (max-width: 575.98px) { 
 #panier{display:none;}
@@ -266,12 +269,12 @@ height:2800px;overflow-y:scroll;z-index:5;}
                     <div class="center">
                     <!--formulaire affiche-->
   <form method="post" id="forms"  enctype="multipart/form-data">
-  <h1> <i class='fas fa-house-user' style='font-size:20px'></i> Formualire pour modifier les données d'un local,une chambre ou un appartement de votre espace Hotelier</h1>
+  <h1> <i class='fas fa-house-user' style='font-size:20px'></i> Formualire de modification du local</h1>
    
    <div class="form-row">
     <div class="form-group col-md-6">
-	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations relatives au type du local</h2>
-      <label for="inputPassword4">type de local *</label>
+	<h2><i style="font-size:16px" class="fa">&#xf044;</i> Informations du local</h2>
+      <label for="inputPassword4">Type de local *</label>
       <select name="type" class="forms form-select-sm" aria-label=".form-select-sm example">
                            <option value="<?phpecho$type?>"><?phpecho$type;?></option>
 						   <option value="0">chambre single</option><option value="1">chambre double</option>
@@ -286,11 +289,11 @@ height:2800px;overflow-y:scroll;z-index:5;}
   
 
    <div class="form-group col-md-6">
-      <label for="inputEmail4">identifier votre local *</label>
+      <label for="inputEmail4">Identifier votre local *</label>
       <input type="text" class="form-control" name="ids" id="ids" required value="<?php echo$chambre;?>" required>
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">occupants possible *</label>
+      <label for="inputPassword4">Occupants possible *</label>
       <input type="number" class="form-control" id="num" name="num" value="<?php echo$occupant;?>" required>
     </div>
      <div class="form-group col-md-6">
@@ -313,29 +316,29 @@ height:2800px;overflow-y:scroll;z-index:5;}
     </div>
 	
      <div class="form-group col-md-12">
-        <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements principales du local</h2>
+        <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations des équipements primaires</h2>
 
       <div class="custom-checkbox">
-      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation" <?php $a = "climatisation"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation
-     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision" <?php $a = "télévision"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf108;</i> télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> salle de bains
+      <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf2dc;</i> climatisation" <?php $a = "climatisation"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf2dc;</i> Climatisation
+     <input type="checkbox" name="ch[]"  value="<i style='font-size:13px' class='fa'>&#xf108;</i> télévision" <?php $a = "télévision"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style='font-size:13px' class='fa'>&#xf108;</i> Télévision<input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf1eb;</i> wiffi">  <i style='font-size:14px' class='fa'>&#xf1eb;</i> Wifi</td> <input type="checkbox" name="ch[]"  value="<i style='font-size:14px' class='fa'>&#xf2a2;</i> salle de baim"> <i style="font-size:14px" class="fa">&#xf2a2;</i> Salle de bains
      <input type="checkbox" name="ch[]" value="<i style='font-size:16px' class='fas'>&#xf0f4;</i> Déjeuner" <?php $a = "Déjeuner"; if(strpos($data,$a) !== false){echo'checked';} else{} ?>> <i style="font-size:14px" class="fas">&#xf0f4;</i> Déjeuner
 	 </div>
 	 
-	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations relatives aux equipements secondaires du local</h2>
-    <input type="checkbox" name="choix[]"  value="toilletes" <?php $a = "toilletes"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> toilletes
+	 <h2><i style="font-size:14px" class="fa">&#xf044;</i> Informations des équipements secondaires </h2>
+    <input type="checkbox" name="choix[]"  value="toilletes" <?php $a = "toilletes"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> toillete
     <input type="checkbox" name="choix[]"  value="armoie ou penderie" <?php $a = "armoie"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> armoie ou penderie  
    <input type="checkbox" name="choix2[]" value="chaines satellite" <?php $a = "chaines satellite"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> chaines satellite
-   <input type="checkbox" name="choix2[]"  value="prise près du lit" <?php $a = "prise près du lit"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> prise près de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace pour pc</td> 
+   <input type="checkbox" name="choix2[]"  value="prise près du lit" <?php $a = "prise près du lit"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> prise de lit <input type="checkbox" name="choix[]"  value="espace pour pc"> espace  pc</td> 
    <input type="checkbox" name="choix[]"  value="portant" <?php $a = "portant"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> portant<br/>
     <input type="checkbox" name="choix[]"  value="baignoire ou douche" <?php $a = "baignoire ou douche"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Baignoire ou douche
    <input type="checkbox" name="choix[]"  value="télephone" <?php $a = "télephone"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> télephone
-   <input type="checkbox" name="choix[]"  value="microonde" <?php $a = "microonde"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> microonde
-   <input type="checkbox" name="choix[]"  value="fer à repasser" <?php $a = "fer à repasser"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> fer à repasser
+   <input type="checkbox" name="choix[]"  value="Microonde" <?php $a = "microonde"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Microonde
+   <input type="checkbox" name="choix[]"  value="Fer à repasser" <?php $a = "fer à repasser"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Fer à repasser
    <input type="checkbox" name="choix[]"  value="réfrigérateur" <?php $a = "réfrigerateur"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> réfrigerateur
-    <input type="checkbox" name="choix[]"  value="machine à laver" <?php $a = "machine à laver"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> machine à laver<br/>
-     <input type="checkbox" name="choix[]"  value="papier toillete" <?php $a = "papier toillette"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> papier toillete
-    <input type="checkbox" name="choix[]"  value="séche cheveux" <?php $a = "séche cheveux"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> séche cheveux
-   <input type="checkbox" name="choix[]"  value="petit café" <?php $a = "petit café"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>>  petit café
+    <input type="checkbox" name="choix[]"  value="machine à laver" <?php $a = "machine à laver"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Machine à laver<br/>
+     <input type="checkbox" name="choix[]"  value="Papier toillete" <?php $a = "papier toillette"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Papier toillete
+    <input type="checkbox" name="choix[]"  value="Séche cheveux" <?php $a = "séche cheveux"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> Séche cheveux
+   <input type="checkbox" name="choix[]"  value="Petit café" <?php $a = "petit café"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>>  Petit café
    <input type="checkbox" name="choix[]" value="déjeuner" <?php $a = "déjeuner"; if(strpos($data1,$a) !== false){echo'checked';} else{} ?>> déjeuner
 	</div>
       
@@ -463,8 +466,16 @@ echo$_SESSION['token'];?>">
     <?php include('inc_foot_scriptjs.php');?>
   <script type="text/javascript">
    $(document).ready(function(){
-     $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+      $('#sidebar').click(function(){
+		$('#pak').css('display','block');
+		$('.menu_mobile').css('display','block');
+		$('.xs').css('display','block');
+	 });
+	 
+	 $('.xs').click(function(){
+	 $('.menu_mobile').css('display','none');
+	 $('#pak').css('display','none');
+	 $('.xs').css('display','none');
 	 });
 
     $('#sms').click(function(){
@@ -472,8 +483,6 @@ echo$_SESSION['token'];?>">
 	});
 	
 	 $('#news_data').click(function(){
-	$('.drops').slideToggle();
-	$('.drop').css('display','none');
 	 });
 
    $('#but').click(function(){
@@ -563,7 +572,6 @@ else{
 			view();
 			
 	// click sur les news message
-	
 	$(document).on('click','#sms',function(){
 		  var action ="click";
 		  $.ajax({
