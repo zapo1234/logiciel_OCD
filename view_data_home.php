@@ -3,10 +3,8 @@ include('connecte_db.php');
 include('inc_session.php');
 
  if(!isset($_GET['home'])) {
-	 
-	 header('location:index.php');
+  header('location:index.php');
  }
- 
  else{
  
   // requete pour aller chercher les valeurs 
@@ -21,11 +19,8 @@ include('inc_session.php');
     $req->closeCursor();
 
 	
-// emttre la requete sur le fonction
-    $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_local= :id_chambre AND email_ocds= :email_ocd');
-    $ret->execute(array(':id_chambre'=>$home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']
-						));
+//
+	
 	
 	$rem='<span class="ts"></span>';
 	$rt=",";
@@ -34,32 +29,36 @@ include('inc_session.php');
  }
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--favicon-->
+	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<!--plugins-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	
+	<link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="/assets/css/pace.min.css" rel="stylesheet" />
+	<script src="/assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="/assets/css/app.css" rel="stylesheet">
+	<link href="/assets/css/icons.css" rel="stylesheet">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>logiciel innovant</title>
-
-    <!-- Custom fonts for this template-->
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <style>
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="/assets/css/dark-theme.css" />
+    <link rel="stylesheet" href="/assets/css/semi-dark.css" />
+    <link rel="stylesheet" href="/assets/css/header-colors.css" />
+	
+	<style>
 	.s{display:none;}
      h1,select{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:18px;margin-left:8%;color:black}
     #collapse{width:300px;height:100px;padding:2%;position:fixed;top:60px;left:81%;border-shadow:3px 3px 3px black;}
@@ -155,14 +154,14 @@ height:2800px;overflow-y:scroll} h2{margin-top:20px;border-top:1px solid #eee;co
 #news_data{display:block;} #news{display:none;} .users{display:block;color:black;}
 .form-select{display:none;} .es{display:none;}
 #der11,#der12,#der13,#der14{width:95%;margin-left:2%;}
-#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;} 
+#searchDropdown{display:none;} .content3{margin-left:-65%;} h2{font-size:22px;} .btn{display:block;}
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -176,16 +175,14 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1200px;} .detail{margin-left:2.5%;}
-#searchDropdown{display:none;} .der3{display:none;}
-.der2,.der5{width:210px;}
-
+#searchDropdown{display:none;} 
 }
 
 
 @media (min-width: 992px) and (max-width: 1200px) {
 #panier{display:none;}
 #logo{display:none;} .side{display:none;} .bs{display:none;}.bg{display:none;}
-#accordionSidebar{display:none;width:120px;margin-top:-150px;} .center{width:100%;margin:0;padding:0;height:1000px;}
+#accordionSidebar{display:none;} .center{width:100%;margin:0;padding:0;height:1000px;}
 cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
  h2{margin-top:20px;border-top:1px solid #eee;color:black;}
 .us{margin-top:5px;border-bottom:1px solid #eee;color:black;margin-left:10%;}
@@ -199,83 +196,65 @@ cont1,.cont12,.cont13,.cont14,.titre{font-size:14px;}
 .drops{padding:2%;position:absolute;left:-40%;width:500px;background:white;
 height:2800px;overflow-y:scroll;z-index:5;}
 .center{height:1400px;} .detail{margin-left:12.5%;} .btn{display:block;}
-.der3{display:none;}
-.der2,.der5{width:270px;}
 }
 
-</style>
-
+   
+   
+   </style>
+	
+	
+	
+	
+    <title>Optimisation de comptabilité à distance</title>
 </head>
 
-<body id="page-top">
-
-        <?php include('inc_menu_principale.php');?>
-        <!-- End of Sidebar -->
+<body>
+	<!--wrapper-->
+	<div class="wrapper">
+        <!--navigation-->
+        <?php include('nav.php');?>
+        <!--end navigation-->
         
-         <div id="collapse" class="collapse show" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                   
-				   <?php
-					// recupére les images existant
-			$home=$_GET['home'];
-          $res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
-          $res->execute(array(':id_chambre'=>$home,
-	                    ':email_ocd'=>$_SESSION['email_ocd']
-					   ));
-			$donns=$res->fetchAll();
-            
-            foreach($donns as $donnes){			
-	      echo'<div class="bs">
-		    <img  data-id="'.$donnes['id'].'" src="upload_image/'.$donnes['name_upload'].'" class="img_image" width="250" height="240" alt="'.$donnes['name_upload'].'">
-			</div><br/>';	
-				
-			}
-				?>
-				
-                </div>
+		<!--start header -->
+		<?php include('header.php');?>
+		<!--end header -->
+		
+		<!--start page wrapper ->
+		<!--end page wrapper -->
+		<!--start overlay-->
+		<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<footer class="page-footer">
+			<p class="mb-0">Copyright © 2022 Optimisation de comptabilité à distance !.</p>
+		</footer>
+	</div>
+	<!--end wrapper-->
+    <!--start switcher-->
+  
+		<div class="page-wrapper">
+			<div class="page-content">
+			
+		      <div class="row">
+					<div class="col">
+						<div class="card radius-10 mb-0">
+							<div class="card-body">
+								<div class="d-flex align-items-center">
+									<div>
+										<h5 class="mb-1" style="font-size:12px;text-transform:uppercase;color:#057AD6">Détails sur le local sélectioné</h5>
+									</div>
+									<div class="ms-auto">
+										<a href="javscript:;" class="btn btn-primary btn-sm radius-30" id="but">Encaisser un client</a>
+									</div>
+								</div>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn  rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="navbar-search">
-                        <div class="input-group">
-
-                        <div class="input"><select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                         <option selected>Type de logement</option>
-						  <option value="1">chambre single</option><option value="2">chambre double</option>
-                           <option value="3">chambre triple</option><option value="4">chambre twin</option><option value="5">chambre standard</option><option value="6">chambre deluxe</option>
-                          <option value="7">studio double</option>
-						  <option value="8">appartement meublé</option>
-                          </select>
-						  
-                          </div>  
-                        </div>
-                    </form>
-
-                    <?php include('inc_menu1.php');?>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
+                              <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- 404 Error Text -->
                     <div class="center">
-                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> <span class="es">Type de local</span></div><div class="der2"><i class="fas fa-info-circle"></i><span class="es"> information du local</span></i></div>
+                    <div class="content1"><div class="der1"><i class="fas fa-home"></i> <span class="es">Type de local</span></div><div class="der2"><i class="fas fa-info-circle"></i><span class="es"> Informations du local</span></i></div>
 					 <div class="der3"><i class="fas fa-table"></i> <span class="es">Disponibilité</span></div> <div class="der4"><i class="fas fa-laptop-house"></i><span class="es"> Statistiques </span></div> <div class="der5"><i class="fas fa-key"></i><span class="es">Accès au local</span></div></div>
                      
 					 <div class="content2">
@@ -319,15 +298,39 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 <h3><i class="fas fa-minus-circle"></i> Ce local est indisponible aux dates suivantes</h3>
 					 <div class="def">Motif(pour cas de réservation,présence clients au sein du local,travaux ou divers)</div>
 					 ';
-					 
-					 if(!empty($ret)){
-						$donnes =$ret->fetchAll(); 
-					 $tab =[]; // pour les séjour facturé
-					 $array =[];// pour les réservation
-					 $ses =[]; // pour les horaire facturé
+					 // emttre la requete sur le fonction
+            $ret=$bds->prepare('SELECT date,date_french,type FROM home_occupation WHERE id_local= :id_chambre AND email_ocds= :email_ocd');
+           $ret->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+						));
+						
+					 $donnes =$ret->fetchAll();
+					 if(!empty($donnes)){
+					    
+					   $tab =[]; // pour les séjour facturé
+					   $array =[];// pour les réservation
+					   $ses =[]; // pour les horaire facturé
 					 foreach($donnes as $dats){
 						
-					$data = $dats['date_french'];
+					  $data = $dats['date_french'];
+					  
+					  // recupérer les dates avenir
+					  $datex = date('d-m-y');
+					  $data_avenir = explode(',',$data);
+					 
+					  $data_vue =[];// recupérer les avenir
+					  
+					  foreach($data_avenir as $valu)
+					  {
+					       if($valu > $datex)
+						   {
+							   $data_vue[] = $valu;
+						   }
+					  }
+					  
+					// transformer en chaine en caractères
+					$chaine_data = implode('. ',$data_vue);
+					  
 					
 				     // pour les statisque
 					    $datos = $dats['type'].',';
@@ -374,7 +377,25 @@ height:2800px;overflow-y:scroll;z-index:5;}
 					 </div>
 					 
 					<div class="content3">
-					<h2><i class="fas fa-camera"></i> Les images du local</h2>
+					<h2><i class="fas fa-camera"></i>Images du local</h2>
+									   <?php
+					// recupére les images existant
+			$home=$_GET['home'];
+          $res=$bds->prepare('SELECT id,name_upload FROM photo_chambre WHERE id_chambre= :id_chambre AND email_ocd= :email_ocd');
+          $res->execute(array(':id_chambre'=>$home,
+	                    ':email_ocd'=>$_SESSION['email_ocd']
+					   ));
+			$donns=$res->fetchAll();
+            
+            foreach($donns as $donnes){			
+	      echo'<div class="bs" style="float:left;margin-left:2%">
+		    <img  data-id="'.$donnes['id'].'" src="image_logo/'.$donnes['name_upload'].'" class="img_image" width="250" height="240" alt="'.$donnes['name_upload'].'"><br/>
+			
+			
+			</div>';	
+				
+			}
+				?>
 					<div id="zoom"></div><!--afficher les images en zoom-->
                    
 				   </div>
@@ -383,67 +404,29 @@ height:2800px;overflow-y:scroll;z-index:5;}
  <div id="result"></div>
     
 	</div>
-                <!-- /.container-fluid -->
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+     
+	<!-- Bootstrap JS -->
+	<script src="/assets/js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!--app JS-->
+	<script src="/assets/js/app.js"></script>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; optimisation de comptabilité à distance 2022</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <!-- Modal -->
-  
-
-<!--div black-->
-<div id="pak" style="display:none"></div>
-<div id="panier"></div><!--afficher les facturation en cours-->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-<script src="@@path/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-    <?php include('inc_foot_scriptjs.php');?>
-  <script type="text/javascript">
-   $(document).ready(function(){
-
+	<script type="text/javascript">
+	$(document).ready(function(){
+   
    $('#sidebarToggleTop').click(function(){
-		$('#accordionSidebar').slideToggle();
+		$('#accordionSidebar').css('display','block');
 	 });
 
    $('#but').click(function(){
@@ -674,6 +657,8 @@ height:2800px;overflow-y:scroll;z-index:5;}
 			panier();
  });
 </script>
+    
+ 
 </body>
 
 </html>
